@@ -1,0 +1,8 @@
+.DS_Store
+/.bundle
+/.sass-cache
+/.cache
+/vendor
+
+# Ignore the build directory
+/build
