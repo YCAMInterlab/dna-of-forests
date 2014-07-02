@@ -8,6 +8,9 @@ set :css_dir, 'style'
 set :js_dir, 'script'
 set :images_dir, 'img'
 
+# htmlのattributesの囲みを「"」にする
+set :haml, { :attr_wrapper => "\"" }
+
 ###
 # Compass
 ###
