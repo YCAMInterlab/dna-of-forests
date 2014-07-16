@@ -1,15 +1,38 @@
-# 他言語化
-# activate :i18n
-
-# URL access xxx.hmtl -> /xxx/
-activate :directory_indexes
-
 set :css_dir, 'style'
 set :js_dir, 'script'
 set :images_dir, 'img'
 
 # htmlのattributesの囲みを「"」にする
 set :haml, { :attr_wrapper => "\"" }
+
+# 他言語化
+# activate :i18n
+
+# URL access xxx.hmtl -> /xxx/
+activate :directory_indexes
+
+# Build-specific configuration
+configure :build do
+  # activate :minify_css
+  # activate :minify_javascript
+  # activate :asset_hash
+
+  # Use relative URLs
+  # activate :relative_assets
+
+  # Or use a different image path
+  # set :http_prefix, "/Content/images/"
+
+  # リポジトリ名を host に設定しておく
+  # こうすることで stylesheet_link_tag などで展開されるパスが
+  # /my_project/stylesheets/normalize.css
+  # のようになる
+  # activate :asset_host, host:"/path/to"
+end
+
+configure :development do
+    activate :livereload
+end
 
 ###
 # Compass
@@ -45,10 +68,6 @@ end
 # Helpers
 ###
 
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
-
-# Methods defined in the helpers block are available in templates
 helpers do
 
   def nl2br(txt)
@@ -82,39 +101,9 @@ helpers do
   end
 end
 
-# Build-specific configuration
-configure :build do
-  # For example, change the Compass output style for deployment
-  # activate :minify_css
-
-  # Minify Javascript on build
-  # activate :minify_javascript
-
-  # Enable cache buster
-  # activate :asset_hash
-
-  # Use relative URLs
-  # activate :relative_assets
-
-  # Or use a different image path
-  # set :http_prefix, "/Content/images/"
-
-  # リポジトリ名を host に設定しておく
-  # こうすることで stylesheet_link_tag などで展開されるパスが
-  # /my_project/stylesheets/normalize.css
-  # のようになる
-  # activate :asset_host, host:"/path/to"
-end
-
-configure :development do
-    activate :livereload
-end
-
 # デプロイ設定
 activate :deploy do |deploy|
   deploy.build_before = true
   deploy.method = :git
   deploy.branch = 'master'
 end
-
-
