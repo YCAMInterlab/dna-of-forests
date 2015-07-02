@@ -24,12 +24,21 @@ gem install bundler
 
 ###Get to start
 
-checkout `source` branch
-
 ```
+# checkout `source` branch.
+git clone git@github.com:naokazuterada/middleman-template.git mysite
+cd mysite
+
+# setup
 git submodule update --init
 bundle install --path=vendor/bundle --binstubs=vendor/bin
+
+# start server
+bundle exec middleman
 ```
+
+Open [http://localhost:4567](http://localhost:4567) with browser.
+
 
 ###Middleman commands
 
