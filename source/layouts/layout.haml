@@ -9,13 +9,13 @@
     %meta{name: "viewport",    content: "width=925"}
     %meta{name: "description", lang: "ja", content: data.page.description}
     %meta{name: "keywords",    lang: "ja", content: data.page.keywords}
-    
+
     %meta{property: "og:title", content: data.page.title}
     %meta{property: "og:site_name", content: data.page.title}
     %meta{property: "og:type", content: "website"}
     %meta{property: "og:url", content: "[TODO]"}
     %meta{property: "og:image", content: "[TODO]"}
-    
+
     %link{rel: "stylesheet", type: "text/css", href: "/style/main.css"}
     - data.page.styles.each do |file|
       = stylesheet_link_tag "#{file}"
@@ -27,8 +27,8 @@
     - data.page.scripts.each do |file|
       = javascript_include_tag "#{file}"
 
-    = partial 'partial/google_analytics'
+    = partial 'google_analytics'
 
   %body{ class:"#{page_classes}" }
-    = partial 'partial/facebook_like_button'
+    = partial 'facebook_like_button'
     = yield
