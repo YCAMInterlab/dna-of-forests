@@ -26,10 +26,8 @@ gem install bundler
 
 checkout `source` branch
 
-
-***Install bundles***
-
 ```
+git submodule update --init
 bundle install --path=vendor/bundle --binstubs=vendor/bin
 ```
 
