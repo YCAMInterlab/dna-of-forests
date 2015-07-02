@@ -37,7 +37,7 @@ bundle install --path=vendor/bundle --binstubs=vendor/bin
 bundle exec middleman
 ```
 
-Open [http://localhost:4567](http://localhost:4567) with browser.
+Open [http://0.0.0.0:4567](http://0.0.0.0:4567) with browser.
 
 
 ###Middleman commands
