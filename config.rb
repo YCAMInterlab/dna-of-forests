@@ -17,7 +17,10 @@ activate :directory_indexes
 configure :build do
   
   ignore "/**README*"
-
+  
+  # libフォルダをsprocketsの走査対象に
+  sprockets.append_path 'lib/'
+  
   # activate :minify_css
   # activate :minify_javascript
   # activate :asset_hash
