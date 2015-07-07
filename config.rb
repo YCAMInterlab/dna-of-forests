@@ -13,13 +13,13 @@ set :haml, { :attr_wrapper => "\"" }
 # URL access xxx.hmtl -> /xxx/
 activate :directory_indexes
 
+# libフォルダをsprocketsの走査対象に
+sprockets.append_path 'lib/'
+
 # Build-specific configuration
 configure :build do
   
   ignore "/**README*"
-  
-  # libフォルダをsprocketsの走査対象に
-  sprockets.append_path 'lib/'
   
   # activate :minify_css
   # activate :minify_javascript
