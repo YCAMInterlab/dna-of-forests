@@ -26,11 +26,10 @@ gem install bundler
 
 ```
 # checkout `source` branch.
-git clone git@github.com:naokazuterada/middleman-template.git mysite
+git clone --recursive git@github.com:naokazuterada/middleman-template.git mysite
 cd mysite
 
 # setup
-git submodule update --init
 bundle install --path=vendor/bundle --binstubs=vendor/bin
 
 # start server
