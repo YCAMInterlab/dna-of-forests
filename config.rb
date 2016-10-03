@@ -35,7 +35,7 @@ configure :build do
   # こうすることで stylesheet_link_tag などで展開されるパスが
   # /my_project/stylesheets/normalize.css
   # のようになる
-  # activate :asset_host, host:"/path/to"
+  activate :asset_host, host:"/dna-of-forests"
 end
 
 configure :development do

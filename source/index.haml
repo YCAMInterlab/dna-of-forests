@@ -2,8 +2,10 @@
 title: 森のDNA図鑑 - 仁保の森 2016
 description: 山口の森には、一体どんな植物や昆虫が住んでいるのでしょうか？YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と一緒に山口市の仁保（にほ）の森で生き物を採集して、顕微鏡での観察やDNA解析によって調査した結果を収録していく予定です。
 keywords: YCAM,DNA,森,図鑑
-class: 'index,ja'
+class: 'index'
 styles:
+  - lib/slick/slick.css
+  - lib/slick/slick-theme.css
   - main
 scripts:
   - main
@@ -14,27 +16,25 @@ scripts:
 #slide
   #overlay
   #slider
-    .slide{style: 'background-image: url(/img/slide/1.jpg);'}
-    .slide{style: 'background-image: url(/img/slide/2.jpg);'}
-    .slide{style: 'background-image: url(/img/slide/3.jpg);'}
-    .slide{style: 'background-image: url(/img/slide/4.jpg);'}
-    .slide{style: 'background-image: url(/img/slide/5.jpg);'}
+    .slide{style: 'background-image: url(./img/slide/1.jpg);'}
+    .slide{style: 'background-image: url(./img/slide/2.jpg);'}
+    .slide{style: 'background-image: url(./img/slide/3.jpg);'}
+    .slide{style: 'background-image: url(./img/slide/4.jpg);'}
+    .slide{style: 'background-image: url(./img/slide/5.jpg);'}
 #content
   #main
     %h1
-      %img{alt: '森のDNA図鑑 仁保の森2016', src: '/img/content.png', srcset: '/img/content@2x.png 2x'}
-    %img#badge{alt: '11月上旬公開！', src: '/img/badge.png', srcset: '/img/badge@2x.png 2x'}
+      %img{alt: '森のDNA図鑑 仁保の森2016', src: 'img/content.png', srcset: 'img/content@2x.png 2x'}
+    %img#badge{alt: '11月上旬公開！', src: 'img/badge.png', srcset: 'img/badge@2x.png 2x'}
   %a#sound_btn
-    %img.sound_on{alt: 'SOUND ON', src: '/img/sound-on.png', srcset: '/img/sound-on@2x.png 2x'}
-    %img.sound_off{alt: 'SOUND OFF', src: '/img/sound-off.png', srcset: '/img/sound-off@2x.png 2x'}
+    %img.sound_on{alt: 'SOUND ON', src: 'img/sound-on.png', srcset: 'img/sound-on@2x.png 2x'}
+    %img.sound_off{alt: 'SOUND OFF', src: 'img/sound-off.png', srcset: 'img/sound-off@2x.png 2x'}
   %a#bio_research{href: 'http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/', target: '_blank'}
-    %img.arrow{alt: '→', src: '/img/arrow.png', srcset: '/img/arrow@2x.png 2x'}
-    %img.text{alt: 'YCAMバイオ・リサーチのワークショップ「森のDNA」', src: '/img/bio_research-link.png', srcset: '/img/bio_research-link@2x.png 2x'}
+    %img.arrow{alt: '→', src: 'img/arrow.png', srcset: 'img/arrow@2x.png 2x'}
+    %img.text{alt: 'YCAMバイオ・リサーチのワークショップ「森のDNA」', src: 'img/bio_research-link.png', srcset: 'img/bio_research-link@2x.png 2x'}
   %a#ycam{href: 'http://www.ycam.jp/', target: '_blank'}
-    %img{alt: 'YCAM', src: '/img/ycam-logo.png', srcset: '/img/ycam-logo@2x.png 2x'}
+    %img{alt: 'YCAM', src: 'img/ycam-logo.png', srcset: 'img/ycam-logo@2x.png 2x'}
   %p#copyright
     Copyright © 2016 <br>
     Yamaguchi Center for Arts and Media, <br>
     All Rights Reserved.
-
-
