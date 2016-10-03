@@ -7,6 +7,7 @@
 // Constant
 
 $hiragino: 'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','HiraKakuProN-W3','メイリオ','Meiryo','ＭＳ ゴシック','MS Gothic',Osaka,Verdana,arial,helvetica,sans-serif
+$helvetica: helvetica,Verdana,arial,sans-serif
 
 
 // =========================
@@ -18,3 +19,93 @@ body
   font-size: 13px
   line-height: 1em
   position: relative
+
+a
+  opacity: 0.7
+  transition-duration: 0.2s
+  &:hover
+    opacity: 1
+    transition-duration: 0.2s
+
+#slide
+  position: fixed
+  width: 100%
+  height: 100%
+  padding: 0
+  animation: fadeIn 3s ease 0s 1 normal
+  -webkit-animation: fadeIn 3s ease 0s 1 normal
+  background-color: #000
+  #overlay
+    position: absolute
+    z-index: 10
+    background-color: rgba(0,0,0,0.65)
+    width: 100%
+    height: 100%
+  #slider.slick-slider
+    height: 100%
+    z-index: 1
+    >.slick-list
+      height: 100%
+      >.slick-track
+        height: 100%
+        .slick-slide
+          background-position: center
+          background-size: cover
+
+#content
+  position: fixed
+  width: 100%
+  height: 100%
+  z-index: 100
+  #main
+    width: 508px
+    height: 379px
+    position: absolute
+    top: calc(50% - 189px)
+    left: calc(50% - 254px)
+    #badge
+      display: none
+      position: absolute
+      top: -80px
+      right: -29px
+  #sound_on,
+  #sound_off
+    display: block
+    width: 150px
+    height: 70px
+    position: absolute
+    top: 0
+    right: 0
+    cursor: pointer
+    >img
+      position: absolute
+      top: 26px
+      left: 34px
+  #sound_off
+    display: none
+  #bio_research
+    position: absolute
+    bottom: 28px
+    left: 30px
+    opacity: 1
+    .text
+      margin-left: 10px
+      transition-duration: 0.2s
+      opacity: 0.7
+    &:hover
+      .text
+        transition-duration: 0.2s
+        opacity: 1
+  #ycam
+    position: absolute
+    bottom: 20px
+    right: 22px
+  #copyright
+    position: absolute
+    bottom: 20px
+    right: 96px
+    font-family: $helvetica
+    text-align: right
+    font-size: 9px
+    line-height: 15px
+    color: rgba(255,255,255,0.3)
