@@ -68,8 +68,7 @@ a
       position: absolute
       top: -80px
       right: -29px
-  #sound_on,
-  #sound_off
+  #sound_btn
     display: block
     width: 150px
     height: 70px
@@ -77,10 +76,21 @@ a
     top: 0
     right: 0
     cursor: pointer
-    >img
+    .sound_on,
+    .sound_off
       position: absolute
       top: 26px
       left: 34px
+    .sound_on
+      display: block
+    .sound_off
+      display: none
+    &.off
+      .sound_on
+        display: none
+      .sound_off
+        display: block
+
   #sound_off
     display: none
   #bio_research

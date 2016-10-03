@@ -1,13 +1,15 @@
 ---
-title: TODO
-description: TODO
-keywords: TODO
+title: 森のDNA図鑑 - 仁保の森 2016
+description: 山口の森には、一体どんな植物や昆虫が住んでいるのでしょうか？YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と一緒に山口市の仁保（にほ）の森で生き物を採集して、顕微鏡での観察やDNA解析によって調査した結果を収録していく予定です。
+keywords: YCAM,DNA,森,図鑑
 class: 'index,ja'
 styles:
   - main
 scripts:
   - main
 ---
+%audio#sound(loop)
+  %source{src: asset_url('sound/field_recording.mp3'), type: "audio/mp3"}
 
 #slide
   #overlay
@@ -22,10 +24,9 @@ scripts:
     %h1
       %img{alt: '森のDNA図鑑 仁保の森2016', src: '/img/content.png', srcset: '/img/content@2x.png 2x'}
     %img#badge{alt: '11月上旬公開！', src: '/img/badge.png', srcset: '/img/badge@2x.png 2x'}
-  %a#sound_on
-    %img{alt: 'SOUND ON', src: '/img/sound-on.png', srcset: '/img/sound-on@2x.png 2x'}
-  %a#sound_off
-    %img{alt: 'SOUND OFF', src: '/img/sound-off.png', srcset: '/img/sound-off@2x.png 2x'}
+  %a#sound_btn
+    %img.sound_on{alt: 'SOUND ON', src: '/img/sound-on.png', srcset: '/img/sound-on@2x.png 2x'}
+    %img.sound_off{alt: 'SOUND OFF', src: '/img/sound-off.png', srcset: '/img/sound-off@2x.png 2x'}
   %a#bio_research{href: 'http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/', target: '_blank'}
     %img.arrow{alt: '→', src: '/img/arrow.png', srcset: '/img/arrow@2x.png 2x'}
     %img.text{alt: 'YCAMバイオ・リサーチのワークショップ「森のDNA」', src: '/img/bio_research-link.png', srcset: '/img/bio_research-link@2x.png 2x'}
