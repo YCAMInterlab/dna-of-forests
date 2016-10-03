@@ -18,9 +18,9 @@ sprockets.append_path 'lib/'
 
 # Build-specific configuration
 configure :build do
-  
+
   ignore "/**README*"
-  
+
   # activate :minify_css
   # activate :minify_javascript
   # activate :asset_hash
@@ -113,5 +113,5 @@ end
 activate :deploy do |deploy|
   deploy.build_before = true
   deploy.method = :git
-  deploy.branch = 'master'
+  deploy.branch = 'teaser'
 end
