@@ -1,3 +1,5 @@
+-# host = 'http://special.ycam.jp'
+- host = 'http://ycam.karappo.jp'
 !!!
 %html{ lang:"ja" }
   %head
@@ -6,7 +8,7 @@
     %meta{name: "description", lang: "ja", content: data.page.description}
     %meta{name: "keywords",    lang: "ja", content: data.page.keywords}
     %meta{name: "copyright",   content: "Copyright © 2016 Yamaguchi Center for Arts and Media, All Rights Reserved."}
-    %meta{name: "viewport",    content: "width=640"}
+    %meta{name: "viewport",    content: "width=660"}
     %meta{name: "description", lang: "ja", content: data.page.description}
     %meta{name: "keywords",    lang: "ja", content: data.page.keywords}
 
@@ -14,8 +16,15 @@
     %meta{property: "og:site_name", content: data.page.title}
     %meta{property: "og:description", content: data.page.description}
     %meta{property: "og:type", content: "website"}
-    %meta{property: "og:url", content: "http://special.ycam.jp/dna-of-forests/"}
-    %meta{property: "og:image", content: "http://special.ycam.jp/dna-of-forests/img/facebook.png"}
+    %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
+    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/facebook.png"}
+
+    %meta{property: "twitter:site", content: '@ycam_jp'}
+    %meta{property: "twitter:title", content: data.page.title}
+    %meta{property: "twitter:card", content: 'summary_large_image'}
+    %meta{property: "twitter:url", content: "#{host}/dna-of-forests/"}
+    %meta{property: "twitter:description", content: data.page.description}
+    %meta{property: "twitter:image", content: "#{host}/dna-of-forests/img/facebook.png"}
 
     = stylesheet_link_tag "lib/slick/slick.css"
     = stylesheet_link_tag "lib/slick/slick-theme.css"
