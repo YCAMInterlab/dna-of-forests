@@ -1,5 +1,7 @@
 -# host = 'http://ycam.karappo.jp'
 - host = 'http://special.ycam.jp'
+-# TODO: 画像を変えた場合は、ここの?移行も変更
+- chache_param = 'this-is-random-number-for-cache-4362984378'
 !!!
 %html{ lang:"ja" }
   %head
@@ -16,15 +18,14 @@
     %meta{property: "og:description", content: data.page.description}
     %meta{property: "og:type", content: "website"}
     %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
-    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/facebook.png"}
+    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/facebook.png?#{chache_param}"}
 
     %meta{name: "twitter:site", content: '@ycam_jp'}
     %meta{name: "twitter:title", content: data.page.title}
     %meta{name: "twitter:card", content: 'summary_large_image'}
     %meta{name: "twitter:url", content: "#{host}/dna-of-forests/"}
     %meta{name: "twitter:description", content: data.page.description}
-    -# TODO: 画像を変えた場合は、ここの?移行も変更
-    %meta{name: "twitter:image", content: "#{host}/dna-of-forests/img/facebook.png?this-is-random-number-for-cache-4362984378"}
+    %meta{name: "twitter:image", content: "#{host}/dna-of-forests/img/facebook.png?#{chache_param}"}
 
     = stylesheet_link_tag "lib/slick/slick.css"
     = stylesheet_link_tag "lib/slick/slick-theme.css"
