@@ -13,7 +13,18 @@ animate();
 
 function init() {
 
-  var container, mesh;
+  var container, mesh, video;
+
+  // var video = document.createElement('video');
+  // video.src = "some.mp4";
+  // video.load();
+  // video.play();
+
+  video = document.getElementById( 'video' );
+  texture = new THREE.VideoTexture( video );
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.format = THREE.RGBFormat;
 
   container = document.getElementById( 'container' );
 
@@ -26,7 +37,8 @@ function init() {
   geometry.scale( - 1, 1, 1 );
 
   var material = new THREE.MeshBasicMaterial( {
-    map: new THREE.TextureLoader().load( 'img/panorama/1.jpg' )
+    // map: new THREE.TextureLoader().load( 'img/panorama/1.jpg' )
+    map: texture
   } );
 
   mesh = new THREE.Mesh( geometry, material );
