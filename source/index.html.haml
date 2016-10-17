@@ -6,7 +6,9 @@ class: 'index,ja'
 styles:
   - main
 scripts:
-  - main
+  - lib/threejs/three.min.js
 ---
 
-%h1 index page
+#container
+
+= javascript_include_tag 'script/main.js'
