@@ -32,6 +32,7 @@ function create_pano_sphere(){
   });
   return new THREE.Mesh( geometry, material );
 }
+
 // マーカー
 function create_marker(color, x=0, y=0, z=0){
   var geometry = new THREE.SphereGeometry(2, 10, 10);
@@ -100,37 +101,37 @@ function init() {
 
   window.addEventListener( 'resize', onWindowResize, false );
 
-  document.addEventListener( 'dragover', function ( event ) {
+  document.addEventListener( 'dragover', function( e ) {
 
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'copy';
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
 
   }, false );
 
-  document.addEventListener( 'dragenter', function ( event ) {
+  document.addEventListener( 'dragenter', function( e ) {
 
     document.body.style.opacity = 0.5;
 
   }, false );
 
-  document.addEventListener( 'dragleave', function ( event ) {
+  document.addEventListener( 'dragleave', function( e ) {
 
     document.body.style.opacity = 1;
 
   }, false );
 
-  document.addEventListener( 'drop', function ( event ) {
+  document.addEventListener( 'drop', function( e ) {
 
-    event.preventDefault();
+    e.preventDefault();
 
     var reader = new FileReader();
-    reader.addEventListener( 'load', function ( event ) {
+    reader.addEventListener( 'load', function( e ) {
 
-      material.map.image.src = event.target.result;
+      material.map.image.src = e.target.result;
       material.map.needsUpdate = true;
 
     }, false );
-    reader.readAsDataURL( event.dataTransfer.files[ 0 ] );
+    reader.readAsDataURL( e.dataTransfer.files[ 0 ] );
 
     document.body.style.opacity = 1;
 
@@ -160,32 +161,32 @@ function onWindowResize() {
 
 }
 
-function onDocumentTouchStart( event ) {
+function onDocumentTouchStart( e ) {
 
-  event.preventDefault();
+  e.preventDefault();
 
-  event.clientX = event.touches[0].clientX;
-  event.clientY = event.touches[0].clientY;
-  onDocumentMouseDown( event );
+  e.clientX = e.touches[0].clientX;
+  e.clientY = e.touches[0].clientY;
+  onDocumentMouseDown( e );
 
 }
 
-function onDocumentMouseDown( event ) {
+function onDocumentMouseDown( e ) {
 
-  event.preventDefault();
+  e.preventDefault();
 
   isUserInteracting = true;
 
-  onPointerDownPointerX = event.clientX;
-  onPointerDownPointerY = event.clientY;
+  onPointerDownPointerX = e.clientX;
+  onPointerDownPointerY = e.clientY;
 
   onPointerDownLon = lon;
   onPointerDownLat = lat;
 
   // -----
 
-  mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-  mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+  mouse.x = ( e.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+  mouse.y = - ( e.clientY / renderer.domElement.clientHeight ) * 2 + 1;
 
   raycaster.setFromCamera( mouse, camera );
 
@@ -220,42 +221,42 @@ function onDocumentMouseDown( event ) {
   */
 }
 
-function onDocumentMouseMove( event ) {
+function onDocumentMouseMove( e ) {
 
   if ( isUserInteracting === true ) {
 
-    lon = ( onPointerDownPointerX - event.clientX ) * 0.1 + onPointerDownLon;
-    lat = ( event.clientY - onPointerDownPointerY ) * 0.1 + onPointerDownLat;
+    lon = ( onPointerDownPointerX - e.clientX ) * 0.1 + onPointerDownLon;
+    lat = ( e.clientY - onPointerDownPointerY ) * 0.1 + onPointerDownLat;
 
   }
 
 }
 
-function onDocumentMouseUp( event ) {
+function onDocumentMouseUp( e ) {
 
   isUserInteracting = false;
 
 }
 
-function onDocumentMouseWheel( event ) {
+function onDocumentMouseWheel( e ) {
 
   // WebKit
 
-  if ( event.wheelDeltaY ) {
+  if ( e.wheelDeltaY ) {
 
-    camera.fov -= event.wheelDeltaY * 0.05;
+    camera.fov -= e.wheelDeltaY * 0.05;
 
   // Opera / Explorer 9
 
-  } else if ( event.wheelDelta ) {
+  } else if ( e.wheelDelta ) {
 
-    camera.fov -= event.wheelDelta * 0.05;
+    camera.fov -= e.wheelDelta * 0.05;
 
   // Firefox
 
-  } else if ( event.detail ) {
+  } else if ( e.detail ) {
 
-    camera.fov += event.detail * 1.0;
+    camera.fov += e.detail * 1.0;
 
   }
 
