@@ -7,6 +7,9 @@ set :js_dir, 'script'
 set :images_dir, 'img'
 # set :build_dir, '../html'
 
+ignore '*.git*'
+ignore '**/README*'
+
 # htmlのattributesの囲みを「"」にする
 set :haml, { :attr_wrapper => "\"" }
 
