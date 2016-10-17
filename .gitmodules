@@ -1,0 +1,3 @@
+[submodule "source/style/general"]
+	path = source/style/general
+	url = git@github.com:naokazuterada/general.git

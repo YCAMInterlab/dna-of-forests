@@ -1,0 +1,37 @@
+- data = current_resource.data
+!!!
+%html{ lang:"ja" }
+  %head
+    %meta{charset: "utf-8"}
+    %title= data.title
+    %meta{name: "description", lang: "ja", content: data.description}
+    %meta{name: "keywords",    lang: "ja", content: data.keywords}
+    %meta{name: "copyright",   content: "Copyright (C) [TODO] All rights reserved."}
+    %meta{name: "viewport",    content: "width=925"}
+    %meta{name: "description", lang: "ja", content: data.description}
+    %meta{name: "keywords",    lang: "ja", content: data.keywords}
+
+    %meta{property: "og:title", content: data.title}
+    %meta{property: "og:site_name", content: data.title}
+    %meta{property: "og:type", content: "website"}
+    %meta{property: "og:url", content: "[TODO]"}
+    %meta{property: "og:image", content: "[TODO]"}
+
+    -#= javascript_include_tag "style/main.css"
+    - if data.styles
+      - data.styles.each do |file|
+        = stylesheet_link_tag "#{file}"
+
+    -#= javascript_include_tag "lib/modernizr.custom"
+    -#= javascript_include_tag "lib/lodash.min"
+    -#= javascript_include_tag "lib/jquery-1.11.2.min"
+    -#= javascript_include_tag "lib/jquery.easing.1.3"
+    - if data.scripts
+      - data.scripts.each do |file|
+        = javascript_include_tag "#{file}"
+
+    = partial 'partials/google_analytics'
+
+  %body{ class:"#{page_classes}" }
+    = partial 'partials/facebook_like_button'
+    = yield
