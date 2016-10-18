@@ -1,5 +1,4 @@
 'use strict';
-import $ from 'jquery';
 import Cookies from 'js-cookie';
 import MobileDetect from 'mobile-detect';
 
