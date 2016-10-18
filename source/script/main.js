@@ -1,5 +1,7 @@
 //= require_tree .
 
+
+
 var camera,
   scene,
   renderer,
@@ -34,8 +36,8 @@ function create_pano_sphere(){
 }
 
 // マーカー
-function create_marker(color, x=0, y=0, z=0){
-  var geometry = new THREE.SphereGeometry(2, 10, 10);
+function create_marker(color, x=0, y=0, z=0, key){
+  var geometry = new THREE.SphereGeometry(0.15, 10, 10);
   // geometry.scale( - 1, 1, 1 );
   var material = new THREE.MeshLambertMaterial({
     color: color
@@ -43,11 +45,27 @@ function create_marker(color, x=0, y=0, z=0){
   var marker = new THREE.Mesh( geometry, material );
 
   marker.position.set( x, y, z );
-
+  marker.key = key;
   markers.push( marker );
 
   return marker;
 }
+
+// 緯度経度から位置を算出
+function translateGeoCoords(latitude, longitude, radius) {
+
+  // 仰角
+  var phi = (latitude) * Math.PI / 180;
+  // 方位角
+  var theta = (longitude - 180) * Math.PI / 180;
+
+  var x = -(radius) * Math.cos(phi) * Math.cos(theta);
+  var y = (radius) * Math.sin(phi);
+  var z = (radius) * Math.cos(phi) * Math.sin(theta);
+
+  return new THREE.Vector3(x, y, z);
+}
+
 
 function init() {
 
@@ -70,44 +88,41 @@ function init() {
   var pano_sphere = create_pano_sphere();
   scene.add( pano_sphere );
 
-  var maker1 = create_marker(0xff0000,0,-50,100);
-  var maker2 = create_marker(0x550000,350,-50,50);
-  var maker3 = create_marker(0x0000ff,130,-50,0);
-  var maker4 = create_marker(0xff0055,-200,70,140);
-  scene.add( maker1 );
-  scene.add( maker2 );
-  scene.add( maker3 );
-  scene.add( maker4 );
-
-  var marker_data = {
-    '9_1_A':  [0,0,0],
-    '9_1_B':  [0,0,0],
-    '9_1_C':  [0,0,0],
-    '9_1_D':  [0,0,0],
-    '9_2_A':  [0,0,0],
-    '9_2_B':  [0,0,0],
-    '9_2_C':  [0,0,0],
-    '9_2_D':  [0,0,0],
-    '9_3_A':  [0,0,0],
-    '9_3_B':  [0,0,0],
-    '9_3_C':  [0,0,0],
-    '9_3_D':  [0,0,0],
-    '10_1_A': [0,0,0],
-    '10_1_B': [0,0,0],
-    '10_1_C': [0,0,0],
-    '10_1_D': [0,0,0],
-    '10_2_A': [0,0,0],
-    '10_2_B': [0,0,0],
-    '10_2_C': [0,0,0],
-    '10_2_D': [0,0,0],
-    '10_3_A': [0,0,0],
-    '10_3_B': [0,0,0],
-    '10_3_C': [0,0,0],
-    '10_3_D': [0,0,0]
+  // 半径は全てメートルで大体目測で合わせる
+  var marker_datas = {
+    // カメラの中心座標からの方角（lat,long）と距離（radius）
+    // {key}: [latitude, longitude, radius]
+    'cristina': [2.3,-55,17],
+    'ersin': [1.8,-57,18], // 木の裏に隠れて見えないところ
+    '9_1_C': [-9,-62,13],
+    '9_2_A': [-6.8,95,20],
+    '9_2_B': [-12.5,116.3,19],
+    '9_2_C': [5.8,-42,18],
+    '9_2_D': [-25,-106,6],
+    '9_3_A': [-4.5,142,21],
+    '9_3_D': [-11.3,113.2,20],
+    '9_1_B': [-18,-24,8.2],
+    '9_1_D': [-20,-22,8],
+    '9_3_C': [-1,-27,9],
+    '9_1_A': [-10.7,39,8],
+    '9_3_B': [1,53,9.5],
+    '10_1_A': [22,53,16],
+    '10_1_B': [5.4,-46,22],
+    '10_1_C': [4.5,76.6,15],
+    '10_1_D': [-7,-67,13],
+    '10_2_A': [-23,-164,8],
+    '10_2_B': [5,-50,20],
+    '10_2_C': [-32,-120,5.5],
+    '10_2_D': [23.4,5,20], // 鎖のところ？
+    '10_3_A': [23.4,-4,21], // ２本めのポールの奥
+    '10_3_B': [-0.5,-62.5,18], // 隠れて見えないところ
+    '10_3_C': [-13,93,12],
+    '10_3_D': [-0.4,-35,12] // 葉っぱに隠れて見えないところ
   };
-  for(var i=0; i<marker_data.length; i++){
-    var dada = marker_data[i];
-    scene.add( create_marker(0xff0055, dada[0], dada[1], dada[2]) );
+  for(var key in marker_datas){
+    var data = marker_datas[key];
+    var geo = translateGeoCoords(data[0],data[1],data[2]);
+    scene.add( create_marker(0xff0000, geo.x, geo.y, geo.z, key) );
   }
 
   // 座標軸の表示
@@ -233,6 +248,8 @@ function onDocumentMouseDown( e ) {
     else{
       clicked_marker.object.material.color.r = 0;
     }
+
+    console.log('clicked:', clicked_marker.object.key);
 
     // intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
     // var particle = new THREE.Sprite( particleMaterial );
