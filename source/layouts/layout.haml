@@ -1,4 +1,10 @@
 - data = current_resource.data
+-#
+-# host = 'http://ycam.karappo.jp'
+- host = 'http://special.ycam.jp'
+-#
+-# TODO: 画像を変えた場合は、ここの?移行も変更
+- chache_param = 'this-is-random-number-for-cache-4362984378'
 !!!
 %html{ lang:"ja" }
   %head
@@ -6,16 +12,23 @@
     %title= data.title
     %meta{name: "description", lang: "ja", content: data.description}
     %meta{name: "keywords",    lang: "ja", content: data.keywords}
-    %meta{name: "copyright",   content: "Copyright (C) [TODO] All rights reserved."}
-    %meta{name: "viewport",    content: "width=925"}
-    %meta{name: "description", lang: "ja", content: data.description}
-    %meta{name: "keywords",    lang: "ja", content: data.keywords}
+    %meta{name: "copyright",   content: "Copyright © 2016 Yamaguchi Center for Arts and Media, All Rights Reserved."}
+    %meta{name: "viewport",    content: "width=660"}
 
+    %meta{property: "og:locale", content: "ja_JP"}
     %meta{property: "og:title", content: data.title}
     %meta{property: "og:site_name", content: data.title}
+    %meta{property: "og:description", content: data.description}
     %meta{property: "og:type", content: "website"}
-    %meta{property: "og:url", content: "[TODO]"}
-    %meta{property: "og:image", content: "[TODO]"}
+    %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
+    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/facebook.png?#{chache_param}"}
+
+    %meta{name: "twitter:site", content: '@ycam_jp'}
+    %meta{name: "twitter:title", content: data.title}
+    %meta{name: "twitter:card", content: 'summary_large_image'}
+    %meta{name: "twitter:url", content: "#{host}/dna-of-forests/"}
+    %meta{name: "twitter:description", content: data.description}
+    %meta{name: "twitter:image", content: "#{host}/dna-of-forests/img/facebook.png?#{chache_param}"}
 
     -#= javascript_include_tag "style/main.css"
     - if data.styles
