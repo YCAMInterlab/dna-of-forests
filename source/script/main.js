@@ -1,69 +1,7 @@
 'use strict';
-import $ from 'jquery';
-import Cookies from 'js-cookie';
+import Sound from './Sound';
 
-$(function(){
-  console.log('ok', Cookies.get('isSoundOn'));
-
-  // Sound
-  // --------
-
-  var sound = document.getElementById('sound');
-  sound.volume = 0.3;
-  var toggleSound = function(_on){
-    console.log(_on);
-    if(_on){
-      sound.play();
-      Cookies.set('isSoundOn', 1);
-      $('#sound_btn').removeClass('off');
-    }
-    else {
-      sound.pause();
-      Cookies.set('isSoundOn', 0);
-      $('#sound_btn').addClass('off');
-    }
-  }
-  toggleSound(!(isMobile.iOS() || parseInt(Cookies.get('isSoundOn'),10)==0));
-
-  $('body')
-    .on('click', '#sound_btn', function(){
-      toggleSound($(this).hasClass('off'));
-    });
-});
-
-var isMobile = {
-  Android: function() {
-    if (navigator.userAgent.match(/Android/i)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  BlackBerry: function() {
-    if (navigator.userAgent.match(/BlackBerry/i)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  iOS: function() {
-    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  Windows: function() {
-    if (navigator.userAgent.match(/IEMobile/i)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  any: function() {
-    return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows();
-  }
-};
+new Sound();
 
 var camera,
   scene,
