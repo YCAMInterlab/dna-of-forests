@@ -1,12 +1,79 @@
-//= require_tree .
+'use strict';
+import $ from 'jquery';
+import Cookies from 'js-cookie';
 
+$(function(){
+  console.log('ok', Cookies.get('isSoundOn'));
 
+  // Sound
+  // --------
+
+  var sound = document.getElementById('sound');
+  sound.volume = 0.3;
+  var toggleSound = function(_on){
+    console.log(_on);
+    if(_on){
+      sound.play();
+      Cookies.set('isSoundOn', 1);
+      $('#sound_btn').removeClass('off');
+    }
+    else {
+      sound.pause();
+      Cookies.set('isSoundOn', 0);
+      $('#sound_btn').addClass('off');
+    }
+  }
+  toggleSound(!(isMobile.iOS() || parseInt(Cookies.get('isSoundOn'),10)==0));
+
+  $('body')
+    .on('click', '#sound_btn', function(){
+      toggleSound($(this).hasClass('off'));
+    });
+});
+
+var isMobile = {
+  Android: function() {
+    if (navigator.userAgent.match(/Android/i)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  BlackBerry: function() {
+    if (navigator.userAgent.match(/BlackBerry/i)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  iOS: function() {
+    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  Windows: function() {
+    if (navigator.userAgent.match(/IEMobile/i)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  any: function() {
+    return isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows();
+  }
+};
 
 var camera,
   scene,
   renderer,
   raycaster,
   mouse,
+  onPointerDownPointerX,
+  onPointerDownPointerY,
+  onPointerDownLon,
+  onPointerDownLat,
   isUserInteracting = false,
   onMouseDownMouseX = 0,
   onMouseDownMouseY = 0,
@@ -24,7 +91,7 @@ function create_pano_sphere(){
   geometry.scale( - 1, 1, 1 );
 
   var video = document.getElementById( 'video' );
-  texture = new THREE.VideoTexture( video );
+  var texture = new THREE.VideoTexture( video );
   texture.minFilter = THREE.LinearFilter;
   texture.magFilter = THREE.LinearFilter;
   texture.format = THREE.RGBFormat;
@@ -240,7 +307,7 @@ function onDocumentMouseDown( e ) {
 
   if ( intersects.length > 0 ) {
 
-    clicked_marker = intersects[0];
+    var clicked_marker = intersects[0];
 
     if(clicked_marker.object.material.color.r!=1){
       clicked_marker.object.material.color.r = 1;

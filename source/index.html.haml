@@ -8,11 +8,16 @@ styles:
 scripts:
   - lib/threejs/three.min.js
 ---
+%audio#sound(loop)
+  %source{src: asset_url('sound/field_recording.mp3'), type: "audio/mp3"}
 
 %video#video{autoplay: "", loop: "", style: "display:none", "webkit-playsinlin": ""}
   %source{src: "img/panorama/video-2s-no_sound.mp4", type: "video/mp4; codecs=\"avc1.42E01E, mp4a.40.2\""}
     Your browser doesn't support video.
 
 #container
+  %a#sound_btn
+    %img.sound_on{alt: 'SOUND ON', src: 'img/sound-on.png', srcset: 'img/sound-on@2x.png 2x'}
+    %img.sound_off{alt: 'SOUND OFF', src: 'img/sound-off.png', srcset: 'img/sound-off@2x.png 2x'}
 
 = javascript_include_tag 'script/main.js'

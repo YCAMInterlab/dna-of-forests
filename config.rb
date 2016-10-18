@@ -19,6 +19,21 @@ set :haml, { :attr_wrapper => "\"" }
 # URL access xxx.hmtl -> /xxx/
 activate :directory_indexes
 
+# activate :external_pipeline,
+#   name: :webpack,
+#   command: build? ? './node_modules/webpack/bin/webpack.js --bail' : './node_modules/webpack/bin/webpack.js --watch -d',
+#   source: ".tmp/dist",
+#   latency: 2
+
+activate :external_pipeline,
+   name: :webpack,
+   command: build? ?
+   "./node_modules/webpack/bin/webpack.js --bail -p" :
+   "./node_modules/webpack/bin/webpack.js --watch -d --progress --color",
+   source: ".tmp/dist",
+   latency: 1
+
+
 # Per-page layout changes:
 #
 # With no layout

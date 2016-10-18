@@ -20,3 +20,26 @@ body
   background-color: #000
   margin: 0px
   overflow: hidden
+
+#sound_btn
+  display: block
+  width: 150px
+  height: 70px
+  position: absolute
+  top: 0
+  right: 0
+  cursor: pointer
+  .sound_on,
+  .sound_off
+    position: absolute
+    top: 26px
+    left: 34px
+  .sound_on
+    display: block
+  .sound_off
+    display: none
+  &.off
+    .sound_on
+      display: none
+    .sound_off
+      display: block
