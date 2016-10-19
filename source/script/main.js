@@ -28,7 +28,7 @@ animate();
 
 // パノラマ画像を貼り付けた球体
 function create_pano_sphere(){
-  var geometry = new THREE.SphereGeometry( 500, 60, 40 );
+  var geometry = new THREE.SphereGeometry( 500, 120, 120 );
   geometry.scale( - 1, 1, 1 );
 
   var video = document.getElementById( 'video' );
@@ -88,13 +88,23 @@ function init() {
   mouse = new THREE.Vector2();
 
   // 光
-  var ambient = new THREE.AmbientLight(0x550000);
+  var ambient = new THREE.AmbientLight(0xffffff);
   scene.add(ambient);
 
   // ジオメトリの追加
 
   var pano_sphere = create_pano_sphere();
   scene.add( pano_sphere );
+
+  // グリッド
+  // var sphere = new THREE.Mesh(
+  //   new THREE.SphereGeometry( 500, 12, 12 ),
+  //   new THREE.MeshPhongMaterial({
+  //     color: 0xffffff,
+  //     wireframe: true
+  //   })
+  // );
+  // scene.add(sphere);
 
   // 半径は全てメートルで大体目測で合わせる
   var marker_datas = {
@@ -133,10 +143,9 @@ function init() {
   }
 
   // 座標軸の表示
-  var axis = new THREE.AxisHelper(1000);
-  axis.position.set(0,0,0);
-  scene.add(axis);
-
+  // var axis = new THREE.AxisHelper(300);
+  // axis.position.set(0,-10,0); // 原点だとカメラと同じ視点になるので表示されない
+  // scene.add(axis);
 
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio( window.devicePixelRatio );
@@ -328,9 +337,9 @@ function animate() {
 
 function update() {
 
-  if ( isUserInteracting === false ) {
-    lon += 0.05;
-  }
+  // if ( isUserInteracting === false ) {
+  //   lon += 0.05;
+  // }
 
   lat = Math.max( - 85, Math.min( 85, lat ) );
   phi = THREE.Math.degToRad( 90 - lat );
