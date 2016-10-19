@@ -99,37 +99,36 @@ function init() {
   // 半径は全てメートルで大体目測で合わせる
   var marker_datas = {
     // カメラの中心座標からの方角（lat,long）と距離（radius）
-    // {key}: [latitude, longitude, radius]
-    'cristina': [   2.3,   -55,  17 ],
-    'ersin':    [   1.8,   -57,  18 ], // 木の裏に隠れて見えないところ
-    '9_1_C':    [    -9,   -62,  13 ],
-    '9_2_A':    [  -6.8,    95,  20 ],
-    '9_2_B':    [ -12.5, 116.3,  19 ],
-    '9_2_C':    [   5.8,   -42,  18 ],
-    '9_2_D':    [   -25,  -106,   6 ],
-    '9_3_A':    [  -4.5,   142,  21 ],
-    '9_3_D':    [ -11.3, 113.2,  20 ],
-    '9_1_B':    [   -18,   -24, 8.2 ],
-    '9_1_D':    [   -20,   -22,   8 ],
-    '9_3_C':    [    -1,   -27,   9 ],
-    '9_1_A':    [ -10.7,    39,   8 ],
-    '9_3_B':    [     1,    53, 9.5 ],
-    '10_1_A':   [    22,    53,  16 ],
-    '10_1_B':   [   5.4,   -46,  22 ],
-    '10_1_C':   [   4.5,  76.6,  15 ],
-    '10_1_D':   [    -7,   -67,  13 ],
-    '10_2_A':   [   -23,  -164,   8 ],
-    '10_2_B':   [     5,   -50,  20 ],
-    '10_2_C':   [   -32,  -120, 5.5 ],
-    '10_2_D':   [  23.4,     5,  20 ], // 鎖のところ？
-    '10_3_A':   [  23.4,    -4,  21 ], // ２本めのポールの奥
-    '10_3_B':   [  -0.5, -62.5,  18 ], // 隠れて見えないところ
-    '10_3_C':   [   -13,    93,  12 ],
-    '10_3_D':   [  -0.4,   -35,  12 ], // 葉っぱに隠れて見えないところ
+    'cristina': { lat:  2.3, long:   -55, radius:  17 },
+    'ersin':    { lat:  1.8, long:   -57, radius:  18 }, // 木の裏に隠れて見えないところ
+    '9_1_C':    { lat:   -9, long:   -62, radius:  13 },
+    '9_2_A':    { lat: -6.8, long:    95, radius:  20 },
+    '9_2_B':    { lat:-12.5, long: 116.3, radius:  19 },
+    '9_2_C':    { lat:  5.8, long:   -42, radius:  18 },
+    '9_2_D':    { lat:  -25, long:  -106, radius:   6 },
+    '9_3_A':    { lat: -4.5, long:   142, radius:  21 },
+    '9_3_D':    { lat:-11.3, long: 113.2, radius:  20 },
+    '9_1_B':    { lat:  -18, long:   -24, radius: 8.2 },
+    '9_1_D':    { lat:  -20, long:   -22, radius:   8 },
+    '9_3_C':    { lat:   -1, long:   -27, radius:   9 },
+    '9_1_A':    { lat:-10.7, long:    39, radius:   8 },
+    '9_3_B':    { lat:    1, long:    53, radius: 9.5 },
+    '10_1_A':   { lat:   22, long:    53, radius:  16 },
+    '10_1_B':   { lat:  5.4, long:   -46, radius:  22 },
+    '10_1_C':   { lat:  4.5, long:  76.6, radius:  15 },
+    '10_1_D':   { lat:   -7, long:   -67, radius:  13 },
+    '10_2_A':   { lat:  -23, long:  -164, radius:   8 },
+    '10_2_B':   { lat:    5, long:   -50, radius:  20 },
+    '10_2_C':   { lat:  -32, long:  -120, radius: 5.5 },
+    '10_2_D':   { lat: 23.4, long:     5, radius:  20 }, // 鎖のところ？
+    '10_3_A':   { lat: 23.4, long:    -4, radius:  21 }, // ２本めのポールの奥
+    '10_3_B':   { lat: -0.5, long: -62.5, radius:  18 }, // 隠れて見えないところ
+    '10_3_C':   { lat:  -13, long:    93, radius:  12 },
+    '10_3_D':   { lat: -0.4, long:   -35, radius:  12 }, // 葉っぱに隠れて見えないところ
   };
   for(var key in marker_datas){
     var data = marker_datas[key];
-    var geo = translateGeoCoords(data[0],data[1],data[2]);
+    var geo = translateGeoCoords(data.lat, data.long, data.radius);
     scene.add( create_marker(0xff0000, geo.x, geo.y, geo.z, key) );
   }
 
