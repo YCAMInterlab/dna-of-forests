@@ -42,7 +42,7 @@ function create_pano_sphere(){
 
 // マーカー
 function create_marker(color, x=0, y=0, z=0, key){
-  var geometry = new THREE.SphereGeometry(0.15, 10, 10);
+  var geometry = new THREE.SphereGeometry(0.15, 8, 8); // 15cmくらい
   // geometry.scale( - 1, 1, 1 );
   var material = new THREE.MeshLambertMaterial({
     color: color
