@@ -60,6 +60,7 @@ end
 configure :build do
 
   ignore "/**README*"
+  # buildに時間がかかる場合は、build不要なディレクトリをここで指定する
 
   # activate :minify_css
   # activate :minify_javascript
