@@ -19,12 +19,6 @@ set :haml, { :attr_wrapper => "\"" }
 # URL access xxx.hmtl -> /xxx/
 activate :directory_indexes
 
-# activate :external_pipeline,
-#   name: :webpack,
-#   command: build? ? './node_modules/webpack/bin/webpack.js --bail' : './node_modules/webpack/bin/webpack.js --watch -d',
-#   source: ".tmp/dist",
-#   latency: 2
-
 activate :external_pipeline,
    name: :webpack,
    command: build? ?
@@ -57,11 +51,25 @@ end
 
 # Build-specific configuration
 configure :build do
-  # Minify CSS on build
-  # activate :minify_css
 
-  # Minify Javascript on build
+  ignore "/**README*"
+
+  # activate :minify_css
   # activate :minify_javascript
+  activate :asset_hash
+
+  # Use relative URLs
+  # activate :relative_assets
+
+  # Or use a different image path
+  # set :http_prefix, "/Content/images/"
+
+  # リポジトリ名を host に設定しておく
+  # こうすることで stylesheet_link_tag などで展開されるパスが
+  # /my_project/stylesheets/normalize.css
+  # のようになる
+  # activate :asset_host, host: '/dna-of-forests'
+  # activate :asset_host, host: 'http://ycam.karappo.jp/dna-of-forests'
 end
 
 ###
