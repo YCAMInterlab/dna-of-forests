@@ -18,9 +18,12 @@ var camera,
   isUserInteracting = false,
   onMouseDownMouseX = 0,
   onMouseDownMouseY = 0,
-  lon = 0, onMouseDownLon = 0,
-  lat = 0, onMouseDownLat = 0,
-  phi = 0, theta = 0,
+  lon = (Cookies.get('lon') || 0)*1,
+  lat = (Cookies.get('lat') || 0)*1,
+  onMouseDownLon = 0,
+  onMouseDownLat = 0,
+  phi = 0,
+  theta = 0,
   markers = [];
 
 init();
@@ -291,7 +294,6 @@ function onDocumentMouseMove( e ) {
 
     lon = ( onPointerDownPointerX - e.clientX ) * 0.1 + onPointerDownLon;
     lat = ( e.clientY - onPointerDownPointerY ) * 0.1 + onPointerDownLat;
-
   }
 
 }
@@ -300,6 +302,8 @@ function onDocumentMouseUp( e ) {
 
   isUserInteracting = false;
 
+  Cookies.set('lon', lon);
+  Cookies.set('lat', lat);
 }
 
 function onDocumentMouseWheel( e ) {

@@ -1,5 +1,4 @@
 'use strict';
-import Cookies from 'js-cookie';
 import MobileDetect from 'mobile-detect';
 
 class Sound {
