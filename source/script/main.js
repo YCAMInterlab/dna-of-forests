@@ -1,5 +1,8 @@
 'use strict';
+import THREELib from 'three-js';
 import Sound from './Sound';
+
+var THREE = THREELib();
 
 new Sound();
 
