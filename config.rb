@@ -19,6 +19,13 @@ set :haml, { :attr_wrapper => "\"" }
 # URL access xxx.hmtl -> /xxx/
 activate :directory_indexes
 
+# デプロイ設定
+activate :deploy do |deploy|
+  deploy.deploy_method = :git
+  deploy.build_before = true
+  deploy.branch = 'master'
+end
+
 activate :external_pipeline,
    name: :webpack,
    command: build? ?
@@ -68,8 +75,7 @@ configure :build do
   # こうすることで stylesheet_link_tag などで展開されるパスが
   # /my_project/stylesheets/normalize.css
   # のようになる
-  # activate :asset_host, host: '/dna-of-forests'
-  # activate :asset_host, host: 'http://ycam.karappo.jp/dna-of-forests'
+  activate :asset_host, host: '/dna-of-forests'
 end
 
 ###
