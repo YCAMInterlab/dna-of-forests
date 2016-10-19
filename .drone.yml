@@ -1,0 +1,20 @@
+clone:
+  depth: 1
+build:
+  image: karappo/dronedeploy
+  environment:
+    - DEP_TEASER_COMMAND=rsync
+    - DEP_TEASER_HOST=karappojp.sakura.ne.jp
+    - DEP_TEASER_USER=karappojp
+    - DEP_TEASER_HOST_DIR=/home/karappojp/www/preview/ycam.karappo.jp/dna-of-forests
+    - DEP_MASTER_COMMAND=rsync
+    - DEP_MASTER_HOST=karappojp.sakura.ne.jp
+    - DEP_MASTER_USER=karappojp
+    - DEP_MASTER_HOST_DIR=/home/karappojp/www/preview/ycam.karappo.jp/dna-of-forests
+  commands:
+    - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
+notify:
+  slack:
+    webhook_url: https://hooks.slack.com/services/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
+    channel: builds
+    username: drone
