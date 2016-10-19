@@ -12,7 +12,6 @@ class Sound {
       var sound = document.getElementById('sound');
       sound.volume = 0.3;
       var toggleSound = function(_on){
-        console.log(_on);
         if(_on){
           sound.play();
           Cookies.set('isSoundOn', 1);
