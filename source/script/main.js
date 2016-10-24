@@ -47,11 +47,12 @@ function create_pano_sphere(){
 }
 
 // マーカー
-function create_marker(color, x=0, y=0, z=0, key){
-  var geometry = new THREE.SphereGeometry(0.15, 8, 8); // 15cmくらい
+function create_marker(type, x=0, y=0, z=0, key){
+  // 15cmくらい
+  var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
   // geometry.scale( - 1, 1, 1 );
   var material = new THREE.MeshLambertMaterial({
-    color: color
+    color: 0xffffff
   });
   var marker = new THREE.Mesh( geometry, material );
 
@@ -144,7 +145,7 @@ function init() {
   for(var key in sample_markers){
     var data = sample_markers[key];
     var geo = translateGeoCoords(data.lat, data.lon, data.rad);
-    scene.add( create_marker(0xff0000, geo.x, geo.y, geo.z, key) );
+    scene.add( create_marker('sample', geo.x, geo.y, geo.z, key) );
   }
 
   // 森の知識マーカー
@@ -164,7 +165,7 @@ function init() {
   for(var key in knowledge_markers){
     var data = knowledge_markers[key];
     var geo = translateGeoCoords(data.lat, data.lon, data.rad);
-    scene.add( create_marker(0xffffff, geo.x, geo.y, geo.z, key) );
+    scene.add( create_marker('knowloedge', geo.x, geo.y, geo.z, key) );
   }
 
   // 座標軸の表示
