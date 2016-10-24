@@ -101,7 +101,7 @@ function init() {
 
   // グリッド
   // var sphere = new THREE.Mesh(
-  //   new THREE.SphereGeometry( 500, 12, 12 ),
+  //   new THREE.SphereGeometry( 500, 36, 18 ),
   //   new THREE.MeshPhongMaterial({
   //     color: 0xffffff,
   //     wireframe: true
