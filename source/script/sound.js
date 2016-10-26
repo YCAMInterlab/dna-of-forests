@@ -3,7 +3,7 @@ import MobileDetect from 'mobile-detect';
 
 class Sound {
 
-  constructor(data, targetTab){
+  constructor(){
 
     var md = new MobileDetect(window.navigator.userAgent);
 
