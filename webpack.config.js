@@ -8,7 +8,12 @@ module.exports = {
 
   resolve: {
     root: __dirname + '/source/script',
-    // extensions: ['','.js','.jsx']
+    // extensions: ['','.js','.jsx'],
+
+    // HTMLファイル内でVueの記法でを可能にする
+    alias: {
+      'vue$': 'vue/dist/vue.js'
+    }
   },
 
   output: {
@@ -30,6 +35,10 @@ module.exports = {
         test: /\.json$/,
         exclude: /node_modules/,
         loader: 'json-loader'
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
       }
     ],
   },

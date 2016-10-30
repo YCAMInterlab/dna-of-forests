@@ -6,16 +6,25 @@ class: 'index,ja'
 styles:
   - main
 ---
-%audio#sound(loop)
-  %source{src: './sound/field_recording.mp3', type: "audio/mp3"}
+/ %audio#sound(loop)
+/   %source{src: './sound/field_recording.mp3', type: "audio/mp3"}
 
-%video#video{autoplay: '', loop: '', style: 'display:none', 'webkit-playsinlin': ''}
-  %source{src: 'img/panorama/video-2s-no_sound.mp4', type: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'}
-    Your browser doesn't support video.
+/ %video#video{autoplay: '', loop: '', style: 'display:none', 'webkit-playsinlin': ''}
+/   %source{src: 'img/panorama/video-2s-no_sound.mp4', type: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'}
+/     Your browser doesn't support video.
 
-#container
-  %a#sound_btn
-    %img.sound_on{alt: 'SOUND ON', src: 'img/sound-on.png', srcset: 'img/sound-on@2x.png 2x'}
-    %img.sound_off{alt: 'SOUND OFF', src: 'img/sound-off.png', srcset: 'img/sound-off@2x.png 2x'}
 
-= javascript_include_tag 'script/main.js'
+#app
+  %nav#gnav
+    %router-link{to: "/panorama"} 360
+    %router-link{to: "/list"} List
+    %router-link{to: "/about"} About
+    %a#sound_btn
+      Soung
+      / %img.sound_on{alt: 'SOUND ON', src: 'img/sound-on.png', srcset: 'img/sound-on@2x.png 2x'}
+      / %img.sound_off{alt: 'SOUND OFF', src: 'img/sound-off.png', srcset: 'img/sound-off@2x.png 2x'}
+  #content
+    %router-view
+      Top
+
+= javascript_include_tag 'main'

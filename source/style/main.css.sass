@@ -11,35 +11,42 @@ $hiragino: 'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','HiraKakuProN-
 // =========================
 // Common
 
+html,
 body
+  height: 100%
+
+body
+  position: relative
   font-family: $hiragino
   color: #111
   font-size: 13px
   line-height: 1em
-  position: relative
-  background-color: #000
-  margin: 0px
-  overflow: hidden
 
-#sound_btn
-  display: block
-  width: 150px
-  height: 70px
-  position: absolute
-  top: 0
-  right: 0
-  cursor: pointer
-  .sound_on,
-  .sound_off
-    position: absolute
-    top: 26px
-    left: 34px
-  .sound_on
+#app
+  position: relative
+  height: 100%
+  min-height: 100%
+  width: 100%
+#gnav
+  position: relative
+  background: #000
+  width: 100px
+  height: 100%
+  float: left
+  >a
     display: block
-  .sound_off
-    display: none
-  &.off
-    .sound_on
-      display: none
-    .sound_off
-      display: block
+    width: 100%
+    height: 100px
+    background-color: #222
+    margin-bottom: 1px
+    cursor: pointer
+    &#sound_btn
+      position: absolute
+      bottom: 0
+
+    &.router-link-active
+      color: red
+
+#content
+  width: calc(100% - 100px)
+  float: left
