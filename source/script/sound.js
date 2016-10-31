@@ -1,6 +1,7 @@
 'use strict';
 import $ from 'jquery';
 import MobileDetect from 'mobile-detect';
+import Cookies from 'js-cookie';
 
 class Sound {
 

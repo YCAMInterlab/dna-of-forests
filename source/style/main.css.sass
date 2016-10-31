@@ -5,8 +5,7 @@
 // =========================
 // Constant
 
-$hiragino: 'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','HiraKakuProN-W3','メイリオ','Meiryo','ＭＳ ゴシック','MS Gothic',Osaka,Verdana,arial,helvetica,sans-serif
-
+$yu_gothic: '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif
 
 // =========================
 // Common
@@ -17,10 +16,11 @@ body
 
 body
   position: relative
-  font-family: $hiragino
+  font-family: $yu_gothic
   color: #111
   font-size: 13px
   line-height: 1em
+  color: #fff
 
 #app
   position: relative
@@ -87,19 +87,14 @@ $gnav_w: 80px
 
 
 #content
-  width: calc(100% - $gnav_w)
+  width: calc(100% - #{$gnav_w})
   float: left
+  height: 100%
+  overflow-y: auto
+  background-color: #1a1a1a
 
 section
   >h1
-    height: 74px
-    background-color: #333
+    padding: 30px 27px
+    background-color: #2b2b2b
     margin-bottom: 1px
-    color: #fff
-    font-size: 20px
-
-  &#list
-    table
-      width: 100%
-      tr
-        height: 55px
