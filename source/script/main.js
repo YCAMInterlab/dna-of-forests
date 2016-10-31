@@ -1,9 +1,12 @@
 'use strict';
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Sound from './Sound';
 
-Vue.use(VueRouter)
+new Sound();
+
+Vue.use(VueRouter);
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -11,7 +14,7 @@ Vue.use(VueRouter)
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/panorama', component: require('./components/panorama.vue') },
+  { path: '/',         component: require('./components/panorama.vue') },
   { path: '/list',     component: require('./components/list.vue') },
   { path: '/about',    component: require('./components/about.vue') },
 ]
