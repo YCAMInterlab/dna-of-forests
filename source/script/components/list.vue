@@ -33,6 +33,11 @@ section
 
 <style lang="sass?indentedSyntax" scoped>
 
+h1
+  padding: 30px 27px
+  background-color: #2b2b2b
+  margin-bottom: 1px
+
 table
   width: 100%
   max-width: 100%
