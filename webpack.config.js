@@ -50,11 +50,11 @@ module.exports = {
   plugins: [
     new Clean(['.tmp']),
     // Declare Global variables
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Cookies: 'js-cookie',
-    }),
+    // new webpack.ProvidePlugin({
+    //   $: 'jquery',
+    //   jQuery: 'jquery',
+    //   'window.jQuery': 'jquery',
+    //   Cookies: 'js-cookie',
+    // }),
   ],
 };
