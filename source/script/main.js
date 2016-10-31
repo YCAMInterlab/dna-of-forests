@@ -15,6 +15,7 @@ Vue.use(VueRouter);
 // We'll talk about nested routes later.
 const routes = [
   { path: '/',         component: require('./components/panorama.vue') },
+  { path: '/panorama', component: require('./components/panorama.vue') },
   { path: '/list',     component: require('./components/list.vue') },
   { path: '/about',    component: require('./components/about.vue') },
 ]
