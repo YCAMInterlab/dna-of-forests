@@ -1,21 +1,18 @@
-<template lang="pug">
-
-#container
-
-</template>
-
-<script>
-
-import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
 
 var THREE = THREELib();
 
-export default Vue.extend({
+export default class Scene {
 
-  created: function() {
+  constructor( options = {} ) {
 
+    this.containter = options.containter.$el
+    console.log('constructor',　options.containter.$el);
+  }
+
+  init() {
+    console.log('init');
     var camera,
         scene,
         renderer,
@@ -36,8 +33,7 @@ export default Vue.extend({
         theta = 0,
         markers = [];
     // var container = document.getElementById( 'container' );
-    var container = this.$el;
-    console.log('OK?', this.$el, this);
+    console.log('OK?', options.containter);
 
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
     camera.target = new THREE.Vector3( 0, 0, 0 );
@@ -184,28 +180,218 @@ export default Vue.extend({
     //
 
     window.addEventListener( 'resize', onWindowResize, false );
-  },
-  methods: {
-    // パノラマ画像を貼り付けた球体
-    create_pano_sphere(){
-      var geometry = new THREE.SphereGeometry( 500, 120, 120 );
-      geometry.scale( - 1, 1, 1 );
 
-      var video = document.getElementById( 'video' );
-      var texture = new THREE.VideoTexture( video );
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.format = THREE.RGBFormat;
+  }
 
-      var material = new THREE.MeshBasicMaterial( {
-        map: texture
-      });
-      return new THREE.Mesh( geometry, material );
+  animate( ts ) {
+
+    requestAnimationFrame( animate );
+    update();
+  }
+
+  render( elapsed, ts ) {
+
+    if (this.options.orbitControls) {
+      let position = this.camera.position.toArray();
+      let direction = this.target.toArray();
+      this.controls.update(position, direction);
+      this.camera.position.fromArray(position);
+      this.camera.lookAt(this.target.fromArray(direction));
+    }
+
+    if ( this.options.postprocessing ) {
+      this.postprocessing.render( elapsed, ts, this.tick );
+    } else {
+      this.renderer.render( this.scene, this.camera );
     }
   }
-  data () {
-    return {
-    }
+
+  onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
   }
-});
-</script>
+
+  update() {
+
+    // if ( isUserInteracting === false ) {
+    //   lon += 0.05;
+    // }
+
+    lat = Math.max( - 85, Math.min( 85, lat ) );
+    phi = THREE.Math.degToRad( 90 - lat );
+    theta = THREE.Math.degToRad( lon );
+
+    camera.target.x = 500 * Math.sin( phi ) * Math.cos( theta );
+    camera.target.y = 500 * Math.cos( phi );
+    camera.target.z = 500 * Math.sin( phi ) * Math.sin( theta );
+
+    camera.lookAt( camera.target );
+
+    /*
+    // distortion
+    camera.position.copy( camera.target ).negate();
+    */
+
+    renderer.render( scene, camera );
+
+  }
+
+  // パノラマ画像を貼り付けた球体
+  create_pano_sphere(){
+    var geometry = new THREE.SphereGeometry( 500, 120, 120 );
+    geometry.scale( - 1, 1, 1 );
+
+    var video = document.getElementById( 'video' );
+    var texture = new THREE.VideoTexture( video );
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.format = THREE.RGBFormat;
+
+    var material = new THREE.MeshBasicMaterial( {
+      map: texture
+    });
+    return new THREE.Mesh( geometry, material );
+  }
+
+  // マーカー
+  create_marker(type, x=0, y=0, z=0, key){
+    // 15cmくらい
+    var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
+    // geometry.scale( - 1, 1, 1 );
+    var material = new THREE.MeshLambertMaterial({
+      color: 0xffffff
+    });
+    var marker = new THREE.Mesh( geometry, material );
+
+    marker.position.set( x, y, z );
+    marker.key = key;
+    markers.push( marker );
+
+    return marker;
+  }
+
+  // 緯度経度から位置を算出
+  translateGeoCoords(latitude, longitude, radius) {
+
+    // 仰角
+    var phi = (latitude) * Math.PI / 180;
+    // 方位角
+    var theta = (longitude - 180) * Math.PI / 180;
+
+    var x = -(radius) * Math.cos(phi) * Math.cos(theta);
+    var y = (radius) * Math.sin(phi);
+    var z = (radius) * Math.cos(phi) * Math.sin(theta);
+
+    return new THREE.Vector3(x, y, z);
+  }
+
+
+
+  onDocumentTouchStart( e ) {
+
+    e.preventDefault();
+
+    e.clientX = e.touches[0].clientX;
+    e.clientY = e.touches[0].clientY;
+    onDocumentMouseDown( e );
+
+  }
+
+  onDocumentMouseDown( e ) {
+
+    e.preventDefault();
+
+    isUserInteracting = true;
+
+    onPointerDownPointerX = e.clientX;
+    onPointerDownPointerY = e.clientY;
+
+    onPointerDownLon = lon;
+    onPointerDownLat = lat;
+
+    // -----
+
+    mouse.x = ( e.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+    mouse.y = - ( e.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+    raycaster.setFromCamera( mouse, camera );
+
+    var intersects = raycaster.intersectObjects( markers );
+
+    if ( intersects.length > 0 ) {
+
+      var clicked_marker = intersects[0];
+
+      if(clicked_marker.object.material.color.r!=1){
+        clicked_marker.object.material.color.r = 1;
+      }
+      else{
+        clicked_marker.object.material.color.r = 0;
+      }
+
+      console.log('clicked:', clicked_marker.object.key);
+
+      // intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
+      // var particle = new THREE.Sprite( particleMaterial );
+      // particle.position.copy( intersects[ 0 ].point );
+      // particle.scale.x = particle.scale.y = 16;
+      // scene.add( particle );
+
+    }
+
+    /*
+    // Parse all the faces
+    for ( var i in intersects ) {
+
+      intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
+
+    }
+    */
+  }
+
+  onDocumentMouseMove( e ) {
+
+    if ( isUserInteracting === true ) {
+
+      lon = ( onPointerDownPointerX - e.clientX ) * 0.1 + onPointerDownLon;
+      lat = ( e.clientY - onPointerDownPointerY ) * 0.1 + onPointerDownLat;
+    }
+
+  }
+
+  onDocumentMouseUp( e ) {
+
+    isUserInteracting = false;
+
+    Cookies.set('lon', lon);
+    Cookies.set('lat', lat);
+  }
+
+  onDocumentMouseWheel( e ) {
+
+    // WebKit
+
+    if ( e.wheelDeltaY ) {
+
+      camera.fov -= e.wheelDeltaY * 0.05;
+
+    // Opera / Explorer 9
+
+    } else if ( e.wheelDelta ) {
+
+      camera.fov -= e.wheelDelta * 0.05;
+
+    // Firefox
+
+    } else if ( e.detail ) {
+
+      camera.fov += e.detail * 1.0;
+
+    }
+
+    camera.updateProjectionMatrix();
+
+  }
+
+}

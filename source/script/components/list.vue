@@ -81,7 +81,7 @@ table
 </style>
 
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default Vue.extend({
   filters: {
@@ -309,5 +309,5 @@ export default Vue.extend({
       ]
     }
   }
-})
+});
 </script>
