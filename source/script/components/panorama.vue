@@ -136,7 +136,7 @@ export default Vue.extend({
     document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
     document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
-    document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
+    // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
     document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
 
     //
