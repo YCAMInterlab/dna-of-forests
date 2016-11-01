@@ -37,9 +37,6 @@ export default Vue.extend({
     this.isUserInteracting = false;
     this.markers = [];
 
-    // var container = document.getElementById( 'container' );
-    var container = this.$el;
-
     this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
 
@@ -54,8 +51,8 @@ export default Vue.extend({
 
     // ジオメトリの追加
 
-    // var pano_sphere = this.create_pano_sphere();
-    // this.scene.add( pano_sphere );
+    var pano_sphere = this.create_pano_sphere();
+    this.scene.add( pano_sphere );
 
     // グリッド
     // var sphere = new THREE.Mesh(
@@ -132,8 +129,8 @@ export default Vue.extend({
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
-    container.appendChild( this.renderer.domElement );
+    this.renderer.setSize( this.$el.offsetWidth, window.innerHeight );
+    this.$el.appendChild( this.renderer.domElement );
 
     document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
     document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
@@ -144,7 +141,7 @@ export default Vue.extend({
 
     //
 
-    window.addEventListener( 'resize', this.onWindowResize, false );
+    // window.addEventListener( 'resize', this.onWindowResize, false );
 
     document.addEventListener( 'dragover', function( e ) {
 
@@ -185,14 +182,16 @@ export default Vue.extend({
     //
 
     window.addEventListener( 'resize', this.onWindowResize, false );
+
+    this.animate();
   },
 
   methods: {
 
     animate( ts ) {
 
-      requestAnimationFrame( animate );
-      update();
+      requestAnimationFrame( this.animate );
+      this.update();
     },
 
     render( elapsed, ts ) {
@@ -213,9 +212,11 @@ export default Vue.extend({
     },
 
     onWindowResize() {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
+      var w = this.$el.offsetWidth;
+      var h = window.innerHeight;
+      this.camera.aspect = w / h;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize( window.innerWidth, window.innerHeight );
+      this.renderer.setSize( w, h );
     },
 
     update() {
@@ -225,12 +226,12 @@ export default Vue.extend({
       // }
 
       this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
-      phi = THREE.Math.degToRad( 90 - this.lat );
-      theta = THREE.Math.degToRad( this.lon );
+      this.phi = THREE.Math.degToRad( 90 - this.lat );
+      this.theta = THREE.Math.degToRad( this.lon );
 
-      this.camera.target.x = 500 * Math.sin( phi ) * Math.cos( theta );
-      this.camera.target.y = 500 * Math.cos( phi );
-      this.camera.target.z = 500 * Math.sin( phi ) * Math.sin( theta );
+      this.camera.target.x = 500 * Math.sin( this.phi ) * Math.cos( this.theta );
+      this.camera.target.y = 500 * Math.cos( this.phi );
+      this.camera.target.z = 500 * Math.sin( this.phi ) * Math.sin( this.theta );
 
       this.camera.lookAt( this.camera.target );
 
