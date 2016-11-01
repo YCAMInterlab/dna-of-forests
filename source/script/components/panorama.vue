@@ -202,7 +202,7 @@ export default Vue.extend({
       });
       return new THREE.Mesh( geometry, material );
     }
-  }
+  },
   data () {
     return {
     }
