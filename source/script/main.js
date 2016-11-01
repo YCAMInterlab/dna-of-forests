@@ -2,9 +2,6 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Sound from './Sound';
-
-new Sound();
 
 Vue.use(VueRouter);
 

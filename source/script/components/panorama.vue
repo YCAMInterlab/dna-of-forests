@@ -12,6 +12,9 @@ import Cookies from 'js-cookie';
 
 var THREE = THREELib();
 
+// 登録
+Vue.component('sound-button', require('./sound-button.vue'));
+
 export default Vue.extend({
 
   mounted: function() {

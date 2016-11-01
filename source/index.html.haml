@@ -6,8 +6,6 @@ class: 'index,ja'
 styles:
   - main
 ---
-%audio#sound(loop)
-  %source{src: './sound/forest-collage-for-the-biolab.mp3', type: "audio/mp3"}
 
 %video#video{autoplay: '', loop: '', style: 'display:none', 'webkit-playsinlin': ''}
   %source{src: 'img/panorama/video-2s-no_sound.mp4', type: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'}
@@ -25,9 +23,8 @@ styles:
     %router-link{class: 'about', to: '/about'}
       %div
         %span ABOUT
-    %a#sound_btn
-      %div
-        %span SOUND
+    <sound-button/>
+
   #content
     %router-view
       Top
