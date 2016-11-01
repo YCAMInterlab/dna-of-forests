@@ -381,8 +381,7 @@ export default Vue.extend({
   },
 
   data () {
-    return {
-    }
+    return {}
   }
 });
 </script>
