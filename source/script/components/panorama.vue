@@ -15,7 +15,6 @@ var THREE = THREELib();
 export default Vue.extend({
 
   mounted: function() {
-    console.log('mounted');
 
     this.camera = null;
     this.scene = null;
