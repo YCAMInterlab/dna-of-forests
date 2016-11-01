@@ -56,9 +56,6 @@ export default Vue.extend({
         this.$el.className = 'off';
       }
     }
-  },
-  data () {
-    return {}
   }
 });
 
