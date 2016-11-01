@@ -26,10 +26,6 @@ export default Vue.extend({
     this.mouse = null;
     this.onPointerDownLon = null;
     this.onPointerDownLat = null;
-    // onMouseDownMouseX = 0,
-    // onMouseDownMouseY = 0,
-    // onMouseDownLon = 0,
-    // onMouseDownLat = 0,
     this.phi = 0;
     this.theta = 0;
     this.lon = (Cookies.get('lon') || 0)*1;
