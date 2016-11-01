@@ -132,16 +132,13 @@ export default Vue.extend({
     this.renderer.setSize( this.$el.offsetWidth, window.innerHeight );
     this.$el.appendChild( this.renderer.domElement );
 
+    window.addEventListener( 'resize', this.onWindowResize, false );
     document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
     document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
     document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
     // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
     document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
-
-    //
-
-    // window.addEventListener( 'resize', this.onWindowResize, false );
 
     document.addEventListener( 'dragover', function( e ) {
 
@@ -178,10 +175,6 @@ export default Vue.extend({
       document.body.style.opacity = 1;
 
     }, false );
-
-    //
-
-    window.addEventListener( 'resize', this.onWindowResize, false );
 
     this.animate();
   },
