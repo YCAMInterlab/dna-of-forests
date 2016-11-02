@@ -2,7 +2,7 @@
 
 section
   h1
-    img(alt='採取したサンプル' src='../img/list/title-samples.png' srcset='../img/list/title-samples@2x.png 2x')
+    img(alt='採取したサンプル' src='img/list/title-samples.png' srcset='img/list/title-samples@2x.png 2x')
   table#samples
     thead
       tr
@@ -21,7 +21,7 @@ section
         td.region {{ item.region }}
         td.date {{ item.date }}
   h1
-    img(alt='森の知識' src='../img/list/title-knowledges.png' srcset='../img/list/title-knowledges@2x.png 2x')
+    img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
   table#knowledge
     tbody
       tr(v-for="(item, index) in knowledges")
