@@ -10,7 +10,7 @@ module.exports = {
     root: __dirname + '/source/script',
     // extensions: ['','.js','.jsx'],
 
-    // HTMLファイル内でVueの記法でを可能にする
+    // HTMLファイル内でVueの記法を可能にする
     alias: {
       'vue$': 'vue/dist/vue.js'
     }
