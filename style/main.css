@@ -105,17 +105,17 @@ a {
     #gnav > a:not(.router-link-active):hover > div {
       opacity: 0.9; }
     #gnav > a.panorama > div {
-      background-image: url(/dna-of-forests/img/gnav/panorama-a3ebfc18.png); }
+      background-image: url(/dna-of-forests/img/gnav/panorama.png); }
     #gnav > a.panorama.router-link-active > div {
-      background-image: url(/dna-of-forests/img/gnav/panorama-active-cba5a4b9.png); }
+      background-image: url(/dna-of-forests/img/gnav/panorama-active.png); }
     #gnav > a.list > div {
-      background-image: url(/dna-of-forests/img/gnav/list-f0c814d7.png); }
+      background-image: url(/dna-of-forests/img/gnav/list.png); }
     #gnav > a.list.router-link-active > div {
-      background-image: url(/dna-of-forests/img/gnav/list-active-9f0f7dfd.png); }
+      background-image: url(/dna-of-forests/img/gnav/list-active.png); }
     #gnav > a.about > div {
-      background-image: url(/dna-of-forests/img/gnav/about-213509a6.png); }
+      background-image: url(/dna-of-forests/img/gnav/about.png); }
     #gnav > a.about.router-link-active > div {
-      background-image: url(/dna-of-forests/img/gnav/about-active-e00faf46.png); }
+      background-image: url(/dna-of-forests/img/gnav/about-active.png); }
 
 #content {
   width: calc(100% - 80px);
