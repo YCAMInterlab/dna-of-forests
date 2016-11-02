@@ -4,6 +4,14 @@
 
 </template>
 
+<style lang="sass?indentedSyntax" scoped>
+
+section
+  height: 100%
+  overflow: hidden
+
+</style>
+
 <script>
 
 import Vue from 'vue';
