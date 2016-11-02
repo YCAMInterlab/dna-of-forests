@@ -33,6 +33,9 @@ section
 
 <style lang="sass?indentedSyntax" scoped>
 
+section
+  height: 100%
+  overflow-y: auto
 h1
   padding: 30px 27px
   background-color: #2b2b2b

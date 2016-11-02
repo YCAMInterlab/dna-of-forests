@@ -42,6 +42,10 @@ article
 
 <style lang="sass?indentedSyntax" scoped>
 
+article
+  height: 100%
+  overflow-y: auto
+
 h1
   text-align: center
   margin-top: 68px
