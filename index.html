@@ -20,7 +20,7 @@
     <meta content="http://special.ycam.jp/dna-of-forests/" name="twitter:url">
     <meta content="山口の森には、一体どんな植物や昆虫が住んでいるのでしょうか？YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と一緒に山口市の仁保（にほ）の森で生き物を採集して、顕微鏡での観察やDNA解析によって調査した結果を収録しています。" name="twitter:description">
     <meta content="http://special.ycam.jp/dna-of-forests/img/facebook.png?this-is-random-number-for-cache-4362984378" name="twitter:image">
-    <link href="/dna-of-forests/style/main-10daf2ef.css" rel="stylesheet" />
+    <link href="/dna-of-forests/style/main-96dcff39.css" rel="stylesheet" />
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -42,20 +42,36 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
-    <audio id="sound" loop>
-      <source src="./sound/field_recording.mp3" type="audio/mp3">
-    </audio>
     <video autoplay="" id="video" loop="" style="display:none" webkit-playsinlin="">
       <source src="img/panorama/video-2s-no_sound.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
         Your browser doesn't support video.
       </source>
     </video>
-    <div id="container">
-      <a id="sound_btn">
-        <img alt="SOUND ON" class="sound_on" src="/dna-of-forests/img/sound-on-61dce774.png" srcset="/dna-of-forests/img/sound-on@2x-5540d878.png 2x">
-        <img alt="SOUND OFF" class="sound_off" src="/dna-of-forests/img/sound-off-227e4f16.png" srcset="/dna-of-forests/img/sound-off@2x-4d9c57bb.png 2x">
-      </a>
+    <div id="app">
+      <nav id="gnav">
+        <router-link class="panorama" to="/panorama">
+          <div>
+            <span>360</span>
+          </div>
+        </router-link>
+        <router-link class="list" to="/list">
+          <div>
+            <span>LIST</span>
+          </div>
+        </router-link>
+        <router-link class="about" to="/about">
+          <div>
+            <span>ABOUT</span>
+          </div>
+        </router-link>
+        <sound-button/>
+      </nav>
+      <div id="content">
+        <router-view>
+          Top
+        </router-view>
+      </div>
     </div>
-    <script src="/dna-of-forests/script/main-0b562cb9.js"></script>
+    <script src="/dna-of-forests/script/main-cb2c64f7.js"></script>
   </body>
 </html>

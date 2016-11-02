@@ -1,0 +1,125 @@
+@charset "UTF-8";
+/* Reset All Default Styles */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+/* remember to define focus styles! */
+:focus {
+  outline: 0; }
+
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%; }
+
+a, h1, h2, h3, h4, h5, h6, p, small, section {
+  max-height: 100%; }
+
+img {
+  border: 0;
+  vertical-align: bottom; }
+
+a span {
+  cursor: pointer; }
+
+.overlay {
+  cursor: pointer; }
+
+html,
+body {
+  height: 100%; }
+
+body {
+  position: relative;
+  font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+  color: #111;
+  font-size: 13px;
+  line-height: 1em;
+  color: #fff; }
+
+a {
+  transition-duration: 0.2s; }
+
+#app {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+  width: 100%; }
+
+#gnav {
+  position: relative;
+  background: #000;
+  width: 80px;
+  height: 100%;
+  float: left; }
+  #gnav > a {
+    display: block;
+    width: 100%;
+    height: 80px;
+    background-color: #0d0d0d;
+    margin-bottom: 2px;
+    cursor: pointer; }
+    #gnav > a > div {
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition-duration: 0.2s; }
+      #gnav > a > div > span {
+        display: none; }
+    #gnav > a:not(.router-link-active) > div {
+      opacity: 0.5; }
+    #gnav > a:not(.router-link-active):hover > div {
+      opacity: 0.9; }
+    #gnav > a.panorama > div {
+      background-image: url(/dna-of-forests/img/gnav/panorama-a3ebfc18.png); }
+    #gnav > a.panorama.router-link-active > div {
+      background-image: url(/dna-of-forests/img/gnav/panorama-active-cba5a4b9.png); }
+    #gnav > a.list > div {
+      background-image: url(/dna-of-forests/img/gnav/list-f0c814d7.png); }
+    #gnav > a.list.router-link-active > div {
+      background-image: url(/dna-of-forests/img/gnav/list-active-9f0f7dfd.png); }
+    #gnav > a.about > div {
+      background-image: url(/dna-of-forests/img/gnav/about-213509a6.png); }
+    #gnav > a.about.router-link-active > div {
+      background-image: url(/dna-of-forests/img/gnav/about-active-e00faf46.png); }
+
+#content {
+  width: calc(100% - 80px);
+  float: left;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #1a1a1a; }
