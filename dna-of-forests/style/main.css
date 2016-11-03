@@ -59,6 +59,11 @@ a span {
 .overlay {
   cursor: pointer; }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/Roboto-Meduim.ttf");
+  font-weight: normal;
+  font-style: normal; }
 html,
 body {
   height: 100%; }
