@@ -3,11 +3,11 @@ var Clean = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './source/script/main.js'
+    main: './source/dna-of-forests/script/main.js'
   },
 
   resolve: {
-    root: __dirname + '/source/script',
+    root: __dirname + '/source/dna-of-forests/script',
     // extensions: ['','.js','.jsx'],
 
     // HTMLファイル内でVueの記法を可能にする
@@ -18,7 +18,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/.tmp/dist',
-    filename: 'script/[name].js',
+    filename: '/dna-of-forests/script/[name].js',
   },
 
   module: {
