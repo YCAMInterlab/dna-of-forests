@@ -22,6 +22,9 @@ const router = new VueRouter({
   routes
 })
 
+// 登録
+Vue.component('detail-drawer', require('./components/detail-drawer.vue'));
+
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
