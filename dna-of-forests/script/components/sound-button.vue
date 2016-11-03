@@ -15,10 +15,10 @@ a
   margin-bottom: 0
   bottom: 0
   >div
-    background-image: url(/img/gnav/sound-on.png)
+    background-image: url(/dna-of-forests/img/gnav/sound-on.png)
   &.off
     >div
-      background-image: url(/img/gnav/sound-off.png)
+      background-image: url(/dna-of-forests/img/gnav/sound-off.png)
 
 </style>
 

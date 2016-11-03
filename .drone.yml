@@ -3,14 +3,10 @@ clone:
 build:
   image: karappo/dronedeploy
   environment:
-    - DEP_TEASER_COMMAND=rsync
-    - DEP_TEASER_HOST=karappojp.sakura.ne.jp
-    - DEP_TEASER_USER=karappojp
-    - DEP_TEASER_HOST_DIR=/home/karappojp/www/preview/ycam.karappo.jp/dna-of-forests
     - DEP_MASTER_COMMAND=rsync
     - DEP_MASTER_HOST=karappojp.sakura.ne.jp
     - DEP_MASTER_USER=karappojp
-    - DEP_MASTER_HOST_DIR=/home/karappojp/www/preview/ycam.karappo.jp/dna-of-forests
+    - DEP_MASTER_HOST_DIR=/home/karappojp/www/preview/ycam.karappo.jp
   commands:
     - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
 notify:
