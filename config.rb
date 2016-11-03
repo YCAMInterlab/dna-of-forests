@@ -76,7 +76,7 @@ configure :build do
   # こうすることで stylesheet_link_tag などで展開されるパスが
   # /my_project/stylesheets/normalize.css
   # のようになる
-  activate :asset_host, host: '/dna-of-forests'
+  # activate :asset_host, host: '/dna-of-forests'
 end
 
 ###
