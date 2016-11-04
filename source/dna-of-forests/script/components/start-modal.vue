@@ -2,9 +2,9 @@
 
 .wrapper
   .containter
-    .popup
-      img.logo(alt='森のDNA図鑑 仁保の森 2016 YCAM Bio Research' src='img/start-popup/logo.png' srcset='img/start-popup/logo@2x.png 2x')
-      img.lead(alt='YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。' src='img/start-popup/lead.png' srcset='img/start-popup/lead@2x.png 2x')
+    .modal
+      img.logo(alt='森のDNA図鑑 仁保の森 2016 YCAM Bio Research' src='img/start-modal/logo.png' srcset='img/start-modal/logo@2x.png 2x')
+      img.lead(alt='YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。' src='img/start-modal/lead.png' srcset='img/start-modal/lead@2x.png 2x')
       router-link(to='/panorama') ENTER
 
 </template>
@@ -23,7 +23,7 @@
   height: 100%
   vertical-align: middle
 
-.popup
+.modal
   background-color: #000
   padding: 10px
   width: 252px

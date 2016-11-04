@@ -1,7 +1,7 @@
 <template lang="pug">
 
 #container
-  <start-popup v-if="$route.path=='/'"></start-popup>
+  <start-modal v-if="$route.path=='/'"></start-modal>
 
 </template>
 
@@ -23,7 +23,7 @@ var THREE = THREELib();
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
-Vue.component('start-popup',  require('./start-popup.vue'));
+Vue.component('start-modal',  require('./start-modal.vue'));
 
 export default Vue.extend({
 
