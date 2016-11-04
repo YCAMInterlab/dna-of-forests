@@ -9,10 +9,12 @@ Vue.use(VueRouter);
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-  { path: '/',         component: require('./components/panorama.vue') },
-  { path: '/panorama', component: require('./components/panorama.vue') },
-  { path: '/list',     component: require('./components/list.vue') },
-  { path: '/about',    component: require('./components/about.vue') },
+  { path: '/',             component: require('./components/panorama.vue') },
+  { path: '/panorama',     component: require('./components/panorama.vue') },
+  { path: '/panorama/:id', component: require('./components/panorama.vue') },
+  { path: '/list',         component: require('./components/list.vue') },
+  { path: '/list/:id',     component: require('./components/list.vue') },
+  { path: '/about',        component: require('./components/about.vue') },
 ]
 
 // 3. Create the router instance and pass the `routes` option

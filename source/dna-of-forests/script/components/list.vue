@@ -13,7 +13,7 @@ section
         th.region 同定に用いたDNA領域
         th.date 採取日
     tbody
-      tr(v-for="(item, index) in samples")
+      tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/'+item.id)")
         td.index {{ (index+1) | zero-pad }}
         td.genus_ja {{ item.genus_ja }}
         td.genus_en {{ item.genus_en }}

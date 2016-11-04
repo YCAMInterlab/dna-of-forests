@@ -4,8 +4,9 @@
   header
     h2
       img(alt='森の知識' src='/dna-of-forests/img/detail-drawer/title-chisiki.png' srcset='/dna-of-forests/img/detail-drawer/title-chisiki@2x.png 2x')
-    router-link.close_btn(to='../')
+    router-link.close_btn(to='./')
       img(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png' srcset='/dna-of-forests/img/detail-drawer/close-btn@2x.png 2x')
+  article
 
 </template>
 
@@ -18,6 +19,7 @@
   right: 0
   background-color: #1a1a1a
   z-index: 9999
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 
 header
   background-color: #2b2b2b
