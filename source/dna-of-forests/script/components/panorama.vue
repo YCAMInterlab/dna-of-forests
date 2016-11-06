@@ -11,6 +11,9 @@ section
   height: 100%
   overflow: hidden
 
+#container
+  position: relative
+
 </style>
 
 <script>
@@ -19,7 +22,7 @@ import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
 
-var THREE = THREELib();
+var THREE = THREELib(["Projector"]);
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
@@ -29,6 +32,8 @@ export default Vue.extend({
 
   mounted: function() {
 
+    this.width = null;
+    this.hight = null;
     this.camera = null;
     this.scene = null;
     this.renderer = null;
@@ -44,6 +49,7 @@ export default Vue.extend({
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
     this.markers = [];
+    this.projector = new THREE.Projector();
 
     this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
@@ -86,6 +92,8 @@ export default Vue.extend({
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
       this.scene.add( this.create_marker('knowledge', geo.x, geo.y, geo.z, 'k-'+(i+1)) );
     }
+
+    console.log(this.markers.length);
 
     // 座標軸の表示
     // var axis = new THREE.AxisHelper(300);
@@ -170,11 +178,11 @@ export default Vue.extend({
     },
 
     onWindowResize() {
-      var w = this.$el.offsetWidth;
-      var h = window.innerHeight;
-      this.camera.aspect = w / h;
+      this.width = this.$el.offsetWidth;
+      this.height = window.innerHeight;
+      this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize( w, h );
+      this.renderer.setSize( this.width, this.height );
     },
 
     update() {
@@ -198,6 +206,21 @@ export default Vue.extend({
       this.camera.position.copy( this.camera.target ).negate();
       */
       this.renderer.render( this.scene, this.camera );
+
+      for(var i = 0; i < this.markers.length; i++){
+        var marker = this.markers[i];
+        var pos = this.getTwoDPosition(marker);
+        if(marker.type=='sample'){
+          var top = pos.y-7;
+          var left = pos.x-7;
+        }
+        else{
+          var top = pos.y-5;
+          var left = pos.x-5;
+        }
+        marker.el.style.top = top+'px';
+        marker.el.style.left = left+'px';
+      }
     },
 
     // パノラマ画像を貼り付けた球体
@@ -232,6 +255,25 @@ export default Vue.extend({
       return new THREE.Vector3(x, y, z);
     },
 
+    getTwoDPosition(obj) {
+
+      var vector = new THREE.Vector3();
+      var widthHalf = 0.5*this.renderer.context.canvas.width;
+      var heightHalf = 0.5*this.renderer.context.canvas.height;
+
+      obj.updateMatrixWorld();
+      vector.setFromMatrixPosition(obj.matrixWorld);
+      vector.project(this.camera);
+
+      vector.x = ( vector.x * widthHalf ) + widthHalf;
+      vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+      return {
+        x: vector.x,
+        y: vector.y
+      };
+    },
+
     // マーカー
     create_marker(type, x=0, y=0, z=0, key){
 
@@ -245,6 +287,15 @@ export default Vue.extend({
 
       marker.position.set( x, y, z );
       marker.key = key;
+      marker.type = type;
+
+      // Add 2d marker
+      var el = document.createElement('div');
+      el.className = 'marker '+type;
+      el.id = key;
+      this.$el.appendChild(el);
+      marker.el = el;
+
       this.markers.push( marker );
 
       return marker;
