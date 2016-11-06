@@ -1,0 +1,12 @@
+# BASIC AUTH -----------
+# ycam:morinodna
+#DEP_MASTER_RM <Files ~ "^.(htaccess|htpasswd)$">
+#DEP_MASTER_RM deny from all
+#DEP_MASTER_RM </Files>
+#DEP_MASTER_RM AuthUserFile /home/karappojp/www/preview/ycam.karappo.jp/.htpasswd
+#DEP_MASTER_RM AuthGroupFile /dev/null
+#DEP_MASTER_RM AuthName "Please enter your ID and password"
+#DEP_MASTER_RM AuthType Basic
+#DEP_MASTER_RM require valid-user
+#DEP_MASTER_RM order deny,allow
+# ----------- / BASIC AUTH
