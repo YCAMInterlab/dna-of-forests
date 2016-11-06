@@ -11,11 +11,28 @@ a(v-on:click="click")
 <style lang="sass?indentedSyntax" scoped>
 
 a
+  display: block
+  width: 100%
+  height: 80px
+  background-color: #0d0d0d
+  cursor: pointer
   position: absolute
-  margin-bottom: 0
   bottom: 0
+
   >div
+    height: 100%
+    background-position: center
+    background-repeat: no-repeat
     background-image: url(/dna-of-forests/img/gnav/sound-on.png)
+    transition-duration: 0.2s
+    opacity: 0.5
+    >span
+      display: none
+
+  &:hover
+    >div
+      opacity: 0.9
+
   &.off
     >div
       background-image: url(/dna-of-forests/img/gnav/sound-off.png)

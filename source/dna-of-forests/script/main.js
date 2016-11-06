@@ -19,6 +19,7 @@ const router = new VueRouter({
 
 // 登録
 Vue.component('detail-drawer', require('./components/detail-drawer.vue'));
+Vue.component('global-nav', require('./components/global-nav.vue'));
 
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the

@@ -13,7 +13,7 @@ section
         th.dna_text DNA配列
         th.collection_date 採取日
     tbody
-      tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/'+(index+1))")
+      tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/s-'+(index+1))")
         td.index {{ (index+1) | zero-pad }}
         td.genus_ja {{ item.genus_ja }}
         td.genus_en {{ item.genus_en }}
@@ -25,7 +25,7 @@ section
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
   table#knowledge
     tbody
-      tr(v-for="(item, index) in knowledges")
+      tr(v-for="(item, index) in knowledges" v-on:click="$router.push('/list/k-'+(index+1))")
         td.index {{ (index+1) | zero-pad }}
         td.title {{ item.title }}
         td.description {{ item.description }}
@@ -38,7 +38,7 @@ section
   height: 100%
   overflow-y: auto
 h1
-  padding: 30px 27px
+  padding: 28px 27px
   background-color: #2b2b2b
   margin-bottom: 1px
 
@@ -97,6 +97,7 @@ export default Vue.extend({
     'dna-barcode': require('./dna-barcode.vue')
   },
   data () {
+    // TODO: 直接ルートのComponentから受け渡せないか？
     return require('../data.json');
   }
 });

@@ -12,20 +12,10 @@ styles:
     Your browser doesn't support video.
 
 #app
-  %nav#gnav
-    %router-link.panorama{to: '/panorama'}
-      %div
-        %span 360
-    %router-link.list{to: '/list'}
-      %div
-        %span LIST
-    %router-link.about{to: '/about'}
-      %div
-        %span ABOUT
-    <sound-button/>
+  %global-nav
 
   #content
-    <router-view/>
+    %router-view
 
   <detail-drawer v-if="$route.params.index"/>
 
