@@ -61,11 +61,7 @@ a span {
 
 @font-face {
   font-family: "Roboto";
-<<<<<<< HEAD:dna-of-forests/style/main.css
   src: url("Roboto-Medium.ttf");
-=======
-  src: url("../font/Roboto-Meduim.ttf");
->>>>>>> 9c6f56031843a381c5a38becbaf35fafeed38140:dna-of-forests/style/main.css
   font-weight: normal;
   font-style: normal; }
 html,
