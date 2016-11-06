@@ -174,18 +174,15 @@ export default Vue.extend({
 
   methods: {
     fetchData () {
-      console.log(this.$route.params.index);
       if(0<=this.$route.params.index.indexOf('s-')){
         var idx = this.$route.params.index.replace('s-','') - 1;
         var _data = this.$root.samples[idx];
-        console.log('_data', _data);
         // TODO: もっとシンプルに受け渡せないか
         this.type = 'sample';
         this.id = _data.id;
         this.genus_ja = _data.genus_ja;
         this.genus_en = _data.genus_en;
         this.dna_sequences = _data.dna_sequences;
-        console.log('this.dna_sequences',this.dna_sequences)
         this.region = _data.region;
         this.collection_date = _data.collection_date;
         this.microscope_youtube_id = _data.microscope_youtube_id;
@@ -195,7 +192,6 @@ export default Vue.extend({
       else if(0<=this.$route.params.index.indexOf('k-')){
         var idx = this.$route.params.index.replace('k-','') - 1;
         var _data = this.$root.knowledges[idx];
-        console.log('_data', _data);
         // TODO: もっとシンプルに受け渡せないか
         this.type = 'knowledge';
         this.title = _data.title;

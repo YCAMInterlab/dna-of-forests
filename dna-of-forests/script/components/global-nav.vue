@@ -1,10 +1,10 @@
 <template lang="pug">
 
 nav
-  router-link.panorama(to='/panorama')
+  router-link.panorama(v-bind:to="linkUrl('/panorama')")
     div
       span 360
-  router-link.list(to='/list')
+  router-link.list(v-bind:to="linkUrl('/list')")
     div
       span LIST
   router-link.about(to='/about')
@@ -73,8 +73,18 @@ import Vue from 'vue';
 Vue.component('sound-button', require('./sound-button.vue'));
 
 
-// export default Vue.extend({
-
-// });
+export default Vue.extend({
+  methods: {
+    linkUrl(default_path) {
+      console.log('this.$route.params.index', this.$route.params.index);
+      if(this.$route.params.index){
+        return default_path+'/'+this.$route.params.index;
+      }
+      else {
+        return default_path;
+      }
+    }
+  }
+});
 
 </script>

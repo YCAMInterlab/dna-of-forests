@@ -234,7 +234,7 @@ export default Vue.extend({
 
     // マーカー
     create_marker(type, x=0, y=0, z=0, key){
-      console.log('key',key);
+
       // 15cmくらい
       var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
       // geometry.scale( - 1, 1, 1 );
