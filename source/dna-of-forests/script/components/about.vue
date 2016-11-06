@@ -11,7 +11,7 @@ article
       | 私たちが何気なく見ている自然の風景にも、たくさんの情報が眠っています。その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>
       | このウェブサイトでは仁保の森のある地点から、ぐるっと360°の風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。
     a.btn(href="http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/" target="_blank") YCAMバイオ・リサーチのワークショップ「森のDNA」
-  section
+  section#dna-barcoding
     h2
       img(alt='解析方法（DNAバーコーディング）について' src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
     p

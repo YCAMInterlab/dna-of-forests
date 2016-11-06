@@ -9,15 +9,34 @@
       img(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png' srcset='/dna-of-forests/img/detail-drawer/close-btn@2x.png 2x')
   article
     template(v-if="type=='sample'")
-      section
+      section.dna
         h3
           img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
         h4 1. 採取サンプルの写真
         img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
-        h4 2. DNA配列
+        h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
           textarea {{ item.text }}
+        h4 2. DNA解析による同定の結果
+        div.result
+          small {{ genus_en }}
+          | {{ genus_ja }}
+        div.description
+          h4 解析方法について
+          p
+            | DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、
+            | ある程度まで種名を調べる事ができる「DNAバーコーディング」という技術を使って解析しました。詳しくは、こちらを御覧ください。
+
+      section.microscope
+        h3
+          img(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png' srcset='/dna-of-forests/img/detail-drawer/title-sp_microscope@2x.png 2x')
+        iframe(width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope_youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
+
+      section.memo
+        h3
+          img(alt='採取メモ' src='/dna-of-forests/img/detail-drawer/title-memo.png' srcset='/dna-of-forests/img/detail-drawer/title-memo@2x.png 2x')
+
     template(v-if="type=='knowledge'")
       h3 {{ title }}
       img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/knowledge/'+id+'@2x.jpg 2x'")
@@ -36,6 +55,7 @@
   background-color: #1a1a1a
   z-index: 9999
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  overflow: hidden
 
 header
   background-color: #2b2b2b
@@ -56,14 +76,29 @@ header
       opacity: 0.5
 article
   padding: 25px
+  overflow-y: scroll
+  height: calc(100% - 125px)
+
+h3
+  font-size: 16px
+  margin-bottom: 26px
+  text-align: center
+
+p
+  font-size: 13px
+  line-height: 32px
+  letter-spacing: 0.075em
+  margin-top: 25px
 
 section
   h3
-    margin: -25px
-    margin-bottom: 25px
+    margin: 25px -25px
     text-align: center
     background-color: #2b2b2b
     padding: 21px
+  &:first-child
+    h3
+      margin-top: -25px
 h4
   margin-bottom: 13px
   color: #ccc
@@ -76,6 +111,33 @@ h4
   textarea
     width: 100%
     overflow: hidden
+
+.result
+  background-color: #333333
+  font-size: 20px
+  text-align: center
+  font-weight: bold
+  padding: 19px 0 23px
+  border-radius: 5px
+  small
+    font-size: 11px
+    display: block
+    margin-bottom: 12px
+
+.description
+  margin: 25px -25px 0
+  padding: 25px
+  border-top: 1px solid #333333
+  color: #808080
+  h4
+    color: #808080
+  p
+    font-size: 13px
+    line-height: 28px
+    letter-spacing: 0
+
+.microscope
+  text-align: center
 
 </style>
 
@@ -102,10 +164,11 @@ export default Vue.extend({
       'genus_en': null,
       'dna_sequences': null,
       'region': null,
-      'date': null,
+      'collection_date': null,
       // knowledge
       'title': null,
-      'description': null
+      'description': null,
+      'microscope_youtube_id': null
     }
   },
 
@@ -124,7 +187,8 @@ export default Vue.extend({
         this.dna_sequences = _data.dna_sequences;
         console.log('this.dna_sequences',this.dna_sequences)
         this.region = _data.region;
-        this.date = _data.date;
+        this.collection_date = _data.collection_date;
+        this.microscope_youtube_id = _data.microscope_youtube_id;
         this.title = null;
         this.description = null;
       }
@@ -141,7 +205,8 @@ export default Vue.extend({
         this.genus_en = null;
         this.dna_sequences = null;
         this.region = null;
-        this.date = null;
+        this.collection_date = null;
+        this.microscope_youtube_id = null;
       }
       else{
         console.error('Wrong index format...');

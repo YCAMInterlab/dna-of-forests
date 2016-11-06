@@ -13,7 +13,7 @@ section
         th.dna_text DNA配列
         th.collection_date 採取日
     tbody
-      tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/s-'+(index+1))")
+      tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.genus_ja {{ item.genus_ja }}
         td.genus_en {{ item.genus_en }}
@@ -25,7 +25,7 @@ section
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
   table#knowledge
     tbody
-      tr(v-for="(item, index) in knowledges" v-on:click="$router.push('/list/k-'+(index+1))")
+      tr(v-for="(item, index) in knowledges" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.title {{ item.title }}
         td.description {{ item.description }}
@@ -64,6 +64,9 @@ table
   tbody
     tr:hover
       background-color: #202020
+      cursor: pointer
+    tr.selected
+      background-color: #272727
     td
       &.dna
         max-width: 150px
