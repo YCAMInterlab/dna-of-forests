@@ -1,7 +1,11 @@
 <template lang="pug">
 
 #container
+<<<<<<< HEAD:dna-of-forests/script/components/panorama.vue
   <start-modal v-if="$route.path=='/'"></start-modal>
+=======
+  <start-popup v-if="$route.path=='/'"></start-popup>
+>>>>>>> 9c6f56031843a381c5a38becbaf35fafeed38140:dna-of-forests/script/components/panorama.vue
 
 </template>
 
@@ -23,7 +27,11 @@ var THREE = THREELib();
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
+<<<<<<< HEAD:dna-of-forests/script/components/panorama.vue
 Vue.component('start-modal',  require('./start-modal.vue'));
+=======
+Vue.component('start-popup',  require('./start-popup.vue'));
+>>>>>>> 9c6f56031843a381c5a38becbaf35fafeed38140:dna-of-forests/script/components/panorama.vue
 
 export default Vue.extend({
 

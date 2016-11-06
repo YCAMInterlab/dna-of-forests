@@ -20,6 +20,7 @@ a
   bottom: 0
 
   >div
+<<<<<<< HEAD:dna-of-forests/script/components/sound-button.vue
     height: 100%
     background-position: center
     background-repeat: no-repeat
@@ -33,6 +34,9 @@ a
     >div
       opacity: 0.9
 
+=======
+    background-image: url(/dna-of-forests/img/gnav/sound-on.png)
+>>>>>>> 9c6f56031843a381c5a38becbaf35fafeed38140:dna-of-forests/script/components/sound-button.vue
   &.off
     >div
       background-image: url(/dna-of-forests/img/gnav/sound-off.png)
