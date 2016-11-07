@@ -48,7 +48,7 @@
 
     template(v-if="type=='knowledge'")
       h3 {{ title }}
-      img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/knowledge/'+id+'@2x.jpg 2x'")
+      img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
       p {{ description }}
 
 
