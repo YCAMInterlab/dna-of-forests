@@ -230,8 +230,8 @@ export default Vue.extend({
           }
 
           el.style.display = 'block';
-          el.style.top = top+'px';
-          el.style.left = left+'px';
+          el.style.top = parseInt(top,10)+'px';
+          el.style.left = parseInt(left,10)+'px';
         }
         else{
           // Outside camera view
