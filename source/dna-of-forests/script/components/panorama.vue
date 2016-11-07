@@ -137,42 +137,6 @@ export default Vue.extend({
     // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
     document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
 
-    document.addEventListener( 'dragover', function( e ) {
-
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'copy';
-
-    }, false );
-
-    document.addEventListener( 'dragenter', function( e ) {
-
-      document.body.style.opacity = 0.5;
-
-    }, false );
-
-    document.addEventListener( 'dragleave', function( e ) {
-
-      document.body.style.opacity = 1;
-
-    }, false );
-
-    document.addEventListener( 'drop', function( e ) {
-
-      e.preventDefault();
-
-      var reader = new FileReader();
-      reader.addEventListener( 'load', function( e ) {
-
-        material.map.image.src = e.target.result;
-        material.map.needsUpdate = true;
-
-      }, false );
-      reader.readAsDataURL( e.dataTransfer.files[ 0 ] );
-
-      document.body.style.opacity = 1;
-
-    }, false );
-
     this.animate();
   },
 
