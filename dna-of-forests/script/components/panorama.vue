@@ -3,7 +3,9 @@
 #container
   <start-modal v-if="$route.path=='/'"></start-modal>
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
-    span.genus {{ item.genus_en }}
+    .wrapper
+      span.genus {{ item.genus_en }}
+      <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
@@ -20,6 +22,7 @@ section
   opacity: 0.7
   cursor: pointer
   z-index: 10
+  user-select: none;
   &:hover
     opacity: 0.9
   &.selected
@@ -28,12 +31,7 @@ section
     width: 14px
     height: 13px
     background: url(/dna-of-forests/img/marker-arrow.png) no-repeat center
-    span.genus
-      color: #fcff00
-      font-family: 'Roboto'
-      font-size: 11px
-      letter-spacing: 0.001em
-      display: inline-block
+    .wrapper
       transform-origin: 0% 100%
       -webkit-transform-origin: 0% 100%
       transform: rotate(-90deg)
@@ -41,6 +39,17 @@ section
       position: absolute
       top: -18px
       left: 14px
+      width: 4000px
+      span.genus
+        color: #fcff00
+        font-family: 'Roboto'
+        font-size: 11px
+        letter-spacing: 0.001em
+        display: inline-block
+      canvas
+        margin-bottom: 2px
+        margin-left: 4px
+        display: inline-block
   &.knowledge
     width: 14px
     height: 14px
@@ -365,7 +374,7 @@ export default Vue.extend({
 
       Cookies.set('lon', this.lon);
       Cookies.set('lat', this.lat);
-      console.log(this.lon,this.lat);
+      // console.log(this.lon,this.lat);
     },
 
     onDocumentMouseWheel( e ) {
