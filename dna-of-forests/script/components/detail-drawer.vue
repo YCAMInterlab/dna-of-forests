@@ -189,6 +189,8 @@ h4
   >img
     margin: 18px auto 36px
     width: 230px
+    transform: rotate(-3deg)
+    -webkit-transform: rotate(-3deg)
 
 
 
