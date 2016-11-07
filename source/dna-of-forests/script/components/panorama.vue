@@ -46,16 +46,14 @@ export default Vue.extend({
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
     this.markers = [];
-    this.projector = new THREE.Projector();
-    this.frustum = new THREE.Frustum();
 
-    this.camera = new THREE.PerspectiveCamera( 75, this.$el.offsetWidth / window.innerHeight, 1, 1100 );
+    this.projector     = new THREE.Projector();
+    this.frustum       = new THREE.Frustum();
+    this.scene         = new THREE.Scene();
+    this.raycaster     = new THREE.Raycaster();
+    this.mouse         = new THREE.Vector2();
+    this.camera        = new THREE.PerspectiveCamera( 75, this.$el.offsetWidth / window.innerHeight, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
-
-    this.scene = new THREE.Scene();
-
-    this.raycaster = new THREE.Raycaster();
-    this.mouse = new THREE.Vector2();
 
     // 光
     var ambient = new THREE.AmbientLight(0xffffff);
