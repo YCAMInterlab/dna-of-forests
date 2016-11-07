@@ -71,6 +71,14 @@ export default Vue.extend({
 
   mounted: function() {
 
+    // 最初のカメラ位置
+    var default_lon = 1882;
+    var default_lat = 46.2;
+    if(this.$route.path!='/'){
+      default_lon = (Cookies.get('lon')*1 || default_lon);
+      default_lat = (Cookies.get('lat')*1 || default_lat);
+    }
+
     this.width = this.$el.offsetWidth;
     this.height = window.innerHeight;
     this.camera = null;
@@ -82,8 +90,8 @@ export default Vue.extend({
     this.onPointerDownLat = null;
     this.phi = 0;
     this.theta = 0;
-    this.lon = (Cookies.get('lon') || 0)*1;
-    this.lat = (Cookies.get('lat') || 0)*1;
+    this.lon = default_lon;
+    this.lat = default_lat;
     this.onPointerDownPointerX = null;
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
@@ -357,6 +365,7 @@ export default Vue.extend({
 
       Cookies.set('lon', this.lon);
       Cookies.set('lat', this.lat);
+      console.log(this.lon,this.lat);
     },
 
     onDocumentMouseWheel( e ) {
