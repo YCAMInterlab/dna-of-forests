@@ -327,42 +327,6 @@ export default Vue.extend({
 
       this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
       this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
-
-      this.raycaster.setFromCamera( this.mouse, this.camera );
-
-      var intersects = this.raycaster.intersectObjects( this.markers );
-
-      if ( intersects.length > 0 ) {
-
-        var clicked_marker = intersects[0];
-
-        if(clicked_marker.object.material.color.r!=1){
-          clicked_marker.object.material.color.r = 1;
-        }
-        else{
-          clicked_marker.object.material.color.r = 0;
-        }
-
-        this.$router.push('/panorama/'+clicked_marker.object.key);
-
-        console.log('clicked:', clicked_marker.object.key);
-
-        // intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
-        // var particle = new THREE.Sprite( particleMaterial );
-        // particle.position.copy( intersects[ 0 ].point );
-        // particle.scale.x = particle.scale.y = 16;
-        // scene.add( particle );
-
-      }
-
-      /*
-      // Parse all the faces
-      for ( var i in intersects ) {
-
-        intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-      }
-      */
     },
 
     onDocumentMouseMove( e ) {
