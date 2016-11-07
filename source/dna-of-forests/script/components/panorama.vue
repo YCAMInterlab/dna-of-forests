@@ -2,6 +2,12 @@
 
 #container
   <start-modal v-if="$route.path=='/'"></start-modal>
+  a.ycam(href="http://www.ycam.jp/" target="_blank")
+    img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
+  span.copyright
+    | Copyright © 2016<br>
+    | Yamaguchi Center for Arts and Media,<br>
+    | All Rights Reserved.
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     .wrapper
       span.genus {{ item.genus_en }}
@@ -17,6 +23,26 @@ section
   height: 100%
   overflow: hidden
 
+.ycam
+  position: absolute
+  top: 18px
+  right: 22px
+  z-index: 1
+  &:hover
+    opacity: 0.7
+
+.copyright
+  position: absolute
+  bottom: 19px
+  right: 22px
+  z-index: 1
+  font-family: 'Roboto'
+  font-size: 9px
+  line-height: 14px
+  letter-spacing: 0.075
+  text-align: right
+  opacity: 0.25
+
 .marker
   position: absolute
   opacity: 0.7
@@ -24,9 +50,9 @@ section
   z-index: 10
   user-select: none;
   &:hover
-    opacity: 0.9
+    opacity: 1
   &.selected
-    opacity: 100
+    opacity: 1
   &.sample
     width: 14px
     height: 13px
