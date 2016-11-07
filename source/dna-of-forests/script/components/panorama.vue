@@ -3,6 +3,7 @@
 #container
   <start-modal v-if="$route.path=='/'"></start-modal>
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
+    span.genus {{ item.genus_en }}
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
@@ -27,6 +28,19 @@ section
     width: 14px
     height: 13px
     background: url(/dna-of-forests/img/marker-arrow.png) no-repeat center
+    span.genus
+      color: #fcff00
+      font-family: 'Roboto'
+      font-size: 11px
+      letter-spacing: 0.001em
+      display: inline-block
+      transform-origin: 0% 100%
+      -webkit-transform-origin: 0% 100%
+      transform: rotate(-90deg)
+      -webkit-transform: rotate(-90deg)
+      position: absolute
+      top: -18px
+      left: 14px
   &.knowledge
     width: 14px
     height: 14px
