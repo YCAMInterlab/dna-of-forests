@@ -50,6 +50,7 @@ export default Vue.extend({
     this.isUserInteracting = false;
     this.markers = [];
     this.projector = new THREE.Projector();
+    this.frustum = new THREE.Frustum();
 
     this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
@@ -83,17 +84,15 @@ export default Vue.extend({
     for(var i = 0; i<this.samples.length; i++){
       var data = this.samples[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.scene.add( this.create_marker('sample', geo.x, geo.y, geo.z, 's-'+(i+1)) );
+      this.create_marker('sample', 's-'+(i+1), geo.x, geo.y, geo.z);
     }
 
     // // 森の知識マーカー
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.scene.add( this.create_marker('knowledge', geo.x, geo.y, geo.z, 'k-'+(i+1)) );
+      this.create_marker('knowledge', 'k-'+(i+1), geo.x, geo.y, geo.z);
     }
-
-    console.log(this.markers.length);
 
     // 座標軸の表示
     // var axis = new THREE.AxisHelper(300);
@@ -207,19 +206,32 @@ export default Vue.extend({
       */
       this.renderer.render( this.scene, this.camera );
 
+      this.frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse ) );
+
+      // Update 2D markers
       for(var i = 0; i < this.markers.length; i++){
         var marker = this.markers[i];
-        var pos = this.getTwoDPosition(marker);
-        if(marker.type=='sample'){
-          var top = pos.y-7;
-          var left = pos.x-7;
+        var pos = this.getTwoDPosition(marker.position);
+        if(pos){
+          // Within camera view
+          if(marker.type=='sample'){
+            var top = pos.y-7;
+            var left = pos.x-7;
+          }
+          else{
+            var top = pos.y-5;
+            var left = pos.x-5;
+          }
+          marker.marker_2d.style.display = 'block';
+          marker.marker_2d.style.top = top+'px';
+          marker.marker_2d.style.left = left+'px';
         }
         else{
-          var top = pos.y-5;
-          var left = pos.x-5;
+          // Outside camera view
+          marker.marker_2d.style.display = 'none';
+          marker.marker_2d.style.top = top+'px';
+          marker.marker_2d.style.left = left+'px';
         }
-        marker.el.style.top = top+'px';
-        marker.el.style.left = left+'px';
       }
     },
 
@@ -255,46 +267,45 @@ export default Vue.extend({
       return new THREE.Vector3(x, y, z);
     },
 
-    getTwoDPosition(obj) {
+    getTwoDPosition(vector) {
 
-      var vector = new THREE.Vector3();
+      var vector = vector.clone();
       var widthHalf = 0.5*this.renderer.context.canvas.width;
       var heightHalf = 0.5*this.renderer.context.canvas.height;
 
-      obj.updateMatrixWorld();
-      vector.setFromMatrixPosition(obj.matrixWorld);
-      vector.project(this.camera);
+      // 何もしないと対角線上の位置も返してしまうので、ここで間引く
+      if(this.frustum.containsPoint(vector)) {
 
-      vector.x = ( vector.x * widthHalf ) + widthHalf;
-      vector.y = - ( vector.y * heightHalf ) + heightHalf;
+        // Within camera
+        vector.project(this.camera);
 
-      return {
-        x: vector.x,
-        y: vector.y
-      };
+        vector.x = ( vector.x * widthHalf ) + widthHalf;
+        vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+        return {
+          x: vector.x,
+          y: vector.y
+        };
+      }
+      return null;
     },
 
     // マーカー
-    create_marker(type, x=0, y=0, z=0, key){
+    create_marker(type, key, x=0, y=0, z=0){
 
-      // 15cmくらい
-      var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
-      // geometry.scale( - 1, 1, 1 );
-      var material = new THREE.MeshLambertMaterial({
-        color: 0xffffff
-      });
-      var marker = new THREE.Mesh( geometry, material );
+      var marker = {};
 
-      marker.position.set( x, y, z );
+      marker.position = new THREE.Vector3( x, y, z );
+
       marker.key = key;
       marker.type = type;
 
-      // Add 2d marker
+      // 2d marker ------------------
       var el = document.createElement('div');
       el.className = 'marker '+type;
       el.id = key;
       this.$el.appendChild(el);
-      marker.el = el;
+      marker.marker_2d = el;
 
       this.markers.push( marker );
 
