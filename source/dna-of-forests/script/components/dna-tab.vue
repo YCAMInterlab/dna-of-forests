@@ -12,9 +12,10 @@
         | テキスト
   div.contents
     div.barcode(v-bind:class="{ current: current=='barcode' }")
-      <dna-barcode v-bind:dna="this.text">
+      <dna-barcode v-bind:dna="this.text" v-bind:width_limit="403">
     div.text(v-bind:class="{ current: current=='text' }")
-      p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
+      //p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
+      p.dna_text(v-html="colorize(text)")
 
 
 </template>
@@ -98,13 +99,13 @@ export default Vue.extend({
       this.current = val;
     },
 
-    selectAll(){
-      var range = document.createRange();
-      var selection = window.getSelection();
-      range.selectNodeContents(this.$el.querySelector('.dna_text'));
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
+    // selectAll(){
+    //   var range = document.createRange();
+    //   var selection = window.getSelection();
+    //   range.selectNodeContents(this.$el.querySelector('.dna_text'));
+    //   selection.removeAllRanges();
+    //   selection.addRange(range);
+    // }
   }
 });
 
