@@ -11,9 +11,6 @@ section
   height: 100%
   overflow: hidden
 
-#container
-  position: relative
-
 </style>
 
 <script>
