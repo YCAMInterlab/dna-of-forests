@@ -49,7 +49,7 @@ export default Vue.extend({
     this.projector = new THREE.Projector();
     this.frustum = new THREE.Frustum();
 
-    this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
+    this.camera = new THREE.PerspectiveCamera( 75, this.$el.offsetWidth / window.innerHeight, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
 
     this.scene = new THREE.Scene();
