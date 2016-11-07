@@ -2,6 +2,9 @@
 
 #container
   <start-modal v-if="$route.path=='/'"></start-modal>
+  .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
+  .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
+    img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
 </template>
 
@@ -10,6 +13,31 @@
 section
   height: 100%
   overflow: hidden
+
+.marker
+  position: absolute
+  opacity: 0.7
+  cursor: pointer
+  z-index: 10
+  &:hover
+    opacity: 0.9
+  &.selected
+    opacity: 100
+  &.sample
+    width: 14px
+    height: 13px
+    background: url(/dna-of-forests/img/marker-arrow.png) no-repeat center
+  &.knowledge
+    width: 14px
+    height: 14px
+    border-radius: 7px
+    background-color: #fcff00
+    position: relative
+    >img
+      position: absolute
+      bottom: 20px
+      left: 2px
+
 
 </style>
 
@@ -29,8 +57,8 @@ export default Vue.extend({
 
   mounted: function() {
 
-    this.width = null;
-    this.hight = null;
+    this.width = this.$el.offsetWidth;
+    this.height = window.innerHeight;
     this.camera = null;
     this.scene = null;
     this.renderer = null;
@@ -46,16 +74,14 @@ export default Vue.extend({
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
     this.markers = [];
-    this.projector = new THREE.Projector();
-    this.frustum = new THREE.Frustum();
 
-    this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
+    this.projector     = new THREE.Projector();
+    this.frustum       = new THREE.Frustum();
+    this.scene         = new THREE.Scene();
+    this.raycaster     = new THREE.Raycaster();
+    this.mouse         = new THREE.Vector2();
+    this.camera        = new THREE.PerspectiveCamera( 75, this.width / this.height, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
-
-    this.scene = new THREE.Scene();
-
-    this.raycaster = new THREE.Raycaster();
-    this.mouse = new THREE.Vector2();
 
     // 光
     var ambient = new THREE.AmbientLight(0xffffff);
@@ -98,7 +124,9 @@ export default Vue.extend({
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setSize( this.$el.offsetWidth, window.innerHeight );
+    this.renderer.setSize( this.width, this.height );
+    this.renderer.domElement.style.position = 'absolute';
+    this.renderer.domElement.style.top = '0';
     this.$el.appendChild( this.renderer.domElement );
 
     window.addEventListener( 'resize', this.onWindowResize, false );
@@ -209,25 +237,27 @@ export default Vue.extend({
       for(var i = 0; i < this.markers.length; i++){
         var marker = this.markers[i];
         var pos = this.getTwoDPosition(marker.position);
+        var el = this.$el.querySelector('#' + marker.key);
         if(pos){
           // Within camera view
+          var top = pos.y;
+          var left = pos.x;
           if(marker.type=='sample'){
-            var top = pos.y-7;
-            var left = pos.x-7;
+            top -= 7;
+            left -= 7;
           }
           else{
-            var top = pos.y-5;
-            var left = pos.x-5;
+            top -= 5;
+            left -= 5;
           }
-          marker.marker_2d.style.display = 'block';
-          marker.marker_2d.style.top = top+'px';
-          marker.marker_2d.style.left = left+'px';
+
+          el.style.display = 'block';
+          el.style.top = top+'px';
+          el.style.left = left+'px';
         }
         else{
           // Outside camera view
-          marker.marker_2d.style.display = 'none';
-          marker.marker_2d.style.top = top+'px';
-          marker.marker_2d.style.left = left+'px';
+          el.style.display = 'none';
         }
       }
     },
@@ -296,13 +326,6 @@ export default Vue.extend({
 
       marker.key = key;
       marker.type = type;
-
-      // 2d marker ------------------
-      var el = document.createElement('div');
-      el.className = 'marker '+type;
-      el.id = key;
-      this.$el.appendChild(el);
-      marker.marker_2d = el;
 
       this.markers.push( marker );
 
