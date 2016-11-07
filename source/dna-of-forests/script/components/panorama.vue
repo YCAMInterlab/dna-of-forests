@@ -308,20 +308,24 @@ export default Vue.extend({
 
     onDocumentMouseDown( e ) {
 
-      e.preventDefault();
+      // Canvas部分でドラッグ開始したら
+      if( e.target === this.renderer.domElement){
 
-      this.isUserInteracting = true;
+        e.preventDefault();
 
-      this.onPointerDownPointerX = e.clientX;
-      this.onPointerDownPointerY = e.clientY;
+        this.isUserInteracting = true;
 
-      this.onPointerDownLon = this.lon;
-      this.onPointerDownLat = this.lat;
+        this.onPointerDownPointerX = e.clientX;
+        this.onPointerDownPointerY = e.clientY;
 
-      // -----
+        this.onPointerDownLon = this.lon;
+        this.onPointerDownLat = this.lat;
 
-      this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
-      this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+        // -----
+
+        this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
+        this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+      }
     },
 
     onDocumentMouseMove( e ) {
