@@ -100,6 +100,10 @@ p
   margin-top: 25px
 
 section
+
+  // Android対策の影響が出ていたので上書き対応
+  max-height: inherit
+
   h3
     margin: 25px -25px
     text-align: center
