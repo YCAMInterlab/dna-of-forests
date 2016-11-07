@@ -29,8 +29,8 @@ export default Vue.extend({
 
   mounted: function() {
 
-    this.width = null;
-    this.hight = null;
+    this.width = this.$el.offsetWidth;
+    this.height = window.innerHeight;
     this.camera = null;
     this.scene = null;
     this.renderer = null;
@@ -52,7 +52,7 @@ export default Vue.extend({
     this.scene         = new THREE.Scene();
     this.raycaster     = new THREE.Raycaster();
     this.mouse         = new THREE.Vector2();
-    this.camera        = new THREE.PerspectiveCamera( 75, this.$el.offsetWidth / window.innerHeight, 1, 1100 );
+    this.camera        = new THREE.PerspectiveCamera( 75, this.width / this.height, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
 
     // 光
@@ -96,7 +96,7 @@ export default Vue.extend({
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setSize( this.$el.offsetWidth, window.innerHeight );
+    this.renderer.setSize( this.width, this.height );
     this.$el.appendChild( this.renderer.domElement );
 
     window.addEventListener( 'resize', this.onWindowResize, false );
@@ -224,8 +224,6 @@ export default Vue.extend({
         else{
           // Outside camera view
           marker.marker_2d.style.display = 'none';
-          marker.marker_2d.style.top = top+'px';
-          marker.marker_2d.style.left = left+'px';
         }
       }
     },
