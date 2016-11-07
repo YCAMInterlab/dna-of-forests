@@ -2,8 +2,8 @@
 
 #container
   <start-modal v-if="$route.path=='/'"></start-modal>
-  .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="$router.push('./s-'+(index+1))")
-  .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="$router.push('./k-'+(index+1))")
+  .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
+  .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
 
 </template>
 
@@ -12,6 +12,24 @@
 section
   height: 100%
   overflow: hidden
+
+.marker
+  position: absolute
+  opacity: 0.7
+  cursor: pointer
+  &:hover
+    opacity: 0.9
+  &.selected
+    opacity: 100
+  &.sample
+    width: 14px
+    height: 13px
+    background: url(/dna-of-forests/img/marker-arrow.png) no-repeat center
+  &.knowledge
+    width: 14px
+    height: 14px
+    border-radius: 7px
+    background-color: #fcff00
 
 </style>
 
