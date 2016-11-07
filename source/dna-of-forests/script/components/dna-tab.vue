@@ -14,7 +14,7 @@
     div.barcode(v-bind:class="{ current: current=='barcode' }")
       <dna-barcode v-bind:dna="this.text" v-bind:width_limit="403">
     div.text(v-bind:class="{ current: current=='text' }")
-      //p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
+      //- p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
       p.dna_text(v-html="colorize(text)")
 
 
@@ -67,6 +67,7 @@ header
       word-wrap: break-word
       font-size: 12px
       line-height: 2em
+      font-weight: bold
 
 </style>
 
