@@ -2,6 +2,8 @@
 
 #container
   <start-modal v-if="$route.path=='/'"></start-modal>
+  .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="$router.push('./s-'+(index+1))")
+  .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="$router.push('./k-'+(index+1))")
 
 </template>
 
@@ -207,23 +209,27 @@ export default Vue.extend({
       for(var i = 0; i < this.markers.length; i++){
         var marker = this.markers[i];
         var pos = this.getTwoDPosition(marker.position);
+        var el = this.$el.querySelector('#' + marker.key);
         if(pos){
           // Within camera view
+          var top = pos.y;
+          var left = pos.x;
           if(marker.type=='sample'){
-            var top = pos.y-7;
-            var left = pos.x-7;
+            top -= 7;
+            left -= 7;
           }
           else{
-            var top = pos.y-5;
-            var left = pos.x-5;
+            top -= 5;
+            left -= 5;
           }
-          marker.marker_2d.style.display = 'block';
-          marker.marker_2d.style.top = top+'px';
-          marker.marker_2d.style.left = left+'px';
+
+          el.style.display = 'block';
+          el.style.top = top+'px';
+          el.style.left = left+'px';
         }
         else{
           // Outside camera view
-          marker.marker_2d.style.display = 'none';
+          el.style.display = 'none';
         }
       }
     },
@@ -292,13 +298,6 @@ export default Vue.extend({
 
       marker.key = key;
       marker.type = type;
-
-      // 2d marker ------------------
-      var el = document.createElement('div');
-      el.className = 'marker '+type;
-      el.id = key;
-      this.$el.appendChild(el);
-      marker.marker_2d = el;
 
       this.markers.push( marker );
 

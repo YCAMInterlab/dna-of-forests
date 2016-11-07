@@ -25,7 +25,7 @@ section
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
   table#knowledge
     tbody
-      tr(v-for="(item, index) in knowledges" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")
+      tr(v-for="(item, index) in knowledges" v-on:click="$router.push('./k-'+(index+1))" v-bind:class="{ selected: $route.path=='./k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.title {{ item.title }}
         td.description {{ item.description }}
