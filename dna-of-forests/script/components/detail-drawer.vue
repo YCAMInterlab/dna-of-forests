@@ -18,7 +18,7 @@
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
-          textarea {{ item.text }}
+          <dna-tab v-bind:text="item.text" v-bind:current="'barcode'"></dna-tab>
         h4 2. DNA解析による同定の結果
         div.result
           small {{ genus_en }}
@@ -85,7 +85,7 @@ header
       opacity: 0.5
 article
   padding: 25px
-  overflow-y: scroll
+  overflow-y: auto
   height: calc(100% - 125px)
 
 h3
@@ -100,6 +100,10 @@ p
   margin-top: 25px
 
 section
+
+  // Android対策の影響が出ていたので上書き対応
+  max-height: inherit
+
   h3
     margin: 25px -25px
     text-align: center
@@ -193,6 +197,9 @@ h4
 <script>
 
 import Vue from 'vue';
+
+// 登録
+Vue.component('dna-tab', require('./dna-tab.vue'));
 
 export default Vue.extend({
 

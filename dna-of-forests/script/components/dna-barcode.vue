@@ -10,40 +10,76 @@ import Vue from 'vue';
 
 export default Vue.extend({
 
-  props: ['dna'],
+  props: ['dna','width_limit'],
 
   mounted: function() {
+    this.renderBarcode()
+  },
 
-    var x = 0,
-        y = 0,
-        w = 2,
-        h = 10,
-        canvas = this.$el;
+  watch: {
+    dna: function (newVal) {
+      this.renderBarcode()
+    }
+  },
 
-    canvas.width = w*this.dna.length;
-    canvas.height = h;
+  methods: {
+    chunkString(str, length) {
+      // 文字数lengthでstrを分割した配列を返す
+      return str.match(new RegExp('.{1,' + length + '}', 'g'));
+    },
 
-    if (canvas.getContext) {
+    renderBarcode(){
+      var canvas = this.$el;
 
-      var context = canvas.getContext('2d');
+      if (canvas.getContext) {
 
-      var colors = {
-        'A': "rgb(255,  51, 165)", // R: #ff33a5
-        'T': "rgb( 51, 255, 109)", // G: #33ff6d
-        'G': "rgb( 51, 126, 255)", // B: #337eff
-        'C': "rgb(245, 255, 138)", // Y: #f5ff8a
-      }
+        var w = 2,
+            h = 10,
+            line_margin = 15, // 行間
+            str_arr = null;
 
-      for(var i = 0; i < this.dna.length; i++){
-        var c = this.dna[i];
-        if(colors[c]!==null){
-          context.fillStyle = colors[c];
+        // TODO: グローバルに定義
+        var colors = {
+          'A': "rgb(255,  51, 165)", // R: #ff33a5
+          'T': "rgb( 51, 255, 109)", // G: #33ff6d
+          'G': "rgb( 51, 126, 255)", // B: #337eff
+          'C': "rgb(245, 255, 138)", // Y: #f5ff8a
+        }
+
+        if(this.width_limit){
+
+          var str_len = Math.floor(this.width_limit / w);
+          str_arr = this.chunkString(this.dna, str_len);
+          var lines = str_arr.length;
+          canvas.height = h*lines + line_margin*(lines-1);
+          canvas.width = this.width_limit;
         }
         else{
-          context.fillStyle = "rgb(0, 0, 0)";
+          str_arr = [this.dna];
+          canvas.height = h;
+          canvas.width = w*this.dna.length;
         }
-        x = (w*i);
-        context.fillRect(x,y,w,h);
+
+        var context = canvas.getContext('2d');
+
+        for(var j = 0; j < str_arr.length; j++){
+          var str = str_arr[j];
+          var x = 0,
+              y = (h+line_margin)*j;
+          for(var i = 0; i < str.length; i++){
+
+            var c = str[i];
+            if(colors[c]!==null){
+              context.fillStyle = colors[c];
+            }
+            else{
+              context.fillStyle = "rgb(0, 0, 0)";
+            }
+
+            x = (w*i);
+            context.fillRect(x,y,w,h);
+          }
+        }
       }
     }
   }

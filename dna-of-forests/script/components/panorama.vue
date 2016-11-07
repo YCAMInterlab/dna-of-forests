@@ -3,6 +3,7 @@
 #container
   <start-modal v-if="$route.path=='/'"></start-modal>
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
+    span.genus {{ item.genus_en }}
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
@@ -27,6 +28,19 @@ section
     width: 14px
     height: 13px
     background: url(/dna-of-forests/img/marker-arrow.png) no-repeat center
+    span.genus
+      color: #fcff00
+      font-family: 'Roboto'
+      font-size: 11px
+      letter-spacing: 0.001em
+      display: inline-block
+      transform-origin: 0% 100%
+      -webkit-transform-origin: 0% 100%
+      transform: rotate(-90deg)
+      -webkit-transform: rotate(-90deg)
+      position: absolute
+      top: -18px
+      left: 14px
   &.knowledge
     width: 14px
     height: 14px
@@ -57,6 +71,14 @@ export default Vue.extend({
 
   mounted: function() {
 
+    // 最初のカメラ位置
+    var default_lon = 1882;
+    var default_lat = 46.2;
+    if(this.$route.path!='/'){
+      default_lon = (Cookies.get('lon')*1 || default_lon);
+      default_lat = (Cookies.get('lat')*1 || default_lat);
+    }
+
     this.width = this.$el.offsetWidth;
     this.height = window.innerHeight;
     this.camera = null;
@@ -68,8 +90,8 @@ export default Vue.extend({
     this.onPointerDownLat = null;
     this.phi = 0;
     this.theta = 0;
-    this.lon = (Cookies.get('lon') || 0)*1;
-    this.lat = (Cookies.get('lat') || 0)*1;
+    this.lon = default_lon;
+    this.lat = default_lat;
     this.onPointerDownPointerX = null;
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
@@ -137,42 +159,6 @@ export default Vue.extend({
     // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
     document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
 
-    document.addEventListener( 'dragover', function( e ) {
-
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'copy';
-
-    }, false );
-
-    document.addEventListener( 'dragenter', function( e ) {
-
-      document.body.style.opacity = 0.5;
-
-    }, false );
-
-    document.addEventListener( 'dragleave', function( e ) {
-
-      document.body.style.opacity = 1;
-
-    }, false );
-
-    document.addEventListener( 'drop', function( e ) {
-
-      e.preventDefault();
-
-      var reader = new FileReader();
-      reader.addEventListener( 'load', function( e ) {
-
-        material.map.image.src = e.target.result;
-        material.map.needsUpdate = true;
-
-      }, false );
-      reader.readAsDataURL( e.dataTransfer.files[ 0 ] );
-
-      document.body.style.opacity = 1;
-
-    }, false );
-
     this.animate();
   },
 
@@ -211,9 +197,9 @@ export default Vue.extend({
 
     update() {
 
-      // if ( this.isUserInteracting === false ) {
-      //   this.lon += 0.05;
-      // }
+      if ( this.isUserInteracting === false && this.$route.path==='/' ) {
+        this.lon += 0.04;
+      }
 
       this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
       this.phi = THREE.Math.degToRad( 90 - this.lat );
@@ -252,8 +238,8 @@ export default Vue.extend({
           }
 
           el.style.display = 'block';
-          el.style.top = top+'px';
-          el.style.left = left+'px';
+          el.style.top = parseInt(top,10)+'px';
+          el.style.left = parseInt(left,10)+'px';
         }
         else{
           // Outside camera view
@@ -344,20 +330,24 @@ export default Vue.extend({
 
     onDocumentMouseDown( e ) {
 
-      e.preventDefault();
+      // Canvas部分でドラッグ開始したら
+      if( e.target === this.renderer.domElement){
 
-      this.isUserInteracting = true;
+        e.preventDefault();
 
-      this.onPointerDownPointerX = e.clientX;
-      this.onPointerDownPointerY = e.clientY;
+        this.isUserInteracting = true;
 
-      this.onPointerDownLon = this.lon;
-      this.onPointerDownLat = this.lat;
+        this.onPointerDownPointerX = e.clientX;
+        this.onPointerDownPointerY = e.clientY;
 
-      // -----
+        this.onPointerDownLon = this.lon;
+        this.onPointerDownLat = this.lat;
 
-      this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
-      this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+        // -----
+
+        this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
+        this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+      }
     },
 
     onDocumentMouseMove( e ) {
@@ -375,6 +365,7 @@ export default Vue.extend({
 
       Cookies.set('lon', this.lon);
       Cookies.set('lat', this.lat);
+      console.log(this.lon,this.lat);
     },
 
     onDocumentMouseWheel( e ) {

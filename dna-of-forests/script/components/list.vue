@@ -68,10 +68,12 @@ table
     tr.selected
       background-color: #272727
     td
-      &.dna
+      &.dna_text
         max-width: 150px
         overflow: hidden
         white-space: nowrap
+      &.dna_region
+        width: 150px
       &.index
         font-family: 'Hiragino Maru Gothic Pro','ヒラギノ丸ゴ Pro W6','HiraMaruProN-W6', '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif
         font-weight: bold
