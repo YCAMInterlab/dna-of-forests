@@ -10,7 +10,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
 
-  props: ['dna','width_limit'],
+  props: ['dna','width_limit','height'],
 
   mounted: function() {
     this.renderBarcode()
@@ -34,7 +34,7 @@ export default Vue.extend({
       if (canvas.getContext) {
 
         var w = 2,
-            h = 10,
+            h = this.height || 10,
             line_margin = 15, // 行間
             str_arr = null;
 
