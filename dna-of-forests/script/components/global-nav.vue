@@ -72,11 +72,9 @@ import Vue from 'vue';
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
 
-
 export default Vue.extend({
   methods: {
     linkUrl(default_path) {
-      console.log('this.$route.params.index', this.$route.params.index);
       if(this.$route.params.index){
         return default_path+'/'+this.$route.params.index;
       }

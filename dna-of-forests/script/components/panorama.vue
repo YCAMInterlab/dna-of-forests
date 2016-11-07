@@ -11,6 +11,9 @@ section
   height: 100%
   overflow: hidden
 
+#container
+  position: relative
+
 </style>
 
 <script>
@@ -19,7 +22,7 @@ import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
 
-var THREE = THREELib();
+var THREE = THREELib(["Projector"]);
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
@@ -29,6 +32,8 @@ export default Vue.extend({
 
   mounted: function() {
 
+    this.width = null;
+    this.hight = null;
     this.camera = null;
     this.scene = null;
     this.renderer = null;
@@ -44,6 +49,8 @@ export default Vue.extend({
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
     this.markers = [];
+    this.projector = new THREE.Projector();
+    this.frustum = new THREE.Frustum();
 
     this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
@@ -77,14 +84,14 @@ export default Vue.extend({
     for(var i = 0; i<this.samples.length; i++){
       var data = this.samples[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.scene.add( this.create_marker('sample', geo.x, geo.y, geo.z, 's-'+(i+1)) );
+      this.create_marker('sample', 's-'+(i+1), geo.x, geo.y, geo.z);
     }
 
     // // 森の知識マーカー
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.scene.add( this.create_marker('knowledge', geo.x, geo.y, geo.z, 'k-'+(i+1)) );
+      this.create_marker('knowledge', 'k-'+(i+1), geo.x, geo.y, geo.z);
     }
 
     // 座標軸の表示
@@ -170,11 +177,11 @@ export default Vue.extend({
     },
 
     onWindowResize() {
-      var w = this.$el.offsetWidth;
-      var h = window.innerHeight;
-      this.camera.aspect = w / h;
+      this.width = this.$el.offsetWidth;
+      this.height = window.innerHeight;
+      this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize( w, h );
+      this.renderer.setSize( this.width, this.height );
     },
 
     update() {
@@ -198,6 +205,34 @@ export default Vue.extend({
       this.camera.position.copy( this.camera.target ).negate();
       */
       this.renderer.render( this.scene, this.camera );
+
+      this.frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse ) );
+
+      // Update 2D markers
+      for(var i = 0; i < this.markers.length; i++){
+        var marker = this.markers[i];
+        var pos = this.getTwoDPosition(marker.position);
+        if(pos){
+          // Within camera view
+          if(marker.type=='sample'){
+            var top = pos.y-7;
+            var left = pos.x-7;
+          }
+          else{
+            var top = pos.y-5;
+            var left = pos.x-5;
+          }
+          marker.marker_2d.style.display = 'block';
+          marker.marker_2d.style.top = top+'px';
+          marker.marker_2d.style.left = left+'px';
+        }
+        else{
+          // Outside camera view
+          marker.marker_2d.style.display = 'none';
+          marker.marker_2d.style.top = top+'px';
+          marker.marker_2d.style.left = left+'px';
+        }
+      }
     },
 
     // パノラマ画像を貼り付けた球体
@@ -232,19 +267,46 @@ export default Vue.extend({
       return new THREE.Vector3(x, y, z);
     },
 
+    getTwoDPosition(vector) {
+
+      var vector = vector.clone();
+      var widthHalf = 0.5*this.renderer.context.canvas.width;
+      var heightHalf = 0.5*this.renderer.context.canvas.height;
+
+      // 何もしないと対角線上の位置も返してしまうので、ここで間引く
+      if(this.frustum.containsPoint(vector)) {
+
+        // Within camera
+        vector.project(this.camera);
+
+        vector.x = ( vector.x * widthHalf ) + widthHalf;
+        vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+        return {
+          x: vector.x,
+          y: vector.y
+        };
+      }
+      return null;
+    },
+
     // マーカー
-    create_marker(type, x=0, y=0, z=0, key){
+    create_marker(type, key, x=0, y=0, z=0){
 
-      // 15cmくらい
-      var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
-      // geometry.scale( - 1, 1, 1 );
-      var material = new THREE.MeshLambertMaterial({
-        color: 0xffffff
-      });
-      var marker = new THREE.Mesh( geometry, material );
+      var marker = {};
 
-      marker.position.set( x, y, z );
+      marker.position = new THREE.Vector3( x, y, z );
+
       marker.key = key;
+      marker.type = type;
+
+      // 2d marker ------------------
+      var el = document.createElement('div');
+      el.className = 'marker '+type;
+      el.id = key;
+      this.$el.appendChild(el);
+      marker.marker_2d = el;
+
       this.markers.push( marker );
 
       return marker;
@@ -276,42 +338,6 @@ export default Vue.extend({
 
       this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
       this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
-
-      this.raycaster.setFromCamera( this.mouse, this.camera );
-
-      var intersects = this.raycaster.intersectObjects( this.markers );
-
-      if ( intersects.length > 0 ) {
-
-        var clicked_marker = intersects[0];
-
-        if(clicked_marker.object.material.color.r!=1){
-          clicked_marker.object.material.color.r = 1;
-        }
-        else{
-          clicked_marker.object.material.color.r = 0;
-        }
-
-        this.$router.push('/panorama/'+clicked_marker.object.key);
-
-        console.log('clicked:', clicked_marker.object.key);
-
-        // intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
-        // var particle = new THREE.Sprite( particleMaterial );
-        // particle.position.copy( intersects[ 0 ].point );
-        // particle.scale.x = particle.scale.y = 16;
-        // scene.add( particle );
-
-      }
-
-      /*
-      // Parse all the faces
-      for ( var i in intersects ) {
-
-        intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-      }
-      */
     },
 
     onDocumentMouseMove( e ) {
