@@ -29,10 +29,10 @@
             | DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、
             | ある程度まで種名を調べる事ができる「DNAバーコーディング」という技術を使って解析しました。詳しくは、アバウトページを御覧ください。
 
-      section.microscope
+      section.microscope(v-if="microscope")
         h3
           img(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png' srcset='/dna-of-forests/img/detail-drawer/title-sp_microscope@2x.png 2x')
-        iframe(width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
+        iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="microscope.memo")
           dl
             dd(v-html="microscope.memo")
