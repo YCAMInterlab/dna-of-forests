@@ -96,6 +96,7 @@
         font-size: 11px
         letter-spacing: 0.001em
         display: inline-block
+        text-shadow: 0 0 8px #000
       canvas
         margin-bottom: 2px
         margin-left: 4px
