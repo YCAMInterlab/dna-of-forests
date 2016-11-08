@@ -64,6 +64,11 @@ a span {
   src: url("Roboto-Medium.ttf");
   font-weight: normal;
   font-style: normal; }
+@font-face {
+  font-family: "Roboto";
+  src: url("Roboto-Bold.ttf");
+  font-weight: bold;
+  font-style: normal; }
 html,
 body {
   height: 100%; }
@@ -71,7 +76,7 @@ body {
 body {
   position: relative;
   font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
-  color: #111;
+  color: #000;
   font-size: 13px;
   line-height: 1em;
   color: #fff; }
@@ -90,5 +95,15 @@ a {
   float: left;
   height: 100%;
   overflow: hidden;
-  background-color: #1a1a1a;
+  background-color: #000;
   position: relative; }
+
+.slide-fade-enter-active {
+  transition: all 0.1s ease; }
+
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1); }
+
+.slide-fade-enter,
+.slide-fade-leave-active {
+  right: -490px; }

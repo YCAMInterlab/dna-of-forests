@@ -14,7 +14,7 @@
         h3
           img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
         h4 1. 採取サンプルの写真
-        img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
+        img.round(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
@@ -29,10 +29,10 @@
             | DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、
             | ある程度まで種名を調べる事ができる「DNAバーコーディング」という技術を使って解析しました。詳しくは、アバウトページを御覧ください。
 
-      section.microscope
+      section.microscope(v-if="microscope")
         h3
           img(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png' srcset='/dna-of-forests/img/detail-drawer/title-sp_microscope@2x.png 2x')
-        iframe(width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
+        iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="microscope.memo")
           dl
             dd(v-html="microscope.memo")
@@ -48,7 +48,7 @@
 
     template(v-if="type=='knowledge'")
       h3 {{ title }}
-      img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
+      img.round(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
       p {{ description }}
 
 
@@ -61,16 +61,16 @@
   width: 490px
   height: 100%
   right: 0
-  background-color: #1a1a1a
+  background-color: #151515
   z-index: 9999
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   overflow: hidden
 
 header
-  background-color: #2b2b2b
+  background-color: #0d0d0d
   padding: 28.5px 25px
   position: relative
-  margin-bottom: 1px
+  border-bottom: 1px solid #1a1a1a
   h2
     text-align: center
   .close_btn
@@ -107,7 +107,7 @@ section
   h3
     margin: 25px -25px
     text-align: center
-    background-color: #2b2b2b
+    background-color: #0d0d0d
     padding: 21px
   &:first-child
     h3
@@ -117,6 +117,10 @@ h4
   color: #ccc
   &:not(:first-child)
     margin-top: 30px
+
+img.round
+  border-radius: 5px
+  width: 100%
 
 .dna_sequence
   p
@@ -138,7 +142,7 @@ h4
     margin-bottom: 12px
 
 .description
-  margin: 25px -25px 0
+  margin: 25px -25px -25px
   padding: 25px
   border-top: 1px solid #333333
   color: #808080

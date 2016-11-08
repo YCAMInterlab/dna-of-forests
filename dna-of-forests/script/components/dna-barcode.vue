@@ -44,6 +44,7 @@ export default Vue.extend({
           'T': "rgb( 51, 255, 109)", // G: #33ff6d
           'G': "rgb( 51, 126, 255)", // B: #337eff
           'C': "rgb(245, 255, 138)", // Y: #f5ff8a
+          'N': "rgb(255, 255, 255)", // W: #ffffff
         }
 
         if(this.width_limit){
@@ -73,7 +74,7 @@ export default Vue.extend({
               context.fillStyle = colors[c];
             }
             else{
-              context.fillStyle = "rgb(0, 0, 0)";
+              context.fillStyle = colors['N'];
             }
 
             x = (w*i);
