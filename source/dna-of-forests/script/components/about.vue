@@ -88,7 +88,7 @@ a.btn
   text-decoration: none
   border: 1px solid #3f3f3f
   border-radius: 8px
-  background: url(/img/about/arrow.png) no-repeat 17px center
+  background: url(/dna-of-forests/img/about/arrow.png) no-repeat 17px center
   &:hover
     color: #fff
     border-color: #ccc

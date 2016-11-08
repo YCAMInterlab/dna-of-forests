@@ -14,7 +14,7 @@
         h3
           img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
         h4 1. 採取サンプルの写真
-        img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
+        img.sample(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
@@ -61,13 +61,13 @@
   width: 490px
   height: 100%
   right: 0
-  background-color: #1a1a1a
+  background-color: #151515
   z-index: 9999
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   overflow: hidden
 
 header
-  background-color: #2b2b2b
+  background-color: #0d0d0d
   padding: 28.5px 25px
   position: relative
   margin-bottom: 1px
@@ -107,7 +107,7 @@ section
   h3
     margin: 25px -25px
     text-align: center
-    background-color: #2b2b2b
+    background-color: #0d0d0d
     padding: 21px
   &:first-child
     h3
@@ -117,6 +117,10 @@ h4
   color: #ccc
   &:not(:first-child)
     margin-top: 30px
+
+img.sample
+  border-radius: 5px
+  width: 100%
 
 .dna_sequence
   p
@@ -138,7 +142,7 @@ h4
     margin-bottom: 12px
 
 .description
-  margin: 25px -25px 0
+  margin: 25px -25px -25px
   padding: 25px
   border-top: 1px solid #333333
   color: #808080

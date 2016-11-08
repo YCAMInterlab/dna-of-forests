@@ -27,8 +27,9 @@ nav
     width: 100%
     height: 80px
     background-color: #0d0d0d
-    margin-bottom: 2px
     cursor: pointer
+    &:not(:last-child)
+      margin-bottom: 2px
 
     >div
       height: 100%

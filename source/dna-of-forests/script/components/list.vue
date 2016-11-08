@@ -37,10 +37,11 @@ section
 section
   height: 100%
   overflow-y: auto
+  background-color: #151515
 h1
   padding: 28px 27px
-  background-color: #2b2b2b
-  margin-bottom: 1px
+  background-color: #0d0d0d
+  border-bottom: 1px solid #1a1a1a
 
 table
   width: 100%
@@ -56,17 +57,18 @@ table
         padding-right: 27px
 
   thead
-    background-color: #2b2b2b
+    background-color: #0d0d0d
     th
       text-align: left
       color: #656566
       font-size: 12px
   tbody
+    color: #979799
     tr:hover
-      background-color: #202020
+      background-color: #1d1d1d
       cursor: pointer
     tr.selected
-      background-color: #272727
+      background-color: #202020
     td
       &.dna_text
         max-width: 150px
@@ -75,11 +77,18 @@ table
       &.dna_region
         width: 150px
       &.index
-        font-family: 'Hiragino Maru Gothic Pro','ヒラギノ丸ゴ Pro W6','HiraMaruProN-W6', '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif
+        font-family: 'Roboto'
         font-weight: bold
+        letter-spacing: 0.025em
         width: 30px
       &.title,
+      &.description,
+      &.index,
       &.genus_ja
+        color: #fff
+      &.title,
+      &.genus_ja,
+      &.genus_en
           width: 150px
       &.description
         max-width: 150px
