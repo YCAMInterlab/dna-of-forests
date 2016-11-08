@@ -101,6 +101,11 @@ var THREE = THREELib(["Projector"]);
 Vue.component('sound-button', require('./sound-button.vue'));
 Vue.component('start-modal',  require('./start-modal.vue'));
 
+// 表示の切り替え
+const visibleAxisHelper = false;
+const visible3dMaker = false;
+const visibleGrid = false;
+
 export default Vue.extend({
 
   mounted: function() {
@@ -149,34 +154,38 @@ export default Vue.extend({
     this.scene.add( pano_sphere );
 
     // グリッド
-    // var sphere = new THREE.Mesh(
-    //   new THREE.SphereGeometry( 500, 36, 18 ),
-    //   new THREE.MeshPhongMaterial({
-    //     color: 0xffffff,
-    //     wireframe: true
-    //   })
-    // );
-    // this.scene.add(sphere);
+    if(visibleGrid){
+      var sphere = new THREE.Mesh(
+        new THREE.SphereGeometry( 500, 36, 18 ),
+        new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          wireframe: true
+        })
+      );
+      this.scene.add(sphere);
+    }
 
     // 半径は全てメートルで大体目測で合わせる
     // サンプルマーカー
     for(var i = 0; i<this.samples.length; i++){
       var data = this.samples[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('sample', 's-'+(i+1), geo.x, geo.y, geo.z);
+      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
     }
 
     // // 森の知識マーカー
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('knowledge', 'k-'+(i+1), geo.x, geo.y, geo.z);
+      this.create_marker('knowledge', 'k-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
     }
 
     // 座標軸の表示
-    // var axis = new THREE.AxisHelper(300);
-    // axis.position.set(0,-10,0); // 原点だとカメラと同じ視点になるので表示されない
-    // this.scene.add(axis);
+    if(visibleAxisHelper){
+      var axis = new THREE.AxisHelper(300);
+      axis.position.set(0,-10,0); // 原点だとカメラと同じ視点になるので表示されない
+      this.scene.add(axis);
+    }
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -338,7 +347,22 @@ export default Vue.extend({
     },
 
     // マーカー
-    create_marker(type, key, x=0, y=0, z=0){
+    create_marker(type, key, id, x=0, y=0, z=0){
+
+      // 3D marker -----------
+      if(visible3dMaker){
+        // 15cmくらい
+        var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
+        // geometry.scale( - 1, 1, 1 );
+        var color = (id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
+        var material = new THREE.MeshLambertMaterial({
+          color: color
+        });
+        var marker_3d = new THREE.Mesh( geometry, material );
+        marker_3d.position.set( x, y, z );
+        this.scene.add(marker_3d);
+      }
+      // ---------------------
 
       var marker = {};
 
