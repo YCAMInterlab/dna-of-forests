@@ -19,7 +19,7 @@
 
 <style lang="sass?indentedSyntax" scoped>
 
-section
+#container
   height: 100%
   overflow: hidden
 
@@ -45,12 +45,11 @@ section
 
 .marker
   position: absolute
-  opacity: 0.7
   cursor: pointer
   z-index: 10
   user-select: none;
   &:hover
-    opacity: 1
+    opacity: 0.7
   &.selected
     opacity: 1
   &.sample
