@@ -689,7 +689,7 @@
           "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
         }
       ],
-      "marker_position": { "latitude": 0, "longtitude":  -166, "radius": 3.8 },
+      "marker_position": { "latitude": 0, "longtitude":  -170, "radius": 3.8 },
       "collection_date": "2016.10.01"
     },
     {
@@ -910,7 +910,7 @@
           "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
         }
       ],
-      "marker_position": { "latitude": -32, "longtitude": -54, "radius": 1.7 },
+      "marker_position": { "latitude": -32, "longtitude": -52, "radius": 1.7 },
       "collection_date": "2016.10.01"
     },
     {
@@ -975,7 +975,7 @@
     {
       "title": "トンボ",
       "description": "食虫性の昆虫。飛びながら小さな昆虫を捕えて食べます。体は細長く、早く、まっすぐに飛び、旋回やホバリングもこなします。大きな複眼は飛翔しながら昆虫を探すセンサーです。幼虫はヤゴとよばれ水棲で肉食です。仁保の森には、イトトンボ、カワトンボ、オニヤンマ、ヤンマ、サナエ、トンボの仲間など多種類が生息。特に渓流では、春にムカシトンボやカワトンボ、5月頃からサナエの仲間、夏にはヤンマの仲間などがみられます。",
-      "marker_position": { "latitude": 20, "longtitude": -200, "radius": 5 }
+      "marker_position": { "latitude": 10, "longtitude": -150, "radius": 4 }
     },
     {
       "title": "カエル",
@@ -1005,7 +1005,7 @@
     {
       "title": "山道と広場と崖の穴",
       "description": "人が通る山道は動物の通り道にもなっており、夜間にカメラを置いておくと動物たちが多く映ります。フクロウは広くひらけたところを狩場として利用します。夜、木の高いところから観察し、野ネズミなどが出てくると捉えて食べます。また、崖の穴は、ヒミズ（モグラの仲間）、モグラ、ヘビ、ノネズミなどの生息場所としてシェアされています。",
-      "marker_position": { "latitude": -20, "longtitude": -63, "radius": 4 }
+      "marker_position": { "latitude": -40, "longtitude": -90, "radius": 1.7 }
     },
     {
       "title": "危険な生きもの",
