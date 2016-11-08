@@ -19,6 +19,29 @@
 
 <style lang="sass?indentedSyntax" scoped>
 
+@keyframes flash
+    0%
+      opacity: 0.4
+    50%
+      opacity: 1
+    100%
+      opacity: 0.4
+
+@-webkit-keyframes flash
+    0%
+      opacity: 0.4
+    50%
+      opacity: 1
+    100%
+      opacity: 0.4
+@-moz-keyframes flash
+    0%
+      opacity: 0.4
+    50%
+      opacity: 1
+    100%
+      opacity: 0.4
+
 #container
   height: 100%
   overflow: hidden
@@ -51,7 +74,9 @@
   &:hover
     opacity: 0.7
   &.selected
-    opacity: 1
+    animation: flash 0.6s infinite linear
+    -webkit-animation: flash 0.6s infinite linear
+    -moz-animation: flash 0.6s infinite linear
   &.sample
     width: 14px
     height: 13px
