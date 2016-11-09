@@ -34,7 +34,7 @@ article
       | 図鑑ウェブ制作：<a href="http://karappo.net" target="_blank">Karappo Inc.</a><br>
       | 講師：<a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">田中 浩（山口県立博物館動物担当理学博士）</a><br>
       | <a href="http://www.ycam.jp/projects/ycam-bio-research/" target="_blank">高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖</a><br>
-      | スマホ顕微鏡技術協力：<a href="防府市青少年科学館ソラール" target="_blank">寺田 勉（防府市青少年科学館ソラール館長）</a><br>
+      | スマホ顕微鏡技術協力：<a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">寺田 勉（防府市青少年科学館ソラール館長）</a><br>
       | 録音・音源編集：<a href="http://www.antoinebertin.org/" target="_blank">Antoine Bertin（antoinebertin.org）</a><br>
       | 試薬提供：<a href="https://www.kanto.co.jp/" target="_blank">関東科学株式会社</a>
 
