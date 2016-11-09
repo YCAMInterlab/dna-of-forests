@@ -1,662 +1,9 @@
 {
   "samples": [
     {
-      "id": "9-1-A",
-      "genus_ja": "ロドトルラ1",
-      "genus_en": "Rhodotorula1",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -10.7, "longtitude": 39, "radius": 3 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "GcvMQw3tMFE"
-      },
-      "memo": {
-        "どんな場所で採ったか": "石の上。",
-        "なぜその植物を採取したか": "色がきれいで美しいから。",
-        "なんの植物だと思うか": "ミドリゴケ",
-        "植物の特徴を絵や文字で書いて下さい": "石にはうように、はりついて伸びている<br>わかめのよう<br>先端が細い、先の先まで生命を感じる"
-      },
-      "memofig_width": "230px"
-    },
-    {
-      "id": "9-1-B",
-      "genus_ja": "前記カンジダ1",
-      "genus_en": "Candida1",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -18, "longtitude": -24, "radius": 2.2 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "mKZYbG8enks"
-      },
-      "memo": {
-        "どんな場所で採ったか": "がけの下<br>しめった場所、腐った葉っぱたくさんあるところ<br>日陰<br>他の植物と合わさって、乱雑に植えている",
-        "なぜその植物を採取したか": "よく見るけど、名前が何も思いうかばない雑草だから。",
-        "なんの植物だと思うか": "ユリ科？",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "9-1-C",
-      "genus_ja": "スターメレラ1",
-      "genus_en": "Starmerella1",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -9, "longtitude": -62, "radius": 5.7 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "kO0wplTeGls"
-      },
-      "memo": {
-        "どんな場所で採ったか": "山道<br>コンクリートの横<br>コケが生えている岩の下<br>多くの落ち葉<br>しめっている",
-        "なぜその植物を採取したか": "足元にあったけれども、だれも気づかなかったから",
-        "なんの植物だと思うか": "何かのキノコ<br>ヒダヒダが多い<br>色が白色なので、食べられる？",
-        "植物の特徴を絵や文字で書いて下さい": "特有の臭いあり"
-      }
-    },
-    {
-      "id": "9-1-D",
-      "genus_ja": "ピチア1",
-      "genus_en": "Pichia1",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -20, "longtitude": -22, "radius": 2 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "xPFNlxnIGM8"
-      },
-      "memo": {
-        "どんな場所で採ったか": "滝付近の傾斜地の下のあたり",
-        "なぜその植物を採取したか": "実のようなものがフサフサ毛がはえていたので可愛らしかったから",
-        "なんの植物だと思うか": "フキ<br>柏餅の葉<br>など・・・",
-        "植物の特徴を絵や文字で書いて下さい": "臭い・・・青臭い<br>すったら粘り気がでた<br>THE 葉っぱ"
-      },
-      "memofig_width": "230px"
-    },
-    {
-      "id": "9-2-A",
-      "genus_ja": "ウィケルハミエラ1",
-      "genus_en": "Wickerhamiella1",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -6.8, "longtitude": 95, "radius": 10 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "IzQ6h748U4Q"
-      },
-      "memo": {
-        "どんな場所で採ったか": "道沿いの岩",
-        "なぜその植物を採取したか": "みずみずしい感じがしたため",
-        "なんの植物だと思うか": "こけ",
-        "植物の特徴を絵や文字で書いて下さい": "濃いみどり色<br>湿っている<br>長い<br>シダっぽい<br>細かい葉っぱがある"
-      }
-    },
-    {
-      "id": "9-2-B",
-      "genus_ja": "スターメレラ2",
-      "genus_en": "Starmerella2",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -12.5, "longtitude": 116.3, "radius": 7.8 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "pBKikF1ozso"
-      },
-      "memo": {
-        "どんな場所で採ったか": "川のすぐ近く<br>岩場",
-        "なぜその植物を採取したか": "こけをとりたいと思った為<br>小さな芽のようなものがかわいかった。",
-        "なんの植物だと思うか": "こけ",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "9-2-C",
-      "genus_ja": "前記カンジダ2",
-      "genus_en": "Candida2",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "GATTTCTTTGCCTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACGCCCCTTCCGGGGCATTGCTTGGGCGCCGCAAGGTGCCCGACGTTTAAACTCTTATGTTTATCTCTGACAACCAAGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGCATCGATGAAGAAAGA"
-        }
-      ],
-      "marker_position": { "latitude": 5.8, "longtitude": -42, "radius": 18 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "EkeSB44WIlo"
-      },
-      "memo": {
-        "どんな場所で採ったか": "道のそばの岩の間",
-        "なぜその植物を採取したか": "形が面白かった",
-        "なんの植物だと思うか": "ヌスットハギ？<br>猫じゃらし系",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "230px"
-    },
-    {
-      "id": "9-2-D",
-      "genus_ja": "ロドトルラ2",
-      "genus_en": "Rhodotorula2",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        }
-      ],
-      "marker_position": { "latitude": -25, "longtitude": -106, "radius": 3.3 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "xqHnnHvKLx8"
-      },
-      "memo": {
-        "どんな場所で採ったか": "川のほとりに群生<br>鉱脈試掘跡そばに咲く夢の花",
-        "なぜその植物を採取したか": "お花としてきれい<br>他の班がとってないエリア<br>川辺でさがしたかった",
-        "なんの植物だと思うか": "むらさきりんどう的な？",
-        "植物の特徴を絵や文字で書いて下さい": "ホタル袋の小さいもののような花弁<br>うすむらさき<br>苦い無臭<br>エディブルではなさげ<br>葉っぱは普遍的な姿<br>ちょっとトンガリ系<br>虫が食べる、ちょっと野菜系で美味しそう"
-      },
-      "memofig_width": "230px"
-    },
-    {
-      "id": "9-3-A",
-      "genus_ja": "ピチア2",
-      "genus_en": "Pichia2",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -4.5, "longtitude":   142, "radius":  21 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "ILI_e6YMFFg"
-      },
-      "memo": {
-        "どんな場所で採ったか": "川の対岸の岩壁の割れ目。",
-        "なぜその植物を採取したか": "人が足を踏み得れにくい場所なので、珍しいものがありそうな気がしたから。",
-        "なんの植物だと思うか": "わかりません。",
-        "植物の特徴を絵や文字で書いて下さい": "双子葉系。<br>岩の隙間から生えていた。<br>根本には苔がびっしり。"
-      }
-    },
-    {
-      "id": "9-3-B",
-      "genus_ja": "ウィケルハミエラ2",
-      "genus_en": "Wickerhamiella2",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -1, "longtitude": 53, "radius": 9 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "BvFNBQqs_5M"
-      },
-      "memo": {
-        "どんな場所で採ったか": "岩肌<br>少し水気がある<br>斜面",
-        "なぜその植物を採取したか": "小さな木のようでキレイだったから。",
-        "なんの植物だと思うか": "？",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "280px"
-    },
-    {
-      "id": "9-3-C",
-      "genus_ja": "スターメレラ3",
-      "genus_en": "Starmerella3",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -1, "longtitude": -27, "radius": 5.5 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "KbAzNYJpQK0"
-      },
-      "memo": {
-        "どんな場所で採ったか": "開始地点の滝の対面<br>小さなガケになっている斜面<br>斜面に同じような植物<br>斜面に対して直角",
-        "なぜその植物を採取したか": "実が気になった<br>見たことがあるが名前がわからない",
-        "なんの植物だと思うか": "ナンテン",
-        "植物の特徴を絵や文字で書いて下さい": "葉が竹っぽい<br>葉にツヤがある<br>実は緑色<br>葉の先がトガっている<br>実のエダはブドウっぽい"
-      }
-    },
-    {
-      "id": "9-3-D",
-      "genus_ja": "前記カンジダ3",
-      "genus_en": "Candida3",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -11.3, "longtitude": 113.2, "radius":  8 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "LJg0lsIaRTs"
-      },
-      "memo": {
-        "どんな場所で採ったか": "渓流沿いの岩場についていた",
-        "なぜその植物を採取したか": "苔は苔でも、綿毛の様な小さな芽が出ているのが珍しいから",
-        "なんの植物だと思うか": "つたに似た苔",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "280px"
-    },
-    {
-      "id": "10-1-A",
-      "genus_ja": "ロドトルラ3",
-      "genus_en": "Rhodotorula3",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude":    22, "longtitude":    53, "radius":  16 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "_kB4PkbpT08"
-      },
-      "memo": {
-        "どんな場所で採ったか": "崖ってほどでもない崖←少し登る<br>ジメジメしていた<br>日陰<br>コケがたくさん生えていた<br>コケの中から枝が出てきている感じ",
-        "なぜその植物を採取したか": "穴があいていたから<br>誰も知らなかったから",
-        "なんの植物だと思うか": "クサギか何か",
-        "植物の特徴を絵や文字で書いて下さい": "汁が臭い<br>ギザギザ<br>こんなに臭いのに虫に食われていて、なぜ虫が好むのか？<br>葉がやわらかい"
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "10-1-B",
-      "genus_ja": "ピチア3",
-      "genus_en": "Pichia3",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        }
-      ],
-      "marker_position": { "latitude": 5.4, "longtitude": -46, "radius": 22 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "2RADeXyY2ss"
-      },
-      "memo": {
-        "どんな場所で採ったか": "滝付近の岩場（高いところ）",
-        "なぜその植物を採取したか": "周りの植物と比べて、背が高くて目立っていたから！",
-        "なんの植物だと思うか": "つるむらさき（？）",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "10-1-C",
-      "genus_ja": "ウィケルハミエラ3",
-      "genus_en": "Wickerhamiella3",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": 4.5, "longtitude": 76.6, "radius": 15 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "ZM4Ap2PbuhU",
-        "memo": "スキマが多い→細胞壁？<br>茶色のは死んでる？"
-      },
-      "memo": {
-        "どんな場所で採ったか": "日のあたる木にまきついているツタ",
-        "なぜその植物を採取したか": "かわいいから<br>葉っぱがまるくて・・・<br>木にまきついているのを取りたかった",
-        "なんの植物だと思うか": "ツタ植物<br>ラシ植物（？）<br>葉がうすいから・・・",
-        "植物の特徴を絵や文字で書いて下さい": "多肉植物・・・食べられそう<br>意外と肉厚<br>葉のうらに白・茶のハンテンがあるものもある<br>すりつぶすと水がたくさん出た"
-      },
-      "memofig_width": "280px"
-    },
-    {
-      "id": "10-1-D",
-      "genus_ja": "スターメレラ4",
-      "genus_en": "Starmerella4",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude":    -7, "longtitude":   -67, "radius":  5.7 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "lq8rwoGqbBc"
-      },
-      "memo": {
-        "どんな場所で採ったか": "半日陰の岩肌<br>湿度があるところ",
-        "なぜその植物を採取したか": "葉の形状<br>コケが成長したようにみえる（コケより大きい）<br>この場所にしかなかったから<br>根っこがとても長い。水分をひろく取る為",
-        "なんの植物だと思うか": "こけ",
-        "植物の特徴を絵や文字で書いて下さい": "持って帰って切る時、乾燥したせいか葉がクルクルまるまって、かさかさになっていた。すりつぶしやすかった。"
-      },
-      "memofig_width": "200px"
-    },
-    {
-      "id": "10-2-A",
-      "genus_ja": "前記カンジダ4",
-      "genus_en": "Candida4",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        }
-      ],
-      "marker_position": { "latitude": -23, "longtitude": -164, "radius": 3.5 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "YTzTNmCRzf4"
-      },
-      "memo": {
-        "どんな場所で採ったか": "Riverside, grow on the rock and with mosses",
-        "なぜその植物を採取したか": "川の側の他と違うツル状の植物だったから",
-        "なんの植物だと思うか": "ツタの仲間？",
-        "植物の特徴を絵や文字で書いて下さい": "The stem is thin.<br>Leaves are grow in pairs.<br>Root on the rock,and moss.<br>The plant grows really long."
-      }
-    },
-    {
-      "id": "10-2-B",
-      "genus_ja": "ロドトルラ4",
-      "genus_en": "Rhodotorula4",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude":     5, "longtitude":   -50, "radius":  20 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "bUUKy5aJnBo"
-      },
-      "memo": {
-        "どんな場所で採ったか": "ポールにからみついていた。",
-        "なぜその植物を採取したか": "ポールにからみついていたから。",
-        "なんの植物だと思うか": "豆科",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "200px"
-    },
-    {
-      "id": "10-2-C",
-      "genus_ja": "ピチア4",
-      "genus_en": "Pichia4",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude":   -32, "longtitude":  -120, "radius":   3 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "d4AgZFgyPv0"
-      },
-      "memo": {
-        "どんな場所で採ったか": "水場に近い場所<br>日あたりが良くて水気のある場所",
-        "なぜその植物を採取したか": "花がその場でしかなかったから<br>紫色の花がきれいだったため",
-        "なんの植物だと思うか": "シソ科<br>虫にはを食べられていたため、食べることのできる植物",
-        "植物の特徴を絵や文字で書いて下さい": "花は紫色"
-      },
-      "memofig_width": "200px"
-    },
-    {
-      "id": "10-2-D",
-      "genus_ja": "ウィケルハミエラ4",
-      "genus_en": "Wickerhamiella4",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "GATTTCTTTGCCTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACGCCCCTTCCGGGGCATTGCTTGGGCGCCGCAAGGTGCCCGACGTTTAAACTCTTATGTTTATCTCTGACAACCAAGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGCATCGATGAAGAAAGA"
-        }
-      ],
-      "marker_position": { "latitude":  23.4, "longtitude":     5, "radius":  20 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "sZEBhjMW-0w",
-        "memo": "プツプツ丸いのがたくさん<br>黒い点々が各所にあった<br>つぶすと鮮やかな緑色<br>他のチームの葉と同じような緑ですが、つぶすと色の違いがでた。Dチームはきれな緑。Cチームは茶色い緑に・・・"
-      },
-      "memo": {
-        "どんな場所で採ったか": "杉の木の横の少し高くなった土手の上<br>日陰<br>落ち葉（杉）が積もって腐葉土っぽくなっている",
-        "なぜその植物を採取したか": "園芸植物リシマキアの葉と少し似ているけど、微妙にちがうから。たくさん生えていると可愛いかもしれないので。<br>グランドカバー系？",
-        "なんの植物だと思うか": "ツル系か？",
-        "植物の特徴を絵や文字で書いて下さい": "他の植物の枯れ葉の間の地面からしっかり生えている<br>あまり背は高くない"
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "10-3-A",
-      "genus_ja": "スターメレラ5",
-      "genus_en": "Starmerella5",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        }
-      ],
-      "marker_position": { "latitude":  23.4, "longtitude":    -4, "radius":  21 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "mIbfYuzXh3g"
-      },
-      "memo": {
-        "どんな場所で採ったか": "切り立った岩の側面",
-        "なぜその植物を採取したか": "かわいかったから",
-        "なんの植物だと思うか": "コケ",
-        "植物の特徴を絵や文字で書いて下さい": "ふさふさした手触り<br>森の香り？（土の香り）"
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "10-3-B",
-      "genus_ja": "前記カンジダ5",
-      "genus_en": "Candida5",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -0.5, "longtitude": -62.5, "radius": 18 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "nwgJfYqdbkw"
-      },
-      "memo": {
-        "どんな場所で採ったか": "水分をふくんだ岩",
-        "なぜその植物を採取したか": "岩から生えていたから<br>シダの形が他の植物と大きく違うので、遺伝子に特徴があるのではないかと思いました。",
-        "なんの植物だと思うか": "シダ",
-        "採取の手順にて": "①葉をカッターで細くする→においが発する（草っぽい）<br>②乳鉢と乳棒ですりつぶす<br>③（チューブのイラスト有り）にすりつぶしたサンプルを入れる"
-      },
-      "memofig_width": "200 px"
-    },
-    {
-      "id": "10-3-C",
-      "genus_ja": "ロドトルラ5",
-      "genus_en": "Rhodotorula5",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -13, "longtitude": 93, "radius": 4.6 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "G7Q73sykHIs"
-      },
-      "memo": {
-        "どんな場所で採ったか": "岩肌",
-        "なぜその植物を採取したか": "かわいかったから",
-        "なんの植物だと思うか": "コケの進化したやつ",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "200 px"
-    },
-    {
-      "id": "10-3-D",
-      "genus_ja": "ピチア5",
-      "genus_en": "Pichia5",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude": -0.4, "longtitude": -35, "radius": 4.5 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "uDck0LAAtPY"
-      },
-      "memo": {
-        "どんな場所で採ったか": "沢に接する小路の石にある<br>水もあり、日もよく当たる<br>コケといっしょにはえている",
-        "なぜその植物を採取したか": "形がきれいである<br>ひいらぎのようで、見かけない形だった",
-        "なんの植物だと思うか": "ツタの仲間",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "cristina",
-      "genus_ja": "ロドトルラ6",
-      "genus_en": "Rhodotorula6",
-      "dna_sequences": [
-        {
-          "region": "ITS",
-          "text": "GATTTCTTTGCCTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACGCCCCTTCCGGGGCATTGCTTGGGCGCCGCAAGGTGCCCGACGTTTAAACTCTTATGTTTATCTCTGACAACCAAGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGCATCGATGAAGAAAGA"
-        }
-      ],
-      "marker_position": { "latitude": 2.3, "longtitude": -55, "radius": 17 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "zQ-4A_Q4EKQ"
-      }
-    },
-    {
-      "id": "ersin",
-      "genus_ja": "前記カンジダ6",
-      "genus_en": "Candida6",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
-        },
-        {
-          "region": "rbcL",
-          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
-        }
-      ],
-      "marker_position": { "latitude":   1.8, "longtitude":   -57, "radius":  18 },
-      "collection_date": "2016.10.09",
-      "microscope": {
-        "youtube_id": "nesAcTKDWLw"
-      }
-    },
-    {
       "id": "B-1",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen1",
+      "genus_ja": "ナンテン",
+      "genus_en": "Nandina domestica",
       "dna_sequences": [
         {
           "region": "ITS",
@@ -681,8 +28,8 @@
     },
     {
       "id": "B-3",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen3",
+      "genus_ja": "ツバキ属",
+      "genus_en": "Camellia",
       "dna_sequences": [
         {
           "region": "ITS",
@@ -851,7 +198,7 @@
     {
       "id": "B-16",
       "genus_ja": "事前採取分",
-      "genus_en": "Jizen16",
+      "genus_en": "Clerodendrum trichotomum",
       "dna_sequences": [
         {
           "region": "ITS",
@@ -864,7 +211,7 @@
     {
       "id": "B-17",
       "genus_ja": "事前採取分",
-      "genus_en": "Jizen17",
+      "genus_en": "Cryptomeria japonica",
       "dna_sequences": [
         {
           "region": "ITS",
@@ -964,6 +311,651 @@
       ],
       "marker_position": { "latitude": -1, "longtitude": -125, "radius": 4.7 },
       "collection_date": "2016.10.01"
+    },
+    {
+      "id": "9-1-A",
+      "genus_ja": "コクシノハゴケ / クシノハゴケ",
+      "genus_en": "Ctenidium hastile / Ctenidium capillifolium",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNGANNGAATTATTATACTCCTCCCCNCTATNNTAACTAAAATGATNCNTTGNNNGGTTCCNTNNNNTCCTCCCCCCCANTTCCCCCCGNANANGANGGNCNGCGG"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNNNNCTGGTGTAAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACAGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAGGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAGAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATCTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGNNNNNNNTTTTTNANAANAAAN"
+        }
+      ],
+      "marker_position": { "latitude": -10.7, "longtitude": 39, "radius": 3 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "GcvMQw3tMFE"
+      },
+      "memo": {
+        "どんな場所で採ったか": "石の上。",
+        "なぜその植物を採取したか": "色がきれいで美しいから。",
+        "なんの植物だと思うか": "ミドリゴケ",
+        "植物の特徴を絵や文字で書いて下さい": "石にはうように、はりついて伸びている<br>わかめのよう<br>先端が細い、先の先まで生命を感じる"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "9-1-B",
+      "genus_ja": "スゲ属",
+      "genus_en": "Carex",
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNAGGGNTTANNGATTACAAACTTACTTATTATACTCCTGAGTACGAAACCAAAGATACTGATATTTTAGCAGCGTTCCGAGTAACTCCTCAACCCGGAGTCCCCCCTGAAGAAGCAGGAGCTGCAGTAGCGGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCATATCGAGCCTGTTGTTGGAGAAGAAAATCAATTTATTGCCTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCTATTGTAGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGCTTGGAAGACTTACGAATTCCCCCTGCTTATTCAAAAACTTTCCAAGGCCCACCTCATGGTATCCAATCCGAAAGAGATAAGTTGAACAAATATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCATGTTATGAATGTCTACGTGGTGGACTTGATTTTACAAATAAAAANCCCNNNNNCCCCNGGC"
+        }
+      ],
+      "marker_position": { "latitude": -18, "longtitude": -24, "radius": 2.2 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "mKZYbG8enks"
+      },
+      "memo": {
+        "どんな場所で採ったか": "がけの下<br>しめった場所、腐った葉っぱたくさんあるところ<br>日陰<br>他の植物と合わさって、乱雑に植えている",
+        "なぜその植物を採取したか": "よく見るけど、名前が何も思いうかばない雑草だから。",
+        "なんの植物だと思うか": "ユリ科？",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "390px"
+    },
+    {
+      "id": "9-1-C",
+      "genus_ja": "ホウライタケ属",
+      "genus_en": "Marasmius",
+      "dna_sequences": [
+        {
+          "region": "ITS1",
+          "text": "NNNNGNNTTATTGAACNTTGTNNGGAGAGTTGAGCTGGTCCTTCAAGGGCAAGTGCTCGCTTTTCTTTCAATATTCATCCACCTGTGCACTTTTTGTAGAGAGTTTCTGAGAAAACGGGCCTCAATTGGCCTCGAGTATTGGAACTTTCTATGTCTTTTTACAAACCCTTGATGTATGTCCTTGAATGCCTTTTACAAAGGGGACTTAGTTGGCCCTTTTATAAAAACAATACAACTTTCAGCAACGGATCTCTTGGCTCTCGCATCGANNNAAGAACGANANTNGNTNCGCGTAC"
+        }
+      ],
+      "marker_position": { "latitude": -9, "longtitude": -62, "radius": 5.7 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "kO0wplTeGls"
+      },
+      "memo": {
+        "どんな場所で採ったか": "山道<br>コンクリートの横<br>コケが生えている岩の下<br>多くの落ち葉<br>しめっている",
+        "なぜその植物を採取したか": "足元にあったけれども、だれも気づかなかったから",
+        "なんの植物だと思うか": "何かのキノコ<br>ヒダヒダが多い<br>色が白色なので、食べられる？",
+        "植物の特徴を絵や文字で書いて下さい": "特有の臭いあり"
+      }
+    },
+    {
+      "id": "9-1-D",
+      "genus_ja": "キイチゴ属",
+      "genus_en": "Rubus",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNNNGNGAGTCGAAGTATATATTTTATTCGATACAAACTTTTTTTTTTTGAGGATCCGCTATAATAATGAGAAAGATTTCCGCCTATACGCACAAATCGGTCGATAATATCAGAATCCGACGAATCCGCCCAAGTGGACTTACTAATAGGATGCCCTAATGTGTTACAAAATTTAACTTTAGCCAACGATCCTATCATTGGAATAATTGGAACTAATGTATCAAGCTTCTTCATAGCATTATCCATTAGAAACGAATTTTCTAGCAATTGACTCCGTACCACTGAAATATTCGGTCGTATGCTTGAAAGATAACCCAAAAAATCAAGGGAATGCTTGGATAATTGGTTTATATGGATTCTTCCTGGTTGAGACCATACATAAAAATGACATTGCCAAAAATTGACAAGATAATATTTCCACTTATTCATCAGAAGAGGAGTCTCTTTTGATGCCAGAATAGATTTTCCTCGATATCTAACATACTGCATAAAAGGATCCTTGAAGAACCATAAGGTGGCCGGAAAATCGTTAGCAAAGACTTCTTCAACAGGATATTTTATTTTTTCATAAAAAAATATTCGCTCAAAAAAGATCCCAGAAGAGGTTAATAGTAAATGATTAGATTGGTTACGGAGAAAAAGTAAAATGGATTCGTATTCNCATACATNAGAATTATATANGNAGNAGGANGNANCTTGGANTACTTTTTGTAAAATANNNTNNTTTTGGNGGNANGAGGANNNTNCCN"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNANNNNNCTGGTGTNNNNATTATAAATTGACTTATTATACTCCGGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAGGAAGCAGGGGCCGCGGTAGCTGCGGAATCTTCTACCGGTACATGGACAACTGTATGGACTGACGGGCTTACTAGTCTTGATCGTTACAAAGGGCGATGCTACCACATTGAACCTGTTGCTGGAGAAGAAACTCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCGGTTACTAACATGTTTACTTCCATTGTGGGTAATGTGTTTG"
+        }
+      ],
+      "marker_position": { "latitude": -20, "longtitude": -22, "radius": 2 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "xPFNlxnIGM8"
+      },
+      "memo": {
+        "どんな場所で採ったか": "滝付近の傾斜地の下のあたり",
+        "なぜその植物を採取したか": "実のようなものがフサフサ毛がはえていたので可愛らしかったから",
+        "なんの植物だと思うか": "フキ<br>柏餅の葉<br>など・・・",
+        "植物の特徴を絵や文字で書いて下さい": "臭い・・・青臭い<br>すったら粘り気がでた<br>THE 葉っぱ"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "9-2-A",
+      "genus_ja": "ミヤマサナダゴケ",
+      "genus_en": "Plagiothecium nemorale",
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "GNNNNNNNNNNNNCTGGNGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAGGCGGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTGCTGGAGAAGAGAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACTAATTTATTTACTTCTATTGTTGGTAATGTCTTCGGATTCAAGCTTNAGAGCTTTNGTCTAGAAGATTACNATTCCTCCGCTTATTNNANNCTTTCCNNNCCCCCNNNGGGATNNNGANAAANANTAAATTAAGNNCTNTGNNGGNGGGNGTATATNNNCTNNTNGGGNNATCTGCNAANTTNGGTNNNCGGTTTGNNGCTCTCNNATTTTTTTTNNNAAAAAAANNAAANCN"
+        }
+      ],
+      "marker_position": { "latitude": -6.8, "longtitude": 95, "radius": 10 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "IzQ6h748U4Q"
+      },
+      "memo": {
+        "どんな場所で採ったか": "道沿いの岩",
+        "なぜその植物を採取したか": "みずみずしい感じがしたため",
+        "なんの植物だと思うか": "こけ",
+        "植物の特徴を絵や文字で書いて下さい": "濃いみどり色<br>湿っている<br>長い<br>シダっぽい<br>細かい葉っぱがある"
+      }
+    },
+    {
+      "id": "9-2-B",
+      "genus_ja": "ツボゴケ",
+      "genus_en": "Plagiomnium cuspidatum ",
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "NNNNTGGNNNNNCTGGTGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTACAGAAACTGATATTTTAGCAGCATTTCGGATGACTCCTCAACCGGGAGTACCAGCTGAAGAGGCAGGAGCGGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACTGATGGACTTACTAGTCTTGATCGTTACAAAGGAAGATGCTATGGTATTGAAGCAGTTCCTGGAGAAGATAATCAATATATTGCTTATGTTGCTTACCCATTAGATTTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAACAAATATGGTCGTCCATTATTAGGGNGCACTATNAAACCNAAATTGGGTTTATCTGCTNNAAACTATGGTANAGCTGTATATGAATGNNTTCCNGGNGN"
+        }
+      ],
+      "marker_position": { "latitude": -12.5, "longtitude": 116.3, "radius": 7.8 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "pBKikF1ozso"
+      },
+      "memo": {
+        "どんな場所で採ったか": "川のすぐ近く<br>岩場",
+        "なぜその植物を採取したか": "こけをとりたいと思った為<br>小さな芽のようなものがかわいかった。",
+        "なんの植物だと思うか": "こけ",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "390px"
+    },
+    {
+      "id": "9-2-C",
+      "genus_ja": "ササクサ",
+      "genus_en": "Lophatherum gracile",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNTGNNNGTCGNAGTATATATTTTAGTCGATACAAAGTCTGTTTTTTCGAAGATCCACTATGATAATGAAAAAGATTTCTACATATCCGACCAAAGCGATCAAGAATATCCCAATCTGATAAATCGGTCCAAACGGGTTTACTAATAGGATGCCCCGATCCAGTACAAAATTGAGCTTTTGATAAGGATCCAACGAGAGGAGTAGCGGGGACTGTGGTATCGAATTTTTTTATTCGAGTATTTATTAGAAAAGAATTCTCCAGCATTTGATTCCTTACTAACAAAGTATTTATTGGTACACTTGAAAGGTACCCCAGAAAATCGAAGCAAGAGTTTGTTAATTGGTTTAGACGGATCCTTTGTGGTTGAGTCCAAAAAGAGAAAAAATATTGCGAGAAATTGACAAGGTAAGATTTCCATTTCTTCTTCAAAAGAAGAGTTCCTTTTGATGCAAGAATCGCCTTTCCTTGATATCGAACATAATGCGTAAGAGGATCTATAAAGAACCATATGGTTTTCCGAAAAAACCCTGGGCACATTACCCCAAAATGTTCCATCTTCCTAGAACAGTGGATTCGTTCCAGAAAGGTTCCAGAAGATGTTAATCGTAAGCAAGAAGATTGTTTACGAAGAAACAACAAGAAAAATTCATATTCTGATACATAAGAGTTATATAGGAATCGAAATAGTCTTTTATTTGCTTTTTTCAAAAGCAAAATAGATTTCATTGAAGTAATAAGACTATTCCAATTCGAATAATAGTTGAGAAAGAATCGCAATAAATGCAAAGATGGAACATCTTGAATCCGGTATTCAAGGATTGNNNNAANTCNNANGG"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNNNNCTGGTGTTANGGATTATAAATTGACTTACTACACCCCGGAGTACGAAACCAAGGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAGCCCGGGGTTCCGCCTGAAGAAGCAGGGGCTGCAGTAGCTGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAGCCCGTTCCTGGGGAAGGAGATCAATATATCTGTTATGTAGCTTATCCATTAGACCTATTTGAAGAGGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAACGTATTTGGTTTCAAAGCCCTACGCGCTCTACGTTTGGAGGATCTACGAATTCCCCCTACTTATTCAAAAACTTTCCAAGGTCCGCCTCACGGTATCCAAGTTGAAAGGGATAAGTTGAACAAGTATGGCCGTCCTTTCTTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAAAATTACGGTAGAGCGTGTTATGAGTGTCTACGCGNNNTTTTTTTTTTTNNAAAAANNAAAAN"
+        }
+      ],
+      "marker_position": { "latitude": 5.8, "longtitude": -42, "radius": 18 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "EkeSB44WIlo"
+      },
+      "memo": {
+        "どんな場所で採ったか": "道のそばの岩の間",
+        "なぜその植物を採取したか": "形が面白かった",
+        "なんの植物だと思うか": "ヌスットハギ？<br>猫じゃらし系",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "9-2-D",
+      "genus_ja": "ヤマハッカ",
+      "genus_en": "Isodon inflexus",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "ANNNNNNANNATATANTTTATTTGACNCNTNCNCNNTCCNNTCGAACCANCCNATNTGNNCATATANNCCGTNTTNNGCCTTATNNCTTCNCATCCCNGTNNNNCNTC"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNGGANNNNCGGGTGTTNAGAGTATAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTACTGCTTATATTAAAACTTTCCAAGGTCCGCCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGCGGTGGATTGATTTTTTNNNAAAAAAAAAN"
+        }
+      ],
+      "marker_position": { "latitude": -25, "longtitude": -106, "radius": 3.3 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "xqHnnHvKLx8"
+      },
+      "memo": {
+        "どんな場所で採ったか": "川のほとりに群生<br>鉱脈試掘跡そばに咲く夢の花",
+        "なぜその植物を採取したか": "お花としてきれい<br>他の班がとってないエリア<br>川辺でさがしたかった",
+        "なんの植物だと思うか": "むらさきりんどう的な？",
+        "植物の特徴を絵や文字で書いて下さい": "ホタル袋の小さいもののような花弁<br>うすむらさき<br>苦い無臭<br>エディブルではなさげ<br>葉っぱは普遍的な姿<br>ちょっとトンガリ系<br>虫が食べる、ちょっと野菜系で美味しそう"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "9-3-A",
+      "genus_ja": "カナワラビ属",
+      "genus_en": "Arachniodes",
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "NNNNNTNGNNNNNCTGGTGTCAAAGATTATCGATTGACCTATTACACCCCCGAATACAAAACCAAAGATACCGATATCTTAGCAGCCTTCAGAATGACCCCGCAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCAGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCCTTGGATCTATTCGAAGAAGGTTCTGTCACCAATCTGTTCACCTCCATTGTAGGTAATGTCTTTGGATTCAAAGCTCTACGCGCTTTGCGCTTGGAAGACCTTCGAATTCCCCCTGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGCCTGTCTGCTAAAAATTATGGCAGAGCCGTCTACGAATGCCTTCNNGGTGGANNNNNNTTTTACANNNNANNNTTAANGGNCGNCCATNTTTGNTTAAGTAAACCNTANNNNNNTGAANANCANGNGGCGGTCAATGANNGTTTTAGAANNN"
+        }
+      ],
+      "marker_position": { "latitude": -4.5, "longtitude":   142, "radius":  21 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "ILI_e6YMFFg"
+      },
+      "memo": {
+        "どんな場所で採ったか": "川の対岸の岩壁の割れ目。",
+        "なぜその植物を採取したか": "人が足を踏み得れにくい場所なので、珍しいものがありそうな気がしたから。",
+        "なんの植物だと思うか": "わかりません。",
+        "植物の特徴を絵や文字で書いて下さい": "双子葉系。<br>岩の隙間から生えていた。<br>根本には苔がびっしり。"
+      }
+    },
+    {
+      "id": "9-3-B",
+      "genus_ja": "コスギラン属",
+      "genus_en": "Huperzia",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude": -1, "longtitude": 53, "radius": 9 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "BvFNBQqs_5M"
+      },
+      "memo": {
+        "どんな場所で採ったか": "岩肌<br>少し水気がある<br>斜面",
+        "なぜその植物を採取したか": "小さな木のようでキレイだったから。",
+        "なんの植物だと思うか": "？",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "280px"
+    },
+    {
+      "id": "9-3-C",
+      "genus_ja": "ナンテン",
+      "genus_en": "Nandina domestica",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude": -1, "longtitude": -27, "radius": 5.5 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "KbAzNYJpQK0"
+      },
+      "memo": {
+        "どんな場所で採ったか": "開始地点の滝の対面<br>小さなガケになっている斜面<br>斜面に同じような植物<br>斜面に対して直角",
+        "なぜその植物を採取したか": "実が気になった<br>見たことがあるが名前がわからない",
+        "なんの植物だと思うか": "ナンテン",
+        "植物の特徴を絵や文字で書いて下さい": "葉が竹っぽい<br>葉にツヤがある<br>実は緑色<br>葉の先がトガっている<br>実のエダはブドウっぽい"
+      }
+    },
+    {
+      "id": "9-3-D",
+      "genus_ja": "ハネヒツジゴケ",
+      "genus_en": "Brachythecium plumosum",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude": -11.3, "longtitude": 113.2, "radius":  8 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "LJg0lsIaRTs"
+      },
+      "memo": {
+        "どんな場所で採ったか": "渓流沿いの岩場についていた",
+        "なぜその植物を採取したか": "苔は苔でも、綿毛の様な小さな芽が出ているのが珍しいから",
+        "なんの植物だと思うか": "つたに似た苔",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "280px"
+    },
+    {
+      "id": "10-1-A",
+      "genus_ja": "ロドトルラ3",
+      "genus_en": "Rhodotorula3",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude":    22, "longtitude":    53, "radius":  16 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "_kB4PkbpT08"
+      },
+      "memo": {
+        "どんな場所で採ったか": "崖ってほどでもない崖←少し登る<br>ジメジメしていた<br>日陰<br>コケがたくさん生えていた<br>コケの中から枝が出てきている感じ",
+        "なぜその植物を採取したか": "穴があいていたから<br>誰も知らなかったから",
+        "なんの植物だと思うか": "クサギか何か",
+        "植物の特徴を絵や文字で書いて下さい": "汁が臭い<br>ギザギザ<br>こんなに臭いのに虫に食われていて、なぜ虫が好むのか？<br>葉がやわらかい"
+      },
+      "memofig_width": "390px"
+    },
+    {
+      "id": "10-1-B",
+      "genus_ja": "カラムシ",
+      "genus_en": "Boehmeria nivea",
+      "dna_sequences": [
+        {
+          "region": "ITS",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        }
+      ],
+      "marker_position": { "latitude": 5.4, "longtitude": -46, "radius": 22 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "2RADeXyY2ss"
+      },
+      "memo": {
+        "どんな場所で採ったか": "滝付近の岩場（高いところ）",
+        "なぜその植物を採取したか": "周りの植物と比べて、背が高くて目立っていたから！",
+        "なんの植物だと思うか": "つるむらさき（？）",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "390px"
+    },
+    {
+      "id": "10-1-C",
+      "genus_ja": "ウィケルハミエラ3",
+      "genus_en": "Wickerhamiella3",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude": 4.5, "longtitude": 76.6, "radius": 15 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "ZM4Ap2PbuhU",
+        "memo": "スキマが多い→細胞壁？<br>茶色のは死んでる？"
+      },
+      "memo": {
+        "どんな場所で採ったか": "日のあたる木にまきついているツタ",
+        "なぜその植物を採取したか": "かわいいから<br>葉っぱがまるくて・・・<br>木にまきついているのを取りたかった",
+        "なんの植物だと思うか": "ツタ植物<br>ラシ植物（？）<br>葉がうすいから・・・",
+        "植物の特徴を絵や文字で書いて下さい": "多肉植物・・・食べられそう<br>意外と肉厚<br>葉のうらに白・茶のハンテンがあるものもある<br>すりつぶすと水がたくさん出た"
+      },
+      "memofig_width": "280px"
+    },
+    {
+      "id": "10-1-D",
+      "genus_ja": "イヌカタヒバ",
+      "genus_en": "Selaginella moellendorffii",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude":    -7, "longtitude":   -67, "radius":  5.7 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "lq8rwoGqbBc"
+      },
+      "memo": {
+        "どんな場所で採ったか": "半日陰の岩肌<br>湿度があるところ",
+        "なぜその植物を採取したか": "葉の形状<br>コケが成長したようにみえる（コケより大きい）<br>この場所にしかなかったから<br>根っこがとても長い。水分をひろく取る為",
+        "なんの植物だと思うか": "こけ",
+        "植物の特徴を絵や文字で書いて下さい": "持って帰って切る時、乾燥したせいか葉がクルクルまるまって、かさかさになっていた。すりつぶしやすかった。"
+      },
+      "memofig_width": "200px"
+    },
+    {
+      "id": "10-2-A",
+      "genus_ja": "トウキョウチクトウ",
+      "genus_en": "Trachelospermum jasminoides",
+      "dna_sequences": [
+        {
+          "region": "ITS",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        }
+      ],
+      "marker_position": { "latitude": -23, "longtitude": -164, "radius": 3.5 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "YTzTNmCRzf4"
+      },
+      "memo": {
+        "どんな場所で採ったか": "Riverside, grow on the rock and with mosses",
+        "なぜその植物を採取したか": "川の側の他と違うツル状の植物だったから",
+        "なんの植物だと思うか": "ツタの仲間？",
+        "植物の特徴を絵や文字で書いて下さい": "The stem is thin.<br>Leaves are grow in pairs.<br>Root on the rock,and moss.<br>The plant grows really long."
+      }
+    },
+    {
+      "id": "10-2-B",
+      "genus_ja": "ロドトルラ4",
+      "genus_en": "Rhodotorula4",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude":     5, "longtitude":   -50, "radius":  20 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "bUUKy5aJnBo"
+      },
+      "memo": {
+        "どんな場所で採ったか": "ポールにからみついていた。",
+        "なぜその植物を採取したか": "ポールにからみついていたから。",
+        "なんの植物だと思うか": "豆科",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "200px"
+    },
+    {
+      "id": "10-2-C",
+      "genus_ja": "ヤマハッカ",
+      "genus_en": "Isodon inflexus",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude":   -32, "longtitude":  -120, "radius":   3 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "d4AgZFgyPv0"
+      },
+      "memo": {
+        "どんな場所で採ったか": "水場に近い場所<br>日あたりが良くて水気のある場所",
+        "なぜその植物を採取したか": "花がその場でしかなかったから<br>紫色の花がきれいだったため",
+        "なんの植物だと思うか": "シソ科<br>虫にはを食べられていたため、食べることのできる植物",
+        "植物の特徴を絵や文字で書いて下さい": "花は紫色"
+      },
+      "memofig_width": "200px"
+    },
+    {
+      "id": "10-2-D",
+      "genus_ja": "トウキョウチクトウ",
+      "genus_en": "Trachelospermum jasminoides",
+      "dna_sequences": [
+        {
+          "region": "ITS",
+          "text": "GATTTCTTTGCCTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACGCCCCTTCCGGGGCATTGCTTGGGCGCCGCAAGGTGCCCGACGTTTAAACTCTTATGTTTATCTCTGACAACCAAGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGCATCGATGAAGAAAGA"
+        }
+      ],
+      "marker_position": { "latitude":  23.4, "longtitude":     5, "radius":  20 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "sZEBhjMW-0w",
+        "memo": "プツプツ丸いのがたくさん<br>黒い点々が各所にあった<br>つぶすと鮮やかな緑色<br>他のチームの葉と同じような緑ですが、つぶすと色の違いがでた。Dチームはきれな緑。Cチームは茶色い緑に・・・"
+      },
+      "memo": {
+        "どんな場所で採ったか": "杉の木の横の少し高くなった土手の上<br>日陰<br>落ち葉（杉）が積もって腐葉土っぽくなっている",
+        "なぜその植物を採取したか": "園芸植物リシマキアの葉と少し似ているけど、微妙にちがうから。たくさん生えていると可愛いかもしれないので。<br>グランドカバー系？",
+        "なんの植物だと思うか": "ツル系か？",
+        "植物の特徴を絵や文字で書いて下さい": "他の植物の枯れ葉の間の地面からしっかり生えている<br>あまり背は高くない"
+      },
+      "memofig_width": "390px"
+    },
+    {
+      "id": "10-3-A",
+      "genus_ja": "ツリミギボウシゴケ",
+      "genus_en": "Grimmia apiculata",
+      "dna_sequences": [
+        {
+          "region": "ITS",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        }
+      ],
+      "marker_position": { "latitude":  23.4, "longtitude":    -4, "radius":  21 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "mIbfYuzXh3g"
+      },
+      "memo": {
+        "どんな場所で採ったか": "切り立った岩の側面",
+        "なぜその植物を採取したか": "かわいかったから",
+        "なんの植物だと思うか": "コケ",
+        "植物の特徴を絵や文字で書いて下さい": "ふさふさした手触り<br>森の香り？（土の香り）"
+      },
+      "memofig_width": "390px"
+    },
+    {
+      "id": "10-3-B",
+      "genus_ja": "前記カンジダ5",
+      "genus_en": "Candida5",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude": -0.5, "longtitude": -62.5, "radius": 18 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "nwgJfYqdbkw"
+      },
+      "memo": {
+        "どんな場所で採ったか": "水分をふくんだ岩",
+        "なぜその植物を採取したか": "岩から生えていたから<br>シダの形が他の植物と大きく違うので、遺伝子に特徴があるのではないかと思いました。",
+        "なんの植物だと思うか": "シダ",
+        "採取の手順にて": "①葉をカッターで細くする→においが発する（草っぽい）<br>②乳鉢と乳棒ですりつぶす<br>③（チューブのイラスト有り）にすりつぶしたサンプルを入れる"
+      },
+      "memofig_width": "200 px"
+    },
+    {
+      "id": "10-3-C",
+      "genus_ja": "ロドトルラ5",
+      "genus_en": "Rhodotorula5",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude": -13, "longtitude": 93, "radius": 4.6 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "G7Q73sykHIs"
+      },
+      "memo": {
+        "どんな場所で採ったか": "岩肌",
+        "なぜその植物を採取したか": "かわいかったから",
+        "なんの植物だと思うか": "コケの進化したやつ",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "200 px"
+    },
+    {
+      "id": "10-3-D",
+      "genus_ja": "トウキョウチクトウ",
+      "genus_en": "Trachelospermum jasminoides",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude": -0.4, "longtitude": -35, "radius": 4.5 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "uDck0LAAtPY"
+      },
+      "memo": {
+        "どんな場所で採ったか": "沢に接する小路の石にある<br>水もあり、日もよく当たる<br>コケといっしょにはえている",
+        "なぜその植物を採取したか": "形がきれいである<br>ひいらぎのようで、見かけない形だった",
+        "なんの植物だと思うか": "ツタの仲間",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "390px"
+    },
+    {
+      "id": "cristina",
+      "genus_ja": "",
+      "genus_en": "Cystoderma sp.",
+      "dna_sequences": [
+        {
+          "region": "ITS",
+          "text": "GATTTCTTTGCCTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACGCCCCTTCCGGGGCATTGCTTGGGCGCCGCAAGGTGCCCGACGTTTAAACTCTTATGTTTATCTCTGACAACCAAGAAAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGCATCGATGAAGAAAGA"
+        }
+      ],
+      "marker_position": { "latitude": 2.3, "longtitude": -55, "radius": 17 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "zQ-4A_Q4EKQ"
+      }
+    },
+    {
+      "id": "ersin",
+      "genus_ja": "分類不可",
+      "genus_en": "Uncultured fungus",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "GCCCCTTCCGGGGCATGTGCCCGACGTTAATCAAAACTTTCAACAACGGATCTCTTGGTTCTCGTGCTTGGGCGCCGCAAGCATCGATTTAAATTGAAAAGCTACCCGTCCGGACATTGTGAAACCTCTGAAGAAAGATAAAGATTTCTTTGCCTATGTTTATCTCTGACAACCAAGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "CTGCCAATGCCTTAGTAGCGGCGAGTGACCGGCAAAAGCTCAGATTTGAAAGCCTTTCGGGGCATTGTATTCTGAAGCCTTGGTCCTGGGAACCGATGTCTAAGTCTTCTGGAAAGAAGCGCCATGGAGGGTGATAGCCCCGTACGACATTGACCCCACTGTAGGACCTTGGCATGGAGTCGAGTTGTTTGGGAATGCAGCTCAAATAGGTGGTATGCTCCATCTAAAGCTAAATATCTGCGAGAGACCGATAGCGAACAAGTACTGTGAAGGAAAGATGAAAAGAACTTTGAAAAGAGAGTGAAATAGTATGTGAAATTGTTGAAATGGAAGGGTAGGCTGCTAACCATGCAGGGTCGTGTCTGGGGGGAGAATAAAAGCTGAAGAATGTAACTCCTCGGAGTATTATAGCTTCAGTCCATACTCCCACCCGGGCGCGAGGACCTAAGACTCTGCTAAATGGTGGTCTACCACCCGTCTTGAAACACGGACCA"
+        }
+      ],
+      "marker_position": { "latitude":   1.8, "longtitude":   -57, "radius":  18 },
+      "collection_date": "2016.10.09",
+      "microscope": {
+        "youtube_id": "nesAcTKDWLw"
+      }
     }
   ],
   "knowledges": [
