@@ -9,17 +9,16 @@ section
         th.index No.
         th.genus_ja 属名
         th.genus_en 属名（英）
-        th.dna_region 同定に用いたDNA領域
-        th.dna_text DNA配列
+        th.dna DNA
         th.collection_date 採取日
     tbody
       tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.genus_ja {{ item.genus_ja }}
         td.genus_en {{ item.genus_en }}
-        td.dna_region {{ item.dna_sequences[0].region }}
-        td.dna_text
+        td.dna
           <dna-barcode :dna="item.dna_sequences[0].text">
+          | {{ item.dna_sequences[0].region }}
         td.collection_date {{ item.collection_date }}
   h1
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
@@ -70,11 +69,12 @@ table
     tr.selected
       background-color: #202020
     td
+      white-space: nowrap
       &.dna_text
         max-width: 150px
         overflow: hidden
         white-space: nowrap
-      &.dna_region
+      &.dna
         width: 150px
       &.index
         font-family: 'Roboto'

@@ -70,7 +70,7 @@ header
   background-color: #0d0d0d
   padding: 28.5px 25px
   position: relative
-  margin-bottom: 1px
+  border-bottom: 1px solid #1a1a1a
   h2
     text-align: center
   .close_btn

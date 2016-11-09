@@ -1,7 +1,9 @@
 <template lang="pug">
 
 #container
-  <start-modal v-if="$route.path=='/'"></start-modal>
+  <transition name="fade">
+    <start-modal v-if="$route.path=='/'"></start-modal>
+  </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
   span.copyright
@@ -41,6 +43,13 @@
       opacity: 1
     100%
       opacity: 0.4
+
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity 1.5s
+.fade-enter,
+.fade-leave-active
+  opacity: 0
 
 #container
   height: 100%
