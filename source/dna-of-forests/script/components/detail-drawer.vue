@@ -66,6 +66,14 @@
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   overflow: hidden
 
+  // トランジッション
+  &.fade-enter-active,
+  &.fade-leave-active
+    transition-duration: 0.2s
+  &.fade-enter,
+  &.fade-leave-active
+    right: -490px
+
 header
   background-color: #0d0d0d
   padding: 28.5px 25px
