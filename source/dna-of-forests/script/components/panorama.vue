@@ -95,7 +95,6 @@
     transform: rotate(-90deg)
     -webkit-transform: rotate(-90deg)
     img
-      // display: block
       display: inline-block
       float: left
     span.genus
@@ -115,7 +114,6 @@
     height: 14px
     border-radius: 7px
     background-color: #fcff00
-    position: relative
     >img
       position: absolute
       bottom: 20px
