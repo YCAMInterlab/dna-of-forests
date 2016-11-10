@@ -2,8 +2,8 @@
   "samples": [
     {
       "id": "9-1-A",
-      "genus_ja": "コクシノハゴケ / クシノハゴケ",
-      "genus_en": "Ctenidium hastile / Ctenidium capillifolium",
+      "genus_ja": "クシノハゴケ",
+      "genus_en": "Ctenidium capillifolium",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -192,8 +192,8 @@
     },
     {
       "id": "9-3-A",
-      "genus_ja": "カナワラビ属",
-      "genus_en": "Arachniodes",
+      "genus_ja": "カナワラビ属？",
+      "genus_en": "Arachniodes?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -214,8 +214,8 @@
     },
     {
       "id": "9-3-B",
-      "genus_ja": "コスギラン属",
-      "genus_en": "Huperzia",
+      "genus_ja": "トウゲシバ",
+      "genus_en": "Huperzia serrata",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -283,7 +283,7 @@
     {
       "id": "10-1-A",
       "genus_ja": "カラムシ",
-      "genus_en": "Rhodotorula3",
+      "genus_en": "Boehmeria nivea",
       "dna_sequences": [
         {
           "region": "matK",
@@ -309,19 +309,11 @@
     },
     {
       "id": "10-1-B",
-      "genus_ja": "カラムシ",
-      "genus_en": "Boehmeria nivea",
+      "genus_ja": "やり直し！",
+      "genus_en": "やり直し！",
       "dna_sequences": [
         {
-          "region": "matK",
-          "text": ""
-        },
-        {
-          "region": "rbcL",
-          "text": ""
-        },
-        {
-          "region": "ITS1",
+          "region": "",
           "text": ""
         }
       ],
@@ -340,8 +332,8 @@
     },
     {
       "id": "10-1-C",
-      "genus_ja": "ウィケルハミエラ3",
-      "genus_en": "Wickerhamiella3",
+      "genus_ja": "マメヅタ",
+      "genus_en": "Lemmaphyllum microphyllum",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -364,8 +356,8 @@
     },
     {
       "id": "10-1-D",
-      "genus_ja": "イヌカタヒバ",
-      "genus_en": "Selaginella moellendorffii",
+      "genus_ja": "カタヒバ",
+      "genus_en": "Selaginella involvens",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -387,8 +379,8 @@
     },
     {
       "id": "10-2-A",
-      "genus_ja": "トウキョウチクトウ",
-      "genus_en": "Trachelospermum jasminoides",
+      "genus_ja": "トウキョウチクトウ？",
+      "genus_en": "Trachelospermum jasminoides?",
       "dna_sequences": [
         {
           "region": "matK",
@@ -413,8 +405,8 @@
     },
     {
       "id": "10-2-B",
-      "genus_ja": "ロドトルラ4",
-      "genus_en": "Rhodotorula4",
+      "genus_ja": "トウキョウチクトウ？",
+      "genus_en": "Trachelospermum jasminoides?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -459,8 +451,8 @@
     },
     {
       "id": "10-2-D",
-      "genus_ja": "トウキョウチクトウ",
-      "genus_en": "Trachelospermum jasminoides",
+      "genus_ja": "トウキョウチクトウ？",
+      "genus_en": "Trachelospermum jasminoides?",
       "dna_sequences": [
         {
           "region": "matK",
@@ -510,8 +502,8 @@
     },
     {
       "id": "10-3-B",
-      "genus_ja": "前記カンジダ5",
-      "genus_en": "Candida5",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "matK",
@@ -537,8 +529,8 @@
     },
     {
       "id": "10-3-C",
-      "genus_ja": "ロドトルラ5",
-      "genus_en": "Rhodotorula5",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "matK",
@@ -564,8 +556,8 @@
     },
     {
       "id": "10-3-D",
-      "genus_ja": "トウキョウチクトウ",
-      "genus_en": "Trachelospermum jasminoides",
+      "genus_ja": "トウキョウチクトウ？",
+      "genus_en": "Trachelospermum jasminoides?",
       "dna_sequences": [
         {
           "region": "matK",
@@ -591,7 +583,7 @@
     },
     {
       "id": "cristina",
-      "genus_ja": "",
+      "genus_ja": "シワカラカサタケ属",
       "genus_en": "Cystoderma sp.",
       "dna_sequences": [
         {
@@ -607,8 +599,8 @@
     },
     {
       "id": "ersin",
-      "genus_ja": "分類不可",
-      "genus_en": "Uncultured fungus",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "ITS1",
@@ -623,8 +615,8 @@
     },
         {
       "id": "B-1",
-      "genus_ja": "ナンテン",
-      "genus_en": "Nandina domestica",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -636,8 +628,8 @@
     },
     {
       "id": "B-2",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen2",
+      "genus_ja": "ナンテン？",
+      "genus_en": "Nandina domestica?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -649,8 +641,8 @@
     },
     {
       "id": "B-3",
-      "genus_ja": "ツバキ属",
-      "genus_en": "Camellia",
+      "genus_ja": "ツバキ属？",
+      "genus_en": "Camellia?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -662,8 +654,8 @@
     },
     {
       "id": "B-4",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen4",
+      "genus_ja": "トウバナ？",
+      "genus_en": "Clinopodium gracile?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -675,8 +667,8 @@
     },
     {
       "id": "B-5",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen5",
+      "genus_ja": "オオシノブゴケ？",
+      "genus_en": "Thuidium tamariscinum?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -688,8 +680,8 @@
     },
     {
       "id": "B-6",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen6",
+      "genus_ja": "アオキ？",
+      "genus_en": "Aucuba japonica?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -701,8 +693,8 @@
     },
     {
       "id": "B-7",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen7",
+      "genus_ja": "ヤマハッカ？",
+      "genus_en": "Isodon inflexus?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -714,8 +706,8 @@
     },
     {
       "id": "B-8",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen8",
+      "genus_ja": "？？？？",
+      "genus_en": "Ophiorrhiza?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -727,8 +719,8 @@
     },
     {
       "id": "B-9",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen9",
+      "genus_ja": "キイチゴ属？",
+      "genus_en": "Rubus?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -740,7 +732,7 @@
     },
     {
       "id": "B-10",
-      "genus_ja": "事前採取分",
+      "genus_ja": "？？？？",
       "genus_en": "Jizen10",
       "dna_sequences": [
         {
@@ -753,8 +745,8 @@
     },
     {
       "id": "B-11",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen11",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -766,8 +758,8 @@
     },
     {
       "id": "B-12",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen12",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -779,8 +771,8 @@
     },
     {
       "id": "B-13",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen13",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -792,8 +784,8 @@
     },
     {
       "id": "B-14",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen14",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -805,8 +797,8 @@
     },
     {
       "id": "B-15",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen15",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -818,11 +810,11 @@
     },
     {
       "id": "B-16",
-      "genus_ja": "事前採取分",
-      "genus_en": "Clerodendrum trichotomum",
+      "genus_ja": "？？？？",
+      "genus_en": "???? trichotomum",
       "dna_sequences": [
         {
-          "region": "rbcL",
+          "region": "",
           "text": ""
         }
       ],
@@ -831,11 +823,11 @@
     },
     {
       "id": "B-17",
-      "genus_ja": "事前採取分",
-      "genus_en": "Cryptomeria japonica",
+      "genus_ja": "？？？？",
+      "genus_en": "???? japonica",
       "dna_sequences": [
         {
-          "region": "rbcL",
+          "region": "",
           "text": ""
         }
       ],
@@ -844,8 +836,8 @@
     },
     {
       "id": "B-18",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen18",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -857,8 +849,8 @@
     },
     {
       "id": "B-19",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen19",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -870,8 +862,8 @@
     },
     {
       "id": "B-20",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen20",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -883,8 +875,8 @@
     },
     {
       "id": "B-21",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen21",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -896,11 +888,11 @@
     },
     {
       "id": "B-22",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen22",
+      "genus_ja": "？？？？",
+      "genus_en": "????",
       "dna_sequences": [
         {
-          "region": "rbcL",
+          "region": "",
           "text": ""
         }
       ],
@@ -909,8 +901,8 @@
     },
     {
       "id": "B-23",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen23",
+      "genus_ja": "？？？？",
+      "genus_en": "Clerodendrum trichotomum?",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -922,8 +914,8 @@
     },
     {
       "id": "B-24",
-      "genus_ja": "事前採取分",
-      "genus_en": "Jizen24",
+      "genus_ja": "？？？？",
+      "genus_en": "Cryptomeria japonica?",
       "dna_sequences": [
         {
           "region": "rbcL",
