@@ -9,16 +9,26 @@ section
         th.index No.
         th.genus_ja 属名
         th.genus_en 属名（英）
-        th.dna DNA
+        th(colspan='2').dna 同定に用いたDNA配列
         th.collection_date 採取日
     tbody
       tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.genus_ja {{ item.genus_ja }}
         td.genus_en {{ item.genus_en }}
-        td.dna
-          <dna-barcode :dna="item.dna_sequences[0].text">
-          | {{ item.dna_sequences[0].region }}
+        template(v-if="item.dna_sequences.length==0")
+          td.dna(colspan='2')
+        template(v-if="item.dna_sequences.length==1")
+          td.dna(colspan='2')
+            span.region {{ item.dna_sequences[0].region }}
+            <dna-barcode :dna="item.dna_sequences[0].text">
+        template(v-if="item.dna_sequences.length==2")
+          td.dna1
+            span.region {{ item.dna_sequences[0].region }}
+            <dna-barcode :dna="item.dna_sequences[0].text">
+          td.dna2
+            span.region {{ item.dna_sequences[1].region }}
+            <dna-barcode :dna="item.dna_sequences[1].text">
         td.collection_date {{ item.collection_date }}
   h1
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
@@ -70,12 +80,20 @@ table
       background-color: #202020
     td
       white-space: nowrap
-      &.dna_text
+      &.dna
+        max-width: 300px
+        overflow: hidden
+        white-space: nowrap
+      &.dna1,
+      &.dna2
         max-width: 150px
         overflow: hidden
         white-space: nowrap
-      &.dna
-        width: 150px
+      .region
+        display: inline-block
+        width: 32px
+        margin-right: 8px
+        text-align: right
       &.index
         font-family: 'Roboto'
         font-weight: bold
@@ -95,6 +113,7 @@ table
         overflow: hidden
         white-space: nowrap
         text-overflow: ellipsis
+
 
 </style>
 

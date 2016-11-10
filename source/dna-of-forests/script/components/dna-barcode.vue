@@ -31,7 +31,11 @@ export default Vue.extend({
     renderBarcode(){
       var canvas = this.$el;
 
-      if (canvas.getContext) {
+      if(this.dna.length<=0){
+        canvas.height = 0;
+        canvas.width = 0;
+      }
+      else if (canvas.getContext) {
 
         var w = 2,
             h = this.height || 10,

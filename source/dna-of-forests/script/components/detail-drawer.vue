@@ -19,7 +19,7 @@
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
           <dna-tab v-bind:text="item.text" v-bind:current="'barcode'"></dna-tab>
-        h4 2. DNA解析による同定の結果
+        h4 3. DNA解析による同定の結果
         div.result
           small {{ genus_en }}
           | {{ genus_ja }}
