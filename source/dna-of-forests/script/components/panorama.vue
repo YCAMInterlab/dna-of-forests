@@ -59,7 +59,7 @@
   position: absolute
   top: 18px
   right: 22px
-  z-index: 1
+  z-index: 5
   &:hover
     opacity: 0.7
 
@@ -71,14 +71,15 @@
   font-family: 'Roboto'
   font-size: 9px
   line-height: 14px
-  letter-spacing: 0.075
+  letter-spacing: 0.075em
   text-align: right
-  opacity: 0.25
+  opacity: 0.4
+  z-index: 5
 
 .marker
   position: absolute
   cursor: pointer
-  z-index: 10
+  z-index: 2
   user-select: none
   &:hover
     opacity: 0.7
