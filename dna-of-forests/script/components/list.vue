@@ -9,21 +9,30 @@ section
         th.index No.
         th.genus_ja 属名
         th.genus_en 属名（英）
-        th.dna_region 同定に用いたDNA領域
-        th.dna_text DNA配列
+        th(colspan='2').dna 同定に用いたDNA配列
         th.collection_date 採取日
     tbody
       tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.genus_ja {{ item.genus_ja }}
         td.genus_en {{ item.genus_en }}
-        td.dna_region {{ item.dna_sequences[0].region }}
-        td.dna_text
-          <dna-barcode :dna="item.dna_sequences[0].text">
+        template(v-if="item.dna_sequences.length==0")
+          td.dna(colspan='2')
+        template(v-if="item.dna_sequences.length==1")
+          td.dna(colspan='2')
+            span.region {{ item.dna_sequences[0].region }}
+            <dna-barcode :dna="item.dna_sequences[0].text">
+        template(v-if="item.dna_sequences.length==2")
+          td.dna1
+            span.region {{ item.dna_sequences[0].region }}
+            <dna-barcode :dna="item.dna_sequences[0].text">
+          td.dna2
+            span.region {{ item.dna_sequences[1].region }}
+            <dna-barcode :dna="item.dna_sequences[1].text">
         td.collection_date {{ item.collection_date }}
   h1
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
-  table#knowledge
+  table#knowledges
     tbody
       tr(v-for="(item, index) in knowledges" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
@@ -37,10 +46,11 @@ section
 section
   height: 100%
   overflow-y: auto
+  background-color: #151515
 h1
   padding: 28px 27px
-  background-color: #2b2b2b
-  margin-bottom: 1px
+  background-color: #0d0d0d
+  border-bottom: 1px solid #1a1a1a
 
 table
   width: 100%
@@ -56,34 +66,54 @@ table
         padding-right: 27px
 
   thead
-    background-color: #2b2b2b
+    background-color: #0d0d0d
     th
       text-align: left
       color: #656566
       font-size: 12px
   tbody
+    color: #979799
     tr:hover
-      background-color: #202020
+      background-color: #1d1d1d
       cursor: pointer
     tr.selected
-      background-color: #272727
+      background-color: #202020
     td
+      white-space: nowrap
       &.dna
+        max-width: 300px
+        overflow: hidden
+        white-space: nowrap
+      &.dna1,
+      &.dna2
         max-width: 150px
         overflow: hidden
         white-space: nowrap
+      .region
+        display: inline-block
+        width: 32px
+        margin-right: 8px
+        text-align: right
       &.index
-        font-family: 'Hiragino Maru Gothic Pro','ヒラギノ丸ゴ Pro W6','HiraMaruProN-W6', '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif
+        font-family: 'Roboto'
         font-weight: bold
+        letter-spacing: 0.025em
         width: 30px
       &.title,
+      &.description,
+      &.index,
       &.genus_ja
+        color: #fff
+      &.title,
+      &.genus_ja,
+      &.genus_en
           width: 150px
       &.description
         max-width: 150px
         overflow: hidden
         white-space: nowrap
         text-overflow: ellipsis
+
 
 </style>
 

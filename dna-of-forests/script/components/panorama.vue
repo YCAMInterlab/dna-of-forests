@@ -1,15 +1,126 @@
 <template lang="pug">
 
 #container
-  <start-modal v-if="$route.path=='/'"></start-modal>
+  <transition name="fade">
+    <start-modal v-if="$route.path=='/'"></start-modal>
+  </transition>
+  a.ycam(href="http://www.ycam.jp/" target="_blank")
+    img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
+  span.copyright
+    | Copyright © 2016<br>
+    | Yamaguchi Center for Arts and Media,<br>
+    | All Rights Reserved.
+  .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
+    img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
+    span.genus {{ item.genus_en }}
+    <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
+  .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
+    img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
 </template>
 
 <style lang="sass?indentedSyntax" scoped>
 
-section
+@keyframes flash
+    0%
+      opacity: 0.4
+    50%
+      opacity: 1
+    100%
+      opacity: 0.4
+
+@-webkit-keyframes flash
+    0%
+      opacity: 0.4
+    50%
+      opacity: 1
+    100%
+      opacity: 0.4
+@-moz-keyframes flash
+    0%
+      opacity: 0.4
+    50%
+      opacity: 1
+    100%
+      opacity: 0.4
+
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity 1.5s
+.fade-enter,
+.fade-leave-active
+  opacity: 0
+
+#container
   height: 100%
   overflow: hidden
+
+.ycam
+  position: absolute
+  top: 18px
+  right: 22px
+  z-index: 1
+  &:hover
+    opacity: 0.7
+
+.copyright
+  position: absolute
+  bottom: 19px
+  right: 22px
+  z-index: 1
+  font-family: 'Roboto'
+  font-size: 9px
+  line-height: 14px
+  letter-spacing: 0.075
+  text-align: right
+  opacity: 0.25
+
+.marker
+  position: absolute
+  cursor: pointer
+  z-index: 10
+  user-select: none
+  &:hover
+    opacity: 0.7
+  &.selected
+    animation: flash 0.6s infinite linear
+    -webkit-animation: flash 0.6s infinite linear
+    -moz-animation: flash 0.6s infinite linear
+  &.sample
+    height: 14px
+    white-space: nowrap
+    // 矢印の先を中心に回転
+    transform-origin: 0% 50%
+    -webkit-transform-origin: 0% 50%
+    transform: rotate(-90deg)
+    -webkit-transform: rotate(-90deg)
+    img
+      // display: block
+      display: inline-block
+      float: left
+    span.genus
+      color: #fcff00
+      font-family: 'Roboto'
+      font-size: 11px
+      letter-spacing: 0.001em
+      display: inline-block
+      text-shadow: 0 0 8px #000
+      margin-left: 5px
+    canvas
+      display: inline-block
+      margin-bottom: 2px
+      margin-left: 4px
+  &.knowledge
+    width: 14px
+    height: 14px
+    border-radius: 7px
+    background-color: #fcff00
+    position: relative
+    >img
+      position: absolute
+      bottom: 20px
+      left: 2px
+
 
 </style>
 
@@ -19,16 +130,31 @@ import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
 
-var THREE = THREELib();
+var THREE = THREELib(["Projector"]);
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
 Vue.component('start-modal',  require('./start-modal.vue'));
 
+// 表示の切り替え
+const visibleAxisHelper = false;
+const visible3dMaker = false;
+const visibleGrid = false;
+
 export default Vue.extend({
 
   mounted: function() {
 
+    // 最初のカメラ位置
+    var default_lon = 1882;
+    var default_lat = 46.2;
+    if(this.$route.path!='/'){
+      default_lon = (Cookies.get('lon')*1 || default_lon);
+      default_lat = (Cookies.get('lat')*1 || default_lat);
+    }
+
+    this.width = this.$el.offsetWidth;
+    this.height = window.innerHeight;
     this.camera = null;
     this.scene = null;
     this.renderer = null;
@@ -38,20 +164,20 @@ export default Vue.extend({
     this.onPointerDownLat = null;
     this.phi = 0;
     this.theta = 0;
-    this.lon = (Cookies.get('lon') || 0)*1;
-    this.lat = (Cookies.get('lat') || 0)*1;
+    this.lon = default_lon;
+    this.lat = default_lat;
     this.onPointerDownPointerX = null;
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
     this.markers = [];
 
-    this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
+    this.projector     = new THREE.Projector();
+    this.frustum       = new THREE.Frustum();
+    this.scene         = new THREE.Scene();
+    this.raycaster     = new THREE.Raycaster();
+    this.mouse         = new THREE.Vector2();
+    this.camera        = new THREE.PerspectiveCamera( 75, this.width / this.height, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
-
-    this.scene = new THREE.Scene();
-
-    this.raycaster = new THREE.Raycaster();
-    this.mouse = new THREE.Vector2();
 
     // 光
     var ambient = new THREE.AmbientLight(0xffffff);
@@ -63,38 +189,44 @@ export default Vue.extend({
     this.scene.add( pano_sphere );
 
     // グリッド
-    // var sphere = new THREE.Mesh(
-    //   new THREE.SphereGeometry( 500, 36, 18 ),
-    //   new THREE.MeshPhongMaterial({
-    //     color: 0xffffff,
-    //     wireframe: true
-    //   })
-    // );
-    // this.scene.add(sphere);
+    if(visibleGrid){
+      var sphere = new THREE.Mesh(
+        new THREE.SphereGeometry( 500, 36, 18 ),
+        new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          wireframe: true
+        })
+      );
+      this.scene.add(sphere);
+    }
 
     // 半径は全てメートルで大体目測で合わせる
     // サンプルマーカー
     for(var i = 0; i<this.samples.length; i++){
       var data = this.samples[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.scene.add( this.create_marker('sample', geo.x, geo.y, geo.z, 's-'+(i+1)) );
+      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
     }
 
     // // 森の知識マーカー
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.scene.add( this.create_marker('knowledge', geo.x, geo.y, geo.z, 'k-'+(i+1)) );
+      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, geo.x, geo.y, geo.z);
     }
 
     // 座標軸の表示
-    // var axis = new THREE.AxisHelper(300);
-    // axis.position.set(0,-10,0); // 原点だとカメラと同じ視点になるので表示されない
-    // this.scene.add(axis);
+    if(visibleAxisHelper){
+      var axis = new THREE.AxisHelper(300);
+      axis.position.set(0,-10,0); // 原点だとカメラと同じ視点になるので表示されない
+      this.scene.add(axis);
+    }
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.setSize( this.$el.offsetWidth, window.innerHeight );
+    this.renderer.setSize( this.width, this.height );
+    this.renderer.domElement.style.position = 'absolute';
+    this.renderer.domElement.style.top = '0';
     this.$el.appendChild( this.renderer.domElement );
 
     window.addEventListener( 'resize', this.onWindowResize, false );
@@ -104,42 +236,6 @@ export default Vue.extend({
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
     // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
     document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
-
-    document.addEventListener( 'dragover', function( e ) {
-
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'copy';
-
-    }, false );
-
-    document.addEventListener( 'dragenter', function( e ) {
-
-      document.body.style.opacity = 0.5;
-
-    }, false );
-
-    document.addEventListener( 'dragleave', function( e ) {
-
-      document.body.style.opacity = 1;
-
-    }, false );
-
-    document.addEventListener( 'drop', function( e ) {
-
-      e.preventDefault();
-
-      var reader = new FileReader();
-      reader.addEventListener( 'load', function( e ) {
-
-        material.map.image.src = e.target.result;
-        material.map.needsUpdate = true;
-
-      }, false );
-      reader.readAsDataURL( e.dataTransfer.files[ 0 ] );
-
-      document.body.style.opacity = 1;
-
-    }, false );
 
     this.animate();
   },
@@ -170,18 +266,18 @@ export default Vue.extend({
     },
 
     onWindowResize() {
-      var w = this.$el.offsetWidth;
-      var h = window.innerHeight;
-      this.camera.aspect = w / h;
+      this.width = this.$el.offsetWidth;
+      this.height = window.innerHeight;
+      this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
-      this.renderer.setSize( w, h );
+      this.renderer.setSize( this.width, this.height );
     },
 
     update() {
 
-      // if ( this.isUserInteracting === false ) {
-      //   this.lon += 0.05;
-      // }
+      if ( this.isUserInteracting === false && this.$route.path==='/' ) {
+        this.lon += 0.04;
+      }
 
       this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
       this.phi = THREE.Math.degToRad( 90 - this.lat );
@@ -198,6 +294,36 @@ export default Vue.extend({
       this.camera.position.copy( this.camera.target ).negate();
       */
       this.renderer.render( this.scene, this.camera );
+
+      this.frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse ) );
+
+      // Update 2D markers
+      for(var i = 0; i < this.markers.length; i++){
+        var marker = this.markers[i];
+        var pos = this.getTwoDPosition(marker.position);
+        var el = this.$el.querySelector('#' + marker.key);
+        if(pos){
+          // Within camera view
+          var top = pos.y;
+          var left = pos.x;
+          if(marker.type=='sample'){
+            top -= 7;
+            left -= 7;
+          }
+          else{
+            top -= 5;
+            left -= 5;
+          }
+
+          el.style.display = 'block';
+          el.style.top = parseInt(top,10)+'px';
+          el.style.left = parseInt(left,10)+'px';
+        }
+        else{
+          // Outside camera view
+          el.style.display = 'none';
+        }
+      }
     },
 
     // パノラマ画像を貼り付けた球体
@@ -232,19 +358,54 @@ export default Vue.extend({
       return new THREE.Vector3(x, y, z);
     },
 
+    getTwoDPosition(vector) {
+
+      var vector = vector.clone();
+      var widthHalf = 0.5*this.renderer.context.canvas.width;
+      var heightHalf = 0.5*this.renderer.context.canvas.height;
+
+      // 何もしないと対角線上の位置も返してしまうので、ここで間引く
+      if(this.frustum.containsPoint(vector)) {
+
+        // Within camera
+        vector.project(this.camera);
+
+        vector.x = ( vector.x * widthHalf ) + widthHalf;
+        vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+        return {
+          x: vector.x,
+          y: vector.y
+        };
+      }
+      return null;
+    },
+
     // マーカー
-    create_marker(type, x=0, y=0, z=0, key){
+    create_marker(type, key, id, x=0, y=0, z=0){
 
-      // 15cmくらい
-      var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
-      // geometry.scale( - 1, 1, 1 );
-      var material = new THREE.MeshLambertMaterial({
-        color: 0xffffff
-      });
-      var marker = new THREE.Mesh( geometry, material );
+      // 3D marker -----------
+      if(visible3dMaker){
+        // 15cmくらい
+        var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
+        // geometry.scale( - 1, 1, 1 );
+        var color = (id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
+        var material = new THREE.MeshLambertMaterial({
+          color: color
+        });
+        var marker_3d = new THREE.Mesh( geometry, material );
+        marker_3d.position.set( x, y, z );
+        this.scene.add(marker_3d);
+      }
+      // ---------------------
 
-      marker.position.set( x, y, z );
+      var marker = {};
+
+      marker.position = new THREE.Vector3( x, y, z );
+
       marker.key = key;
+      marker.type = type;
+
       this.markers.push( marker );
 
       return marker;
@@ -262,56 +423,24 @@ export default Vue.extend({
 
     onDocumentMouseDown( e ) {
 
-      e.preventDefault();
+      // Canvas部分でドラッグ開始したら
+      if( e.target === this.renderer.domElement){
 
-      this.isUserInteracting = true;
+        e.preventDefault();
 
-      this.onPointerDownPointerX = e.clientX;
-      this.onPointerDownPointerY = e.clientY;
+        this.isUserInteracting = true;
 
-      this.onPointerDownLon = this.lon;
-      this.onPointerDownLat = this.lat;
+        this.onPointerDownPointerX = e.clientX;
+        this.onPointerDownPointerY = e.clientY;
 
-      // -----
+        this.onPointerDownLon = this.lon;
+        this.onPointerDownLat = this.lat;
 
-      this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
-      this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+        // -----
 
-      this.raycaster.setFromCamera( this.mouse, this.camera );
-
-      var intersects = this.raycaster.intersectObjects( this.markers );
-
-      if ( intersects.length > 0 ) {
-
-        var clicked_marker = intersects[0];
-
-        if(clicked_marker.object.material.color.r!=1){
-          clicked_marker.object.material.color.r = 1;
-        }
-        else{
-          clicked_marker.object.material.color.r = 0;
-        }
-
-        this.$router.push('/panorama/'+clicked_marker.object.key);
-
-        console.log('clicked:', clicked_marker.object.key);
-
-        // intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
-        // var particle = new THREE.Sprite( particleMaterial );
-        // particle.position.copy( intersects[ 0 ].point );
-        // particle.scale.x = particle.scale.y = 16;
-        // scene.add( particle );
-
+        this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
+        this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
       }
-
-      /*
-      // Parse all the faces
-      for ( var i in intersects ) {
-
-        intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-      }
-      */
     },
 
     onDocumentMouseMove( e ) {
@@ -329,6 +458,7 @@ export default Vue.extend({
 
       Cookies.set('lon', this.lon);
       Cookies.set('lat', this.lat);
+      // console.log(this.lon,this.lat);
     },
 
     onDocumentMouseWheel( e ) {

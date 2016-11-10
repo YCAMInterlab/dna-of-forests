@@ -9,16 +9,17 @@
       img(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png' srcset='/dna-of-forests/img/detail-drawer/close-btn@2x.png 2x')
   article
     template(v-if="type=='sample'")
+
       section.dna
         h3
           img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
         h4 1. 採取サンプルの写真
-        img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
+        img.round(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
-          textarea {{ item.text }}
-        h4 2. DNA解析による同定の結果
+          <dna-tab v-bind:text="item.text" v-bind:current="'barcode'"></dna-tab>
+        h4 3. DNA解析による同定の結果
         div.result
           small {{ genus_en }}
           | {{ genus_ja }}
@@ -26,20 +27,28 @@
           h4 解析方法について
           p
             | DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、
-            | ある程度まで種名を調べる事ができる「DNAバーコーディング」という技術を使って解析しました。詳しくは、こちらを御覧ください。
+            | ある程度まで種名を調べる事ができる「DNAバーコーディング」という技術を使って解析しました。詳しくは、アバウトページを御覧ください。
 
-      section.microscope
+      section.microscope(v-if="microscope")
         h3
           img(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png' srcset='/dna-of-forests/img/detail-drawer/title-sp_microscope@2x.png 2x')
-        iframe(width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope_youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
+        iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
+        .bg_line(v-if="microscope.memo")
+          dl
+            dd(v-html="microscope.memo")
 
-      section.memo
+      section.memo(v-if="memo")
         h3
           img(alt='採取メモ' src='/dna-of-forests/img/detail-drawer/title-memo.png' srcset='/dna-of-forests/img/detail-drawer/title-memo@2x.png 2x')
+        .bg_line
+          dl(v-for="(answer, question) in memo")
+            dt {{ question }}
+            dd(v-html="answer")
+          img(alt='手書きメモ' v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
 
     template(v-if="type=='knowledge'")
       h3 {{ title }}
-      img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/knowledge/'+id+'@2x.jpg 2x'")
+      img.round(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
       p {{ description }}
 
 
@@ -52,16 +61,24 @@
   width: 490px
   height: 100%
   right: 0
-  background-color: #1a1a1a
+  background-color: #151515
   z-index: 9999
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   overflow: hidden
 
+  // トランジッション
+  &.fade-enter-active,
+  &.fade-leave-active
+    transition-duration: 0.2s
+  &.fade-enter,
+  &.fade-leave-active
+    right: -490px
+
 header
-  background-color: #2b2b2b
+  background-color: #0d0d0d
   padding: 28.5px 25px
   position: relative
-  margin-bottom: 1px
+  border-bottom: 1px solid #1a1a1a
   h2
     text-align: center
   .close_btn
@@ -76,7 +93,7 @@ header
       opacity: 0.5
 article
   padding: 25px
-  overflow-y: scroll
+  overflow-y: auto
   height: calc(100% - 125px)
 
 h3
@@ -91,10 +108,14 @@ p
   margin-top: 25px
 
 section
+
+  // Android対策の影響が出ていたので上書き対応
+  max-height: inherit
+
   h3
     margin: 25px -25px
     text-align: center
-    background-color: #2b2b2b
+    background-color: #0d0d0d
     padding: 21px
   &:first-child
     h3
@@ -104,6 +125,10 @@ h4
   color: #ccc
   &:not(:first-child)
     margin-top: 30px
+
+img.round
+  border-radius: 5px
+  width: 100%
 
 .dna_sequence
   p
@@ -125,7 +150,7 @@ h4
     margin-bottom: 12px
 
 .description
-  margin: 25px -25px 0
+  margin: 25px -25px -25px
   padding: 25px
   border-top: 1px solid #333333
   color: #808080
@@ -138,12 +163,57 @@ h4
 
 .microscope
   text-align: center
+  .bg_line
+    margin-top: 25px
+
+.bg_line
+  background-image: url(/dna-of-forests/img/detail-drawer/memo-line.png)
+  padding-bottom: 1px
+  text-align: center
+
+  // cleafix
+  min-height : 1px;
+  &:after
+    content: '.'
+    display: block
+    clear: both
+    height: 0
+    visibility: hidden
+
+  dl
+    font-size: 13px
+    line-height: 36px
+    text-align: left
+    clear: both
+    &:not(:first-child)
+      margin-top: 36px
+    dt
+      font-weight: bold
+      // width: 170px
+      // margin-right: 10px
+      // float: left
+      // clear: bot
+    dd
+      font-weight: normal
+      // width: calc(100% - 180px)
+      // float: left
+
+  >img
+    margin: 18px auto 36px
+    width: 230px
+    transform: rotate(-3deg)
+    -webkit-transform: rotate(-3deg)
+
+
 
 </style>
 
 <script>
 
 import Vue from 'vue';
+
+// 登録
+Vue.component('dna-tab', require('./dna-tab.vue'));
 
 export default Vue.extend({
 
@@ -165,10 +235,12 @@ export default Vue.extend({
       'dna_sequences': null,
       'region': null,
       'collection_date': null,
+      'microscope': null,
+      'memo': null,
+      'memofig_width': null,
       // knowledge
       'title': null,
       'description': null,
-      'microscope_youtube_id': null
     }
   },
 
@@ -185,7 +257,9 @@ export default Vue.extend({
         this.dna_sequences = _data.dna_sequences;
         this.region = _data.region;
         this.collection_date = _data.collection_date;
-        this.microscope_youtube_id = _data.microscope_youtube_id;
+        this.microscope = _data.microscope;
+        this.memo = _data.memo;
+        this.memofig_width = _data.memofig_width;
         this.title = null;
         this.description = null;
       }
@@ -202,13 +276,13 @@ export default Vue.extend({
         this.dna_sequences = null;
         this.region = null;
         this.collection_date = null;
-        this.microscope_youtube_id = null;
+        this.microscope = null;
+        this.memo = null;
+        this.memofig_width = null;
       }
       else{
         console.error('Wrong index format...');
       }
-
-
     }
   }
 });

@@ -52,7 +52,9 @@
       <div id="content">
         <router-view></router-view>
       </div>
-      <detail-drawer v-if="$route.params.index"/>
+      <transition name="fade">
+        <detail-drawer v-if="$route.params.index"></detail-drawer>
+      </transition>
     </div>
     <script src="/dna-of-forests/script/main.js"></script>
   </body>

@@ -27,8 +27,9 @@ nav
     width: 100%
     height: 80px
     background-color: #0d0d0d
-    margin-bottom: 2px
     cursor: pointer
+    &:not(:last-child)
+      margin-bottom: 2px
 
     >div
       height: 100%
@@ -72,11 +73,9 @@ import Vue from 'vue';
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
 
-
 export default Vue.extend({
   methods: {
     linkUrl(default_path) {
-      console.log('this.$route.params.index', this.$route.params.index);
       if(this.$route.params.index){
         return default_path+'/'+this.$route.params.index;
       }
