@@ -212,7 +212,7 @@ export default Vue.extend({
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('knowledge', 'k-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
+      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, geo.x, geo.y, geo.z);
     }
 
     // 座標軸の表示
