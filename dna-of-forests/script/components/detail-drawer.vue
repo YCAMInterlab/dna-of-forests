@@ -19,7 +19,7 @@
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
           <dna-tab v-bind:text="item.text" v-bind:current="'barcode'"></dna-tab>
-        h4 2. DNA解析による同定の結果
+        h4 3. DNA解析による同定の結果
         div.result
           small {{ genus_en }}
           | {{ genus_ja }}
@@ -65,6 +65,14 @@
   z-index: 9999
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   overflow: hidden
+
+  // トランジッション
+  &.fade-enter-active,
+  &.fade-leave-active
+    transition-duration: 0.2s
+  &.fade-enter,
+  &.fade-leave-active
+    right: -490px
 
 header
   background-color: #0d0d0d

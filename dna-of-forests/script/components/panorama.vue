@@ -11,9 +11,9 @@
     | Yamaguchi Center for Arts and Media,<br>
     | All Rights Reserved.
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
-    .wrapper
-      span.genus {{ item.genus_en }}
-      <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
+    img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
+    span.genus {{ item.genus_en }}
+    <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
@@ -79,7 +79,7 @@
   position: absolute
   cursor: pointer
   z-index: 10
-  user-select: none;
+  user-select: none
   &:hover
     opacity: 0.7
   &.selected
@@ -87,29 +87,29 @@
     -webkit-animation: flash 0.6s infinite linear
     -moz-animation: flash 0.6s infinite linear
   &.sample
-    width: 14px
-    height: 13px
-    background: url(/dna-of-forests/img/marker-arrow.png) no-repeat center
-    .wrapper
-      transform-origin: 0% 100%
-      -webkit-transform-origin: 0% 100%
-      transform: rotate(-90deg)
-      -webkit-transform: rotate(-90deg)
-      position: absolute
-      top: -18px
-      left: 14px
-      width: 4000px
-      span.genus
-        color: #fcff00
-        font-family: 'Roboto'
-        font-size: 11px
-        letter-spacing: 0.001em
-        display: inline-block
-        text-shadow: 0 0 8px #000
-      canvas
-        margin-bottom: 2px
-        margin-left: 4px
-        display: inline-block
+    height: 14px
+    white-space: nowrap
+    // 矢印の先を中心に回転
+    transform-origin: 0% 50%
+    -webkit-transform-origin: 0% 50%
+    transform: rotate(-90deg)
+    -webkit-transform: rotate(-90deg)
+    img
+      // display: block
+      display: inline-block
+      float: left
+    span.genus
+      color: #fcff00
+      font-family: 'Roboto'
+      font-size: 11px
+      letter-spacing: 0.001em
+      display: inline-block
+      text-shadow: 0 0 8px #000
+      margin-left: 5px
+    canvas
+      display: inline-block
+      margin-bottom: 2px
+      margin-left: 4px
   &.knowledge
     width: 14px
     height: 14px
@@ -212,7 +212,7 @@ export default Vue.extend({
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
       var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('knowledge', 'k-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
+      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, geo.x, geo.y, geo.z);
     }
 
     // 座標軸の表示
