@@ -29,7 +29,7 @@ nav
     background-color: #0d0d0d
     cursor: pointer
     &:not(:last-child)
-      margin-bottom: 2px
+      margin-bottom: 1px
 
     >div
       height: 100%
