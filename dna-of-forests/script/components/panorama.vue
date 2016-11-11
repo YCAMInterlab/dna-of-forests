@@ -59,7 +59,7 @@
   position: absolute
   top: 18px
   right: 22px
-  z-index: 1
+  z-index: 11
   &:hover
     opacity: 0.7
 
@@ -67,7 +67,7 @@
   position: absolute
   bottom: 19px
   right: 22px
-  z-index: 1
+  z-index: 11
   font-family: 'Roboto'
   font-size: 9px
   line-height: 14px
@@ -95,7 +95,6 @@
     transform: rotate(-90deg)
     -webkit-transform: rotate(-90deg)
     img
-      // display: block
       display: inline-block
       float: left
     span.genus
@@ -115,7 +114,6 @@
     height: 14px
     border-radius: 7px
     background-color: #fcff00
-    position: relative
     >img
       position: absolute
       bottom: 20px

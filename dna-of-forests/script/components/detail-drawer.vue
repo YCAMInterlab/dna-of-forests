@@ -67,12 +67,14 @@
   overflow: hidden
 
   // トランジッション
-  &.fade-enter-active,
+  &.fade-enter-active
+    transition-duration: 0.45s
   &.fade-leave-active
-    transition-duration: 0.2s
+    transition-duration: 0.3s
   &.fade-enter,
   &.fade-leave-active
     right: -490px
+    opacity: 0
 
 header
   background-color: #0d0d0d

@@ -624,7 +624,10 @@
         }
       ],
       "marker_position": { "latitude": -6, "longtitude": -65, "radius": 6 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "CQy3d6iswo0"
+      }
     },
     {
       "id": "B-2",
@@ -637,7 +640,10 @@
         }
       ],
       "marker_position": { "latitude": 0, "longtitude": -40, "radius": 5 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "DJhE3VufoEU"
+      }
     },
     {
       "id": "B-3",
@@ -650,7 +656,10 @@
         }
       ],
       "marker_position": { "latitude": 0, "longtitude":  -170, "radius": 3.8 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "3fQJA9LoZWQ"
+      }
     },
     {
       "id": "B-4",
@@ -663,7 +672,10 @@
         }
       ],
       "marker_position": { "latitude": -20, "longtitude": -210, "radius": 3.5 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "gwNpgBQUZek"
+      }
     },
     {
       "id": "B-5",
@@ -676,7 +688,10 @@
         }
       ],
       "marker_position": { "latitude": -15.5, "longtitude": -238, "radius": 4.5 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "QqhyFgaGzIc"
+      }
     },
     {
       "id": "B-6",
@@ -689,7 +704,10 @@
         }
       ],
       "marker_position": { "latitude": 6, "longtitude": 107, "radius": 36 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "V9HPNK6c8jw"
+      }
     },
     {
       "id": "B-7",
@@ -702,7 +720,10 @@
         }
       ],
       "marker_position": { "latitude": -16, "longtitude": 100, "radius": 4 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "Kesx5BHhAfo"
+      }
     },
     {
       "id": "B-8",
@@ -715,7 +736,10 @@
         }
       ],
       "marker_position": { "latitude": -45, "longtitude":   110, "radius": 1.5 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "tuSvN5_JQwA"
+      }
     },
     {
       "id": "B-9",
@@ -728,7 +752,10 @@
         }
       ],
       "marker_position": { "latitude": -22, "longtitude": -100, "radius": 3.4 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "TUwughfpsgI"
+      }
     },
     {
       "id": "B-10",
@@ -741,7 +768,10 @@
         }
       ],
       "marker_position": { "latitude": 9, "longtitude": -44.5, "radius": 25 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "TIKn4w8qkaI"
+      }
     },
     {
       "id": "B-11",
@@ -754,7 +784,10 @@
         }
       ],
       "marker_position": { "latitude": -5, "longtitude": -90, "radius": 8 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "GHOB5xv54WM"
+      }
     },
     {
       "id": "B-12",
@@ -767,7 +800,10 @@
         }
       ],
       "marker_position": { "latitude": 0, "longtitude": 65, "radius": 15 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "YM1nOx5-0hw"
+      }
     },
     {
       "id": "B-13",
@@ -780,7 +816,10 @@
         }
       ],
       "marker_position": { "latitude": -11, "longtitude": -225, "radius": 5.7 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "k_Jb-hZ4bZk"
+      }
     },
     {
       "id": "B-14",
@@ -793,7 +832,10 @@
         }
       ],
       "marker_position": { "latitude": -20, "longtitude": -220, "radius": 4 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "vh7shDaZ6R0"
+      }
     },
     {
       "id": "B-15",
@@ -806,7 +848,10 @@
         }
       ],
       "marker_position": { "latitude": -3, "longtitude": 98, "radius": 23 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "7EclZm3AePo"
+      }
     },
     {
       "id": "B-16",
@@ -819,7 +864,10 @@
         }
       ],
       "marker_position": { "latitude": 1, "longtitude": 115, "radius": 35 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "6zXd9mEi1PQ"
+      }
     },
     {
       "id": "B-17",
@@ -832,7 +880,10 @@
         }
       ],
       "marker_position": { "latitude": 1, "longtitude": 104, "radius": 30 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "DFZ4EnxMF6g"
+      }
     },
     {
       "id": "B-18",
@@ -845,7 +896,10 @@
         }
       ],
       "marker_position": { "latitude": 23, "longtitude": -28.5, "radius": 23 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "G3-OOTj_Ktk"
+      }
     },
     {
       "id": "B-19",
@@ -858,7 +912,10 @@
         }
       ],
       "marker_position": { "latitude": 9, "longtitude": -53, "radius": 25 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "mPycCN2wLHo"
+      }
     },
     {
       "id": "B-20",
@@ -871,7 +928,10 @@
         }
       ],
       "marker_position": { "latitude": -32, "longtitude": -52, "radius": 1.7 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "wJiPaxhgXm0"
+      }
     },
     {
       "id": "B-21",
@@ -884,7 +944,10 @@
         }
       ],
       "marker_position": { "latitude": -22, "longtitude": -180, "radius": 3.2 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "fEKNNg2ZRaY"
+      }
     },
     {
       "id": "B-22",
@@ -897,7 +960,10 @@
         }
       ],
       "marker_position": { "latitude": -7, "longtitude": 102, "radius": 5 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "Y4X5eakOagU"
+      }
     },
     {
       "id": "B-23",
@@ -910,7 +976,10 @@
         }
       ],
       "marker_position": { "latitude": -27, "longtitude": -114, "radius": 3.2 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "XdfnMKZwImU"
+      }
     },
     {
       "id": "B-24",
@@ -923,7 +992,10 @@
         }
       ],
       "marker_position": { "latitude": -1, "longtitude": -125, "radius": 4.7 },
-      "collection_date": "2016.10.01"
+      "collection_date": "2016.10.01",
+      "microscope": {
+        "youtube_id": "au5oqDo4uoA"
+      }
     }
   ],
   "knowledges": [
