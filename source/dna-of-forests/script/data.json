@@ -192,8 +192,8 @@
     },
     {
       "id": "9-3-A",
-      "genus_ja": "カナワラビ属？",
-      "genus_en": "Arachniodes?",
+      "genus_ja": "カナワラビ属",
+      "genus_en": "Arachniodes",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -599,8 +599,8 @@
     },
     {
       "id": "ersin",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "菌類(環境サンプル)？",
+      "genus_en": "Uncultured fungus?",
       "dna_sequences": [
         {
           "region": "ITS1",
@@ -647,8 +647,8 @@
     },
     {
       "id": "B-3",
-      "genus_ja": "ツバキ属？",
-      "genus_en": "Camellia?",
+      "genus_ja": "ツバキ属",
+      "genus_en": "Camellia",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -663,8 +663,8 @@
     },
     {
       "id": "B-4",
-      "genus_ja": "トウバナ？",
-      "genus_en": "Clinopodium gracile?",
+      "genus_ja": "トウバナ",
+      "genus_en": "Clinopodium gracile",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -679,8 +679,8 @@
     },
     {
       "id": "B-5",
-      "genus_ja": "オオシノブゴケ？",
-      "genus_en": "Thuidium tamariscinum?",
+      "genus_ja": "オオシノブゴケ",
+      "genus_en": "Thuidium tamariscinum",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -695,8 +695,8 @@
     },
     {
       "id": "B-6",
-      "genus_ja": "アオキ？",
-      "genus_en": "Aucuba japonica?",
+      "genus_ja": "アオキ",
+      "genus_en": "Aucuba japonica",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -727,8 +727,8 @@
     },
     {
       "id": "B-8",
-      "genus_ja": "？？？？",
-      "genus_en": "Ophiorrhiza?",
+      "genus_ja": "サツマイナモリ属",
+      "genus_en": "Ophiorrhiza",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -743,8 +743,8 @@
     },
     {
       "id": "B-9",
-      "genus_ja": "キイチゴ属？",
-      "genus_en": "Rubus?",
+      "genus_ja": "キイチゴ属",
+      "genus_en": "Rubus",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -775,8 +775,8 @@
     },
     {
       "id": "B-11",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": " オオイチシダ",
+      "genus_en": "Dryopteris pacifica (Nakai) Tagawa",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -791,8 +791,8 @@
     },
     {
       "id": "B-12",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "トウゲシバ",
+      "genus_en": "Huperzia serrata",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -807,8 +807,8 @@
     },
     {
       "id": "B-13",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "スゲ属",
+      "genus_en": "Carex",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -823,8 +823,8 @@
     },
     {
       "id": "B-14",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "トウバナ",
+      "genus_en": "Clinopodium gracile",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -839,8 +839,8 @@
     },
     {
       "id": "B-15",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "ニレ科",
+      "genus_en": "Ulmaceae",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -855,12 +855,16 @@
     },
     {
       "id": "B-16",
-      "genus_ja": "？？？？",
-      "genus_en": "???? trichotomum",
+      "genus_ja": "クサギ",
+      "genus_en": "Clerodendrum trichotomum",
       "dna_sequences": [
         {
-          "region": "",
-          "text": ""
+          "region": "matK",
+          "text": "CCGGCCCGAAAGTTGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCGCTATAATAATGAGAAAGATTTCTGCATATACGACCAAATCGGTCAATAATATTAGAATCGGATAAATCAGCCCAAATCGGCTTACTAACAGGATGCCCAAATACGTTACAAAATTTCGCTTTAGCCAATGACGCAATCATTGGAATAATTGGAATAAGGGTATCAAACTTCTTAATAGCATTATTGATTAGAAATGCATTTTCTAGAATTTGACTCCGTACCACGGAGGGGTTCATTCGCACGCTTGAAAGATAGTCCAAAAATTCAAGGGAATAATTGGATAATTGGTTTATATAAATCCTTCTTGGATGAAACCACAGCGAAAAATGCCATTGCCAAAAAGTGACAAGATAAAATTGCCATTTTTTCATGAAAAAAGATGTTCCCTTTGAAGCCAGAATGGATCTTCTTTGATACCTAATATAATGCATGAAAGGTTCCTTGACCAACCACGAGTTCGCCCGAAAATTGTTAATCTTAACAAAGACGTTCACAAGACGTTCTACTTTTACATAGAAATGGATTCGTTCAAGAAGAACTCCAAAAGCTGTTGATCGTAAATGAAAAGATTGGTTACGTAGAAAGACGAAAACGGATTCATATTCACATACATGAGAATTATATAAGAATAAGAATAGTCTTGGATTTCGTTTTGAAAAAGAGGAGCCAGCTTTCGTTGGAATAATAAGACTATTCCAATTACAATATTCAGCGAGAAAGACTCGTAGTAAATGTAAAGAAGAAGCATCTTTTACCCAACCGCGAAGAGTTTGAACCAAGATTTCCAGATGGGACTGGGGT"
+        },
+        {
+          "region": "rbcL",
+          "text": "TCTGGGATTACAAGCGGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACAAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGCCTTACCAGCCTTGATCGTTACAAAGGTCGATGCTACGACATCGAGCCCGTTCTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTATCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATCCCCACTGCTTATATTAAAACTTTCCAAGGCCCACCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGTTGGGATGTACTATTAAACCGAAATTGGGGTTATCCGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGTGGTGGACTTGATTTTACAAAA"
         }
       ],
       "marker_position": { "latitude": 1, "longtitude": 115, "radius": 35 },
@@ -871,12 +875,12 @@
     },
     {
       "id": "B-17",
-      "genus_ja": "？？？？",
-      "genus_en": "???? japonica",
+      "genus_ja": "スギ",
+      "genus_en": "Cryptomeria japonica",
       "dna_sequences": [
         {
-          "region": "",
-          "text": ""
+          "region": "rbcL",
+          "text": "GAAGGCGGTATTAAGGCTGGTGTTAAAGATTACAGATTAACTTATTATACTCCGGAATATCAGACCAAAGATACTGATATCTTAGCAGCATTCCGAGTCACTCCTCAACCTGGAGTACCCCCCGAAGAAGCGGGAGCAGCAGTAGCCGCCGAATCTTCCACTGGTACGTGGACGACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTACAAGGGGCGATGCTATGATATTGAACCCGTTCCTGGAGAGGAAAGTCAATTTATTGCCTATGTGGCTTACCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACCTGTTCACTTCTATTGTAGGTAATGTATTTGGATTCAAAGCCTTACGGGCTCTACGTCTGGAAGATTTACGGATTCCTCCTGCTTATTCAAAAACTTTCCAAGGCCCACCACATGGTATTCAAGTAGAAAGAGATAAATTAAACAAATATGGTCGTCCTTTGTTGGGATGTACTATAAAACCAAAATTGGGTCTATCTGCCAAGAATTATGGTAGAGCGGTTTATGAATGTCTCCGTGGTGGACTTGATTTTACAAAA"
         }
       ],
       "marker_position": { "latitude": 1, "longtitude": 104, "radius": 30 },
@@ -887,8 +891,8 @@
     },
     {
       "id": "B-18",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "イヌガヤ属",
+      "genus_en": "Cephalotaxus",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -919,8 +923,8 @@
     },
     {
       "id": "B-20",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "シノブゴケ属",
+      "genus_en": "Thuidium",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -967,8 +971,8 @@
     },
     {
       "id": "B-23",
-      "genus_ja": "？？？？",
-      "genus_en": "Clerodendrum trichotomum?",
+      "genus_ja": "チヂミザサ",
+      "genus_en": "Oplismenus undulatifolius",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -983,8 +987,8 @@
     },
     {
       "id": "B-24",
-      "genus_ja": "？？？？",
-      "genus_en": "Cryptomeria japonica?",
+      "genus_ja": "タブノキ",
+      "genus_en": "Machilus",
       "dna_sequences": [
         {
           "region": "rbcL",
