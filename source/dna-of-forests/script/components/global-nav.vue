@@ -70,7 +70,7 @@ nav
       position: absolute
       bottom: 0
 
-@media (max-width: 900px)
+@media (max-width: 660px)
   nav
     height: 80px
     width: 100%
