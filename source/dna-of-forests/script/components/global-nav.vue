@@ -64,6 +64,10 @@ nav
         >div
           background-image: url(/dna-of-forests/img/gnav/about-active.png)
 
+    // sound
+    &:last-child
+      position: absolute
+      bottom: 0
 </style>
 
 <script>
