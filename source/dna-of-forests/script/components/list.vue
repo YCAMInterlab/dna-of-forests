@@ -115,6 +115,13 @@ table
         text-overflow: ellipsis
 
 
+// @media (max-width: 1280px) and (orientation: portrait)
+
+@media (max-width: 1280px)
+  table
+    .genus_en
+      display: none
+
 </style>
 
 <script>
