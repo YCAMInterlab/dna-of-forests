@@ -49,8 +49,8 @@ article.about
       h4
         img(alt='「もしも、森の生き物になったら」チーム' src='img/about/iteota.png' srcset='img/about/iteota@2x.png 2x')
       p
-        | Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin,<br>
-        | 竹下 暁子, Clarence Ng, 三浦 陽平, 北堀 あすみ
+        | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
+        | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ
     h3#support
       img(alt='制作・協力' src='img/about/title-support.png' srcset='img/about/title-support@2x.png 2x')
     p
