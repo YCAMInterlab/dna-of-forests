@@ -1,6 +1,6 @@
 <template lang="pug">
 
-article
+article.about
   h1
     img(alt='森のDNA図鑑 仁保の森 2016' src='img/about/logo.png' srcset='img/about/logo@2x.png 2x')
 
@@ -12,6 +12,8 @@ article
       | 私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>
       | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森の生き物になったら</a>」の仁保の森ツアープログラムとして開催されました。
     .carousel
+      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/9.jpg' srcset='img/about/slide/9@2x.jpg 2x')
+      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/10.jpg' srcset='img/about/slide/10@2x.jpg 2x')
       img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/1.jpg' srcset='img/about/slide/1@2x.jpg 2x')
       img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/2.jpg' srcset='img/about/slide/2@2x.jpg 2x')
       img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/3.jpg' srcset='img/about/slide/3@2x.jpg 2x')
@@ -20,8 +22,6 @@ article
       img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/6.jpg' srcset='img/about/slide/6@2x.jpg 2x')
       img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/7.jpg' srcset='img/about/slide/7@2x.jpg 2x')
       img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/8.jpg' srcset='img/about/slide/8@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/9.jpg' srcset='img/about/slide/9@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/10.jpg' srcset='img/about/slide/10@2x.jpg 2x')
   section#dna-barcoding
     h2
       img(alt='解析方法（DNAバーコーディング）について' src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
@@ -55,7 +55,7 @@ article
       img(alt='制作・協力' src='img/about/title-support.png' srcset='img/about/title-support@2x.png 2x')
     p
       | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">講師：田中 浩（山口県立博物館動物担当理学博士）</a><br>
-      | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：Karappo Inc.</a><br>
+      | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：KARAPPO Inc.</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">録音・音源編集：Antoine Bertin（antoinebertin.org）</a><br>
       | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>
       | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a>
@@ -77,122 +77,123 @@ article
     background-size: ($stripe+$spacing)*1px ($width)*1px
     background-position: ($stripe)*1px $pos
 
-article
+article.about
   height: 100%
   overflow-y: auto
-
-h1
-  text-align: center
-  margin-top: 68px
-  margin-bottom: 68px
-h2
-  text-align: center
-  margin-bottom: 38px
-h3
-  text-align: center
-  margin-bottom: 24px
-p
-  font-size: 15px
-  line-height: 2.2em
-  letter-spacing: 0.15em
-  text-align: left
-  margin-bottom: 2.2em
-  text-align: justify
-a
-  color: inherit
-  text-decoration: none
-a.border
-  +dotted(bottom, #808080, 1, 3)
-  display: inline-block
-  &:hover
-    opacity: 1
-    +dotted(bottom, #fff, 1, 3)
-section
-  width: 600px
-  margin: 0 auto
-  text-align: center
-  margin-bottom: 96px
-  &#credit
-    width: auto
-    background-color: #202020
-    padding: 108px 0
-    margin-bottom: 0
-    h3#produce
-      margin-bottom: 53px
-    h3#support
-      margin-bottom: 40px
-      margin-top: 80px
-    >a
-      display: block
-      &:hover
-        opacity: 0.7
-    p
-      text-align: center
-      a
-        color: inherit
-        text-decoration: none
+  h1
+    text-align: center
+    margin-top: 68px
+    margin-bottom: 68px
+  h2
+    text-align: center
+    margin-bottom: 38px
+  h3
+    text-align: center
+    margin-bottom: 24px
+  p
+    font-size: 15px
+    line-height: 2.2em
+    letter-spacing: 0.15em
+    text-align: left
+    margin-bottom: 2.2em
+    text-align: justify
+  a
+    color: inherit
+    text-decoration: none
+  a.border
+    +dotted(bottom, #808080, 1, 3)
+    display: inline-block
+    &:hover
+      opacity: 1
+      +dotted(bottom, #fff, 1, 3)
+  section
+    width: 600px
+    margin: 0 auto
+    text-align: center
+    margin-bottom: 96px
+    &#credit
+      width: auto
+      background-color: #202020
+      padding: 108px 0
+      margin-bottom: 0
+      h3#produce
+        margin-bottom: 53px
+      h3#support
+        margin-bottom: 40px
+        margin-top: 80px
+      >a
+        display: block
+        width: 570px
+        margin: 0 auto
         &:hover
           opacity: 0.7
-    h4
-      margin-bottom: 10px
+      p
+        text-align: center
+        a
+          color: inherit
+          text-decoration: none
+          &:hover
+            opacity: 0.7
+      h4
+        margin-bottom: 10px
 
-.carousel
-  width: 760px
-  height: 506px
-  margin: 50px -80px 200px
-  // .flickity-viewport
-  //   border-radius: 20px !important
-  //   overflow: hidden !important
-  // 上記で角丸にするとスライド中に効かないのでしょうがなく、下のように画像を重ねて代用
-  &:before
-    content: url(/dna-of-forests/img/about/slide-round.png)
-    width: 100%
-    height: 100%
-    position: absolute
-    z-index: 10
-    left: 0
-    pointer-events: none
-  .carousel-cell
-    width: 100%
-    height: 100%
-    margin-right: 0
-  .flickity-page-dots
-    bottom: -38px
-    .dot
-      width: 7px
-      height: 7px
-      background-color: #fff
-      opacity: 0.3
-      margin: 0 6px
-      &.is-selected
-        opacity: 1
-  .flickity-prev-next-button
-    outline: 0
-    height: 100%
-    border-radius: 0
-    transition-duration: 0.2s
-    opacity: 0
-    background: transparent
-    width: 80px
-    .arrow
-      fill: #fff
-    svg
-      left: calc(50% - 20px)
-      top: calc(50% - 20px)
-      width: 40px
-      height: auto
-    &.next
-      right: 0
-    &.previous
+  .carousel
+    width: 760px
+    height: 506px
+    margin: 50px -80px 200px
+    // .flickity-viewport
+    //   border-radius: 20px !important
+    //   overflow: hidden !important
+    // 上記で角丸にするとスライド中に効かないのでしょうがなく、下のように画像を重ねて代用
+    &:before
+      content: url(/dna-of-forests/img/about/slide-round.png)
+      width: 100%
+      height: 100%
+      position: absolute
+      z-index: 10
       left: 0
-    &:not([disabled]):active
+      pointer-events: none
+    .carousel-cell
+      width: 100%
+      height: 100%
+      margin-right: 0
+    .flickity-page-dots
+      bottom: -38px
+      .dot
+        width: 7px
+        height: 7px
+        background-color: #fff
+        opacity: 0.3
+        margin: 0 6px
+        &.is-selected
+          opacity: 1
+    .flickity-prev-next-button
+      outline: 0
+      height: 100%
+      border-radius: 0
+      transition-duration: 0.2s
+      opacity: 0
+      background: transparent
+      width: 80px
       .arrow
-        opacity: 0.5
-    &[disabled]
-      display: none
-  &:hover
-    .flickity-prev-next-button:not([disabled])
-      opacity: 1
+        fill: #fff
+      svg
+        left: calc(50% - 20px)
+        top: calc(50% - 20px)
+        width: 40px
+        height: auto
+      &.next
+        right: 0
+      &.previous
+        left: 0
+      &:not([disabled]):active
+        .arrow
+          opacity: 0.5
+      &[disabled]
+        display: none
+    &:hover
+      .flickity-prev-next-button:not([disabled])
+        opacity: 1
 
 </style>
 
