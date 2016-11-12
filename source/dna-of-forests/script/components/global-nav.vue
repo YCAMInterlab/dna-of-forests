@@ -24,12 +24,13 @@ nav
   float: left
   >a
     display: block
-    width: 100%
+    width: 80px
     height: 80px
     background-color: #0d0d0d
     cursor: pointer
     &:not(:last-child)
       margin-bottom: 1px
+
 
     >div
       height: 100%
@@ -68,6 +69,21 @@ nav
     &:last-child
       position: absolute
       bottom: 0
+
+@media (max-width: 900px)
+  nav
+    height: 80px
+    width: 100%
+    float: none
+    >a
+      float: left
+      &:not(:last-child)
+        margin-bottom: 0
+      // sound
+      &:last-child
+        right: 0
+
+
 </style>
 
 <script>
