@@ -119,7 +119,7 @@
       bottom: 20px
       left: 2px
 
-@media (max-width: 900px)
+@media (max-width: 660px)
   .ycam
     top: inherit
     right: inherit
