@@ -11,14 +11,6 @@ a(v-on:click="click")
 <style lang="sass?indentedSyntax" scoped>
 
 a
-  display: block
-  width: 100%
-  height: 80px
-  background-color: #0d0d0d
-  cursor: pointer
-  position: absolute
-  bottom: 0
-
   >div
     height: 100%
     background-position: center

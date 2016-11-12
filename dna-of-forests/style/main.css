@@ -101,3 +101,8 @@ a {
 
 #container > canvas {
   opacity: 0.8; }
+
+@media (max-width: 900px) {
+  #content {
+    width: 100%;
+    height: calc(100% - 80px); } }

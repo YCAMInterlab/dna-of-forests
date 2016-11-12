@@ -192,8 +192,8 @@
     },
     {
       "id": "9-3-A",
-      "genus_ja": "カナワラビ属？",
-      "genus_en": "Arachniodes?",
+      "genus_ja": "カナワラビ属",
+      "genus_en": "Arachniodes",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -304,29 +304,6 @@
         "なぜその植物を採取したか": "穴があいていたから<br>誰も知らなかったから",
         "なんの植物だと思うか": "クサギか何か",
         "植物の特徴を絵や文字で書いて下さい": "汁が臭い<br>ギザギザ<br>こんなに臭いのに虫に食われていて、なぜ虫が好むのか？<br>葉がやわらかい"
-      },
-      "memofig_width": "390px"
-    },
-    {
-      "id": "10-1-B",
-      "genus_ja": "やり直し！",
-      "genus_en": "やり直し！",
-      "dna_sequences": [
-        {
-          "region": "",
-          "text": ""
-        }
-      ],
-      "marker_position": { "latitude": 5.4, "longtitude": -46, "radius": 22 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "hff7rKFclZ8"
-      },
-      "memo": {
-        "どんな場所で採ったか": "滝付近の岩場（高いところ）",
-        "なぜその植物を採取したか": "周りの植物と比べて、背が高くて目立っていたから！",
-        "なんの植物だと思うか": "つるむらさき（？）",
-        "植物の特徴を絵や文字で書いて下さい": ""
       },
       "memofig_width": "390px"
     },
@@ -501,60 +478,6 @@
       "memofig_width": "390px"
     },
     {
-      "id": "10-3-B",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "NNNNNNNNATAANNTGCCTTATAATCCCCCCTATTGNNANANCCANTATGATNATGNNNAAGGNTTCTGCATATACACCCCCNTCTATCCNTNAAATCCNAATCTGATAAATCAGTCCGAACCGGCTTACTANCTGGATGTCCTAATAGATTACAAAATTTCGCTTTAGGGAATGATCCACTTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCNTTATNAAGTAAAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAAATAGATTCNNNTCAAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGGAGAANATTGGTTNNNNGAGAGAAANNNNNAANNANNNATTC"
-        },
-        {
-          "region": "rbcL",
-          "text": "NNNNNNNNNNNAAGCTGGTGTTAAAGATTATANATTGGACTTATTATACTCCCGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCCGGGGCTGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTTAAGGCTCTACGCGCTCTACGCTTGGAAGACCTTCGAATTCCCCCCGCTTATTCTAAAACTTTCCTTGGACCGCCTCATGGNATTCAGGTCGAAAGAGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAANCCAAAATTAGGNTTGTCTGCTAAGAATTATGGTAGAGNNNNNTANGAATGCCTCCNTGNNGGACTNNATNTTTTACANNNNNNNNANAAGGACCCCNNAGGATGTTGGTCGTANATGAGAAGATTGTTNTNNGANNAAAGNCNAANNTANNNTCNTANTCNCNTACCTTNNAANTNTATATAACN"
-        }
-      ],
-      "marker_position": { "latitude": -0.5, "longtitude": -62.5, "radius": 18 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "tcJ2q_q9ye0"
-      },
-      "memo": {
-        "どんな場所で採ったか": "水分をふくんだ岩",
-        "なぜその植物を採取したか": "岩から生えていたから<br>シダの形が他の植物と大きく違うので、遺伝子に特徴があるのではないかと思いました。",
-        "なんの植物だと思うか": "シダ",
-        "採取の手順にて": "①葉をカッターで細くする→においが発する（草っぽい）<br>②乳鉢と乳棒ですりつぶす<br>③（チューブのイラスト有り）にすりつぶしたサンプルを入れる"
-      },
-      "memofig_width": "200 px"
-    },
-    {
-      "id": "10-3-C",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
-      "dna_sequences": [
-        {
-          "region": "matK",
-          "text": "NNNNNNNNNNNAAGTCGANGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCATTATTAATTAGAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAATAGATTCGTTCAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGAGAAGATTGGTTANNGGAGAAAGACGAAAATAGATTCGTATTCACATACATAAAAATTATATAACAAGAAGAGTAATCTTTGATTTCTTTTTGTTAAAAAATGAAAACAGGTTTTCTTTGTAGAAAGAATCTTATTGCAATTACAATACTCGCGTAGAAAGAATCGTAATAAGTGCAAAGAAGGGGCATCTTTTACCNANTAGCGAAAGGGTTGTACANNTCGCANNNNNNNN"
-        },
-        {
-          "region": "rbcL",
-          "text": "NNNNNNNNNNAAGCCGGNGTTNNNAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTNACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGGAATGTGNTTGGGATTCAAAGCTTTACGAGCTTTACGTTTAGAAGATTTGCGAATTCCCCCCGCTTATTCCAAAACTTTCATAGGTCCACCCCATGGTATCCAAGTTGAAAGAGACAAATCAAACAAATATGGCCGTCCTTTATTAGGATGTACTATTAAACCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTTTATGAATGTCTCCGTGGTGGACNNNNNNNTTACANNNN"
-        }
-      ],
-      "marker_position": { "latitude": -13, "longtitude": 93, "radius": 4.6 },
-      "collection_date": "2016.10.10",
-      "microscope": {
-        "youtube_id": "jkDc7iL5u-g"
-      },
-      "memo": {
-        "どんな場所で採ったか": "岩肌",
-        "なぜその植物を採取したか": "かわいかったから",
-        "なんの植物だと思うか": "コケの進化したやつ",
-        "植物の特徴を絵や文字で書いて下さい": ""
-      },
-      "memofig_width": "200 px"
-    },
-    {
       "id": "10-3-D",
       "genus_ja": "トウキョウチクトウ？",
       "genus_en": "Trachelospermum jasminoides?",
@@ -599,8 +522,8 @@
     },
     {
       "id": "ersin",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "菌類(環境サンプル)？",
+      "genus_en": "Uncultured fungus?",
       "dna_sequences": [
         {
           "region": "ITS1",
@@ -613,42 +536,10 @@
         "youtube_id": "ha8d8GsV0eI"
       }
     },
-        {
-      "id": "B-1",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
-      "dna_sequences": [
-        {
-          "region": "rbcL",
-          "text": "NNNNNNNNNNNNNNNCTGGNGTNNNGATTACANNTTGNCTTATTATACTCCTGACTATGNAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCGGGGGCCGCTGTAGCTGCCGAATCTTCTACANGNACATGGACAACTGTGTGGACCGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTACCACATTGAGCCCGTTGCTGGAGAAGACAATCAATATATTTGTTATGTAGCCTATCCTTTAGACCTTTTTGAAGAAGGGTCTGTTACTAACATGTTTACTTCTATTGTAGGTAATGTTTTTGGATTCAAAGCGCTNCGCGCTCTACGTCTGGAGGATTTGCGAATTCCTCCTTCTTATGTAAAAACTTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTAAACAAATATGGTCGTCCTCTATTGGGATGTACCATTAAACCAAAATTGGGATTATCTGCTAAAAATTATGGNAGAGCGGNTTATGAATGTCTCCGTGGTGGACTNNNNTTTTAC"
-        }
-      ],
-      "marker_position": { "latitude": -6, "longtitude": -65, "radius": 6 },
-      "collection_date": "2016.10.01",
-      "microscope": {
-        "youtube_id": "CQy3d6iswo0"
-      }
-    },
-    {
-      "id": "B-2",
-      "genus_ja": "ナンテン？",
-      "genus_en": "Nandina domestica?",
-      "dna_sequences": [
-        {
-          "region": "rbcL",
-          "text": "NNNNNNNNNNNNNNCGGGTGTTNNNATTACAAATTGAATTATTATACTCCTGACTATGTAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCTGTAGCTGCCGAATCTTCTACAGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTACCACATTGAGCCCGTTGCTGGAGAAGACAATCAATATATTTGTTATGTAGCCTATCCTTTAGACCTTTTTGAAGAAGGGTCTGTTACTAACATGTTTACTTCTATTGTAGGTAATGTTTTTGGGTTCAAAGCGCTGCGCGCTCTACGTCTGGAGGATCTGCGAATTCCTACTTCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTATTAGGATGTACCATTAAACCAAAATTGGGATTATCTGCTAAGAACTACGGTAGAGCGGTTTATGAATGTCTCCGTGNNNNNNNNNNTTTTTTNANN"
-        }
-      ],
-      "marker_position": { "latitude": 0, "longtitude": -40, "radius": 5 },
-      "collection_date": "2016.10.01",
-      "microscope": {
-        "youtube_id": "DJhE3VufoEU"
-      }
-    },
     {
       "id": "B-3",
-      "genus_ja": "ツバキ属？",
-      "genus_en": "Camellia?",
+      "genus_ja": "ツバキ属",
+      "genus_en": "Camellia",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -663,8 +554,8 @@
     },
     {
       "id": "B-4",
-      "genus_ja": "トウバナ？",
-      "genus_en": "Clinopodium gracile?",
+      "genus_ja": "トウバナ",
+      "genus_en": "Clinopodium gracile",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -679,8 +570,8 @@
     },
     {
       "id": "B-5",
-      "genus_ja": "オオシノブゴケ？",
-      "genus_en": "Thuidium tamariscinum?",
+      "genus_ja": "オオシノブゴケ",
+      "genus_en": "Thuidium tamariscinum",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -695,8 +586,8 @@
     },
     {
       "id": "B-6",
-      "genus_ja": "アオキ？",
-      "genus_en": "Aucuba japonica?",
+      "genus_ja": "アオキ",
+      "genus_en": "Aucuba japonica",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -710,25 +601,9 @@
       }
     },
     {
-      "id": "B-7",
-      "genus_ja": "ヤマハッカ？",
-      "genus_en": "Isodon inflexus?",
-      "dna_sequences": [
-        {
-          "region": "rbcL",
-          "text": "NNNNNNNNNNNNNNNNGGNGTTANAGAGTATAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGTGAATTCCTACTGCTTATATTAAAACTTTCCAAGGTCCGCCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAANCCGGTCGTCCTCTGCTGGGATGNACTATTANACCAAACCTGANTTGATCTGATACAAACTATGNNANAGCGGANCATGNNNGNATTGTCTNCN"
-        }
-      ],
-      "marker_position": { "latitude": -16, "longtitude": 100, "radius": 4 },
-      "collection_date": "2016.10.01",
-      "microscope": {
-        "youtube_id": "Kesx5BHhAfo"
-      }
-    },
-    {
       "id": "B-8",
-      "genus_ja": "？？？？",
-      "genus_en": "Ophiorrhiza?",
+      "genus_ja": "サツマイナモリ属",
+      "genus_en": "Ophiorrhiza",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -743,8 +618,8 @@
     },
     {
       "id": "B-9",
-      "genus_ja": "キイチゴ属？",
-      "genus_en": "Rubus?",
+      "genus_ja": "キイチゴ属",
+      "genus_en": "Rubus",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -758,25 +633,9 @@
       }
     },
     {
-      "id": "B-10",
-      "genus_ja": "？？？？",
-      "genus_en": "Jizen10",
-      "dna_sequences": [
-        {
-          "region": "rbcL",
-          "text": "NNNNNNNNNNNNCCGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCNNNNNNNNTTTTTTTTNAAAAAANN"
-        }
-      ],
-      "marker_position": { "latitude": 9, "longtitude": -44.5, "radius": 25 },
-      "collection_date": "2016.10.01",
-      "microscope": {
-        "youtube_id": "TIKn4w8qkaI"
-      }
-    },
-    {
       "id": "B-11",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": " オオイチシダ",
+      "genus_en": "Dryopteris pacifica (Nakai) Tagawa",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -791,8 +650,8 @@
     },
     {
       "id": "B-12",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "トウゲシバ",
+      "genus_en": "Huperzia serrata",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -807,8 +666,8 @@
     },
     {
       "id": "B-13",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "スゲ属",
+      "genus_en": "Carex",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -823,8 +682,8 @@
     },
     {
       "id": "B-14",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "トウバナ",
+      "genus_en": "Clinopodium gracile",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -839,8 +698,8 @@
     },
     {
       "id": "B-15",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "ニレ科",
+      "genus_en": "Ulmaceae",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -855,12 +714,16 @@
     },
     {
       "id": "B-16",
-      "genus_ja": "？？？？",
-      "genus_en": "???? trichotomum",
+      "genus_ja": "クサギ",
+      "genus_en": "Clerodendrum trichotomum",
       "dna_sequences": [
         {
-          "region": "",
-          "text": ""
+          "region": "matK",
+          "text": "CCGGCCCGAAAGTTGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCGCTATAATAATGAGAAAGATTTCTGCATATACGACCAAATCGGTCAATAATATTAGAATCGGATAAATCAGCCCAAATCGGCTTACTAACAGGATGCCCAAATACGTTACAAAATTTCGCTTTAGCCAATGACGCAATCATTGGAATAATTGGAATAAGGGTATCAAACTTCTTAATAGCATTATTGATTAGAAATGCATTTTCTAGAATTTGACTCCGTACCACGGAGGGGTTCATTCGCACGCTTGAAAGATAGTCCAAAAATTCAAGGGAATAATTGGATAATTGGTTTATATAAATCCTTCTTGGATGAAACCACAGCGAAAAATGCCATTGCCAAAAAGTGACAAGATAAAATTGCCATTTTTTCATGAAAAAAGATGTTCCCTTTGAAGCCAGAATGGATCTTCTTTGATACCTAATATAATGCATGAAAGGTTCCTTGACCAACCACGAGTTCGCCCGAAAATTGTTAATCTTAACAAAGACGTTCACAAGACGTTCTACTTTTACATAGAAATGGATTCGTTCAAGAAGAACTCCAAAAGCTGTTGATCGTAAATGAAAAGATTGGTTACGTAGAAAGACGAAAACGGATTCATATTCACATACATGAGAATTATATAAGAATAAGAATAGTCTTGGATTTCGTTTTGAAAAAGAGGAGCCAGCTTTCGTTGGAATAATAAGACTATTCCAATTACAATATTCAGCGAGAAAGACTCGTAGTAAATGTAAAGAAGAAGCATCTTTTACCCAACCGCGAAGAGTTTGAACCAAGATTTCCAGATGGGACTGGGGT"
+        },
+        {
+          "region": "rbcL",
+          "text": "TCTGGGATTACAAGCGGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACAAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGCCTTACCAGCCTTGATCGTTACAAAGGTCGATGCTACGACATCGAGCCCGTTCTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTATCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATCCCCACTGCTTATATTAAAACTTTCCAAGGCCCACCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGTTGGGATGTACTATTAAACCGAAATTGGGGTTATCCGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGTGGTGGACTTGATTTTACAAAA"
         }
       ],
       "marker_position": { "latitude": 1, "longtitude": 115, "radius": 35 },
@@ -871,12 +734,12 @@
     },
     {
       "id": "B-17",
-      "genus_ja": "？？？？",
-      "genus_en": "???? japonica",
+      "genus_ja": "スギ",
+      "genus_en": "Cryptomeria japonica",
       "dna_sequences": [
         {
-          "region": "",
-          "text": ""
+          "region": "rbcL",
+          "text": "GAAGGCGGTATTAAGGCTGGTGTTAAAGATTACAGATTAACTTATTATACTCCGGAATATCAGACCAAAGATACTGATATCTTAGCAGCATTCCGAGTCACTCCTCAACCTGGAGTACCCCCCGAAGAAGCGGGAGCAGCAGTAGCCGCCGAATCTTCCACTGGTACGTGGACGACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTACAAGGGGCGATGCTATGATATTGAACCCGTTCCTGGAGAGGAAAGTCAATTTATTGCCTATGTGGCTTACCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACCTGTTCACTTCTATTGTAGGTAATGTATTTGGATTCAAAGCCTTACGGGCTCTACGTCTGGAAGATTTACGGATTCCTCCTGCTTATTCAAAAACTTTCCAAGGCCCACCACATGGTATTCAAGTAGAAAGAGATAAATTAAACAAATATGGTCGTCCTTTGTTGGGATGTACTATAAAACCAAAATTGGGTCTATCTGCCAAGAATTATGGTAGAGCGGTTTATGAATGTCTCCGTGGTGGACTTGATTTTACAAAA"
         }
       ],
       "marker_position": { "latitude": 1, "longtitude": 104, "radius": 30 },
@@ -887,8 +750,8 @@
     },
     {
       "id": "B-18",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "イヌガヤ属",
+      "genus_en": "Cephalotaxus",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -902,25 +765,9 @@
       }
     },
     {
-      "id": "B-19",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
-      "dna_sequences": [
-        {
-          "region": "rbcL",
-          "text": "NNNNGNNNNNNGCTGGTGTTAAGATTACAAATTGACTTATTATACTCCTGACTATGAAACCAAAAGTACTGATATTTTGGCAGCATTTCGAGTAACTCCTCAACCCGGAGTTCCACCTGAGGAAGCAGGGGCTGCCGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGACGATGCTACCACATCGAGCCCGTTGCTGGGGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACGAACATGTTTACTTCTATTGTGGGTAATGTATTTGGGTTCAAAGCTCTACGAGCTCTACGTCTGGAGGATCTGCGAATTCCTCCTGCTTATTCCAAAACTTTCCAAGGCCCGCCCCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTATTGGGATGTACTATTAAACCAAAATTGGGGTTATCCGCCAAGAACTACGGTAGAGCGGTTTATGAATGTCTCCGTGNNNNNNNNNTTTTTNNNAN"
-        }
-      ],
-      "marker_position": { "latitude": 9, "longtitude": -53, "radius": 25 },
-      "collection_date": "2016.10.01",
-      "microscope": {
-        "youtube_id": "mPycCN2wLHo"
-      }
-    },
-    {
       "id": "B-20",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
+      "genus_ja": "シノブゴケ属",
+      "genus_en": "Thuidium",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -934,41 +781,9 @@
       }
     },
     {
-      "id": "B-21",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
-      "dna_sequences": [
-        {
-          "region": "rbcL",
-          "text": "NNNNNNNNNNNNNCCGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCNNNNNNNNNNNNNTTTTTNANANNAAA"
-        }
-      ],
-      "marker_position": { "latitude": -22, "longtitude": -180, "radius": 3.2 },
-      "collection_date": "2016.10.01",
-      "microscope": {
-        "youtube_id": "fEKNNg2ZRaY"
-      }
-    },
-    {
-      "id": "B-22",
-      "genus_ja": "？？？？",
-      "genus_en": "????",
-      "dna_sequences": [
-        {
-          "region": "",
-          "text": ""
-        }
-      ],
-      "marker_position": { "latitude": -7, "longtitude": 102, "radius": 5 },
-      "collection_date": "2016.10.01",
-      "microscope": {
-        "youtube_id": "Y4X5eakOagU"
-      }
-    },
-    {
       "id": "B-23",
-      "genus_ja": "？？？？",
-      "genus_en": "Clerodendrum trichotomum?",
+      "genus_ja": "チヂミザサ",
+      "genus_en": "Oplismenus undulatifolius",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -983,8 +798,8 @@
     },
     {
       "id": "B-24",
-      "genus_ja": "？？？？",
-      "genus_en": "Cryptomeria japonica?",
+      "genus_ja": "タブノキ",
+      "genus_en": "Machilus",
       "dna_sequences": [
         {
           "region": "rbcL",

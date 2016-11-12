@@ -119,6 +119,18 @@
       bottom: 20px
       left: 2px
 
+@media (max-width: 900px)
+  .ycam
+    top: inherit
+    right: inherit
+    left: 22px
+    bottom: 19px
+    opacity: 0.5
+
+  .copyright
+    bottom: 19px
+    left: 91px
+    text-align: left
 
 </style>
 
