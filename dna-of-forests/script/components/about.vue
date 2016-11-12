@@ -45,12 +45,12 @@ article.about
         | 高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>
         | 「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>
         | 多様な切り口で模索するYCAMのプロジェクトです
-    a(href="http://www.ycam.jp/projects/ycam-bio-research/" target="_blank")
+    a(href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank")
       h4
         img(alt='「もしも、森の生き物になったら」チーム' src='img/about/iteota.png' srcset='img/about/iteota@2x.png 2x')
       p
-        | Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin,<br>
-        | 竹下 暁子, Clarence Ng, 三浦 陽平, 北堀 あすみ
+        | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
+        | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ
     h3#support
       img(alt='制作・協力' src='img/about/title-support.png' srcset='img/about/title-support@2x.png 2x')
     p
