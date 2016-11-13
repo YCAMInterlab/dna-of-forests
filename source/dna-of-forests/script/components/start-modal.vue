@@ -38,6 +38,7 @@
     margin-top: 95px
     margin-bottom: 110px
   a
+    cursor: pointer
     display: block
     font-family: "Roboto"
     font-size: 15px

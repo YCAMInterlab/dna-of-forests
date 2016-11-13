@@ -81,6 +81,8 @@ nav
 
 @media (max-width: 660px)
   nav
+    position: absolute
+    bottom: 0
     height: 100px
     width: 100%
     float: none
@@ -93,31 +95,6 @@ nav
       // sound
       &:last-child
         right: 0
-
-      &.top
-        >div
-          background-image: url(/dna-of-forests/img/gnav/top@2x.png)
-        &.router-link-active
-          >div
-            background-image: url(/dna-of-forests/img/gnav/top-active@2x.png)
-      &.panorama
-        >div
-          background-image: url(/dna-of-forests/img/gnav/panorama@2x.png)
-        &.router-link-active
-          >div
-            background-image: url(/dna-of-forests/img/gnav/panorama-active@2x.png)
-      &.list
-        >div
-          background-image: url(/dna-of-forests/img/gnav/list@2x.png)
-        &.router-link-active
-          >div
-            background-image: url(/dna-of-forests/img/gnav/list-active@2x.png)
-      &.about
-        >div
-          background-image: url(/dna-of-forests/img/gnav/about@2x.png)
-        &.router-link-active
-          >div
-            background-image: url(/dna-of-forests/img/gnav/about-active@2x.png)
 
 
 </style>

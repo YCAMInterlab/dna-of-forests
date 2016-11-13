@@ -121,16 +121,15 @@
 
 @media (max-width: 660px)
   .ycam
-    top: inherit
     right: inherit
     left: 22px
-    bottom: 19px
     opacity: 0.5
 
   .copyright
-    bottom: 19px
-    left: 91px
-    text-align: left
+    bottom: inherit
+    top: 19px
+    right: 22px
+    opacity: 0.5
 
 </style>
 
