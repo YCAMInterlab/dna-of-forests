@@ -1,7 +1,7 @@
 <template lang="pug">
 
 nav
-  router-link.top(to='/' exact='true')
+  router-link.top(to='/' v-bind:exact="true")
     div
       span TOP
   router-link.panorama(v-bind:to="linkUrl('/panorama')")
