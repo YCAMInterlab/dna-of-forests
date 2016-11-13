@@ -122,6 +122,12 @@ table
     .genus_en
       display: none
 
+@media (max-width: 660px)
+  table
+    .genus_en,
+    .collection_date
+      display: none
+
 </style>
 
 <script>
