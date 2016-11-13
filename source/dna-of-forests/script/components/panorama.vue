@@ -426,7 +426,7 @@ export default Vue.extend({
 
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
-      onDocumentMouseDown( e );
+      this.onDocumentMouseDown( e );
 
     },
 
