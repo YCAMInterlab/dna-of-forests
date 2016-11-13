@@ -314,8 +314,8 @@ export default Vue.extend({
         var el = this.$el.querySelector('#' + marker.key);
         if(pos){
           // Within camera view
-          var top = pos.y/window.devicePixelRatio;
-          var left = pos.x/window.devicePixelRatio;
+          var top = pos.y;
+          var left = pos.x;
           if(marker.type=='sample'){
             top -= 7;
             left -= 7;
@@ -384,8 +384,8 @@ export default Vue.extend({
         vector.y = - ( vector.y * heightHalf ) + heightHalf;
 
         return {
-          x: vector.x,
-          y: vector.y
+          x: vector.x/window.devicePixelRatio,
+          y: vector.y/window.devicePixelRatio
         };
       }
       return null;
