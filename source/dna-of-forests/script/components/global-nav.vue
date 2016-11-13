@@ -1,6 +1,9 @@
 <template lang="pug">
 
 nav
+  router-link.top(to='/' exact='true')
+    div
+      span TOP
   router-link.panorama(v-bind:to="linkUrl('/panorama')")
     div
       span 360
@@ -46,6 +49,12 @@ nav
         >div
           opacity: 0.9
 
+    &.top
+      >div
+        background-image: url(/dna-of-forests/img/gnav/top.png)
+      &.router-link-active
+        >div
+          background-image: url(/dna-of-forests/img/gnav/top-active.png)
     &.panorama
       >div
         background-image: url(/dna-of-forests/img/gnav/panorama.png)
@@ -72,16 +81,43 @@ nav
 
 @media (max-width: 660px)
   nav
-    height: 80px
+    height: 100px
     width: 100%
     float: none
     >a
+      width: 100px
+      height: 100px
       float: left
       &:not(:last-child)
         margin-bottom: 0
       // sound
       &:last-child
         right: 0
+
+      &.top
+        >div
+          background-image: url(/dna-of-forests/img/gnav/top@2x.png)
+        &.router-link-active
+          >div
+            background-image: url(/dna-of-forests/img/gnav/top-active@2x.png)
+      &.panorama
+        >div
+          background-image: url(/dna-of-forests/img/gnav/panorama@2x.png)
+        &.router-link-active
+          >div
+            background-image: url(/dna-of-forests/img/gnav/panorama-active@2x.png)
+      &.list
+        >div
+          background-image: url(/dna-of-forests/img/gnav/list@2x.png)
+        &.router-link-active
+          >div
+            background-image: url(/dna-of-forests/img/gnav/list-active@2x.png)
+      &.about
+        >div
+          background-image: url(/dna-of-forests/img/gnav/about@2x.png)
+        &.router-link-active
+          >div
+            background-image: url(/dna-of-forests/img/gnav/about-active@2x.png)
 
 
 </style>
