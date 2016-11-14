@@ -2,7 +2,7 @@
 
 #container
   <transition name="fade">
-    <start-modal v-if="$route.path=='/'"></start-modal>
+    <top-modal v-if="$route.path=='/'"></top-modal>
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
@@ -143,7 +143,7 @@ var THREE = THREELib(["Projector"]);
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
-Vue.component('start-modal',  require('./start-modal.vue'));
+Vue.component('top-modal',  require('./top-modal.vue'));
 
 // 表示の切り替え
 const visibleAxisHelper = false;
