@@ -82,8 +82,8 @@ article.about
   overflow-y: auto
   h1
     text-align: center
-    margin-top: 68px
-    margin-bottom: 68px
+    margin-top: 130px
+    margin-bottom: 130px
   h2
     text-align: center
     margin-bottom: 38px
@@ -93,7 +93,7 @@ article.about
   p
     font-size: 15px
     line-height: 2.2em
-    letter-spacing: 0.15em
+    letter-spacing: 0.05em
     text-align: left
     margin-bottom: 2.2em
     text-align: justify
@@ -107,7 +107,7 @@ article.about
       opacity: 1
       +dotted(bottom, #fff, 1, 3)
   section
-    width: 600px
+    width: 620px
     margin: 0 auto
     text-align: center
     margin-bottom: 96px
@@ -123,11 +123,12 @@ article.about
         margin-top: 80px
       >a
         display: block
-        width: 570px
-        margin: 0 auto
+        width: 600px
+        margin: 0 auto 40px
         &:hover
           opacity: 0.7
       p
+        font-size: 14px
         text-align: center
         a
           color: inherit
@@ -140,7 +141,7 @@ article.about
   .carousel
     width: 760px
     height: 506px
-    margin: 50px -80px 200px
+    margin: 50px -80px 38px
     // .flickity-viewport
     //   border-radius: 20px !important
     //   overflow: hidden !important

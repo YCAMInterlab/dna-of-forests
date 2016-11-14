@@ -326,8 +326,8 @@ export default Vue.extend({
         var el = this.$el.querySelector('#' + marker.key);
         if(pos){
           // Within camera view
-          var top = pos.y/window.devicePixelRatio;
-          var left = pos.x/window.devicePixelRatio;
+          var top = pos.y;
+          var left = pos.x;
           if(marker.type=='sample'){
             top -= 7;
             left -= 7;
