@@ -223,9 +223,11 @@ export default Vue.extend({
     }
 
     // 脚立を隠す円形を配置
-    var geometry = new THREE.CircleGeometry( 0.7, 128 );
-    var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+    var geometry = new THREE.CircleGeometry( 0.6, 128 );
+    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/img/panorama/logo-cover@2x.png') });
     var circle = new THREE.Mesh( geometry, material );
+
+
     circle.position.set(0, -1.5, 0); // 原点だとカメラと同じ視点になるので表示されない
     circle.rotateZ(Math.PI/2);
     circle.rotateY(Math.PI/2);
