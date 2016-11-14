@@ -340,11 +340,17 @@ export default Vue.extend({
       var geometry = new THREE.SphereGeometry( 500, 120, 120 );
       geometry.scale( - 1, 1, 1 );
 
+      var texture = null;
       var video = document.getElementById( 'video' );
-      var texture = new THREE.VideoTexture( video );
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.format = THREE.RGBFormat;
+      if(video) {
+        texture = new THREE.VideoTexture( video );
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.format = THREE.RGBFormat;
+      }
+      else {
+        texture = new THREE.TextureLoader().load('/dna-of-forests/img/panorama.jpg');
+      }
 
       var material = new THREE.MeshBasicMaterial( {
         map: texture
