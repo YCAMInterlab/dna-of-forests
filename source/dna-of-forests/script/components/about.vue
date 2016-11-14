@@ -123,7 +123,7 @@ article.about
         margin-top: 80px
       >a
         display: block
-        width: 570px
+        width: 600px
         margin: 0 auto
         &:hover
           opacity: 0.7
@@ -140,7 +140,7 @@ article.about
   .carousel
     width: 760px
     height: 506px
-    margin: 50px -80px 200px
+    margin: 50px -80px 38px
     // .flickity-viewport
     //   border-radius: 20px !important
     //   overflow: hidden !important
