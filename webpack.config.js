@@ -37,6 +37,10 @@ module.exports = {
         loader: 'json-loader'
       },
       {
+        test: /\.sass$/,
+        loader: 'sass-loader',
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
       }
