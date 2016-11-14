@@ -12,7 +12,7 @@
     | All Rights Reserved.
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
-    span.genus {{ item.genus_en }}
+    span.genus {{ item.genus_ja }}
     <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
@@ -149,6 +149,7 @@
 import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
+import _ from 'lodash';
 
 var THREE = THREELib(["Projector"]);
 
@@ -164,14 +165,6 @@ export default Vue.extend({
 
   mounted: function() {
 
-    // 最初のカメラ位置
-    var default_lon = 1882;
-    var default_lat = 46.2;
-    if(this.$route.path!='/'){
-      default_lon = (Cookies.get('lon')*1 || default_lon);
-      default_lat = (Cookies.get('lat')*1 || default_lat);
-    }
-
     this.width = this.$el.offsetWidth;
     this.height = window.innerHeight;
     this.camera = null;
@@ -183,8 +176,6 @@ export default Vue.extend({
     this.onPointerDownLat = null;
     this.phi = 0;
     this.theta = 0;
-    this.lon = default_lon;
-    this.lat = default_lat;
     this.onPointerDownPointerX = null;
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
@@ -263,6 +254,29 @@ export default Vue.extend({
     document.addEventListener( 'touchend', this.onDocumentTouchEnd, false );
     document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
+
+    // カメラ位置の設定 -------
+
+    var default_lon = 1882;
+    var default_lat = 46.2;
+    if(this.$route.params.index) {
+
+      // // 選択された行がある場合は、そこまでスクロール
+      var key = this.$route.params.index;
+      var selectedMarker = _.filter(this.markers, function(m){ return m.key==key; })[0];
+      default_lat = selectedMarker.latitude;
+      default_lon = -selectedMarker.longtitude;
+    }
+    else if(this.$route.path!='/') {
+
+      default_lon = (Cookies.get('lon')*1 || default_lon);
+      default_lat = (Cookies.get('lat')*1 || default_lat);
+    }
+
+    this.lon = default_lon;
+    this.lat = default_lat;
+
+    // ----------------------
 
     this.animate();
   },
@@ -432,6 +446,10 @@ export default Vue.extend({
       var marker = {};
 
       marker.position = new THREE.Vector3( x, y, z );
+
+      // カメラ位置をあわせる時に使う
+      marker.latitude = latitude;
+      marker.longtitude = longtitude;
 
       marker.key = key;
       marker.type = type;
