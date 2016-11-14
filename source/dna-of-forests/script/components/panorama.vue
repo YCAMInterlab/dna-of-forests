@@ -55,6 +55,17 @@
   height: 100%
   overflow: hidden
 
+  // 中心にマーカー
+  // &:after
+  //   content: ''
+  //   display: block
+  //   width: 4px
+  //   height: 4px
+  //   background-color: red
+  //   position: absolute
+  //   top: calc(50% - 2px)
+  //   left: calc(50% - 2px)
+
 .ycam
   position: absolute
   top: 18px
