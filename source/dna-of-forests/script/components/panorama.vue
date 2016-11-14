@@ -211,15 +211,13 @@ export default Vue.extend({
     // サンプルマーカー
     for(var i = 0; i<this.samples.length; i++){
       var data = this.samples[i].marker_position;
-      var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
+      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, data.latitude, data.longtitude, data.radius);
     }
 
     // // 森の知識マーカー
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
-      var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, geo.x, geo.y, geo.z);
+      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, data.latitude, data.longtitude, data.radius);
     }
 
     // 脚立を隠す円形を配置
@@ -398,7 +396,12 @@ export default Vue.extend({
     },
 
     // マーカー
-    create_marker(type, key, id, x=0, y=0, z=0){
+    create_marker(type, key, id, latitude, longtitude, radius){
+
+      var geo = this.translateGeoCoords(latitude, longtitude, radius);
+      var x = geo.x,
+          y = geo.y,
+          z = geo.z;
 
       // 3D marker -----------
       if(visible3dMaker){
