@@ -142,7 +142,6 @@ import Cookies from 'js-cookie';
 var THREE = THREELib(["Projector"]);
 
 // 登録
-Vue.component('sound-button', require('./sound-button.vue'));
 Vue.component('top-modal',  require('./top-modal.vue'));
 
 // 表示の切り替え
