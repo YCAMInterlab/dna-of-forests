@@ -287,7 +287,8 @@ export default Vue.extend({
         this.lon += 0.04;
       }
 
-      this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
+      // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); 少し上向きにしたい場合
+      this.lat = Math.max( -90, Math.min( 90, this.lat ) );
       this.phi = THREE.Math.degToRad( 90 - this.lat );
       this.theta = THREE.Math.degToRad( this.lon );
 
