@@ -30,6 +30,7 @@
     "jquery": "^3.1.1",
     "js-cookie": "^2.1.3",
     "json-loader": "^0.5.4",
+    "lodash": "^4.17.0",
     "mobile-detect": "^1.3.3",
     "three-js": "^79.0.0",
     "vue": "^2.0.3",
