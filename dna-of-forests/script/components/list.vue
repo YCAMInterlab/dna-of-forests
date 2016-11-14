@@ -12,7 +12,7 @@ section
         th(colspan='2').dna 同定に用いたDNA配列
         th.collection_date 採取日
     tbody
-      tr(v-for="(item, index) in samples" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
+      tr(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.genus_ja {{ item.genus_ja }}
         td.genus_en {{ item.genus_en }}
@@ -34,7 +34,7 @@ section
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')
   table#knowledges
     tbody
-      tr(v-for="(item, index) in knowledges" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")
+      tr(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.title {{ item.title }}
         td.description {{ item.description }}
@@ -122,6 +122,12 @@ table
     .genus_en
       display: none
 
+@media (max-width: 660px)
+  table
+    .genus_en,
+    .collection_date
+      display: none
+
 </style>
 
 <script>
@@ -139,6 +145,28 @@ export default Vue.extend({
   data () {
     // TODO: 直接ルートのComponentから受け渡せないか？
     return require('../data.json');
+  },
+  mounted: function() {
+
+    // 選択された行がある場合は、そこまでスクロール
+    if(this.$route.params.index){
+      var selectedRow = document.querySelector('#'+this.$route.params.index);
+      var offset = this.getOffsetTop(selectedRow);
+      this.$el.scrollTop = offset;
+    }
+  },
+
+  methods: {
+    getOffsetTop(el){
+      var offsetTop = 0;
+      do {
+        if(!isNaN( el.offsetTop)){
+          offsetTop += el.offsetTop;
+        }
+      }
+      while(el = el.offsetParent);
+      return offsetTop;
+    }
   }
 });
 </script>

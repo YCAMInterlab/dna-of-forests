@@ -2,7 +2,7 @@
 
 #container
   <transition name="fade">
-    <start-modal v-if="$route.path=='/'"></start-modal>
+    <top-modal v-if="$route.path=='/'"></top-modal>
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
@@ -12,7 +12,7 @@
     | All Rights Reserved.
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
-    span.genus {{ item.genus_en }}
+    span.genus {{ item.genus_ja }}
     <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
@@ -119,18 +119,17 @@
       bottom: 20px
       left: 2px
 
-@media (max-width: 900px)
+@media (max-width: 660px)
   .ycam
-    top: inherit
     right: inherit
     left: 22px
-    bottom: 19px
     opacity: 0.5
 
   .copyright
-    bottom: 19px
-    left: 91px
-    text-align: left
+    bottom: inherit
+    top: 19px
+    right: 22px
+    opacity: 0.5
 
 </style>
 
@@ -139,12 +138,12 @@
 import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
+import _ from 'lodash';
 
 var THREE = THREELib(["Projector"]);
 
 // 登録
-Vue.component('sound-button', require('./sound-button.vue'));
-Vue.component('start-modal',  require('./start-modal.vue'));
+Vue.component('top-modal',  require('./top-modal.vue'));
 
 // 表示の切り替え
 const visibleAxisHelper = false;
@@ -154,14 +153,6 @@ const visibleGrid = false;
 export default Vue.extend({
 
   mounted: function() {
-
-    // 最初のカメラ位置
-    var default_lon = 1882;
-    var default_lat = 46.2;
-    if(this.$route.path!='/'){
-      default_lon = (Cookies.get('lon')*1 || default_lon);
-      default_lat = (Cookies.get('lat')*1 || default_lat);
-    }
 
     this.width = this.$el.offsetWidth;
     this.height = window.innerHeight;
@@ -174,8 +165,6 @@ export default Vue.extend({
     this.onPointerDownLat = null;
     this.phi = 0;
     this.theta = 0;
-    this.lon = default_lon;
-    this.lat = default_lat;
     this.onPointerDownPointerX = null;
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
@@ -194,7 +183,6 @@ export default Vue.extend({
     this.scene.add(ambient);
 
     // ジオメトリの追加
-
     var pano_sphere = this.create_pano_sphere();
     this.scene.add( pano_sphere );
 
@@ -214,16 +202,25 @@ export default Vue.extend({
     // サンプルマーカー
     for(var i = 0; i<this.samples.length; i++){
       var data = this.samples[i].marker_position;
-      var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
+      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, data.latitude, data.longtitude, data.radius);
     }
 
     // // 森の知識マーカー
     for(var i = 0; i<this.knowledges.length; i++){
       var data = this.knowledges[i].marker_position;
-      var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, geo.x, geo.y, geo.z);
+      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, data.latitude, data.longtitude, data.radius);
     }
+
+    // 脚立を隠す円形を配置
+    var geometry = new THREE.CircleGeometry( 0.6, 128 );
+    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/img/panorama/logo-cover@2x.png') });
+    var circle = new THREE.Mesh( geometry, material );
+
+
+    circle.position.set(0, -1.5, 0); // 原点だとカメラと同じ視点になるので表示されない
+    circle.rotateZ(Math.PI/2);
+    circle.rotateY(Math.PI/2);
+    this.scene.add( circle );
 
     // 座標軸の表示
     if(visibleAxisHelper){
@@ -242,10 +239,33 @@ export default Vue.extend({
     window.addEventListener( 'resize', this.onWindowResize, false );
     document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
     document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
+    document.addEventListener( 'touchmove', this.onDocumentTouchMove, false );
+    document.addEventListener( 'touchend', this.onDocumentTouchEnd, false );
     document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
-    // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
-    document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
+
+    // カメラ位置の設定 -------
+
+    var default_lon = 1882;
+    var default_lat = 46.2;
+    console.log('-',this.$route.params.index);
+    if(this.$route.params.index){
+      // // 選択された行がある場合は、そこまでスクロール
+      // var key = this.$route.params.index;
+      // var selectedMarker = _.filter(this.markers, function(m){ return m.key==key; })[0];
+      // default_lat = selectedMarker.latitude;
+      // default_lon = selectedMarker.longtitude;
+      // console.log('selectedMarker', selectedMarker);
+    }
+    else if(this.$route.path!='/'){
+      default_lon = (Cookies.get('lon')*1 || default_lon);
+      default_lat = (Cookies.get('lat')*1 || default_lat);
+    }
+
+    this.lon = default_lon;
+    this.lat = default_lat;
+
+    // ----------------------
 
     this.animate();
   },
@@ -259,14 +279,6 @@ export default Vue.extend({
     },
 
     render( elapsed, ts ) {
-
-      if (this.options.orbitControls) {
-        let position = this.camera.position.toArray();
-        let direction = this.target.toArray();
-        this.controls.update(position, direction);
-        this.camera.position.fromArray(position);
-        this.camera.lookAt(this.target.fromArray(direction));
-      }
 
       if ( this.options.postprocessing ) {
         this.postprocessing.render( elapsed, ts, this.tick );
@@ -341,15 +353,20 @@ export default Vue.extend({
       var geometry = new THREE.SphereGeometry( 500, 120, 120 );
       geometry.scale( - 1, 1, 1 );
 
+      var texture = null;
       var video = document.getElementById( 'video' );
-      var texture = new THREE.VideoTexture( video );
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.format = THREE.RGBFormat;
+      if(video) {
+        texture = new THREE.VideoTexture( video );
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.format = THREE.RGBFormat;
+      }
+      else {
+        texture = new THREE.TextureLoader().load('/dna-of-forests/img/panorama.jpg');
+      }
 
-      var material = new THREE.MeshBasicMaterial( {
-        map: texture
-      });
+      var material = new THREE.MeshBasicMaterial({ map: texture });
+
       return new THREE.Mesh( geometry, material );
     },
 
@@ -384,15 +401,20 @@ export default Vue.extend({
         vector.y = - ( vector.y * heightHalf ) + heightHalf;
 
         return {
-          x: vector.x,
-          y: vector.y
+          x: vector.x/window.devicePixelRatio,
+          y: vector.y/window.devicePixelRatio
         };
       }
       return null;
     },
 
     // マーカー
-    create_marker(type, key, id, x=0, y=0, z=0){
+    create_marker(type, key, id, latitude, longtitude, radius){
+
+      var geo = this.translateGeoCoords(latitude, longtitude, radius);
+      var x = geo.x,
+          y = geo.y,
+          z = geo.z;
 
       // 3D marker -----------
       if(visible3dMaker){
@@ -413,6 +435,10 @@ export default Vue.extend({
 
       marker.position = new THREE.Vector3( x, y, z );
 
+      // カメラ位置をあわせる時に使う
+      marker.latitude = latitude;
+      marker.longtitude = longtitude;
+
       marker.key = key;
       marker.type = type;
 
@@ -422,20 +448,25 @@ export default Vue.extend({
     },
 
     onDocumentTouchStart( e ) {
-
-      e.preventDefault();
-
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
-      onDocumentMouseDown( e );
-
+      this.onDocumentMouseDown( e );
+    },
+    onDocumentTouchMove( e ) {
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onDocumentMouseMove( e );
+    },
+    onDocumentTouchEnd( e ) {
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onDocumentMouseUp( e );
     },
 
     onDocumentMouseDown( e ) {
 
       // Canvas部分でドラッグ開始したら
-      if( e.target === this.renderer.domElement){
-
+      if( e.target === this.renderer.domElement ){
         e.preventDefault();
 
         this.isUserInteracting = true;
@@ -470,21 +501,6 @@ export default Vue.extend({
       Cookies.set('lat', this.lat);
       // console.log(this.lon,this.lat);
     },
-
-    onDocumentMouseWheel( e ) {
-
-      // WebKit
-      if ( e.wheelDeltaY ) {
-        this.camera.fov -= e.wheelDeltaY * 0.05;
-      // Opera / Explorer 9
-      } else if ( e.wheelDelta ) {
-        this.camera.fov -= e.wheelDelta * 0.05;
-      // Firefox
-      } else if ( e.detail ) {
-        this.camera.fov += e.detail * 1.0;
-      }
-      this.camera.updateProjectionMatrix();
-    }
 
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
