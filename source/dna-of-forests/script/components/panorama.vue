@@ -239,7 +239,7 @@ export default Vue.extend({
 
     window.addEventListener( 'resize', this.onWindowResize, false );
     document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
-    document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
+    // document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
     document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
     // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
