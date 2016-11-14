@@ -14,6 +14,17 @@ if(!new MobileDetect(window.navigator.userAgent).mobile()){
   document.body.appendChild(video);
 }
 
+  var ua = navigator.userAgent;
+  if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
+    // do nothing
+  }
+  else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
+    // TODO 正規表現でwidthだけ変える
+    var vp = document.querySelector('head>meta[name="viewport"]');
+    vp.content = 'width=1150';
+  }
+
+
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
