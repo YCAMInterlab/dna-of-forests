@@ -239,7 +239,9 @@ export default Vue.extend({
 
     window.addEventListener( 'resize', this.onWindowResize, false );
     document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
-    // document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
+    document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
+    document.addEventListener( 'touchmove', this.onDocumentTouchMove, false );
+    document.addEventListener( 'touchend', this.onDocumentTouchEnd, false );
     document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
 
@@ -255,14 +257,6 @@ export default Vue.extend({
     },
 
     render( elapsed, ts ) {
-
-      if (this.options.orbitControls) {
-        let position = this.camera.position.toArray();
-        let direction = this.target.toArray();
-        this.controls.update(position, direction);
-        this.camera.position.fromArray(position);
-        this.camera.lookAt(this.target.fromArray(direction));
-      }
 
       if ( this.options.postprocessing ) {
         this.postprocessing.render( elapsed, ts, this.tick );
@@ -423,20 +417,25 @@ export default Vue.extend({
     },
 
     onDocumentTouchStart( e ) {
-
-      e.preventDefault();
-
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
       this.onDocumentMouseDown( e );
-
+    },
+    onDocumentTouchMove( e ) {
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onDocumentMouseMove( e );
+    },
+    onDocumentTouchEnd( e ) {
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onDocumentMouseUp( e );
     },
 
     onDocumentMouseDown( e ) {
 
       // Canvas部分でドラッグ開始したら
-      if( e.target === this.renderer.domElement){
-
+      if( e.target === this.renderer.domElement ){
         e.preventDefault();
 
         this.isUserInteracting = true;
