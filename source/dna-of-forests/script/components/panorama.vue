@@ -238,7 +238,6 @@ export default Vue.extend({
       this.scene.add(axis);
     }
 
-
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio( window.devicePixelRatio );
     this.renderer.setSize( this.width, this.height );
@@ -267,7 +266,7 @@ export default Vue.extend({
 
     render( elapsed, ts ) {
 
-      if ( this.options.postprocessing ) {
+      if( this.options.postprocessing ) {
         this.postprocessing.render( elapsed, ts, this.tick );
       } else {
         this.renderer.render( this.scene, this.camera );
@@ -284,7 +283,7 @@ export default Vue.extend({
 
     update() {
 
-      if ( this.isUserInteracting === false && this.$route.path==='/' ) {
+      if( this.isUserInteracting === false && this.$route.path==='/' ) {
         this.lon += 0.04;
       }
 
@@ -482,7 +481,6 @@ export default Vue.extend({
 
       Cookies.set('lon', this.lon);
       Cookies.set('lat', this.lat);
-      // console.log(this.lon,this.lat);
     },
 
   },
