@@ -192,7 +192,6 @@ export default Vue.extend({
     this.scene.add(ambient);
 
     // ジオメトリの追加
-
     var pano_sphere = this.create_pano_sphere();
     this.scene.add( pano_sphere );
 
@@ -223,12 +222,22 @@ export default Vue.extend({
       this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, geo.x, geo.y, geo.z);
     }
 
+    // 脚立を隠す円形を配置
+    var geometry = new THREE.CircleGeometry( 0.7, 128 );
+    var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+    var circle = new THREE.Mesh( geometry, material );
+    circle.position.set(0, -1.5, 0); // 原点だとカメラと同じ視点になるので表示されない
+    circle.rotateZ(Math.PI/2);
+    circle.rotateY(Math.PI/2);
+    this.scene.add( circle );
+
     // 座標軸の表示
     if(visibleAxisHelper){
       var axis = new THREE.AxisHelper(300);
       axis.position.set(0,-10,0); // 原点だとカメラと同じ視点になるので表示されない
       this.scene.add(axis);
     }
+
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio( window.devicePixelRatio );
