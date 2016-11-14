@@ -1,7 +1,18 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import MobileDetect from 'mobile-detect';
 
 Vue.use(VueRouter);
+
+if(!new MobileDetect(window.navigator.userAgent).mobile()){
+  var video = document.createElement('video');
+  video.id = 'video';
+  video.src = '/dna-of-forests/img/panorama.mp4';
+  video.autoplay = true;
+  video.loop = true;
+  video.style = 'display:none;';
+  document.body.appendChild(video);
+}
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's

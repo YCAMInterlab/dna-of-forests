@@ -352,9 +352,8 @@ export default Vue.extend({
         texture = new THREE.TextureLoader().load('/dna-of-forests/img/panorama.jpg');
       }
 
-      var material = new THREE.MeshBasicMaterial( {
-        map: texture
-      });
+      var material = new THREE.MeshBasicMaterial({ map: texture });
+
       return new THREE.Mesh( geometry, material );
     },
 
