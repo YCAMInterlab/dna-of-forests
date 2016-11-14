@@ -242,8 +242,6 @@ export default Vue.extend({
     // document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
     document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
     document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
-    // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
-    document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
 
     this.animate();
   },
@@ -473,21 +471,6 @@ export default Vue.extend({
       Cookies.set('lat', this.lat);
       // console.log(this.lon,this.lat);
     },
-
-    onDocumentMouseWheel( e ) {
-
-      // WebKit
-      if ( e.wheelDeltaY ) {
-        this.camera.fov -= e.wheelDeltaY * 0.05;
-      // Opera / Explorer 9
-      } else if ( e.wheelDelta ) {
-        this.camera.fov -= e.wheelDelta * 0.05;
-      // Firefox
-      } else if ( e.detail ) {
-        this.camera.fov += e.detail * 1.0;
-      }
-      this.camera.updateProjectionMatrix();
-    }
 
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
