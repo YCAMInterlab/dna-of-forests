@@ -1,6 +1,6 @@
 <template lang="pug">
 
-section
+section.list
   h1
     img(alt='採取したサンプル' src='img/list/title-samples.png' srcset='img/list/title-samples@2x.png 2x')
   table#samples
@@ -43,7 +43,7 @@ section
 
 <style lang="sass?indentedSyntax" scoped>
 
-section
+section.list
   height: 100%
   overflow-y: auto
   background-color: #151515
