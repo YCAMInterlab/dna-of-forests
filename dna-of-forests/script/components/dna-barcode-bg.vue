@@ -11,13 +11,13 @@
   0%
     background-position: 0% 0
   100%
-    background-position: 2000px 0
+    background-position: 10000px 0
 
 @keyframes bgscroll
   0%
     background-position: 0% 0
   100%
-    background-position: 2000px 0
+    background-position: 10000px 0
 
 .dna_barcode
   display: inline-block
@@ -25,8 +25,6 @@
   height: 3px
   margin-bottom: 2px
   margin-left: 4px
-  -webkit-animation: bgscroll 30s linear infinite
-  animation: bgscroll 30s linear infinite
   >canvas
     display: none
 
@@ -43,8 +41,11 @@ export default Vue.extend({
   },
   methods: {
     onDrawComplete(canvas){
+      var rnd = _.random(70, 150);
       this.$el.style =
-        'background-image: url('+canvas.toDataURL()+');';
+        'background-image: url('+canvas.toDataURL()+');'+
+        '-webkit-animation: bgscroll '+rnd+'s linear infinite;'+
+        'animation: bgscroll '+rnd+'s linear infinite';
     },
   },
 });
