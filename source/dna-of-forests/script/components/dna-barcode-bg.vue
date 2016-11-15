@@ -43,7 +43,6 @@ export default Vue.extend({
   },
   methods: {
     onDrawComplete(canvas){
-      console.log('onDrawComplete', canvas.width);
       this.$el.style =
         'background-image: url('+canvas.toDataURL()+');';
     },
