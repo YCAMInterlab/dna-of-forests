@@ -13,7 +13,7 @@
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
     span.genus {{ item.genus_ja }}
-    <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
+    <dna-barcode-bg :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
@@ -54,6 +54,17 @@
 #container
   height: 100%
   overflow: hidden
+
+  // 中心にマーカー
+  // &:after
+  //   content: ''
+  //   display: block
+  //   width: 4px
+  //   height: 4px
+  //   background-color: red
+  //   position: absolute
+  //   top: calc(50% - 2px)
+  //   left: calc(50% - 2px)
 
 .ycam
   position: absolute
@@ -105,10 +116,6 @@
       display: inline-block
       text-shadow: 0 0 8px #000
       margin-left: 5px
-    canvas
-      display: inline-block
-      margin-bottom: 2px
-      margin-left: 4px
   &.knowledge
     width: 14px
     height: 14px
@@ -248,16 +255,20 @@ export default Vue.extend({
 
     var default_lon = 1882;
     var default_lat = 46.2;
-    console.log('-',this.$route.params.index);
-    if(this.$route.params.index){
+    if(this.$route.params.index) {
+
       // // 選択された行がある場合は、そこまでスクロール
-      // var key = this.$route.params.index;
-      // var selectedMarker = _.filter(this.markers, function(m){ return m.key==key; })[0];
-      // default_lat = selectedMarker.latitude;
-      // default_lon = selectedMarker.longtitude;
-      // console.log('selectedMarker', selectedMarker);
+      var key = this.$route.params.index;
+      var selectedMarker = _.filter(this.markers, function(m){ return m.key==key; })[0];
+      default_lat = selectedMarker.latitude;
+      default_lon = -selectedMarker.longtitude;
+
+      // Drawer分差し引いた領域の中心になるように
+      // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
+      default_lon += 27;
     }
-    else if(this.$route.path!='/'){
+    else if(this.$route.path!='/') {
+
       default_lon = (Cookies.get('lon')*1 || default_lon);
       default_lat = (Cookies.get('lat')*1 || default_lat);
     }
@@ -280,7 +291,7 @@ export default Vue.extend({
 
     render( elapsed, ts ) {
 
-      if ( this.options.postprocessing ) {
+      if( this.options.postprocessing ) {
         this.postprocessing.render( elapsed, ts, this.tick );
       } else {
         this.renderer.render( this.scene, this.camera );
@@ -289,7 +300,7 @@ export default Vue.extend({
 
     onWindowResize() {
       this.width = this.$el.offsetWidth;
-      this.height = window.innerHeight;
+      this.height = this.$el.offsetHeight;
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize( this.width, this.height );
@@ -297,11 +308,12 @@ export default Vue.extend({
 
     update() {
 
-      if ( this.isUserInteracting === false && this.$route.path==='/' ) {
+      if( this.isUserInteracting === false && this.$route.path==='/' ) {
         this.lon += 0.04;
       }
 
-      this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
+      // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); 少し上向きにしたい場合
+      this.lat = Math.max( -90, Math.min( 90, this.lat ) );
       this.phi = THREE.Math.degToRad( 90 - this.lat );
       this.theta = THREE.Math.degToRad( this.lon );
 
@@ -499,9 +511,11 @@ export default Vue.extend({
 
       Cookies.set('lon', this.lon);
       Cookies.set('lat', this.lat);
-      // console.log(this.lon,this.lat);
     },
 
+  },
+  components: {
+    'dna-barcode-bg': require('./dna-barcode-bg.vue')
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
