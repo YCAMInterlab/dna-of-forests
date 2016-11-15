@@ -13,7 +13,7 @@
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
     span.genus {{ item.genus_ja }}
-    <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
+    <dna-barcode-bg :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
@@ -116,10 +116,6 @@
       display: inline-block
       text-shadow: 0 0 8px #000
       margin-left: 5px
-    canvas
-      display: inline-block
-      margin-bottom: 2px
-      margin-left: 4px
   &.knowledge
     width: 14px
     height: 14px
@@ -517,6 +513,9 @@ export default Vue.extend({
       Cookies.set('lat', this.lat);
     },
 
+  },
+  components: {
+    'dna-barcode-bg': require('./dna-barcode-bg.vue')
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
