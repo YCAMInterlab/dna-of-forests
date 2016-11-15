@@ -58,6 +58,8 @@ a
   overflow: hidden
   background-color: #000
   position: relative
+  // ↓これがないとiOS Safariで慣性スクロールが有効化されない
+  -webkit-overflow-scrolling: touch
 
 @media (max-width: 660px)
   #content
