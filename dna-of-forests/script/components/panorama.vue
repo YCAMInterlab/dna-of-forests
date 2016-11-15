@@ -265,7 +265,7 @@ export default Vue.extend({
 
       // Drawer分差し引いた領域の中心になるように
       // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
-      default_lon += 27;
+      // default_lon += 27;
     }
     else if(this.$route.path!='/') {
 
@@ -460,19 +460,25 @@ export default Vue.extend({
     },
 
     onDocumentTouchStart( e ) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onDocumentMouseDown( e );
+      if( e.target === this.renderer.domElement ){
+        e.clientX = e.touches[0].clientX;
+        e.clientY = e.touches[0].clientY;
+        this.onDocumentMouseDown( e );
+      }
     },
     onDocumentTouchMove( e ) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onDocumentMouseMove( e );
+      if( e.target === this.renderer.domElement ){
+        e.clientX = e.touches[0].clientX;
+        e.clientY = e.touches[0].clientY;
+        this.onDocumentMouseMove( e );
+      }
     },
     onDocumentTouchEnd( e ) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onDocumentMouseUp( e );
+      if( e.target === this.renderer.domElement ){
+        e.clientX = e.touches[0].clientX;
+        e.clientY = e.touches[0].clientY;
+        this.onDocumentMouseUp( e );
+      }
     },
 
     onDocumentMouseDown( e ) {

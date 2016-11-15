@@ -97,6 +97,8 @@ article
   padding: 25px
   overflow-y: auto
   height: calc(100% - 125px)
+  // ↓これがないとiOS Safariで慣性スクロールが有効化されない
+  -webkit-overflow-scrolling: touch
 
 h3
   font-size: 16px

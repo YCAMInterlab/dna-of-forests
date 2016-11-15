@@ -1,21 +1,21 @@
 <template lang="pug">
 
-section
+section.list
   h1
     img(alt='採取したサンプル' src='img/list/title-samples.png' srcset='img/list/title-samples@2x.png 2x')
   table#samples
     thead
       tr
         th.index No.
-        th.genus_ja 属名
-        th.genus_en 属名（英）
+        th.result 同定結果
         th(colspan='2').dna 同定に用いたDNA配列
         th.collection_date 採取日
     tbody
       tr(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
-        td.genus_ja {{ item.genus_ja }}
-        td.genus_en {{ item.genus_en }}
+        td.result
+          | {{ item.genus_ja }}
+          span.genus_en ({{ item.genus_en }})
         template(v-if="item.dna_sequences.length==0")
           td.dna(colspan='2')
         template(v-if="item.dna_sequences.length==1")
@@ -43,7 +43,7 @@ section
 
 <style lang="sass?indentedSyntax" scoped>
 
-section
+section.list
   height: 100%
   overflow-y: auto
   background-color: #151515
@@ -80,6 +80,9 @@ table
       background-color: #202020
     td
       white-space: nowrap
+      .genus_en
+        margin-left: 1em
+        color: #979799
       &.dna
         max-width: 300px
         overflow: hidden
@@ -102,25 +105,28 @@ table
       &.title,
       &.description,
       &.index,
-      &.genus_ja
+      &.result
         color: #fff
       &.title,
-      &.genus_ja,
-      &.genus_en
-          width: 150px
+      &.result,
       &.description
-        max-width: 150px
         overflow: hidden
         white-space: nowrap
         text-overflow: ellipsis
+      &.title
+        width: 150px
+      &.result,
+      &.description
+        max-width: 150px
+      &.collection_date
+        width: 80px
 
-
-// @media (max-width: 1280px) and (orientation: portrait)
-
-@media (max-width: 1280px)
+@media (max-width: 1000px)
   table
-    .genus_en
-      display: none
+    td.result
+      width: 150px
+      .genus_en
+        display: none
 
 @media (max-width: 660px)
   table

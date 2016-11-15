@@ -42,10 +42,8 @@ export default Vue.extend({
   methods: {
     onDrawComplete(canvas){
       var rnd = _.random(70, 150);
-      this.$el.style =
-        'background-image: url('+canvas.toDataURL()+');'+
-        '-webkit-animation: bgscroll '+rnd+'s linear infinite;'+
-        'animation: bgscroll '+rnd+'s linear infinite';
+      this.$el.style.backgroundImage = 'url('+canvas.toDataURL()+')';
+      this.$el.style.animation = 'bgscroll '+rnd+'s linear infinite';
     },
   },
 });
