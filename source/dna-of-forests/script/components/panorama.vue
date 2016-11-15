@@ -300,7 +300,7 @@ export default Vue.extend({
 
     onWindowResize() {
       this.width = this.$el.offsetWidth;
-      this.height = window.innerHeight;
+      this.height = this.$el.offsetHeight;
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize( this.width, this.height );
