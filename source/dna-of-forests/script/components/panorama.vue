@@ -265,7 +265,7 @@ export default Vue.extend({
 
       // Drawer分差し引いた領域の中心になるように
       // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
-      default_lon += 27;
+      // default_lon += 27;
     }
     else if(this.$route.path!='/') {
 
