@@ -460,19 +460,25 @@ export default Vue.extend({
     },
 
     onDocumentTouchStart( e ) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onDocumentMouseDown( e );
+      if( e.target === this.renderer.domElement ){
+        e.clientX = e.touches[0].clientX;
+        e.clientY = e.touches[0].clientY;
+        this.onDocumentMouseDown( e );
+      }
     },
     onDocumentTouchMove( e ) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onDocumentMouseMove( e );
+      if( e.target === this.renderer.domElement ){
+        e.clientX = e.touches[0].clientX;
+        e.clientY = e.touches[0].clientY;
+        this.onDocumentMouseMove( e );
+      }
     },
     onDocumentTouchEnd( e ) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onDocumentMouseUp( e );
+      if( e.target === this.renderer.domElement ){
+        e.clientX = e.touches[0].clientX;
+        e.clientY = e.touches[0].clientY;
+        this.onDocumentMouseUp( e );
+      }
     },
 
     onDocumentMouseDown( e ) {
