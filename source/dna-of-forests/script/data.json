@@ -311,8 +311,7 @@
       "id": "10-1-B",
       "genus_ja": "再解析中",
       "genus_en": "Under re-analysis",
-      "dna_sequences": [
-      ],
+      "dna_sequences": null,
       "marker_position": { "latitude": 5.4, "longtitude": -46, "radius": 22 },
       "collection_date": "2016.10.10",
       "microscope": {
