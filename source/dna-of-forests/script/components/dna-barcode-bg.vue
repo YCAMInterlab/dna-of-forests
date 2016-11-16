@@ -44,6 +44,7 @@ export default Vue.extend({
       var rnd = _.random(70, 150);
       this.$el.style.backgroundImage = 'url('+canvas.toDataURL()+')';
       this.$el.style.animation = 'bgscroll '+rnd+'s linear infinite';
+      canvas.parentNode.removeChild(canvas);
     },
   },
 });
