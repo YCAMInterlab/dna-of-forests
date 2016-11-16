@@ -120,7 +120,7 @@
     {
       "id": "9-2-B",
       "genus_ja": "ツボゴケ",
-      "genus_en": "Plagiomnium cuspidatum ",
+      "genus_en": "Plagiomnium cuspidatum",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -706,7 +706,7 @@
     },
     {
       "id": "B-11",
-      "genus_ja": " オオイチシダ",
+      "genus_ja": "オオイチシダ",
       "genus_en": "Dryopteris pacifica (Nakai) Tagawa",
       "dna_sequences": [
         {

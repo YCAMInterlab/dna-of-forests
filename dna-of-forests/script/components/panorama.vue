@@ -11,11 +11,10 @@
     | Yamaguchi Center for Arts and Media,<br>
     | All Rights Reserved.
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
-    img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
-    span.genus {{ item.genus_ja }}
+    img.label(v-bind:alt="item.genus_ja" v-bind:src="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'@2x.png 2x'")
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
-    img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
+    img.label(v-bind:src="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'@2x.png 2x'")
 
 </template>
 
@@ -28,7 +27,6 @@
       opacity: 1
     100%
       opacity: 0.4
-
 @-webkit-keyframes flash
     0%
       opacity: 0.4
@@ -44,6 +42,28 @@
     100%
       opacity: 0.4
 
+@keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+@-webkit-keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+@-moz-keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+
 .fade-enter-active,
 .fade-leave-active
   transition: opacity 1.5s
@@ -55,7 +75,7 @@
   height: 100%
   overflow: hidden
 
-  // 中心にマーカー
+  // 中心にマーカーを描画
   // &:after
   //   content: ''
   //   display: block
@@ -91,40 +111,63 @@
   cursor: pointer
   z-index: 10
   user-select: none
+
+  height: 14px
+  line-height: 14px
+  white-space: nowrap
+
+  // 左中央を中心に回転
+  transform-origin: 0% 50%
+  -webkit-transform-origin: 0% 50%
+  transform: rotate(-90deg)
+  -webkit-transform: rotate(-90deg)
+
+  img
+    display: inline-block
+    vertical-align: middle
+    cursor: pointer
+  img.label
+    margin-left: 5px
+
   &:hover
-    opacity: 0.7
+    animation: hover_flash 0.2s 1 linear
+    -webkit-animation: hover_flash 0.2s 1 linear
+    -moz-animation: hover_flash 0.2s 1 linear
   &.selected
     animation: flash 0.6s infinite linear
     -webkit-animation: flash 0.6s infinite linear
     -moz-animation: flash 0.6s infinite linear
+
   &.sample
-    height: 14px
-    white-space: nowrap
-    // 矢印の先を中心に回転
-    transform-origin: 0% 50%
-    -webkit-transform-origin: 0% 50%
-    transform: rotate(-90deg)
-    -webkit-transform: rotate(-90deg)
-    img
+    // 左中央が基準点になるようにずらす
+    // margin-top: -7px
+    &:before
       display: inline-block
-      float: left
-    span.genus
-      color: #fcff00
-      font-family: 'Roboto'
-      font-size: 11px
-      letter-spacing: 0.001em
-      display: inline-block
-      text-shadow: 0 0 8px #000
+      content: url(/dna-of-forests/img/panorama/marker-arrow.png)
+      width: 13px
+      height: 14px
+      vertical-align: middle
+    .dna_barcode
       margin-left: 5px
+      cursor: pointer
+    // ボバーした時にDNAの動きを遅くする
+    &:hover
+      .dna_barcode
+        animation: bgscroll 500s linear infinite !important
+
   &.knowledge
-    width: 14px
-    height: 14px
-    border-radius: 7px
-    background-color: #fcff00
-    >img
-      position: absolute
-      bottom: 20px
-      left: 2px
+    // markerの中央が基準点になるようにずらす
+    // margin-top: -7px
+    // margin-left: -7px
+    &:before
+      display: inline-block
+      content: ''
+      width: 14px
+      height: 14px
+      vertical-align: middle
+      border-radius: 7px
+      background-color: #fcff00
+
 
 @media (max-width: 660px)
   .ycam
@@ -206,21 +249,20 @@ export default Vue.extend({
     }
 
     // マーカー
+
+    // 並び順に沿って、URLに現出する"alias"を設定
+    for(var i = 0; i<this.samples.length; i++){
+      this.samples[i]['alias'] = 's-'+(i+1);
+    }
+    for(var i = 0; i<this.knowledges.length; i++){
+      this.knowledges[i]['alias'] = 'k-'+(i+1);
+    }
     var marker_all = this.samples.concat(this.knowledges);
     // 距離でソートして、重なり順序がおかしくならないように
     marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
-    var s_idx = 0;
-    var k_idx = 0;
     for(var i = 0; i<marker_all.length; i++){
       var data = marker_all[i];
-      if(data.id){
-        s_idx++;
-        this.create_marker(data, 's-'+(s_idx));
-      }
-      else{
-        k_idx++;
-        this.create_marker(data, 'k-'+(k_idx));
-      }
+      this.create_marker(data);
     }
 
 
@@ -288,6 +330,11 @@ export default Vue.extend({
   },
 
   methods: {
+
+    // 英語名を全部小文字にしたり置換してファイル名を取得
+    filename(str){
+      return str.toLowerCase().replace(/[\(|\)|.]/g , '').replace(/ /g , '-');
+    },
 
     animate( ts ) {
 
@@ -428,7 +475,7 @@ export default Vue.extend({
 
     // マーカー
     create_marker(data, key){
-
+      var key = data.alias;
       var type = (key.indexOf('s-')==0) ? 'sample' : 'knowledge';
       var latitude = data.marker_position.latitude;
       var longtitude = data.marker_position.longtitude;
