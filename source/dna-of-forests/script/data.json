@@ -356,8 +356,8 @@
     },
     {
       "id": "10-2-A",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "matK",
@@ -382,8 +382,8 @@
     },
     {
       "id": "10-2-B",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -428,8 +428,8 @@
     },
     {
       "id": "10-2-D",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "matK",
@@ -479,8 +479,8 @@
     },
     {
       "id": "10-3-D",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "matK",
@@ -522,8 +522,8 @@
     },
     {
       "id": "ersin",
-      "genus_ja": "菌類(環境サンプル)？",
-      "genus_en": "Uncultured fungus?",
+      "genus_ja": "属種が未同定の菌",
+      "genus_en": "Uncultured fungus",
       "dna_sequences": [
         {
           "region": "ITS1",
