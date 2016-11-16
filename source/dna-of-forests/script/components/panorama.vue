@@ -55,7 +55,7 @@
   height: 100%
   overflow: hidden
 
-  // 中心にマーカー
+  // 中心にマーカーを描画
   // &:after
   //   content: ''
   //   display: block
