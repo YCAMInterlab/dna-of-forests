@@ -206,21 +206,20 @@ export default Vue.extend({
     }
 
     // マーカー
+
+    // 並び順に沿って、URLに現出する"alias"を設定
+    for(var i = 0; i<this.samples.length; i++){
+      this.samples[i]['alias'] = 's-'+(i+1);
+    }
+    for(var i = 0; i<this.knowledges.length; i++){
+      this.knowledges[i]['alias'] = 'k-'+(i+1);
+    }
     var marker_all = this.samples.concat(this.knowledges);
     // 距離でソートして、重なり順序がおかしくならないように
     marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
-    var s_idx = 0;
-    var k_idx = 0;
     for(var i = 0; i<marker_all.length; i++){
       var data = marker_all[i];
-      if(data.id){
-        s_idx++;
-        this.create_marker(data, 's-'+(s_idx));
-      }
-      else{
-        k_idx++;
-        this.create_marker(data, 'k-'+(k_idx));
-      }
+      this.create_marker(data);
     }
 
 
@@ -428,7 +427,7 @@ export default Vue.extend({
 
     // マーカー
     create_marker(data, key){
-
+      var key = data.alias;
       var type = (key.indexOf('s-')==0) ? 'sample' : 'knowledge';
       var latitude = data.marker_position.latitude;
       var longtitude = data.marker_position.longtitude;
