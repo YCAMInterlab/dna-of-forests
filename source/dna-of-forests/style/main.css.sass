@@ -1,0 +1,68 @@
+@import general/reset
+@import general/fixes
+@import general/mixins
+@import general/clf
+
+section
+  max-height: inherit
+
+
+
+// =========================
+// Constant
+
+$yu_gothic: '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif
+
+// =========================
+// Common
+
+@font-face
+  font-family: "Roboto"
+  src: url("Roboto-Medium.ttf")
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: "Roboto"
+  src: url("Roboto-Bold.ttf")
+  font-weight: bold
+  font-style: normal
+
+html,
+body
+  height: 100%
+
+body
+  position: relative
+  font-family: $yu_gothic
+  color: #000
+  font-size: 13px
+  line-height: 1em
+  color: #fff
+  background-color: #000
+
+a
+  cursor: pointer // これがないとiOSでクリックイベントが発生しない
+  transition-duration: 0.2s
+
+#app
+  position: relative
+  height: 100%
+  min-height: 100%
+  width: 100%
+  overflow: hidden
+
+#content
+  width: calc(100% - 80px)
+  float: left
+  height: 100%
+  overflow: hidden
+  background-color: #000
+  position: relative
+  // ↓これがないとiOS Safariで慣性スクロールが有効化されない
+  -webkit-overflow-scrolling: touch
+
+@media (max-width: 660px)
+  #content
+    width: 100%
+    height: calc(100% - 100px)

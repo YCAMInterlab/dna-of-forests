@@ -3,17 +3,22 @@ var Clean = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './source/script/main.js'
+    main: './source/dna-of-forests/script/main.js'
   },
 
   resolve: {
-    root: __dirname + '/source/script',
-    // extensions: ['','.js','.jsx']
+    root: __dirname + '/source/dna-of-forests/script',
+    // extensions: ['','.js','.jsx'],
+
+    // HTMLファイル内でVueの記法を可能にする
+    alias: {
+      'vue$': 'vue/dist/vue.js'
+    }
   },
 
   output: {
     path: __dirname + '/.tmp/dist',
-    filename: 'script/[name].js',
+    filename: '/dna-of-forests/script/[name].js',
   },
 
   module: {
@@ -30,6 +35,10 @@ module.exports = {
         test: /\.json$/,
         exclude: /node_modules/,
         loader: 'json-loader'
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
       }
     ],
   },
@@ -41,11 +50,11 @@ module.exports = {
   plugins: [
     new Clean(['.tmp']),
     // Declare Global variables
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Cookies: 'js-cookie',
-    }),
+    // new webpack.ProvidePlugin({
+    //   $: 'jquery',
+    //   jQuery: 'jquery',
+    //   'window.jQuery': 'jquery',
+    //   Cookies: 'js-cookie',
+    // }),
   ],
 };

@@ -2,9 +2,9 @@
 # Page options, layouts, aliases and proxies
 ###
 
-set :css_dir, 'style'
-set :js_dir, 'script'
-set :images_dir, 'img'
+set :css_dir, 'dna-of-forests/style'
+set :js_dir, 'dna-of-forests/script'
+set :images_dir, 'dna-of-forests/img'
 # set :build_dir, '../html'
 
 ignore '*.git*'
@@ -64,7 +64,7 @@ configure :build do
 
   # activate :minify_css
   # activate :minify_javascript
-  activate :asset_hash
+  # activate :asset_hash
 
   # Use relative URLs
   # activate :relative_assets
@@ -76,7 +76,7 @@ configure :build do
   # こうすることで stylesheet_link_tag などで展開されるパスが
   # /my_project/stylesheets/normalize.css
   # のようになる
-  activate :asset_host, host: '/dna-of-forests'
+  # activate :asset_host, host: '/dna-of-forests'
 end
 
 ###
