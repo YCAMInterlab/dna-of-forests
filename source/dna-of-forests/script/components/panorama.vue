@@ -27,7 +27,6 @@
       opacity: 1
     100%
       opacity: 0.4
-
 @-webkit-keyframes flash
     0%
       opacity: 0.4
@@ -42,6 +41,28 @@
       opacity: 1
     100%
       opacity: 0.4
+
+@keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+@-webkit-keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+@-moz-keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
 
 .fade-enter-active,
 .fade-leave-active
@@ -104,11 +125,14 @@
   img
     display: inline-block
     vertical-align: middle
+    cursor: pointer
   img.label
     margin-left: 5px
 
   &:hover
-    opacity: 0.7
+    animation: hover_flash 0.2s 1 linear
+    -webkit-animation: hover_flash 0.2s 1 linear
+    -moz-animation: hover_flash 0.2s 1 linear
   &.selected
     animation: flash 0.6s infinite linear
     -webkit-animation: flash 0.6s infinite linear
@@ -125,6 +149,11 @@
       vertical-align: middle
     .dna_barcode
       margin-left: 5px
+      cursor: pointer
+    // ボバーした時にDNAの動きを遅くする
+    &:hover
+      .dna_barcode
+        animation: bgscroll 500s linear infinite !important
 
   &.knowledge
     // markerの中央が基準点になるようにずらす
