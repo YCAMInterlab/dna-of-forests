@@ -934,7 +934,7 @@
     {
       "title": "ノネズミ",
       "description": "森にはたくさんのノネズミが生息しています。林の中では直径1-2cmの穴を多く見つけることができますが、これらはノネズミの巣穴であることも多いです。ノネズミは夜行性の動物で、夜に活動してドングリ類などを食べています。フクロウの主な食料でもあります。",
-      "marker_position": { "latitude": 5, "longtitude": 35, "radius": 13 }
+      "marker_position": { "latitude": -5, "longtitude": 0, "radius": 6.5 }
     },
     {
       "title": "ザトウムシ",
