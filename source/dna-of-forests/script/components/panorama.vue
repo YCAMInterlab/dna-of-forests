@@ -11,11 +11,10 @@
     | Yamaguchi Center for Arts and Media,<br>
     | All Rights Reserved.
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
-    img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
-    span.genus {{ item.genus_ja }}
+    img.label(v-bind:alt="item.genus_ja" v-bind:src="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'@2x.png 2x'")
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
-    img(v-bind:src="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'@2x.png 2x'")
+    img.label(v-bind:src="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'@2x.png 2x'")
 
 </template>
 
@@ -91,40 +90,55 @@
   cursor: pointer
   z-index: 10
   user-select: none
+
+  height: 14px
+  line-height: 14px
+  white-space: nowrap
+
+  // 左中央を中心に回転
+  transform-origin: 0% 50%
+  -webkit-transform-origin: 0% 50%
+  transform: rotate(-90deg)
+  -webkit-transform: rotate(-90deg)
+
+  img
+    display: inline-block
+    vertical-align: middle
+  img.label
+    margin-left: 5px
+
   &:hover
     opacity: 0.7
   &.selected
     animation: flash 0.6s infinite linear
     -webkit-animation: flash 0.6s infinite linear
     -moz-animation: flash 0.6s infinite linear
+
   &.sample
-    height: 14px
-    white-space: nowrap
-    // 矢印の先を中心に回転
-    transform-origin: 0% 50%
-    -webkit-transform-origin: 0% 50%
-    transform: rotate(-90deg)
-    -webkit-transform: rotate(-90deg)
-    img
+    // 左中央が基準点になるようにずらす
+    // margin-top: -7px
+    &:before
       display: inline-block
-      float: left
-    span.genus
-      color: #fcff00
-      font-family: 'Roboto'
-      font-size: 11px
-      letter-spacing: 0.001em
-      display: inline-block
-      text-shadow: 0 0 8px #000
+      content: url(/dna-of-forests/img/panorama/marker-arrow.png)
+      width: 13px
+      height: 14px
+      vertical-align: middle
+    .dna_barcode
       margin-left: 5px
+
   &.knowledge
-    width: 14px
-    height: 14px
-    border-radius: 7px
-    background-color: #fcff00
-    >img
-      position: absolute
-      bottom: 20px
-      left: 2px
+    // markerの中央が基準点になるようにずらす
+    // margin-top: -7px
+    // margin-left: -7px
+    &:before
+      display: inline-block
+      content: ''
+      width: 14px
+      height: 14px
+      vertical-align: middle
+      border-radius: 7px
+      background-color: #fcff00
+
 
 @media (max-width: 660px)
   .ycam
@@ -287,6 +301,11 @@ export default Vue.extend({
   },
 
   methods: {
+
+    // 英語名を全部小文字にしたり置換してファイル名を取得
+    filename(str){
+      return str.toLowerCase().replace(/[\(|\)|.]/g , '').replace(/ /g , '-');
+    },
 
     animate( ts ) {
 
