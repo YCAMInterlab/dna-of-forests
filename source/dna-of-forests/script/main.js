@@ -10,7 +10,7 @@ if(!new MobileDetect(window.navigator.userAgent).mobile()){
   video.src = '/dna-of-forests/img/panorama.mp4';
   video.autoplay = true;
   video.loop = true;
-  video.style = 'display:none;';
+  video.style.display = 'none';
   document.body.appendChild(video);
 }
 
