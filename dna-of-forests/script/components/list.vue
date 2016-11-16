@@ -16,19 +16,22 @@ section.list
         td.result
           | {{ item.genus_ja }}
           span.genus_en ({{ item.genus_en }})
-        template(v-if="item.dna_sequences.length==0")
+        template(v-if="item.dna_sequences")
+          template(v-if="item.dna_sequences.length==0")
+            td.dna(colspan='2')
+          template(v-if="item.dna_sequences.length==1")
+            td.dna(colspan='2')
+              span.region {{ item.dna_sequences[0].region }}
+              <dna-barcode :dna="item.dna_sequences[0].text">
+          template(v-if="item.dna_sequences.length==2")
+            td.dna1
+              span.region {{ item.dna_sequences[0].region }}
+              <dna-barcode :dna="item.dna_sequences[0].text">
+            td.dna2
+              span.region {{ item.dna_sequences[1].region }}
+              <dna-barcode :dna="item.dna_sequences[1].text">
+        template(v-else)
           td.dna(colspan='2')
-        template(v-if="item.dna_sequences.length==1")
-          td.dna(colspan='2')
-            span.region {{ item.dna_sequences[0].region }}
-            <dna-barcode :dna="item.dna_sequences[0].text">
-        template(v-if="item.dna_sequences.length==2")
-          td.dna1
-            span.region {{ item.dna_sequences[0].region }}
-            <dna-barcode :dna="item.dna_sequences[0].text">
-          td.dna2
-            span.region {{ item.dna_sequences[1].region }}
-            <dna-barcode :dna="item.dna_sequences[1].text">
         td.collection_date {{ item.collection_date }}
   h1
     img(alt='森の知識' src='img/list/title-knowledges.png' srcset='img/list/title-knowledges@2x.png 2x')

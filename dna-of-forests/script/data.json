@@ -308,6 +308,24 @@
       "memofig_width": "390px"
     },
     {
+      "id": "10-1-B",
+      "genus_ja": "再解析中",
+      "genus_en": "Under re-analysis",
+      "dna_sequences": null,
+      "marker_position": { "latitude": 5.4, "longtitude": -46, "radius": 22 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "hff7rKFclZ8"
+      },
+      "memo": {
+        "どんな場所で採ったか": "滝付近の岩場（高いところ）",
+        "なぜその植物を採取したか": "周りの植物と比べて、背が高くて目立っていたから！",
+        "なんの植物だと思うか": "つるむらさき（？）",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "390px"
+    },
+    {
       "id": "10-1-C",
       "genus_ja": "マメヅタ",
       "genus_en": "Lemmaphyllum microphyllum",
@@ -356,8 +374,8 @@
     },
     {
       "id": "10-2-A",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "matK",
@@ -382,8 +400,8 @@
     },
     {
       "id": "10-2-B",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -428,8 +446,8 @@
     },
     {
       "id": "10-2-D",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "matK",
@@ -478,9 +496,63 @@
       "memofig_width": "390px"
     },
     {
+      "id": "10-3-B",
+      "genus_ja": "再解析中",
+      "genus_en": "Under re-analysis",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNATAANNTGCCTTATAATCCCCCCTATTGNNANANCCANTATGATNATGNNNAAGGNTTCTGCATATACACCCCCNTCTATCCNTNAAATCCNAATCTGATAAATCAGTCCGAACCGGCTTACTANCTGGATGTCCTAATAGATTACAAAATTTCGCTTTAGGGAATGATCCACTTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCNTTATNAAGTAAAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAAATAGATTCNNNTCAAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGGAGAANATTGGTTNNNNGAGAGAAANNNNNAANNANNNATTC"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNNAAGCTGGTGTTAAAGATTATANATTGGACTTATTATACTCCCGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCCGGGGCTGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTTAAGGCTCTACGCGCTCTACGCTTGGAAGACCTTCGAATTCCCCCCGCTTATTCTAAAACTTTCCTTGGACCGCCTCATGGNATTCAGGTCGAAAGAGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAANCCAAAATTAGGNTTGTCTGCTAAGAATTATGGTAGAGNNNNNTANGAATGCCTCCNTGNNGGACTNNATNTTTTACANNNNNNNNANAAGGACCCCNNAGGATGTTGGTCGTANATGAGAAGATTGTTNTNNGANNAAAGNCNAANNTANNNTCNTANTCNCNTACCTTNNAANTNTATATAACN"
+        }
+      ],
+      "marker_position": { "latitude": -0.5, "longtitude": -62.5, "radius": 18 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "tcJ2q_q9ye0"
+      },
+      "memo": {
+        "どんな場所で採ったか": "水分をふくんだ岩",
+        "なぜその植物を採取したか": "岩から生えていたから<br>シダの形が他の植物と大きく違うので、遺伝子に特徴があるのではないかと思いました。",
+        "なんの植物だと思うか": "シダ",
+        "採取の手順にて": "①葉をカッターで細くする→においが発する（草っぽい）<br>②乳鉢と乳棒ですりつぶす<br>③（チューブのイラスト有り）にすりつぶしたサンプルを入れる"
+      },
+      "memofig_width": "250px"
+    },
+    {
+      "id": "10-3-C",
+      "genus_ja": "再解析中",
+      "genus_en": "Under re-analysis",
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNNNNAAGTCGANGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCATTATTAATTAGAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAATAGATTCGTTCAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGAGAAGATTGGTTANNGGAGAAAGACGAAAATAGATTCGTATTCACATACATAAAAATTATATAACAAGAAGAGTAATCTTTGATTTCTTTTTGTTAAAAAATGAAAACAGGTTTTCTTTGTAGAAAGAATCTTATTGCAATTACAATACTCGCGTAGAAAGAATCGTAATAAGTGCAAAGAAGGGGCATCTTTTACCNANTAGCGAAAGGGTTGTACANNTCGCANNNNNNNN"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNAAGCCGGNGTTNNNAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTNACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGGAATGTGNTTGGGATTCAAAGCTTTACGAGCTTTACGTTTAGAAGATTTGCGAATTCCCCCCGCTTATTCCAAAACTTTCATAGGTCCACCCCATGGTATCCAAGTTGAAAGAGACAAATCAAACAAATATGGCCGTCCTTTATTAGGATGTACTATTAAACCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTTTATGAATGTCTCCGTGGTGGACNNNNNNNTTACANNNN"
+        }
+      ],
+      "marker_position": { "latitude": -13, "longtitude": 93, "radius": 4.6 },
+      "collection_date": "2016.10.10",
+      "microscope": {
+        "youtube_id": "jkDc7iL5u-g"
+      },
+      "memo": {
+        "どんな場所で採ったか": "岩肌",
+        "なぜその植物を採取したか": "かわいかったから",
+        "なんの植物だと思うか": "コケの進化したやつ",
+        "植物の特徴を絵や文字で書いて下さい": ""
+      },
+      "memofig_width": "300px"
+    },
+    {
       "id": "10-3-D",
-      "genus_ja": "トウキョウチクトウ？",
-      "genus_en": "Trachelospermum jasminoides?",
+      "genus_ja": "テイカカズラ属",
+      "genus_en": "Trachelospermum",
       "dna_sequences": [
         {
           "region": "matK",
@@ -522,8 +594,8 @@
     },
     {
       "id": "ersin",
-      "genus_ja": "菌類(環境サンプル)？",
-      "genus_en": "Uncultured fungus?",
+      "genus_ja": "属種が未同定の菌",
+      "genus_en": "Uncultured fungus",
       "dna_sequences": [
         {
           "region": "ITS1",

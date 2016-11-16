@@ -12,16 +12,16 @@ article.about
       | 私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>
       | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森の生き物になったら</a>」の仁保の森ツアープログラムとして開催されました。
     .carousel
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/9.jpg' srcset='img/about/slide/9@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/10.jpg' srcset='img/about/slide/10@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/1.jpg' srcset='img/about/slide/1@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/2.jpg' srcset='img/about/slide/2@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/3.jpg' srcset='img/about/slide/3@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/4.jpg' srcset='img/about/slide/4@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/5.jpg' srcset='img/about/slide/5@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/6.jpg' srcset='img/about/slide/6@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/7.jpg' srcset='img/about/slide/7@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/8.jpg' srcset='img/about/slide/8@2x.jpg 2x')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/1.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/2.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/3.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/4.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/5.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8.jpg);')
   section#dna-barcoding
     h2
       img(alt='解析方法（DNAバーコーディング）について' src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
@@ -158,6 +158,8 @@ article.about
       width: 100%
       height: 100%
       margin-right: 0
+      background-position: center
+      background-size: cover
     .flickity-page-dots
       bottom: -38px
       .dot
@@ -195,6 +197,27 @@ article.about
     &:hover
       .flickity-prev-next-button:not([disabled])
         opacity: 1
+
+@media (max-width: 900px)
+  article.about
+
+    a.border
+      +dotted(bottom, #ccc, 2, 6, 2)
+      &:hover
+        +dotted(bottom, #fff, 2, 6, 2)
+
+    section
+      width: 100%
+      p
+        padding-left: 50px
+        padding-right: 50px
+        font-size: 18px
+      .carousel
+        width: 100%
+        margin-left: 0
+        margin-right: 0
+        &:before
+          display: none
 
 </style>
 

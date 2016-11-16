@@ -13,7 +13,7 @@
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
     span.genus {{ item.genus_ja }}
-    <dna-barcode-bg :dna="item.dna_sequences[0].text">
+    <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
     img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
 
@@ -205,18 +205,24 @@ export default Vue.extend({
       this.scene.add(sphere);
     }
 
-    // 半径は全てメートルで大体目測で合わせる
-    // サンプルマーカー
-    for(var i = 0; i<this.samples.length; i++){
-      var data = this.samples[i].marker_position;
-      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, data.latitude, data.longtitude, data.radius);
+    // マーカー
+    var marker_all = this.samples.concat(this.knowledges);
+    // 距離でソートして、重なり順序がおかしくならないように
+    marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
+    var s_idx = 0;
+    var k_idx = 0;
+    for(var i = 0; i<marker_all.length; i++){
+      var data = marker_all[i];
+      if(data.id){
+        s_idx++;
+        this.create_marker(data, 's-'+(s_idx));
+      }
+      else{
+        k_idx++;
+        this.create_marker(data, 'k-'+(k_idx));
+      }
     }
 
-    // // 森の知識マーカー
-    for(var i = 0; i<this.knowledges.length; i++){
-      var data = this.knowledges[i].marker_position;
-      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, data.latitude, data.longtitude, data.radius);
-    }
 
     // 脚立を隠す円形を配置
     var geometry = new THREE.CircleGeometry( 0.6, 128 );
@@ -421,8 +427,12 @@ export default Vue.extend({
     },
 
     // マーカー
-    create_marker(type, key, id, latitude, longtitude, radius){
+    create_marker(data, key){
 
+      var type = (key.indexOf('s-')==0) ? 'sample' : 'knowledge';
+      var latitude = data.marker_position.latitude;
+      var longtitude = data.marker_position.longtitude;
+      var radius = data.marker_position.radius;
       var geo = this.translateGeoCoords(latitude, longtitude, radius);
       var x = geo.x,
           y = geo.y,
@@ -433,7 +443,7 @@ export default Vue.extend({
         // 15cmくらい
         var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
         // geometry.scale( - 1, 1, 1 );
-        var color = (id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
+        var color = (data.id && data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
         var material = new THREE.MeshLambertMaterial({
           color: color
         });
@@ -508,7 +518,6 @@ export default Vue.extend({
         this.lon = ( this.onPointerDownPointerX - e.clientX ) * 0.1 + this.onPointerDownLon;
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
       }
-
     },
 
     onDocumentMouseUp( e ) {
