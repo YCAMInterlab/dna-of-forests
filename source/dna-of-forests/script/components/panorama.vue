@@ -139,8 +139,8 @@
     -moz-animation: flash 0.6s infinite linear
 
   &.sample
-    // 左中央が基準点になるようにずらす
-    // margin-top: -7px
+    // 矢印の先端が基準点になるようにずらす
+    margin-left: 7px
     &:before
       display: inline-block
       content: url(/dna-of-forests/img/panorama/marker-arrow.png)
@@ -157,8 +157,8 @@
 
   &.knowledge
     // markerの中央が基準点になるようにずらす
-    // margin-top: -7px
-    // margin-left: -7px
+    margin-top: 3.5px
+    margin-left: 3.5px
     &:before
       display: inline-block
       content: ''
