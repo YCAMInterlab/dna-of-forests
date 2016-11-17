@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 if(!new MobileDetect(window.navigator.userAgent).mobile()){
   var video = document.createElement('video');
   video.id = 'video';
-  video.src = '/dna-of-forests/img/panorama.mp4';
+  video.src = '/dna-of-forests/img/panorama/forest.mp4';
   video.autoplay = true;
   video.loop = true;
   video.style.display = 'none';
