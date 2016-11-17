@@ -394,10 +394,6 @@ export default Vue.extend({
 
       this.camera.lookAt( this.camera.target );
 
-      /*
-      // distortion
-      this.camera.position.copy( this.camera.target ).negate();
-      */
       this.renderer.render( this.scene, this.camera );
 
       this.frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse ) );
