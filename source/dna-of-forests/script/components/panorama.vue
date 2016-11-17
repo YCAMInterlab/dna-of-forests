@@ -2,7 +2,7 @@
 
 #container
   <transition name="instruction_anim">
-    <instruction-modal v-if="instructionVisiblity"/>
+    <instruction-modal v-if="!$root.isAlreadyDragged"/>
   </transition>
   <transition name="fade">
     <top-modal v-if="$route.path=='/'"/>
@@ -575,7 +575,7 @@ export default Vue.extend({
         this.lon = ( this.onPointerDownPointerX - e.clientX ) * 0.1 + this.onPointerDownLon;
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
         // -----
-        this.instructionVisiblity = false;
+        this.$root.isAlreadyDragged = true;
       }
     },
 
@@ -599,10 +599,7 @@ export default Vue.extend({
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
-    // instructionVisiblityを追加する
-    var _data = _.cloneDeep(require('../data.json'));
-    _data['instructionVisiblity'] = true;
-    return _data;
+    return require('../data.json');
   }
 });
 </script>

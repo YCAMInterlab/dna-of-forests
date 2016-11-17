@@ -49,6 +49,9 @@ Vue.component('global-nav', require('./components/global-nav.vue'));
 const app = new Vue({
   router: router,
   data: function(){
-    return require('./data.json');
+    // isAlreadyDraggedを追加する
+    var _data = _.cloneDeep(require('./data.json'));
+    _data['isAlreadyDragged'] = false;
+    return _data;
   }
 }).$mount('#app')
