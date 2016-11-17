@@ -568,7 +568,7 @@ export default Vue.extend({
       if(this.isUserInteracting === true) {
 
         // クリックだったら詳細を閉じる
-        if(!this.isDragged && e.target === this.renderer.domElement && this.$route.path!='/') {
+        if(!this.isDragged && e.target === this.renderer.domElement && this.$route.path!='/panorama/' ) {
           this.$router.push('/panorama/');
         }
 
