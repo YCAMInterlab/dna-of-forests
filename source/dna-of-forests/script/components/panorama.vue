@@ -101,10 +101,13 @@
   z-index: 11
   font-family: 'Roboto'
   font-size: 9px
-  line-height: 14px
+  line-height: 15px
   letter-spacing: 0.075
   text-align: right
-  opacity: 0.25
+  opacity: 0.55
+
+  line-height: 15px;
+  opacity: 0.55
 
 .marker
   position: absolute

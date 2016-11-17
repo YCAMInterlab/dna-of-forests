@@ -113,7 +113,7 @@ article.about
     margin-bottom: 96px
     &#credit
       width: auto
-      background-color: #202020
+      background-color: #191919
       padding: 108px 0
       margin-bottom: 0
       h3#produce
