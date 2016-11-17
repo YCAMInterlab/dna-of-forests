@@ -2,7 +2,7 @@
 
 #container
   <transition name="fade">
-    <top-modal v-if="$route.path=='/'"></top-modal>
+    <top-modal v-if="$route.path=='/'"/>
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
@@ -101,10 +101,13 @@
   z-index: 11
   font-family: 'Roboto'
   font-size: 9px
-  line-height: 14px
+  line-height: 15px
   letter-spacing: 0.075
   text-align: right
-  opacity: 0.25
+  opacity: 0.55
+
+  line-height: 15px;
+  opacity: 0.55
 
 .marker
   position: absolute
@@ -195,16 +198,16 @@ import _ from 'lodash';
 
 var THREE = THREELib(["Projector"]);
 
-// 登録
-Vue.component('top-modal',  require('./top-modal.vue'));
-
 // 表示の切り替え
 const visibleAxisHelper = false;
 const visible3dMaker = false;
 const visibleGrid = false;
 
 export default Vue.extend({
-
+  components: {
+    'dna-barcode-bg':    require('./dna-barcode-bg.vue'),
+    'top-modal':         require('./top-modal.vue'),
+  },
   mounted: function() {
 
     this.width = this.$el.offsetWidth;
@@ -521,19 +524,16 @@ export default Vue.extend({
     },
 
     onTouchStart( e ) {
-      // console.log('onTouchStart',e);
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
       this.onMouseDown( e );
     },
     onTouchMove( e ) {
-      // console.log('onTouchMove',e);
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
       this.onMouseMove( e );
     },
     onTouchEnd( e ) {
-      // console.log('onTouchEnd',e);
       e.clientX = e.changedTouches[0].clientX;
       e.clientY = e.changedTouches[0].clientY;
       this.onMouseUp( e );
@@ -583,9 +583,6 @@ export default Vue.extend({
       }
     },
 
-  },
-  components: {
-    'dna-barcode-bg': require('./dna-barcode-bg.vue')
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
