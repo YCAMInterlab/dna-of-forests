@@ -382,7 +382,7 @@ export default Vue.extend({
     update() {
 
       if( this.isUserInteracting === false && this.$route.path==='/' ) {
-        this.lon += 0.04;
+        this.lon += 0.06;
       }
 
       // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); 少し上向きにしたい場合
