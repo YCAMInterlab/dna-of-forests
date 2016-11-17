@@ -219,6 +219,9 @@ export default Vue.extend({
     'top-modal':         require('./top-modal.vue'),
     'instruction-modal': require('./instruction-modal.vue'),
   },
+  watch: {
+    '$route': 'resetAutoScroll'
+  },
   mounted: function() {
 
     this.width = this.$el.offsetWidth;
@@ -381,8 +384,8 @@ export default Vue.extend({
 
     update() {
 
-      if( this.isUserInteracting === false && this.$route.path==='/' ) {
-        this.lon += 0.06;
+      if( this.autoScroll ) {
+        this.lon += 0.04;
       }
 
       // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); 少し上向きにしたい場合
@@ -574,6 +577,7 @@ export default Vue.extend({
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
         // -----
         this.$root.isAlreadyDragged = true;
+        this.autoScroll = false;
       }
     },
 
@@ -606,13 +610,21 @@ export default Vue.extend({
         this.lon -= e.detail * 1.0;
       }
       this.$root.isAlreadyDragged = true;
+      this.autoScroll = false;
+    },
+
+    resetAutoScroll() {
+      this.autoScroll = true;
     }
 
 
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
-    return require('../data.json');
+    // autoScrollを追加する
+    var _data = _.cloneDeep(require('../data.json'));
+    _data['autoScroll'] = true;
+    return _data;
   }
 });
 </script>
