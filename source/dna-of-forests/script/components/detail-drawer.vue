@@ -70,7 +70,7 @@
   &.fade-enter-active
     transition-duration: 0.45s
   &.fade-leave-active
-    transition-duration: 0.3s
+    transition-duration: 0.45s
   &.fade-enter,
   &.fade-leave-active
     right: -490px
