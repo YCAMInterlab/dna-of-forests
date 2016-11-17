@@ -153,7 +153,9 @@
     // ボバーした時にDNAの動きを遅くする
     &:hover
       .dna_barcode
-        animation: bgscroll 500s linear infinite !important
+        animation-duration: 500s !important
+        -webkit-animation-duration: 500s !important
+        -moz-animation-duration: 500s !important
 
   &.knowledge
     // markerの中央が基準点になるようにずらす
