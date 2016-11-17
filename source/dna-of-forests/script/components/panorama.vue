@@ -195,16 +195,16 @@ import _ from 'lodash';
 
 var THREE = THREELib(["Projector"]);
 
-// 登録
-Vue.component('top-modal', require('./top-modal.vue'));
-
 // 表示の切り替え
 const visibleAxisHelper = false;
 const visible3dMaker = false;
 const visibleGrid = false;
 
 export default Vue.extend({
-
+  components: {
+    'dna-barcode-bg':    require('./dna-barcode-bg.vue'),
+    'top-modal':         require('./top-modal.vue'),
+  },
   mounted: function() {
 
     this.width = this.$el.offsetWidth;
@@ -580,9 +580,6 @@ export default Vue.extend({
       }
     },
 
-  },
-  components: {
-    'dna-barcode-bg': require('./dna-barcode-bg.vue')
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
