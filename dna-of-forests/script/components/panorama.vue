@@ -316,6 +316,8 @@ export default Vue.extend({
     this.$el.addEventListener( 'touchend', this.onTouchEnd, false );
     this.$el.addEventListener( 'mousemove', this.onMouseMove, false );
     this.$el.addEventListener( 'mouseup', this.onMouseUp, false );
+    this.$el.addEventListener( 'mousewheel', this.onMouseWheel, false );
+    this.$el.addEventListener( 'MozMousePixelScroll', this.onMouseWheel, false);
 
     // カメラ位置の設定 -------
 
@@ -591,6 +593,20 @@ export default Vue.extend({
         this.isDragged = false;
       }
     },
+
+    onMouseWheel( e ) {
+      // WebKit
+      if ( e.wheelDeltaY ) {
+        this.lon += e.wheelDeltaY * 0.05;
+      // Opera / Explorer 9
+      } else if ( e.wheelDelta ) {
+        this.lon += e.wheelDelta * 0.05;
+      // Firefox
+      } else if ( e.detail ) {
+        this.lon -= e.detail * 1.0;
+      }
+    }
+
 
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
