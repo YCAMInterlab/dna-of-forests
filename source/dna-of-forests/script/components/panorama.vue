@@ -2,7 +2,7 @@
 
 #container
   <transition name="fade">
-    <top-modal v-if="$route.path=='/'"></top-modal>
+    <top-modal v-if="$route.path=='/'"/>
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
@@ -196,7 +196,7 @@ import _ from 'lodash';
 var THREE = THREELib(["Projector"]);
 
 // 登録
-Vue.component('top-modal',  require('./top-modal.vue'));
+Vue.component('top-modal', require('./top-modal.vue'));
 
 // 表示の切り替え
 const visibleAxisHelper = false;
@@ -521,19 +521,16 @@ export default Vue.extend({
     },
 
     onTouchStart( e ) {
-      // console.log('onTouchStart',e);
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
       this.onMouseDown( e );
     },
     onTouchMove( e ) {
-      // console.log('onTouchMove',e);
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
       this.onMouseMove( e );
     },
     onTouchEnd( e ) {
-      // console.log('onTouchEnd',e);
       e.clientX = e.changedTouches[0].clientX;
       e.clientY = e.changedTouches[0].clientY;
       this.onMouseUp( e );
