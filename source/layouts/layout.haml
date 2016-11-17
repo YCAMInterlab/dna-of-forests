@@ -4,7 +4,7 @@
 - host = 'http://special.ycam.jp'
 -#
 -# TODO: 画像を変えた場合は、ここの?移行も変更
-- chache_param = 'this-is-random-number-for-cache-921689201'
+- chache_param = 'random-number-for-cache-clear-921689201'
 !!!
 %html{ lang:"ja" }
   %head
@@ -22,6 +22,7 @@
     %meta{property: "og:type", content: "website"}
     %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
     %meta{property: "og:image", content: "#{host}/dna-of-forests/img/share.png?#{chache_param}"}
+    %meta{property: "fb:app_id", content: "205454639864260"}
 
     %meta{name: "twitter:site", content: '@ycam_jp'}
     %meta{name: "twitter:title", content: data.title}
