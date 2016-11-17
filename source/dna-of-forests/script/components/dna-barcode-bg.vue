@@ -22,7 +22,7 @@
 .dna_barcode
   display: inline-block
   width: 2000px
-  height: 3px
+  height: 2px
   margin-bottom: 2px
   margin-left: 4px
   >canvas

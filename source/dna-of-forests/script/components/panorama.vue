@@ -133,10 +133,11 @@
     animation: hover_flash 0.2s 1 linear
     -webkit-animation: hover_flash 0.2s 1 linear
     -moz-animation: hover_flash 0.2s 1 linear
+
   &.selected
-    animation: flash 0.6s infinite linear
-    -webkit-animation: flash 0.6s infinite linear
-    -moz-animation: flash 0.6s infinite linear
+    animation: flash 1s infinite linear
+    -webkit-animation: flash 1s infinite linear
+    -moz-animation: flash 1s infinite linear
 
   &.sample
     // 矢印の先端が基準点になるようにずらす
