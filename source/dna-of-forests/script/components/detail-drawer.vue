@@ -14,7 +14,8 @@
         h3
           img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
         h4 1. 採取サンプルの写真
-        img.round(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
+        .image_wrapper
+          img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
@@ -48,13 +49,14 @@
 
     template(v-if="type=='knowledge'")
       h3 {{ title }}
-      img.round(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
+      .image_wrapper
+        img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
       p {{ description }}
 
 
 </template>
 
-<style lang="sass?indentedSyntax" scoped>
+<style lang="sass?indentedSyntax">
 
 .drawer
   position: absolute
@@ -130,9 +132,59 @@ h4
   &:not(:first-child)
     margin-top: 30px
 
-img.round
+@-moz-keyframes spin
+  0%
+    -moz-transform: rotate(0deg)
+  100%
+    -moz-transform: rotate(360deg)
+@-webkit-keyframes spin
+  0%
+    -webkit-transform: rotate(0deg)
+  100%
+    -webkit-transform: rotate(360deg)
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+
+.image_wrapper
+  width: 440px
+  height: 277px
   border-radius: 5px
-  width: 100%
+  background-color: #262626
+  position: relative
+  overflow: hidden
+  &:before
+    content: ""
+    position: absolute
+    width: 32px
+    height: 32px
+    top: calc(50% - 16px)
+    left: calc(50% - 16px)
+    z-index: 1
+    background: transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat center
+    -webkit-animation-name: spin
+    -webkit-animation-duration: 400ms
+    -webkit-animation-iteration-count: infinite
+    -webkit-animation-timing-function: linear
+    -moz-animation-name: spin
+    -moz-animation-duration: 400ms
+    -moz-animation-iteration-count: infinite
+    -moz-animation-timing-function: linear
+    -ms-animation-name: spin
+    -ms-animation-duration: 400ms
+    -ms-animation-iteration-count: infinite
+    -ms-animation-timing-function: linear
+    animation-name: spin
+    animation-duration: 400ms
+    animation-iteration-count: infinite
+    animation-timing-function: linear
+  >img
+    z-index: 2
+    position: absolute
+    border-radius: 5px
 
 .dna_sequence
   p
