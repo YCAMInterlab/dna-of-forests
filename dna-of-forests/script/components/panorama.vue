@@ -218,6 +218,7 @@ export default Vue.extend({
     this.onPointerDownPointerX = null;
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
+    this.isDragged = false;
     this.markers = [];
 
     this.projector     = new THREE.Projector();
@@ -292,12 +293,12 @@ export default Vue.extend({
     this.$el.appendChild( this.renderer.domElement );
 
     window.addEventListener( 'resize', this.onWindowResize, false );
-    document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
-    document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
-    document.addEventListener( 'touchmove', this.onDocumentTouchMove, false );
-    document.addEventListener( 'touchend', this.onDocumentTouchEnd, false );
-    document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
-    document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
+    this.$el.addEventListener( 'mousedown', this.onMouseDown, false );
+    this.$el.addEventListener( 'touchstart', this.onTouchStart, false );
+    this.$el.addEventListener( 'touchmove', this.onTouchMove, false );
+    this.$el.addEventListener( 'touchend', this.onTouchEnd, false );
+    this.$el.addEventListener( 'mousemove', this.onMouseMove, false );
+    this.$el.addEventListener( 'mouseup', this.onMouseUp, false );
 
     // カメラ位置の設定 -------
 
@@ -516,30 +517,26 @@ export default Vue.extend({
       return marker;
     },
 
-    onDocumentTouchStart( e ) {
-      if( e.target === this.renderer.domElement ){
-        e.clientX = e.touches[0].clientX;
-        e.clientY = e.touches[0].clientY;
-        this.onDocumentMouseDown( e );
-      }
+    onTouchStart( e ) {
+      // console.log('onTouchStart',e);
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onMouseDown( e );
     },
-    onDocumentTouchMove( e ) {
-      if( e.target === this.renderer.domElement ){
-        e.clientX = e.touches[0].clientX;
-        e.clientY = e.touches[0].clientY;
-        this.onDocumentMouseMove( e );
-      }
+    onTouchMove( e ) {
+      // console.log('onTouchMove',e);
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onMouseMove( e );
     },
-    onDocumentTouchEnd( e ) {
-      if( e.target === this.renderer.domElement ){
-        e.clientX = e.touches[0].clientX;
-        e.clientY = e.touches[0].clientY;
-        this.onDocumentMouseUp( e );
-      }
+    onTouchEnd( e ) {
+      // console.log('onTouchEnd',e);
+      e.clientX = e.changedTouches[0].clientX;
+      e.clientY = e.changedTouches[0].clientY;
+      this.onMouseUp( e );
     },
 
-    onDocumentMouseDown( e ) {
-
+    onMouseDown( e ) {
       // Canvas部分でドラッグ開始したら
       if( e.target === this.renderer.domElement ){
         e.preventDefault();
@@ -559,20 +556,28 @@ export default Vue.extend({
       }
     },
 
-    onDocumentMouseMove( e ) {
-
+    onMouseMove( e ) {
       if ( this.isUserInteracting === true ) {
+        this.isDragged = true;
         this.lon = ( this.onPointerDownPointerX - e.clientX ) * 0.1 + this.onPointerDownLon;
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
       }
     },
 
-    onDocumentMouseUp( e ) {
+    onMouseUp( e ) {
+      if(this.isUserInteracting === true) {
 
-      this.isUserInteracting = false;
+        // クリックだったら詳細を閉じる
+        if(!this.isDragged && e.target === this.renderer.domElement && this.$route.path!='/') {
+          this.$router.push('/panorama/');
+        }
 
-      Cookies.set('lon', this.lon);
-      Cookies.set('lat', this.lat);
+        Cookies.set('lon', this.lon);
+        Cookies.set('lat', this.lat);
+
+        this.isUserInteracting = false;
+        this.isDragged = false;
+      }
     },
 
   },
