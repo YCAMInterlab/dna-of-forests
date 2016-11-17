@@ -56,7 +56,7 @@
 
 </template>
 
-<style lang="sass?indentedSyntax">
+<style lang="sass?indentedSyntax" scoped>
 
 .drawer
   position: absolute
