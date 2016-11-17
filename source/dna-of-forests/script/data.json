@@ -688,8 +688,8 @@
     },
     {
       "id": "B-11",
-      "genus_ja": "オオイチシダ",
-      "genus_en": "Dryopteris pacifica (Nakai) Tagawa",
+      "genus_ja": "オオイタチシダ",
+      "genus_en": "Dryopteris pacifica",
       "dna_sequences": [
         {
           "region": "rbcL",
