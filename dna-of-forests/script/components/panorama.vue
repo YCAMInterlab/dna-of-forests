@@ -1,6 +1,9 @@
 <template lang="pug">
 
 #container
+  <transition name="instruction_anim">
+    <instruction-modal v-if="!$root.isAlreadyDragged"/>
+  </transition>
   <transition name="fade">
     <top-modal v-if="$route.path=='/'"/>
   </transition>
@@ -69,6 +72,13 @@
   transition: opacity 1.5s
 .fade-enter,
 .fade-leave-active
+  opacity: 0
+
+.instruction_anim-enter-active,
+.instruction_anim-leave-active
+  transition: opacity 0.3s
+.instruction_anim-enter,
+.instruction_anim-leave-active
   opacity: 0
 
 #container
@@ -207,6 +217,7 @@ export default Vue.extend({
   components: {
     'dna-barcode-bg':    require('./dna-barcode-bg.vue'),
     'top-modal':         require('./top-modal.vue'),
+    'instruction-modal': require('./instruction-modal.vue'),
   },
   mounted: function() {
 
@@ -383,10 +394,6 @@ export default Vue.extend({
 
       this.camera.lookAt( this.camera.target );
 
-      /*
-      // distortion
-      this.camera.position.copy( this.camera.target ).negate();
-      */
       this.renderer.render( this.scene, this.camera );
 
       this.frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse ) );
@@ -552,7 +559,6 @@ export default Vue.extend({
         this.onPointerDownLon = this.lon;
         this.onPointerDownLat = this.lat;
 
-        // -----
 
         this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
         this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
@@ -564,14 +570,17 @@ export default Vue.extend({
         this.isDragged = true;
         this.lon = ( this.onPointerDownPointerX - e.clientX ) * 0.1 + this.onPointerDownLon;
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
+        // -----
+        this.$root.isAlreadyDragged = true;
       }
     },
 
     onMouseUp( e ) {
       if(this.isUserInteracting === true) {
 
-        // クリックだったら詳細を閉じる
+        // クリック
         if(!this.isDragged && e.target === this.renderer.domElement && this.$route.path!='/panorama/' ) {
+          // 詳細を閉じる
           this.$router.push('/panorama/');
         }
 
