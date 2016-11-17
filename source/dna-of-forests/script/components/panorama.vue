@@ -605,6 +605,7 @@ export default Vue.extend({
       } else if ( e.detail ) {
         this.lon -= e.detail * 1.0;
       }
+      this.$root.isAlreadyDragged = true;
     }
 
 
