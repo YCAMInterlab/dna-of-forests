@@ -24,6 +24,10 @@
   height: 100%
   vertical-align: middle
 
+img
+  user-select: none
+  pointer-events: none
+
 .modal
   background-color: #000
   padding: 10px
