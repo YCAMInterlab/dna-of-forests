@@ -9,8 +9,13 @@
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
-  a.copyright(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank")
-    | Creative Commons License CC BY-SA 4.0
+  p.copyright
+    a(href="http://special.ycam.jp/dna-of-forests/") DNA of Forests
+    | by
+    a(href="http://www.ycam.jp/" target="_blank") Yamaguchi Center for Arts and Media [YCAM]
+    br
+    | is licensed under a
+    a(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank") Creative Commons License CC BY-SA 4.0
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     img.label(v-bind:alt="item.genus_ja" v-bind:src="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'@2x.png 2x'")
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text">
@@ -112,14 +117,16 @@
   font-family: 'Roboto'
   font-size: 9px
   line-height: 15px
-  letter-spacing: 0.075
   text-align: right
   opacity: 0.55
-  transition-duration: 0.2s
-  color: #fff
-  text-decoration: none
-  &:hover
-    opacity: 1
+  a
+    margin-left: 0.4em
+    color: #fff
+    text-decoration: none
+    &:first-child
+      margin-right: 0.4em
+    &:hover
+      border-bottom: 1px dotted #ccc
 
 .marker
   position: absolute
