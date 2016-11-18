@@ -101,6 +101,8 @@
   top: 18px
   right: 22px
   z-index: 11
+  user-select: none
+  pointer-events: none
   &:hover
     opacity: 0.7
 
@@ -139,6 +141,8 @@
     display: inline-block
     vertical-align: middle
     cursor: pointer
+    user-select: none
+    pointer-events: none
   img.label
     margin-left: 5px
 
