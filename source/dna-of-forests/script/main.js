@@ -4,7 +4,16 @@ import MobileDetect from 'mobile-detect';
 
 Vue.use(VueRouter);
 
-if(!new MobileDetect(window.navigator.userAgent).mobile()){
+var userAgent = window.navigator.userAgent.toLowerCase();
+if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
+  var isIE = true;
+  var ieVersion = userAgent.match(/((msie|MSIE)\s|rv:)([\d\.]+)/)[3];
+  ieVersion = parseInt(ieVersion);
+} else {
+  var isIE = false;
+}
+var ua = navigator.userAgent;
+if(!isIE && (ua.indexOf("Edge") < 0) && (!new MobileDetect(window.navigator.userAgent).mobile())) {
   var video = document.createElement('video');
   video.id = 'video';
   video.src = '/dna-of-forests/img/panorama/forest.mp4';
@@ -13,8 +22,6 @@ if(!new MobileDetect(window.navigator.userAgent).mobile()){
   video.style.display = 'none';
   document.body.appendChild(video);
 }
-
-var ua = navigator.userAgent;
 if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
   // do nothing
 }
