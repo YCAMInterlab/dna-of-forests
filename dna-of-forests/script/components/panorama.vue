@@ -612,18 +612,20 @@ export default Vue.extend({
     },
 
     onMouseWheel( e ) {
-      // WebKit
-      if ( e.wheelDeltaY ) {
-        this.lon += e.wheelDeltaY * 0.05;
-      // Opera / Explorer 9
-      } else if ( e.wheelDelta ) {
-        this.lon += e.wheelDelta * 0.05;
-      // Firefox
-      } else if ( e.detail ) {
-        this.lon -= e.detail * 1.0;
+      if(this.$route.path!='/'){
+        // WebKit
+        if ( e.wheelDeltaY ) {
+          this.lon += e.wheelDeltaY * 0.05;
+        // Opera / Explorer 9
+        } else if ( e.wheelDelta ) {
+          this.lon += e.wheelDelta * 0.05;
+        // Firefox
+        } else if ( e.detail ) {
+          this.lon -= e.detail * 1.0;
+        }
+        this.$root.isAlreadyDragged = true;
+        this.autoScroll = false;
       }
-      this.$root.isAlreadyDragged = true;
-      this.autoScroll = false;
     },
 
     resetAutoScroll() {

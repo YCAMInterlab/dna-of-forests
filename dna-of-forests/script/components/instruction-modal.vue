@@ -39,6 +39,8 @@
   .icon
     margin-top: 22px
     margin-bottom: 16px
+    user-select: none
+    pointer-events: none
   p
     font-family: 'Roboto'
     font-weight: normal
