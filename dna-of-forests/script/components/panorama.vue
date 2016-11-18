@@ -101,6 +101,8 @@
   top: 18px
   right: 22px
   z-index: 11
+  user-select: none
+  pointer-events: none
   &:hover
     opacity: 0.7
 
@@ -139,6 +141,8 @@
     display: inline-block
     vertical-align: middle
     cursor: pointer
+    user-select: none
+    pointer-events: none
   img.label
     margin-left: 5px
 
@@ -218,6 +222,9 @@ export default Vue.extend({
     'dna-barcode-bg':    require('./dna-barcode-bg.vue'),
     'top-modal':         require('./top-modal.vue'),
     'instruction-modal': require('./instruction-modal.vue'),
+  },
+  watch: {
+    '$route': 'resetAutoScroll'
   },
   mounted: function() {
 
@@ -381,7 +388,7 @@ export default Vue.extend({
 
     update() {
 
-      if( this.isUserInteracting === false && this.$route.path==='/' ) {
+      if( this.autoScroll ) {
         this.lon += 0.04;
       }
 
@@ -574,6 +581,7 @@ export default Vue.extend({
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
         // -----
         this.$root.isAlreadyDragged = true;
+        this.autoScroll = false;
       }
     },
 
@@ -605,13 +613,22 @@ export default Vue.extend({
       } else if ( e.detail ) {
         this.lon -= e.detail * 1.0;
       }
+      this.$root.isAlreadyDragged = true;
+      this.autoScroll = false;
+    },
+
+    resetAutoScroll() {
+      this.autoScroll = true;
     }
 
 
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
-    return require('../data.json');
+    // autoScrollを追加する
+    var _data = _.cloneDeep(require('../data.json'));
+    _data['autoScroll'] = true;
+    return _data;
   }
 });
 </script>
