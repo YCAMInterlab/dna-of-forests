@@ -11,11 +11,13 @@
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
   p.copyright
     //- <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; margin-bottom: 5px;"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>
-    a(href="http://special.ycam.jp/dna-of-forests/" style="margin-right: 0.4em;") DNA of Forests
+    a(href="http://special.ycam.jp/dna-of-forests/") DNA of Forests
+    br
     | by
     a(href="http://www.ycam.jp/" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
     br
     | is licensed under a
+    br
     a(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank") Creative Commons License CC BY-SA 4.0
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     img.label(v-bind:alt="item.genus_ja" v-bind:src="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'@2x.png 2x'")
