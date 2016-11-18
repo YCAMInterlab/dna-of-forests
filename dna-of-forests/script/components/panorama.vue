@@ -10,9 +10,10 @@
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
   p.copyright
-    a(href="http://special.ycam.jp/dna-of-forests/") DNA of Forests
+    //- <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; margin-bottom: 5px;"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>
+    a(href="http://special.ycam.jp/dna-of-forests/" style="margin-right: 0.4em;") DNA of Forests
     | by
-    a(href="http://www.ycam.jp/" target="_blank") Yamaguchi Center for Arts and Media [YCAM]
+    a(href="http://www.ycam.jp/" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
     br
     | is licensed under a
     a(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank") Creative Commons License CC BY-SA 4.0
@@ -120,11 +121,8 @@
   text-align: right
   opacity: 0.55
   a
-    margin-left: 0.4em
     color: #fff
     text-decoration: none
-    &:first-child
-      margin-right: 0.4em
     &:hover
       border-bottom: 1px dotted #ccc
 
