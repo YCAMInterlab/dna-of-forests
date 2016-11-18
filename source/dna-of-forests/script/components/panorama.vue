@@ -228,6 +228,8 @@ export default Vue.extend({
   },
   mounted: function() {
 
+    this.resetAutoScroll();
+
     this.width = this.$el.offsetWidth;
     this.height = window.innerHeight;
     this.camera = null;
@@ -618,16 +620,17 @@ export default Vue.extend({
     },
 
     resetAutoScroll() {
-      this.autoScroll = true;
+      if(this.$route.path==='/'){
+        this.autoScroll = true;
+      }
     }
-
 
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
     // autoScrollを追加する
     var _data = _.cloneDeep(require('../data.json'));
-    _data['autoScroll'] = true;
+    _data['autoScroll'] = false;
     return _data;
   }
 });
