@@ -107,6 +107,9 @@ section {
 html,
 body {
   height: 100%; }
+  html.facebook,
+  body.facebook {
+    height: calc(100% - 100px); }
 
 body {
   position: relative;
