@@ -138,6 +138,7 @@ a {
   overflow: hidden;
   background-color: #000;
   position: relative;
+  position: fixed;
   -webkit-overflow-scrolling: touch; }
 
 @media (max-width: 660px) {
