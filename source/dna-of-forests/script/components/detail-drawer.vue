@@ -59,7 +59,7 @@
 <style lang="sass?indentedSyntax" scoped>
 
 .drawer
-  position: absolute
+  position: fixed
   width: 490px
   height: 100%
   right: 0
