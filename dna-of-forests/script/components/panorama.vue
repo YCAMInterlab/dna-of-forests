@@ -103,7 +103,7 @@
   //   left: calc(50% - 2px)
 
 .ycam
-  position: fixed
+  position: absolute
   top: 18px
   right: 22px
   z-index: 11
@@ -113,7 +113,7 @@
     opacity: 0.7
 
 .copyright
-  position: fixed
+  position: absolute
   bottom: 19px
   right: 22px
   z-index: 11
