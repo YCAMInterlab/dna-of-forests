@@ -1,6 +1,9 @@
 <template lang="pug">
 
 nav
+  router-link.top(to='/' v-bind:exact="true")
+    div
+      span TOP
   router-link.panorama(v-bind:to="linkUrl('/panorama')")
     div
       span 360
@@ -46,6 +49,12 @@ nav
         >div
           opacity: 0.9
 
+    &.top
+      >div
+        background-image: url(/dna-of-forests/img/gnav/top.png)
+      &.router-link-active
+        >div
+          background-image: url(/dna-of-forests/img/gnav/top-active.png)
     &.panorama
       >div
         background-image: url(/dna-of-forests/img/gnav/panorama.png)
@@ -72,10 +81,14 @@ nav
 
 @media (max-width: 660px)
   nav
-    height: 80px
+    position: fixed
+    bottom: 0
+    height: 100px
     width: 100%
     float: none
     >a
+      width: 100px
+      height: 100px
       float: left
       &:not(:last-child)
         margin-bottom: 0

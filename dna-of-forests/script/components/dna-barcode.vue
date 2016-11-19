@@ -85,6 +85,7 @@ export default Vue.extend({
             context.fillRect(x,y,w,h);
           }
         }
+        this.$emit('drawcomplete',canvas);
       }
     }
   }

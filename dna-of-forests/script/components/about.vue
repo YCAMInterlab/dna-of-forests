@@ -12,16 +12,16 @@ article.about
       | 私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>
       | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森の生き物になったら</a>」の仁保の森ツアープログラムとして開催されました。
     .carousel
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/9.jpg' srcset='img/about/slide/9@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/10.jpg' srcset='img/about/slide/10@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/1.jpg' srcset='img/about/slide/1@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/2.jpg' srcset='img/about/slide/2@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/3.jpg' srcset='img/about/slide/3@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/4.jpg' srcset='img/about/slide/4@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/5.jpg' srcset='img/about/slide/5@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/6.jpg' srcset='img/about/slide/6@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/7.jpg' srcset='img/about/slide/7@2x.jpg 2x')
-      img.carousel-cell(alt='ワークショップの様子' src='img/about/slide/8.jpg' srcset='img/about/slide/8@2x.jpg 2x')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/1.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/2.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/3.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/4.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/5.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8.jpg);')
   section#dna-barcoding
     h2
       img(alt='解析方法（DNAバーコーディング）について' src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
@@ -82,8 +82,8 @@ article.about
   overflow-y: auto
   h1
     text-align: center
-    margin-top: 68px
-    margin-bottom: 68px
+    margin-top: 130px
+    margin-bottom: 130px
   h2
     text-align: center
     margin-bottom: 38px
@@ -93,7 +93,7 @@ article.about
   p
     font-size: 15px
     line-height: 2.2em
-    letter-spacing: 0.15em
+    letter-spacing: 0.05em
     text-align: left
     margin-bottom: 2.2em
     text-align: justify
@@ -107,13 +107,13 @@ article.about
       opacity: 1
       +dotted(bottom, #fff, 1, 3)
   section
-    width: 600px
+    width: 620px
     margin: 0 auto
     text-align: center
     margin-bottom: 96px
     &#credit
       width: auto
-      background-color: #202020
+      background-color: #191919
       padding: 108px 0
       margin-bottom: 0
       h3#produce
@@ -123,11 +123,12 @@ article.about
         margin-top: 80px
       >a
         display: block
-        width: 570px
-        margin: 0 auto
+        width: 600px
+        margin: 0 auto 40px
         &:hover
           opacity: 0.7
       p
+        font-size: 14px
         text-align: center
         a
           color: inherit
@@ -140,7 +141,7 @@ article.about
   .carousel
     width: 760px
     height: 506px
-    margin: 50px -80px 200px
+    margin: 50px -80px 38px
     // .flickity-viewport
     //   border-radius: 20px !important
     //   overflow: hidden !important
@@ -157,6 +158,8 @@ article.about
       width: 100%
       height: 100%
       margin-right: 0
+      background-position: center
+      background-size: cover
     .flickity-page-dots
       bottom: -38px
       .dot
@@ -195,6 +198,27 @@ article.about
       .flickity-prev-next-button:not([disabled])
         opacity: 1
 
+@media (max-width: 900px)
+  article.about
+
+    a.border
+      +dotted(bottom, #ccc, 2, 6, 2)
+      &:hover
+        +dotted(bottom, #fff, 2, 6, 2)
+
+    section
+      width: 100%
+      p
+        padding-left: 50px
+        padding-right: 50px
+        font-size: 18px
+      .carousel
+        width: 100%
+        margin-left: 0
+        margin-right: 0
+        &:before
+          display: none
+
 </style>
 
 <script>
@@ -204,7 +228,6 @@ import Flickity from 'flickity';
 
 export default Vue.extend({
   mounted: function() {
-    console.log('ready');
     var elem = document.querySelector('.carousel');
     var flkty = new Flickity( elem, {
       autoPlay: true,

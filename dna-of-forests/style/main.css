@@ -59,6 +59,41 @@ a span {
 .overlay {
   cursor: pointer; }
 
+.clfl:after {
+  content: ".";
+  display: block;
+  clear: left;
+  height: 0;
+  visibility: hidden; }
+
+.clfr:after {
+  content: ".";
+  display: block;
+  clear: right;
+  height: 0;
+  visibility: hidden; }
+
+.clf:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden; }
+
+.clf {
+  min-height: 1px; }
+
+* html .clf {
+  height: 1px;
+  /*¥*/
+   /*/
+height: auto;
+overflow: hidden;
+/**/ }
+
+section {
+  max-height: inherit; }
+
 @font-face {
   font-family: "Roboto";
   src: url("Roboto-Medium.ttf");
@@ -79,9 +114,11 @@ body {
   color: #000;
   font-size: 13px;
   line-height: 1em;
-  color: #fff; }
+  color: #fff;
+  background-color: #000; }
 
 a {
+  cursor: pointer;
   transition-duration: 0.2s; }
 
 #app {
@@ -97,12 +134,10 @@ a {
   height: 100%;
   overflow: hidden;
   background-color: #000;
-  position: relative; }
-
-#container > canvas {
-  opacity: 0.8; }
+  position: relative;
+  -webkit-overflow-scrolling: touch; }
 
 @media (max-width: 660px) {
   #content {
     width: 100%;
-    height: calc(100% - 80px); } }
+    height: calc(100% - 100px); } }

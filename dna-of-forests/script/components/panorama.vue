@@ -1,21 +1,29 @@
 <template lang="pug">
 
 #container
+  <transition name="instruction_anim">
+    <instruction-modal v-if="!$root.isAlreadyDragged"/>
+  </transition>
   <transition name="fade">
-    <start-modal v-if="$route.path=='/'"></start-modal>
+    <top-modal v-if="$route.path=='/'"/>
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
-  span.copyright
-    | Copyright © 2016<br>
-    | Yamaguchi Center for Arts and Media,<br>
-    | All Rights Reserved.
+  p.copyright
+    //- <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; margin-bottom: 5px;"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>
+    a(href="http://special.ycam.jp/dna-of-forests/") DNA of Forests
+    br
+    | by
+    a(href="http://www.ycam.jp/" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
+    br
+    | is licensed under a
+    br
+    a(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank") Creative Commons License CC BY-SA 4.0
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
-    img(v-bind:src="'/dna-of-forests/img/panorama/marker-arrow.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-arrow@2x.png 2x'")
-    span.genus {{ item.genus_en }}
-    <dna-barcode :dna="item.dna_sequences[0].text" v-bind:height="3">
+    img.label(v-bind:alt="item.genus_ja" v-bind:src="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'@2x.png 2x'")
+    <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
-    img(v-bind:src="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text-k-'+(index+1)+'@2x.png 2x'")
+    img.label(v-bind:src="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'@2x.png 2x'")
 
 </template>
 
@@ -28,7 +36,6 @@
       opacity: 1
     100%
       opacity: 0.4
-
 @-webkit-keyframes flash
     0%
       opacity: 0.4
@@ -44,6 +51,28 @@
     100%
       opacity: 0.4
 
+@keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+@-webkit-keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+@-moz-keyframes hover_flash
+    0%
+      opacity: 1
+    50%
+      opacity: 0.4
+    100%
+      opacity: 1
+
 .fade-enter-active,
 .fade-leave-active
   transition: opacity 1.5s
@@ -51,86 +80,133 @@
 .fade-leave-active
   opacity: 0
 
+.instruction_anim-enter-active,
+.instruction_anim-leave-active
+  transition: opacity 0.3s
+.instruction_anim-enter,
+.instruction_anim-leave-active
+  opacity: 0
+
 #container
   height: 100%
   overflow: hidden
 
+  // 中心にマーカーを描画
+  // &:after
+  //   content: ''
+  //   display: block
+  //   width: 4px
+  //   height: 4px
+  //   background-color: red
+  //   position: absolute
+  //   top: calc(50% - 2px)
+  //   left: calc(50% - 2px)
+
 .ycam
-  position: absolute
+  position: fixed
   top: 18px
   right: 22px
   z-index: 11
+  user-select: none
+  pointer-events: none
   &:hover
     opacity: 0.7
 
 .copyright
-  position: absolute
+  position: fixed
   bottom: 19px
   right: 22px
   z-index: 11
   font-family: 'Roboto'
   font-size: 9px
-  line-height: 14px
-  letter-spacing: 0.075
+  line-height: 15px
   text-align: right
-  opacity: 0.25
+  opacity: 0.55
+  a
+    color: #fff
+    text-decoration: none
+    &:hover
+      border-bottom: 1px dotted #ccc
 
 .marker
   position: absolute
   cursor: pointer
   z-index: 10
   user-select: none
+
+  height: 14px
+  line-height: 14px
+  white-space: nowrap
+
+  // 左中央を中心に回転
+  transform-origin: 0% 50%
+  -webkit-transform-origin: 0% 50%
+  transform: rotate(-90deg)
+  -webkit-transform: rotate(-90deg)
+
+  img
+    display: inline-block
+    vertical-align: middle
+    cursor: pointer
+    user-select: none
+    pointer-events: none
+  img.label
+    margin-left: 5px
+
   &:hover
-    opacity: 0.7
+    animation: hover_flash 0.2s 1 linear
+    -webkit-animation: hover_flash 0.2s 1 linear
+    -moz-animation: hover_flash 0.2s 1 linear
+
   &.selected
-    animation: flash 0.6s infinite linear
-    -webkit-animation: flash 0.6s infinite linear
-    -moz-animation: flash 0.6s infinite linear
+    animation: flash 1s infinite linear
+    -webkit-animation: flash 1s infinite linear
+    -moz-animation: flash 1s infinite linear
+
   &.sample
-    height: 14px
-    white-space: nowrap
-    // 矢印の先を中心に回転
-    transform-origin: 0% 50%
-    -webkit-transform-origin: 0% 50%
-    transform: rotate(-90deg)
-    -webkit-transform: rotate(-90deg)
-    img
+    // 矢印の先端が基準点になるようにずらす
+    margin-left: 7px
+    &:before
       display: inline-block
-      float: left
-    span.genus
-      color: #fcff00
-      font-family: 'Roboto'
-      font-size: 11px
-      letter-spacing: 0.001em
-      display: inline-block
-      text-shadow: 0 0 8px #000
+      content: url(/dna-of-forests/img/panorama/marker-arrow.png)
+      width: 13px
+      height: 14px
+      vertical-align: middle
+    .dna_barcode
       margin-left: 5px
-    canvas
-      display: inline-block
-      margin-bottom: 2px
-      margin-left: 4px
+      cursor: pointer
+    // ボバーした時にDNAの動きを遅くする
+    &:hover
+      .dna_barcode
+        animation-duration: 500s !important
+        -webkit-animation-duration: 500s !important
+        -moz-animation-duration: 500s !important
+
   &.knowledge
-    width: 14px
-    height: 14px
-    border-radius: 7px
-    background-color: #fcff00
-    >img
-      position: absolute
-      bottom: 20px
-      left: 2px
+    // markerの中央が基準点になるようにずらす
+    margin-top: 3.5px
+    margin-left: 3.5px
+    &:before
+      display: inline-block
+      content: ''
+      width: 14px
+      height: 14px
+      vertical-align: middle
+      border-radius: 7px
+      background-color: #fcff00
+
 
 @media (max-width: 660px)
   .ycam
-    top: inherit
     right: inherit
     left: 22px
-    bottom: 19px
     opacity: 0.5
 
   .copyright
-    bottom: 19px
-    left: 91px
-    text-align: left
+    bottom: inherit
+    top: 19px
+    right: 22px
+    opacity: 0.5
 
 </style>
 
@@ -139,12 +215,9 @@
 import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
+import _ from 'lodash';
 
 var THREE = THREELib(["Projector"]);
-
-// 登録
-Vue.component('sound-button', require('./sound-button.vue'));
-Vue.component('start-modal',  require('./start-modal.vue'));
 
 // 表示の切り替え
 const visibleAxisHelper = false;
@@ -152,16 +225,17 @@ const visible3dMaker = false;
 const visibleGrid = false;
 
 export default Vue.extend({
-
+  components: {
+    'dna-barcode-bg':    require('./dna-barcode-bg.vue'),
+    'top-modal':         require('./top-modal.vue'),
+    'instruction-modal': require('./instruction-modal.vue'),
+  },
+  watch: {
+    '$route': 'resetAutoScroll'
+  },
   mounted: function() {
 
-    // 最初のカメラ位置
-    var default_lon = 1882;
-    var default_lat = 46.2;
-    if(this.$route.path!='/'){
-      default_lon = (Cookies.get('lon')*1 || default_lon);
-      default_lat = (Cookies.get('lat')*1 || default_lat);
-    }
+    this.resetAutoScroll();
 
     this.width = this.$el.offsetWidth;
     this.height = window.innerHeight;
@@ -174,11 +248,10 @@ export default Vue.extend({
     this.onPointerDownLat = null;
     this.phi = 0;
     this.theta = 0;
-    this.lon = default_lon;
-    this.lat = default_lat;
     this.onPointerDownPointerX = null;
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
+    this.isDragged = false;
     this.markers = [];
 
     this.projector     = new THREE.Projector();
@@ -194,7 +267,6 @@ export default Vue.extend({
     this.scene.add(ambient);
 
     // ジオメトリの追加
-
     var pano_sphere = this.create_pano_sphere();
     this.scene.add( pano_sphere );
 
@@ -210,20 +282,34 @@ export default Vue.extend({
       this.scene.add(sphere);
     }
 
-    // 半径は全てメートルで大体目測で合わせる
-    // サンプルマーカー
+    // マーカー
+
+    // 並び順に沿って、URLに現出する"alias"を設定
     for(var i = 0; i<this.samples.length; i++){
-      var data = this.samples[i].marker_position;
-      var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('sample', 's-'+(i+1), this.samples[i].id, geo.x, geo.y, geo.z);
+      this.samples[i]['alias'] = 's-'+(i+1);
+    }
+    for(var i = 0; i<this.knowledges.length; i++){
+      this.knowledges[i]['alias'] = 'k-'+(i+1);
+    }
+    var marker_all = this.samples.concat(this.knowledges);
+    // 距離でソートして、重なり順序がおかしくならないように
+    marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
+    for(var i = 0; i<marker_all.length; i++){
+      var data = marker_all[i];
+      this.create_marker(data);
     }
 
-    // // 森の知識マーカー
-    for(var i = 0; i<this.knowledges.length; i++){
-      var data = this.knowledges[i].marker_position;
-      var geo = this.translateGeoCoords(data.latitude, data.longtitude, data.radius);
-      this.create_marker('knowledge', 'k-'+(i+1), this.knowledges[i].id, geo.x, geo.y, geo.z);
-    }
+
+    // 脚立を隠す円形を配置
+    var geometry = new THREE.CircleGeometry( 0.6, 128 );
+    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/img/panorama/logo-cover@2x.png') });
+    var circle = new THREE.Mesh( geometry, material );
+
+
+    circle.position.set(0, -1.5, 0); // 原点だとカメラと同じ視点になるので表示されない
+    circle.rotateZ(Math.PI/2);
+    circle.rotateY(Math.PI/2);
+    this.scene.add( circle );
 
     // 座標軸の表示
     if(visibleAxisHelper){
@@ -240,17 +326,51 @@ export default Vue.extend({
     this.$el.appendChild( this.renderer.domElement );
 
     window.addEventListener( 'resize', this.onWindowResize, false );
-    document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
-    document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
-    document.addEventListener( 'mousemove', this.onDocumentMouseMove, false );
-    document.addEventListener( 'mouseup', this.onDocumentMouseUp, false );
-    // document.addEventListener( 'mousewheel', this.onDocumentMouseWheel, false );
-    document.addEventListener( 'MozMousePixelScroll', this.onDocumentMouseWheel, false);
+    this.$el.addEventListener( 'mousedown', this.onMouseDown, false );
+    this.$el.addEventListener( 'touchstart', this.onTouchStart, false );
+    this.$el.addEventListener( 'touchmove', this.onTouchMove, false );
+    this.$el.addEventListener( 'touchend', this.onTouchEnd, false );
+    this.$el.addEventListener( 'mousemove', this.onMouseMove, false );
+    this.$el.addEventListener( 'mouseup', this.onMouseUp, false );
+    this.$el.addEventListener( 'mousewheel', this.onMouseWheel, false );
+    this.$el.addEventListener( 'MozMousePixelScroll', this.onMouseWheel, false);
+
+    // カメラ位置の設定 -------
+
+    var default_lon = 1882;
+    var default_lat = 46.2;
+    if(this.$route.params.index) {
+
+      // // 選択された行がある場合は、そこまでスクロール
+      var key = this.$route.params.index;
+      var selectedMarker = _.filter(this.markers, function(m){ return m.key==key; })[0];
+      default_lat = selectedMarker.latitude;
+      default_lon = -selectedMarker.longtitude;
+
+      // Drawer分差し引いた領域の中心になるように
+      // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
+      // default_lon += 27;
+    }
+    else if(this.$route.path!='/') {
+
+      default_lon = (Cookies.get('lon')*1 || default_lon);
+      default_lat = (Cookies.get('lat')*1 || default_lat);
+    }
+
+    this.lon = default_lon;
+    this.lat = default_lat;
+
+    // ----------------------
 
     this.animate();
   },
 
   methods: {
+
+    // 英語名を全部小文字にしたり置換してファイル名を取得
+    filename(str){
+      return str.toLowerCase().replace(/[\(|\)|.]/g , '').replace(/ /g , '-');
+    },
 
     animate( ts ) {
 
@@ -260,15 +380,7 @@ export default Vue.extend({
 
     render( elapsed, ts ) {
 
-      if (this.options.orbitControls) {
-        let position = this.camera.position.toArray();
-        let direction = this.target.toArray();
-        this.controls.update(position, direction);
-        this.camera.position.fromArray(position);
-        this.camera.lookAt(this.target.fromArray(direction));
-      }
-
-      if ( this.options.postprocessing ) {
+      if( this.options.postprocessing ) {
         this.postprocessing.render( elapsed, ts, this.tick );
       } else {
         this.renderer.render( this.scene, this.camera );
@@ -277,7 +389,7 @@ export default Vue.extend({
 
     onWindowResize() {
       this.width = this.$el.offsetWidth;
-      this.height = window.innerHeight;
+      this.height = this.$el.offsetHeight;
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize( this.width, this.height );
@@ -285,11 +397,12 @@ export default Vue.extend({
 
     update() {
 
-      if ( this.isUserInteracting === false && this.$route.path==='/' ) {
+      if( this.autoScroll ) {
         this.lon += 0.04;
       }
 
-      this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
+      // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); 少し上向きにしたい場合
+      this.lat = Math.max( -90, Math.min( 90, this.lat ) );
       this.phi = THREE.Math.degToRad( 90 - this.lat );
       this.theta = THREE.Math.degToRad( this.lon );
 
@@ -299,10 +412,6 @@ export default Vue.extend({
 
       this.camera.lookAt( this.camera.target );
 
-      /*
-      // distortion
-      this.camera.position.copy( this.camera.target ).negate();
-      */
       this.renderer.render( this.scene, this.camera );
 
       this.frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse ) );
@@ -314,8 +423,8 @@ export default Vue.extend({
         var el = this.$el.querySelector('#' + marker.key);
         if(pos){
           // Within camera view
-          var top = pos.y/window.devicePixelRatio;
-          var left = pos.x/window.devicePixelRatio;
+          var top = pos.y;
+          var left = pos.x;
           if(marker.type=='sample'){
             top -= 7;
             left -= 7;
@@ -341,15 +450,20 @@ export default Vue.extend({
       var geometry = new THREE.SphereGeometry( 500, 120, 120 );
       geometry.scale( - 1, 1, 1 );
 
+      var texture = null;
       var video = document.getElementById( 'video' );
-      var texture = new THREE.VideoTexture( video );
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.format = THREE.RGBFormat;
+      if(video) {
+        texture = new THREE.VideoTexture( video );
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.format = THREE.RGBFormat;
+      }
+      else {
+        texture = new THREE.TextureLoader().load('/dna-of-forests/img/panorama/forest.jpg');
+      }
 
-      var material = new THREE.MeshBasicMaterial( {
-        map: texture
-      });
+      var material = new THREE.MeshBasicMaterial({ map: texture });
+
       return new THREE.Mesh( geometry, material );
     },
 
@@ -384,22 +498,31 @@ export default Vue.extend({
         vector.y = - ( vector.y * heightHalf ) + heightHalf;
 
         return {
-          x: vector.x,
-          y: vector.y
+          x: vector.x/window.devicePixelRatio,
+          y: vector.y/window.devicePixelRatio
         };
       }
       return null;
     },
 
     // マーカー
-    create_marker(type, key, id, x=0, y=0, z=0){
+    create_marker(data, key){
+      var key = data.alias;
+      var type = (key.indexOf('s-')==0) ? 'sample' : 'knowledge';
+      var latitude = data.marker_position.latitude;
+      var longtitude = data.marker_position.longtitude;
+      var radius = data.marker_position.radius;
+      var geo = this.translateGeoCoords(latitude, longtitude, radius);
+      var x = geo.x,
+          y = geo.y,
+          z = geo.z;
 
       // 3D marker -----------
       if(visible3dMaker){
         // 15cmくらい
         var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
         // geometry.scale( - 1, 1, 1 );
-        var color = (id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
+        var color = (data.id && data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
         var material = new THREE.MeshLambertMaterial({
           color: color
         });
@@ -413,6 +536,10 @@ export default Vue.extend({
 
       marker.position = new THREE.Vector3( x, y, z );
 
+      // カメラ位置をあわせる時に使う
+      marker.latitude = latitude;
+      marker.longtitude = longtitude;
+
       marker.key = key;
       marker.type = type;
 
@@ -421,21 +548,25 @@ export default Vue.extend({
       return marker;
     },
 
-    onDocumentTouchStart( e ) {
-
-      e.preventDefault();
-
+    onTouchStart( e ) {
       e.clientX = e.touches[0].clientX;
       e.clientY = e.touches[0].clientY;
-      onDocumentMouseDown( e );
-
+      this.onMouseDown( e );
+    },
+    onTouchMove( e ) {
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onMouseMove( e );
+    },
+    onTouchEnd( e ) {
+      e.clientX = e.changedTouches[0].clientX;
+      e.clientY = e.changedTouches[0].clientY;
+      this.onMouseUp( e );
     },
 
-    onDocumentMouseDown( e ) {
-
+    onMouseDown( e ) {
       // Canvas部分でドラッグ開始したら
-      if( e.target === this.renderer.domElement){
-
+      if( e.target === this.renderer.domElement ){
         e.preventDefault();
 
         this.isUserInteracting = true;
@@ -446,50 +577,70 @@ export default Vue.extend({
         this.onPointerDownLon = this.lon;
         this.onPointerDownLat = this.lat;
 
-        // -----
 
         this.mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
         this.mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
       }
     },
 
-    onDocumentMouseMove( e ) {
-
+    onMouseMove( e ) {
       if ( this.isUserInteracting === true ) {
+        this.isDragged = true;
         this.lon = ( this.onPointerDownPointerX - e.clientX ) * 0.1 + this.onPointerDownLon;
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
+        // -----
+        this.$root.isAlreadyDragged = true;
+        this.autoScroll = false;
       }
-
     },
 
-    onDocumentMouseUp( e ) {
+    onMouseUp( e ) {
+      if(this.isUserInteracting === true) {
 
-      this.isUserInteracting = false;
+        // クリック
+        if(!this.isDragged && e.target === this.renderer.domElement && this.$route.path!='/panorama/' ) {
+          // 詳細を閉じる
+          this.$router.push('/panorama/');
+        }
 
-      Cookies.set('lon', this.lon);
-      Cookies.set('lat', this.lat);
-      // console.log(this.lon,this.lat);
+        Cookies.set('lon', this.lon);
+        Cookies.set('lat', this.lat);
+
+        this.isUserInteracting = false;
+        this.isDragged = false;
+      }
     },
 
-    onDocumentMouseWheel( e ) {
-
-      // WebKit
-      if ( e.wheelDeltaY ) {
-        this.camera.fov -= e.wheelDeltaY * 0.05;
-      // Opera / Explorer 9
-      } else if ( e.wheelDelta ) {
-        this.camera.fov -= e.wheelDelta * 0.05;
-      // Firefox
-      } else if ( e.detail ) {
-        this.camera.fov += e.detail * 1.0;
+    onMouseWheel( e ) {
+      if(this.$route.path!='/'){
+        // WebKit
+        if ( e.wheelDeltaY ) {
+          this.lon += e.wheelDeltaY * 0.05;
+        // Opera / Explorer 9
+        } else if ( e.wheelDelta ) {
+          this.lon += e.wheelDelta * 0.05;
+        // Firefox
+        } else if ( e.detail ) {
+          this.lon -= e.detail * 1.0;
+        }
+        this.$root.isAlreadyDragged = true;
+        this.autoScroll = false;
       }
-      this.camera.updateProjectionMatrix();
+    },
+
+    resetAutoScroll() {
+      if(this.$route.path==='/'){
+        this.autoScroll = true;
+      }
     }
 
   },
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
-    return require('../data.json');
+    // autoScrollを追加する
+    var _data = _.cloneDeep(require('../data.json'));
+    _data['autoScroll'] = false;
+    return _data;
   }
 });
 </script>

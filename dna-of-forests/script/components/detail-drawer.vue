@@ -3,7 +3,7 @@
 .drawer
   header
     h2
-      img(v-if="type=='sample'" alt='サンプルのデータ' src='/dna-of-forests/img/detail-drawer/title-sample.png' srcset='/dna-of-forests/img/detail-drawer/title-sample@2x.png 2x')
+      img(v-if="type=='sample'" alt='採取サンプルのデータ' src='/dna-of-forests/img/detail-drawer/title-sample.png' srcset='/dna-of-forests/img/detail-drawer/title-sample@2x.png 2x')
       img(v-if="type=='knowledge'" alt='森の知識' src='/dna-of-forests/img/detail-drawer/title-chisiki.png' srcset='/dna-of-forests/img/detail-drawer/title-chisiki@2x.png 2x')
     router-link.close_btn(to='./')
       img(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png' srcset='/dna-of-forests/img/detail-drawer/close-btn@2x.png 2x')
@@ -14,7 +14,8 @@
         h3
           img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
         h4 1. 採取サンプルの写真
-        img.round(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
+        .image_wrapper
+          img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
@@ -27,7 +28,7 @@
           h4 解析方法について
           p
             | DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、
-            | ある程度まで種名を調べる事ができる「DNAバーコーディング」という技術を使って解析しました。詳しくは、アバウトページを御覧ください。
+            | ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。
 
       section.microscope(v-if="microscope")
         h3
@@ -48,7 +49,8 @@
 
     template(v-if="type=='knowledge'")
       h3 {{ title }}
-      img.round(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
+      .image_wrapper
+        img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
       p {{ description }}
 
 
@@ -70,7 +72,7 @@
   &.fade-enter-active
     transition-duration: 0.45s
   &.fade-leave-active
-    transition-duration: 0.3s
+    transition-duration: 0.45s
   &.fade-enter,
   &.fade-leave-active
     right: -490px
@@ -90,13 +92,15 @@ header
     top: 0
     right: 0
     cursor: pointer
-    opacity: 0.15
+    opacity: 0.3
     &:hover
       opacity: 0.5
 article
   padding: 25px
   overflow-y: auto
   height: calc(100% - 125px)
+  // ↓これがないとiOS Safariで慣性スクロールが有効化されない
+  -webkit-overflow-scrolling: touch
 
 h3
   font-size: 16px
@@ -128,9 +132,59 @@ h4
   &:not(:first-child)
     margin-top: 30px
 
-img.round
+@-moz-keyframes spin
+  0%
+    -moz-transform: rotate(0deg)
+  100%
+    -moz-transform: rotate(360deg)
+@-webkit-keyframes spin
+  0%
+    -webkit-transform: rotate(0deg)
+  100%
+    -webkit-transform: rotate(360deg)
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+
+.image_wrapper
+  width: 440px
+  height: 277px
   border-radius: 5px
-  width: 100%
+  background-color: #262626
+  position: relative
+  overflow: hidden
+  &:before
+    content: ""
+    position: absolute
+    width: 32px
+    height: 32px
+    top: calc(50% - 16px)
+    left: calc(50% - 16px)
+    z-index: 1
+    background: transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat center
+    -webkit-animation-name: spin
+    -webkit-animation-duration: 400ms
+    -webkit-animation-iteration-count: infinite
+    -webkit-animation-timing-function: linear
+    -moz-animation-name: spin
+    -moz-animation-duration: 400ms
+    -moz-animation-iteration-count: infinite
+    -moz-animation-timing-function: linear
+    -ms-animation-name: spin
+    -ms-animation-duration: 400ms
+    -ms-animation-iteration-count: infinite
+    -ms-animation-timing-function: linear
+    animation-name: spin
+    animation-duration: 400ms
+    animation-iteration-count: infinite
+    animation-timing-function: linear
+  >img
+    z-index: 2
+    position: absolute
+    border-radius: 5px
 
 .dna_sequence
   p
@@ -206,7 +260,9 @@ img.round
     transform: rotate(-3deg)
     -webkit-transform: rotate(-3deg)
 
-
+@media (max-width: 660px)
+  .drawer
+    height: calc(100% - 100px)
 
 </style>
 
