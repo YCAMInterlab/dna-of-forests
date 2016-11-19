@@ -566,7 +566,7 @@ export default Vue.extend({
 
     onMouseDown( e ) {
       // Canvas部分でドラッグ開始したら
-      if( e.target === this.renderer.domElement ){
+      if( e.target === this.renderer.domElement && this.$route.path!='/' ){
         e.preventDefault();
 
         this.isUserInteracting = true;

@@ -86,8 +86,7 @@ nav
     height: 100px
     width: 100%
     float: none
-    pointer-events: none
-    user-select: none
+    z-index: 9999
     >a
       width: 100px
       height: 100px
