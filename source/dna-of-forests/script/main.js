@@ -12,6 +12,18 @@ if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
 } else {
   var isIE = false;
 }
+
+// Facebook InApp Browser
+if(userAgent.indexOf("fban/fbios;fbav") != -1){
+  document.querySelector('body').className += " facebook";
+  // 下記でスクロールをOFFにできるが、サイト全体に影響してしまう
+  // $(window).on('touchmove.noScroll', function(e) {
+  //   e.preventDefault();
+  // });
+  // スクロール復活
+  // $(window).off('.noScroll');
+}
+
 var ua = navigator.userAgent;
 if(!isIE && (ua.indexOf("Edge") < 0) && (!new MobileDetect(window.navigator.userAgent).mobile())) {
   var video = document.createElement('video');

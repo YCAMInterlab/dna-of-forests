@@ -29,6 +29,8 @@ $yu_gothic: '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro
 html,
 body
   height: 100%
+  &.facebook
+    height: calc(100% - 100px)
 
 body
   position: relative
@@ -59,6 +61,11 @@ a
   position: relative
   // ↓これがないとiOS Safariで慣性スクロールが有効化されない
   -webkit-overflow-scrolling: touch
+
+body.facebook
+  #content
+    position: fixed
+    top: 0
 
 @media (max-width: 660px)
   #content
