@@ -46,8 +46,6 @@ export default Vue.extend({
     this.sound = this.$el.querySelector('audio');
     this.sound.volume = 0.3;
 
-    this.toggleSound(!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0));
-
     if(md.mobile()){
       // モバイルのときだけ、ウィンドウが背面にいくとサウンド停止（戻ってくると復帰）
       window.addEventListener('blur', ()=> {
@@ -65,6 +63,9 @@ export default Vue.extend({
         }
       }, false);
     }
+
+    this.toggleSound(!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0));
+
   },
 
   methods: {
