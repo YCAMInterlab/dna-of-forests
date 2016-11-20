@@ -108,7 +108,6 @@
   right: 22px
   z-index: 11
   user-select: none
-  pointer-events: none
   &:hover
     opacity: 0.7
 
