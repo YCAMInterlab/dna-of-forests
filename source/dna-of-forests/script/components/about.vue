@@ -51,6 +51,10 @@ article.about
       p
         | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
         | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ
+    a(href="http://www.ycam.jp/" target="_blank")
+      h4
+        img(alt='山口情報芸術センター［YCAM］' src='img/about/ycam.png' srcset='img/about/ycam@2x.png 2x')
+      p Yamaguchi Center for Arts and Media
     h3#support
       img(alt='制作・協力' src='img/about/title-support.png' srcset='img/about/title-support@2x.png 2x')
     p
