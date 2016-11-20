@@ -107,6 +107,9 @@ section {
 html,
 body {
   height: 100%; }
+  html.facebook,
+  body.facebook {
+    height: calc(100% - 100px); }
 
 body {
   position: relative;
@@ -136,6 +139,10 @@ a {
   background-color: #000;
   position: relative;
   -webkit-overflow-scrolling: touch; }
+
+body.facebook #content {
+  position: fixed;
+  top: 0; }
 
 @media (max-width: 660px) {
   #content {

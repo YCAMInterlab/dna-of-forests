@@ -108,7 +108,6 @@
   right: 22px
   z-index: 11
   user-select: none
-  pointer-events: none
   &:hover
     opacity: 0.7
 
@@ -566,7 +565,7 @@ export default Vue.extend({
 
     onMouseDown( e ) {
       // Canvas部分でドラッグ開始したら
-      if( e.target === this.renderer.domElement ){
+      if( e.target === this.renderer.domElement && this.$route.path!='/' ){
         e.preventDefault();
 
         this.isUserInteracting = true;

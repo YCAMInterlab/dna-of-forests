@@ -10,7 +10,7 @@ article.about
     p
       | YCAMバイオ・リサーチのワークショップ「<a class="border" href="http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/" target="_blank">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class="border" href="https://goo.gl/maps/Fm9EAftjMMA2" target="_blank">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>
       | 私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>
-      | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森の生き物になったら</a>」の仁保の森ツアープログラムとして開催されました。
+      | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。
     .carousel
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10.jpg);')
@@ -22,6 +22,7 @@ article.about
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8.jpg);')
+    center.credit 撮影：山中慎太郎（Qsyum!）
   section#dna-barcoding
     h2
       img(alt='解析方法（DNAバーコーディング）について' src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
@@ -47,10 +48,14 @@ article.about
         | 多様な切り口で模索するYCAMのプロジェクトです
     a(href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank")
       h4
-        img(alt='「もしも、森の生き物になったら」チーム' src='img/about/iteota.png' srcset='img/about/iteota@2x.png 2x')
+        img(alt='「もしも、森のいきものになったら」チーム' src='img/about/iteota.png' srcset='img/about/iteota@2x.png 2x')
       p
         | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
         | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ
+    a(href="http://www.ycam.jp/" target="_blank")
+      h4
+        img(alt='山口情報芸術センター［YCAM］' src='img/about/ycam.png' srcset='img/about/ycam@2x.png 2x')
+      p Yamaguchi Center for Arts and Media
     h3#support
       img(alt='制作・協力' src='img/about/title-support.png' srcset='img/about/title-support@2x.png 2x')
     p
@@ -58,7 +63,8 @@ article.about
       | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：KARAPPO Inc.</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">録音・音源編集：Antoine Bertin（antoinebertin.org）</a><br>
       | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>
-      | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a>
+      | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a><br>
+      | 助成：平成２８年度文化庁劇場・音楽堂等活性化事業
 
 </template>
 
@@ -161,7 +167,7 @@ article.about
       background-position: center
       background-size: cover
     .flickity-page-dots
-      bottom: -38px
+      bottom: -60px
       .dot
         width: 7px
         height: 7px
@@ -197,6 +203,12 @@ article.about
     &:hover
       .flickity-prev-next-button:not([disabled])
         opacity: 1
+
+  // 撮影クレジット
+  center.credit
+    margin-top: -26px
+    color: #696969
+    font-size: 12px
 
 @media (max-width: 900px)
   article.about
