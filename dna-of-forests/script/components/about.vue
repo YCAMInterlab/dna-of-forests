@@ -209,6 +209,7 @@ article.about
     margin-top: -26px
     color: #696969
     font-size: 12px
+    font-weight: bold
 
 @media (max-width: 900px)
   article.about
