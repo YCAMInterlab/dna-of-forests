@@ -58,7 +58,8 @@ article.about
       | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：KARAPPO Inc.</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">録音・音源編集：Antoine Bertin（antoinebertin.org）</a><br>
       | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>
-      | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a>
+      | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a><br>
+      | 助成：平成２８年度文化庁劇場・音楽堂等活性化事業
 
 </template>
 
