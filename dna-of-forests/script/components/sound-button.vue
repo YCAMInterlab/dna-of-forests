@@ -48,23 +48,23 @@ export default Vue.extend({
 
     this.toggleSound(!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0));
 
-    // if(md.mobile()){
-    //   // モバイルのときだけ、ウィンドウが背面にいくとサウンド停止（戻ってくると復帰）
-    //   window.addEventListener('blur', ()=> {
-    //     if(!this.sound.paused){
-    //       this.pauseByWindowBlur = true;
-    //       this.toggleSound(false);
-    //     }
-    //     else{
-    //       this.pauseByWindowBlur = false;
-    //     }
-    //   }, false);
-    //   window.addEventListener('focus', ()=> {
-    //     if(this.pauseByWindowBlur){
-    //       this.toggleSound(true);
-    //     }
-    //   }, false);
-    // }
+    if(md.mobile()){
+      // モバイルのときだけ、ウィンドウが背面にいくとサウンド停止（戻ってくると復帰）
+      window.addEventListener('blur', ()=> {
+        if(!this.sound.paused){
+          this.pauseByWindowBlur = true;
+          this.toggleSound(false);
+        }
+        else{
+          this.pauseByWindowBlur = false;
+        }
+      }, false);
+      window.addEventListener('focus', ()=> {
+        if(this.pauseByWindowBlur){
+          this.toggleSound(true);
+        }
+      }, false);
+    }
   },
 
   methods: {
