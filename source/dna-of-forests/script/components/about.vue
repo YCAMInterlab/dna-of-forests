@@ -22,6 +22,7 @@ article.about
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8.jpg);')
+    center.credit 撮影：山中慎太郎（Qsyum!）
   section#dna-barcoding
     h2
       img(alt='解析方法（DNAバーコーディング）について' src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
@@ -166,7 +167,7 @@ article.about
       background-position: center
       background-size: cover
     .flickity-page-dots
-      bottom: -38px
+      bottom: -60px
       .dot
         width: 7px
         height: 7px
@@ -202,6 +203,12 @@ article.about
     &:hover
       .flickity-prev-next-button:not([disabled])
         opacity: 1
+
+  // 撮影クレジット
+  center.credit
+    margin-top: -26px
+    color: #696969
+    font-size: 12px
 
 @media (max-width: 900px)
   article.about
