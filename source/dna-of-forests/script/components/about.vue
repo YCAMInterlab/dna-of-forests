@@ -10,7 +10,7 @@ article.about
     p
       | YCAMバイオ・リサーチのワークショップ「<a class="border" href="http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/" target="_blank">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class="border" href="https://goo.gl/maps/Fm9EAftjMMA2" target="_blank">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>
       | 私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>
-      | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森の生き物になったら</a>」の仁保の森ツアープログラムとして開催されました。
+      | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。
     .carousel
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10.jpg);')
@@ -47,7 +47,7 @@ article.about
         | 多様な切り口で模索するYCAMのプロジェクトです
     a(href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank")
       h4
-        img(alt='「もしも、森の生き物になったら」チーム' src='img/about/iteota.png' srcset='img/about/iteota@2x.png 2x')
+        img(alt='「もしも、森のいきものになったら」チーム' src='img/about/iteota.png' srcset='img/about/iteota@2x.png 2x')
       p
         | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
         | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ
