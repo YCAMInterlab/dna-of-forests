@@ -34,8 +34,27 @@ if(!isIE && (ua.indexOf("Edge") < 0) && (!new MobileDetect(window.navigator.user
   video.style.display = 'none';
   document.body.appendChild(video);
 }
+
+// iPhoneでLandscapeにした時に見にくくなるのを何とかする
+var setViewportByOrientation = function(){
+  var vp = document.querySelector('head>meta[name="viewport"]');
+  switch (window.orientation) {
+  case 0:
+  case 180:
+    // Portrait
+    vp.content = 'width=640';
+    break;
+  case -90:
+  case 90:
+    // Landscape
+    vp.content = 'width=1320';
+    break;
+  }
+}
+
 if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
-  // do nothing
+  setViewportByOrientation();
+  window.addEventListener("orientationchange", setViewportByOrientation);
 }
 else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
   // TODO 正規表現でwidthだけ変える

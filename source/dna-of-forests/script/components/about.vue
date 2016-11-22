@@ -96,6 +96,7 @@ article.about
 article.about
   height: 100%
   overflow-y: auto
+  overflow-x: hidden
   h1
     text-align: center
     margin-top: 130px
