@@ -44,6 +44,7 @@ article.about
         img(alt='YCAM バイオ・リサーチ' src='img/about/ycam-bioresearch.png' srcset='img/about/ycam-bioresearch@2x.png 2x')
       p
         | 高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>
+        | （山口情報芸術センター［YCAM］）<br>
         | 「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>
         | 多様な切り口で模索するYCAMのプロジェクトです
     a(href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank")
@@ -51,20 +52,29 @@ article.about
         img(alt='「もしも、森のいきものになったら」チーム' src='img/about/iteota.png' srcset='img/about/iteota@2x.png 2x')
       p
         | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
-        | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ
+        | （マシュマロ・レーザー・フィースト）<br>
+        | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>
+        | （山口情報芸術センター［YCAM］）
     a(href="http://www.ycam.jp/" target="_blank")
       h4
         img(alt='山口情報芸術センター［YCAM］' src='img/about/ycam.png' srcset='img/about/ycam@2x.png 2x')
       p Yamaguchi Center for Arts and Media
-    h3#support
-      img(alt='制作・協力' src='img/about/title-support.png' srcset='img/about/title-support@2x.png 2x')
+    h3#create
+      img(alt='制作' src='img/about/title-create.png' srcset='img/about/title-create@2x.png 2x')
     p
-      | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">講師：田中 浩（山口県立博物館動物担当理学博士）</a><br>
+      | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">講師(アドバイス)：田中 浩（山口県立博物館動物担当理学博士）</a><br>
       | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：KARAPPO Inc.</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">録音・音源編集：Antoine Bertin（antoinebertin.org）</a><br>
-      | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>
+    h3#support
+      img(alt='協力' src='img/about/title-support.png' srcset='img/about/title-support@2x.png 2x')
+    p.small
+      | スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>
+      | 伊藤俊幸（元生理学研究所技術員、LisCo社員）<br>
       | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a><br>
-      | 助成：平成２８年度文化庁劇場・音楽堂等活性化事業
+      | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>
+      | 後援：山口市、山口市教育委員会、ブリティッシュ・カウンシル<br>
+      | 助成：平成28年度文化庁劇場・音楽堂等活性化事業<br>
+      | 協力：仁保自治会、東北大学災害科学国際研究所、山口大学
 
 </template>
 
@@ -86,6 +96,7 @@ article.about
 article.about
   height: 100%
   overflow-y: auto
+  overflow-x: hidden
   h1
     text-align: center
     margin-top: 130px
@@ -124,6 +135,7 @@ article.about
       margin-bottom: 0
       h3#produce
         margin-bottom: 53px
+      h3#create,
       h3#support
         margin-bottom: 40px
         margin-top: 80px
@@ -141,6 +153,10 @@ article.about
           text-decoration: none
           &:hover
             opacity: 0.7
+            cursor: pointer
+        &.small
+          font-size: 12px
+
       h4
         margin-bottom: 10px
 
