@@ -62,7 +62,7 @@ article.about
     h3#create
       img(alt='制作' src='img/about/title-create.png' srcset='img/about/title-create@2x.png 2x')
     p
-      | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">講師(アドバイス)：田中 浩（山口県立博物館動物担当理学博士）</a><br>
+      | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">講師：田中 浩（山口県立博物館動物担当理学博士）</a><br>
       | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：KARAPPO Inc.</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">録音・音源編集：Antoine Bertin（antoinebertin.org）</a><br>
     h3#support
