@@ -5,7 +5,7 @@
     <instruction-modal v-if="!$root.isAlreadyDragged"/>
   </transition>
   <transition name="fade">
-    <top-modal v-if="$route.path=='/'"/>
+    <entrance-modal v-if="$route.path=='/'"/>
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
@@ -225,9 +225,9 @@ const visibleGrid = false;
 
 export default Vue.extend({
   components: {
-    'dna-barcode-bg':    require('./dna-barcode-bg.vue'),
-    'top-modal':         require('./top-modal.vue'),
-    'instruction-modal': require('./instruction-modal.vue'),
+    'dna-barcode-bg':    require('../dna-barcode-bg.vue'),
+    'entrance-modal':    require('../modal/entrance-modal.vue'),
+    'instruction-modal': require('../modal/instruction-modal.vue'),
   },
   watch: {
     '$route': 'resetAutoScroll'
@@ -637,7 +637,7 @@ export default Vue.extend({
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
     // autoScrollを追加する
-    var _data = _.cloneDeep(require('../data.json'));
+    var _data = _.cloneDeep(require('../../data.json'));
     _data['autoScroll'] = false;
     return _data;
   }

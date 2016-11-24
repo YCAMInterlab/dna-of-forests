@@ -149,11 +149,11 @@ export default Vue.extend({
     }
   },
   components: {
-    'dna-barcode': require('./dna-barcode.vue')
+    'dna-barcode': require('../dna-barcode.vue')
   },
   data () {
     // TODO: 直接ルートのComponentから受け渡せないか？
-    return require('../data.json');
+    return require('../../data.json');
   },
   mounted: function() {
 
