@@ -72,7 +72,8 @@ article.about
       | 伊藤俊幸（元生理学研究所技術員、LisCo社員）<br>
       | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a><br>
       | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>
-      | 協力：仁保自治会、東北大学災害科学国際研究所、山口大学<br>
+      | 現地協力：仁保自治会<br>
+      | レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br>
       | <br>
       | 主催：山口市、公益財団法人山口市文化振興財団<br>
       | 後援：山口市教育委員会、ブリティッシュ・カウンシル<br>
