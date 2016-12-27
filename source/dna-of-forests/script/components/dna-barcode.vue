@@ -10,7 +10,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
 
-  props: ['dna','width_limit','height'],
+  props: ['dna','max_width','height'],
 
   mounted: function() {
     this.renderBarcode()
@@ -51,13 +51,13 @@ export default Vue.extend({
           'N': "rgb(255, 255, 255)", // W: #ffffff
         }
 
-        if(this.width_limit){
+        if(this.max_width){
 
-          var str_len = Math.floor(this.width_limit / w);
+          var str_len = Math.floor(this.max_width / w);
           str_arr = this.chunkString(this.dna, str_len);
           var lines = str_arr.length;
           canvas.height = h*lines + line_margin*(lines-1);
-          canvas.width = this.width_limit;
+          canvas.width = this.max_width;
         }
         else{
           str_arr = [this.dna];

@@ -12,7 +12,7 @@
         | テキスト
   div.contents
     div.barcode(v-bind:class="{ current: current=='barcode' }")
-      <dna-barcode v-bind:dna="this.text" v-bind:width_limit="403">
+      <dna-barcode v-bind:dna="this.text" v-bind:max_width="403">
     div.text(v-bind:class="{ current: current=='text' }")
       //- p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
       p.dna_text(v-html="colorize(text)")
