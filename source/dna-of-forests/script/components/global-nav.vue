@@ -13,7 +13,7 @@ nav
   router-link.about(to='/about')
     div
       span ABOUT
-  <sound-button></sound-button>
+  <sound-button>
 
 </template>
 
