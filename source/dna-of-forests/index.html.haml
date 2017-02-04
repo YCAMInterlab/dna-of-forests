@@ -10,11 +10,9 @@ styles:
 
 #app
   %global-nav
-
   #content
     %router-view
-
-  %transition{name: "fade"}
+  %transition{name: 'fade'}
     %detail-drawer{'v-if': "$route.params.index"}
 
 = javascript_include_tag '/dna-of-forests/script/main'
