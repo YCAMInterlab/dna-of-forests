@@ -299,7 +299,7 @@ export default Vue.extend({
       // knowledge
       'title': null,
       'description': null,
-    }
+    };
   },
 
   methods: {

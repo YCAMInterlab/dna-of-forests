@@ -1,17 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MobileDetect from 'mobile-detect';
+import _ from 'lodash';
 
 Vue.use(VueRouter);
 
 var userAgent = window.navigator.userAgent.toLowerCase();
 if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
   var isIE = true;
-  var ieVersion = userAgent.match(/((msie|MSIE)\s|rv:)([\d\.]+)/)[3];
-  ieVersion = parseInt(ieVersion);
-} else {
-  var isIE = false;
+  // var ieVersion = userAgent.match(/((msie|MSIE)\s|rv:)([\d\.]+)/)[3];
+  // ieVersion = parseInt(ieVersion);
 }
+// else {
+//   var isIE = false;
+// }
 
 // Facebook InApp Browser
 if(userAgent.indexOf('fban/fbios;fbav') != -1){
@@ -39,13 +41,13 @@ if(!isIE && (ua.indexOf('Edge') < 0) && (!new MobileDetect(window.navigator.user
 var setViewportByOrientation = function(){
   var vp = document.querySelector('head>meta[name="viewport"]');
   switch (window.orientation) {
-    case 0:
-    case 180:
+  case 0:
+  case 180:
     // Portrait
     vp.content = 'width=640';
     break;
-    case -90:
-    case 90:
+  case -90:
+  case 90:
     // Landscape
     vp.content = 'width=1320';
     break;
@@ -84,7 +86,7 @@ Vue.component('global-nav', require('./components/global-nav.vue'));
 // 4. Create and mount the root instance.
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
-const app = new Vue({
+new Vue({
   router: router,
   data: function(){
     // isAlreadyDraggedを追加する

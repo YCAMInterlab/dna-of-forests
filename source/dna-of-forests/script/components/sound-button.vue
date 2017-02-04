@@ -88,7 +88,7 @@ export default Vue.extend({
   data: function(){
     return {
       pauseByWindowBlur: false
-    }
+    };
   }
 });
 

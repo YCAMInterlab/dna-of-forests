@@ -216,7 +216,7 @@ import THREELib from 'three-js';
 import Cookies from 'js-cookie';
 import _ from 'lodash';
 
-var THREE = THREELib(["Projector"]);
+var THREE = THREELib(['Projector']);
 
 // 表示の切り替え
 const visibleAxisHelper = false;
@@ -513,8 +513,8 @@ export default Vue.extend({
       var radius = data.marker_position.radius;
       var geo = this.translateGeoCoords(latitude, longtitude, radius);
       var x = geo.x,
-          y = geo.y,
-          z = geo.z;
+        y = geo.y,
+        z = geo.z;
 
       // 3D marker -----------
       if(visible3dMaker){

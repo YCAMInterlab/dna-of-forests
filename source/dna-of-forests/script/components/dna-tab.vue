@@ -90,10 +90,10 @@ export default Vue.extend({
     colorize(value) {
       // TODO 色情報はどこか一箇所にまとめる
       return value
-        .replace(/A/g, "<span style=\"color: #ff33a5;\">A</span>")
-        .replace(/T/g, "<span style=\"color: #33ff6d;\">T</span>")
-        .replace(/G/g, "<span style=\"color: #337eff;\">G</span>")
-        .replace(/C/g, "<span style=\"color: #f5ff8a;\">C</span>");
+        .replace(/A/g, '<span style="color: #ff33a5;">A</span>')
+        .replace(/T/g, '<span style="color: #33ff6d;">T</span>')
+        .replace(/G/g, '<span style="color: #337eff;">G</span>')
+        .replace(/C/g, '<span style="color: #f5ff8a;">C</span>');
     },
 
     switchTab(val) {
