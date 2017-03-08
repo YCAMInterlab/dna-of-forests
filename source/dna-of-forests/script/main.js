@@ -64,10 +64,6 @@ else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
   vp.content = 'width=1150';
 }
 
-
-// 3. Create the router instance and pass the `routes` option
-// You can pass in additional options here, but let's
-// keep it simple for now.
 const router = new VueRouter({
   routes: [
   { path: '/',                component: require('./components/page/panorama.vue') },
@@ -83,9 +79,6 @@ const router = new VueRouter({
 Vue.component('detail-drawer', require('./components/detail-drawer.vue'));
 Vue.component('global-nav', require('./components/global-nav.vue'));
 
-// 4. Create and mount the root instance.
-// Make sure to inject the router with the router option to make the
-// whole app router-aware.
 new Vue({
   router: router,
   data: function(){
