@@ -3,8 +3,8 @@
 .wrapper
   .containter
     .modal
-      img.logo(alt='森のDNA図鑑 仁保の森 2016 YCAM Bio Research' src='/dna-of-forests/img/entrance-modal/logo.png' srcset='/dna-of-forests/img/entrance-modal/logo@2x.png 2x')
-      img.lead(alt='YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。' src='/dna-of-forests/img/entrance-modal/lead.png' srcset='/dna-of-forests/img/entrance-modal/lead@2x.png 2x')
+      img.logo(:alt="$t('logo')" src='/dna-of-forests/img/entrance-modal/logo.png' srcset='/dna-of-forests/img/entrance-modal/logo@2x.png 2x')
+      img.lead(:alt="$t('lead')" src='/dna-of-forests/img/entrance-modal/lead.png' srcset='/dna-of-forests/img/entrance-modal/lead@2x.png 2x')
       router-link(to='/panorama') ENTER
 
 </template>

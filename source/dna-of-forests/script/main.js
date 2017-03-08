@@ -1,9 +1,16 @@
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import MobileDetect from 'mobile-detect';
 import _ from 'lodash';
 
 Vue.use(VueRouter);
+Vue.use(VueI18n);
+
+var i18n = new VueI18n({
+  locale: document.querySelector('html').getAttribute('lang'),
+  messages: require('./messages.json')
+});
 
 var userAgent = window.navigator.userAgent.toLowerCase();
 if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
@@ -66,12 +73,12 @@ else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
 
 const router = new VueRouter({
   routes: [
-  { path: '/',                component: require('./components/page/panorama.vue') },
-  { path: '/panorama',        component: require('./components/page/panorama.vue') },
-  { path: '/panorama/:index', component: require('./components/page/panorama.vue') },
-  { path: '/list',            component: require('./components/page/list.vue') },
-  { path: '/list/:index',     component: require('./components/page/list.vue') },
-  { path: '/about',           component: require('./components/page/about.vue') },
+    { path: '/',                component: require('./components/page/panorama.vue') },
+    { path: '/panorama',        component: require('./components/page/panorama.vue') },
+    { path: '/panorama/:index', component: require('./components/page/panorama.vue') },
+    { path: '/list',            component: require('./components/page/list.vue') },
+    { path: '/list/:index',     component: require('./components/page/list.vue') },
+    { path: '/about',           component: require('./components/page/about.vue') },
   ]
 });
 
@@ -79,8 +86,9 @@ const router = new VueRouter({
 Vue.component('detail-drawer', require('./components/detail-drawer.vue'));
 Vue.component('global-nav', require('./components/global-nav.vue'));
 
-new Vue({
+document.moge = new Vue({
   router: router,
+  i18n: i18n,
   data: function(){
     // isAlreadyDraggedを追加する
     var _data = _.cloneDeep(require('./data.json'));

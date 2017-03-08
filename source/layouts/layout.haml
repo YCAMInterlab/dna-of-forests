@@ -6,7 +6,7 @@
 -# TODO: 画像を変えた場合は、ここの?移行も変更
 - chache_param = 'random-number-for-cache-clear-921689201'
 !!!
-%html{ lang:"ja" }
+%html{ lang: data.lang }
   %head
     %meta{charset: "utf-8"}
     %title= data.title
@@ -41,6 +41,6 @@
 
     = partial 'partials/google_analytics'
 
-  %body{ class: "#{page_classes}" }
+  %body
     = partial 'partials/facebook_like_button'
     = yield
