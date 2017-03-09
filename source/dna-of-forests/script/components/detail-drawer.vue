@@ -112,6 +112,8 @@ p
   line-height: 32px
   letter-spacing: 0.075em
   margin-top: 25px
+  word-break: break-all
+  text-align: justify
 
 section
 
