@@ -869,58 +869,124 @@
   ],
   "knowledges": [
     {
-      "title": "ユスリカ",
-      "description": "ハエ目の昆虫。蚊柱の多くはユスリカのオスの群飛で、メスはその群飛に飛び込み交尾をし、水辺に移動し産卵します。成虫の口器は退化し、食物をとらず、1日から数日の命です。幼虫は水底で成長し、魚類などの餌です。仁保の森には、山間渓流に生息するコヒメユスリカ（モンユスリカ亜科）、カニエリユスリカ（エリユスリカ亜科）、水田など発生するウスイロユスリカ（ユスリカ亜科）をはじめ多種が生息。",
+      "title": {
+        "ja": "ユスリカ",
+        "en": "Chironomids"
+      },
+      "description": {
+        "ja": "ハエ目の昆虫。蚊柱の多くはユスリカのオスの群飛で、メスはその群飛に飛び込み交尾をし、水辺に移動し産卵します。成虫の口器は退化し、食物をとらず、1日から数日の命です。幼虫は水底で成長し、魚類などの餌です。仁保の森には、山間渓流に生息する<a href=\"https://www.google.com/search?q='Tanypodinae'\" target=\"_blank\" class=\"border\">コヒメユスリカ（モンユスリカ亜科）</a>、<a href=\"https://www.google.com/search?q='Orthocladius'\" target=\"_blank\" class=\"border\">カニエリユスリカ（エリユスリカ亜科）</a>、水田など発生する<a href=\"https://www.google.com/search?q='Chironominae'\" target=\"_blank\" class=\"border\">ウスイロユスリカ（ユスリカ亜科）</a>をはじめ多種が生息。",
+        "en": "Chironomids are insects of the order Diptera. Most of the time, mosquito pillars are the swarming of flying male chironomids, and females fly into the swarm for copulation, then move to the waterside to lay eggs. The adults have atrophied mouthparts, and for this reason, they spend their lives without consuming any food and survive for one or a few days. Larval chironomids develop at the bottom of water, and animals such as fish prey on them. There are many species of chironomids inhabiting the forest of Niho, including <a href=\"https://www.google.com/search?q='Tanypodinae'\" target=\"_blank\" class=\"border\">Nilotanypus(Tanypodinae)</a> and <a href=\"https://www.google.com/search?q='Orthocladius'\" target=\"_blank\" class=\"border\">Orthocladius kanii(Orthocladius)</a> that live in mountain streams, and <a href=\"https://www.google.com/search?q='Chironominae'\" target=\"_blank\" class=\"border\">Chironomus kiiensis(Chironominae)</a> dwelling in paddy fields."
+      },
       "marker_position": { "latitude": -10, "longtitude": -130, "radius": 6 }
     },
     {
-      "title": "トンボ",
-      "description": "食虫性の昆虫。飛びながら小さな昆虫を捕えて食べます。体は細長く、早く、まっすぐに飛び、旋回やホバリングもこなします。大きな複眼は飛翔しながら昆虫を探すセンサーです。幼虫はヤゴとよばれ水棲で肉食です。仁保の森には、イトトンボ、カワトンボ、オニヤンマ、ヤンマ、サナエ、トンボの仲間など多種類が生息。特に渓流では、春にムカシトンボやカワトンボ、5月頃からサナエの仲間、夏にはヤンマの仲間などがみられます。",
+      "title": {
+        "ja": "トンボ",
+        "en": "Dragonflies"
+      },
+      "description": {
+        "ja": "食虫性の昆虫。飛びながら小さな昆虫を捕えて食べます。体は細長く、早く、まっすぐに飛び、旋回やホバリングもこなします。大きな複眼は飛翔しながら昆虫を探すセンサーです。幼虫はヤゴとよばれ水棲で肉食です。仁保の森には、<a href=\"https://www.google.com/search?q='Coenagrionidae'\" target=\"_blank\" class=\"border\">イトトンボ</a>、<a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">カワトンボ</a>、<a href=\"https://www.google.com/search?q='Cordulegasteridae'\" target=\"_blank\" class=\"border\">オニヤンマ</a>、<a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">ヤンマ</a>、<a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">サナエ</a>、<a href=\"https://www.google.com/search?q='Libellulidae'\" target=\"_blank\" class=\"border\">トンボ</a>の仲間など多種類が生息。特に渓流では、春に<a href=\"https://www.google.com/search?q='Epiophlebiidae'\" target=\"_blank\" class=\"border\">ムカシトンボ</a>や<a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">カワトンボ</a>、5月頃から<a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">サナエ</a>の仲間、夏には<a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">ヤンマ</a>の仲間などがみられます。",
+        "en": "Dragonflies are insectivores. They capture small insects while flying and feed on them. With their thin and long body, they fly fast and straight, and can also circle and hover. Their big compound eyes are the sensor for hunting insects while flying in the air. The nymphs, called “yago” in Japanese, spend their juvenile stages underwater and are carnivorous. There are many species from the families <a href=\"https://www.google.com/search?q='Coenagrionidae'\" target=\"_blank\" class=\"border\">Coenagrionidae</a>, <a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">Calopterygidae</a>, <a href=\"https://www.google.com/search?q='Cordulegasteridae'\" target=\"_blank\" class=\"border\">Cordulegasteridae</a>, <a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">Aeshnidae</a>, <a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">Gomphidae</a>, and <a href=\"https://www.google.com/search?q='Libellulidae'\" target=\"_blank\" class=\"border\">Libellulidae</a> inhabiting in the forest of Niho. Especially near the mountain streams, you can find species from <a href=\"https://www.google.com/search?q='Epiophlebiidae'\" target=\"_blank\" class=\"border\">Epiophlebiidae</a> and <a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">Calopterygidae</a> families in spring, <a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">Gomphidae</a> from around May, and <a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">Aeshnidae</a> during summer."
+      },
       "marker_position": { "latitude": 10, "longtitude": -150, "radius": 4 }
     },
     {
-      "title": "カエル",
-      "description": "水中と陸上の両方で活動する半水生、繁殖期以外は陸上で生活する陸生に分かれます。後足は長く、跳躍運動に適応し、水かきがあります。樹上性カエルの指には吸盤があります。オタマジャクシは水中で成長します。意外と視野は狭いが、動いているものは捉えることができます。渓流域の森林部にはカジカガエル、モリアオガエル、ヤマアカガエル、タゴガエル、二ホンヒキガエルが生息。田畑周辺にはニホンアマガエルなどが生息。",
+      "title": {
+        "ja": "カエル",
+        "en": "Frogs"
+      },
+      "description": {
+        "ja": "水中と陸上の両方で活動する半水生、繁殖期以外は陸上で生活する陸生に分かれます。後足は長く、跳躍運動に適応し、水かきがあります。樹上性カエルの指には吸盤があります。オタマジャクシは水中で成長します。意外と視野は狭いが、動いているものは捉えることができます。渓流域の森林部には<a href=\"https://www.google.com/search?q='Buergeria+buergeri'\" target=\"_blank\" class=\"border\">カジカガエル</a>、<a href=\"https://www.google.com/search?q='Rhacophorus+arboreus'\" target=\"_blank\" class=\"border\">モリアオガエル</a>、<a href=\"https://www.google.com/search?q='Rana+ornativentris'\" target=\"_blank\" class=\"border\">ヤマアカガエル</a>、<a href=\"https://www.google.com/search?q='Rana+tagoi'\" target=\"_blank\" class=\"border\">タゴガエル</a>、<a href=\"https://www.google.com/search?q='Bufo+japonicus'\" target=\"_blank\" class=\"border\">二ホンヒキガエル</a>が生息。田畑周辺には<a href=\"https://www.google.com/search?q='Hyla+japonica'\" target=\"_blank\" class=\"border\">ニホンアマガエル</a>などが生息。",
+        "en": "Frogs are divided into two groups; one group is semiaquatic, active both in water and on land, and another is terrestrial that spend their lives on land other than the breeding season. Their long rear legs are webbed and adapted for jumping movement, and arboreal frogs have fingers with suckers. Tadpoles develop in water. Frogs actually have a narrow range of vision, but they are capable of recognizing moving animals or objects. There are species such as <a href=\"https://www.google.com/search?q='Buergeria+buergeri'\" target=\"_blank\" class=\"border\">Buergeria buergeri</a>, <a href=\"https://www.google.com/search?q='Rhacophorus+arboreus'\" target=\"_blank\" class=\"border\">Rhacophorus arboreus</a>, <a href=\"https://www.google.com/search?q='Rana+ornativentris'\" target=\"_blank\" class=\"border\">Rana ornativentris</a>, <a href=\"https://www.google.com/search?q='Rana+tagoi'\" target=\"_blank\" class=\"border\">Rana tagoi</a>, and <a href=\"https://www.google.com/search?q='Bufo+japonicus'\" target=\"_blank\" class=\"border\">Bufo japonicus</a> inhabiting the areas with mountain streams in the forest. Around the fields, frogs such as <a href=\"https://www.google.com/search?q='Hyla+japonica'\" target=\"_blank\" class=\"border\">Hyla japonica</a> can be found."
+      },
       "marker_position": { "latitude": -20, "longtitude": -150, "radius": 4 }
     },
     {
-      "title": "フクロウ",
-      "description": "多くは肉食性の鳥類で、夜行性の種が多く、大型種はネズミ、小鳥、ヘビなどを捕食します。小型種は昆虫食です。風切羽に消音構造があり、羽音をたてずに飛びます。頭は大きく、鋭いくちばし、大きな目、発達した耳を持ちます。仁保の森に生息している種類は、留鳥ではフクロウ、オオコノハズク、夏鳥ではアオバズク、コノハズク、冬鳥ではコミミズク、トラフグス。",
+      "title": {
+        "ja": "フクロウ",
+        "en": "Owls"
+      },
+      "description": {
+        "ja": "多くは肉食性の鳥類で、夜行性の種が多く、大型種はネズミ、小鳥、ヘビなどを捕食します。小型種は昆虫食です。風切羽に消音構造があり、羽音をたてずに飛びます。頭は大きく、鋭いくちばし、大きな目、発達した耳を持ちます。仁保の森に生息している種類は、留鳥では<a href=\"https://www.google.com/search?q='Ural+owls'\" target=\"_blank\" class=\"border\">フクロウ</a>、<a href=\"https://www.google.com/search?q='Otus+lempiji'\" target=\"_blank\" class=\"border\">オオコノハズク</a>、夏鳥では<a href=\"https://www.google.com/search?q='Ninox+scutulata'\" target=\"_blank\" class=\"border\">アオバズク</a>、<a href=\"https://www.google.com/search?q='Otus+sunia'\" target=\"_blank\" class=\"border\">コノハズク</a>、冬鳥では<a href=\"https://www.google.com/search?q='Asio+flammeus'\" target=\"_blank\" class=\"border\">コミミズク</a>、<a href=\"https://www.google.com/search?q='Asio+otus'\" target=\"_blank\" class=\"border\">トラフグス</a>。",
+        "en": "Mostly carnivorous and nocturnal, owls with large body feed on mice, small birds, and snakes, while smaller species prey on insects. Their flight feathers are designed to silence the sounds, hence, they can fly without emitting any sounds of flapping wings. Their heads are big, with features including a sharp beak, big eyes, and developed ears. There are several owl species in the forest of Niho: the resident <a href=\"https://www.google.com/search?q='Ural+owls'\" target=\"_blank\" class=\"border\">Ural owls</a> and <a href=\"https://www.google.com/search?q='Otus+lempiji'\" target=\"_blank\" class=\"border\">Otus lempiji</a>; <a href=\"https://www.google.com/search?q='Ninox+scutulata'\" target=\"_blank\" class=\"border\">Ninox scutulata</a> and <a href=\"https://www.google.com/search?q='Otus+sunia'\" target=\"_blank\" class=\"border\">Otus sunia</a> that migrate to the forests during summer; and <a href=\"https://www.google.com/search?q='Asio+flammeus'\" target=\"_blank\" class=\"border\">Asio flammeus</a> and <a href=\"https://www.google.com/search?q='Asio+otus'\" target=\"_blank\" class=\"border\">Asio otus</a> that are winter migrants."
+      },
       "marker_position": { "latitude": 45, "longtitude": 280, "radius": 20 }
     },
     {
-      "title": "ウロ",
-      "description": "ケヤキなどの大きく成長する樹にはウロと呼ばれる穴ができやすいので、そこにフクロウなどが巣をつくります。ウロは入口の直径が10cm程度のさほど大きくはないものでも、奥が広くなっていることが多く、体長約50cmのフクロウも暮らすことができます。複数の動物が利用するため、ムササビや、夏に渡ってくるアオバズクなども使います。",
+      "title": {
+        "ja": "ウロ",
+        "en": "Tree hollow"
+      },
+      "description": {
+        "ja": "ケヤキなどの大きく成長する樹にはウロと呼ばれる穴ができやすいので、そこにフクロウなどが巣をつくります。ウロは入口の直径が10cm程度のさほど大きくはないものでも、奥が広くなっていることが多く、体長約50cmのフクロウも暮らすことができます。複数の動物が利用するため、ムササビや、夏に渡ってくるアオバズクなども使います。",
+        "en": "Trees such as zelkova that grow large tend to form hollows inside, and animals such as owls use those space to build dens. In many cases, even the holes with a 10 cm wide entrance, the interior tends to be spacious, which would be large enough for a 50 cm owl to dwell inside. Hollows are used by several animals including flying squirrels and brown hawk owls that migrate to the forests in summer."
+      },
       "marker_position": { "latitude": 42, "longtitude": 21, "radius": 14 }
     },
     {
-      "title": "犬鳴の滝",
-      "description": "この森の奥には落差20メートルの「犬鳴の滝」があり、川となって森と里をつなぎ、仁保川に流れ込んでいます。そのため、山や里によくいる生き物に加えて、渓流系の生き物も住んでいます。また、この辺りは植林による針葉樹も少なく、自然に育った多様な広葉樹が残っている豊かな森です。",
+      "title": {
+        "ja": "犬鳴の滝",
+        "en": "Inunaki Waterfall"
+      },
+      "description": {
+        "ja": "この森の奥には落差20メートルの「犬鳴の滝」があり、川となって森と里をつなぎ、仁保川に流れ込んでいます。そのため、山や里によくいる生き物に加えて、渓流系の生き物も住んでいます。また、この辺りは植林による針葉樹も少なく、自然に育った多様な広葉樹が残っている豊かな森です。",
+        "en": "Deep in the forest, there is a twenty-meter Inunaki Waterfall, which forms a river that links the forest and villages and flows into a main stream of Niho River. In addition to the wildlife often seen in mountains and village-vicinity woodlands, the types of creatures that dwell near mountain streams also inhabit the forest. Only a small number of coniferous trees are planted in this forest, where richness still remains with a wide diversity of naturally-grown broadleaved trees."
+      },
       "marker_position": { "latitude": 15, "longtitude": -60, "radius":  25 }
     },
     {
-      "title": "ハムシ",
-      "description": "ハムシ（葉虫）は幼虫も成虫も生きた植物にくっついて、葉っぱを食べて暮らしています。甲虫目で硬い虫であり、危険を察知するとすぐ葉っぱから落ちて身を守ります。食べる植物の好き嫌いがハッキリしていて、シソ科の多年草などを好みます。",
+      "title": {
+        "ja": "ハムシ",
+        "en": "Leaf beetles"
+      },
+      "description": {
+        "ja": "ハムシ（葉虫）は幼虫も成虫も生きた植物にくっついて、葉っぱを食べて暮らしています。甲虫目で硬い虫であり、危険を察知するとすぐ葉っぱから落ちて身を守ります。食べる植物の好き嫌いがハッキリしていて、シソ科の多年草などを好みます。",
+        "en": "Adult and larval leaf beetles spend their lives attached to living plants and feed on leaves. They are coleopteran with hard body. When they sense impending danger, they protect themselves by immediately falling onto the ground. They have definite food likes and dislikes, and prefer eating perennial plants such as labiates."
+      },
       "marker_position": { "latitude": -40, "longtitude": 50, "radius": 1.5 }
     },
     {
-      "title": "山道と広場と崖の穴",
-      "description": "人が通る山道は動物の通り道にもなっており、夜間にカメラを置いておくと動物たちが多く映ります。フクロウは広くひらけたところを狩場として利用します。夜、木の高いところから観察し、野ネズミなどが出てくると捉えて食べます。また、崖の穴は、ヒミズ（モグラの仲間）、モグラ、ヘビ、ノネズミなどの生息場所としてシェアされています。",
+      "title": {
+        "ja": "山道と広場と崖の穴",
+        "en": "Mountain paths, open areas, and holes on the cliff sides"
+      },
+      "description": {
+        "ja": "人が通る山道は動物の通り道にもなっており、夜間にカメラを置いておくと動物たちが多く映ります。フクロウは広くひらけたところを狩場として利用します。夜、木の高いところから観察し、野ネズミなどが出てくると捉えて食べます。また、崖の穴は、ヒミズ（モグラの仲間）、モグラ、ヘビ、ノネズミなどの生息場所としてシェアされています。",
+        "en": "Mountain paths for humans also function as pathways for wildlife. A camera left on standby at nighttime would capture the records of many animals passing by. Wide and open areas are used as hunting field by owls, that would observe from high places on trees at night to wait for emerging field mice to prey on. Holes on the cliff sides are shared as habitats among animals such as shrew-moles, moles, snakes, and field mice."
+      },
       "marker_position": { "latitude": -40, "longtitude": -90, "radius": 1.7 }
     },
     {
-      "title": "危険な生きもの",
-      "description": "秋の採集の時期はカエルがいたのでマムシも出てきていました。ヘビは草むらにいることも多く、草むらに入ることがある場合は気をつけて入る必要があります。ブト・ブヨや蚊にも注意が必要です。",
+      "title": {
+        "ja": "危険な生きもの",
+        "en": "Dangerous Creatures"
+      },
+      "description": {
+        "ja": "秋の採集の時期はカエルがいたのでマムシも出てきていました。ヘビは草むらにいることも多く、草むらに入ることがある場合は気をつけて入る必要があります。ブト・ブヨや蚊にも注意が必要です。",
+        "en": "Frogs appeared during the fieldwork season in the autumn, but so as vipers, a type of venomous snake. It is important to be careful when entering into the grass, where snakes are often found, and keep wary eyes on black flies and mosquitos as well."
+      },
       "marker_position": { "latitude": -5, "longtitude": -95, "radius": 8 }
     },
     {
-      "title": "ノネズミ",
-      "description": "森にはたくさんのノネズミが生息しています。林の中では直径1-2cmの穴を多く見つけることができますが、これらはノネズミの巣穴であることも多いです。ノネズミは夜行性の動物で、夜に活動してドングリ類などを食べています。フクロウの主な食料でもあります。",
+      "title": {
+        "ja": "ノネズミ",
+        "en": "Field mice"
+      },
+      "description": {
+        "ja": "森にはたくさんのノネズミが生息しています。林の中では直径1-2cmの穴を多く見つけることができますが、これらはノネズミの巣穴であることも多いです。ノネズミは夜行性の動物で、夜に活動してドングリ類などを食べています。フクロウの主な食料でもあります。",
+        "en": "In the forest, there are many field mice. On the cliff sides, you can find lots of holes with diameter of 1-2 cm, which happens to be the burrows of field mice in many cases. The mice are nocturnal and eat acorns and such. They are the staple food for owls."
+      },
       "marker_position": { "latitude": -5, "longtitude": 0, "radius": 6.5 }
     },
     {
-      "title": "ザトウムシ",
-      "description": "クモを連想するような長い足を持った外見のためザトウグモとも呼ばれますが、網状の巣をつくるクモとは別グループに属します。ザトウムシは川を超えられないので、川をはさんで、種が異なっている可能性もあります。",
+      "title": {
+        "ja": "ザトウムシ",
+        "en": "Harvestmen"
+      },
+      "description": {
+        "ja": "クモを連想するような長い足を持った外見のためザトウグモとも呼ばれますが、網状の巣をつくるクモとは別グループに属します。ザトウムシは川を超えられないので、川をはさんで、種が異なっている可能性もあります。",
+        "en": "Due to their appearance having long legs that remind us of spiders, harvestmen are also called as “Zatougumo” in Japanese, which the word “kumo (or gumo)” refers to “spider.” However, they actually belong to a group different from the spiders that construct spiderwebs. Since they are incapable to travel across water, their species may be distinct from the ones on the other side of the river."
+      },
       "marker_position": { "latitude": 20, "longtitude": 22.5, "radius": 10 }
     }
   ]

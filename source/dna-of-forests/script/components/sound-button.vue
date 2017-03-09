@@ -4,7 +4,7 @@ a(v-on:click="click")
   div
     span SOUND
   audio(loop)
-    source(src='./sound/forest.mp3' type='audio/mp3')
+    source(src='/dna-of-forests/sound/forest.mp3' type='audio/mp3')
 
 </template>
 

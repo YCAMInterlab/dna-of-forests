@@ -2,20 +2,24 @@
 
 section.list
   h1
-    img(alt='採取したサンプル' src='/dna-of-forests/img/list/title-samples.png' srcset='/dna-of-forests/img/list/title-samples@2x.png 2x')
+    img(:alt="$t('list.samples.title')" src='/dna-of-forests/img/list/title-samples.png' srcset='/dna-of-forests/img/list/title-samples@2x.png 2x')
   table#samples
     thead
       tr
-        th.index No.
-        th.result 同定結果
-        th(colspan='2').dna 同定に用いたDNA配列
-        th.collection_date 採取日
+        th.index {{ $t('list.samples.index') }}
+        th.result {{ $t('list.samples.result') }}
+        th(colspan='2').dna {{ $t('list.samples.dna') }}
+        th.collection_date {{ $t('list.samples.collection_date') }}
     tbody
       tr(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
-        td.result
+
+        td.result(v-if="$root.$i18n.locale === 'ja'")
           | {{ item.genus_ja }}
           span.genus_en ({{ item.genus_en }})
+        td.result(v-else)
+          | {{ item.genus_en }}
+
         template(v-if="item.dna_sequences")
           template(v-if="item.dna_sequences.length==0")
             td.dna(colspan='2')
@@ -34,13 +38,13 @@ section.list
           td.dna(colspan='2')
         td.collection_date {{ item.collection_date }}
   h1
-    img(alt='森の知識' src='/dna-of-forests/img/list/title-knowledges.png' srcset='/dna-of-forests/img/list/title-knowledges@2x.png 2x')
+    img(:alt="$t('list.tips.title')" src='/dna-of-forests/img/list/title-knowledges.png' srcset='/dna-of-forests/img/list/title-knowledges@2x.png 2x')
   table#knowledges
     tbody
       tr(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
-        td.title {{ item.title }}
-        td.description {{ item.description }}
+        td.title {{ item.title[$root.$i18n.locale] }}
+        td.description {{ item.description[$root.$i18n.locale] | striptags }}
 
 </template>
 
@@ -141,11 +145,15 @@ table
 
 <script>
 import Vue from 'vue';
+import striptags from 'striptags';
 
 export default Vue.extend({
   filters: {
     'zero-pad': function (value) {
       return (value<10) ? '0'+value : ''+value;
+    },
+    'striptags': function (html) {
+      return striptags(html);
     }
   },
   components: {

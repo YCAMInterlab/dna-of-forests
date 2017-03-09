@@ -26,6 +26,19 @@ $yu_gothic: '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro
   font-weight: bold
   font-style: normal
 
+=dotted($pos: left,$color:rgba(#000, 1.0), $stripe: 1, $spacing: 4, $width:1)
+  border: none
+  @if $pos == left or $pos == right
+    background: linear-gradient(to bottom,$color 0%,$color $stripe/($stripe+$spacing)*100%,transparent $stripe/($stripe+$spacing)*100%,transparent 100%)
+    background-repeat: repeat-y
+    background-size: ($width)*1px ($stripe+$spacing)*1px
+    background-position: $pos ($stripe)*1px
+  @else if $pos == top or $pos == bottom
+    background: linear-gradient(to left,$color 0%,$color $stripe/($stripe+$spacing)*100%,transparent $stripe/($stripe+$spacing)*100%,transparent 100%)
+    background-repeat: repeat-x
+    background-size: ($stripe+$spacing)*1px ($width)*1px
+    background-position: ($stripe)*1px $pos
+
 html,
 body
   height: 100%
@@ -44,6 +57,16 @@ body
 a
   cursor: pointer // これがないとiOSでクリックイベントが発生しない
   transition-duration: 0.2s
+
+a.border
+  text-decoration: none
+  color: #fff
+  +dotted(bottom, #808080, 1, 3)
+  display: inline
+  padding-bottom: 0.5em
+  &:hover
+    opacity: 1
+    +dotted(bottom, #fff, 1, 3)
 
 #app
   position: relative
@@ -67,6 +90,12 @@ body.facebook
   #content
     position: fixed
     top: 0
+
+@media (max-width: 900px)
+  a.border
+    +dotted(bottom, #ccc, 2, 6, 2)
+    &:hover
+      +dotted(bottom, #fff, 2, 6, 2)
 
 @media (max-width: 660px)
   #content

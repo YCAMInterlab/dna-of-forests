@@ -7,11 +7,6 @@ import _ from 'lodash';
 Vue.use(VueRouter);
 Vue.use(VueI18n);
 
-var i18n = new VueI18n({
-  locale: document.querySelector('html').getAttribute('lang'),
-  messages: require('./messages.json')
-});
-
 var userAgent = window.navigator.userAgent.toLowerCase();
 if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
   var isIE = true;
@@ -88,7 +83,10 @@ Vue.component('global-nav', require('./components/global-nav.vue'));
 
 document.moge = new Vue({
   router: router,
-  i18n: i18n,
+  i18n: new VueI18n({
+    locale: document.querySelector('html').getAttribute('lang'),
+    messages: require('./messages.json')
+  }),
   data: function(){
     // isAlreadyDraggedを追加する
     var _data = _.cloneDeep(require('./data.json'));

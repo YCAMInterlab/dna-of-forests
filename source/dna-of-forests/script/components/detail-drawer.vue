@@ -48,10 +48,10 @@
           img(alt='手書きメモ' v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
 
     template(v-if="type=='knowledge'")
-      h3 {{ title }}
+      h3 {{ title[$root.$i18n.locale] }}
       .image_wrapper
         img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
-      p {{ description }}
+      p(v-html="description[$root.$i18n.locale]")
 
 
 </template>
@@ -304,9 +304,10 @@ export default Vue.extend({
 
   methods: {
     fetchData () {
+      var idx, _data;
       if(0<=this.$route.params.index.indexOf('s-')){
-        var idx = this.$route.params.index.replace('s-','') - 1;
-        var _data = this.$root.samples[idx];
+        idx = this.$route.params.index.replace('s-','') - 1;
+        _data = this.$root.samples[idx];
         // TODO: もっとシンプルに受け渡せないか
         this.type = 'sample';
         this.id = _data.id;
@@ -322,8 +323,8 @@ export default Vue.extend({
         this.description = null;
       }
       else if(0<=this.$route.params.index.indexOf('k-')){
-        var idx = this.$route.params.index.replace('k-','') - 1;
-        var _data = this.$root.knowledges[idx];
+        idx = this.$route.params.index.replace('k-','') - 1;
+        _data = this.$root.knowledges[idx];
         // TODO: もっとシンプルに受け渡せないか
         this.type = 'knowledge';
         this.title = _data.title;

@@ -35,6 +35,7 @@
     "json-loader": "^0.5.4",
     "lodash": "^4.17.0",
     "mobile-detect": "^1.3.3",
+    "striptags": "^3.0.1",
     "three-js": "^79.0.0",
     "vue": "^2.0.3",
     "vue-router": "^2.0.1"

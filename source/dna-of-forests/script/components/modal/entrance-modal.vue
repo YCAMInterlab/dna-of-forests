@@ -3,8 +3,8 @@
 .wrapper
   .containter
     .modal
-      img.logo(:alt="$t('logo')" src='/dna-of-forests/img/entrance-modal/logo.png' srcset='/dna-of-forests/img/entrance-modal/logo@2x.png 2x')
-      img.lead(:alt="$t('lead')" src='/dna-of-forests/img/entrance-modal/lead.png' srcset='/dna-of-forests/img/entrance-modal/lead@2x.png 2x')
+      img.logo(:alt="$t('top.logo')" src='/dna-of-forests/img/entrance-modal/logo.png' srcset='/dna-of-forests/img/entrance-modal/logo@2x.png 2x')
+      img.lead(:alt="$t('top.lead')" src='/dna-of-forests/img/entrance-modal/lead.png' srcset='/dna-of-forests/img/entrance-modal/lead@2x.png 2x')
       router-link(to='/panorama') ENTER
 
 </template>

@@ -2,15 +2,12 @@
 
 article.about
   h1
-    img(alt='森のDNA図鑑 仁保の森 2016' src='img/about/logo.png' srcset='img/about/logo@2x.png 2x')
+    img(:alt="$t('about.logo')" src='img/about/logo.png' srcset='img/about/logo@2x.png 2x')
 
-  section
+  section#about
     h2
-      img(alt='「森のDNA図鑑」について' src='img/about/title-about.png' srcset='img/about/title-about@2x.png 2x')
-    p
-      | YCAMバイオ・リサーチのワークショップ「<a class="border" href="http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/" target="_blank">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class="border" href="https://goo.gl/maps/Fm9EAftjMMA2" target="_blank">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>
-      | 私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>
-      | この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class="border" href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。
+      img(:alt="$t('about.about.title')" src='img/about/title-about.png' srcset='img/about/title-about@2x.png 2x')
+    p(v-html="$t('about.about.body')")
     .carousel
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10.jpg);')
@@ -22,20 +19,15 @@ article.about
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7.jpg);')
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8.jpg);')
-    center.credit 撮影：山中慎太郎（Qsyum!）
-  section#dna-barcoding
+    center.credit {{ $t('about.about.credit') }}
+  section#dna_barcoding
     h2
-      img(alt='解析方法（DNAバーコーディング）について' src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
-    p
-      | すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>
-      | 今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・昆虫・菌類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の特定を試みました。具体的には、植物では葉緑体のrbcLやmatK、昆虫ではミトコンドリアのCOI、菌類ではITSと呼ばれる領域のDNAを利用しました。<br>
-      | また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class="border" href="https://blast.ncbi.nlm.nih.gov/Blast.cgi" target="_blank">BLAST</a>」と呼ばれるプログラムを利用しました。
-  section
+      img(:alt="$t('about.dna_barcoding.title')" src='img/about/title-dna_barcoding.png' srcset='img/about/title-dna_barcoding@2x.png 2x')
+    p(v-html="$t('about.dna_barcoding.body')")
+  section#niho_forest
     h2
-      img(alt='仁保の森について' src='img/about/title-niho_forest.png' srcset='img/about/title-niho_forest@2x.png 2x')
-    p
-      | YCAMから車で約30分、山口市仁保上郷（にほ かみごう）にある森。森の奥には落差20メートルの「犬鳴（いぬなき）の滝」があり、そこから流れる川は森と里をつなぎ、仁保川に流れ込んでいます。山や里によくいる生き物に加えて渓流系の生き物も住んでいる豊かな森であり、典型的な山口の里山の風景が広がっています。
-
+      img(:alt="$t('about.niho_forest.title')" src='img/about/title-niho_forest.png' srcset='img/about/title-niho_forest@2x.png 2x')
+    p(v-html="$t('about.niho_forest.body')")
   section#credit
     h3#produce
       img(alt='企画・制作' src='img/about/title-produce.png' srcset='img/about/title-produce@2x.png 2x')
@@ -83,19 +75,6 @@ article.about
 
 <style lang="sass?indentedSyntax">
 
-=dotted($pos: left,$color:rgba(#000, 1.0), $stripe: 1, $spacing: 4, $width:1)
-  border: none
-  @if $pos == left or $pos == right
-    background: linear-gradient(to bottom,$color 0%,$color $stripe/($stripe+$spacing)*100%,transparent $stripe/($stripe+$spacing)*100%,transparent 100%)
-    background-repeat: repeat-y
-    background-size: ($width)*1px ($stripe+$spacing)*1px
-    background-position: $pos ($stripe)*1px
-  @else if $pos == top or $pos == bottom
-    background: linear-gradient(to left,$color 0%,$color $stripe/($stripe+$spacing)*100%,transparent $stripe/($stripe+$spacing)*100%,transparent 100%)
-    background-repeat: repeat-x
-    background-size: ($stripe+$spacing)*1px ($width)*1px
-    background-position: ($stripe)*1px $pos
-
 article.about
   height: 100%
   overflow-y: auto
@@ -120,12 +99,6 @@ article.about
   a
     color: inherit
     text-decoration: none
-  a.border
-    +dotted(bottom, #808080, 1, 3)
-    display: inline-block
-    &:hover
-      opacity: 1
-      +dotted(bottom, #fff, 1, 3)
   section
     width: 620px
     margin: 0 auto
@@ -232,12 +205,6 @@ article.about
 
 @media (max-width: 900px)
   article.about
-
-    a.border
-      +dotted(bottom, #ccc, 2, 6, 2)
-      &:hover
-        +dotted(bottom, #fff, 2, 6, 2)
-
     section
       width: 100%
       p
