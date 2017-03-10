@@ -161,7 +161,7 @@ export default Vue.extend({
   },
   data () {
     // TODO: 直接ルートのComponentから受け渡せないか？
-    return require('../../data.json');
+    return require('../../script/data.json');
   },
   mounted: function() {
 

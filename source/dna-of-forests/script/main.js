@@ -68,18 +68,18 @@ else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
 
 const router = new VueRouter({
   routes: [
-    { path: '/',                component: require('./components/page/panorama.vue') },
-    { path: '/panorama',        component: require('./components/page/panorama.vue') },
-    { path: '/panorama/:index', component: require('./components/page/panorama.vue') },
-    { path: '/list',            component: require('./components/page/list.vue') },
-    { path: '/list/:index',     component: require('./components/page/list.vue') },
-    { path: '/about',           component: require('./components/page/about.vue') },
+    { path: '/',                component: require('../components/page/panorama.vue') },
+    { path: '/panorama',        component: require('../components/page/panorama.vue') },
+    { path: '/panorama/:index', component: require('../components/page/panorama.vue') },
+    { path: '/list',            component: require('../components/page/list.vue') },
+    { path: '/list/:index',     component: require('../components/page/list.vue') },
+    { path: '/about',           component: require('../components/page/about.vue') },
   ]
 });
 
 // 登録
-Vue.component('detail-drawer', require('./components/detail-drawer.vue'));
-Vue.component('global-nav', require('./components/global-nav.vue'));
+Vue.component('detail-drawer', require('../components/detail-drawer.vue'));
+Vue.component('global-nav', require('../components/global-nav.vue'));
 
 document.moge = new Vue({
   router: router,
