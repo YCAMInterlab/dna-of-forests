@@ -3,8 +3,8 @@
 .wrapper
   .containter
     .modal
-      imgr.logo(:alt="$t('top.logo')" src='/dna-of-forests/img/entrance-modal/logo.png')
-      imgr.lead(:alt="$t('top.lead')" src='/dna-of-forests/img/entrance-modal/lead.png')
+      imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png')
+      imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png')
       router-link(to='/panorama') ENTER
 
 </template>

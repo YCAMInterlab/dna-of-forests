@@ -2,11 +2,11 @@
 
 article.about
   h1
-    imgr(:alt="$t('about.logo')" src='img/about/logo.png')
+    imgr(:alt="$t('about.logo')" src='about/logo.png' locale)
 
   section#about
     h2
-      imgr(:alt="$t('about.about.title')" src='img/about/title-about.png')
+      imgr(:alt="$t('about.about.title')" src='about/title-about.png' locale)
     p(v-html="$t('about.about.body')")
     .carousel
       .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9.jpg);')
@@ -22,18 +22,18 @@ article.about
     center.credit {{ $t('about.about.credit') }}
   section#dna_barcoding
     h2
-      imgr(:alt="$t('about.dna_barcoding.title')" src='img/about/title-dna_barcoding.png')
+      imgr(:alt="$t('about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
     p(v-html="$t('about.dna_barcoding.body')")
   section#niho_forest
     h2
-      imgr(:alt="$t('about.niho_forest.title')" src='img/about/title-niho_forest.png')
+      imgr(:alt="$t('about.niho_forest.title')" src='about/title-niho_forest.png' locale)
     p(v-html="$t('about.niho_forest.body')")
   section#credit
     h3#produce
-      imgr(alt='企画・制作' src='img/about/title-produce.png')
+      imgr(alt='企画・制作' src='about/title-produce.png' locale)
     a(href="http://www.ycam.jp/projects/ycam-bio-research/" target="_blank")
       h4
-        imgr(alt='YCAM バイオ・リサーチ' src='img/about/ycam-bioresearch.png')
+        imgr(alt='YCAM バイオ・リサーチ' src='about/ycam-bioresearch.png' locale)
       p
         | 高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>
         | （山口情報芸術センター［YCAM］）<br>
@@ -41,7 +41,7 @@ article.about
         | 多様な切り口で模索するYCAMのプロジェクトです
     a(href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank")
       h4
-        imgr(alt='「もしも、森のいきものになったら」チーム' src='img/about/iteota.png')
+        imgr(alt='「もしも、森のいきものになったら」チーム' src='about/iteota.png' locale)
       p
         | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
         | （マシュマロ・レーザー・フィースト）<br>
@@ -49,16 +49,16 @@ article.about
         | （山口情報芸術センター［YCAM］）
     a(href="http://www.ycam.jp/" target="_blank")
       h4
-        imgr(alt='山口情報芸術センター［YCAM］' src='img/about/ycam.png')
+        imgr(alt='山口情報芸術センター［YCAM］' src='about/ycam.png' locale)
       p Yamaguchi Center for Arts and Media
     h3#create
-      imgr(alt='制作' src='img/about/title-create.png')
+      imgr(alt='制作' src='about/title-create.png' locale)
     p
       | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">講師：田中 浩（山口県立博物館動物担当理学博士）</a><br>
       | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：KARAPPO Inc.</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">録音・音源編集：Antoine Bertin（antoinebertin.org）</a><br>
     h3#support
-      imgr(alt='協力' src='img/about/title-support.png')
+      imgr(alt='協力' src='about/title-support.png' locale)
     p.small
       | スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>
       | 伊藤俊幸（元生理学研究所技術員、LisCo社員）<br>

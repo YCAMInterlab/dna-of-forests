@@ -3,19 +3,19 @@
 .drawer
   header
     h2
-      imgr(v-if="type=='sample'" alt='採取サンプルのデータ' src='/dna-of-forests/img/detail-drawer/title-sample.png')
-      imgr(v-if="type=='knowledge'" alt='森の知識' src='/dna-of-forests/img/detail-drawer/title-chisiki.png')
+      imgr(v-if="type=='sample'" alt='採取サンプルのデータ' src='detail-drawer/title-sample.png')
+      imgr(v-if="type=='knowledge'" alt='森の知識' src='detail-drawer/title-chisiki.png')
     router-link.close_btn(to='./')
-      imgr(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png')
+      imgr(alt='Close' src='detail-drawer/close-btn.png')
   article
     template(v-if="type=='sample'")
 
       section.dna
         h3
-          imgr(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png')
+          imgr(alt='DNA解析による種の同定' src='detail-drawer/title-dna.png')
         h4 1. 採取サンプルの写真
         .image_wrapper
-          imgr(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'")
+          imgr(alt='サンプル写真' v-bind:src="'sample/'+id+'.jpg'")
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
@@ -32,7 +32,7 @@
 
       section.microscope(v-if="microscope")
         h3
-          imgr(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png')
+          imgr(alt='スマホ顕微鏡による観察記録' src='detail-drawer/title-sp_microscope.png')
         iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="microscope.memo")
           dl
@@ -40,7 +40,7 @@
 
       section.memo(v-if="memo")
         h3
-          imgr(alt='採取メモ' src='/dna-of-forests/img/detail-drawer/title-memo.png')
+          imgr(alt='採取メモ' src='detail-drawer/title-memo.png')
         .bg_line
           dl(v-for="(answer, question) in memo")
             dt {{ question }}
@@ -50,7 +50,7 @@
     template(v-if="type=='knowledge'")
       h3 {{ title[$root.$i18n.locale] }}
       .image_wrapper
-        imgr(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'")
+        imgr(alt='イメージ写真' v-bind:src="'detail-drawer/knowledge/'+id+'.jpg'")
       p(v-html="description[$root.$i18n.locale]")
 
 

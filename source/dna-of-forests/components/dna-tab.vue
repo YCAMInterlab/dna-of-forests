@@ -4,11 +4,11 @@
   header
     a.barcode(v-on:click="switchTab('barcode')" v-bind:class="{ current: current==='barcode' }")
       span
-        imgr(alt='バーコード' src="/dna-of-forests/img/detail-drawer/icon-barcode.png")
+        imgr(alt='バーコード' src="detail-drawer/icon-barcode.png")
         | バーコード
     a.text(v-on:click="switchTab('text')" v-bind:class="{ current: current==='text' }")
       span
-        imgr(alt='テキスト' src="/dna-of-forests/img/detail-drawer/icon-text.png")
+        imgr(alt='テキスト' src="detail-drawer/icon-text.png")
         | テキスト
   div.contents
     div.barcode(v-bind:class="{ current: current=='barcode' }")
