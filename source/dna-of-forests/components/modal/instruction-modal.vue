@@ -3,7 +3,7 @@
 .wrapper
   .containter
     .modal
-      img.icon(alt="Icon" src='/dna-of-forests/img/instruction-modal/drag-icon.png' srcset='/dna-of-forests/img/instruction-modal/drag-icon@2x.png 2x')
+      imgr.icon(alt="Icon" src='/dna-of-forests/img/instruction-modal/drag-icon.png')
       p Drag or Swipe
 
 </template>

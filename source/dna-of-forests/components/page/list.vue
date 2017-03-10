@@ -2,7 +2,7 @@
 
 section.list
   h1
-    img(:alt="$t('list.samples.title')" src='/dna-of-forests/img/list/title-samples.png' srcset='/dna-of-forests/img/list/title-samples@2x.png 2x')
+    imgr(:alt="$t('list.samples.title')" src='/dna-of-forests/img/list/title-samples.png')
   table#samples
     thead
       tr
@@ -38,7 +38,7 @@ section.list
           td.dna(colspan='2')
         td.collection_date {{ item.collection_date }}
   h1
-    img(:alt="$t('list.tips.title')" src='/dna-of-forests/img/list/title-knowledges.png' srcset='/dna-of-forests/img/list/title-knowledges@2x.png 2x')
+    imgr(:alt="$t('list.tips.title')" src='/dna-of-forests/img/list/title-knowledges.png')
   table#knowledges
     tbody
       tr(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")

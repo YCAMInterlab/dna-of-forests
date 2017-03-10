@@ -3,19 +3,19 @@
 .drawer
   header
     h2
-      img(v-if="type=='sample'" alt='採取サンプルのデータ' src='/dna-of-forests/img/detail-drawer/title-sample.png' srcset='/dna-of-forests/img/detail-drawer/title-sample@2x.png 2x')
-      img(v-if="type=='knowledge'" alt='森の知識' src='/dna-of-forests/img/detail-drawer/title-chisiki.png' srcset='/dna-of-forests/img/detail-drawer/title-chisiki@2x.png 2x')
+      imgr(v-if="type=='sample'" alt='採取サンプルのデータ' src='/dna-of-forests/img/detail-drawer/title-sample.png')
+      imgr(v-if="type=='knowledge'" alt='森の知識' src='/dna-of-forests/img/detail-drawer/title-chisiki.png')
     router-link.close_btn(to='./')
-      img(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png' srcset='/dna-of-forests/img/detail-drawer/close-btn@2x.png 2x')
+      imgr(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png')
   article
     template(v-if="type=='sample'")
 
       section.dna
         h3
-          img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
+          imgr(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png')
         h4 1. 採取サンプルの写真
         .image_wrapper
-          img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
+          imgr(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'")
         h4 2. 同定に用いたDNA配列
         div.dna_sequence(v-for="item in dna_sequences")
           p DNA領域：{{ item.region }}
@@ -32,7 +32,7 @@
 
       section.microscope(v-if="microscope")
         h3
-          img(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png' srcset='/dna-of-forests/img/detail-drawer/title-sp_microscope@2x.png 2x')
+          imgr(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png')
         iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="microscope.memo")
           dl
@@ -40,7 +40,7 @@
 
       section.memo(v-if="memo")
         h3
-          img(alt='採取メモ' src='/dna-of-forests/img/detail-drawer/title-memo.png' srcset='/dna-of-forests/img/detail-drawer/title-memo@2x.png 2x')
+          imgr(alt='採取メモ' src='/dna-of-forests/img/detail-drawer/title-memo.png')
         .bg_line
           dl(v-for="(answer, question) in memo")
             dt {{ question }}
@@ -50,7 +50,7 @@
     template(v-if="type=='knowledge'")
       h3 {{ title[$root.$i18n.locale] }}
       .image_wrapper
-        img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
+        imgr(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'")
       p(v-html="description[$root.$i18n.locale]")
 
 
