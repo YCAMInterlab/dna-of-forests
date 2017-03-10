@@ -2,7 +2,7 @@
 
 section.list(:data-lang="$root.$i18n.locale")
   h1
-    imgr(:alt="$t('list.samples.title')" src='list/title-samples.png')
+    imgr(:alt="$t('list.samples.title')" src='list/title-samples.png' locale)
   table#samples
     thead
       tr
@@ -38,7 +38,7 @@ section.list(:data-lang="$root.$i18n.locale")
           td.dna(colspan='2')
         td.collection_date {{ item.collection_date }}
   h1
-    imgr(:alt="$t('list.tips.title')" src='list/title-knowledges.png')
+    imgr(:alt="$t('list.tips.title')" src='list/title-knowledges.png' locale)
   table#knowledges
     tbody
       tr(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")

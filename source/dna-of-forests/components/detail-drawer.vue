@@ -4,7 +4,7 @@
   header
     h2
       imgr(v-if="type=='sample'" alt='採取サンプルのデータ' src='detail-drawer/title-sample.png')
-      imgr(v-if="type=='knowledge'" alt='森の知識' src='detail-drawer/title-chisiki.png')
+      imgr(v-if="type=='knowledge'" alt='森の知識' src='detail-drawer/title-tips.png')
     router-link.close_btn(to='./')
       imgr(alt='Close' src='detail-drawer/close-btn.png')
   article
