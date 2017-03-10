@@ -1,6 +1,6 @@
 <template lang="pug">
 
-section.list
+section.list(:data-lang="$root.$i18n.locale")
   h1
     imgr(:alt="$t('list.samples.title')" src='list/title-samples.png')
   table#samples
@@ -140,6 +140,13 @@ table
     .genus_en,
     .collection_date
       display: none
+
+[data-lang='en']
+  table
+    tr
+      th,td
+        &:last-child
+          width: 100px
 
 </style>
 
