@@ -30,46 +30,38 @@ article.about
     p(v-html="$t('about.niho_forest.body')")
   section#credit
     h3#produce
-      imgr(alt='企画・制作' src='about/title-produce.png' locale)
+      imgr(:alt="$t('about.produce')" src='about/title-produce.png' locale)
     a(href="http://www.ycam.jp/projects/ycam-bio-research/" target="_blank")
       h4
-        imgr(alt='YCAM バイオ・リサーチ' src='about/ycam-bioresearch.png' locale)
-      p
-        | 高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>
-        | （山口情報芸術センター［YCAM］）<br>
-        | 「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>
-        | 多様な切り口で模索するYCAMのプロジェクトです
+        imgr(:alt="$t('about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
+      p(v-html="$t('about.ycam-bioresearch.body')")
     a(href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank")
       h4
-        imgr(alt='「もしも、森のいきものになったら」チーム' src='about/iteota.png' locale)
-      p
-        | Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>
-        | （マシュマロ・レーザー・フィースト）<br>
-        | 竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>
-        | （山口情報芸術センター［YCAM］）
+        imgr(:alt="$t('about.iteota.title')" src='about/iteota.png' locale)
+      p(v-html="$t('about.iteota.body')")
     a(href="http://www.ycam.jp/" target="_blank")
       h4
-        imgr(alt='山口情報芸術センター［YCAM］' src='about/ycam.png' locale)
-      p Yamaguchi Center for Arts and Media
+        imgr(:alt="$t('about.ycam.title')" src='about/ycam.png' locale)
+      p(v-html="$t('about.ycam.body')")
     h3#create
-      imgr(alt='制作' src='about/title-create.png' locale)
+      imgr(:alt="$t('about.create')" src='about/title-create.png' locale)
     p
-      | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">講師：田中 浩（山口県立博物館動物担当理学博士）</a><br>
-      | <a href="http://karappo.net" target="_blank">図鑑ウェブ制作：KARAPPO Inc.</a><br>
-      | <a href="http://www.antoinebertin.org/" target="_blank">録音・音源編集：Antoine Bertin（antoinebertin.org）</a><br>
+      | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">{{ $t('about.tanaka') }}</a><br>
+      | <a href="http://karappo.net" target="_blank">{{ $t('about.karappo') }}</a><br>
+      | <a href="http://www.antoinebertin.org/" target="_blank">{{ $t('about.antoine') }}</a><br>
     h3#support
-      imgr(alt='協力' src='about/title-support.png' locale)
+      imgr(:alt="$t('about.support')" src='about/title-support.png' locale)
     p.small
-      | スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>
-      | 伊藤俊幸（元生理学研究所技術員、LisCo社員）<br>
-      | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">スマホ顕微鏡普及団体：Life is small Project</a><br>
-      | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>
-      | 現地協力：仁保自治会<br>
-      | レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br>
+      | {{ $t('about.nagayama') }}<br>
+      | {{ $t('about.ito') }}<br>
+      | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">{{ $t('about.life_is_small') }}</a><br>
+      | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">{{ $t('about.terada') }}</a><br>
+      | {{ $t('about.niho_jichikai') }}<br>
+      | {{ $t('about.lazer') }}<br>
       | <br>
-      | 主催：山口市、公益財団法人山口市文化振興財団<br>
-      | 後援：山口市教育委員会、ブリティッシュ・カウンシル<br>
-      | 助成：平成28年度文化庁劇場・音楽堂等活性化事業
+      | {{ $t('about.syusai') }}<br>
+      | {{ $t('about.kouen') }}<br>
+      | {{ $t('about.josei') }}
 
 </template>
 
