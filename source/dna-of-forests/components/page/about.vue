@@ -228,7 +228,7 @@ import Flickity from 'flickity';
 export default Vue.extend({
   mounted: function() {
     var elem = document.querySelector('.carousel');
-    var flkty = new Flickity( elem, {
+    new Flickity( elem, {
       autoPlay: true,
       wrapAround: true
     });
