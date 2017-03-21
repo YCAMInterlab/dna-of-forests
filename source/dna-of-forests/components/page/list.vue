@@ -187,8 +187,9 @@ export default Vue.extend({
         if(!isNaN( el.offsetTop)){
           offsetTop += el.offsetTop;
         }
+        el = el.offsetParent;
       }
-      while(el = el.offsetParent);
+      while(el.offsetParent != document.body);
       return offsetTop;
     }
   }
