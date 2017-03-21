@@ -50,6 +50,34 @@
       "tips": {
         "title": "森の知識"
       }
+    },
+    "detail_drawer": {
+      "sample": {
+        "title": "採取サンプルのデータ",
+        "article": {
+          "dna": {
+            "title": "DNA解析による種の同定",
+            "photo_of_the_sample": "採取サンプルの写真",
+            "dna_sequence_to_identify": "同定に用いたDNA配列",
+            "result_of_identification": "DNA解析による同定の結果",
+            "dna_region": "DNA領域：",
+            "method": {
+              "title": "解析方法について",
+              "body": "DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。"
+            }
+          },
+          "microscope": {
+            "title": "スマホ顕微鏡による観察記録"
+          }
+        }
+      },
+      "tips": {
+        "title": "森の知識"
+      }
+    },
+    "dna_tab": {
+      "text": "テキスト",
+      "barcode": "バーコード"
     }
   },
   "en": {
@@ -103,6 +131,34 @@
       "tips": {
         "title": "Tips about the Forest"
       }
+    },
+    "detail_drawer": {
+      "sample": {
+        "title": "Data of collected sample",
+        "article": {
+          "dna": {
+            "title": "Identification of species with DNA-based technology",
+            "photo_of_the_sample": "Photo of the sample",
+            "dna_sequence_to_identify": "DNA sequence to identify",
+            "result_of_identification": "Result of identification",
+            "dna_region": "DNA region: ",
+            "method": {
+              "title": "Method",
+              "body": "We used a method called DNA barcoding to identify the species of the samples.See ABOUT page for more details."
+            }
+          },
+          "microscope": {
+            "title": "Observation with smartphone microscope"
+          }
+        }
+      },
+      "tips": {
+        "title": "Tips about the Forest"
+      }
+    },
+    "dna_tab": {
+      "text": "text",
+      "barcode": "barcode"
     }
   }
 }

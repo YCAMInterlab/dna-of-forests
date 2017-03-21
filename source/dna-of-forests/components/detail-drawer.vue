@@ -3,8 +3,8 @@
 .drawer
   header
     h2
-      imgr(v-if="type=='sample'" alt='採取サンプルのデータ' src='detail-drawer/title-sample.png')
-      imgr(v-if="type=='knowledge'" alt='森の知識' src='detail-drawer/title-tips.png')
+      imgr(:alt="$t('detail_drawer.sample.title')" src='detail-drawer/title-sample.png' locale v-if="type=='sample'")
+      imgr(:alt="$t('detail_drawer.tips.title')" src='detail-drawer/title-tips.png' locale v-if="type=='knowledge'")
     router-link.close_btn(to='./')
       imgr(alt='Close' src='detail-drawer/close-btn.png')
   article
@@ -12,33 +12,33 @@
 
       section.dna
         h3
-          imgr(alt='DNA解析による種の同定' src='detail-drawer/title-dna.png')
-        h4 1. 採取サンプルの写真
+          imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale)
+        h4 1. {{ $t('detail_drawer.sample.article.dna.photo_of_the_sample') }}
         .image_wrapper
-          imgr(alt='サンプル写真' v-bind:src="'sample/'+id+'.jpg'")
-        h4 2. 同定に用いたDNA配列
+          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" v-bind:src="'sample/'+id+'.jpg'")
+        h4 2. {{ $t('detail_drawer.sample.article.dna.dna_sequence_to_identify') }}
         div.dna_sequence(v-for="item in dna_sequences")
-          p DNA領域：{{ item.region }}
+          p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
           <dna-tab v-bind:text="item.text" v-bind:current="'barcode'">
-        h4 3. DNA解析による同定の結果
-        div.result
+        h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
+        div.result(v-if="$root.$i18n.locale === 'ja'")
           small {{ genus_en }}
           | {{ genus_ja }}
+        div.result.expand(v-else)
+          | {{ genus_en }}
         div.description
-          h4 解析方法について
-          p
-            | DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、
-            | ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。
+          h4 {{ $t('detail_drawer.sample.article.dna.method.title') }}
+          p {{ $t('detail_drawer.sample.article.dna.method.body') }}
 
       section.microscope(v-if="microscope")
         h3
-          imgr(alt='スマホ顕微鏡による観察記録' src='detail-drawer/title-sp_microscope.png')
+          imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale)
         iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="microscope.memo")
           dl
             dd(v-html="microscope.memo")
 
-      section.memo(v-if="memo")
+      section.memo(v-if="$root.$i18n.locale === 'ja' && memo")
         h3
           imgr(alt='採取メモ' src='detail-drawer/title-memo.png')
         .bg_line
@@ -206,6 +206,8 @@ h4
     font-size: 11px
     display: block
     margin-bottom: 12px
+  &.expand
+    padding: 34px 0
 
 .description
   margin: 25px -25px -25px

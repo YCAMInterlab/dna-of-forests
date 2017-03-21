@@ -4,12 +4,12 @@
   header
     a.barcode(v-on:click="switchTab('barcode')" v-bind:class="{ current: current==='barcode' }")
       span
-        imgr(alt='バーコード' src="detail-drawer/icon-barcode.png")
-        | バーコード
+        imgr(v-bind:alt="$t('dna_tab.barcode')" src="detail-drawer/icon-barcode.png")
+        | {{ $t('dna_tab.barcode') }}
     a.text(v-on:click="switchTab('text')" v-bind:class="{ current: current==='text' }")
       span
-        imgr(alt='テキスト' src="detail-drawer/icon-text.png")
-        | テキスト
+        imgr(v-bind:alt="$t('dna_tab.text')" src="detail-drawer/icon-text.png")
+        | {{ $t('dna_tab.text') }}
   div.contents
     div.barcode(v-bind:class="{ current: current=='barcode' }")
       <dna-barcode v-bind:dna="this.text" v-bind:max_width="403">
