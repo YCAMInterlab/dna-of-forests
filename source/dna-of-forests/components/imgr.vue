@@ -15,6 +15,7 @@ export default Vue.extend({
     // 相対パスを絶対パスに
     this.src = '/dna-of-forests/img/'+this.src;
     if(this.locale){
+      // locale属性があれば、言語毎に画像パスを切り替え
       this.$el.src = this.src.replace(/(\.\w+)$/, '-'+this.$root.$i18n.locale+'$1');
       this.$el.srcset = this.src.replace(/(\.\w+)$/, '-'+this.$root.$i18n.locale+'@2x$1')+' 2x';
     }
