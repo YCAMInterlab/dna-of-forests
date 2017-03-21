@@ -29,8 +29,8 @@ article.about
       imgr(:alt="$t('about.niho_forest.title')" src='about/title-niho_forest.png' locale)
     p(v-html="$t('about.niho_forest.body')")
   section#credit
-    h3#produce
-      imgr(:alt="$t('about.produce')" src='about/title-produce.png' locale)
+    h3#planning_production
+      imgr(:alt="$t('about.planning_production')" src='about/title-planning_production.png' locale)
     a(href="http://www.ycam.jp/projects/ycam-bio-research/" target="_blank")
       h4
         imgr(:alt="$t('about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
@@ -43,25 +43,15 @@ article.about
       h4
         imgr(:alt="$t('about.ycam.title')" src='about/ycam.png' locale)
       p(v-html="$t('about.ycam.body')")
-    h3#create
-      imgr(:alt="$t('about.create')" src='about/title-create.png' locale)
+    h3#production
+      imgr(:alt="$t('about.production')" src='about/title-production.png' locale)
     p
       | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">{{ $t('about.tanaka') }}</a><br>
       | <a href="http://karappo.net" target="_blank">{{ $t('about.karappo') }}</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">{{ $t('about.antoine') }}</a><br>
     h3#support
-      imgr(:alt="$t('about.support')" src='about/title-support.png' locale)
-    p.small
-      | {{ $t('about.nagayama') }}<br>
-      | {{ $t('about.ito') }}<br>
-      | <a href="https://www.facebook.com/groups/life.is.small/" target="_blank">{{ $t('about.life_is_small') }}</a><br>
-      | <a href="http://www.solar-hofu.sakura.ne.jp/" target="_blank">{{ $t('about.terada') }}</a><br>
-      | {{ $t('about.niho_jichikai') }}<br>
-      | {{ $t('about.lazer') }}<br>
-      | <br>
-      | {{ $t('about.syusai') }}<br>
-      | {{ $t('about.kouen') }}<br>
-      | {{ $t('about.josei') }}
+      imgr(:alt="$t('about.cooperation')" src='about/title-cooperation.png' locale)
+    p.small(v-html="$t('about.cooperations')")
 
 </template>
 
@@ -101,10 +91,10 @@ article.about
       background-color: #191919
       padding: 108px 0
       margin-bottom: 0
-      h3#produce
+      h3#planning_production
         margin-bottom: 53px
-      h3#create,
-      h3#support
+      h3#production,
+      h3#cooperation
         margin-bottom: 40px
         margin-top: 80px
       >a
