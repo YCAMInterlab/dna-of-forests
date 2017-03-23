@@ -284,16 +284,17 @@ export default Vue.extend({
     // マーカー
 
     // 並び順に沿って、URLに現出する"alias"を設定
+
     for(var i = 0; i<this.samples.length; i++){
       this.samples[i]['alias'] = 's-'+(i+1);
     }
-    for(var i = 0; i<this.knowledges.length; i++){
+    for(i = 0; i<this.knowledges.length; i++){
       this.knowledges[i]['alias'] = 'k-'+(i+1);
     }
     var marker_all = this.samples.concat(this.knowledges);
     // 距離でソートして、重なり順序がおかしくならないように
     marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
-    for(var i = 0; i<marker_all.length; i++){
+    for(i = 0; i<marker_all.length; i++){
       var data = marker_all[i];
       this.create_marker(data);
     }
@@ -481,9 +482,9 @@ export default Vue.extend({
       return new THREE.Vector3(x, y, z);
     },
 
-    getTwoDPosition(vector) {
+    getTwoDPosition(_vector) {
 
-      var vector = vector.clone();
+      var vector = _vector.clone();
       var widthHalf = 0.5*this.renderer.context.canvas.width;
       var heightHalf = 0.5*this.renderer.context.canvas.height;
 
@@ -505,12 +506,12 @@ export default Vue.extend({
     },
 
     // マーカー
-    create_marker(data, key){
-      var key = data.alias;
+    create_marker(_data, _key){
+      var key = _data.alias;
       var type = (key.indexOf('s-')==0) ? 'sample' : 'knowledge';
-      var latitude = data.marker_position.latitude;
-      var longtitude = data.marker_position.longtitude;
-      var radius = data.marker_position.radius;
+      var latitude = _data.marker_position.latitude;
+      var longtitude = _data.marker_position.longtitude;
+      var radius = _data.marker_position.radius;
       var geo = this.translateGeoCoords(latitude, longtitude, radius);
       var x = geo.x,
         y = geo.y,
@@ -521,7 +522,7 @@ export default Vue.extend({
         // 15cmくらい
         var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
         // geometry.scale( - 1, 1, 1 );
-        var color = (data.id && data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
+        var color = (_data.id && _data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
         var material = new THREE.MeshLambertMaterial({
           color: color
         });
