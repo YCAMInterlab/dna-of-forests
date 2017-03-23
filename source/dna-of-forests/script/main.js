@@ -90,7 +90,7 @@ document.moge = new Vue({
   }),
   data: function(){
     // isAlreadyDraggedを追加する
-    var _data = _.cloneDeep(require('./data.json'));
+    var _data = _.cloneDeep(require('./markers.json'));
     _data['isAlreadyDragged'] = false;
     return _data;
   }
