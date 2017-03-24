@@ -68,6 +68,10 @@
           },
           "microscope": {
             "title": "スマホ顕微鏡による観察記録"
+          },
+          "memo": {
+            "title": "採取メモ",
+            "sketch": "手書きメモ"
           }
         }
       },
@@ -149,6 +153,10 @@
           },
           "microscope": {
             "title": "Observation with smartphone microscope"
+          },
+          "memo": {
+            "title": "Memo",
+            "sketch": "Sketch"
           }
         }
       },

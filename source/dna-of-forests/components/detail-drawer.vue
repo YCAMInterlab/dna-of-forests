@@ -38,19 +38,19 @@
           dl
             dd(v-html="microscope.memo")
 
-      section.memo(v-if="$root.$i18n.locale === 'ja' && memo")
+      section.memo(v-if="memo")
         h3
-          imgr(alt='採取メモ' src='detail-drawer/title-memo.png')
+          imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale)
         .bg_line
           dl(v-for="(answer, question) in memo")
             dt {{ question }}
             dd(v-html="answer")
-          img(alt='手書きメモ' v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
+          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
 
     template(v-if="type=='knowledge'")
       h3 {{ title[$root.$i18n.locale] }}
       .image_wrapper
-        imgr(alt='イメージ写真' v-bind:src="'detail-drawer/knowledge/'+id+'.jpg'")
+        imgr(:alt="title[$root.$i18n.locale]" v-bind:src="'detail-drawer/knowledge/'+id+'.jpg'")
       p(v-html="description[$root.$i18n.locale]")
 
 
