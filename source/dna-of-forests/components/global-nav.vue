@@ -13,7 +13,8 @@ nav
   router-link.about(to='/about')
     div
       span ABOUT
-  <sound-button>
+  <lang-button />
+  <sound-button />
 
 </template>
 
@@ -78,6 +79,11 @@ nav
         >div
           background-image: url(/dna-of-forests/img/gnav/about-active@2x.png)
 
+    // lang
+    &:nth-last-child(2)
+      position: absolute
+      bottom: 81px
+      height: 40px
     // sound
     &:last-child
       position: absolute
@@ -110,6 +116,7 @@ import Vue from 'vue';
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
+Vue.component('lang-button', require('./lang-button.vue'));
 
 export default Vue.extend({
   methods: {
