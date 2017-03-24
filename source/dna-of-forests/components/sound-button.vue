@@ -15,7 +15,8 @@ a
     height: 100%
     background-position: center
     background-repeat: no-repeat
-    background-image: url(/dna-of-forests/img/gnav/sound-on.png)
+    background-image: url(/dna-of-forests/img/gnav/sound-on@2x.png)
+    background-size: 18px 15px
     transition-duration: 0.2s
     opacity: 0.5
     >span
@@ -27,7 +28,8 @@ a
 
   &.off
     >div
-      background-image: url(/dna-of-forests/img/gnav/sound-off.png)
+      background-image: url(/dna-of-forests/img/gnav/sound-off@2x.png)
+      background-size: 17px 15px
 
 </style>
 
