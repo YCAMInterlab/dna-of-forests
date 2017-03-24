@@ -50,11 +50,11 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueI18n = __webpack_require__(122);
+	var _vueI18n = __webpack_require__(124);
 	
 	var _vueI18n2 = _interopRequireDefault(_vueI18n);
 	
-	var _vueRouter = __webpack_require__(144);
+	var _vueRouter = __webpack_require__(148);
 	
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 	
@@ -130,19 +130,19 @@
 	}
 	
 	var router = new _vueRouter2.default({
-	  routes: [{ path: '/', component: __webpack_require__(10) }, { path: '/panorama', component: __webpack_require__(10) }, { path: '/panorama/:index', component: __webpack_require__(10) }, { path: '/list', component: __webpack_require__(19) }, { path: '/list/:index', component: __webpack_require__(19) }, { path: '/about', component: __webpack_require__(130) }]
+	  routes: [{ path: '/', component: __webpack_require__(10) }, { path: '/panorama', component: __webpack_require__(10) }, { path: '/panorama/:index', component: __webpack_require__(10) }, { path: '/list', component: __webpack_require__(19) }, { path: '/list/:index', component: __webpack_require__(19) }, { path: '/about', component: __webpack_require__(133) }]
 	});
 	
 	// 登録
-	_vue2.default.component('detail-drawer', __webpack_require__(123));
-	_vue2.default.component('global-nav', __webpack_require__(126));
-	_vue2.default.component('imgr', __webpack_require__(127));
+	_vue2.default.component('detail-drawer', __webpack_require__(125));
+	_vue2.default.component('global-nav', __webpack_require__(128));
+	_vue2.default.component('imgr', __webpack_require__(129));
 	
 	document.moge = new _vue2.default({
 	  router: router,
 	  i18n: new _vueI18n2.default({
 	    locale: document.querySelector('html').getAttribute('lang'),
-	    messages: __webpack_require__(54)
+	    messages: __webpack_require__(56)
 	  }),
 	  data: function data() {
 	    // isAlreadyDraggedを追加する
@@ -159,7 +159,7 @@
 	/* WEBPACK VAR INJECTION */(function(global) {/*global window, global*/
 	var util = __webpack_require__(18)
 	var assert = __webpack_require__(21)
-	var now = __webpack_require__(42)
+	var now = __webpack_require__(44)
 	
 	var slice = Array.prototype.slice
 	var console
@@ -8317,7 +8317,7 @@
 	  if ( true ) {
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	      __webpack_require__(43)
+	      __webpack_require__(45)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( matchesSelector ) {
 	      return factory( window, matchesSelector );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -8556,9 +8556,9 @@
 	      __webpack_require__(7),
 	      __webpack_require__(11),
 	      __webpack_require__(5),
-	      __webpack_require__(46),
-	      __webpack_require__(53),
-	      __webpack_require__(45)
+	      __webpack_require__(48),
+	      __webpack_require__(55),
+	      __webpack_require__(47)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, getSize, utils, Cell, Slide, animatePrototype ) {
 	      return factory( window, EvEmitter, getSize, utils, Cell, Slide, animatePrototype );
 	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -10824,7 +10824,7 @@
 	__vue_exports__ = __webpack_require__(24)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(141)
+	var __vue_template__ = __webpack_require__(145)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -10850,13 +10850,13 @@
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(148)
+	__webpack_require__(152)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(30)
+	__vue_exports__ = __webpack_require__(31)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(136)
+	var __vue_template__ = __webpack_require__(139)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -28342,7 +28342,7 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(156)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(161)(module)))
 
 /***/ },
 /* 14 */
@@ -30483,7 +30483,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 	
-	exports.isBuffer = __webpack_require__(121);
+	exports.isBuffer = __webpack_require__(123);
 	
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -30527,7 +30527,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(120);
+	exports.inherits = __webpack_require__(122);
 	
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -30555,13 +30555,13 @@
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(152)
+	__webpack_require__(156)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(29)
+	__vue_exports__ = __webpack_require__(30)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(140)
+	var __vue_template__ = __webpack_require__(143)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -31101,7 +31101,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// 登録
-	_vue2.default.component('dna-tab', __webpack_require__(125)); //
+	_vue2.default.component('dna-tab', __webpack_require__(127)); //
 	//
 	//
 	//
@@ -31733,7 +31733,17 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// 登録
-	_vue2.default.component('sound-button', __webpack_require__(131)); //
+	_vue2.default.component('sound-button', __webpack_require__(134)); //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -31836,6 +31846,8 @@
 	//
 	//
 	
+	
+	_vue2.default.component('lang-button', __webpack_require__(130));
 	
 	exports.default = _vue2.default.extend({
 	  methods: {
@@ -31867,18 +31879,26 @@
 	
 	exports.default = _vue2.default.extend({
 	  props: ['alt', 'src', 'locale'],
-	  mounted: function mounted() {
-	    this.$el.alt = this.alt;
-	    // 相対パスを絶対パスに
-	    this.src = '/dna-of-forests/img/' + this.src;
-	    if (this.locale) {
-	      // locale属性があれば、言語毎に画像パスを切り替え
-	      this.$el.src = this.src.replace(/(\.\w+)$/, '-' + this.$root.$i18n.locale + '$1');
-	      this.$el.srcset = this.src.replace(/(\.\w+)$/, '-' + this.$root.$i18n.locale + '@2x$1') + ' 2x';
-	    } else {
-	      this.$el.src = this.src;
-	      this.$el.srcset = this.src.replace(/(\.\w+)$/, '@2x$1') + ' 2x';
+	  watch: {
+	    src: 'setAttrs'
+	  },
+	  methods: {
+	    setAttrs: function setAttrs() {
+	      this.$el.alt = this.alt;
+	      // 相対パスを絶対パスに
+	      var _src = '/dna-of-forests/img/' + this.src;
+	      if (this.locale) {
+	        // locale属性があれば、言語毎に画像パスを切り替え
+	        this.$el.src = _src.replace(/(\.\w+)$/, '-' + this.$root.$i18n.locale + '$1');
+	        this.$el.srcset = _src.replace(/(\.\w+)$/, '-' + this.$root.$i18n.locale + '@2x$1') + ' 2x';
+	      } else {
+	        this.$el.src = _src;
+	        this.$el.srcset = _src.replace(/(\.\w+)$/, '@2x$1') + ' 2x';
+	      }
 	    }
+	  },
+	  mounted: function mounted() {
+	    this.setAttrs();
 	  }
 	}); //
 	//
@@ -31901,7 +31921,67 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _flickity = __webpack_require__(48);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _vue2.default.extend({
+	
+	  mounted: function mounted() {
+	    this.$el.className = this.$root.$i18n.locale === 'en' ? 'ja' : 'en';
+	    this.changeRoute();
+	  },
+	
+	  watch: {
+	    // ルートの変更を監視
+	    '$route': 'changeRoute'
+	  },
+	
+	  methods: {
+	    changeRoute: function changeRoute() {
+	      var _root = this.$root.$i18n.locale === 'en' ? '/dna-of-forests/' : '/dna-of-forests/en/';
+	      this.$el.href = _root + '#' + this.$route.path;
+	    }
+	  }
+	}); //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _vue = __webpack_require__(2);
+	
+	var _vue2 = _interopRequireDefault(_vue);
+	
+	var _flickity = __webpack_require__(50);
 	
 	var _flickity2 = _interopRequireDefault(_flickity);
 	
@@ -32124,7 +32204,7 @@
 	});
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32137,12 +32217,16 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _striptags2 = __webpack_require__(55);
+	var _striptags2 = __webpack_require__(57);
 	
 	var _striptags3 = _interopRequireDefault(_striptags2);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -32338,7 +32422,7 @@
 	});
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32351,7 +32435,7 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _threeJs = __webpack_require__(117);
+	var _threeJs = __webpack_require__(119);
 	
 	var _threeJs2 = _interopRequireDefault(_threeJs);
 	
@@ -32599,9 +32683,9 @@
 	
 	exports.default = _vue2.default.extend({
 	  components: {
-	    'dna-barcode-bg': __webpack_require__(124),
-	    'entrance-modal': __webpack_require__(128),
-	    'instruction-modal': __webpack_require__(129)
+	    'dna-barcode-bg': __webpack_require__(126),
+	    'entrance-modal': __webpack_require__(131),
+	    'instruction-modal': __webpack_require__(132)
 	  },
 	  watch: {
 	    '$route': 'resetAutoScroll'
@@ -33004,7 +33088,7 @@
 	});
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33111,9 +33195,11 @@
 	//
 	//
 	//
+	//
+	//
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(3)();
@@ -33127,20 +33213,6 @@
 
 
 /***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "a>div[data-v-148fe6d8]{height:100%;background-position:50%;background-repeat:no-repeat;background-image:url(/dna-of-forests/img/gnav/sound-on.png);transition-duration:.2s;opacity:.5}a>div>span[data-v-148fe6d8]{display:none}a:hover>div[data-v-148fe6d8]{opacity:.9}a.off>div[data-v-148fe6d8]{background-image:url(/dna-of-forests/img/gnav/sound-off.png)}", ""]);
-	
-	// exports
-
-
-/***/ },
 /* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -33149,7 +33221,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".wrapper[data-v-1627d9a0]{display:table;position:absolute;width:100%;height:100%;z-index:9999}.containter[data-v-1627d9a0]{display:table-cell;width:100%;height:100%;vertical-align:middle}img[data-v-1627d9a0]{user-select:none;pointer-events:none}.modal[data-v-1627d9a0]{background-color:#000;padding:10px;width:252px;height:558px;padding:25px;border-radius:20px;margin-left:auto;margin-right:auto;text-align:center}.modal .logo[data-v-1627d9a0]{margin-top:95px;margin-bottom:110px}.modal a[data-v-1627d9a0]{cursor:pointer;display:block;font-family:Roboto;font-size:15px;border-radius:2px;padding:20px;border:1px solid #3f3f3f;color:#fff;text-decoration:none;letter-spacing:.15em;margin-top:28px;transition-duration:.2s}.modal a[data-v-1627d9a0]:hover{border-color:#aaa}", ""]);
+	exports.push([module.id, "a>div[data-v-148fe6d8]{height:100%;background-position:50%;background-repeat:no-repeat;background-image:url(/dna-of-forests/img/gnav/sound-on@2x.png);background-size:18px 15px;transition-duration:.2s;opacity:.5}a>div>span[data-v-148fe6d8]{display:none}a:hover>div[data-v-148fe6d8]{opacity:.9}a.off>div[data-v-148fe6d8]{background-image:url(/dna-of-forests/img/gnav/sound-off@2x.png);background-size:17px 15px}", ""]);
 	
 	// exports
 
@@ -33163,7 +33235,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@-webkit-keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}@-webkit-keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}.fade-enter-active[data-v-2169d57d],.fade-leave-active[data-v-2169d57d]{transition:opacity 1.5s}.fade-enter[data-v-2169d57d],.fade-leave-active[data-v-2169d57d]{opacity:0}.instruction_anim-enter-active[data-v-2169d57d],.instruction_anim-leave-active[data-v-2169d57d]{transition:opacity .3s}.instruction_anim-enter[data-v-2169d57d],.instruction_anim-leave-active[data-v-2169d57d]{opacity:0}#container[data-v-2169d57d]{height:100%;overflow:hidden}.ycam[data-v-2169d57d]{position:absolute;top:18px;right:22px;z-index:11;user-select:none}.ycam[data-v-2169d57d]:hover{opacity:.7}.copyright[data-v-2169d57d]{position:absolute;bottom:19px;right:22px;z-index:11;font-family:Roboto;font-size:9px;line-height:15px;text-align:right;opacity:.55}.copyright a[data-v-2169d57d]{color:#fff;text-decoration:none}.copyright a[data-v-2169d57d]:hover{border-bottom:1px dotted #ccc}.marker[data-v-2169d57d]{position:absolute;cursor:pointer;z-index:10;user-select:none;height:14px;line-height:14px;white-space:nowrap;transform-origin:0 50%;-webkit-transform-origin:0 50%;transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.marker img[data-v-2169d57d]{display:inline-block;vertical-align:middle;cursor:pointer;user-select:none;pointer-events:none}.marker img.label[data-v-2169d57d]{margin-left:5px}.marker span.label[data-v-2169d57d]{font-family:Roboto;color:#fcff00;font-size:11px;letter-spacing:.025em;margin-left:5px}.marker[data-v-2169d57d]:hover{animation:hover_flash .2s 1 linear;-webkit-animation:hover_flash .2s 1 linear;-moz-animation:hover_flash .2s 1 linear}.marker.selected[data-v-2169d57d]{animation:flash 1s infinite linear;-webkit-animation:flash 1s infinite linear;-moz-animation:flash 1s infinite linear}.marker.sample[data-v-2169d57d]{margin-left:7px}.marker.sample[data-v-2169d57d]:before{display:inline-block;content:url(/dna-of-forests/img/panorama/marker-arrow.png);width:13px;height:14px;vertical-align:middle}.marker.sample .dna_barcode[data-v-2169d57d]{margin-left:5px;cursor:pointer}.marker.sample:hover .dna_barcode[data-v-2169d57d]{animation-duration:500s!important;-webkit-animation-duration:500s!important;-moz-animation-duration:500s!important}.marker.knowledge[data-v-2169d57d]{margin-top:3.5px;margin-left:3.5px}.marker.knowledge[data-v-2169d57d]:before{display:inline-block;content:'';width:14px;height:14px;vertical-align:middle;border-radius:7px;background-color:#fcff00}@media (max-width:660px){.ycam[data-v-2169d57d]{right:inherit;left:22px;opacity:.5}.copyright[data-v-2169d57d]{bottom:inherit;top:19px;right:22px;opacity:.5}}", ""]);
+	exports.push([module.id, ".wrapper[data-v-1627d9a0]{display:table;position:absolute;width:100%;height:100%;z-index:9999}.containter[data-v-1627d9a0]{display:table-cell;width:100%;height:100%;vertical-align:middle}img[data-v-1627d9a0]{user-select:none;pointer-events:none}.modal[data-v-1627d9a0]{background-color:#000;padding:10px;width:252px;height:558px;padding:25px;border-radius:20px;margin-left:auto;margin-right:auto;text-align:center}.modal .logo[data-v-1627d9a0]{margin-top:95px;margin-bottom:110px}.modal a[data-v-1627d9a0]{cursor:pointer;display:block;font-family:Roboto;font-size:15px;border-radius:2px;padding:20px;border:1px solid #3f3f3f;color:#fff;text-decoration:none;letter-spacing:.15em;margin-top:28px;transition-duration:.2s}.modal a[data-v-1627d9a0]:hover{border-color:#aaa}", ""]);
 	
 	// exports
 
@@ -33177,7 +33249,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".drawer[data-v-5fe98175]{position:fixed;width:490px;height:100%;right:0;background-color:#151515;z-index:9999;box-shadow:0 0 20px rgba(0,0,0,.5);overflow:hidden}.drawer.fade-enter-active[data-v-5fe98175],.drawer.fade-leave-active[data-v-5fe98175]{transition-duration:.45s}.drawer.fade-enter[data-v-5fe98175],.drawer.fade-leave-active[data-v-5fe98175]{right:-490px;opacity:0}header[data-v-5fe98175]{background-color:#0d0d0d;padding:28.5px 25px;position:relative;border-bottom:1px solid #1a1a1a}header h2[data-v-5fe98175]{text-align:center}header .close_btn[data-v-5fe98175]{display:inline-block;padding:28.5px 25px;position:absolute;top:0;right:0;cursor:pointer;opacity:.3}header .close_btn[data-v-5fe98175]:hover{opacity:.5}article[data-v-5fe98175]{padding:25px;overflow-y:auto;height:calc(100% - 125px);-webkit-overflow-scrolling:touch}h3[data-v-5fe98175]{font-size:16px;margin-bottom:26px;text-align:center}p[data-v-5fe98175]{font-size:13px;line-height:32px;letter-spacing:.075em;margin-top:25px;word-break:break-all;text-align:justify}section[data-v-5fe98175]{max-height:inherit}section h3[data-v-5fe98175]{margin:25px -25px;text-align:center;background-color:#0d0d0d;padding:21px}section:first-child h3[data-v-5fe98175]{margin-top:-25px}h4[data-v-5fe98175]{margin-bottom:13px;color:#ccc}h4[data-v-5fe98175]:not(:first-child){margin-top:30px}@-webkit-keyframes spin{0%{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.image_wrapper[data-v-5fe98175]{width:440px;height:277px;border-radius:5px;background-color:#262626;position:relative;overflow:hidden}.image_wrapper[data-v-5fe98175]:before{content:\"\";position:absolute;width:32px;height:32px;top:calc(50% - 16px);left:calc(50% - 16px);z-index:1;background:transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat 50%;-webkit-animation-name:spin;-webkit-animation-duration:.4s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear;-moz-animation-name:spin;-moz-animation-duration:.4s;-moz-animation-iteration-count:infinite;-moz-animation-timing-function:linear;-ms-animation-name:spin;-ms-animation-duration:.4s;-ms-animation-iteration-count:infinite;-ms-animation-timing-function:linear;animation-name:spin;animation-duration:.4s;animation-iteration-count:infinite;animation-timing-function:linear}.image_wrapper>img[data-v-5fe98175]{z-index:2;position:absolute;border-radius:5px}.dna_sequence p[data-v-5fe98175]{color:gray}.dna_sequence textarea[data-v-5fe98175]{width:100%;overflow:hidden}.result[data-v-5fe98175]{background-color:#333;font-size:20px;text-align:center;font-weight:700;padding:19px 0 23px;border-radius:5px}.result small[data-v-5fe98175]{font-size:11px;display:block;margin-bottom:12px}.result.expand[data-v-5fe98175]{padding:34px 0}.description[data-v-5fe98175]{margin:25px -25px -25px;padding:25px;border-top:1px solid #333;color:gray}.description h4[data-v-5fe98175]{color:gray}.description p[data-v-5fe98175]{font-size:13px;line-height:28px;letter-spacing:0}.microscope[data-v-5fe98175]{text-align:center}.microscope .bg_line[data-v-5fe98175]{margin-top:25px}.bg_line[data-v-5fe98175]{background-image:url(/dna-of-forests/img/detail-drawer/memo-line.png);padding-bottom:1px;text-align:center;min-height:1px}.bg_line[data-v-5fe98175]:after{content:'.';display:block;clear:both;height:0;visibility:hidden}.bg_line dl[data-v-5fe98175]{font-size:13px;line-height:36px;text-align:left;clear:both}.bg_line dl[data-v-5fe98175]:not(:first-child){margin-top:36px}.bg_line dl dt[data-v-5fe98175]{font-weight:700}.bg_line dl dd[data-v-5fe98175]{font-weight:400}.bg_line>img[data-v-5fe98175]{margin:18px auto 36px;width:230px;transform:rotate(-3deg);-webkit-transform:rotate(-3deg)}@media (max-width:660px){.drawer[data-v-5fe98175]{height:calc(100% - 100px)}}", ""]);
+	exports.push([module.id, "@keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@-webkit-keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}@-webkit-keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}.fade-enter-active[data-v-2169d57d],.fade-leave-active[data-v-2169d57d]{transition:opacity 1.5s}.fade-enter[data-v-2169d57d],.fade-leave-active[data-v-2169d57d]{opacity:0}.instruction_anim-enter-active[data-v-2169d57d],.instruction_anim-leave-active[data-v-2169d57d]{transition:opacity .3s}.instruction_anim-enter[data-v-2169d57d],.instruction_anim-leave-active[data-v-2169d57d]{opacity:0}#container[data-v-2169d57d]{height:100%;overflow:hidden}.ycam[data-v-2169d57d]{position:absolute;top:18px;right:22px;z-index:11;user-select:none}.ycam[data-v-2169d57d]:hover{opacity:.7}.copyright[data-v-2169d57d]{position:absolute;bottom:19px;right:22px;z-index:11;font-family:Roboto;font-size:9px;line-height:15px;text-align:right;opacity:.55}.copyright a[data-v-2169d57d]{color:#fff;text-decoration:none}.copyright a[data-v-2169d57d]:hover{border-bottom:1px dotted #ccc}.marker[data-v-2169d57d]{position:absolute;cursor:pointer;z-index:10;user-select:none;height:14px;line-height:14px;white-space:nowrap;transform-origin:0 50%;-webkit-transform-origin:0 50%;transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.marker img[data-v-2169d57d]{display:inline-block;vertical-align:middle;cursor:pointer;user-select:none;pointer-events:none}.marker img.label[data-v-2169d57d]{margin-left:5px}.marker span.label[data-v-2169d57d]{font-family:Roboto;color:#fcff00;font-size:11px;letter-spacing:.025em;margin-left:5px}.marker[data-v-2169d57d]:hover{animation:hover_flash .2s 1 linear;-webkit-animation:hover_flash .2s 1 linear;-moz-animation:hover_flash .2s 1 linear}.marker.selected[data-v-2169d57d]{animation:flash 1s infinite linear;-webkit-animation:flash 1s infinite linear;-moz-animation:flash 1s infinite linear}.marker.sample[data-v-2169d57d]{margin-left:7px}.marker.sample[data-v-2169d57d]:before{display:inline-block;content:url(/dna-of-forests/img/panorama/marker-arrow.png);width:13px;height:14px;vertical-align:middle}.marker.sample .dna_barcode[data-v-2169d57d]{margin-left:5px;cursor:pointer}.marker.sample:hover .dna_barcode[data-v-2169d57d]{animation-duration:500s!important;-webkit-animation-duration:500s!important;-moz-animation-duration:500s!important}.marker.knowledge[data-v-2169d57d]{margin-top:3.5px;margin-left:3.5px}.marker.knowledge[data-v-2169d57d]:before{display:inline-block;content:'';width:14px;height:14px;vertical-align:middle;border-radius:7px;background-color:#fcff00}@media (max-width:660px){.ycam[data-v-2169d57d]{right:inherit;left:22px;opacity:.5}.copyright[data-v-2169d57d]{bottom:inherit;top:19px;right:22px;opacity:.5}}", ""]);
 	
 	// exports
 
@@ -33191,7 +33263,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@-webkit-keyframes bgscroll{0%{background-position:0 0}to{background-position:10000px 0}}@keyframes bgscroll{0%{background-position:0 0}to{background-position:10000px 0}}.dna_barcode{display:inline-block;width:2000px;height:2px;margin-bottom:2px;margin-left:4px}.dna_barcode>canvas{display:none}", ""]);
+	exports.push([module.id, ".drawer[data-v-5fe98175]{position:fixed;width:490px;height:100%;right:0;background-color:#151515;z-index:9999;box-shadow:0 0 20px rgba(0,0,0,.5);overflow:hidden}.drawer.fade-enter-active[data-v-5fe98175],.drawer.fade-leave-active[data-v-5fe98175]{transition-duration:.45s}.drawer.fade-enter[data-v-5fe98175],.drawer.fade-leave-active[data-v-5fe98175]{right:-490px;opacity:0}header[data-v-5fe98175]{background-color:#0d0d0d;padding:28.5px 25px;position:relative;border-bottom:1px solid #1a1a1a}header h2[data-v-5fe98175]{text-align:center}header .close_btn[data-v-5fe98175]{display:inline-block;padding:28.5px 25px;position:absolute;top:0;right:0;cursor:pointer;opacity:.3}header .close_btn[data-v-5fe98175]:hover{opacity:.5}article[data-v-5fe98175]{padding:25px;overflow-y:auto;height:calc(100% - 125px);-webkit-overflow-scrolling:touch}h3[data-v-5fe98175]{font-size:16px;margin-bottom:26px;text-align:center}p[data-v-5fe98175]{font-size:13px;line-height:32px;letter-spacing:.075em;margin-top:25px;word-break:break-all;text-align:justify}section[data-v-5fe98175]{max-height:inherit}section h3[data-v-5fe98175]{margin:25px -25px;text-align:center;background-color:#0d0d0d;padding:21px}section:first-child h3[data-v-5fe98175]{margin-top:-25px}h4[data-v-5fe98175]{margin-bottom:13px;color:#ccc}h4[data-v-5fe98175]:not(:first-child){margin-top:30px}@-webkit-keyframes spin{0%{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.image_wrapper[data-v-5fe98175]{width:440px;height:277px;border-radius:5px;background-color:#262626;position:relative;overflow:hidden}.image_wrapper[data-v-5fe98175]:before{content:\"\";position:absolute;width:32px;height:32px;top:calc(50% - 16px);left:calc(50% - 16px);z-index:1;background:transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat 50%;-webkit-animation-name:spin;-webkit-animation-duration:.4s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear;-moz-animation-name:spin;-moz-animation-duration:.4s;-moz-animation-iteration-count:infinite;-moz-animation-timing-function:linear;-ms-animation-name:spin;-ms-animation-duration:.4s;-ms-animation-iteration-count:infinite;-ms-animation-timing-function:linear;animation-name:spin;animation-duration:.4s;animation-iteration-count:infinite;animation-timing-function:linear}.image_wrapper>img[data-v-5fe98175]{z-index:2;position:absolute;border-radius:5px}.dna_sequence p[data-v-5fe98175]{color:gray}.dna_sequence textarea[data-v-5fe98175]{width:100%;overflow:hidden}.result[data-v-5fe98175]{background-color:#333;font-size:20px;text-align:center;font-weight:700;padding:19px 0 23px;border-radius:5px}.result small[data-v-5fe98175]{font-size:11px;display:block;margin-bottom:12px}.result.expand[data-v-5fe98175]{padding:34px 0}.description[data-v-5fe98175]{margin:25px -25px -25px;padding:25px;border-top:1px solid #333;color:gray}.description h4[data-v-5fe98175]{color:gray}.description p[data-v-5fe98175]{font-size:13px;line-height:28px;letter-spacing:0}.microscope[data-v-5fe98175]{text-align:center}.microscope .bg_line[data-v-5fe98175]{margin-top:25px}.bg_line[data-v-5fe98175]{background-image:url(/dna-of-forests/img/detail-drawer/memo-line.png);padding-bottom:1px;text-align:center;min-height:1px}.bg_line[data-v-5fe98175]:after{content:'.';display:block;clear:both;height:0;visibility:hidden}.bg_line dl[data-v-5fe98175]{font-size:13px;line-height:36px;text-align:left;clear:both}.bg_line dl[data-v-5fe98175]:not(:first-child){margin-top:36px}.bg_line dl dt[data-v-5fe98175]{font-weight:700}.bg_line dl dd[data-v-5fe98175]{font-weight:400}.bg_line>img[data-v-5fe98175]{margin:18px auto 36px;width:230px;transform:rotate(-3deg);-webkit-transform:rotate(-3deg)}@media (max-width:660px){.drawer[data-v-5fe98175]{height:calc(100% - 100px)}}", ""]);
 	
 	// exports
 
@@ -33205,7 +33277,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".tab>div.contents[data-v-740a6467]{padding:18px 11px;background-color:#333;border-bottom-left-radius:5px;border-bottom-right-radius:5px}.tab>div.contents>div[data-v-740a6467]:not(.current){display:none}header[data-v-740a6467]{width:100%}header a[data-v-740a6467]{background-color:#262626;width:50%;padding:10px 0;text-align:center;display:inline-block;cursor:pointer}header a img[data-v-740a6467]{margin-right:7px;cursor:pointer}header a span[data-v-740a6467]{font-size:12px;color:#fff;opacity:.3;cursor:pointer}header a[data-v-740a6467]:first-child{border-top-left-radius:5px}header a[data-v-740a6467]:last-child{border-top-right-radius:5px}header a.current[data-v-740a6467]{background-color:#333}header a.current span[data-v-740a6467]{opacity:.75}header a:hover span[data-v-740a6467]{opacity:.5}.contents .text p[data-v-740a6467]{word-wrap:break-word;font-size:12px;line-height:2em;font-weight:700}", ""]);
+	exports.push([module.id, "@-webkit-keyframes bgscroll{0%{background-position:0 0}to{background-position:10000px 0}}@keyframes bgscroll{0%{background-position:0 0}to{background-position:10000px 0}}.dna_barcode{display:inline-block;width:2000px;height:2px;margin-bottom:2px;margin-left:4px}.dna_barcode>canvas{display:none}", ""]);
 	
 	// exports
 
@@ -33219,7 +33291,7 @@
 	
 	
 	// module
-	exports.push([module.id, "section.list[data-v-8ad0c9b4]{height:100%;overflow-y:auto;background-color:#151515}h1[data-v-8ad0c9b4]{padding:28px 27px;background-color:#0d0d0d;border-bottom:1px solid #1a1a1a}table[data-v-8ad0c9b4]{width:100%;max-width:100%;font-size:14px}table tr[data-v-8ad0c9b4]{height:55px}table tr td[data-v-8ad0c9b4],table tr th[data-v-8ad0c9b4]{vertical-align:middle;padding-left:27px}table tr td[data-v-8ad0c9b4]:last-child,table tr th[data-v-8ad0c9b4]:last-child{padding-right:27px}table thead[data-v-8ad0c9b4]{background-color:#0d0d0d}table thead th[data-v-8ad0c9b4]{text-align:left;color:#656566;font-size:12px}table tbody[data-v-8ad0c9b4]{color:#979799}table tbody tr[data-v-8ad0c9b4]:hover{background-color:#1d1d1d;cursor:pointer}table tbody tr.selected[data-v-8ad0c9b4]{background-color:#202020}table tbody td[data-v-8ad0c9b4]{white-space:nowrap}table tbody td .genus_en[data-v-8ad0c9b4]{margin-left:1em;color:#979799}table tbody td.dna[data-v-8ad0c9b4]{max-width:300px;overflow:hidden;white-space:nowrap}table tbody td.dna1[data-v-8ad0c9b4],table tbody td.dna2[data-v-8ad0c9b4]{max-width:150px;overflow:hidden;white-space:nowrap}table tbody td .region[data-v-8ad0c9b4]{display:inline-block;width:32px;margin-right:8px;text-align:right}table tbody td.index[data-v-8ad0c9b4]{font-family:Roboto;font-weight:700;letter-spacing:.025em;width:30px}table tbody td.description[data-v-8ad0c9b4],table tbody td.index[data-v-8ad0c9b4],table tbody td.result[data-v-8ad0c9b4],table tbody td.title[data-v-8ad0c9b4]{color:#fff}table tbody td.description[data-v-8ad0c9b4],table tbody td.result[data-v-8ad0c9b4],table tbody td.title[data-v-8ad0c9b4]{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}table tbody td.title[data-v-8ad0c9b4]{width:150px}table tbody td.description[data-v-8ad0c9b4],table tbody td.result[data-v-8ad0c9b4]{max-width:150px}table tbody td.collection_date[data-v-8ad0c9b4]{width:80px}@media (max-width:1000px){table td.result[data-v-8ad0c9b4]{width:150px}table td.result .genus_en[data-v-8ad0c9b4]{display:none}}@media (max-width:660px){table .collection_date[data-v-8ad0c9b4],table .genus_en[data-v-8ad0c9b4]{display:none}}[data-lang=en] table tr td[data-v-8ad0c9b4]:last-child,[data-lang=en] table tr th[data-v-8ad0c9b4]:last-child{width:100px}", ""]);
+	exports.push([module.id, ".tab>div.contents[data-v-740a6467]{padding:18px 11px;background-color:#333;border-bottom-left-radius:5px;border-bottom-right-radius:5px}.tab>div.contents>div[data-v-740a6467]:not(.current){display:none}header[data-v-740a6467]{width:100%}header a[data-v-740a6467]{background-color:#262626;width:50%;padding:10px 0;text-align:center;display:inline-block;cursor:pointer}header a img[data-v-740a6467]{margin-right:7px;cursor:pointer}header a span[data-v-740a6467]{font-size:12px;color:#fff;opacity:.3;cursor:pointer}header a[data-v-740a6467]:first-child{border-top-left-radius:5px}header a[data-v-740a6467]:last-child{border-top-right-radius:5px}header a.current[data-v-740a6467]{background-color:#333}header a.current span[data-v-740a6467]{opacity:.75}header a:hover span[data-v-740a6467]{opacity:.5}.contents .text p[data-v-740a6467]{word-wrap:break-word;font-size:12px;line-height:2em;font-weight:700}", ""]);
 	
 	// exports
 
@@ -33233,7 +33305,7 @@
 	
 	
 	// module
-	exports.push([module.id, "nav[data-v-c2e766be]{position:relative;background:#000;width:80px;height:100%;float:left}nav>a[data-v-c2e766be]{display:block;width:80px;height:80px;background-color:#0d0d0d;cursor:pointer}nav>a[data-v-c2e766be]:not(:last-child){margin-bottom:1px}nav>a>div[data-v-c2e766be]{height:100%;background-position:50%;background-repeat:no-repeat;transition-duration:.2s}nav>a>div>span[data-v-c2e766be]{display:none}nav>a:not(.router-link-active)>div[data-v-c2e766be]{opacity:.5}nav>a:not(.router-link-active):hover>div[data-v-c2e766be]{opacity:.9}nav>a.top>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/top.png)}nav>a.top.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/top-active.png)}nav>a.panorama>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/panorama.png)}nav>a.panorama.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/panorama-active.png)}nav>a.list>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/list.png)}nav>a.list.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/list-active.png)}nav>a.about>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/about.png)}nav>a.about.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/about-active.png)}nav>a[data-v-c2e766be]:last-child{position:absolute;bottom:0}@media (max-width:660px){nav[data-v-c2e766be]{position:fixed;bottom:0;height:100px;width:100%;float:none;z-index:9999}nav>a[data-v-c2e766be]{width:100px;height:100px;float:left}nav>a[data-v-c2e766be]:not(:last-child){margin-bottom:0}nav>a[data-v-c2e766be]:last-child{right:0}}", ""]);
+	exports.push([module.id, "section.list[data-v-8ad0c9b4]{height:100%;overflow-y:auto;background-color:#151515}h1[data-v-8ad0c9b4]{padding:28px 27px;background-color:#0d0d0d;border-bottom:1px solid #1a1a1a}table[data-v-8ad0c9b4]{width:100%;max-width:100%;font-size:14px}table tr[data-v-8ad0c9b4]{height:55px}table tr td[data-v-8ad0c9b4],table tr th[data-v-8ad0c9b4]{vertical-align:middle;padding-left:27px}table tr td[data-v-8ad0c9b4]:last-child,table tr th[data-v-8ad0c9b4]:last-child{padding-right:27px}table thead[data-v-8ad0c9b4]{background-color:#0d0d0d}table thead th[data-v-8ad0c9b4]{text-align:left;color:#656566;font-size:12px}table tbody[data-v-8ad0c9b4]{color:#979799}table tbody tr[data-v-8ad0c9b4]:hover{background-color:#1d1d1d;cursor:pointer}table tbody tr.selected[data-v-8ad0c9b4]{background-color:#202020}table tbody td[data-v-8ad0c9b4]{white-space:nowrap}table tbody td .genus_en[data-v-8ad0c9b4]{margin-left:1em;color:#979799}table tbody td.dna[data-v-8ad0c9b4]{max-width:300px;overflow:hidden;white-space:nowrap}table tbody td.dna1[data-v-8ad0c9b4],table tbody td.dna2[data-v-8ad0c9b4]{max-width:150px;overflow:hidden;white-space:nowrap}table tbody td .region[data-v-8ad0c9b4]{display:inline-block;width:32px;margin-right:8px;text-align:right}table tbody td.index[data-v-8ad0c9b4]{font-family:Roboto;font-weight:700;letter-spacing:.025em;width:30px}table tbody td.description[data-v-8ad0c9b4],table tbody td.index[data-v-8ad0c9b4],table tbody td.result[data-v-8ad0c9b4],table tbody td.title[data-v-8ad0c9b4]{color:#fff}table tbody td.description[data-v-8ad0c9b4],table tbody td.result[data-v-8ad0c9b4],table tbody td.title[data-v-8ad0c9b4]{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}table tbody td.title[data-v-8ad0c9b4]{width:150px}table tbody td.description[data-v-8ad0c9b4],table tbody td.result[data-v-8ad0c9b4]{max-width:150px}table tbody td.collection_date[data-v-8ad0c9b4]{width:80px}@media (max-width:1000px){table td.result[data-v-8ad0c9b4]{width:150px}table td.result .genus_en[data-v-8ad0c9b4]{display:none}}@media (max-width:660px){table .collection_date[data-v-8ad0c9b4],table .genus_en[data-v-8ad0c9b4]{display:none}}[data-lang=en] table#samples tr td[data-v-8ad0c9b4]:last-child,[data-lang=en] table#samples tr th[data-v-8ad0c9b4]:last-child{width:100px}[data-lang=en] table#knowledges tr td.description[data-v-8ad0c9b4]{color:#979799}", ""]);
 	
 	// exports
 
@@ -33247,13 +33319,41 @@
 	
 	
 	// module
-	exports.push([module.id, "article.about{height:100%;overflow-y:auto;overflow-x:hidden}article.about h1{text-align:center;margin-top:130px;margin-bottom:130px}article.about h2{text-align:center;margin-bottom:38px}article.about h3{text-align:center;margin-bottom:24px}article.about p{font-size:15px;line-height:2.2em;letter-spacing:.05em;text-align:left;margin-bottom:2.2em;text-align:justify}article.about a{color:inherit;text-decoration:none}article.about section{width:620px;margin:0 auto;text-align:center;margin-bottom:96px}article.about section#credit{width:auto;background-color:#191919;padding:108px 0;margin-bottom:0}article.about section#credit h3#planning_production{margin-bottom:53px}article.about section#credit h3#cooperation,article.about section#credit h3#production{margin-bottom:40px;margin-top:80px}article.about section#credit>a{display:block;width:600px;margin:0 auto 40px}article.about section#credit>a:hover{opacity:.7}article.about section#credit p{font-size:14px;text-align:center}article.about section#credit p a{color:inherit;text-decoration:none}article.about section#credit p a:hover{opacity:.7;cursor:pointer}article.about section#credit p.small{font-size:12px}article.about section#credit h4{margin-bottom:10px}article.about .carousel{width:760px;height:506px;margin:50px -80px 38px}article.about .carousel:before{content:url(/dna-of-forests/img/about/slide-round.png);width:100%;height:100%;position:absolute;z-index:10;left:0;pointer-events:none}article.about .carousel .carousel-cell{width:100%;height:100%;margin-right:0;background-position:50%;background-size:cover}article.about .carousel .flickity-page-dots{bottom:-60px}article.about .carousel .flickity-page-dots .dot{width:7px;height:7px;background-color:#fff;opacity:.3;margin:0 6px}article.about .carousel .flickity-page-dots .dot.is-selected{opacity:1}article.about .carousel .flickity-prev-next-button{outline:0;height:100%;border-radius:0;transition-duration:.2s;opacity:0;background:transparent;width:80px}article.about .carousel .flickity-prev-next-button .arrow{fill:#fff}article.about .carousel .flickity-prev-next-button svg{left:calc(50% - 20px);top:calc(50% - 20px);width:40px;height:auto}article.about .carousel .flickity-prev-next-button.next{right:0}article.about .carousel .flickity-prev-next-button.previous{left:0}article.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow{opacity:.5}article.about .carousel .flickity-prev-next-button[disabled]{display:none}article.about .carousel:hover .flickity-prev-next-button:not([disabled]){opacity:1}article.about center.credit{margin-top:-26px;color:#696969;font-size:12px;font-weight:700}@media (max-width:900px){article.about section{width:100%}article.about section p{padding-left:50px;padding-right:50px;font-size:18px}article.about section .carousel{width:100%;margin-left:0;margin-right:0}article.about section .carousel:before{display:none}}", ""]);
+	exports.push([module.id, "a[data-v-951dd50e]{display:block;background-position:50%;background-repeat:no-repeat;transition-duration:.2s;opacity:.5}a[data-v-951dd50e]:hover{opacity:.9}a.en[data-v-951dd50e]{background-image:url(/dna-of-forests/img/gnav/language-en@2x.png);background-size:41px 8px}a.ja[data-v-951dd50e]{background-image:url(/dna-of-forests/img/gnav/language-ja@2x.png);background-size:47px 8px}", ""]);
 	
 	// exports
 
 
 /***/ },
 /* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "nav[data-v-c2e766be]{position:relative;background:#000;width:80px;height:100%;float:left}nav>a[data-v-c2e766be]{display:block;width:80px;height:80px;background-color:#0d0d0d;cursor:pointer}nav>a[data-v-c2e766be]:not(:last-child){margin-bottom:1px}nav>a>div[data-v-c2e766be]{height:100%;background-position:50%;background-repeat:no-repeat;transition-duration:.2s}nav>a>div>span[data-v-c2e766be]{display:none}nav>a:not(.router-link-active)>div[data-v-c2e766be]{opacity:.5}nav>a:not(.router-link-active):hover>div[data-v-c2e766be]{opacity:.9}nav>a.top>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/top@2x.png);background-size:21px 32px}nav>a.top.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/top-active@2x.png)}nav>a.panorama>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/panorama@2x.png);background-size:20px 34px}nav>a.panorama.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/panorama-active@2x.png)}nav>a.list>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/list@2x.png);background-size:20px 27px}nav>a.list.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/list-active@2x.png)}nav>a.about>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/about@2x.png);background-size:34px 34px}nav>a.about.router-link-active>div[data-v-c2e766be]{background-image:url(/dna-of-forests/img/gnav/about-active@2x.png)}nav>a[data-v-c2e766be]:nth-last-child(2){position:absolute;bottom:81px;height:40px}nav>a[data-v-c2e766be]:last-child{position:absolute;bottom:0}@media (max-width:660px){nav[data-v-c2e766be]{position:fixed;bottom:0;height:100px;width:100%;float:none;z-index:9999}nav>a[data-v-c2e766be]{width:100px;height:100px;float:left}nav>a[data-v-c2e766be]:not(:last-child){margin-bottom:0}nav>a[data-v-c2e766be]:last-child{right:0}}", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(3)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "article.about{height:100%;overflow-y:auto;overflow-x:hidden}article.about h1{text-align:center;margin-top:130px;margin-bottom:130px}article.about h2{text-align:center;margin-bottom:38px}article.about h3{text-align:center;margin-bottom:24px}article.about p{font-size:15px;line-height:2.2em;letter-spacing:.05em;text-align:left;margin-bottom:2.2em;text-align:justify}article.about a{color:inherit;text-decoration:none}article.about section{width:620px;margin:0 auto;text-align:center;margin-bottom:96px}article.about section#credit{width:auto;background-color:#191919;padding:108px 0;margin-bottom:0}article.about section#credit h3#planning_production{margin-bottom:53px}article.about section#credit h3#cooperation,article.about section#credit h3#production{margin-bottom:40px;margin-top:80px}article.about section#credit>a{display:block;width:600px;margin:0 auto 40px}article.about section#credit>a:hover{opacity:.7}article.about section#credit p{font-size:14px;text-align:center}article.about section#credit p a{color:inherit;text-decoration:none}article.about section#credit p a:hover{opacity:.7;cursor:pointer}article.about section#credit p.small{font-size:12px}article.about section#credit h4{margin-bottom:10px}article.about .carousel{width:760px;height:506px;margin:50px -80px 38px}article.about .carousel:before{content:url(/dna-of-forests/img/about/slide-round.png);width:100%;height:100%;position:absolute;z-index:10;left:0;pointer-events:none}article.about .carousel .carousel-cell{width:100%;height:100%;margin-right:0;background-position:50%;background-size:cover}article.about .carousel .flickity-page-dots{bottom:-60px}article.about .carousel .flickity-page-dots .dot{width:7px;height:7px;background-color:#fff;opacity:.3;margin:0 6px}article.about .carousel .flickity-page-dots .dot.is-selected{opacity:1}article.about .carousel .flickity-prev-next-button{outline:0;height:100%;border-radius:0;transition-duration:.2s;opacity:0;background:transparent;width:80px}article.about .carousel .flickity-prev-next-button .arrow{fill:#fff}article.about .carousel .flickity-prev-next-button svg{left:calc(50% - 20px);top:calc(50% - 20px);width:40px;height:auto}article.about .carousel .flickity-prev-next-button.next{right:0}article.about .carousel .flickity-prev-next-button.previous{left:0}article.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow{opacity:.5}article.about .carousel .flickity-prev-next-button[disabled]{display:none}article.about .carousel:hover .flickity-prev-next-button:not([disabled]){opacity:1}article.about center.credit{margin-top:-26px;color:#696969;font-size:12px;font-weight:700}@media (max-width:900px){article.about section{width:100%}article.about section p{padding-left:50px;padding-right:50px;font-size:18px}article.about section .carousel{width:100%;margin-left:0;margin-right:0}article.about section .carousel:before{display:none}}", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 44 */
 /***/ function(module, exports) {
 
 	module.exports = now
@@ -33264,7 +33364,7 @@
 
 
 /***/ },
-/* 43 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33323,7 +33423,7 @@
 
 
 /***/ },
-/* 44 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// add, remove cell
@@ -33511,7 +33611,7 @@
 
 
 /***/ },
-/* 45 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// animate
@@ -33736,7 +33836,7 @@
 
 
 /***/ },
-/* 46 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity.Cell
@@ -33832,7 +33932,7 @@
 
 
 /***/ },
-/* 47 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// drag
@@ -33843,7 +33943,7 @@
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	      __webpack_require__(6),
-	      __webpack_require__(119),
+	      __webpack_require__(121),
 	      __webpack_require__(5)
 	    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, Unidragger, utils ) {
 	      return factory( window, Flickity, Unidragger, utils );
@@ -34222,7 +34322,7 @@
 
 
 /***/ },
-/* 48 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -34243,12 +34343,12 @@
 	    // AMD
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	      __webpack_require__(6),
-	      __webpack_require__(47),
+	      __webpack_require__(49),
+	      __webpack_require__(54),
 	      __webpack_require__(52),
-	      __webpack_require__(50),
-	      __webpack_require__(51),
-	      __webpack_require__(44),
-	      __webpack_require__(49)
+	      __webpack_require__(53),
+	      __webpack_require__(46),
+	      __webpack_require__(51)
 	    ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if ( typeof module == 'object' && module.exports ) {
 	    // CommonJS
@@ -34270,7 +34370,7 @@
 
 
 /***/ },
-/* 49 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// lazyload
@@ -34395,7 +34495,7 @@
 
 
 /***/ },
-/* 50 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// page dots
@@ -34579,7 +34679,7 @@
 
 
 /***/ },
-/* 51 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// player & autoPlay
@@ -34798,7 +34898,7 @@
 
 
 /***/ },
-/* 52 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// prev/next buttons
@@ -35024,7 +35124,7 @@
 
 
 /***/ },
-/* 53 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// slide
@@ -35106,7 +35206,7 @@
 
 
 /***/ },
-/* 54 */
+/* 56 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -35283,7 +35383,7 @@
 	};
 
 /***/ },
-/* 55 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -35508,70 +35608,70 @@
 
 
 /***/ },
-/* 56 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./AdaptiveToneMappingPass.js": 57,
-		"./BasicShader.js": 58,
-		"./BleachBypassShader.js": 59,
-		"./BlendShader.js": 60,
-		"./BloomPass.js": 61,
-		"./BokehPass.js": 62,
-		"./BokehShader.js": 63,
-		"./BokehShader2.js": 64,
-		"./BrightnessContrastShader.js": 65,
-		"./CanvasRenderer.js": 66,
-		"./ColorCorrectionShader.js": 67,
-		"./ColorifyShader.js": 68,
-		"./ConvolutionShader.js": 69,
-		"./CopyShader.js": 70,
-		"./DDSLoader.js": 71,
-		"./DOFMipMapShader.js": 72,
-		"./DigitalGlitch.js": 73,
-		"./DotScreenPass.js": 74,
-		"./DotScreenShader.js": 75,
-		"./EdgeShader.js": 76,
-		"./EdgeShader2.js": 77,
-		"./EffectComposer.js": 78,
-		"./FXAAShader.js": 79,
-		"./FilmPass.js": 80,
-		"./FilmShader.js": 81,
-		"./FocusShader.js": 82,
-		"./FresnelShader.js": 83,
-		"./GammaCorrectionShader.js": 84,
-		"./GlitchPass.js": 85,
-		"./HorizontalBlurShader.js": 86,
-		"./HorizontalTiltShiftShader.js": 87,
-		"./HueSaturationShader.js": 88,
-		"./JSONLoader.js": 89,
-		"./KaleidoShader.js": 90,
-		"./LuminosityShader.js": 91,
-		"./MTLLoader.js": 92,
-		"./MarchingCubes.js": 93,
-		"./MaskPass.js": 94,
-		"./MirrorShader.js": 95,
-		"./NormalMapShader.js": 96,
-		"./OBJLoader.js": 97,
-		"./OceanShaders.js": 98,
-		"./OrbitControls.js": 99,
-		"./ParallaxShader.js": 100,
-		"./Projector.js": 101,
-		"./RGBShiftShader.js": 102,
-		"./RenderPass.js": 103,
-		"./SSAOShader.js": 104,
-		"./SVGLoader.js": 105,
-		"./SavePass.js": 106,
-		"./SepiaShader.js": 107,
-		"./ShaderPass.js": 108,
-		"./TechnicolorShader.js": 109,
-		"./TexturePass.js": 110,
-		"./ToneMapShader.js": 111,
-		"./TriangleBlurShader.js": 112,
-		"./UnpackDepthRGBAShader.js": 113,
-		"./VerticalBlurShader.js": 114,
-		"./VerticalTiltShiftShader.js": 115,
-		"./VignetteShader.js": 116
+		"./AdaptiveToneMappingPass.js": 59,
+		"./BasicShader.js": 60,
+		"./BleachBypassShader.js": 61,
+		"./BlendShader.js": 62,
+		"./BloomPass.js": 63,
+		"./BokehPass.js": 64,
+		"./BokehShader.js": 65,
+		"./BokehShader2.js": 66,
+		"./BrightnessContrastShader.js": 67,
+		"./CanvasRenderer.js": 68,
+		"./ColorCorrectionShader.js": 69,
+		"./ColorifyShader.js": 70,
+		"./ConvolutionShader.js": 71,
+		"./CopyShader.js": 72,
+		"./DDSLoader.js": 73,
+		"./DOFMipMapShader.js": 74,
+		"./DigitalGlitch.js": 75,
+		"./DotScreenPass.js": 76,
+		"./DotScreenShader.js": 77,
+		"./EdgeShader.js": 78,
+		"./EdgeShader2.js": 79,
+		"./EffectComposer.js": 80,
+		"./FXAAShader.js": 81,
+		"./FilmPass.js": 82,
+		"./FilmShader.js": 83,
+		"./FocusShader.js": 84,
+		"./FresnelShader.js": 85,
+		"./GammaCorrectionShader.js": 86,
+		"./GlitchPass.js": 87,
+		"./HorizontalBlurShader.js": 88,
+		"./HorizontalTiltShiftShader.js": 89,
+		"./HueSaturationShader.js": 90,
+		"./JSONLoader.js": 91,
+		"./KaleidoShader.js": 92,
+		"./LuminosityShader.js": 93,
+		"./MTLLoader.js": 94,
+		"./MarchingCubes.js": 95,
+		"./MaskPass.js": 96,
+		"./MirrorShader.js": 97,
+		"./NormalMapShader.js": 98,
+		"./OBJLoader.js": 99,
+		"./OceanShaders.js": 100,
+		"./OrbitControls.js": 101,
+		"./ParallaxShader.js": 102,
+		"./Projector.js": 103,
+		"./RGBShiftShader.js": 104,
+		"./RenderPass.js": 105,
+		"./SSAOShader.js": 106,
+		"./SVGLoader.js": 107,
+		"./SavePass.js": 108,
+		"./SepiaShader.js": 109,
+		"./ShaderPass.js": 110,
+		"./TechnicolorShader.js": 111,
+		"./TexturePass.js": 112,
+		"./ToneMapShader.js": 113,
+		"./TriangleBlurShader.js": 114,
+		"./UnpackDepthRGBAShader.js": 115,
+		"./VerticalBlurShader.js": 116,
+		"./VerticalTiltShiftShader.js": 117,
+		"./VignetteShader.js": 118
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -35584,11 +35684,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 56;
+	webpackContext.id = 58;
 
 
 /***/ },
-/* 57 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -35914,7 +36014,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 58 */
+/* 60 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -35954,7 +36054,7 @@
 
 
 /***/ },
-/* 59 */
+/* 61 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -36027,7 +36127,7 @@
 
 
 /***/ },
-/* 60 */
+/* 62 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -36086,7 +36186,7 @@
 	}
 
 /***/ },
-/* 61 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -36212,7 +36312,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 62 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -36325,7 +36425,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 63 */
+/* 65 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -36450,7 +36550,7 @@
 
 
 /***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -36829,7 +36929,7 @@
 
 
 /***/ },
-/* 65 */
+/* 67 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -36896,7 +36996,7 @@
 
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -38020,7 +38120,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -38079,7 +38179,7 @@
 
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -38137,7 +38237,7 @@
 
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -38247,7 +38347,7 @@
 
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -38302,7 +38402,7 @@
 
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -38581,7 +38681,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -38648,7 +38748,7 @@
 
 
 /***/ },
-/* 73 */
+/* 75 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -38760,7 +38860,7 @@
 
 
 /***/ },
-/* 74 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -38831,7 +38931,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -38908,7 +39008,7 @@
 
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39010,7 +39110,7 @@
 
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39092,7 +39192,7 @@
 
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -39240,7 +39340,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39268,7 +39368,7 @@
 
 
 /***/ },
-/* 80 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -39340,7 +39440,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 81 */
+/* 83 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39453,7 +39553,7 @@
 
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39553,7 +39653,7 @@
 
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39636,7 +39736,7 @@
 
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39695,7 +39795,7 @@
 
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -39818,7 +39918,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 86 */
+/* 88 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39889,7 +39989,7 @@
 
 
 /***/ },
-/* 87 */
+/* 89 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -39963,7 +40063,7 @@
 
 
 /***/ },
-/* 88 */
+/* 90 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -40041,7 +40141,7 @@
 
 
 /***/ },
-/* 89 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -40606,7 +40706,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 90 */
+/* 92 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -40675,7 +40775,7 @@
 
 
 /***/ },
-/* 91 */
+/* 93 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -40734,7 +40834,7 @@
 
 
 /***/ },
-/* 92 */
+/* 94 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -41160,7 +41260,7 @@
 	};
 
 /***/ },
-/* 93 */
+/* 95 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -42226,7 +42326,7 @@
 	};
 
 /***/ },
-/* 94 */
+/* 96 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -42322,7 +42422,7 @@
 
 
 /***/ },
-/* 95 */
+/* 97 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -42389,7 +42489,7 @@
 
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -42451,7 +42551,7 @@
 
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -42864,7 +42964,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 98 */
+/* 100 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -43261,7 +43361,7 @@
 
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -44308,7 +44408,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 100 */
+/* 102 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -44501,7 +44601,7 @@
 
 
 /***/ },
-/* 101 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -45432,7 +45532,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 102 */
+/* 104 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -45497,7 +45597,7 @@
 
 
 /***/ },
-/* 103 */
+/* 105 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -45557,7 +45657,7 @@
 	};
 
 /***/ },
-/* 104 */
+/* 106 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -45791,7 +45891,7 @@
 
 
 /***/ },
-/* 105 */
+/* 107 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -45833,7 +45933,7 @@
 	};
 
 /***/ },
-/* 106 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -45906,7 +46006,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 107 */
+/* 109 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -45969,7 +46069,7 @@
 
 
 /***/ },
-/* 108 */
+/* 110 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46038,7 +46138,7 @@
 
 
 /***/ },
-/* 109 */
+/* 111 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46094,7 +46194,7 @@
 
 
 /***/ },
-/* 110 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -46151,7 +46251,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 111 */
+/* 113 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46235,7 +46335,7 @@
 
 
 /***/ },
-/* 112 */
+/* 114 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46322,7 +46422,7 @@
 
 
 /***/ },
-/* 113 */
+/* 115 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46388,7 +46488,7 @@
 
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46459,7 +46559,7 @@
 
 
 /***/ },
-/* 115 */
+/* 117 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46533,7 +46633,7 @@
 
 
 /***/ },
-/* 116 */
+/* 118 */
 /***/ function(module, exports) {
 
 	module.exports = function( THREE ){
@@ -46605,12 +46705,12 @@
 
 
 /***/ },
-/* 117 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function( self ){
 	
-		var THREE = __webpack_require__(118);
+		var THREE = __webpack_require__(120);
 	
 		module.exports = function( addons ){
 	
@@ -46627,7 +46727,7 @@
 					}
 					else if( typeof addon === "string" ){
 	
-						__webpack_require__(56)("./" + addon + ".js")(THREE);
+						__webpack_require__(58)("./" + addon + ".js")(THREE);
 	
 					}
 					else {
@@ -46648,7 +46748,7 @@
 
 
 /***/ },
-/* 118 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(console) {(function( self ){
@@ -88400,7 +88500,7 @@
 	
 		};
 	
-		if( "function" !== "undefined" && __webpack_require__(20) instanceof Function && __webpack_require__(155) != undefined ){
+		if( "function" !== "undefined" && __webpack_require__(20) instanceof Function && __webpack_require__(160) != undefined ){
 	
 			!(__WEBPACK_AMD_DEFINE_RESULT__ = function(){
 	
@@ -88424,7 +88524,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 119 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -88714,7 +88814,7 @@
 
 
 /***/ },
-/* 120 */
+/* 122 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -88743,7 +88843,7 @@
 
 
 /***/ },
-/* 121 */
+/* 123 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -88754,7 +88854,7 @@
 	}
 
 /***/ },
-/* 122 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console, process) {/*!
@@ -89628,20 +89728,20 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(15)))
 
 /***/ },
-/* 123 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(149)
+	__webpack_require__(153)
 	
 	/* script */
 	__vue_exports__ = __webpack_require__(22)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(137)
+	var __vue_template__ = __webpack_require__(140)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89661,20 +89761,20 @@
 
 
 /***/ },
-/* 124 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(150)
+	__webpack_require__(154)
 	
 	/* script */
 	__vue_exports__ = __webpack_require__(23)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(138)
+	var __vue_template__ = __webpack_require__(141)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89693,20 +89793,20 @@
 
 
 /***/ },
-/* 125 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(151)
+	__webpack_require__(155)
 	
 	/* script */
 	__vue_exports__ = __webpack_require__(25)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(139)
+	var __vue_template__ = __webpack_require__(142)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89726,20 +89826,20 @@
 
 
 /***/ },
-/* 126 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(153)
+	__webpack_require__(158)
 	
 	/* script */
 	__vue_exports__ = __webpack_require__(26)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(142)
+	var __vue_template__ = __webpack_require__(146)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89759,7 +89859,7 @@
 
 
 /***/ },
-/* 127 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
@@ -89769,7 +89869,7 @@
 	__vue_exports__ = __webpack_require__(27)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(133)
+	var __vue_template__ = __webpack_require__(136)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89788,17 +89888,50 @@
 
 
 /***/ },
-/* 128 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(147)
+	__webpack_require__(157)
+	
+	/* script */
+	__vue_exports__ = __webpack_require__(28)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(135)
+	var __vue_template__ = __webpack_require__(144)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__._scopeId = "data-v-951dd50e"
+	
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
+	
+	/* styles */
+	__webpack_require__(151)
+	
+	/* template */
+	var __vue_template__ = __webpack_require__(138)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89818,17 +89951,17 @@
 
 
 /***/ },
-/* 129 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(145)
+	__webpack_require__(149)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(132)
+	var __vue_template__ = __webpack_require__(135)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89848,20 +89981,20 @@
 
 
 /***/ },
-/* 130 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(154)
+	__webpack_require__(159)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(28)
+	__vue_exports__ = __webpack_require__(29)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(143)
+	var __vue_template__ = __webpack_require__(147)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89880,20 +90013,20 @@
 
 
 /***/ },
-/* 131 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 	
 	/* styles */
-	__webpack_require__(146)
+	__webpack_require__(150)
 	
 	/* script */
-	__vue_exports__ = __webpack_require__(31)
+	__vue_exports__ = __webpack_require__(32)
 	
 	/* template */
-	var __vue_template__ = __webpack_require__(134)
+	var __vue_template__ = __webpack_require__(137)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -89913,7 +90046,7 @@
 
 
 /***/ },
-/* 132 */
+/* 135 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -89935,7 +90068,7 @@
 	}]}
 
 /***/ },
-/* 133 */
+/* 136 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -89945,7 +90078,7 @@
 	}]}
 
 /***/ },
-/* 134 */
+/* 137 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -89970,7 +90103,7 @@
 	}]}
 
 /***/ },
-/* 135 */
+/* 138 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90000,7 +90133,7 @@
 	},staticRenderFns: []}
 
 /***/ },
-/* 136 */
+/* 139 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90044,7 +90177,7 @@
 	      staticClass: "label",
 	      attrs: {
 	        "alt": item.genus.ja,
-	        "src": 'panorama/marker-text/sample-ja/' + _vm.filename(item.genus_en) + '.png'
+	        "src": 'panorama/marker-text/sample-ja/' + _vm.filename(item.genus.en) + '.png'
 	      }
 	    }) : _vm._h('span', {
 	      staticClass: "label"
@@ -90098,7 +90231,7 @@
 	}]}
 
 /***/ },
-/* 137 */
+/* 140 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90217,7 +90350,7 @@
 	},staticRenderFns: []}
 
 /***/ },
-/* 138 */
+/* 141 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90235,7 +90368,7 @@
 	},staticRenderFns: []}
 
 /***/ },
-/* 139 */
+/* 142 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90297,7 +90430,7 @@
 	},staticRenderFns: []}
 
 /***/ },
-/* 140 */
+/* 143 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90424,7 +90557,17 @@
 	}]}
 
 /***/ },
-/* 141 */
+/* 144 */
+/***/ function(module, exports) {
+
+	module.exports={render:function (){var _vm=this;
+	  return _vm._m(0)
+	},staticRenderFns: [function (){var _vm=this;
+	  return _vm._h('a')
+	}]}
+
+/***/ },
+/* 145 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90434,7 +90577,7 @@
 	}]}
 
 /***/ },
-/* 142 */
+/* 146 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90459,7 +90602,7 @@
 	    attrs: {
 	      "to": "/about"
 	    }
-	  }, [_vm._m(3)]), _vm._h('sound-button')])
+	  }, [_vm._m(3)]), _vm._h('lang-button'), " ", _vm._h('sound-button')])
 	},staticRenderFns: [function (){var _vm=this;
 	  return _vm._h('div', [_vm._h('span', ["TOP"])])
 	},function (){var _vm=this;
@@ -90471,7 +90614,7 @@
 	}]}
 
 /***/ },
-/* 143 */
+/* 147 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;
@@ -90690,7 +90833,7 @@
 	}]}
 
 /***/ },
-/* 144 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(console) {/**
@@ -92574,13 +92717,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 145 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(32);
+	var content = __webpack_require__(33);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92600,13 +92743,13 @@
 	}
 
 /***/ },
-/* 146 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(33);
+	var content = __webpack_require__(34);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92626,13 +92769,13 @@
 	}
 
 /***/ },
-/* 147 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(34);
+	var content = __webpack_require__(35);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92652,13 +92795,13 @@
 	}
 
 /***/ },
-/* 148 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(35);
+	var content = __webpack_require__(36);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92678,13 +92821,13 @@
 	}
 
 /***/ },
-/* 149 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(36);
+	var content = __webpack_require__(37);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92704,13 +92847,13 @@
 	}
 
 /***/ },
-/* 150 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(37);
+	var content = __webpack_require__(38);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92730,13 +92873,13 @@
 	}
 
 /***/ },
-/* 151 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(38);
+	var content = __webpack_require__(39);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92756,13 +92899,13 @@
 	}
 
 /***/ },
-/* 152 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(39);
+	var content = __webpack_require__(40);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92782,13 +92925,39 @@
 	}
 
 /***/ },
-/* 153 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(40);
+	var content = __webpack_require__(41);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(4)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-951dd50e&scoped=true!./../../../node_modules/sass-loader/index.js?indentedSyntax!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./lang-button.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-951dd50e&scoped=true!./../../../node_modules/sass-loader/index.js?indentedSyntax!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./lang-button.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(42);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92808,13 +92977,13 @@
 	}
 
 /***/ },
-/* 154 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(41);
+	var content = __webpack_require__(43);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(4)(content, {});
@@ -92834,7 +93003,7 @@
 	}
 
 /***/ },
-/* 155 */
+/* 160 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -92842,7 +93011,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 156 */
+/* 161 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {

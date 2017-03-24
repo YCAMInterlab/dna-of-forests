@@ -21,7 +21,7 @@
     a(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank") Creative Commons License CC BY-SA 4.0
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     //- 日本語なら画像、英語ならテキストでラベルを表示
-    imgr.label(v-bind:alt="item.genus.ja" v-bind:src="'panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
+    imgr.label(v-bind:alt="item.genus.ja" v-bind:src="'panorama/marker-text/sample-ja/'+filename(item.genus.en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.genus.en }}
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")

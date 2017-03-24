@@ -142,11 +142,15 @@ table
       display: none
 
 [data-lang='en']
-  table
+  table#samples
     tr
       th,td
         &:last-child
           width: 100px
+  table#knowledges
+    tr
+      td.description
+        color: #979799
 
 </style>
 

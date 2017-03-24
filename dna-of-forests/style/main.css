@@ -120,6 +120,9 @@ body {
   color: #fff;
   background-color: #000; }
 
+html[lang=en] body {
+  font-family: "Roboto"; }
+
 a {
   cursor: pointer;
   transition-duration: 0.2s; }

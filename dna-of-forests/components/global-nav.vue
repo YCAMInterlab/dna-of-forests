@@ -13,7 +13,8 @@ nav
   router-link.about(to='/about')
     div
       span ABOUT
-  <sound-button>
+  <lang-button />
+  <sound-button />
 
 </template>
 
@@ -51,29 +52,38 @@ nav
 
     &.top
       >div
-        background-image: url(/dna-of-forests/img/gnav/top.png)
+        background-image: url(/dna-of-forests/img/gnav/top@2x.png)
+        background-size: 21px 32px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/img/gnav/top-active.png)
+          background-image: url(/dna-of-forests/img/gnav/top-active@2x.png)
     &.panorama
       >div
-        background-image: url(/dna-of-forests/img/gnav/panorama.png)
+        background-image: url(/dna-of-forests/img/gnav/panorama@2x.png)
+        background-size: 20px 34px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/img/gnav/panorama-active.png)
+          background-image: url(/dna-of-forests/img/gnav/panorama-active@2x.png)
     &.list
       >div
-        background-image: url(/dna-of-forests/img/gnav/list.png)
+        background-image: url(/dna-of-forests/img/gnav/list@2x.png)
+        background-size: 20px 27px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/img/gnav/list-active.png)
+          background-image: url(/dna-of-forests/img/gnav/list-active@2x.png)
     &.about
       >div
-        background-image: url(/dna-of-forests/img/gnav/about.png)
+        background-image: url(/dna-of-forests/img/gnav/about@2x.png)
+        background-size: 34px 34px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/img/gnav/about-active.png)
+          background-image: url(/dna-of-forests/img/gnav/about-active@2x.png)
 
+    // lang
+    &:nth-last-child(2)
+      position: absolute
+      bottom: 81px
+      height: 40px
     // sound
     &:last-child
       position: absolute
@@ -106,6 +116,7 @@ import Vue from 'vue';
 
 // 登録
 Vue.component('sound-button', require('./sound-button.vue'));
+Vue.component('lang-button', require('./lang-button.vue'));
 
 export default Vue.extend({
   methods: {
