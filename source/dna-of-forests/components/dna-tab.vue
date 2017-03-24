@@ -79,7 +79,12 @@ import Vue from 'vue';
 Vue.component('dna-barcode', require('./dna-barcode.vue'));
 
 export default Vue.extend({
-  props: ['text', 'current'],
+  props: ['text'],
+  data: function(){
+    return {
+      current: 'barcode'
+    };
+  },
   methods: {
 
     colorize(value) {
