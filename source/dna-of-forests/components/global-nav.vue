@@ -82,7 +82,7 @@ nav
     // lang
     &:nth-last-child(2)
       position: absolute
-      bottom: 81px
+      bottom: 80px
       height: 40px
     // sound
     &:last-child

@@ -1,25 +1,30 @@
 <template lang="pug">
 
 a
+  div
 
 </template>
 
 <style lang="sass?indentedSyntax" scoped>
 
 a
-  display: block
-  background-position: center
-  background-repeat: no-repeat
-  transition-duration: 0.2s
-  opacity: 0.5
+  >div
+    height: 100%
+    background-position: center
+    background-repeat: no-repeat
+    transition-duration: 0.2s
+    opacity: 0.5
   &:hover
-    opacity: 0.9
+    >div
+      opacity: 0.9
   &.en
-    background-image: url(/dna-of-forests/img/gnav/language-en@2x.png)
-    background-size: 41px 8px
+    >div
+      background-image: url(/dna-of-forests/img/gnav/language-en@2x.png)
+      background-size: 41px 8px
   &.ja
-    background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png)
-    background-size: 47px 8px
+    >div
+      background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png)
+      background-size: 47px 8px
 
 </style>
 
