@@ -10,15 +10,15 @@ import Vue from 'vue';
 
 export default Vue.extend({
 
-  props: ['dna','width_limit','height'],
+  props: ['dna','max_width','height'],
 
   mounted: function() {
-    this.renderBarcode()
+    this.renderBarcode();
   },
 
   watch: {
     dna: function (newVal) {
-      this.renderBarcode()
+      this.renderBarcode();
     }
   },
 
@@ -38,26 +38,26 @@ export default Vue.extend({
       else if (canvas.getContext) {
 
         var w = 2,
-            h = this.height || 10,
-            line_margin = 15, // 行間
-            str_arr = null;
+          h = this.height || 10,
+          line_margin = 15, // 行間
+          str_arr = null;
 
         // TODO: グローバルに定義
         var colors = {
-          'A': "rgb(255,  51, 165)", // R: #ff33a5
-          'T': "rgb( 51, 255, 109)", // G: #33ff6d
-          'G': "rgb( 51, 126, 255)", // B: #337eff
-          'C': "rgb(245, 255, 138)", // Y: #f5ff8a
-          'N': "rgb(255, 255, 255)", // W: #ffffff
-        }
+          'A': 'rgb(255,  51, 165)', // R: #ff33a5
+          'T': 'rgb( 51, 255, 109)', // G: #33ff6d
+          'G': 'rgb( 51, 126, 255)', // B: #337eff
+          'C': 'rgb(245, 255, 138)', // Y: #f5ff8a
+          'N': 'rgb(255, 255, 255)', // W: #ffffff
+        };
 
-        if(this.width_limit){
+        if(this.max_width){
 
-          var str_len = Math.floor(this.width_limit / w);
+          var str_len = Math.floor(this.max_width / w);
           str_arr = this.chunkString(this.dna, str_len);
           var lines = str_arr.length;
           canvas.height = h*lines + line_margin*(lines-1);
-          canvas.width = this.width_limit;
+          canvas.width = this.max_width;
         }
         else{
           str_arr = [this.dna];
@@ -70,7 +70,7 @@ export default Vue.extend({
         for(var j = 0; j < str_arr.length; j++){
           var str = str_arr[j];
           var x = 0,
-              y = (h+line_margin)*j;
+            y = (h+line_margin)*j;
           for(var i = 0; i < str.length; i++){
 
             var c = str[i];

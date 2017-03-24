@@ -124,6 +124,24 @@ a {
   cursor: pointer;
   transition-duration: 0.2s; }
 
+a.border {
+  text-decoration: none;
+  color: #fff;
+  border: none;
+  background: linear-gradient(to left, #808080 0%, #808080 25%, transparent 25%, transparent 100%);
+  background-repeat: repeat-x;
+  background-size: 4px 1px;
+  background-position: 1px bottom;
+  display: inline;
+  padding-bottom: 0.5em; }
+  a.border:hover {
+    opacity: 1;
+    border: none;
+    background: linear-gradient(to left, #fff 0%, #fff 25%, transparent 25%, transparent 100%);
+    background-repeat: repeat-x;
+    background-size: 4px 1px;
+    background-position: 1px bottom; }
+
 #app {
   position: relative;
   height: 100%;
@@ -144,6 +162,19 @@ body.facebook #content {
   position: fixed;
   top: 0; }
 
+@media (max-width: 900px) {
+  a.border {
+    border: none;
+    background: linear-gradient(to left, #ccc 0%, #ccc 25%, transparent 25%, transparent 100%);
+    background-repeat: repeat-x;
+    background-size: 8px 2px;
+    background-position: 2px bottom; }
+    a.border:hover {
+      border: none;
+      background: linear-gradient(to left, #fff 0%, #fff 25%, transparent 25%, transparent 100%);
+      background-repeat: repeat-x;
+      background-size: 8px 2px;
+      background-position: 2px bottom; } }
 @media (max-width: 660px) {
   #content {
     width: 100%;

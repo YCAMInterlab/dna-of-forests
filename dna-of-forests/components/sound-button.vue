@@ -4,7 +4,7 @@ a(v-on:click="click")
   div
     span SOUND
   audio(loop)
-    source(src='./sound/forest.mp3' type='audio/mp3')
+    source(src='/dna-of-forests/sound/forest.mp3' type='audio/mp3')
 
 </template>
 
@@ -46,7 +46,26 @@ export default Vue.extend({
     this.sound = this.$el.querySelector('audio');
     this.sound.volume = 0.3;
 
+    if(md.mobile()){
+      // モバイルのときだけ、ウィンドウが背面にいくとサウンド停止（戻ってくると復帰）
+      window.addEventListener('blur', ()=> {
+        if(!this.sound.paused){
+          this.pauseByWindowBlur = true;
+          this.toggleSound(false);
+        }
+        else{
+          this.pauseByWindowBlur = false;
+        }
+      }, false);
+      window.addEventListener('focus', ()=> {
+        if(this.pauseByWindowBlur){
+          this.toggleSound(true);
+        }
+      }, false);
+    }
+
     this.toggleSound(!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0));
+
   },
 
   methods: {
@@ -65,6 +84,11 @@ export default Vue.extend({
         this.$el.className = 'off';
       }
     }
+  },
+  data: function(){
+    return {
+      pauseByWindowBlur: false
+    };
   }
 });
 

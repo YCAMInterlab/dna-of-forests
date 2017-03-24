@@ -4,15 +4,15 @@
   header
     a.barcode(v-on:click="switchTab('barcode')" v-bind:class="{ current: current==='barcode' }")
       span
-        img(alt='サンプル写真' src="/dna-of-forests/img/detail-drawer/icon-barcode.png" srcset="/dna-of-forests/img/detail-drawer/icon-barcode@2x.png 2x")
-        | バーコード
+        imgr(v-bind:alt="$t('dna_tab.barcode')" src="detail-drawer/icon-barcode.png")
+        | {{ $t('dna_tab.barcode') }}
     a.text(v-on:click="switchTab('text')" v-bind:class="{ current: current==='text' }")
       span
-        img(alt='サンプル写真' src="/dna-of-forests/img/detail-drawer/icon-text.png" srcset="/dna-of-forests/img/detail-drawer/icon-text@2x.png 2x")
-        | テキスト
+        imgr(v-bind:alt="$t('dna_tab.text')" src="detail-drawer/icon-text.png")
+        | {{ $t('dna_tab.text') }}
   div.contents
     div.barcode(v-bind:class="{ current: current=='barcode' }")
-      <dna-barcode v-bind:dna="this.text" v-bind:width_limit="403">
+      <dna-barcode v-bind:dna="this.text" v-bind:max_width="403">
     div.text(v-bind:class="{ current: current=='text' }")
       //- p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
       p.dna_text(v-html="colorize(text)")
@@ -79,21 +79,19 @@ import Vue from 'vue';
 Vue.component('dna-barcode', require('./dna-barcode.vue'));
 
 export default Vue.extend({
-
   props: [
     'text',
     'current'
   ],
-
   methods: {
 
     colorize(value) {
       // TODO 色情報はどこか一箇所にまとめる
       return value
-        .replace(/A/g, "<span style=\"color: #ff33a5;\">A</span>")
-        .replace(/T/g, "<span style=\"color: #33ff6d;\">T</span>")
-        .replace(/G/g, "<span style=\"color: #337eff;\">G</span>")
-        .replace(/C/g, "<span style=\"color: #f5ff8a;\">C</span>");
+        .replace(/A/g, '<span style="color: #ff33a5;">A</span>')
+        .replace(/T/g, '<span style="color: #33ff6d;">T</span>')
+        .replace(/G/g, '<span style="color: #337eff;">G</span>')
+        .replace(/C/g, '<span style="color: #f5ff8a;">C</span>');
     },
 
     switchTab(val) {

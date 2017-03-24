@@ -5,13 +5,13 @@
     <instruction-modal v-if="!$root.isAlreadyDragged"/>
   </transition>
   <transition name="fade">
-    <top-modal v-if="$route.path=='/'"/>
+    <entrance-modal v-if="$route.path=='/'"/>
   </transition>
   a.ycam(href="http://www.ycam.jp/" target="_blank")
-    img(src="/dna-of-forests/img/panorama/ycam-logo.png" srcset="/dna-of-forests/img/panorama/ycam-logo@2x.png 2x")
+    imgr(src="panorama/ycam-logo.png")
   p.copyright
     //- <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; margin-bottom: 5px;"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>
-    a(href="http://special.ycam.jp/dna-of-forests/") DNA of Forests
+    a(href="http://special.ycam.jp/dna-of-forests/") Field Guide “DNA of Forests”
     br
     | by
     a(href="http://www.ycam.jp/" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
@@ -20,10 +20,14 @@
     br
     a(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank") Creative Commons License CC BY-SA 4.0
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
-    img.label(v-bind:alt="item.genus_ja" v-bind:src="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/sample-ja/'+filename(item.genus_en)+'@2x.png 2x'")
+    //- 日本語なら画像、英語ならテキストでラベルを表示
+    imgr.label(v-bind:alt="item.genus.ja" v-bind:src="'panorama/marker-text/sample-ja/'+filename(item.genus_en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
+    span.label(v-else) {{ item.genus.en }}
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text">
   .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
-    img.label(v-bind:src="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'.png'" v-bind:srcset="'/dna-of-forests/img/panorama/marker-text/knowledge/'+(index+1)+'@2x.png 2x'")
+    //- 日本語なら画像、英語ならテキストでラベルを表示
+    imgr.label(v-bind:src="'panorama/marker-text/knowledge/'+(index+1)+'.png'" v-if="$root.$i18n.locale === 'ja'")
+    span.label(v-else) {{ item.title.en }}
 
 </template>
 
@@ -108,7 +112,6 @@
   right: 22px
   z-index: 11
   user-select: none
-  pointer-events: none
   &:hover
     opacity: 0.7
 
@@ -151,6 +154,14 @@
     user-select: none
     pointer-events: none
   img.label
+    margin-left: 5px
+
+  span.label
+    font-family: 'Roboto'
+    font-weight:
+    color: #fcff00
+    font-size: 11px
+    letter-spacing: 0.025em
     margin-left: 5px
 
   &:hover
@@ -217,7 +228,7 @@ import THREELib from 'three-js';
 import Cookies from 'js-cookie';
 import _ from 'lodash';
 
-var THREE = THREELib(["Projector"]);
+var THREE = THREELib(['Projector']);
 
 // 表示の切り替え
 const visibleAxisHelper = false;
@@ -226,9 +237,9 @@ const visibleGrid = false;
 
 export default Vue.extend({
   components: {
-    'dna-barcode-bg':    require('./dna-barcode-bg.vue'),
-    'top-modal':         require('./top-modal.vue'),
-    'instruction-modal': require('./instruction-modal.vue'),
+    'dna-barcode-bg':    require('../dna-barcode-bg.vue'),
+    'entrance-modal':    require('../modal/entrance-modal.vue'),
+    'instruction-modal': require('../modal/instruction-modal.vue'),
   },
   watch: {
     '$route': 'resetAutoScroll'
@@ -285,16 +296,17 @@ export default Vue.extend({
     // マーカー
 
     // 並び順に沿って、URLに現出する"alias"を設定
+
     for(var i = 0; i<this.samples.length; i++){
       this.samples[i]['alias'] = 's-'+(i+1);
     }
-    for(var i = 0; i<this.knowledges.length; i++){
+    for(i = 0; i<this.knowledges.length; i++){
       this.knowledges[i]['alias'] = 'k-'+(i+1);
     }
     var marker_all = this.samples.concat(this.knowledges);
     // 距離でソートして、重なり順序がおかしくならないように
     marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
-    for(var i = 0; i<marker_all.length; i++){
+    for(i = 0; i<marker_all.length; i++){
       var data = marker_all[i];
       this.create_marker(data);
     }
@@ -482,9 +494,9 @@ export default Vue.extend({
       return new THREE.Vector3(x, y, z);
     },
 
-    getTwoDPosition(vector) {
+    getTwoDPosition(_vector) {
 
-      var vector = vector.clone();
+      var vector = _vector.clone();
       var widthHalf = 0.5*this.renderer.context.canvas.width;
       var heightHalf = 0.5*this.renderer.context.canvas.height;
 
@@ -506,23 +518,23 @@ export default Vue.extend({
     },
 
     // マーカー
-    create_marker(data, key){
-      var key = data.alias;
+    create_marker(_data, _key){
+      var key = _data.alias;
       var type = (key.indexOf('s-')==0) ? 'sample' : 'knowledge';
-      var latitude = data.marker_position.latitude;
-      var longtitude = data.marker_position.longtitude;
-      var radius = data.marker_position.radius;
+      var latitude = _data.marker_position.latitude;
+      var longtitude = _data.marker_position.longtitude;
+      var radius = _data.marker_position.radius;
       var geo = this.translateGeoCoords(latitude, longtitude, radius);
       var x = geo.x,
-          y = geo.y,
-          z = geo.z;
+        y = geo.y,
+        z = geo.z;
 
       // 3D marker -----------
       if(visible3dMaker){
         // 15cmくらい
         var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
         // geometry.scale( - 1, 1, 1 );
-        var color = (data.id && data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
+        var color = (_data.id && _data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
         var material = new THREE.MeshLambertMaterial({
           color: color
         });
@@ -638,7 +650,7 @@ export default Vue.extend({
   // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
     // autoScrollを追加する
-    var _data = _.cloneDeep(require('../data.json'));
+    var _data = _.cloneDeep(require('../../script/markers.json'));
     _data['autoScroll'] = false;
     return _data;
   }

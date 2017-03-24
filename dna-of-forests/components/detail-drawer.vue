@@ -3,36 +3,36 @@
 .drawer
   header
     h2
-      img(v-if="type=='sample'" alt='採取サンプルのデータ' src='/dna-of-forests/img/detail-drawer/title-sample.png' srcset='/dna-of-forests/img/detail-drawer/title-sample@2x.png 2x')
-      img(v-if="type=='knowledge'" alt='森の知識' src='/dna-of-forests/img/detail-drawer/title-chisiki.png' srcset='/dna-of-forests/img/detail-drawer/title-chisiki@2x.png 2x')
+      imgr(:alt="$t('detail_drawer.sample.title')" src='detail-drawer/title-sample.png' locale v-if="type=='sample'")
+      imgr(:alt="$t('detail_drawer.tips.title')" src='detail-drawer/title-tips.png' locale v-if="type=='knowledge'")
     router-link.close_btn(to='./')
-      img(alt='Close' src='/dna-of-forests/img/detail-drawer/close-btn.png' srcset='/dna-of-forests/img/detail-drawer/close-btn@2x.png 2x')
+      imgr(alt='Close' src='detail-drawer/close-btn.png')
   article
     template(v-if="type=='sample'")
 
       section.dna
         h3
-          img(alt='DNA解析による種の同定' src='/dna-of-forests/img/detail-drawer/title-dna.png' srcset='/dna-of-forests/img/detail-drawer/title-dna@2x.png 2x')
-        h4 1. 採取サンプルの写真
+          imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale)
+        h4 1. {{ $t('detail_drawer.sample.article.dna.photo_of_the_sample') }}
         .image_wrapper
-          img(alt='サンプル写真' v-bind:src="'/dna-of-forests/img/sample/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/sample/'+id+'@2x.jpg 2x'")
-        h4 2. 同定に用いたDNA配列
+          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" v-bind:src="'sample/'+id+'.jpg'")
+        h4 2. {{ $t('detail_drawer.sample.article.dna.dna_sequence_to_identify') }}
         div.dna_sequence(v-for="item in dna_sequences")
-          p DNA領域：{{ item.region }}
-          <dna-tab v-bind:text="item.text" v-bind:current="'barcode'"></dna-tab>
-        h4 3. DNA解析による同定の結果
-        div.result
-          small {{ genus_en }}
-          | {{ genus_ja }}
+          p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
+          <dna-tab v-bind:text="item.text" v-bind:current="'barcode'">
+        h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
+        div.result(v-if="$root.$i18n.locale === 'ja'")
+          small {{ genus.en }}
+          | {{ genus.ja }}
+        div.result.expand(v-else)
+          | {{ genus.en }}
         div.description
-          h4 解析方法について
-          p
-            | DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、
-            | ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。
+          h4 {{ $t('detail_drawer.sample.article.dna.method.title') }}
+          p {{ $t('detail_drawer.sample.article.dna.method.body') }}
 
       section.microscope(v-if="microscope")
         h3
-          img(alt='スマホ顕微鏡による観察記録' src='/dna-of-forests/img/detail-drawer/title-sp_microscope.png' srcset='/dna-of-forests/img/detail-drawer/title-sp_microscope@2x.png 2x')
+          imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale)
         iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="microscope.memo")
           dl
@@ -40,18 +40,18 @@
 
       section.memo(v-if="memo")
         h3
-          img(alt='採取メモ' src='/dna-of-forests/img/detail-drawer/title-memo.png' srcset='/dna-of-forests/img/detail-drawer/title-memo@2x.png 2x')
+          imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale)
         .bg_line
           dl(v-for="(answer, question) in memo")
             dt {{ question }}
             dd(v-html="answer")
-          img(alt='手書きメモ' v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
+          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
 
     template(v-if="type=='knowledge'")
-      h3 {{ title }}
+      h3 {{ title[$root.$i18n.locale] }}
       .image_wrapper
-        img(alt='イメージ写真' v-bind:src="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'.jpg'" v-bind:srcset="'/dna-of-forests/img/detail-drawer/knowledge/'+id+'@2x.jpg 2x'")
-      p {{ description }}
+        imgr(:alt="title[$root.$i18n.locale]" v-bind:src="'detail-drawer/knowledge/'+id+'.jpg'")
+      p(v-html="description[$root.$i18n.locale]")
 
 
 </template>
@@ -112,6 +112,8 @@ p
   line-height: 32px
   letter-spacing: 0.075em
   margin-top: 25px
+  word-break: break-all
+  text-align: justify
 
 section
 
@@ -204,6 +206,8 @@ h4
     font-size: 11px
     display: block
     margin-bottom: 12px
+  &.expand
+    padding: 34px 0
 
 .description
   margin: 25px -25px -25px
@@ -288,8 +292,10 @@ export default Vue.extend({
     return {
       'type': null,
       'id': null,
-      'genus_ja': null,
-      'genus_en': null,
+      'genus': {
+        'ja': null,
+        'en': null
+      },
       'dna_sequences': null,
       'region': null,
       'collection_date': null,
@@ -299,19 +305,20 @@ export default Vue.extend({
       // knowledge
       'title': null,
       'description': null,
-    }
+    };
   },
 
   methods: {
     fetchData () {
+      var idx, _data;
       if(0<=this.$route.params.index.indexOf('s-')){
-        var idx = this.$route.params.index.replace('s-','') - 1;
-        var _data = this.$root.samples[idx];
+        idx = this.$route.params.index.replace('s-','') - 1;
+        _data = this.$root.samples[idx];
         // TODO: もっとシンプルに受け渡せないか
         this.type = 'sample';
         this.id = _data.id;
-        this.genus_ja = _data.genus_ja;
-        this.genus_en = _data.genus_en;
+        this.genus.ja = _data.genus.ja;
+        this.genus.en = _data.genus.en;
         this.dna_sequences = _data.dna_sequences;
         this.region = _data.region;
         this.collection_date = _data.collection_date;
@@ -322,15 +329,15 @@ export default Vue.extend({
         this.description = null;
       }
       else if(0<=this.$route.params.index.indexOf('k-')){
-        var idx = this.$route.params.index.replace('k-','') - 1;
-        var _data = this.$root.knowledges[idx];
+        idx = this.$route.params.index.replace('k-','') - 1;
+        _data = this.$root.knowledges[idx];
         // TODO: もっとシンプルに受け渡せないか
         this.type = 'knowledge';
         this.title = _data.title;
         this.description = _data.description;
         this.id = idx+1;
-        this.genus_ja = null;
-        this.genus_en = null;
+        this.genus.ja = null;
+        this.genus.en = null;
         this.dna_sequences = null;
         this.region = null;
         this.collection_date = null;
