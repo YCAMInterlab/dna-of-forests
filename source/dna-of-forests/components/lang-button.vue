@@ -1,6 +1,6 @@
 <template lang="pug">
 
-a(v-on:click="click")
+a
 
 </template>
 
@@ -31,12 +31,18 @@ export default Vue.extend({
 
   mounted: function() {
     this.$el.className = (this.$root.$i18n.locale === 'en') ? 'ja' : 'en';
+    this.changeRoute();
+  },
+
+  watch: {
+    // ルートの変更を監視
+    '$route': 'changeRoute'
   },
 
   methods: {
-    click(){
+    changeRoute(){
       var _root = (this.$root.$i18n.locale === 'en') ? '/dna-of-forests/' : '/dna-of-forests/en/';
-      location.href = _root+'#'+this.$route.path;
+      this.$el.href = _root+'#'+this.$route.path;
     }
   }
 });
