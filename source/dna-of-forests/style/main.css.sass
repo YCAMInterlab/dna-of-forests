@@ -15,14 +15,14 @@ $yu_gothic: '游ゴシック体', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro
 // Common
 
 @font-face
-  font-family: "Roboto"
-  src: url("Roboto-Medium.ttf")
+  font-family: 'Roboto'
+  src: url('Roboto-Medium.ttf')
   font-weight: normal
   font-style: normal
 
 @font-face
-  font-family: "Roboto"
-  src: url("Roboto-Bold.ttf")
+  font-family: 'Roboto'
+  src: url('Roboto-Bold.ttf')
   font-weight: bold
   font-style: normal
 
@@ -53,6 +53,10 @@ body
   line-height: 1em
   color: #fff
   background-color: #000
+
+html[lang=en]
+  body
+    font-family: 'Roboto'
 
 a
   cursor: pointer // これがないとiOSでクリックイベントが発生しない
