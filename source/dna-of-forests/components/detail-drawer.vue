@@ -22,10 +22,10 @@
           <dna-tab v-bind:text="item.text" v-bind:current="'barcode'">
         h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
         div.result(v-if="$root.$i18n.locale === 'ja'")
-          small {{ genus_en }}
-          | {{ genus_ja }}
+          small {{ genus.en }}
+          | {{ genus.ja }}
         div.result.expand(v-else)
-          | {{ genus_en }}
+          | {{ genus.en }}
         div.description
           h4 {{ $t('detail_drawer.sample.article.dna.method.title') }}
           p {{ $t('detail_drawer.sample.article.dna.method.body') }}
@@ -292,8 +292,10 @@ export default Vue.extend({
     return {
       'type': null,
       'id': null,
-      'genus_ja': null,
-      'genus_en': null,
+      'genus': {
+        'ja': null,
+        'en': null
+      },
       'dna_sequences': null,
       'region': null,
       'collection_date': null,
@@ -315,8 +317,8 @@ export default Vue.extend({
         // TODO: もっとシンプルに受け渡せないか
         this.type = 'sample';
         this.id = _data.id;
-        this.genus_ja = _data.genus_ja;
-        this.genus_en = _data.genus_en;
+        this.genus.ja = _data.genus.ja;
+        this.genus.en = _data.genus.en;
         this.dna_sequences = _data.dna_sequences;
         this.region = _data.region;
         this.collection_date = _data.collection_date;
@@ -334,8 +336,8 @@ export default Vue.extend({
         this.title = _data.title;
         this.description = _data.description;
         this.id = idx+1;
-        this.genus_ja = null;
-        this.genus_en = null;
+        this.genus.ja = null;
+        this.genus.en = null;
         this.dna_sequences = null;
         this.region = null;
         this.collection_date = null;

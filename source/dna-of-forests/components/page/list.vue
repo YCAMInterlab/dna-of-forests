@@ -15,10 +15,10 @@ section.list(:data-lang="$root.$i18n.locale")
         td.index {{ (index+1) | zero-pad }}
 
         td.result(v-if="$root.$i18n.locale === 'ja'")
-          | {{ item.genus_ja }}
-          span.genus_en ({{ item.genus_en }})
+          | {{ item.genus.ja }}
+          span.genus_en ({{ item.genus.en }})
         td.result(v-else)
-          | {{ item.genus_en }}
+          | {{ item.genus.en }}
 
         template(v-if="item.dna_sequences")
           template(v-if="item.dna_sequences.length==0")

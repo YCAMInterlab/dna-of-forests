@@ -2,8 +2,10 @@
   "samples": [
     {
       "id": "9-1-A",
-      "genus_ja": "クシノハゴケ",
-      "genus_en": "Ctenidium capillifolium",
+      "genus": {
+        "ja": "クシノハゴケ",
+        "en": "Ctenidium capillifolium"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -25,8 +27,10 @@
     },
     {
       "id": "9-1-B",
-      "genus_ja": "スゲ属",
-      "genus_en": "Carex",
+      "genus": {
+        "ja": "スゲ属",
+        "en": "Carex"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -48,8 +52,10 @@
     },
     {
       "id": "9-1-C",
-      "genus_ja": "ホウライタケ属",
-      "genus_en": "Marasmius",
+      "genus": {
+        "ja": "ホウライタケ属",
+        "en": "Marasmius"
+      },
       "dna_sequences": [
         {
           "region": "ITS1",
@@ -70,8 +76,10 @@
     },
     {
       "id": "9-1-D",
-      "genus_ja": "キイチゴ属",
-      "genus_en": "Rubus",
+      "genus": {
+        "ja": "キイチゴ属",
+        "en": "Rubus"
+      },
       "dna_sequences": [
         {
           "region": "matK",
@@ -97,8 +105,10 @@
     },
     {
       "id": "9-2-A",
-      "genus_ja": "ミヤマサナダゴケ",
-      "genus_en": "Plagiothecium nemorale",
+      "genus": {
+        "ja": "ミヤマサナダゴケ",
+        "en": "Plagiothecium nemorale"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -119,8 +129,10 @@
     },
     {
       "id": "9-2-B",
-      "genus_ja": "ツボゴケ",
-      "genus_en": "Plagiomnium cuspidatum",
+      "genus": {
+        "ja": "ツボゴケ",
+        "en": "Plagiomnium cuspidatum"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -142,8 +154,10 @@
     },
     {
       "id": "9-2-C",
-      "genus_ja": "ササクサ",
-      "genus_en": "Lophatherum gracile",
+      "genus": {
+        "ja": "ササクサ",
+        "en": "Lophatherum gracile"
+      },
       "dna_sequences": [
         {
           "region": "matK",
@@ -169,8 +183,10 @@
     },
     {
       "id": "9-2-D",
-      "genus_ja": "ヤマハッカ",
-      "genus_en": "Isodon inflexus",
+      "genus": {
+        "ja": "ヤマハッカ",
+        "en": "Isodon inflexus"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -192,8 +208,10 @@
     },
     {
       "id": "9-3-A",
-      "genus_ja": "カナワラビ属",
-      "genus_en": "Arachniodes",
+      "genus": {
+        "ja": "カナワラビ属",
+        "en": "Arachniodes"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -214,8 +232,10 @@
     },
     {
       "id": "9-3-B",
-      "genus_ja": "トウゲシバ",
-      "genus_en": "Huperzia serrata",
+      "genus": {
+        "ja": "トウゲシバ",
+        "en": "Huperzia serrata"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -237,8 +257,10 @@
     },
     {
       "id": "9-3-C",
-      "genus_ja": "ナンテン",
-      "genus_en": "Nandina domestica",
+      "genus": {
+        "ja": "ナンテン",
+        "en": "Nandina domestica"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -259,8 +281,10 @@
     },
     {
       "id": "9-3-D",
-      "genus_ja": "ハネヒツジゴケ",
-      "genus_en": "Brachythecium plumosum",
+      "genus": {
+        "ja": "ハネヒツジゴケ",
+        "en": "Brachythecium plumosum"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -282,8 +306,10 @@
     },
     {
       "id": "10-1-A",
-      "genus_ja": "カラムシ",
-      "genus_en": "Boehmeria nivea",
+      "genus": {
+        "ja": "カラムシ",
+        "en": "Boehmeria nivea"
+      },
       "dna_sequences": [
         {
           "region": "matK",
@@ -309,8 +335,10 @@
     },
     {
       "id": "10-1-B",
-      "genus_ja": "再解析中",
-      "genus_en": "Under re-analysis",
+      "genus": {
+        "ja": "再解析中",
+        "en": "Under re-analysis"
+      },
       "dna_sequences": null,
       "marker_position": { "latitude": 5.4, "longtitude": -46, "radius": 22 },
       "collection_date": "2016.10.10",
@@ -327,8 +355,10 @@
     },
     {
       "id": "10-1-C",
-      "genus_ja": "マメヅタ",
-      "genus_en": "Lemmaphyllum microphyllum",
+      "genus": {
+        "ja": "マメヅタ",
+        "en": "Lemmaphyllum microphyllum"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -351,8 +381,10 @@
     },
     {
       "id": "10-1-D",
-      "genus_ja": "カタヒバ",
-      "genus_en": "Selaginella involvens",
+      "genus": {
+        "ja": "カタヒバ",
+        "en": "Selaginella involvens"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -374,8 +406,10 @@
     },
     {
       "id": "10-2-A",
-      "genus_ja": "テイカカズラ属",
-      "genus_en": "Trachelospermum",
+      "genus": {
+        "ja": "テイカカズラ属",
+        "en": "Trachelospermum"
+      },
       "dna_sequences": [
         {
           "region": "matK",
@@ -400,8 +434,10 @@
     },
     {
       "id": "10-2-B",
-      "genus_ja": "テイカカズラ属",
-      "genus_en": "Trachelospermum",
+      "genus": {
+        "ja": "テイカカズラ属",
+        "en": "Trachelospermum"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -423,8 +459,10 @@
     },
     {
       "id": "10-2-C",
-      "genus_ja": "ヤマハッカ",
-      "genus_en": "Isodon inflexus",
+      "genus": {
+        "ja": "ヤマハッカ",
+        "en": "Isodon inflexus"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -446,8 +484,10 @@
     },
     {
       "id": "10-2-D",
-      "genus_ja": "テイカカズラ属",
-      "genus_en": "Trachelospermum",
+      "genus": {
+        "ja": "テイカカズラ属",
+        "en": "Trachelospermum"
+      },
       "dna_sequences": [
         {
           "region": "matK",
@@ -474,8 +514,10 @@
     },
     {
       "id": "10-3-A",
-      "genus_ja": "ツリミギボウシゴケ",
-      "genus_en": "Grimmia apiculata",
+      "genus": {
+        "ja": "ツリミギボウシゴケ",
+        "en": "Grimmia apiculata"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -497,8 +539,10 @@
     },
     {
       "id": "10-3-B",
-      "genus_ja": "再解析中",
-      "genus_en": "Under re-analysis",
+      "genus": {
+        "ja": "再解析中",
+        "en": "Under re-analysis"
+      },
       "dna_sequences": null,
       "marker_position": { "latitude": -0.5, "longtitude": -62.5, "radius": 18 },
       "collection_date": "2016.10.10",
@@ -515,8 +559,10 @@
     },
     {
       "id": "10-3-C",
-      "genus_ja": "再解析中",
-      "genus_en": "Under re-analysis",
+      "genus": {
+        "ja": "再解析中",
+        "en": "Under re-analysis"
+      },
       "dna_sequences": null,
       "marker_position": { "latitude": -13, "longtitude": 93, "radius": 4.6 },
       "collection_date": "2016.10.10",
@@ -533,8 +579,10 @@
     },
     {
       "id": "10-3-D",
-      "genus_ja": "テイカカズラ属",
-      "genus_en": "Trachelospermum",
+      "genus": {
+        "ja": "テイカカズラ属",
+        "en": "Trachelospermum"
+      },
       "dna_sequences": [
         {
           "region": "matK",
@@ -560,8 +608,10 @@
     },
     {
       "id": "cristina",
-      "genus_ja": "シワカラカサタケ属",
-      "genus_en": "Cystoderma sp.",
+      "genus": {
+        "ja": "シワカラカサタケ属",
+        "en": "Cystoderma sp."
+      },
       "dna_sequences": [
         {
           "region": "ITS1",
@@ -576,8 +626,10 @@
     },
     {
       "id": "ersin",
-      "genus_ja": "属種が未同定の菌",
-      "genus_en": "Uncultured fungus",
+      "genus": {
+        "ja": "属種が未同定の菌",
+        "en": "Uncultured fungus"
+      },
       "dna_sequences": [
         {
           "region": "ITS1",
@@ -592,8 +644,10 @@
     },
     {
       "id": "B-3",
-      "genus_ja": "ツバキ属",
-      "genus_en": "Camellia",
+      "genus": {
+        "ja": "ツバキ属",
+        "en": "Camellia"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -608,8 +662,10 @@
     },
     {
       "id": "B-4",
-      "genus_ja": "トウバナ",
-      "genus_en": "Clinopodium gracile",
+      "genus": {
+        "ja": "トウバナ",
+        "en": "Clinopodium gracile"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -624,8 +680,10 @@
     },
     {
       "id": "B-5",
-      "genus_ja": "オオシノブゴケ",
-      "genus_en": "Thuidium tamariscinum",
+      "genus": {
+        "ja": "オオシノブゴケ",
+        "en": "Thuidium tamariscinum"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -640,8 +698,10 @@
     },
     {
       "id": "B-6",
-      "genus_ja": "アオキ",
-      "genus_en": "Aucuba japonica",
+      "genus": {
+        "ja": "アオキ",
+        "en": "Aucuba japonica"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -656,8 +716,10 @@
     },
     {
       "id": "B-8",
-      "genus_ja": "サツマイナモリ属",
-      "genus_en": "Ophiorrhiza",
+      "genus": {
+        "ja": "サツマイナモリ属",
+        "en": "Ophiorrhiza"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -672,8 +734,10 @@
     },
     {
       "id": "B-9",
-      "genus_ja": "キイチゴ属",
-      "genus_en": "Rubus",
+      "genus": {
+        "ja": "キイチゴ属",
+        "en": "Rubus"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -688,8 +752,10 @@
     },
     {
       "id": "B-11",
-      "genus_ja": "オオイタチシダ",
-      "genus_en": "Dryopteris pacifica",
+      "genus": {
+        "ja": "オオイタチシダ",
+        "en": "Dryopteris pacifica"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -704,8 +770,10 @@
     },
     {
       "id": "B-12",
-      "genus_ja": "トウゲシバ",
-      "genus_en": "Huperzia serrata",
+      "genus": {
+        "ja": "トウゲシバ",
+        "en": "Huperzia serrata"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -720,8 +788,10 @@
     },
     {
       "id": "B-13",
-      "genus_ja": "スゲ属",
-      "genus_en": "Carex",
+      "genus": {
+        "ja": "スゲ属",
+        "en": "Carex"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -736,8 +806,10 @@
     },
     {
       "id": "B-14",
-      "genus_ja": "トウバナ",
-      "genus_en": "Clinopodium gracile",
+      "genus": {
+        "ja": "トウバナ",
+        "en": "Clinopodium gracile"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -752,8 +824,10 @@
     },
     {
       "id": "B-15",
-      "genus_ja": "ニレ科",
-      "genus_en": "Ulmaceae",
+      "genus": {
+        "ja": "ニレ科",
+        "en": "Ulmaceae"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -768,8 +842,10 @@
     },
     {
       "id": "B-16",
-      "genus_ja": "クサギ",
-      "genus_en": "Clerodendrum trichotomum",
+      "genus": {
+        "ja": "クサギ",
+        "en": "Clerodendrum trichotomum"
+      },
       "dna_sequences": [
         {
           "region": "matK",
@@ -788,8 +864,10 @@
     },
     {
       "id": "B-17",
-      "genus_ja": "スギ",
-      "genus_en": "Cryptomeria japonica",
+      "genus": {
+        "ja": "スギ",
+        "en": "Cryptomeria japonica"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -804,8 +882,10 @@
     },
     {
       "id": "B-18",
-      "genus_ja": "イヌガヤ属",
-      "genus_en": "Cephalotaxus",
+      "genus": {
+        "ja": "イヌガヤ属",
+        "en": "Cephalotaxus"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -820,8 +900,10 @@
     },
     {
       "id": "B-20",
-      "genus_ja": "シノブゴケ属",
-      "genus_en": "Thuidium",
+      "genus": {
+        "ja": "シノブゴケ属",
+        "en": "Thuidium"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -836,8 +918,10 @@
     },
     {
       "id": "B-23",
-      "genus_ja": "チヂミザサ",
-      "genus_en": "Oplismenus undulatifolius",
+      "genus": {
+        "ja": "チヂミザサ",
+        "en": "Oplismenus undulatifolius"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
@@ -852,8 +936,10 @@
     },
     {
       "id": "B-24",
-      "genus_ja": "タブノキ",
-      "genus_en": "Machilus",
+      "genus": {
+        "ja": "タブノキ",
+        "en": "Machilus"
+      },
       "dna_sequences": [
         {
           "region": "rbcL",
