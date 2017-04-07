@@ -21,7 +21,8 @@
     %meta{property: "og:description", content: data.description}
     %meta{property: "og:type", content: "website"}
     %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
-    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/share.png?#{chache_param}"}
+    - # TODO share-en.pngを用意しておく
+    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/share-#{data.lang}.png?#{chache_param}"}
     %meta{property: "fb:app_id", content: "205454639864260"}
 
     %meta{name: "twitter:site", content: '@ycam_jp'}
