@@ -314,7 +314,8 @@ export default Vue.extend({
 
     // 脚立を隠す円形を配置
     var geometry = new THREE.CircleGeometry( 0.6, 128 );
-    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/img/panorama/logo-cover@2x.png') });
+    console.log('/dna-of-forests/img/panorama/logo-cover-'+this.$i18n.locale+'@2x.png');
+    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/img/panorama/logo-cover-'+this.$i18n.locale+'@2x.png') });
     var circle = new THREE.Mesh( geometry, material );
 
 
