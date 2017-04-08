@@ -273,6 +273,7 @@ h4
 <script>
 
 import Vue from 'vue';
+import _ from 'lodash';
 
 // 登録
 Vue.component('dna-tab', require('./dna-tab.vue'));
@@ -289,23 +290,10 @@ export default Vue.extend({
   },
 
   data: function(){
-    return {
-      'type': null,
-      'id': null,
-      'genus': {
-        'ja': null,
-        'en': null
-      },
-      'dna_sequences': null,
-      'region': null,
-      'collection_date': null,
-      'microscope': null,
-      'memo': null,
-      'memofig_width': null,
-      // knowledge
-      'title': null,
-      'description': null,
-    };
+    var makers = require('../script/markers.json');
+    var _data = _.merge(_.cloneDeep(makers['knowledges'][0]), _.cloneDeep(makers['samples'][0]));
+    _data.type = null; // typeプロパティを追加
+    return _data;
   },
 
   methods: {
