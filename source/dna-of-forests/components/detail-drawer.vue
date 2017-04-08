@@ -320,7 +320,6 @@ export default Vue.extend({
         this.genus.ja = _data.genus.ja;
         this.genus.en = _data.genus.en;
         this.dna_sequences = _data.dna_sequences;
-        this.region = _data.region;
         this.collection_date = _data.collection_date;
         this.microscope = _data.microscope;
         this.memo = _data.memo;
@@ -339,7 +338,6 @@ export default Vue.extend({
         this.genus.ja = null;
         this.genus.en = null;
         this.dna_sequences = null;
-        this.region = null;
         this.collection_date = null;
         this.microscope = null;
         this.memo = null;
