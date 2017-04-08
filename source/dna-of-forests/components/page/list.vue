@@ -171,7 +171,6 @@ export default Vue.extend({
     'dna-barcode': require('../dna-barcode.vue')
   },
   data () {
-    // TODO: 直接ルートのComponentから受け渡せないか？
     return require('../../script/markers.json');
   },
   mounted: function() {
