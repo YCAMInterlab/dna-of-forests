@@ -647,7 +647,6 @@ export default Vue.extend({
     }
 
   },
-  // TODO: 直接ルートのComponentから受け渡せないか？
   data () {
     // autoScrollを追加する
     var _data = _.cloneDeep(require('../../script/markers.json'));
