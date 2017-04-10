@@ -301,8 +301,8 @@ export default Vue.extend({
   },
 
   methods: {
+    // 全valueをnullにする
     initWithNullValue(obj) {
-      // 全valueをnullにする
       for(var key in obj){
         if(obj.hasOwnProperty(key)){
           // 再帰条件
@@ -315,43 +315,38 @@ export default Vue.extend({
         }
       }
     },
+    // new_dataのもつプロパティを、old_dataのプロパティに代入する
+    initWithData(old_data, new_data) {
+      for(var key in new_data){
+        if(new_data.hasOwnProperty(key)){
+          // 再帰条件
+          if(key === 'genus'){
+            this.initWithData(old_data[key], new_data[key]);
+          }
+          else {
+            old_data[key] = new_data[key];
+          }
+        }
+      }
+    },
     fetchData() {
       var idx, _data;
       if(0<=this.$route.params.index.indexOf('s-')){
         idx = this.$route.params.index.replace('s-','') - 1;
         _data = this.$root.samples[idx];
-        // TODO: もっとシンプルに受け渡せないか
-        this.type = 'sample';
-        this.id = _data.id;
-        this.genus.ja = _data.genus.ja;
-        this.genus.en = _data.genus.en;
-        this.dna_sequences = _data.dna_sequences;
-        this.collection_date = _data.collection_date;
-        this.microscope = _data.microscope;
-        this.memo = _data.memo;
-        this.memofig_width = _data.memofig_width;
-        this.title = null;
-        this.description = null;
+        _data.type = 'sample';
       }
       else if(0<=this.$route.params.index.indexOf('k-')){
         idx = this.$route.params.index.replace('k-','') - 1;
         _data = this.$root.knowledges[idx];
-        // TODO: もっとシンプルに受け渡せないか
-        this.type = 'knowledge';
-        this.title = _data.title;
-        this.description = _data.description;
-        this.id = idx+1;
-        this.genus.ja = null;
-        this.genus.en = null;
-        this.dna_sequences = null;
-        this.collection_date = null;
-        this.microscope = null;
-        this.memo = null;
-        this.memofig_width = null;
+        _data.id = idx+1;
+        _data.type = 'knowledge';
       }
       else{
         console.error('Wrong index format...');
       }
+
+      this.initWithData(this, _data);
     }
   }
 });
