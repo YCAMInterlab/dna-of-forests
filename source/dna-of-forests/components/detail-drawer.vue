@@ -19,7 +19,7 @@
         h4 2. {{ $t('detail_drawer.sample.article.dna.dna_sequence_to_identify') }}
         div.dna_sequence(v-for="item in dna_sequences")
           p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
-          <dna-tab v-bind:text="item.text">
+          <dna-tab v-bind:text="item.text" />
         h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
         div.result(v-if="$root.$i18n.locale === 'ja'")
           small {{ genus.en }}
@@ -297,7 +297,7 @@ export default Vue.extend({
   },
 
   methods: {
-    fetchData () {
+    fetchData() {
       var idx, _data;
       if(0<=this.$route.params.index.indexOf('s-')){
         idx = this.$route.params.index.replace('s-','') - 1;

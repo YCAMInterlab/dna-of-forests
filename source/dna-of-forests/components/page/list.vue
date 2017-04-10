@@ -26,14 +26,14 @@ section.list(:data-lang="$root.$i18n.locale")
           template(v-if="item.dna_sequences.length==1")
             td.dna(colspan='2')
               span.region {{ item.dna_sequences[0].region }}
-              <dna-barcode :dna="item.dna_sequences[0].text">
+              <dna-barcode :dna="item.dna_sequences[0].text" />
           template(v-if="item.dna_sequences.length==2")
             td.dna1
               span.region {{ item.dna_sequences[0].region }}
-              <dna-barcode :dna="item.dna_sequences[0].text">
+              <dna-barcode :dna="item.dna_sequences[0].text" />
             td.dna2
               span.region {{ item.dna_sequences[1].region }}
-              <dna-barcode :dna="item.dna_sequences[1].text">
+              <dna-barcode :dna="item.dna_sequences[1].text" />
         template(v-else)
           td.dna(colspan='2')
         td.collection_date {{ item.collection_date }}
