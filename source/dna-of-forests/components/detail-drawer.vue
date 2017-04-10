@@ -293,10 +293,28 @@ export default Vue.extend({
     var makers = require('../script/markers.json');
     var _data = _.merge(_.cloneDeep(makers['knowledges'][0]), _.cloneDeep(makers['samples'][0]));
     _data.type = null; // typeプロパティを追加
+
+    // initialize
+    this.initWithNullValue(_data);
+
     return _data;
   },
 
   methods: {
+    initWithNullValue(obj) {
+      // 全valueをnullにする
+      for(var key in obj){
+        if(obj.hasOwnProperty(key)){
+          // 再帰条件
+          if(key === 'genus'){
+            this.initWithNullValue(obj[key]);
+          }
+          else {
+            obj[key] = null;
+          }
+        }
+      }
+    },
     fetchData() {
       var idx, _data;
       if(0<=this.$route.params.index.indexOf('s-')){
