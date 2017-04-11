@@ -3,8 +3,8 @@
 .wrapper
   .containter
     .modal
-      imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png')
-      imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png')
+      imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
+      imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
       router-link(to='/panorama') ENTER
 
 </template>
@@ -54,8 +54,15 @@ img
     letter-spacing: 0.15em
     margin-top: 28px
     transition-duration: 0.2s
+    text-align: center
     &:hover
       border-color: #aaa
 
+html[lang=en]
+  .modal
+    text-align: left
+    .logo
+      margin-top: 44px
+      margin-bottom: 69px
 
 </style>

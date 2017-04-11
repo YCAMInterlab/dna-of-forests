@@ -13,8 +13,8 @@ nav
   router-link.about(to='/about')
     div
       span ABOUT
-  <lang-button />
   <sound-button />
+  <lang-button class="lang" />
 
 </template>
 
@@ -33,7 +33,7 @@ nav
     background-color: #0d0d0d
     cursor: pointer
     &:not(:last-child)
-      margin-bottom: 1px
+      margin-bottom: 2px
 
 
     >div
@@ -79,14 +79,15 @@ nav
         >div
           background-image: url(/dna-of-forests/img/gnav/about-active@2x.png)
 
-    // lang
+    // sound
     &:nth-last-child(2)
       position: absolute
-      bottom: 81px
-      height: 40px
-    // sound
-    &:last-child
+      bottom: 30px
+      margin-bottom: 2px
+
+  >.lang
       position: absolute
+      height: 30px
       bottom: 0
 
 @media (max-width: 660px)
@@ -101,11 +102,18 @@ nav
       width: 100px
       height: 100px
       float: left
+      margin-right: 2px
       &:not(:last-child)
         margin-bottom: 0
       // sound
-      &:last-child
-        right: 0
+      &:nth-last-child(2)
+        right: 50px
+        bottom: 0
+        margin-bottom: 0
+        margin-right: 2px
+    >.lang
+      right: 0
+      height: 100%
 
 
 </style>

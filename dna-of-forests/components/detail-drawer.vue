@@ -19,7 +19,7 @@
         h4 2. {{ $t('detail_drawer.sample.article.dna.dna_sequence_to_identify') }}
         div.dna_sequence(v-for="item in dna_sequences")
           p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
-          <dna-tab v-bind:text="item.text" v-bind:current="'barcode'">
+          <dna-tab v-bind:text="item.text" />
         h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
         div.result(v-if="$root.$i18n.locale === 'ja'")
           small {{ genus.en }}
@@ -273,6 +273,7 @@ h4
 <script>
 
 import Vue from 'vue';
+import _ from 'lodash';
 
 // 登録
 Vue.component('dna-tab', require('./dna-tab.vue'));
@@ -289,65 +290,68 @@ export default Vue.extend({
   },
 
   data: function(){
-    return {
-      'type': null,
-      'id': null,
-      'genus': {
-        'ja': null,
-        'en': null
-      },
-      'dna_sequences': null,
-      'region': null,
-      'collection_date': null,
-      'microscope': null,
-      'memo': null,
-      'memofig_width': null,
-      // knowledge
-      'title': null,
-      'description': null,
-    };
+    var makers = require('../script/markers.json');
+    var _data = _.merge(_.cloneDeep(makers['knowledges'][0]), _.cloneDeep(makers['samples'][0]));
+    _data.type = null; // typeプロパティを追加
+
+    // initialize
+    _data = this.initWithNullValue(_data);
+
+    return _data;
   },
 
   methods: {
-    fetchData () {
+    // 全valueをnullにする
+    initWithNullValue(obj) {
+      for(var key in obj){
+        if(obj.hasOwnProperty(key)){
+          // 再帰条件
+          if(key === 'genus'){
+            obj[key] = this.initWithNullValue(obj[key]);
+          }
+          else {
+            obj[key] = null;
+          }
+        }
+      }
+      return obj;
+    },
+    // new_dataのもつプロパティを、old_dataのプロパティに代入する
+    initWithData(old_data, new_data) {
+      for(var key in new_data){
+        if(new_data.hasOwnProperty(key)){
+          // 再帰条件
+          if(key === 'genus'){
+            this.initWithData(old_data[key], new_data[key]);
+          }
+          else {
+            old_data[key] = new_data[key];
+          }
+        }
+      }
+    },
+    fetchData() {
       var idx, _data;
       if(0<=this.$route.params.index.indexOf('s-')){
         idx = this.$route.params.index.replace('s-','') - 1;
         _data = this.$root.samples[idx];
-        // TODO: もっとシンプルに受け渡せないか
-        this.type = 'sample';
-        this.id = _data.id;
-        this.genus.ja = _data.genus.ja;
-        this.genus.en = _data.genus.en;
-        this.dna_sequences = _data.dna_sequences;
-        this.region = _data.region;
-        this.collection_date = _data.collection_date;
-        this.microscope = _data.microscope;
-        this.memo = _data.memo;
-        this.memofig_width = _data.memofig_width;
-        this.title = null;
-        this.description = null;
+        _data.type = 'sample';
       }
       else if(0<=this.$route.params.index.indexOf('k-')){
         idx = this.$route.params.index.replace('k-','') - 1;
         _data = this.$root.knowledges[idx];
-        // TODO: もっとシンプルに受け渡せないか
-        this.type = 'knowledge';
-        this.title = _data.title;
-        this.description = _data.description;
-        this.id = idx+1;
-        this.genus.ja = null;
-        this.genus.en = null;
-        this.dna_sequences = null;
-        this.region = null;
-        this.collection_date = null;
-        this.microscope = null;
-        this.memo = null;
-        this.memofig_width = null;
+        _data.id = idx+1;
+        _data.type = 'knowledge';
       }
       else{
         console.error('Wrong index format...');
       }
+
+      // 現在のdataをnullで初期化しinitialized_dataに格納
+      var initialized_data = this.initWithNullValue(_.cloneDeep(this.$data));
+      // initialized_dataに_dataを上書きしてdataに格納
+      _data = _.defaultsDeep(_data, initialized_data);
+      this.initWithData(this, _data);
     }
   }
 });

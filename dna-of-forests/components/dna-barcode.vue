@@ -7,6 +7,7 @@ canvas
 <script>
 
 import Vue from 'vue';
+import dna_colors from '../script/dna_colors.js';
 
 export default Vue.extend({
 
@@ -42,15 +43,6 @@ export default Vue.extend({
           line_margin = 15, // 行間
           str_arr = null;
 
-        // TODO: グローバルに定義
-        var colors = {
-          'A': 'rgb(255,  51, 165)', // R: #ff33a5
-          'T': 'rgb( 51, 255, 109)', // G: #33ff6d
-          'G': 'rgb( 51, 126, 255)', // B: #337eff
-          'C': 'rgb(245, 255, 138)', // Y: #f5ff8a
-          'N': 'rgb(255, 255, 255)', // W: #ffffff
-        };
-
         if(this.max_width){
 
           var str_len = Math.floor(this.max_width / w);
@@ -74,11 +66,11 @@ export default Vue.extend({
           for(var i = 0; i < str.length; i++){
 
             var c = str[i];
-            if(colors[c]!==null){
-              context.fillStyle = colors[c];
+            if(dna_colors[c]!==null){
+              context.fillStyle = dna_colors[c].rgb;
             }
             else{
-              context.fillStyle = colors['N'];
+              context.fillStyle = dna_colors['N'].rgb;
             }
 
             x = (w*i);

@@ -12,7 +12,7 @@
         | {{ $t('dna_tab.text') }}
   div.contents
     div.barcode(v-bind:class="{ current: current=='barcode' }")
-      <dna-barcode v-bind:dna="this.text" v-bind:max_width="403">
+      <dna-barcode v-bind:dna="this.text" v-bind:max_width="403" />
     div.text(v-bind:class="{ current: current=='text' }")
       //- p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
       p.dna_text(v-html="colorize(text)")
@@ -74,24 +74,26 @@ header
 <script>
 
 import Vue from 'vue';
+import dna_colors from '../script/dna_colors.js';
 
 // 登録
 Vue.component('dna-barcode', require('./dna-barcode.vue'));
 
 export default Vue.extend({
-  props: [
-    'text',
-    'current'
-  ],
+  props: ['text'],
+  data: function(){
+    return {
+      current: 'barcode'
+    };
+  },
   methods: {
 
     colorize(value) {
-      // TODO 色情報はどこか一箇所にまとめる
       return value
-        .replace(/A/g, '<span style="color: #ff33a5;">A</span>')
-        .replace(/T/g, '<span style="color: #33ff6d;">T</span>')
-        .replace(/G/g, '<span style="color: #337eff;">G</span>')
-        .replace(/C/g, '<span style="color: #f5ff8a;">C</span>');
+        .replace(/A/g, '<span style="color: '+dna_colors.A.hex+';">A</span>')
+        .replace(/T/g, '<span style="color: '+dna_colors.T.hex+';">T</span>')
+        .replace(/G/g, '<span style="color: '+dna_colors.G.hex+';">G</span>')
+        .replace(/C/g, '<span style="color: '+dna_colors.C.hex+';">C</span>');
     },
 
     switchTab(val) {
