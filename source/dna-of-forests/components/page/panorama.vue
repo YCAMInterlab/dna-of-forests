@@ -363,7 +363,7 @@ export default Vue.extend({
       // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
       // default_lon += 27;
     }
-    else if(this.$route.path!='/') {
+    else if(this.$route.path != '/') {
 
       default_lon = (Cookies.get('lon')*1 || default_lon);
       default_lat = (Cookies.get('lat')*1 || default_lat);
