@@ -220,6 +220,12 @@ html[lang=en]
         margin-right: 0
         &:before
           display: none
+  html[lang=en]
+    article.about
+      section
+        p
+          padding-left: 40px
+          padding-right: 40px
 
 </style>
 
