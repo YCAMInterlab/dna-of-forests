@@ -49,7 +49,7 @@ article.about
       | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">{{ $t('about.tanaka') }}</a><br>
       | <a href="http://karappo.net" target="_blank">{{ $t('about.karappo') }}</a><br>
       | <a href="http://www.antoinebertin.org/" target="_blank">{{ $t('about.antoine') }}</a><br>
-    h3#support
+    h3#cooperation
       imgr(:alt="$t('about.cooperation')" src='about/title-cooperation.png' locale)
     p.small(v-html="$t('about.cooperations')")
 
@@ -184,6 +184,27 @@ article.about
     color: #696969
     font-size: 12px
     font-weight: bold
+
+html[lang=en]
+  article.about
+    h2
+      margin-bottom: 50px
+    p
+      font-size: 15px
+      line-height: 2.2em
+      letter-spacing: 0.1em
+    section
+      width: 600px
+      &#credit
+        >a
+          width: 630px
+      &#credit
+        h3#planning_production
+          margin-bottom: 80px
+        h3#production,
+        h3#cooperation
+          margin-top: 93px
+          margin-bottom: 16px
 
 @media (max-width: 900px)
   article.about

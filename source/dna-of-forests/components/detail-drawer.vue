@@ -349,7 +349,7 @@ export default Vue.extend({
 
       // 現在のdataをnullで初期化しinitialized_dataに格納
       var initialized_data = this.initWithNullValue(_.cloneDeep(this.$data));
-      // __dataを_dataで上書きしてdataに格納
+      // initialized_dataに_dataを上書きしてdataに格納
       _data = _.defaultsDeep(_data, initialized_data);
       this.initWithData(this, _data);
     }
