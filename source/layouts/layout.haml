@@ -20,7 +20,10 @@
     %meta{property: "og:site_name", content: data.title}
     %meta{property: "og:description", content: data.description}
     %meta{property: "og:type", content: "website"}
-    %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
+    - if data.lang == 'en'
+      %meta{property: "og:url", content: "#{host}/dna-of-forests/en/"}
+    - else
+      %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
     %meta{property: "og:image", content: "#{host}/dna-of-forests/img/share-#{data.lang}.png?#{chache_param}"}
     %meta{property: "fb:app_id", content: "205454639864260"}
 
