@@ -295,7 +295,7 @@ export default Vue.extend({
     _data.type = null; // typeプロパティを追加
 
     // initialize
-    this.initWithNullValue(_data);
+    _data = this.initWithNullValue(_data);
 
     return _data;
   },
@@ -307,13 +307,14 @@ export default Vue.extend({
         if(obj.hasOwnProperty(key)){
           // 再帰条件
           if(key === 'genus'){
-            this.initWithNullValue(obj[key]);
+            obj[key] = this.initWithNullValue(obj[key]);
           }
           else {
             obj[key] = null;
           }
         }
       }
+      return obj;
     },
     // new_dataのもつプロパティを、old_dataのプロパティに代入する
     initWithData(old_data, new_data) {
