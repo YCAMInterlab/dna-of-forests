@@ -193,6 +193,7 @@ html[lang=en]
       font-size: 15px
       line-height: 2.2em
       letter-spacing: 0.1em
+      color: #cacaca
     section
       width: 600px
       &#credit
@@ -200,11 +201,15 @@ html[lang=en]
           width: 630px
       &#credit
         h3#planning_production
-          margin-bottom: 45px
+          margin-bottom: 49px
         h3#production,
         h3#cooperation
-          margin-top: 93px
-          margin-bottom: 16px
+          margin-top: 114px
+          margin-bottom: 33px
+        h4
+          margin-bottom: 12px
+        >a
+          margin-bottom: 44px
 
 @media (max-width: 900px)
   article.about
