@@ -1,28 +1,28 @@
 export default
 {
-  "A": {
+  'A': {
     // red
-    "rgb": "rgb(255,  51, 165)",
-    "hex": "#ff33a5"
+    'rgb': 'rgb(255,  51, 165)',
+    'hex': '#ff33a5'
   },
-  "T": {
+  'T': {
     // green
-    "rgb": "rgb(51, 255, 109)",
-    "hex": "#33ff6d"
+    'rgb': 'rgb(51, 255, 109)',
+    'hex': '#33ff6d'
   },
-  "G": {
+  'G': {
     // blue
-    "rgb": "rgb( 51, 126, 255)",
-    "hex": "#337eff"
+    'rgb': 'rgb( 51, 126, 255)',
+    'hex': '#337eff'
   },
-  "C": {
+  'C': {
     // yellow
-    "rgb": "rgb(245, 255, 138)",
-    "hex": "#f5ff8a"
+    'rgb': 'rgb(245, 255, 138)',
+    'hex': '#f5ff8a'
   },
-  "N": {
+  'N': {
     // white
-    "rgb": "rgb(255, 255, 255)",
-    "hex": "#ffffff"
+    'rgb': 'rgb(255, 255, 255)',
+    'hex': '#ffffff'
   }
-}
+};
