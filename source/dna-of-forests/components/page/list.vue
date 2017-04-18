@@ -36,7 +36,7 @@ section.list(:data-lang="$root.$i18n.locale")
               <dna-barcode :dna="item.dna_sequences[1].text" />
         template(v-else)
           td.dna(colspan='2')
-        td.collection_date {{ item.collection_date }}
+        td.collection_date {{ dateFormat(item.collection_date) }}
   h1
     imgr(:alt="$t('list.tips.title')" src='list/title-knowledges.png' locale)
   table#knowledges
@@ -157,6 +157,7 @@ table
 <script>
 import Vue from 'vue';
 import striptags from 'striptags';
+import moment from 'moment';
 
 export default Vue.extend({
   filters: {
@@ -194,6 +195,10 @@ export default Vue.extend({
       }
       while(el.offsetParent != document.body);
       return offsetTop;
+    },
+    dateFormat(date){
+      var format = (this.$root.$i18n.locale === 'en') ? 'DD MMM YYYY' : 'YYYY.MM.DD';
+      return moment(date).format(format);
     }
   }
 });
