@@ -8,6 +8,18 @@
       "ycam": "http://www.ycam.jp/",
       "cc": "https://creativecommons.org/licenses/by-sa/4.0/deed.ja"
     },
+    "list": {
+      "samples": {
+        "title": "採取したサンプル",
+        "index": "No.",
+        "result": "同定結果",
+        "dna": "同定に用いたDNA配列",
+        "collection_date": "採取日"
+      },
+      "tips": {
+        "title": "森の知識"
+      }
+    },
     "about": {
       "logo": "森のDNA図鑑 仁保の森 2016",
       "about": {
@@ -42,18 +54,6 @@
       "antoine": "録音・音源編集：Antoine Bertin（antoinebertin.org）",
       "cooperation": "協力",
       "cooperations": "スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"
-    },
-    "list": {
-      "samples": {
-        "title": "採取したサンプル",
-        "index": "No.",
-        "result": "同定結果",
-        "dna": "同定に用いたDNA配列",
-        "collection_date": "採取日"
-      },
-      "tips": {
-        "title": "森の知識"
-      }
     },
     "detail_drawer": {
       "sample": {
@@ -97,6 +97,18 @@
       "ycam": "http://www.ycam.jp/en/",
       "cc": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
     },
+    "list": {
+      "samples": {
+        "title": "Collected samples",
+        "index": "No.",
+        "result": "Identification result",
+        "dna": "DNA sequence used for identification",
+        "collection_date": "Collection date"
+      },
+      "tips": {
+        "title": "Tips about the Forest"
+      }
+    },
     "about": {
       "logo": "Field Guide “DNA of Forest” in the forest of Niho 2016",
       "about": {
@@ -131,18 +143,6 @@
       "antoine": "Field recording and mixing: Antoine Bertin (antoinebertin.org)",
       "cooperation": "Cooperation",
       "cooperations": "With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"
-    },
-    "list": {
-      "samples": {
-        "title": "Collected samples",
-        "index": "No.",
-        "result": "Identification result",
-        "dna": "DNA sequence used for identification",
-        "collection_date": "Collection date"
-      },
-      "tips": {
-        "title": "Tips about the Forest"
-      }
     },
     "detail_drawer": {
       "sample": {
