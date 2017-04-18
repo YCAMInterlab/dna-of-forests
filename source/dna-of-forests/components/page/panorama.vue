@@ -10,8 +10,7 @@
   a.ycam(href="http://www.ycam.jp/" target="_blank")
     imgr(src="panorama/ycam-logo.png")
   p.copyright
-    //- <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; margin-bottom: 5px;"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>
-    a(href="http://special.ycam.jp/dna-of-forests/") Field Guide “DNA of Forests”
+    | Field Guide “DNA of Forests”
     br
     | by
     a(href="http://www.ycam.jp/" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
