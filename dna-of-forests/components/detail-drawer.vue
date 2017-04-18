@@ -28,7 +28,7 @@
           | {{ genus.en }}
         div.description
           h4 {{ $t('detail_drawer.sample.article.dna.method.title') }}
-          p {{ $t('detail_drawer.sample.article.dna.method.body') }}
+          p(v-html="$t('detail_drawer.sample.article.dna.method.body')")
 
       section.microscope(v-if="microscope")
         h3
@@ -112,8 +112,6 @@ p
   line-height: 32px
   letter-spacing: 0.075em
   margin-top: 25px
-  word-break: break-all
-  text-align: justify
 
 section
 
@@ -149,7 +147,6 @@ h4
     transform: rotate(0deg)
   100%
     transform: rotate(360deg)
-
 
 .image_wrapper
   width: 440px
@@ -191,6 +188,7 @@ h4
 .dna_sequence
   p
     color: #808080
+
   textarea
     width: 100%
     overflow: hidden

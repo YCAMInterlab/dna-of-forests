@@ -144,6 +144,10 @@ a.border {
     background-repeat: repeat-x;
     background-size: 4px 1px;
     background-position: 1px bottom; }
+  a.border.dark {
+    color: #808080; }
+    a.border.dark:hover {
+      color: #fff; }
 
 #app {
   position: relative;

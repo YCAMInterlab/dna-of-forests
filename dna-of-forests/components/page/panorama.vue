@@ -7,18 +7,17 @@
   <transition name="fade">
     <entrance-modal v-if="$route.path=='/'"/>
   </transition>
-  a.ycam(href="http://www.ycam.jp/" target="_blank")
+  a.ycam(:href="$t('panorama.ycam')" target="_blank")
     imgr(src="panorama/ycam-logo.png")
   p.copyright
-    //- <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" style="display: inline-block; margin-bottom: 5px;"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>
-    a(href="http://special.ycam.jp/dna-of-forests/") Field Guide “DNA of Forests”
+    | Field Guide “DNA of Forests”
     br
     | by
-    a(href="http://www.ycam.jp/" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
+    a(:href="$t('panorama.ycam')" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
     br
     | is licensed under a
     br
-    a(href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank") Creative Commons License CC BY-SA 4.0
+    a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
   .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
     //- 日本語なら画像、英語ならテキストでラベルを表示
     imgr.label(v-bind:alt="item.genus.ja" v-bind:src="'panorama/marker-text/sample-ja/'+filename(item.genus.en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
@@ -363,7 +362,7 @@ export default Vue.extend({
       // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
       // default_lon += 27;
     }
-    else if(this.$route.path!='/') {
+    else if(this.$route.path != '/') {
 
       default_lon = (Cookies.get('lon')*1 || default_lon);
       default_lat = (Cookies.get('lat')*1 || default_lat);

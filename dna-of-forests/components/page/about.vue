@@ -200,7 +200,7 @@ html[lang=en]
           width: 630px
       &#credit
         h3#planning_production
-          margin-bottom: 80px
+          margin-bottom: 45px
         h3#production,
         h3#cooperation
           margin-top: 93px
