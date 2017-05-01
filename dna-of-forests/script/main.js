@@ -48249,6 +48249,7 @@
 	//
 	//
 	//
+	//
 	
 	
 	_vue2.default.component('dna-tab', __webpack_require__(248));
@@ -108144,7 +108145,7 @@
 	    domProps: {
 	      "innerHTML": _vm._s(_vm.microscope.memo)
 	    }
-	  })])]) : _vm._e()], 1) : _vm._e(), (_vm.memo) ? _c('section', {
+	  })])]) : _vm._e()], 1) : _vm._e(), ((_vm.$root.$i18n.locale === 'en' && _vm.memofig_width) || (_vm.$root.$i18n.locale === 'ja' && _vm.memo)) ? _c('section', {
 	    staticClass: "memo"
 	  }, [_c('h3', [_c('imgr', {
 	    attrs: {
@@ -108155,11 +108156,11 @@
 	  })], 1), _c('div', {
 	    staticClass: "bg_line"
 	  }, [_vm._l((_vm.memo), function(answer, question) {
-	    return _c('dl', [_c('dt', [_vm._v(_vm._s(question))]), _c('dd', {
+	    return (_vm.$root.$i18n.locale === 'ja') ? _c('dl', [_c('dt', [_vm._v(_vm._s(question))]), _c('dd', {
 	      domProps: {
 	        "innerHTML": _vm._s(answer)
 	      }
-	    })])
+	    })]) : _vm._e()
 	  }), (_vm.memofig_width) ? _c('img', {
 	    style: ({
 	      width: _vm.memofig_width

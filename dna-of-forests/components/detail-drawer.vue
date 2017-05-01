@@ -38,14 +38,15 @@
           dl
             dd(v-html="microscope.memo")
 
-      section.memo(v-if="memo")
+      section.memo(v-if="($root.$i18n.locale === 'en' && memofig_width) || ($root.$i18n.locale === 'ja' && memo)")
         h3
           imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale)
         .bg_line
-          dl(v-for="(answer, question) in memo")
+          dl(v-if="$root.$i18n.locale === 'ja'" v-for="(answer, question) in memo")
             dt {{ question }}
             dd(v-html="answer")
           img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
+
 
     template(v-if="type=='knowledge'")
       h3 {{ title[$root.$i18n.locale] }}
