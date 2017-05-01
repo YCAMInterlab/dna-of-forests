@@ -9,17 +9,20 @@ article.about
       imgr(:alt="$t('about.about.title')" src='about/title-about.png' locale)
     p(v-html="$t('about.about.body')")
     .carousel
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/1.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/2.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/3.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/4.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/5.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8.jpg);')
-    center.credit {{ $t('about.about.credit') }}
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/1@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/2@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/3@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/4@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/5@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/11@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/12@2x.jpg);')
+      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/13@2x.jpg);')
+    center.credit(v-html="$t('about.about.credit')")
   section#dna_barcoding
     h2
       imgr(:alt="$t('about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
@@ -141,7 +144,7 @@ article.about
       background-position: center
       background-size: cover
     .flickity-page-dots
-      bottom: -60px
+      bottom: -86px
       .dot
         width: 7px
         height: 7px
@@ -180,9 +183,10 @@ article.about
 
   // 撮影クレジット
   center.credit
-    margin-top: -26px
+    margin-top: -20px
     color: #696969
     font-size: 12px
+    line-height: 1.8em
     font-weight: bold
 
 html[lang=en]
