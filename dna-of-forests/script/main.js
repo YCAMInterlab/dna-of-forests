@@ -49182,6 +49182,10 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
 	
 	
 	exports.default = _vue2.default.extend({
@@ -50341,7 +50345,7 @@
 	
 	
 	// module
-	exports.push([module.id, "article.about{height:100%;overflow-y:auto;overflow-x:hidden}article.about h1{text-align:center;margin-top:130px;margin-bottom:130px}article.about h2{text-align:center;margin-bottom:38px}article.about h3{text-align:center;margin-bottom:24px}article.about p{font-size:15px;line-height:2.2em;letter-spacing:.05em;text-align:left;margin-bottom:2.2em;text-align:justify}article.about a{color:inherit;text-decoration:none}article.about section{width:620px;margin:0 auto;text-align:center;margin-bottom:96px}article.about section#credit{width:auto;background-color:#191919;padding:108px 0;margin-bottom:0}article.about section#credit h3#planning_production{margin-bottom:53px}article.about section#credit h3#cooperation,article.about section#credit h3#production{margin-bottom:40px;margin-top:80px}article.about section#credit>a{display:block;width:600px;margin:0 auto 40px}article.about section#credit>a:hover{opacity:.7}article.about section#credit p{font-size:14px;text-align:center}article.about section#credit p a{color:inherit;text-decoration:none}article.about section#credit p a:hover{opacity:.7;cursor:pointer}article.about section#credit p.small{font-size:12px}article.about section#credit h4{margin-bottom:10px}article.about .carousel{width:760px;height:506px;margin:50px -80px 38px}article.about .carousel:before{content:url(/dna-of-forests/img/about/slide-round.png);width:100%;height:100%;position:absolute;z-index:10;left:0;pointer-events:none}article.about .carousel .carousel-cell{width:100%;height:100%;margin-right:0;background-position:50%;background-size:cover}article.about .carousel .flickity-page-dots{bottom:-60px}article.about .carousel .flickity-page-dots .dot{width:7px;height:7px;background-color:#fff;opacity:.3;margin:0 6px}article.about .carousel .flickity-page-dots .dot.is-selected{opacity:1}article.about .carousel .flickity-prev-next-button{outline:0;height:100%;border-radius:0;transition-duration:.2s;opacity:0;background:transparent;width:80px}article.about .carousel .flickity-prev-next-button .arrow{fill:#fff}article.about .carousel .flickity-prev-next-button svg{left:calc(50% - 20px);top:calc(50% - 20px);width:40px;height:auto}article.about .carousel .flickity-prev-next-button.next{right:0}article.about .carousel .flickity-prev-next-button.previous{left:0}article.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow{opacity:.5}article.about .carousel .flickity-prev-next-button[disabled]{display:none}article.about .carousel:hover .flickity-prev-next-button:not([disabled]){opacity:1}article.about center.credit{margin-top:-26px;color:#696969;font-size:12px;font-weight:700}html[lang=en] article.about h2{margin-bottom:50px}html[lang=en] article.about p{font-size:15px;line-height:2.2em;letter-spacing:.1em;color:#cacaca}html[lang=en] article.about section{width:600px}html[lang=en] article.about section#credit>a{width:630px}html[lang=en] article.about section#credit h3#planning_production{margin-bottom:49px}html[lang=en] article.about section#credit h3#cooperation,html[lang=en] article.about section#credit h3#production{margin-top:114px;margin-bottom:33px}html[lang=en] article.about section#credit h4{margin-bottom:12px}html[lang=en] article.about section#credit>a{margin-bottom:44px}@media (max-width:900px){article.about section{width:100%}article.about section p{padding-left:50px;padding-right:50px;font-size:18px}article.about section .carousel{width:100%;margin-left:0;margin-right:0}article.about section .carousel:before{display:none}html[lang=en] article.about section p{padding-left:40px;padding-right:40px}}", ""]);
+	exports.push([module.id, "article.about{height:100%;overflow-y:auto;overflow-x:hidden}article.about h1{text-align:center;margin-top:130px;margin-bottom:130px}article.about h2{text-align:center;margin-bottom:38px}article.about h3{text-align:center;margin-bottom:24px}article.about p{font-size:15px;line-height:2.2em;letter-spacing:.05em;text-align:left;margin-bottom:2.2em;text-align:justify}article.about a{color:inherit;text-decoration:none}article.about section{width:620px;margin:0 auto;text-align:center;margin-bottom:96px}article.about section#credit{width:auto;background-color:#191919;padding:108px 0;margin-bottom:0}article.about section#credit h3#planning_production{margin-bottom:53px}article.about section#credit h3#cooperation,article.about section#credit h3#production{margin-bottom:40px;margin-top:80px}article.about section#credit>a{display:block;width:600px;margin:0 auto 40px}article.about section#credit>a:hover{opacity:.7}article.about section#credit p{font-size:14px;text-align:center}article.about section#credit p a{color:inherit;text-decoration:none}article.about section#credit p a:hover{opacity:.7;cursor:pointer}article.about section#credit p.small{font-size:12px}article.about section#credit h4{margin-bottom:10px}article.about .carousel{width:760px;height:506px;margin:50px -80px 38px}article.about .carousel:before{content:url(/dna-of-forests/img/about/slide-round.png);width:100%;height:100%;position:absolute;z-index:10;left:0;pointer-events:none}article.about .carousel .carousel-cell{width:100%;height:100%;margin-right:0;background-position:50%;background-size:cover}article.about .carousel .flickity-page-dots{bottom:-86px}article.about .carousel .flickity-page-dots .dot{width:7px;height:7px;background-color:#fff;opacity:.3;margin:0 6px}article.about .carousel .flickity-page-dots .dot.is-selected{opacity:1}article.about .carousel .flickity-prev-next-button{outline:0;height:100%;border-radius:0;transition-duration:.2s;opacity:0;background:transparent;width:80px}article.about .carousel .flickity-prev-next-button .arrow{fill:#fff}article.about .carousel .flickity-prev-next-button svg{left:calc(50% - 20px);top:calc(50% - 20px);width:40px;height:auto}article.about .carousel .flickity-prev-next-button.next{right:0}article.about .carousel .flickity-prev-next-button.previous{left:0}article.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow{opacity:.5}article.about .carousel .flickity-prev-next-button[disabled]{display:none}article.about .carousel:hover .flickity-prev-next-button:not([disabled]){opacity:1}article.about center.credit{margin-top:-20px;color:#696969;font-size:12px;line-height:1.8em;font-weight:700}html[lang=en] article.about h2{margin-bottom:50px}html[lang=en] article.about p{font-size:15px;line-height:2.2em;letter-spacing:.1em;color:#cacaca}html[lang=en] article.about section{width:600px}html[lang=en] article.about section#credit>a{width:630px}html[lang=en] article.about section#credit h3#planning_production{margin-bottom:49px}html[lang=en] article.about section#credit h3#cooperation,html[lang=en] article.about section#credit h3#production{margin-top:114px;margin-bottom:33px}html[lang=en] article.about section#credit h4{margin-bottom:12px}html[lang=en] article.about section#credit>a{margin-bottom:44px}@media (max-width:900px){article.about section{width:100%}article.about section p{padding-left:50px;padding-right:50px;font-size:18px}article.about section .carousel{width:100%;margin-left:0;margin-right:0}article.about section .carousel:before{display:none}html[lang=en] article.about section p{padding-left:40px;padding-right:40px}}", ""]);
 	
 	// exports
 
@@ -52230,7 +52234,7 @@
 				"about": {
 					"title": "「森のDNA図鑑」について",
 					"body": "YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。",
-					"credit": "撮影：山中慎太郎（Qsyum!）"
+					"credit": "撮影：山中慎太郎（Qsyum!）／大林直行（101 DESIGN）<br>写真提供：山口情報芸術センター［YCAM］"
 				},
 				"dna_barcoding": {
 					"title": "解析方法（DNAバーコーディング）について",
@@ -52319,7 +52323,7 @@
 				"about": {
 					"title": "About the Field Guide “DNA of Forest”",
 					"body": "In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.",
-					"credit": "Photograph: Shintaro Yamanaka(Qsyum!)"
+					"credit": "Photograph: Shintaro Yamanaka(Qsyum!) / Naoyuki Obayashi(101 DESIGN)<br>Photo provided: Yamaguchi Center for Arts and Media [YCAM]"
 				},
 				"dna_barcoding": {
 					"title": "DNA Barcoding Method",
@@ -108386,8 +108390,11 @@
 	      "innerHTML": _vm._s(_vm.$t('about.about.body'))
 	    }
 	  }), _vm._m(0), _c('center', {
-	    staticClass: "credit"
-	  }, [_vm._v(_vm._s(_vm.$t('about.about.credit')))])], 1), _c('section', {
+	    staticClass: "credit",
+	    domProps: {
+	      "innerHTML": _vm._s(_vm.$t('about.about.credit'))
+	    }
+	  })], 1), _c('section', {
 	    attrs: {
 	      "id": "dna_barcoding"
 	    }
@@ -108521,52 +108528,67 @@
 	  }, [_c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/9.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/9@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/10.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/10@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/1.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/1@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/2.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/2@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/3.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/3@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/4.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/4@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/5.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/5@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/6.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/6@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/7.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/7@2x.jpg)"
 	    }
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/8.jpg)"
+	      "background-image": "url(/dna-of-forests/img/about/slide/8@2x.jpg)"
+	    }
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    staticStyle: {
+	      "background-image": "url(/dna-of-forests/img/about/slide/11@2x.jpg)"
+	    }
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    staticStyle: {
+	      "background-image": "url(/dna-of-forests/img/about/slide/12@2x.jpg)"
+	    }
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    staticStyle: {
+	      "background-image": "url(/dna-of-forests/img/about/slide/13@2x.jpg)"
 	    }
 	  })])
 	}]}
