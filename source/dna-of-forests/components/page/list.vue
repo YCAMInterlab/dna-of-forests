@@ -142,13 +142,23 @@ table
       display: none
 
 [data-lang='en']
+  table
+    thead
+      th
+        letter-spacing: 0.1em
+
   table#samples
     tr
       th,td
         &:last-child
           width: 100px
+      td.result
+        letter-spacing: 0.1em
   table#knowledges
     tr
+      td.title,
+      td.description
+        letter-spacing: 0.1em
       td.description
         color: #979799
 
