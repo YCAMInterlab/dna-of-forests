@@ -158,7 +158,7 @@ table
     tr
       td.title,
       td.description
-        letter-spacing: 0.1em
+        letter-spacing: 0.09em
       td.description
         color: #979799
 

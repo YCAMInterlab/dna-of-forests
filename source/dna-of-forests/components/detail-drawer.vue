@@ -268,11 +268,12 @@ h4
     height: calc(100% - 100px)
 
 [data-lang='en']
-  section.dna h4,
+  h3,
+  h4,
   .result
     letter-spacing: 0.09em
   p
-    letter-spacing: 0.1em
+    letter-spacing: 0.09em
 
 </style>
 
