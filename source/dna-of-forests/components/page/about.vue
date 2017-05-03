@@ -9,19 +9,19 @@ article.about
       imgr(:alt="$t('about.about.title')" src='about/title-about.png' locale)
     p(v-html="$t('about.about.body')")
     .carousel
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/9@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/10@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/1@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/2@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/3@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/4@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/5@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/6@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/7@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/8@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/11@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/12@2x.jpg);')
-      .carousel-cell(style='background-image: url(/dna-of-forests/img/about/slide/13@2x.jpg);')
+      .carousel-cell(:style="bgImage(9)")
+      .carousel-cell(:style="bgImage(10)")
+      .carousel-cell(:style="bgImage(1)")
+      .carousel-cell(:style="bgImage(2)")
+      .carousel-cell(:style="bgImage(3)")
+      .carousel-cell(:style="bgImage(4)")
+      .carousel-cell(:style="bgImage(5)")
+      .carousel-cell(:style="bgImage(6)")
+      .carousel-cell(:style="bgImage(7)")
+      .carousel-cell(:style="bgImage(8)")
+      .carousel-cell(:style="bgImage(11)")
+      .carousel-cell(:style="bgImage(12)")
+      .carousel-cell(:style="bgImage(13)")
     center.credit(v-html="$t('about.about.credit')")
   section#dna_barcoding
     h2
@@ -144,7 +144,7 @@ article.about
       background-position: center
       background-size: cover
     .flickity-page-dots
-      bottom: -86px
+      bottom: -66px
       .dot
         width: 7px
         height: 7px
@@ -250,6 +250,11 @@ export default Vue.extend({
       autoPlay: true,
       wrapAround: true
     });
+  },
+  methods: {
+    bgImage(image_num) {
+      return 'background-image: url(/dna-of-forests/img/about/slide/'+image_num+'-'+this.$root.$i18n.locale+'@2x.jpg);';
+    }
   }
 });
 
