@@ -1,6 +1,6 @@
 <template lang="pug">
 
-.tab
+.tab(:data-lang="$root.$i18n.locale")
   header
     a.barcode(v-on:click="switchTab('barcode')" v-bind:class="{ current: current==='barcode' }")
       span
@@ -69,6 +69,11 @@ header
       line-height: 2em
       font-weight: bold
 
+[data-lang='en']
+  header
+    a
+      span
+        letter-spacing: 0.09em
 </style>
 
 <script>

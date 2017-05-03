@@ -1,6 +1,6 @@
 <template lang="pug">
 
-.drawer
+.drawer(:data-lang="$root.$i18n.locale")
   header
     h2
       imgr(:alt="$t('detail_drawer.sample.title')" src='detail-drawer/title-sample.png' locale v-if="type=='sample'")
@@ -266,6 +266,13 @@ h4
 @media (max-width: 660px)
   .drawer
     height: calc(100% - 100px)
+
+[data-lang='en']
+  section.dna h4,
+  .result
+    letter-spacing: 0.09em
+  p
+    letter-spacing: 0.1em
 
 </style>
 

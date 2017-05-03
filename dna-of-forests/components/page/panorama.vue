@@ -1,6 +1,6 @@
 <template lang="pug">
 
-#container
+#container(:data-lang="$root.$i18n.locale")
   <transition name="instruction_anim">
     <instruction-modal v-if="!$root.isAlreadyDragged"/>
   </transition>
@@ -155,14 +155,6 @@
   img.label
     margin-left: 5px
 
-  span.label
-    font-family: 'Roboto'
-    font-weight:
-    color: #fcff00
-    font-size: 11px
-    letter-spacing: 0.025em
-    margin-left: 5px
-
   &:hover
     animation: hover_flash 0.2s 1 linear
     -webkit-animation: hover_flash 0.2s 1 linear
@@ -218,6 +210,15 @@
     right: 22px
     opacity: 0.5
 
+[data-lang='en']
+  .marker
+    span.label
+      font-family: 'Roboto'
+      font-weight:
+      color: #fcff00
+      font-size: 11px
+      letter-spacing: 0.1em
+      margin-left: 5px
 </style>
 
 <script>

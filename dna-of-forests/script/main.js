@@ -48250,6 +48250,13 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	
 	
 	_vue2.default.component('dna-tab', __webpack_require__(248));
@@ -48512,6 +48519,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// 登録
+	//
+	//
+	//
+	//
+	//
 	//
 	//
 	//
@@ -49196,6 +49208,11 @@
 	      autoPlay: true,
 	      wrapAround: true
 	    });
+	  },
+	  methods: {
+	    bgImage: function bgImage(image_num) {
+	      return 'background-image: url(/dna-of-forests/img/about/slide/' + image_num + '-' + this.$root.$i18n.locale + '@2x.jpg);';
+	    }
 	  }
 	});
 
@@ -49421,6 +49438,16 @@
 	//
 	//
 	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 /***/ },
 /* 149 */
@@ -49450,6 +49477,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//
 	//
 	//
 	//
@@ -50220,7 +50248,7 @@
 	
 	
 	// module
-	exports.push([module.id, "section.list[data-v-27c2a6f6]{height:100%;overflow-y:auto;background-color:#151515}h1[data-v-27c2a6f6]{padding:28px 27px;background-color:#0d0d0d;border-bottom:1px solid #1a1a1a}table[data-v-27c2a6f6]{width:100%;max-width:100%;font-size:14px}table tr[data-v-27c2a6f6]{height:55px}table tr td[data-v-27c2a6f6],table tr th[data-v-27c2a6f6]{vertical-align:middle;padding-left:27px}table tr td[data-v-27c2a6f6]:last-child,table tr th[data-v-27c2a6f6]:last-child{padding-right:27px}table thead[data-v-27c2a6f6]{background-color:#0d0d0d}table thead th[data-v-27c2a6f6]{text-align:left;color:#656566;font-size:12px}table tbody[data-v-27c2a6f6]{color:#979799}table tbody tr[data-v-27c2a6f6]:hover{background-color:#1d1d1d;cursor:pointer}table tbody tr.selected[data-v-27c2a6f6]{background-color:#202020}table tbody td[data-v-27c2a6f6]{white-space:nowrap}table tbody td .genus_en[data-v-27c2a6f6]{margin-left:1em;color:#979799}table tbody td.dna[data-v-27c2a6f6]{max-width:300px;overflow:hidden;white-space:nowrap}table tbody td.dna1[data-v-27c2a6f6],table tbody td.dna2[data-v-27c2a6f6]{max-width:150px;overflow:hidden;white-space:nowrap}table tbody td .region[data-v-27c2a6f6]{display:inline-block;width:32px;margin-right:8px;text-align:right}table tbody td.index[data-v-27c2a6f6]{font-family:Roboto;font-weight:700;letter-spacing:.025em;width:30px}table tbody td.description[data-v-27c2a6f6],table tbody td.index[data-v-27c2a6f6],table tbody td.result[data-v-27c2a6f6],table tbody td.title[data-v-27c2a6f6]{color:#fff}table tbody td.description[data-v-27c2a6f6],table tbody td.result[data-v-27c2a6f6],table tbody td.title[data-v-27c2a6f6]{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}table tbody td.title[data-v-27c2a6f6]{width:150px}table tbody td.description[data-v-27c2a6f6],table tbody td.result[data-v-27c2a6f6]{max-width:150px}table tbody td.collection_date[data-v-27c2a6f6]{width:80px}@media (max-width:1000px){table td.result[data-v-27c2a6f6]{width:150px}table td.result .genus_en[data-v-27c2a6f6]{display:none}}@media (max-width:660px){table .collection_date[data-v-27c2a6f6],table .genus_en[data-v-27c2a6f6]{display:none}}[data-lang=en] table#samples tr td[data-v-27c2a6f6]:last-child,[data-lang=en] table#samples tr th[data-v-27c2a6f6]:last-child{width:100px}[data-lang=en] table#knowledges tr td.description[data-v-27c2a6f6]{color:#979799}", ""]);
+	exports.push([module.id, "section.list[data-v-27c2a6f6]{height:100%;overflow-y:auto;background-color:#151515}h1[data-v-27c2a6f6]{padding:28px 27px;background-color:#0d0d0d;border-bottom:1px solid #1a1a1a}table[data-v-27c2a6f6]{width:100%;max-width:100%;font-size:14px}table tr[data-v-27c2a6f6]{height:55px}table tr td[data-v-27c2a6f6],table tr th[data-v-27c2a6f6]{vertical-align:middle;padding-left:27px}table tr td[data-v-27c2a6f6]:last-child,table tr th[data-v-27c2a6f6]:last-child{padding-right:27px}table thead[data-v-27c2a6f6]{background-color:#0d0d0d}table thead th[data-v-27c2a6f6]{text-align:left;color:#656566;font-size:12px}table tbody[data-v-27c2a6f6]{color:#979799}table tbody tr[data-v-27c2a6f6]:hover{background-color:#1d1d1d;cursor:pointer}table tbody tr.selected[data-v-27c2a6f6]{background-color:#202020}table tbody td[data-v-27c2a6f6]{white-space:nowrap}table tbody td .genus_en[data-v-27c2a6f6]{margin-left:1em;color:#979799}table tbody td.dna[data-v-27c2a6f6]{max-width:300px;overflow:hidden;white-space:nowrap}table tbody td.dna1[data-v-27c2a6f6],table tbody td.dna2[data-v-27c2a6f6]{max-width:150px;overflow:hidden;white-space:nowrap}table tbody td .region[data-v-27c2a6f6]{display:inline-block;width:32px;margin-right:8px;text-align:right}table tbody td.index[data-v-27c2a6f6]{font-family:Roboto;font-weight:700;letter-spacing:.025em;width:30px}table tbody td.description[data-v-27c2a6f6],table tbody td.index[data-v-27c2a6f6],table tbody td.result[data-v-27c2a6f6],table tbody td.title[data-v-27c2a6f6]{color:#fff}table tbody td.description[data-v-27c2a6f6],table tbody td.result[data-v-27c2a6f6],table tbody td.title[data-v-27c2a6f6]{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}table tbody td.title[data-v-27c2a6f6]{width:150px}table tbody td.description[data-v-27c2a6f6],table tbody td.result[data-v-27c2a6f6]{max-width:150px}table tbody td.collection_date[data-v-27c2a6f6]{width:80px}@media (max-width:1000px){table td.result[data-v-27c2a6f6]{width:150px}table td.result .genus_en[data-v-27c2a6f6]{display:none}}@media (max-width:660px){table .collection_date[data-v-27c2a6f6],table .genus_en[data-v-27c2a6f6]{display:none}}[data-lang=en] table thead th[data-v-27c2a6f6]{letter-spacing:.1em}[data-lang=en] table#samples tr td[data-v-27c2a6f6]:last-child,[data-lang=en] table#samples tr th[data-v-27c2a6f6]:last-child{width:100px}[data-lang=en] table#knowledges tr td.description[data-v-27c2a6f6],[data-lang=en] table#knowledges tr td.title[data-v-27c2a6f6],[data-lang=en] table#samples tr td.result[data-v-27c2a6f6]{letter-spacing:.1em}[data-lang=en] table#knowledges tr td.description[data-v-27c2a6f6]{color:#979799}", ""]);
 	
 	// exports
 
@@ -50234,7 +50262,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@-webkit-keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}@-webkit-keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}.fade-enter-active[data-v-2c3b1f5c],.fade-leave-active[data-v-2c3b1f5c]{transition:opacity 1.5s}.fade-enter[data-v-2c3b1f5c],.fade-leave-active[data-v-2c3b1f5c]{opacity:0}.instruction_anim-enter-active[data-v-2c3b1f5c],.instruction_anim-leave-active[data-v-2c3b1f5c]{transition:opacity .3s}.instruction_anim-enter[data-v-2c3b1f5c],.instruction_anim-leave-active[data-v-2c3b1f5c]{opacity:0}#container[data-v-2c3b1f5c]{height:100%;overflow:hidden}.ycam[data-v-2c3b1f5c]{position:absolute;top:18px;right:22px;z-index:11;user-select:none}.ycam[data-v-2c3b1f5c]:hover{opacity:.7}.copyright[data-v-2c3b1f5c]{position:absolute;bottom:19px;right:22px;z-index:11;font-family:Roboto;font-size:9px;line-height:15px;text-align:right;opacity:.55}.copyright a[data-v-2c3b1f5c]{color:#fff;text-decoration:none}.copyright a[data-v-2c3b1f5c]:hover{border-bottom:1px dotted #ccc}.marker[data-v-2c3b1f5c]{position:absolute;cursor:pointer;z-index:10;user-select:none;height:14px;line-height:14px;white-space:nowrap;transform-origin:0 50%;-webkit-transform-origin:0 50%;transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.marker img[data-v-2c3b1f5c]{display:inline-block;vertical-align:middle;cursor:pointer;user-select:none;pointer-events:none}.marker img.label[data-v-2c3b1f5c]{margin-left:5px}.marker span.label[data-v-2c3b1f5c]{font-family:Roboto;color:#fcff00;font-size:11px;letter-spacing:.025em;margin-left:5px}.marker[data-v-2c3b1f5c]:hover{animation:hover_flash .2s 1 linear;-webkit-animation:hover_flash .2s 1 linear;-moz-animation:hover_flash .2s 1 linear}.marker.selected[data-v-2c3b1f5c]{animation:flash 1s infinite linear;-webkit-animation:flash 1s infinite linear;-moz-animation:flash 1s infinite linear}.marker.sample[data-v-2c3b1f5c]{margin-left:7px}.marker.sample[data-v-2c3b1f5c]:before{display:inline-block;content:url(/dna-of-forests/img/panorama/marker-arrow.png);width:13px;height:14px;vertical-align:middle}.marker.sample .dna_barcode[data-v-2c3b1f5c]{margin-left:5px;cursor:pointer}.marker.sample:hover .dna_barcode[data-v-2c3b1f5c]{animation-duration:500s!important;-webkit-animation-duration:500s!important;-moz-animation-duration:500s!important}.marker.knowledge[data-v-2c3b1f5c]{margin-top:3.5px;margin-left:3.5px}.marker.knowledge[data-v-2c3b1f5c]:before{display:inline-block;content:\"\";width:14px;height:14px;vertical-align:middle;border-radius:7px;background-color:#fcff00}@media (max-width:660px){.ycam[data-v-2c3b1f5c]{right:inherit;left:22px;opacity:.5}.copyright[data-v-2c3b1f5c]{bottom:inherit;top:19px;right:22px;opacity:.5}}", ""]);
+	exports.push([module.id, "@keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@-webkit-keyframes flash{0%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}@-webkit-keyframes hover_flash{0%{opacity:1}50%{opacity:.4}to{opacity:1}}.fade-enter-active[data-v-2c3b1f5c],.fade-leave-active[data-v-2c3b1f5c]{transition:opacity 1.5s}.fade-enter[data-v-2c3b1f5c],.fade-leave-active[data-v-2c3b1f5c]{opacity:0}.instruction_anim-enter-active[data-v-2c3b1f5c],.instruction_anim-leave-active[data-v-2c3b1f5c]{transition:opacity .3s}.instruction_anim-enter[data-v-2c3b1f5c],.instruction_anim-leave-active[data-v-2c3b1f5c]{opacity:0}#container[data-v-2c3b1f5c]{height:100%;overflow:hidden}.ycam[data-v-2c3b1f5c]{position:absolute;top:18px;right:22px;z-index:11;user-select:none}.ycam[data-v-2c3b1f5c]:hover{opacity:.7}.copyright[data-v-2c3b1f5c]{position:absolute;bottom:19px;right:22px;z-index:11;font-family:Roboto;font-size:9px;line-height:15px;text-align:right;opacity:.55}.copyright a[data-v-2c3b1f5c]{color:#fff;text-decoration:none}.copyright a[data-v-2c3b1f5c]:hover{border-bottom:1px dotted #ccc}.marker[data-v-2c3b1f5c]{position:absolute;cursor:pointer;z-index:10;user-select:none;height:14px;line-height:14px;white-space:nowrap;transform-origin:0 50%;-webkit-transform-origin:0 50%;transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.marker img[data-v-2c3b1f5c]{display:inline-block;vertical-align:middle;cursor:pointer;user-select:none;pointer-events:none}.marker img.label[data-v-2c3b1f5c]{margin-left:5px}.marker[data-v-2c3b1f5c]:hover{animation:hover_flash .2s 1 linear;-webkit-animation:hover_flash .2s 1 linear;-moz-animation:hover_flash .2s 1 linear}.marker.selected[data-v-2c3b1f5c]{animation:flash 1s infinite linear;-webkit-animation:flash 1s infinite linear;-moz-animation:flash 1s infinite linear}.marker.sample[data-v-2c3b1f5c]{margin-left:7px}.marker.sample[data-v-2c3b1f5c]:before{display:inline-block;content:url(/dna-of-forests/img/panorama/marker-arrow.png);width:13px;height:14px;vertical-align:middle}.marker.sample .dna_barcode[data-v-2c3b1f5c]{margin-left:5px;cursor:pointer}.marker.sample:hover .dna_barcode[data-v-2c3b1f5c]{animation-duration:500s!important;-webkit-animation-duration:500s!important;-moz-animation-duration:500s!important}.marker.knowledge[data-v-2c3b1f5c]{margin-top:3.5px;margin-left:3.5px}.marker.knowledge[data-v-2c3b1f5c]:before{display:inline-block;content:\"\";width:14px;height:14px;vertical-align:middle;border-radius:7px;background-color:#fcff00}@media (max-width:660px){.ycam[data-v-2c3b1f5c]{right:inherit;left:22px;opacity:.5}.copyright[data-v-2c3b1f5c]{bottom:inherit;top:19px;right:22px;opacity:.5}}[data-lang=en] .marker span.label[data-v-2c3b1f5c]{font-family:Roboto;color:#fcff00;font-size:11px;letter-spacing:.1em;margin-left:5px}", ""]);
 	
 	// exports
 
@@ -50248,7 +50276,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".drawer[data-v-6abacb54]{position:fixed;width:490px;height:100%;right:0;background-color:#151515;z-index:9999;box-shadow:0 0 20px rgba(0,0,0,.5);overflow:hidden}.drawer.fade-enter-active[data-v-6abacb54],.drawer.fade-leave-active[data-v-6abacb54]{transition-duration:.45s}.drawer.fade-enter[data-v-6abacb54],.drawer.fade-leave-active[data-v-6abacb54]{right:-490px;opacity:0}header[data-v-6abacb54]{background-color:#0d0d0d;padding:28.5px 25px;position:relative;border-bottom:1px solid #1a1a1a}header h2[data-v-6abacb54]{text-align:center}header .close_btn[data-v-6abacb54]{display:inline-block;padding:28.5px 25px;position:absolute;top:0;right:0;cursor:pointer;opacity:.3}header .close_btn[data-v-6abacb54]:hover{opacity:.5}article[data-v-6abacb54]{padding:25px;overflow-y:auto;height:calc(100% - 125px);-webkit-overflow-scrolling:touch}h3[data-v-6abacb54]{font-size:16px;margin-bottom:26px;text-align:center}p[data-v-6abacb54]{font-size:13px;line-height:32px;letter-spacing:.075em;margin-top:25px}section[data-v-6abacb54]{max-height:inherit}section h3[data-v-6abacb54]{margin:25px -25px;text-align:center;background-color:#0d0d0d;padding:21px}section:first-child h3[data-v-6abacb54]{margin-top:-25px}h4[data-v-6abacb54]{margin-bottom:13px;color:#ccc}h4[data-v-6abacb54]:not(:first-child){margin-top:30px}@-webkit-keyframes spin{0%{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.image_wrapper[data-v-6abacb54]{width:440px;height:277px;border-radius:5px;background-color:#262626;position:relative;overflow:hidden}.image_wrapper[data-v-6abacb54]:before{content:\"\";position:absolute;width:32px;height:32px;top:calc(50% - 16px);left:calc(50% - 16px);z-index:1;background:transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat 50%;-webkit-animation-name:spin;-webkit-animation-duration:.4s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear;-moz-animation-name:spin;-moz-animation-duration:.4s;-moz-animation-iteration-count:infinite;-moz-animation-timing-function:linear;-ms-animation-name:spin;-ms-animation-duration:.4s;-ms-animation-iteration-count:infinite;-ms-animation-timing-function:linear;animation-name:spin;animation-duration:.4s;animation-iteration-count:infinite;animation-timing-function:linear}.image_wrapper>img[data-v-6abacb54]{z-index:2;position:absolute;border-radius:5px}.dna_sequence p[data-v-6abacb54]{color:gray}.dna_sequence textarea[data-v-6abacb54]{width:100%;overflow:hidden}.result[data-v-6abacb54]{background-color:#333;font-size:20px;text-align:center;font-weight:700;padding:19px 0 23px;border-radius:5px}.result small[data-v-6abacb54]{font-size:11px;display:block;margin-bottom:12px}.result.expand[data-v-6abacb54]{padding:34px 0}.description[data-v-6abacb54]{margin:25px -25px -25px;padding:25px;border-top:1px solid #333;color:gray}.description h4[data-v-6abacb54]{color:gray}.description p[data-v-6abacb54]{font-size:13px;line-height:28px;letter-spacing:0}.microscope[data-v-6abacb54]{text-align:center}.microscope .bg_line[data-v-6abacb54]{margin-top:25px}.bg_line[data-v-6abacb54]{background-image:url(/dna-of-forests/img/detail-drawer/memo-line.png);padding-bottom:1px;text-align:center;min-height:1px}.bg_line[data-v-6abacb54]:after{content:\".\";display:block;clear:both;height:0;visibility:hidden}.bg_line dl[data-v-6abacb54]{font-size:13px;line-height:36px;text-align:left;clear:both}.bg_line dl[data-v-6abacb54]:not(:first-child){margin-top:36px}.bg_line dl dt[data-v-6abacb54]{font-weight:700}.bg_line dl dd[data-v-6abacb54]{font-weight:400}.bg_line>img[data-v-6abacb54]{margin:18px auto 36px;width:230px;transform:rotate(-3deg);-webkit-transform:rotate(-3deg)}@media (max-width:660px){.drawer[data-v-6abacb54]{height:calc(100% - 100px)}}", ""]);
+	exports.push([module.id, ".drawer[data-v-6abacb54]{position:fixed;width:490px;height:100%;right:0;background-color:#151515;z-index:9999;box-shadow:0 0 20px rgba(0,0,0,.5);overflow:hidden}.drawer.fade-enter-active[data-v-6abacb54],.drawer.fade-leave-active[data-v-6abacb54]{transition-duration:.45s}.drawer.fade-enter[data-v-6abacb54],.drawer.fade-leave-active[data-v-6abacb54]{right:-490px;opacity:0}header[data-v-6abacb54]{background-color:#0d0d0d;padding:28.5px 25px;position:relative;border-bottom:1px solid #1a1a1a}header h2[data-v-6abacb54]{text-align:center}header .close_btn[data-v-6abacb54]{display:inline-block;padding:28.5px 25px;position:absolute;top:0;right:0;cursor:pointer;opacity:.3}header .close_btn[data-v-6abacb54]:hover{opacity:.5}article[data-v-6abacb54]{padding:25px;overflow-y:auto;height:calc(100% - 125px);-webkit-overflow-scrolling:touch}h3[data-v-6abacb54]{font-size:16px;margin-bottom:26px;text-align:center}p[data-v-6abacb54]{font-size:13px;line-height:32px;letter-spacing:.075em;margin-top:25px}section[data-v-6abacb54]{max-height:inherit}section h3[data-v-6abacb54]{margin:25px -25px;text-align:center;background-color:#0d0d0d;padding:21px}section:first-child h3[data-v-6abacb54]{margin-top:-25px}h4[data-v-6abacb54]{margin-bottom:13px;color:#ccc}h4[data-v-6abacb54]:not(:first-child){margin-top:30px}@-webkit-keyframes spin{0%{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(1turn)}}@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.image_wrapper[data-v-6abacb54]{width:440px;height:277px;border-radius:5px;background-color:#262626;position:relative;overflow:hidden}.image_wrapper[data-v-6abacb54]:before{content:\"\";position:absolute;width:32px;height:32px;top:calc(50% - 16px);left:calc(50% - 16px);z-index:1;background:transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat 50%;-webkit-animation-name:spin;-webkit-animation-duration:.4s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear;-moz-animation-name:spin;-moz-animation-duration:.4s;-moz-animation-iteration-count:infinite;-moz-animation-timing-function:linear;-ms-animation-name:spin;-ms-animation-duration:.4s;-ms-animation-iteration-count:infinite;-ms-animation-timing-function:linear;animation-name:spin;animation-duration:.4s;animation-iteration-count:infinite;animation-timing-function:linear}.image_wrapper>img[data-v-6abacb54]{z-index:2;position:absolute;border-radius:5px}.dna_sequence p[data-v-6abacb54]{color:gray}.dna_sequence textarea[data-v-6abacb54]{width:100%;overflow:hidden}.result[data-v-6abacb54]{background-color:#333;font-size:20px;text-align:center;font-weight:700;padding:19px 0 23px;border-radius:5px}.result small[data-v-6abacb54]{font-size:11px;display:block;margin-bottom:12px}.result.expand[data-v-6abacb54]{padding:34px 0}.description[data-v-6abacb54]{margin:25px -25px -25px;padding:25px;border-top:1px solid #333;color:gray}.description h4[data-v-6abacb54]{color:gray}.description p[data-v-6abacb54]{font-size:13px;line-height:28px;letter-spacing:0}.microscope[data-v-6abacb54]{text-align:center}.microscope .bg_line[data-v-6abacb54]{margin-top:25px}.bg_line[data-v-6abacb54]{background-image:url(/dna-of-forests/img/detail-drawer/memo-line.png);padding-bottom:1px;text-align:center;min-height:1px}.bg_line[data-v-6abacb54]:after{content:\".\";display:block;clear:both;height:0;visibility:hidden}.bg_line dl[data-v-6abacb54]{font-size:13px;line-height:36px;text-align:left;clear:both}.bg_line dl[data-v-6abacb54]:not(:first-child){margin-top:36px}.bg_line dl dt[data-v-6abacb54]{font-weight:700}.bg_line dl dd[data-v-6abacb54]{font-weight:400}.bg_line>img[data-v-6abacb54]{margin:18px auto 36px;width:230px;transform:rotate(-3deg);-webkit-transform:rotate(-3deg)}@media (max-width:660px){.drawer[data-v-6abacb54]{height:calc(100% - 100px)}}[data-lang=en] .result[data-v-6abacb54],[data-lang=en] section.dna h4[data-v-6abacb54]{letter-spacing:.09em}[data-lang=en] p[data-v-6abacb54]{letter-spacing:.1em}", ""]);
 	
 	// exports
 
@@ -50318,7 +50346,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".tab>div.contents[data-v-bed77cf4]{padding:18px 11px;background-color:#333;border-bottom-left-radius:5px;border-bottom-right-radius:5px}.tab>div.contents>div[data-v-bed77cf4]:not(.current){display:none}header[data-v-bed77cf4]{width:100%}header a[data-v-bed77cf4]{background-color:#262626;width:50%;padding:10px 0;text-align:center;display:inline-block;cursor:pointer}header a img[data-v-bed77cf4]{margin-right:7px;cursor:pointer}header a span[data-v-bed77cf4]{font-size:12px;color:#fff;opacity:.3;cursor:pointer}header a[data-v-bed77cf4]:first-child{border-top-left-radius:5px}header a[data-v-bed77cf4]:last-child{border-top-right-radius:5px}header a.current[data-v-bed77cf4]{background-color:#333}header a.current span[data-v-bed77cf4]{opacity:.75}header a:hover span[data-v-bed77cf4]{opacity:.5}.contents .text p[data-v-bed77cf4]{word-wrap:break-word;font-size:12px;line-height:2em;font-weight:700}", ""]);
+	exports.push([module.id, ".tab>div.contents[data-v-bed77cf4]{padding:18px 11px;background-color:#333;border-bottom-left-radius:5px;border-bottom-right-radius:5px}.tab>div.contents>div[data-v-bed77cf4]:not(.current){display:none}header[data-v-bed77cf4]{width:100%}header a[data-v-bed77cf4]{background-color:#262626;width:50%;padding:10px 0;text-align:center;display:inline-block;cursor:pointer}header a img[data-v-bed77cf4]{margin-right:7px;cursor:pointer}header a span[data-v-bed77cf4]{font-size:12px;color:#fff;opacity:.3;cursor:pointer}header a[data-v-bed77cf4]:first-child{border-top-left-radius:5px}header a[data-v-bed77cf4]:last-child{border-top-right-radius:5px}header a.current[data-v-bed77cf4]{background-color:#333}header a.current span[data-v-bed77cf4]{opacity:.75}header a:hover span[data-v-bed77cf4]{opacity:.5}.contents .text p[data-v-bed77cf4]{word-wrap:break-word;font-size:12px;line-height:2em;font-weight:700}[data-lang=en] header a span[data-v-bed77cf4]{letter-spacing:.09em}", ""]);
 	
 	// exports
 
@@ -50346,7 +50374,7 @@
 	
 	
 	// module
-	exports.push([module.id, "article.about{height:100%;overflow-y:auto;overflow-x:hidden}article.about h1{text-align:center;margin-top:130px;margin-bottom:130px}article.about h2{text-align:center;margin-bottom:38px}article.about h3{text-align:center;margin-bottom:24px}article.about p{font-size:15px;line-height:2.2em;letter-spacing:.05em;text-align:left;margin-bottom:2.2em;text-align:justify}article.about a{color:inherit;text-decoration:none}article.about section{width:620px;margin:0 auto;text-align:center;margin-bottom:96px}article.about section#credit{width:auto;background-color:#191919;padding:108px 0;margin-bottom:0}article.about section#credit h3#planning_production{margin-bottom:53px}article.about section#credit h3#cooperation,article.about section#credit h3#production{margin-bottom:40px;margin-top:80px}article.about section#credit>a{display:block;width:600px;margin:0 auto 40px}article.about section#credit>a:hover{opacity:.7}article.about section#credit p{font-size:14px;text-align:center}article.about section#credit p a{color:inherit;text-decoration:none}article.about section#credit p a:hover{opacity:.7;cursor:pointer}article.about section#credit p.small{font-size:12px}article.about section#credit h4{margin-bottom:10px}article.about .carousel{width:760px;height:506px;margin:50px -80px 38px}article.about .carousel:before{content:url(/dna-of-forests/img/about/slide-round.png);width:100%;height:100%;position:absolute;z-index:10;left:0;pointer-events:none}article.about .carousel .carousel-cell{width:100%;height:100%;margin-right:0;background-position:50%;background-size:cover}article.about .carousel .flickity-page-dots{bottom:-86px}article.about .carousel .flickity-page-dots .dot{width:7px;height:7px;background-color:#fff;opacity:.3;margin:0 6px}article.about .carousel .flickity-page-dots .dot.is-selected{opacity:1}article.about .carousel .flickity-prev-next-button{outline:0;height:100%;border-radius:0;transition-duration:.2s;opacity:0;background:transparent;width:80px}article.about .carousel .flickity-prev-next-button .arrow{fill:#fff}article.about .carousel .flickity-prev-next-button svg{left:calc(50% - 20px);top:calc(50% - 20px);width:40px;height:auto}article.about .carousel .flickity-prev-next-button.next{right:0}article.about .carousel .flickity-prev-next-button.previous{left:0}article.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow{opacity:.5}article.about .carousel .flickity-prev-next-button[disabled]{display:none}article.about .carousel:hover .flickity-prev-next-button:not([disabled]){opacity:1}article.about center.credit{margin-top:-20px;color:#696969;font-size:12px;line-height:1.8em;font-weight:700}html[lang=en] article.about h2{margin-bottom:50px}html[lang=en] article.about p{font-size:15px;line-height:2.2em;letter-spacing:.1em;color:#cacaca}html[lang=en] article.about section{width:600px}html[lang=en] article.about section#credit>a{width:630px}html[lang=en] article.about section#credit h3#planning_production{margin-bottom:49px}html[lang=en] article.about section#credit h3#cooperation,html[lang=en] article.about section#credit h3#production{margin-top:114px;margin-bottom:33px}html[lang=en] article.about section#credit h4{margin-bottom:12px}html[lang=en] article.about section#credit>a{margin-bottom:44px}@media (max-width:900px){article.about section{width:100%}article.about section p{padding-left:50px;padding-right:50px;font-size:18px}article.about section .carousel{width:100%;margin-left:0;margin-right:0}article.about section .carousel:before{display:none}html[lang=en] article.about section p{padding-left:40px;padding-right:40px}}", ""]);
+	exports.push([module.id, "article.about{height:100%;overflow-y:auto;overflow-x:hidden}article.about h1{text-align:center;margin-top:130px;margin-bottom:130px}article.about h2{text-align:center;margin-bottom:38px}article.about h3{text-align:center;margin-bottom:24px}article.about p{font-size:15px;line-height:2.2em;letter-spacing:.05em;text-align:left;margin-bottom:2.2em;text-align:justify}article.about a{color:inherit;text-decoration:none}article.about section{width:620px;margin:0 auto;text-align:center;margin-bottom:96px}article.about section#credit{width:auto;background-color:#191919;padding:108px 0;margin-bottom:0}article.about section#credit h3#planning_production{margin-bottom:53px}article.about section#credit h3#cooperation,article.about section#credit h3#production{margin-bottom:40px;margin-top:80px}article.about section#credit>a{display:block;width:600px;margin:0 auto 40px}article.about section#credit>a:hover{opacity:.7}article.about section#credit p{font-size:14px;text-align:center}article.about section#credit p a{color:inherit;text-decoration:none}article.about section#credit p a:hover{opacity:.7;cursor:pointer}article.about section#credit p.small{font-size:12px}article.about section#credit h4{margin-bottom:10px}article.about .carousel{width:760px;height:506px;margin:50px -80px 38px}article.about .carousel:before{content:url(/dna-of-forests/img/about/slide-round.png);width:100%;height:100%;position:absolute;z-index:10;left:0;pointer-events:none}article.about .carousel .carousel-cell{width:100%;height:100%;margin-right:0;background-position:50%;background-size:cover}article.about .carousel .flickity-page-dots{bottom:-66px}article.about .carousel .flickity-page-dots .dot{width:7px;height:7px;background-color:#fff;opacity:.3;margin:0 6px}article.about .carousel .flickity-page-dots .dot.is-selected{opacity:1}article.about .carousel .flickity-prev-next-button{outline:0;height:100%;border-radius:0;transition-duration:.2s;opacity:0;background:transparent;width:80px}article.about .carousel .flickity-prev-next-button .arrow{fill:#fff}article.about .carousel .flickity-prev-next-button svg{left:calc(50% - 20px);top:calc(50% - 20px);width:40px;height:auto}article.about .carousel .flickity-prev-next-button.next{right:0}article.about .carousel .flickity-prev-next-button.previous{left:0}article.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow{opacity:.5}article.about .carousel .flickity-prev-next-button[disabled]{display:none}article.about .carousel:hover .flickity-prev-next-button:not([disabled]){opacity:1}article.about center.credit{margin-top:-20px;color:#696969;font-size:12px;line-height:1.8em;font-weight:700}html[lang=en] article.about h2{margin-bottom:50px}html[lang=en] article.about p{font-size:15px;line-height:2.2em;letter-spacing:.1em;color:#cacaca}html[lang=en] article.about section{width:600px}html[lang=en] article.about section#credit>a{width:630px}html[lang=en] article.about section#credit h3#planning_production{margin-bottom:49px}html[lang=en] article.about section#credit h3#cooperation,html[lang=en] article.about section#credit h3#production{margin-top:114px;margin-bottom:33px}html[lang=en] article.about section#credit h4{margin-bottom:12px}html[lang=en] article.about section#credit>a{margin-bottom:44px}@media (max-width:900px){article.about section{width:100%}article.about section p{padding-left:50px;padding-right:50px;font-size:18px}article.about section .carousel{width:100%;margin-left:0;margin-right:0}article.about section .carousel:before{display:none}html[lang=en] article.about section p{padding-left:40px;padding-right:40px}}", ""]);
 	
 	// exports
 
@@ -52235,7 +52263,7 @@
 				"about": {
 					"title": "「森のDNA図鑑」について",
 					"body": "YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。",
-					"credit": "撮影：山中慎太郎（Qsyum!）／大林直行（101 DESIGN）<br>写真提供：山口情報芸術センター［YCAM］"
+					"credit": "写真提供：山口情報芸術センター［YCAM］"
 				},
 				"dna_barcoding": {
 					"title": "解析方法（DNAバーコーディング）について",
@@ -52324,7 +52352,7 @@
 				"about": {
 					"title": "About the Field Guide “DNA of Forest”",
 					"body": "In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.",
-					"credit": "Photograph: Shintaro Yamanaka(Qsyum!) / Naoyuki Obayashi(101 DESIGN)<br>Photo provided: Yamaguchi Center for Arts and Media [YCAM]"
+					"credit": "Courtesy of Yamaguchi Center for Arts and Media [YCAM]"
 				},
 				"dna_barcoding": {
 					"title": "DNA Barcoding Method",
@@ -107974,7 +108002,8 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
 	    attrs: {
-	      "id": "container"
+	      "id": "container",
+	      "data-lang": _vm.$root.$i18n.locale
 	    }
 	  }, [_c('transition', {
 	    attrs: {
@@ -108067,7 +108096,10 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
-	    staticClass: "drawer"
+	    staticClass: "drawer",
+	    attrs: {
+	      "data-lang": _vm.$root.$i18n.locale
+	    }
 	  }, [_c('header', [_c('h2', [(_vm.type == 'sample') ? _c('imgr', {
 	    attrs: {
 	      "alt": _vm.$t('detail_drawer.sample.title'),
@@ -108276,7 +108308,10 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
-	    staticClass: "tab"
+	    staticClass: "tab",
+	    attrs: {
+	      "data-lang": _vm.$root.$i18n.locale
+	    }
 	  }, [_c('header', [_c('a', {
 	    staticClass: "barcode",
 	    class: {
@@ -108390,7 +108425,48 @@
 	    domProps: {
 	      "innerHTML": _vm._s(_vm.$t('about.about.body'))
 	    }
-	  }), _vm._m(0), _c('center', {
+	  }), _c('div', {
+	    staticClass: "carousel"
+	  }, [_c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(9))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(10))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(1))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(2))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(3))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(4))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(5))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(6))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(7))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(8))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(11))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(12))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(13))
+	  })]), _c('center', {
 	    staticClass: "credit",
 	    domProps: {
 	      "innerHTML": _vm._s(_vm.$t('about.about.credit'))
@@ -108523,76 +108599,7 @@
 	      "innerHTML": _vm._s(_vm.$t('about.cooperations'))
 	    }
 	  })])])
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    staticClass: "carousel"
-	  }, [_c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/9@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/10@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/1@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/2@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/3@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/4@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/5@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/6@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/7@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/8@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/11@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/12@2x.jpg)"
-	    }
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    staticStyle: {
-	      "background-image": "url(/dna-of-forests/img/about/slide/13@2x.jpg)"
-	    }
-	  })])
-	}]}
+	},staticRenderFns: []}
 
 /***/ },
 /* 268 */
