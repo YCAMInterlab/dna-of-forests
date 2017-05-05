@@ -208,7 +208,7 @@ export default Vue.extend({
     },
     dateFormat(date){
       var format = (this.$root.$i18n.locale === 'en') ? 'DD MMM YYYY' : 'YYYY.MM.DD';
-      return moment(date).format(format);
+      return moment(date, 'YYYY.MM.DD').format(format); // moment()の第２引数がないとSafariで正しく作成されない
     }
   }
 });
