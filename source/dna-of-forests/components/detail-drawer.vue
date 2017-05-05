@@ -34,7 +34,7 @@
         h3
           imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale)
         iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
-        .bg_line(v-if="microscope.memo")
+        .bg_line(v-if="$root.$i18n.locale === 'ja' && microscope.memo")
           dl
             dd(v-html="microscope.memo")
 
