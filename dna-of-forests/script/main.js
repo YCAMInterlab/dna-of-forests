@@ -49283,7 +49283,7 @@
 	    },
 	    dateFormat: function dateFormat(date) {
 	      var format = this.$root.$i18n.locale === 'en' ? 'DD MMM YYYY' : 'YYYY.MM.DD';
-	      return (0, _moment2.default)(date).format(format);
+	      return (0, _moment2.default)(date, 'YYYY.MM.DD').format(format); // moment()の第２引数がないとSafariで正しく作成されない
 	    }
 	  }
 	}); //
