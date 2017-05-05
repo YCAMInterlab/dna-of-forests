@@ -191,6 +191,9 @@ article.about
 
 html[lang=en]
   article.about
+    h1
+      margin-top: 116px
+      margin-bottom: 146px
     h2
       margin-bottom: 50px
     p

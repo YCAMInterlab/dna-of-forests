@@ -62,7 +62,7 @@ html[lang=en]
   .modal
     text-align: left
     .logo
-      margin-top: 44px
-      margin-bottom: 69px
+      margin-top: 42px
+      margin-bottom: 68px
 
 </style>
