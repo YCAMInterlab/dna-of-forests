@@ -52280,32 +52280,20 @@
 				"planning_production": "企画・制作",
 				"ycam-bioresearch": {
 					"title": "YCAM バイオ・リサーチ",
-					"body": "高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです",
-					"link": "http://www.ycam.jp/projects/ycam-bio-research/"
+					"body": "高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです"
 				},
 				"iteota": {
 					"title": "「もしも、森のいきものになったら」チーム",
-					"body": "Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）",
-					"link": "http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/"
+					"body": "Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）"
 				},
 				"ycam": {
 					"title": "山口情報芸術センター［YCAM］",
-					"body": "Yamaguchi Center for Arts and Media",
-					"link": "http://www.ycam.jp/"
+					"body": "Yamaguchi Center for Arts and Media"
 				},
 				"production": "制作",
-				"tanaka": {
-					"text": "講師：田中 浩（山口県立博物館動物担当理学博士）",
-					"link": "http://www.yamahaku.pref.yamaguchi.lg.jp/"
-				},
-				"karappo": {
-					"text": "図鑑ウェブ制作：KARAPPO Inc.",
-					"link": "http://karappo.net"
-				},
-				"antoine": {
-					"text": "録音・音源編集：Antoine Bertin（antoinebertin.org）",
-					"link": "http://www.antoinebertin.org/"
-				},
+				"tanaka": "講師：田中 浩（山口県立博物館動物担当理学博士）",
+				"karappo": "図鑑ウェブ制作：KARAPPO Inc.",
+				"antoine": "録音・音源編集：Antoine Bertin（antoinebertin.org）",
 				"cooperation": "協力",
 				"cooperations": "スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"
 			},
@@ -52381,32 +52369,20 @@
 				"planning_production": "Planning and Production",
 				"ycam-bioresearch": {
 					"title": "YCAM Bio Research",
-					"body": "Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.",
-					"link": "http://www.ycam.jp/en/projects/ycam-bio-research/"
+					"body": "Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology."
 				},
 				"iteota": {
 					"title": "In the Eyes of the Animal",
-					"body": "Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])",
-					"link": "http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"
+					"body": "Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])"
 				},
 				"ycam": {
 					"title": "Yamaguchi Center for Arts and Media [YCAM]",
-					"body": "",
-					"link": "http://www.ycam.jp/en/"
+					"body": ""
 				},
 				"production": "Production",
-				"tanaka": {
-					"text": "Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)",
-					"link": "http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"
-				},
-				"karappo": {
-					"text": "Web design and development: KARAPPO Inc.",
-					"link": "http://karappo.net"
-				},
-				"antoine": {
-					"text": "Field recording and mixing: Antoine Bertin (antoinebertin.org)",
-					"link": "http://www.antoinebertin.org/"
-				},
+				"tanaka": "Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)",
+				"karappo": "Web design and development: KARAPPO Inc.",
+				"antoine": "Field recording and mixing: Antoine Bertin (antoinebertin.org)",
 				"cooperation": "Cooperation",
 				"cooperations": "With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"
 			},
@@ -108199,7 +108175,7 @@
 	      "frameborder": "0",
 	      "allowfullscreen": "allowfullscreen"
 	    }
-	  }) : _vm._e(), (_vm.$root.$i18n.locale === 'ja' && _vm.microscope.memo) ? _c('div', {
+	  }) : _vm._e(), (_vm.microscope.memo) ? _c('div', {
 	    staticClass: "bg_line"
 	  }, [_c('dl', [_c('dd', {
 	    domProps: {
@@ -108543,7 +108519,7 @@
 	    }
 	  })], 1), _c('a', {
 	    attrs: {
-	      "href": _vm.$t('about.ycam-bioresearch.link'),
+	      "href": "http://www.ycam.jp/projects/ycam-bio-research/",
 	      "target": "_blank"
 	    }
 	  }, [_c('h4', [_c('imgr', {
@@ -108558,7 +108534,7 @@
 	    }
 	  })]), _c('a', {
 	    attrs: {
-	      "href": _vm.$t('about.iteota.link'),
+	      "href": "http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/",
 	      "target": "_blank"
 	    }
 	  }, [_c('h4', [_c('imgr', {
@@ -108573,7 +108549,7 @@
 	    }
 	  })]), _c('a', {
 	    attrs: {
-	      "href": _vm.$t('about.ycam.link'),
+	      "href": "http://www.ycam.jp/",
 	      "target": "_blank"
 	    }
 	  }, [_c('h4', [_c('imgr', {
@@ -108598,20 +108574,20 @@
 	    }
 	  })], 1), _c('p', [_c('a', {
 	    attrs: {
-	      "href": _vm.$t('about.tanaka.link'),
+	      "href": "http://www.yamahaku.pref.yamaguchi.lg.jp/",
 	      "target": "_blank"
 	    }
-	  }, [_vm._v(_vm._s(_vm.$t('about.tanaka.text')))]), _c('br'), _vm._v(" "), _c('a', {
+	  }, [_vm._v(_vm._s(_vm.$t('about.tanaka')))]), _c('br'), _vm._v(" "), _c('a', {
 	    attrs: {
-	      "href": _vm.$t('about.karappo.link'),
+	      "href": "http://karappo.net",
 	      "target": "_blank"
 	    }
-	  }, [_vm._v(_vm._s(_vm.$t('about.karappo.text')))]), _c('br'), _vm._v(" "), _c('a', {
+	  }, [_vm._v(_vm._s(_vm.$t('about.karappo')))]), _c('br'), _vm._v(" "), _c('a', {
 	    attrs: {
-	      "href": _vm.$t('about.antoine.link'),
+	      "href": "http://www.antoinebertin.org/",
 	      "target": "_blank"
 	    }
-	  }, [_vm._v(_vm._s(_vm.$t('about.antoine.text')))]), _c('br')]), _c('h3', {
+	  }, [_vm._v(_vm._s(_vm.$t('about.antoine')))]), _c('br')]), _c('h3', {
 	    attrs: {
 	      "id": "cooperation"
 	    }

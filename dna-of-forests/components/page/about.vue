@@ -34,24 +34,24 @@ article.about
   section#credit
     h3#planning_production
       imgr(:alt="$t('about.planning_production')" src='about/title-planning_production.png' locale)
-    a(:href="$t('about.ycam-bioresearch.link')" target="_blank")
+    a(href="http://www.ycam.jp/projects/ycam-bio-research/" target="_blank")
       h4
         imgr(:alt="$t('about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
       p(v-html="$t('about.ycam-bioresearch.body')")
-    a(:href="$t('about.iteota.link')" target="_blank")
+    a(href="http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/" target="_blank")
       h4
         imgr(:alt="$t('about.iteota.title')" src='about/iteota.png' locale)
       p(v-html="$t('about.iteota.body')")
-    a(:href="$t('about.ycam.link')" target="_blank")
+    a(href="http://www.ycam.jp/" target="_blank")
       h4
         imgr(:alt="$t('about.ycam.title')" src='about/ycam.png' locale)
       p(v-html="$t('about.ycam.body')")
     h3#production
       imgr(:alt="$t('about.production')" src='about/title-production.png' locale)
     p
-      | <a :href="$t('about.tanaka.link')" target="_blank">{{ $t('about.tanaka.text') }}</a><br>
-      | <a :href="$t('about.karappo.link')" target="_blank">{{ $t('about.karappo.text') }}</a><br>
-      | <a :href="$t('about.antoine.link')" target="_blank">{{ $t('about.antoine.text') }}</a><br>
+      | <a href="http://www.yamahaku.pref.yamaguchi.lg.jp/" target="_blank">{{ $t('about.tanaka') }}</a><br>
+      | <a href="http://karappo.net" target="_blank">{{ $t('about.karappo') }}</a><br>
+      | <a href="http://www.antoinebertin.org/" target="_blank">{{ $t('about.antoine') }}</a><br>
     h3#cooperation
       imgr(:alt="$t('about.cooperation')" src='about/title-cooperation.png' locale)
     p.small(v-html="$t('about.cooperations')")
