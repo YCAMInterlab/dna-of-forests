@@ -3,10 +3,10 @@
 -# host = 'http://ycam.karappo.jp'
 - host = 'http://special.ycam.jp'
 -#
--# TODO: 画像を変えた場合は、ここの?移行も変更
-- chache_param = 'random-number-for-cache-clear-921689201'
+-# TODO: 画像を変えた場合は、ここも変更
+- chache_param = 'number-for-cache-clear-20170411'
 !!!
-%html{ lang:"ja" }
+%html{ lang: data.lang }
   %head
     %meta{charset: "utf-8"}
     %title= data.title
@@ -20,8 +20,11 @@
     %meta{property: "og:site_name", content: data.title}
     %meta{property: "og:description", content: data.description}
     %meta{property: "og:type", content: "website"}
-    %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
-    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/share.png?#{chache_param}"}
+    - if data.lang == 'en'
+      %meta{property: "og:url", content: "#{host}/dna-of-forests/en/"}
+    - else
+      %meta{property: "og:url", content: "#{host}/dna-of-forests/"}
+    %meta{property: "og:image", content: "#{host}/dna-of-forests/img/share-#{data.lang}.png?#{chache_param}"}
     %meta{property: "fb:app_id", content: "205454639864260"}
 
     %meta{name: "twitter:site", content: '@ycam_jp'}
@@ -41,6 +44,6 @@
 
     = partial 'partials/google_analytics'
 
-  %body{ class: "#{page_classes}" }
+  %body
     = partial 'partials/facebook_like_button'
     = yield

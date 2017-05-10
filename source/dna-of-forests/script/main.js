@@ -1,9 +1,11 @@
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import MobileDetect from 'mobile-detect';
 import _ from 'lodash';
 
 Vue.use(VueRouter);
+Vue.use(VueI18n);
 
 var userAgent = window.navigator.userAgent.toLowerCase();
 if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
@@ -64,33 +66,31 @@ else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
   vp.content = 'width=1150';
 }
 
-
-// 3. Create the router instance and pass the `routes` option
-// You can pass in additional options here, but let's
-// keep it simple for now.
 const router = new VueRouter({
   routes: [
-  { path: '/',                component: require('./components/page/panorama.vue') },
-  { path: '/panorama',        component: require('./components/page/panorama.vue') },
-  { path: '/panorama/:index', component: require('./components/page/panorama.vue') },
-  { path: '/list',            component: require('./components/page/list.vue') },
-  { path: '/list/:index',     component: require('./components/page/list.vue') },
-  { path: '/about',           component: require('./components/page/about.vue') },
+    { path: '/',                component: require('../components/page/panorama.vue') },
+    { path: '/panorama',        component: require('../components/page/panorama.vue') },
+    { path: '/panorama/:index', component: require('../components/page/panorama.vue') },
+    { path: '/list',            component: require('../components/page/list.vue') },
+    { path: '/list/:index',     component: require('../components/page/list.vue') },
+    { path: '/about',           component: require('../components/page/about.vue') },
   ]
 });
 
 // 登録
-Vue.component('detail-drawer', require('./components/detail-drawer.vue'));
-Vue.component('global-nav', require('./components/global-nav.vue'));
+Vue.component('detail-drawer', require('../components/detail-drawer.vue'));
+Vue.component('global-nav', require('../components/global-nav.vue'));
+Vue.component('imgr', require('../components/imgr.vue'));
 
-// 4. Create and mount the root instance.
-// Make sure to inject the router with the router option to make the
-// whole app router-aware.
-new Vue({
+document.moge = new Vue({
   router: router,
+  i18n: new VueI18n({
+    locale: document.querySelector('html').getAttribute('lang'),
+    messages: require('./messages.json')
+  }),
   data: function(){
     // isAlreadyDraggedを追加する
-    var _data = _.cloneDeep(require('./data.json'));
+    var _data = _.cloneDeep(require('./markers.json'));
     _data['isAlreadyDragged'] = false;
     return _data;
   }

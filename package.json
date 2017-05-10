@@ -25,7 +25,8 @@
     "node-sass": "^3.10.1",
     "pug": "^2.0.0-beta6",
     "sass-loader": "^4.0.2",
-    "vue-loader": "^9.7.0",
+    "vue-i18n": "^6.0.0-alpha.3",
+    "vue-loader": "^11.3.4",
     "webpack": "^1.13.2"
   },
   "dependencies": {
@@ -34,8 +35,12 @@
     "json-loader": "^0.5.4",
     "lodash": "^4.17.0",
     "mobile-detect": "^1.3.3",
+    "moment": "^2.18.1",
+    "striptags": "^3.0.1",
     "three-js": "^79.0.0",
-    "vue": "^2.0.3",
-    "vue-router": "^2.0.1"
+    "vue": "^2.2.6",
+    "vue-loader": "^11.3.4",
+    "vue-router": "^2.0.1",
+    "vue-template-compiler": "^2.2.6"
   }
 }
