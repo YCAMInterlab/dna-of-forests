@@ -9,8 +9,6 @@ article.about
       imgr(:alt="$t('about.about.title')" src='about/title-about.png' locale)
     p(v-html="$t('about.about.body')")
     .carousel
-      .carousel-cell(:style="bgImage(9)")
-      .carousel-cell(:style="bgImage(10)")
       .carousel-cell(:style="bgImage(1)")
       .carousel-cell(:style="bgImage(2)")
       .carousel-cell(:style="bgImage(3)")
@@ -19,6 +17,8 @@ article.about
       .carousel-cell(:style="bgImage(6)")
       .carousel-cell(:style="bgImage(7)")
       .carousel-cell(:style="bgImage(8)")
+      .carousel-cell(:style="bgImage(9)")
+      .carousel-cell(:style="bgImage(10)")
       .carousel-cell(:style="bgImage(11)")
       .carousel-cell(:style="bgImage(12)")
       .carousel-cell(:style="bgImage(13)")
