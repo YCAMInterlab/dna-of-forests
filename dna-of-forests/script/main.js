@@ -49215,7 +49215,7 @@
 	  },
 	  methods: {
 	    bgImage: function bgImage(image_num) {
-	      return 'background-image: url(/dna-of-forests/img/about/slide/' + image_num + '-' + this.$root.$i18n.locale + '@2x.jpg);';
+	      return 'background-image: url(/dna-of-forests/img/about/slides/' + image_num + '-' + this.$root.$i18n.locale + '@2x.jpg);';
 	    }
 	  }
 	});
