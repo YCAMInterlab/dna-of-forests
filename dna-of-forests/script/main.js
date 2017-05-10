@@ -108457,12 +108457,6 @@
 	    staticClass: "carousel"
 	  }, [_c('div', {
 	    staticClass: "carousel-cell",
-	    style: (_vm.bgImage(9))
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
-	    style: (_vm.bgImage(10))
-	  }), _c('div', {
-	    staticClass: "carousel-cell",
 	    style: (_vm.bgImage(1))
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
@@ -108485,6 +108479,12 @@
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    style: (_vm.bgImage(8))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(9))
+	  }), _c('div', {
+	    staticClass: "carousel-cell",
+	    style: (_vm.bgImage(10))
 	  }), _c('div', {
 	    staticClass: "carousel-cell",
 	    style: (_vm.bgImage(11))
