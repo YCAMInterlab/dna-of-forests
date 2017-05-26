@@ -34,7 +34,7 @@ This repository includes these branches below.
 ## Getting started
 
 Using [rbenv](https://github.com/rbenv/rbenv) for ruby version control is recomended.
-Otherwise you install specific ruby version according to [.ruby-version](./blob/source/.ruby-version) file.
+Otherwise you install specific ruby version according to [.ruby-version](https://github.com/YCAMInterlab/dna-of-forests/blob/source/.ruby-version) file.
 
 Install [bundler](http://bundler.io/) and [yarn](https://yarnpkg.com/en/) for package management.
 
@@ -93,7 +93,7 @@ bundle exec middleman deploy
 
 ## Licenses
 
-Field Guide “DNA of Forests” by YCAM InterLab and [Karappo Inc.](http://karappo.net) is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html) (**except the files in the list below**)
+Field Guide “DNA of Forests” by YCAM InterLab and [Karappo Inc.](http://karappo.net) is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html) (**except the files in [the list](#exception-list) below**)
 
 ```
 Copyright 2016-2017 YCAM InterLab and Karappo Inc.
@@ -113,7 +113,7 @@ limitations under the License.
 
 ### Exception List
 
-- [Roboto-Bold.ttf](./blob/source/source/dna-of-forests/style/Roboto-Bold.ttf)
-- [Roboto-Medium.ttf](./blob/source/source/dna-of-forests/style/Roboto-Medium.ttf)
-- [images in slide](./tree/source/source/dna-of-forests/img/about/slides)
-- [vendor files](./tree/source/source/dna-of-forests/vendor)
+- [Roboto-Bold.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Bold.ttf)
+- [Roboto-Medium.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Medium.ttf)
+- [images in slide](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/img/about/slides)
+- [vendor files](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/vendor)
