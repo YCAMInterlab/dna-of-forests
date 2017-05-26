@@ -4,7 +4,7 @@
 
 This is the source of website [Field Guide “DNA of Forests”](http://dna-of-forests.ycam.jp).
 
-# Table of Contents
+## Table of Contents
 
 <!-- MarkdownTOC depth="0" bracket="round" autolink="true" -->
 
