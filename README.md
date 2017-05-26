@@ -45,7 +45,7 @@ brew install yarn
 Clone this repository and install gems and npm packages.
 
 ```
-git clone https://github.com/YCAMInterlab/dna-of-forests.git
+git clone --recursive https://github.com/YCAMInterlab/dna-of-forests.git
 
 cd dna-of-forests
 
