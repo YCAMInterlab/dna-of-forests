@@ -34,7 +34,7 @@ This repository includes these branches below.
 ## Getting started
 
 Using [rbenv](https://github.com/rbenv/rbenv) for ruby version control is recomended.
-Otherwise you install specific ruby version according to [.ruby-version](https://github.com/YCAMInterlab/dna-of-forests/blob/source/.ruby-version) file.
+Otherwise you install specific ruby version according to [.ruby-version](https://github.com/YCAMInterlab/dna-of-forests/blob/source/.ruby-version).
 
 Install [bundler](http://bundler.io/) and [yarn](https://yarnpkg.com/en/) for package management.
 
