@@ -6,18 +6,18 @@ This is the source of website [Field Guide “DNA of Forests”](http://dna-of-f
 
 # Table of Contents
 
-<!-- MarkdownTOC depth="0" style="round" autolink="true" -->
+<!-- MarkdownTOC depth="0" bracket="round" autolink="true" -->
 
-- Branches
-- Getting started
-  - Middleman commands
-    - Developing
-    - Building
-    - Deploying
-- License
+- [Branches](#branches)
+- [Getting started](#getting-started)
+  - [Middleman basic commands](#middleman-basic-commands)
+    - [Developing](#developing)
+    - [Building](#building)
+    - [Deploying](#deploying)
+- [Licenses](#licenses)
+  - [Exception List](#exception-list)
 
 <!-- /MarkdownTOC -->
-
 
 
 ## Branches
