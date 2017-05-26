@@ -13,7 +13,6 @@ This is the source of website [Field Guide “DNA of Forests”](http://dna-of-f
   - [Middleman basic commands](#middleman-basic-commands)
     - [Developing](#developing)
     - [Building](#building)
-    - [Deploying](#deploying)
 - [Licenses](#licenses)
   - [Exception List](#exception-list)
 
@@ -60,7 +59,7 @@ yarn
 
 ### Middleman basic commands
 
-These are the basic commands, other usages are available in the ducuments of [middleman](https://middlemanapp.com/) and [middleman-deploy](https://github.com/middleman-contrib/middleman-deploy).
+These are the basic commands, other usages are available in the ducuments of [middleman](https://middlemanapp.com/).
 
 *You can leave out `bundle exec` if you have added `./vendor/bin` to your `$PATH` in shell.*
 
@@ -81,14 +80,6 @@ Build files in `source` directory to `build` directory
 
 ```
 bundle exec middleman build
-```
-
-#### Deploying
-
-Build files to `build` directory, and auto commit these files to specific branch (configured in config.rb).
-
-```
-bundle exec middleman deploy
 ```
 
 ## Licenses
