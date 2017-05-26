@@ -1,4 +1,4 @@
-![](assets/logo.png)
+![](./source/dna-of-forests/img/share-en.png)
 
 # Field Guide “DNA of Forests”
 
