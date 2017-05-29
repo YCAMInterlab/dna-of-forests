@@ -86,6 +86,13 @@ bundle exec middleman build
 
 Field Guide “DNA of Forests” by YCAM InterLab and [Karappo Inc.](http://karappo.net) is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html) (**except the files in [the list](#exception-list) below**)
 
+### Exception List
+
+- [Roboto-Bold.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Bold.ttf)
+- [Roboto-Medium.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Medium.ttf)
+- [images in slide](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/img/about/slides)
+- [vendor files](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/vendor)
+
 ```
 Copyright 2016-2017 YCAM InterLab and Karappo Inc.
 
@@ -101,10 +108,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-### Exception List
-
-- [Roboto-Bold.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Bold.ttf)
-- [Roboto-Medium.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Medium.ttf)
-- [images in slide](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/img/about/slides)
-- [vendor files](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/vendor)
