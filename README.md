@@ -40,14 +40,14 @@ Otherwise you install specific ruby version according to [.ruby-version](https:/
 
 Install [bundler](http://bundler.io/) and [yarn](https://yarnpkg.com/en/) for package management.
 
-```
+```sh
 gem install bundler
 brew install yarn
 ```
 
 Clone this repository and install gems and npm packages.
 
-```
+```sh
 git clone --recursive https://github.com/YCAMInterlab/dna-of-forests.git
 
 cd dna-of-forests
@@ -68,7 +68,7 @@ These are the basic commands, other usages are available in the ducuments of [mi
 
 #### Developing
 
-```
+```sh
 bundle exec middleman
 ```
 
@@ -81,7 +81,7 @@ Modify files under `source` directory.
 
 Build files in `source` directory to `build` directory
 
-```
+```sh
 bundle exec middleman build
 ```
 
