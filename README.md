@@ -88,10 +88,9 @@ Field Guide “DNA of Forests” by YCAM InterLab and [Karappo Inc.](http://kara
 
 ### Exception List
 
-- [Roboto-Bold.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Bold.ttf)
-- [Roboto-Medium.ttf](https://github.com/YCAMInterlab/dna-of-forests/blob/source/source/dna-of-forests/style/Roboto-Medium.ttf)
-- [images in slide](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/img/about/slides)
-- [vendor files](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/vendor)
+- [Font files licensed from "Google Fonts"](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/font)
+- [Images files in slide](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/img/about/slides)
+- [Vendor files](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/vendor)
 
 ```
 Copyright 2016-2017 YCAM InterLab and Karappo Inc.
