@@ -87,7 +87,7 @@ bundle exec middleman build
 
 ## Licenses
 
-Field Guide “DNA of Forests” by YCAM InterLab and [Karappo Inc.](http://karappo.net) is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html) (**except the files in [the list](#exception-list) below**)
+Field Guide “DNA of Forests” by [YCAM InterLab](https://github.com/YCAMInterlab) and [Karappo Inc.](https://github.com/karappo) is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html) (**except the files in [the list](#exception-list) below**)
 
 ### Exception List
 
