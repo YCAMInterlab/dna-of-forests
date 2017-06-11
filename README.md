@@ -73,8 +73,8 @@ bundle exec middleman
 ```
 
 Then you can preview site on these URLs
-- JA: [http://localhost:4567/dna-of-forests/](http://localhost:4567/dna-of-forests/)
-- EN: [http://localhost:4567/dna-of-forests/en/](http://localhost:4567/dna-of-forests/en/)
+- Japanese ver. [http://localhost:4567/dna-of-forests/](http://localhost:4567/dna-of-forests/)
+- English ver. [http://localhost:4567/dna-of-forests/en/](http://localhost:4567/dna-of-forests/en/)
 
 Modify files under `source` directory.
 
