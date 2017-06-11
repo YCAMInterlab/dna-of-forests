@@ -72,7 +72,7 @@ These are the basic commands, other usages are available in the ducuments of [mi
 bundle exec middleman
 ```
 
-Then you can preview site on [http://localhost:4567](http://localhost:4567)
+Then you can preview site on [http://localhost:4567/dna-of-forests/)](http://localhost:4567/dna-of-forests/)[JA] or [http://localhost:4567/dna-of-forests/en/)](http://localhost:4567/dna-of-forests/en/)[EN]
 
 Modify files under `source` directory.
 
