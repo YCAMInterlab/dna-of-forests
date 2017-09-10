@@ -32,7 +32,7 @@ var ua = navigator.userAgent;
 if(!isIE && (ua.indexOf('Edge') < 0) && (!new MobileDetect(window.navigator.userAgent).mobile())) {
   var video = document.createElement('video');
   video.id = 'video';
-  video.src = '/dna-of-forests/img/panorama/forest.mp4';
+  video.src = '/dna-of-forests/niho/img/panorama/forest.mp4';
   video.autoplay = true;
   video.loop = true;
   video.style.display = 'none';

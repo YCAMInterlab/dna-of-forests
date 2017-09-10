@@ -1,13 +1,12 @@
-var webpack = require('webpack');
 var Clean = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './source/dna-of-forests/script/main.js'
+    main: './source/dna-of-forests/niho/script/main.js'
   },
 
   resolve: {
-    root: __dirname + '/source/dna-of-forests/script',
+    root: __dirname + '/source/dna-of-forests/niho/script',
     // extensions: ['','.js','.jsx'],
 
     // HTMLファイル内でVueの記法を可能にする
@@ -18,7 +17,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/.tmp/dist',
-    filename: '/dna-of-forests/script/[name].js',
+    filename: '/dna-of-forests/niho/script/[name].js',
   },
 
   module: {

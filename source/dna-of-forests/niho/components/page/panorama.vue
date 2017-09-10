@@ -170,7 +170,7 @@
     margin-left: 7px
     &:before
       display: inline-block
-      content: url(/dna-of-forests/img/panorama/marker-arrow.png)
+      content: url(/dna-of-forests/niho/img/panorama/marker-arrow.png)
       width: 13px
       height: 14px
       vertical-align: middle
@@ -314,7 +314,7 @@ export default Vue.extend({
 
     // 脚立を隠す円形を配置
     var geometry = new THREE.CircleGeometry( 0.6, 128 );
-    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/img/panorama/logo-cover-'+this.$i18n.locale+'@2x.png') });
+    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/niho/img/panorama/logo-cover-'+this.$i18n.locale+'@2x.png') });
     var circle = new THREE.Mesh( geometry, material );
 
 
@@ -471,7 +471,7 @@ export default Vue.extend({
         texture.format = THREE.RGBFormat;
       }
       else {
-        texture = new THREE.TextureLoader().load('/dna-of-forests/img/panorama/forest.jpg');
+        texture = new THREE.TextureLoader().load('/dna-of-forests/niho/img/panorama/forest.jpg');
       }
 
       var material = new THREE.MeshBasicMaterial({ map: texture });
