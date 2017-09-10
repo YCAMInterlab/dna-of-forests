@@ -36,7 +36,8 @@ if(!isIE && (ua.indexOf('Edge') < 0) && (!new MobileDetect(window.navigator.user
   video.autoplay = true;
   video.loop = true;
   video.style.display = 'none';
-  document.body.appendChild(video);
+  // TODO: 下行のコメントアウトを解除
+  // document.body.appendChild(video);
 }
 
 // iPhoneでLandscapeにした時に見にくくなるのを何とかする

@@ -1,7 +1,7 @@
 {
   "samples": [
     {
-      "id": "9-1-A",
+      "id": "1",
       "genus": {
         "ja": "サンプルのテストマーカー",
         "en": "test sample marker"
@@ -12,16 +12,13 @@
           "text": "NNNNNNNNNNNNNCTGGTGTAAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACAGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAGGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAGAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATCTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGNNNNNNNTTTTTNANAANAAAN"
         }
       ],
-      "marker_position": { "latitude": -10.7, "longtitude": 39, "radius": 3 },
+      "marker_position": { "latitude": 100, "longtitude": 0, "radius": 2 },
       "collection_date": "2017.XX.XX",
-      "microscope": {
-        "youtube_id": "4EuIq5uTs4Y"
-      },
       "memo": {
-        "どんな場所で採ったか": "石の上。",
-        "なぜその植物を採取したか": "色がきれいで美しいから。",
-        "なんの植物だと思うか": "ミドリゴケ",
-        "植物の特徴を絵や文字で書いて下さい": "石にはうように、はりついて伸びている<br>わかめのよう<br>先端が細い、先の先まで生命を感じる"
+        "質問項目１": "質問に対する答え１",
+        "質問項目２": "質問に対する答え２",
+        "質問項目３": "質問に対する答え３",
+        "質問項目４": "質問に対する答え４"
       },
       "memofig_width": "230px"
     }

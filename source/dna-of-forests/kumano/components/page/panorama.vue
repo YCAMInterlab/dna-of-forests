@@ -231,9 +231,9 @@ import _ from 'lodash';
 var THREE = THREELib(['Projector']);
 
 // 表示の切り替え
-const visibleAxisHelper = false;
-const visible3dMaker = false;
-const visibleGrid = false;
+const visibleAxisHelper = true;
+const visible3dMaker = true;
+const visibleGrid = true;
 
 export default Vue.extend({
   components: {
@@ -532,7 +532,8 @@ export default Vue.extend({
       // 3D marker -----------
       if(visible3dMaker){
         // 15cmくらい
-        var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
+        // var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
+        var geometry = new THREE.SphereGeometry(0.15, 8, 8);
         // geometry.scale( - 1, 1, 1 );
         var color = (_data.id && _data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
         var material = new THREE.MeshLambertMaterial({
