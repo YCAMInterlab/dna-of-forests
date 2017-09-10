@@ -2,7 +2,8 @@ var Clean = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './source/dna-of-forests/niho/script/main.js'
+    niho: './source/dna-of-forests/niho/script/main.js',
+    kumano: './source/dna-of-forests/kumano/script/main.js'
   },
 
   resolve: {
@@ -17,7 +18,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/.tmp/dist',
-    filename: '/dna-of-forests/niho/script/[name].js',
+    filename: '/dna-of-forests/[name]/script/main.js',
   },
 
   module: {
