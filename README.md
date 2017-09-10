@@ -13,6 +13,9 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
 
 - [Branches](#branches)
 - [Getting started](#getting-started)
+  - [Ruby environment](#ruby-environment)
+  - [Node.js environment](#nodejs-environment)
+  - [Clone and install dependencies](#clone-and-install-dependencies)
   - [Middleman basic commands](#middleman-basic-commands)
     - [Developing](#developing)
     - [Building](#building)
@@ -35,29 +38,30 @@ This repository includes these branches below.
 
 ## Getting started
 
+### Ruby environment
+
 Using [rbenv](https://github.com/rbenv/rbenv) for ruby version control is recomended.
 Otherwise you install specific ruby version according to [.ruby-version](https://github.com/YCAMInterlab/dna-of-forests/blob/source/.ruby-version).
 
-Install [bundler](http://bundler.io/) and [yarn](https://yarnpkg.com/en/) for package management.
+**Install [bundler](http://bundler.io/) at first.**
 
-```sh
-gem install bundler
-brew install yarn
-```
+
+### Node.js environment
+
+Using [ndenv](https://github.com/riywo/ndenv) for node version control is recomended.
+Otherwise you install specific node version according to [.node-version](https://github.com/YCAMInterlab/dna-of-forests/blob/source/.node-version).
+
+
+### Clone and install dependencies
 
 Clone this repository and install gems and npm packages.
 
 ```sh
 git clone --recursive https://github.com/YCAMInterlab/dna-of-forests.git
-
 cd dna-of-forests
-
-# This is not needed because you may be in source branch already by default
-git checkout source
-
+git checkout source # This is not needed if you were in source branch
 bundle install --path=vendor/bundle --binstubs=vendor/bin
-
-yarn
+npm install
 ```
 
 ### Middleman basic commands
