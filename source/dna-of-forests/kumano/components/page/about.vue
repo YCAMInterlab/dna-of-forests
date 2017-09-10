@@ -27,10 +27,10 @@ article.about
     h2
       imgr(:alt="$t('about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
     p(v-html="$t('about.dna_barcoding.body')")
-  section#niho_forest
+  section#kumano_forest
     h2
-      imgr(:alt="$t('about.niho_forest.title')" src='about/title-niho_forest.png' locale)
-    p(v-html="$t('about.niho_forest.body')")
+      imgr(:alt="$t('about.kumano_forest.title')" src='about/title-kumano_forest.png' locale)
+    p(v-html="$t('about.kumano_forest.body')")
   section#credit
     h3#planning_production
       imgr(:alt="$t('about.planning_production')" src='about/title-planning_production.png' locale)
@@ -130,7 +130,7 @@ article.about
     //   overflow: hidden !important
     // 上記で角丸にするとスライド中に効かないのでしょうがなく、下のように画像を重ねて代用
     &:before
-      content: url(/dna-of-forests/niho/img/about/slide-round.png)
+      content: url(/dna-of-forests/kumano/img/about/slide-round.png)
       width: 100%
       height: 100%
       position: absolute
@@ -256,7 +256,7 @@ export default Vue.extend({
   },
   methods: {
     bgImage(image_num) {
-      return 'background-image: url(/dna-of-forests/niho/img/about/slides/'+image_num+'-'+this.$root.$i18n.locale+'@2x.jpg);';
+      return 'background-image: url(/dna-of-forests/kumano/img/about/slides/'+image_num+'-'+this.$root.$i18n.locale+'@2x.jpg);';
     }
   }
 });

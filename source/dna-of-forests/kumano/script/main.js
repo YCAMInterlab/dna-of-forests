@@ -29,15 +29,15 @@ if(userAgent.indexOf('fban/fbios;fbav') != -1){
 }
 
 var ua = navigator.userAgent;
-// if(!isIE && (ua.indexOf('Edge') < 0) && (!new MobileDetect(window.navigator.userAgent).mobile())) {
-//   var video = document.createElement('video');
-//   video.id = 'video';
-//   video.src = '/dna-of-forests/niho/img/panorama/forest.mp4';
-//   video.autoplay = true;
-//   video.loop = true;
-//   video.style.display = 'none';
-//   document.body.appendChild(video);
-// }
+if(!isIE && (ua.indexOf('Edge') < 0) && (!new MobileDetect(window.navigator.userAgent).mobile())) {
+  var video = document.createElement('video');
+  video.id = 'video';
+  video.src = '/dna-of-forests/kumano/img/panorama/forest.mp4';
+  video.autoplay = true;
+  video.loop = true;
+  video.style.display = 'none';
+  document.body.appendChild(video);
+}
 
 // iPhoneでLandscapeにした時に見にくくなるのを何とかする
 var setViewportByOrientation = function(){

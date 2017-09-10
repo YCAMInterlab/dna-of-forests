@@ -52,32 +52,32 @@ nav
 
     &.top
       >div
-        background-image: url(/dna-of-forests/niho/img/gnav/top@2x.png)
+        background-image: url(/dna-of-forests/kumano/img/gnav/top@2x.png)
         background-size: 21px 32px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/niho/img/gnav/top-active@2x.png)
+          background-image: url(/dna-of-forests/kumano/img/gnav/top-active@2x.png)
     &.panorama
       >div
-        background-image: url(/dna-of-forests/niho/img/gnav/panorama@2x.png)
+        background-image: url(/dna-of-forests/kumano/img/gnav/panorama@2x.png)
         background-size: 20px 34px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/niho/img/gnav/panorama-active@2x.png)
+          background-image: url(/dna-of-forests/kumano/img/gnav/panorama-active@2x.png)
     &.list
       >div
-        background-image: url(/dna-of-forests/niho/img/gnav/list@2x.png)
+        background-image: url(/dna-of-forests/kumano/img/gnav/list@2x.png)
         background-size: 20px 27px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/niho/img/gnav/list-active@2x.png)
+          background-image: url(/dna-of-forests/kumano/img/gnav/list-active@2x.png)
     &.about
       >div
-        background-image: url(/dna-of-forests/niho/img/gnav/about@2x.png)
+        background-image: url(/dna-of-forests/kumano/img/gnav/about@2x.png)
         background-size: 34px 34px
       &.router-link-active
         >div
-          background-image: url(/dna-of-forests/niho/img/gnav/about-active@2x.png)
+          background-image: url(/dna-of-forests/kumano/img/gnav/about-active@2x.png)
 
     // sound
     &:nth-last-child(2)
