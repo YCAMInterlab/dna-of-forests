@@ -101,10 +101,10 @@ export default Vue.extend({
       var ja = this.$el.querySelector('.ja');
       if(this.$root.$i18n.locale === 'en') {
         en.removeAttribute('href');
-        ja.href = '/dna-of-forests/#'+this.$route.path;
+        ja.href = `/dna-of-forests/${this.$root.forestId}#${this.$route.path}`;
       }
       else {
-        en.href = '/dna-of-forests/en/#'+this.$route.path;
+        en.href = `/dna-of-forests/${this.$root.forestId}/en/#${this.$route.path}`;
         ja.removeAttribute('href');
       }
     }
