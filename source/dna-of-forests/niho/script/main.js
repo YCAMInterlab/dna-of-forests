@@ -79,7 +79,7 @@ const router = new VueRouter({
 
 // 登録
 Vue.component('detail-drawer', require('../components/detail-drawer.vue'));
-Vue.component('global-nav', require('../components/global-nav.vue'));
+Vue.component('global-nav', require('../../components/global-nav.vue'));
 Vue.component('imgr', require('../components/imgr.vue'));
 
 document.moge = new Vue({

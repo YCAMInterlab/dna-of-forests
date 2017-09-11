@@ -4,7 +4,7 @@ a(v-on:click="click")
   div
     span SOUND
   audio(loop)
-    source(src='/dna-of-forests/niho/sound/forest.mp3' type='audio/mp3')
+    source(v-bind:src='soundUrl()' type='audio/mp3')
 
 </template>
 
@@ -15,7 +15,7 @@ a
     height: 100%
     background-position: center
     background-repeat: no-repeat
-    background-image: url(/dna-of-forests/niho/img/gnav/sound-on@2x.png)
+    background-image: url(/dna-of-forests/img/gnav/sound-on@2x.png)
     background-size: 18px 15px
     transition-duration: 0.2s
     opacity: 0.5
@@ -28,7 +28,7 @@ a
 
   &.off
     >div
-      background-image: url(/dna-of-forests/niho/img/gnav/sound-off@2x.png)
+      background-image: url(/dna-of-forests/img/gnav/sound-off@2x.png)
       background-size: 17px 15px
 
 </style>
@@ -85,6 +85,9 @@ export default Vue.extend({
         Cookies.set('isSoundOn', 0);
         this.$el.className = 'off';
       }
+    },
+    soundUrl(){
+      return `/dna-of-forests/${this.$root.forestId}/sound/forest.mp3`;
     }
   },
   data: function(){

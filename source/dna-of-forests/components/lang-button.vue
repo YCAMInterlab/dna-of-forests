@@ -29,23 +29,23 @@
       width: 39px
       margin-right: 1px
       >div
-        background-image: url(/dna-of-forests/kumano/img/gnav/language-en@2x.png)
+        background-image: url(/dna-of-forests/img/gnav/language-en@2x.png)
         background-size: auto 9px
       &:not([href])
         cursor: default
         >div
           opacity: 1
-          background-image: url(/dna-of-forests/kumano/img/gnav/language-en-active@2x.png)
+          background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png)
     &.ja
       width: 40px
       >div
-        background-image: url(/dna-of-forests/kumano/img/gnav/language-ja@2x.png)
+        background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png)
         background-size: auto 9px
       &:not([href])
         cursor: default
         >div
           opacity: 1
-          background-image: url(/dna-of-forests/kumano/img/gnav/language-ja-active@2x.png)
+          background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png)
 
 @media (max-width: 660px)
   .buttons
@@ -59,24 +59,24 @@
         height: 49px
         margin-bottom: 1px
         >div
-          background-image: url(/dna-of-forests/kumano/img/gnav/language-en@2x.png)
+          background-image: url(/dna-of-forests/img/gnav/language-en@2x.png)
           background-size: auto 9px
         &:not([href])
           cursor: default
           >div
             opacity: 1
-            background-image: url(/dna-of-forests/kumano/img/gnav/language-en-active@2x.png)
+            background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png)
       &.ja
         width: 50px
         height: 50px
         >div
-          background-image: url(/dna-of-forests/kumano/img/gnav/language-ja@2x.png)
+          background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png)
           background-size: auto 9px
         &:not([href])
           cursor: default
           >div
             opacity: 1
-            background-image: url(/dna-of-forests/kumano/img/gnav/language-ja-active@2x.png)
+            background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png)
 </style>
 
 <script>
