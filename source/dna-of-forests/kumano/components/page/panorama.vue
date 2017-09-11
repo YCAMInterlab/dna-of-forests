@@ -137,6 +137,7 @@
   user-select: none
 
   height: 14px
+  color: #fcff00
   line-height: 14px
   white-space: nowrap
 
@@ -214,8 +215,6 @@
   .marker
     span.label
       font-family: 'Roboto'
-      font-weight:
-      color: #fcff00
       font-size: 11px
       letter-spacing: 0.1em
       margin-left: 5px
