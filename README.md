@@ -16,6 +16,7 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
   - [Ruby environment](#ruby-environment)
   - [Node.js environment](#nodejs-environment)
   - [Clone and install dependencies](#clone-and-install-dependencies)
+  - [Update dependencies](#update-dependencies)
   - [Middleman basic commands](#middleman-basic-commands)
     - [Developing](#developing)
     - [Building](#building)
@@ -62,6 +63,15 @@ cd dna-of-forests
 git checkout source # This is not needed if you were in source branch
 bundle install --path=vendor/bundle --binstubs=vendor/bin
 npm install
+```
+
+### Update dependencies
+
+Doesn't work? Please check after updating.
+
+```sh
+bundle update
+npm update
 ```
 
 ### Middleman basic commands
