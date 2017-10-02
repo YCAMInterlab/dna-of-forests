@@ -12,6 +12,5 @@ build:
     - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
 notify:
   slack:
-    webhook_url: https://hooks.slack.com/services/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
-    channel: builds
-    username: drone
+    webhook_url: https://hooks.slack.com/services/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
+    channel: builds-karappo
