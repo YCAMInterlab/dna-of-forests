@@ -93,7 +93,7 @@ document.moge = new Vue({
     // isAlreadyDraggedを追加する
     var _data = _.cloneDeep(require('./markers.json'));
     _data['isAlreadyDragged'] = false;
-    _data['forestId'] = 'niho';
+    _data['forestId'] = 'kumano';
     return _data;
   }
 }).$mount('#app');
