@@ -9,19 +9,15 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
 
 ## Table of Contents
 
-<!-- MarkdownTOC depth="0" bracket="round" autolink="true" -->
+<!-- MarkdownTOC depth="0" bracket="round" autolink="true" indent="    " -->
 
 - [Branches](#branches)
 - [Getting started](#getting-started)
-  - [Ruby environment](#ruby-environment)
-  - [Node.js environment](#nodejs-environment)
-  - [Clone and install dependencies](#clone-and-install-dependencies)
-  - [Update dependencies](#update-dependencies)
-  - [Middleman basic commands](#middleman-basic-commands)
-    - [Developing](#developing)
-    - [Building](#building)
+    - [Set up environments and install dependencies](#set-up-environments-and-install-dependencies)
+    - [Start middleman server](#start-middleman-server)
+    - [Doesn't work?](#doesnt-work)
 - [Licenses](#licenses)
-  - [Exception List](#exception-list)
+    - [Exception List](#exception-list)
 
 <!-- /MarkdownTOC -->
 
@@ -39,67 +35,81 @@ This repository includes these branches below.
 
 ## Getting started
 
-### Ruby environment
+### Set up environments and install dependencies
 
-Using [rbenv](https://github.com/rbenv/rbenv) for ruby version control is recomended.
-Otherwise you install specific ruby version according to [.ruby-version](https://github.com/YCAMInterlab/dna-of-forests/blob/source/.ruby-version).
+This instruction shows a strict way for the users who are not very familiar with the ruby and node environments.
 
-**Install [bundler](http://bundler.io/) at first.**
+First of all, please install [rbenv](https://github.com/rbenv/rbenv) and [ndenv](https://github.com/riywo/ndenv) by sourself.
 
-
-### Node.js environment
-
-Using [ndenv](https://github.com/riywo/ndenv) for node version control is recomended.
-Otherwise you install specific node version according to [.node-version](https://github.com/YCAMInterlab/dna-of-forests/blob/source/.node-version).
-
-
-### Clone and install dependencies
-
-Clone this repository and install gems and npm packages.
+Then follow this instruction.
 
 ```sh
-git clone --recursive https://github.com/YCAMInterlab/dna-of-forests.git
+# clone this repository and checkout 'source' branch
+git clone --recursive -b source https://github.com/YCAMInterlab/dna-of-forests.git
+
+# move into project dirctory
 cd dna-of-forests
-git checkout source # This is not needed if you were in source branch
-bundle install --path=vendor/bundle --binstubs=vendor/bin
-npm install
+
+# node setup --------
+
+# check the version of node
+# this command will show you target node version of this project
+cat .node-version
+
+# installl node of specific version
+# you must replace 'x.x.x' part with the result above
+ndenv install x.x.x
+
+# check you are using correct version in case
+ndenv versions
+
+# install dependencies
+npm installl
+
+# ruby setup --------
+
+# check the version of ruby
+# this command will show you target ruby version of this project
+cat .ruby-version
+
+# installl ruby of specific version
+# you must replace 'x.x.x' part with the result above
+rbenv install x.x.x
+
+# check you are using correct version in case
+rbenv versions
+
+# install bundler
+rbenv exec gem install bundler
+
+# install dependencies
+rbenv exec bundle install --path=vendor/bundle --binstubs=vendor/bin
 ```
 
-### Update dependencies
-
-Doesn't work? Please check after updating.
+### Start middleman server
 
 ```sh
-bundle update
-npm update
-```
-
-### Middleman basic commands
-
-These are the basic commands, other usages are available in the ducuments of [middleman](https://middlemanapp.com/).
-
-*You can leave out `bundle exec` if you have added `./vendor/bin` to your `$PATH` in shell.*
-
-#### Developing
-
-```sh
-bundle exec middleman
+rbenv exec bundle exec middleman
 ```
 
 Then you can preview site on these URLs
+
 - English ver. [http://localhost:4567/dna-of-forests/en/](http://localhost:4567/dna-of-forests/en/)
 - Japanese ver. [http://localhost:4567/dna-of-forests/](http://localhost:4567/dna-of-forests/)
 
-Modify files under `source` directory.
+Now you can modify files under `source` directory.
 
+Ref: [Middleman](https://middlemanapp.com/)
 
-#### Building
+### Doesn't work?
 
-Build files in `source` directory to `build` directory
+Please try updating dependencies.
 
 ```sh
-bundle exec middleman build
+rbenv exec bundle update
+npm update
 ```
+
 
 ## Licenses
 
