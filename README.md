@@ -53,7 +53,7 @@ cd dna-of-forests
 # node setup --------
 
 # check the version of node
-# this command will show you target node version of this project
+# this command will show you target node version in this project
 cat .node-version
 
 # installl node of specific version
@@ -69,7 +69,7 @@ npm installl
 # ruby setup --------
 
 # check the version of ruby
-# this command will show you target ruby version of this project
+# this command will show you target ruby version in this project
 cat .ruby-version
 
 # installl ruby of specific version
