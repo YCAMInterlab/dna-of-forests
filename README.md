@@ -37,9 +37,9 @@ This repository includes these branches below.
 
 ### Set up environments and install dependencies
 
-This instruction shows a strict way for the users who are not very familiar with the ruby and node environments.
+This instruction shows a strict way for the users who are not familiar with the ruby and node. If you are an expert, please skip these instructions.
 
-First of all, please install [rbenv](https://github.com/rbenv/rbenv) and [ndenv](https://github.com/riywo/ndenv) by sourself.
+First of all, please install [rbenv](https://github.com/rbenv/rbenv) and [ndenv](https://github.com/riywo/ndenv) by yourself.
 
 Then follow this instruction.
 
