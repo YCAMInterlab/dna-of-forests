@@ -56,7 +56,7 @@ cd dna-of-forests
 # this command will show you target node version in this project
 cat .node-version
 
-# installl the specific version node
+# install the specific version node
 # you must replace 'x.x.x' part with the result above
 ndenv install x.x.x
 
@@ -64,7 +64,7 @@ ndenv install x.x.x
 ndenv versions
 
 # install dependencies
-npm installl
+npm install
 
 # ruby setup --------
 
@@ -72,7 +72,7 @@ npm installl
 # this command will show you target ruby version in this project
 cat .ruby-version
 
-# installl the specific version ruby
+# install the specific version ruby
 # you must replace 'x.x.x' part with the result above
 rbenv install x.x.x
 
