@@ -11,7 +11,7 @@
     %meta{charset: "utf-8"}
     %title= data.title
     %meta{name: "description", lang: "ja", content: data.description}
-    %meta{name: "copyright",   content: "Copyright © 2016 Yamaguchi Center for Arts and Media, All Rights Reserved."}
+    %meta{name: "copyright",   content: "Copyright © Yamaguchi Center for Arts and Media, All Rights Reserved."}
     %meta{name: "viewport",    content: "width=640"}
 
     %meta{property: "og:locale", content: "ja_JP"}
@@ -38,12 +38,12 @@
       - data.styles.each do |file|
         = stylesheet_link_tag "#{file}"
 
+    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyDQoGu03t5Lxa7aVYgCMo7fwrgZmKIfIWQ"
+    = partial 'google_analytics'
+
+  %body{class: data['body_class']}
+    = partial 'facebook_like_button'
+    = yield
     - if data.scripts
       - data.scripts.each do |file|
         = javascript_include_tag "#{file}"
-
-    = partial 'google_analytics'
-
-  %body
-    = partial 'facebook_like_button'
-    = yield
