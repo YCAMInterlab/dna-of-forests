@@ -3,16 +3,16 @@
 .drawer(:data-lang="$root.$i18n.locale")
   header
     h2
-      imgr(:alt="$t('detail_drawer.sample.title')" src='detail-drawer/title-sample.png' locale v-if="type=='sample'")
-      imgr(:alt="$t('detail_drawer.tips.title')" src='detail-drawer/title-tips.png' locale v-if="type=='knowledge'")
+      imgr(:alt="$t('detail_drawer.sample.title')" src='detail-drawer/title-sample.png' locale global v-if="type=='sample'")
+      imgr(:alt="$t('detail_drawer.tips.title')" src='detail-drawer/title-tips.png' locale global v-if="type=='knowledge'")
     router-link.close_btn(to='./')
-      imgr(alt='Close' src='detail-drawer/close-btn.png')
+      imgr(alt='Close' src='detail-drawer/close-btn.png' global)
   article
     template(v-if="type=='sample'")
 
       section.dna
         h3
-          imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale)
+          imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale global)
         h4 1. {{ $t('detail_drawer.sample.article.dna.photo_of_the_sample') }}
         .image_wrapper
           imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" v-bind:src="'sample/'+id+'.jpg'")
@@ -32,7 +32,7 @@
 
       section.microscope(v-if="microscope")
         h3
-          imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale)
+          imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale global)
         iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="$root.$i18n.locale === 'ja' && microscope.memo")
           dl
@@ -40,7 +40,7 @@
 
       section.memo(v-if="($root.$i18n.locale === 'en' && memofig_width) || ($root.$i18n.locale === 'ja' && memo)")
         h3
-          imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale)
+          imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale global)
         .bg_line
           dl(v-if="$root.$i18n.locale === 'ja'" v-for="(answer, question) in memo")
             dt {{ question }}

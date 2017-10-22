@@ -8,7 +8,7 @@
     <entrance-modal v-if="$route.path=='/'"/>
   </transition>
   a.ycam(:href="$t('panorama.ycam')" target="_blank")
-    imgr(src="panorama/ycam-logo.png")
+    imgr(src="panorama/ycam-logo.png" alt="YCAM" global)
   p.copyright
     | Field Guide “DNA of Forests”
     br
@@ -137,7 +137,6 @@
   user-select: none
 
   height: 14px
-  color: #fcff00
   line-height: 14px
   white-space: nowrap
 
@@ -171,7 +170,7 @@
     margin-left: 7px
     &:before
       display: inline-block
-      content: url(/dna-of-forests/kumano/img/panorama/marker-arrow.png)
+      content: url(/dna-of-forests/img/panorama/marker-arrow.png)
       width: 13px
       height: 14px
       vertical-align: middle
@@ -215,6 +214,8 @@
   .marker
     span.label
       font-family: 'Roboto'
+      font-weight:
+      color: #fcff00
       font-size: 11px
       letter-spacing: 0.1em
       margin-left: 5px
@@ -230,15 +231,15 @@ import _ from 'lodash';
 var THREE = THREELib(['Projector']);
 
 // 表示の切り替え
-const visibleAxisHelper = true;
-const visible3dMaker = true;
-const visibleGrid = true;
+const visibleAxisHelper = false;
+const visible3dMaker = false;
+const visibleGrid = false;
 
 export default Vue.extend({
   components: {
-    'dna-barcode-bg':    require('../../../components/dna-barcode-bg.vue').default,
-    'entrance-modal':    require('../../../components/modal/entrance-modal.vue').default,
-    'instruction-modal': require('../../../components/modal/instruction-modal.vue').default,
+    'dna-barcode-bg':    require('../dna-barcode-bg.vue').default,
+    'entrance-modal':    require('../modal/entrance-modal.vue').default,
+    'instruction-modal': require('../modal/instruction-modal.vue').default,
   },
   watch: {
     '$route': 'resetAutoScroll'
@@ -313,7 +314,9 @@ export default Vue.extend({
 
     // 脚立を隠す円形を配置
     var geometry = new THREE.CircleGeometry( 0.6, 128 );
-    var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('/dna-of-forests/kumano/img/panorama/logo-cover-'+this.$i18n.locale+'@2x.png') });
+    var material = new THREE.MeshBasicMaterial({
+      map: new THREE.TextureLoader().load(`/dna-of-forests/${this.$root.forestId}/img/panorama/logo-cover-${this.$i18n.locale}@2x.png`)
+    });
     var circle = new THREE.Mesh( geometry, material );
 
 
@@ -470,7 +473,7 @@ export default Vue.extend({
         texture.format = THREE.RGBFormat;
       }
       else {
-        texture = new THREE.TextureLoader().load('/dna-of-forests/kumano/img/panorama/forest.jpg');
+        texture = new THREE.TextureLoader().load(`/dna-of-forests/${this.$root.forestId}/img/panorama/forest.jpg`);
       }
 
       var material = new THREE.MeshBasicMaterial({ map: texture });
@@ -531,8 +534,7 @@ export default Vue.extend({
       // 3D marker -----------
       if(visible3dMaker){
         // 15cmくらい
-        // var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
-        var geometry = new THREE.SphereGeometry(0.15, 8, 8);
+        var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
         // geometry.scale( - 1, 1, 1 );
         var color = (_data.id && _data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
         var material = new THREE.MeshLambertMaterial({
@@ -649,7 +651,7 @@ export default Vue.extend({
   },
   data () {
     // autoScrollを追加する
-    var _data = _.cloneDeep(require('../../script/markers.json'));
+    var _data = _.cloneDeep(require(`../../${this.$root.forestId}/script/markers.json`));
     _data['autoScroll'] = false;
     return _data;
   }

@@ -9,15 +9,15 @@ img
 import Vue from 'vue';
 
 export default Vue.extend({
-  props: ['alt','src','locale'],
+  props: ['alt','src','locale','global'],
   watch: {
     src: 'setAttrs'
   },
   methods: {
     setAttrs() {
       this.$el.alt = this.alt;
-      // 相対パスを絶対パスに
-      var _src = `/dna-of-forests/${this.$root.forestId}/img/${this.src}`;
+      // 相対パスを絶対パスに（globalがついていたらルートのimgフォルダを読みに行く）
+      var _src = this.global ? `/dna-of-forests/img/${this.src}` : `/dna-of-forests/${this.$root.forestId}/img/${this.src}`;
       if(this.locale){
         // locale属性があれば、言語毎に画像パスを切り替え
         this.$el.src = _src.replace(/(\.\w+)$/, '-'+this.$root.$i18n.locale+'$1');
