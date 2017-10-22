@@ -6,6 +6,7 @@ import _ from 'lodash';
 import DetailDrawer from '../components/detail-drawer.vue';
 import GlobalNav from '../../components/global-nav.vue';
 import Imgr from '../components/imgr.vue';
+import AppGuide from '../../components/app-guide.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -85,7 +86,7 @@ Vue.component('detail-drawer', DetailDrawer);
 Vue.component('global-nav', GlobalNav);
 Vue.component('imgr', Imgr);
 
-document.moge = new Vue({
+new AppGuide({
   router: router,
   i18n: new VueI18n({
     locale: document.querySelector('html').getAttribute('lang'),
