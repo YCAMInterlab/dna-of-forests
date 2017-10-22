@@ -79,8 +79,8 @@ header
 <script>
 
 import Vue from 'vue';
-import dna_colors from '../script/dna_colors.js';
-import DNABarcode from './dna-barcode.vue';
+import dna_colors from '../../script/dna_colors.js';
+import DNABarcode from '../../components/dna-barcode.vue';
 
 // 登録
 Vue.component('dna-barcode', DNABarcode);

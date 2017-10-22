@@ -237,7 +237,7 @@ const visibleGrid = false;
 
 export default Vue.extend({
   components: {
-    'dna-barcode-bg':    require('../dna-barcode-bg.vue').default,
+    'dna-barcode-bg':    require('../../../components/dna-barcode-bg.vue').default,
     'entrance-modal':    require('../../../components/modal/entrance-modal.vue').default,
     'instruction-modal': require('../../../components/modal/instruction-modal.vue').default,
   },
