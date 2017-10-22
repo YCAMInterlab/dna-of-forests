@@ -17,7 +17,7 @@ export default Vue.extend({
     setAttrs() {
       this.$el.alt = this.alt;
       // 相対パスを絶対パスに
-      var _src = '/dna-of-forests/niho/img/'+this.src;
+      var _src = `/dna-of-forests/${this.$root.forestId}/img/${this.src}`;
       if(this.locale){
         // locale属性があれば、言語毎に画像パスを切り替え
         this.$el.src = _src.replace(/(\.\w+)$/, '-'+this.$root.$i18n.locale+'$1');

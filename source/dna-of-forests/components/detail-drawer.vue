@@ -45,7 +45,7 @@
           dl(v-if="$root.$i18n.locale === 'ja'" v-for="(answer, question) in memo")
             dt {{ question }}
             dd(v-html="answer")
-          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/kumano/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
+          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/'+this.$root.forestId+'/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
 
 
     template(v-if="type=='knowledge'")
@@ -164,7 +164,7 @@ h4
     top: calc(50% - 16px)
     left: calc(50% - 16px)
     z-index: 1
-    background: transparent url(/dna-of-forests/kumano/img/detail-drawer/loader.png) no-repeat center
+    background: transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat center
     -webkit-animation-name: spin
     -webkit-animation-duration: 400ms
     -webkit-animation-iteration-count: infinite
@@ -226,7 +226,7 @@ h4
     margin-top: 25px
 
 .bg_line
-  background-image: url(/dna-of-forests/kumano/img/detail-drawer/memo-line.png)
+  background-image: url(/dna-of-forests/img/detail-drawer/memo-line.png)
   padding-bottom: 1px
   text-align: center
 
@@ -298,8 +298,8 @@ export default Vue.extend({
   },
 
   data: function(){
-    var makers = require('../script/markers.json');
-    var _data = _.merge(_.cloneDeep(makers['knowledges'][0]), _.cloneDeep(makers['samples'][0]));
+    var markers = require(`../${this.$root.forestId}/script/markers.json`);
+    var _data = _.merge(_.cloneDeep(markers['knowledges'][0]), _.cloneDeep(markers['samples'][0]));
     _data.type = null; // typeプロパティを追加
 
     // initialize
