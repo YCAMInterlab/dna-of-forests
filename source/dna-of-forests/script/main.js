@@ -171,7 +171,6 @@ new AppGuide({
     // isAlreadyDraggedを追加する
     var _data = _.cloneDeep(require('../niho/script/markers.json'));
     _data['isAlreadyDragged'] = false;
-    _data['forestId'] = 'niho';
     return _data;
   }
 }).$mount('#app');

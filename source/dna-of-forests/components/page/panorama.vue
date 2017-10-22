@@ -315,7 +315,7 @@ export default Vue.extend({
     // 脚立を隠す円形を配置
     var geometry = new THREE.CircleGeometry( 0.6, 128 );
     var material = new THREE.MeshBasicMaterial({
-      map: new THREE.TextureLoader().load(`/dna-of-forests/${this.$root.forestId}/img/panorama/logo-cover-${this.$i18n.locale}@2x.png`)
+      map: new THREE.TextureLoader().load(`/dna-of-forests/${this.$route.params.forest}/img/panorama/logo-cover-${this.$i18n.locale}@2x.png`)
     });
     var circle = new THREE.Mesh( geometry, material );
 
@@ -473,7 +473,7 @@ export default Vue.extend({
         texture.format = THREE.RGBFormat;
       }
       else {
-        texture = new THREE.TextureLoader().load(`/dna-of-forests/${this.$root.forestId}/img/panorama/forest.jpg`);
+        texture = new THREE.TextureLoader().load(`/dna-of-forests/${this.$route.params.forest}/img/panorama/forest.jpg`);
       }
 
       var material = new THREE.MeshBasicMaterial({ map: texture });
@@ -651,7 +651,7 @@ export default Vue.extend({
   },
   data () {
     // autoScrollを追加する
-    var _data = _.cloneDeep(require(`../../${this.$root.forestId}/script/markers.json`));
+    var _data = _.cloneDeep(require(`../../${this.$route.params.forest}/script/markers.json`));
     _data['autoScroll'] = false;
     return _data;
   }

@@ -87,7 +87,7 @@ export default Vue.extend({
       }
     },
     soundUrl(){
-      return `/dna-of-forests/${this.$root.forestId}/sound/forest.mp3`;
+      return `/dna-of-forests/${this.$route.params.forest}/sound/forest.mp3`;
     }
   },
   data: function(){

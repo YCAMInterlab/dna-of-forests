@@ -45,7 +45,7 @@
           dl(v-if="$root.$i18n.locale === 'ja'" v-for="(answer, question) in memo")
             dt {{ question }}
             dd(v-html="answer")
-          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/'+this.$root.forestId+'/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
+          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/'+$route.params.forest+'/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
 
 
     template(v-if="type=='knowledge'")
@@ -297,7 +297,7 @@ export default Vue.extend({
   },
 
   data: function(){
-    var markers = require(`../${this.$root.forestId}/script/markers.json`);
+    var markers = require(`../${this.$route.params.forest}/script/markers.json`);
     var _data = _.merge(_.cloneDeep(markers['knowledges'][0]), _.cloneDeep(markers['samples'][0]));
     _data.type = null; // typeプロパティを追加
 
