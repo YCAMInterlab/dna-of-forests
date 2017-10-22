@@ -72,7 +72,7 @@ import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import MobileDetect from 'mobile-detect';
 import _ from 'lodash';
-import AppGuide from '../components/app-guide.vue';
+import AppGuide from '../components/app.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -140,7 +140,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: require('../components/app-guide.vue').default
+      component: require('../components/app.vue').default
     },
     {
       path: '/:forest',
