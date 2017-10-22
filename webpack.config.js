@@ -7,9 +7,6 @@ module.exports = {
   },
 
   resolve: {
-    root: __dirname + '/source/dna-of-forests/niho/script',
-    // extensions: ['','.js','.jsx'],
-
     // HTMLファイル内でVueの記法を可能にする
     alias: {
       'vue$': 'vue/dist/vue.js'
@@ -18,7 +15,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/.tmp/dist',
-    filename: '/dna-of-forests/[name]/script/main.js',
+    filename: './dna-of-forests/[name]/script/main.js',
   },
 
   module: {
