@@ -80,10 +80,9 @@ header
 
 import Vue from 'vue';
 import dna_colors from '../script/dna_colors.js';
-import DNABarcode from './dna-barcode.vue';
 
 // 登録
-Vue.component('dna-barcode', DNABarcode);
+Vue.component('dna-barcode', require('./dna-barcode.vue').default);
 
 export default Vue.extend({
   props: ['text'],

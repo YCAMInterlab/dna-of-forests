@@ -281,10 +281,9 @@ h4
 
 import Vue from 'vue';
 import _ from 'lodash';
-import DNATab from './dna-tab.vue';
 
 // 登録
-Vue.component('dna-tab', DNATab);
+Vue.component('dna-tab', require('./dna-tab.vue').default);
 
 export default Vue.extend({
 

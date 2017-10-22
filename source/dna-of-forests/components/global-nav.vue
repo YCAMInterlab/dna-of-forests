@@ -121,12 +121,10 @@ nav
 <script>
 
 import Vue from 'vue';
-import SoundButton from './sound-button.vue';
-import LangButton from './lang-button.vue';
 
 // 登録
-Vue.component('sound-button', SoundButton);
-Vue.component('lang-button', LangButton);
+Vue.component('sound-button', require('./sound-button.vue').default);
+Vue.component('lang-button', require('./lang-button.vue').default);
 
 export default Vue.extend({
   methods: {
