@@ -43,10 +43,9 @@ body.facebook
 <script>
 
 import Vue from 'vue';
-import GlobalNav from './global-nav.vue';
 
 // 登録
-Vue.component('global-nav', GlobalNav);
+Vue.component('global-nav', require('./global-nav.vue').default);
 
 export default Vue.extend({
   methods: {
