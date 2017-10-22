@@ -75,8 +75,8 @@ const router = new VueRouter({
     { path: '/',                component: require('../components/page/panorama.vue').default },
     { path: '/panorama',        component: require('../components/page/panorama.vue').default },
     { path: '/panorama/:index', component: require('../components/page/panorama.vue').default },
-    { path: '/list',            component: require('../components/page/list.vue').default },
-    { path: '/list/:index',     component: require('../components/page/list.vue').default },
+    { path: '/list',            component: require('../../components/page/list.vue').default },
+    { path: '/list/:index',     component: require('../../components/page/list.vue').default },
     { path: '/about',           component: require('../components/page/about.vue').default },
   ]
 });
