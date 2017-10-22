@@ -71,12 +71,12 @@ else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
 
 const router = new VueRouter({
   routes: [
-    { path: '/',                component: require('../components/page/panorama.vue') },
-    { path: '/panorama',        component: require('../components/page/panorama.vue') },
-    { path: '/panorama/:index', component: require('../components/page/panorama.vue') },
-    { path: '/list',            component: require('../components/page/list.vue') },
-    { path: '/list/:index',     component: require('../components/page/list.vue') },
-    { path: '/about',           component: require('../components/page/about.vue') },
+    { path: '/',                component: require('../components/page/panorama.vue').default },
+    { path: '/panorama',        component: require('../components/page/panorama.vue').default },
+    { path: '/panorama/:index', component: require('../components/page/panorama.vue').default },
+    { path: '/list',            component: require('../components/page/list.vue').default },
+    { path: '/list/:index',     component: require('../components/page/list.vue').default },
+    { path: '/about',           component: require('../components/page/about.vue').default },
   ]
 });
 

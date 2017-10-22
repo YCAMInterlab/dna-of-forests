@@ -38,7 +38,7 @@ import _ from 'lodash';
 export default Vue.extend({
   props: ['dna'],
   components: {
-    'dna-barcode': require('./dna-barcode.vue')
+    'dna-barcode': require('./dna-barcode.vue').default
   },
   methods: {
     onDrawComplete(canvas){

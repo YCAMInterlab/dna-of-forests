@@ -179,7 +179,7 @@ export default Vue.extend({
     }
   },
   components: {
-    'dna-barcode': require('../dna-barcode.vue')
+    'dna-barcode': require('../dna-barcode.vue').default
   },
   data () {
     return require('../../script/markers.json');

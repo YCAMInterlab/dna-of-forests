@@ -237,9 +237,9 @@ const visibleGrid = false;
 
 export default Vue.extend({
   components: {
-    'dna-barcode-bg':    require('../dna-barcode-bg.vue'),
-    'entrance-modal':    require('../../../components/modal/entrance-modal.vue'),
-    'instruction-modal': require('../../../components/modal/instruction-modal.vue'),
+    'dna-barcode-bg':    require('../dna-barcode-bg.vue').default,
+    'entrance-modal':    require('../../../components/modal/entrance-modal.vue').default,
+    'instruction-modal': require('../../../components/modal/instruction-modal.vue').default,
   },
   watch: {
     '$route': 'resetAutoScroll'
