@@ -44,6 +44,6 @@
 
     = partial 'google_analytics'
 
-  %body
+  %body{class: data['body_class']}
     = partial 'facebook_like_button'
     = yield
