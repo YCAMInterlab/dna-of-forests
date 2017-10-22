@@ -1,10 +1,16 @@
 <template lang="pug">
 
 .root
-  <global-nav />
-  router-view.content
-  transition(name='fade')
-    detail-drawer('v-if'="$route.params.index")
+  div.content('v-if'="$route.params.forest")
+    <global-nav />
+    router-view.guide-content
+    transition(name='fade')
+      detail-drawer('v-if'="$route.params.index")
+  div.content('v-else')
+    nav
+      router-link(v-bind:to="linkUrl('niho')") NIHO
+      router-link(v-bind:to="linkUrl('kumano')") KUMANO
+    #map
 
 </template>
 
@@ -18,6 +24,11 @@
   overflow: hidden
 
 .content
+  height: 100%
+  min-height: 100%
+  width: 100%
+
+.guide-content
   width: calc(100% - 80px)
   float: left
   height: 100%
@@ -29,9 +40,25 @@
 
 // Facebookアプリで表示した時
 body.facebook
-  .content
+  .guide-content
     position: fixed
     top: 0
+
+nav
+  float: left
+  width: 200px
+  height: 100%
+  a
+    display: block
+    color: #fff
+    text-decoration: none
+    font-size: 15px
+    line-height: 2em
+#map
+  float: left
+  width: calc(100% - 200px)
+  height: 100%
+  background-color: #fff
 
 @media (max-width: 660px)
   .content

@@ -1,16 +1,16 @@
 <template lang="pug">
 
 nav
-  router-link.top(to='/' v-bind:exact="true")
+  router-link.top(to='../' v-bind:exact="true")
     div
       span TOP
-  router-link.panorama(v-bind:to="linkUrl('/panorama')")
+  router-link.panorama(v-bind:to="linkUrl('panorama')")
     div
       span 360
-  router-link.list(v-bind:to="linkUrl('/list')")
+  router-link.list(v-bind:to="linkUrl('list')")
     div
       span LIST
-  router-link.about(to='/about')
+  router-link.about(to='about')
     div
       span ABOUT
   <sound-button />
