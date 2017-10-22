@@ -2,7 +2,7 @@ var Clean = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    niho: './source/dna-of-forests/niho/script/main.js',
+    niho:   './source/dna-of-forests/niho/script/main.js',
     kumano: './source/dna-of-forests/kumano/script/main.js'
   },
 
