@@ -5,7 +5,7 @@ import MobileDetect from 'mobile-detect';
 import _ from 'lodash';
 import DetailDrawer from '../components/detail-drawer.vue';
 import GlobalNav from '../../components/global-nav.vue';
-import Imgr from '../components/imgr.vue';
+import Imgr from '../../components/imgr.vue';
 import AppGuide from '../../components/app-guide.vue';
 
 Vue.use(VueRouter);
