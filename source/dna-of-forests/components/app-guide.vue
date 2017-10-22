@@ -2,8 +2,7 @@
 
 .root
   <global-nav />
-  .content
-    <router-view></router-view>
+  router-view.content
   transition(name='fade')
     detail-drawer('v-if'="$route.params.index")
 
