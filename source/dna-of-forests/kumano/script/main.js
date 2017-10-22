@@ -3,6 +3,9 @@ import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import MobileDetect from 'mobile-detect';
 import _ from 'lodash';
+import DetailDrawer from '../components/detail-drawer.vue';
+import GlobalNav from '../../components/global-nav.vue';
+import Imgr from '../components/imgr.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -79,9 +82,9 @@ const router = new VueRouter({
 });
 
 // 登録
-Vue.component('detail-drawer', require('../components/detail-drawer.vue'));
-Vue.component('global-nav', require('../../components/global-nav.vue'));
-Vue.component('imgr', require('../components/imgr.vue'));
+Vue.component('detail-drawer', DetailDrawer);
+Vue.component('global-nav', GlobalNav);
+Vue.component('imgr', Imgr);
 
 document.moge = new Vue({
   router: router,
