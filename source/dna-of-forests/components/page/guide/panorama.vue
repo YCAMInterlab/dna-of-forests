@@ -18,12 +18,12 @@
     | is licensed under a
     br
     a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
-  .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="$router.push('/panorama/s-'+(index+1))")
+  .marker.sample(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/s-'+(index+1) }" v-on:click="goMarker('s-'+(index+1))")
     //- 日本語なら画像、英語ならテキストでラベルを表示
     imgr.label(v-bind:alt="item.genus.ja" v-bind:src="'panorama/marker-text/sample-ja/'+filename(item.genus.en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.genus.en }}
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text" />
-  .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="$router.push('/panorama/k-'+(index+1))")
+  .marker.knowledge(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/panorama/k-'+(index+1) }" v-on:click="goMarker('k-'+(index+1))")
     //- 日本語なら画像、英語ならテキストでラベルを表示
     imgr.label(v-bind:src="'panorama/marker-text/knowledge/'+(index+1)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.title.en }}
@@ -655,6 +655,10 @@ export default Vue.extend({
       if(this.isTop()){
         this.autoScroll = true;
       }
+    },
+
+    goMarker(id) {
+      this.$router.push(`/${this.$route.params.forest}/panorama/${id}`);
     }
 
   },

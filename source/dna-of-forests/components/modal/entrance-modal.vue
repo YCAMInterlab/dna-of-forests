@@ -5,7 +5,7 @@
     .modal
       imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
       imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
-      router-link(to='/panorama') ENTER
+      router-link(to='./panorama') ENTER
 
 </template>
 
