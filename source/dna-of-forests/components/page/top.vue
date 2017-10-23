@@ -72,7 +72,7 @@ export default Vue.extend({
               icon: `/dna-of-forests/img/top/marker-${_prop}-${locale}.png`
             });
             marker.addListener('click', function() {
-              location.href = b.link[locale];
+              location.href = `#/${_prop}`;
             });
           }
         };
@@ -83,20 +83,12 @@ export default Vue.extend({
               ja: '仁保の森 2016',
               en: 'Forest of Niho 2016'
             },
-            link: {
-              ja: '/dna-of-forests/niho/',
-              en: '/dna-of-forests/niho/en/'
-            },
             position: new google.maps.LatLng(34.2505833, 131.5789502)
           },
           kumano: {
             title: {
               ja: '熊野の森 2017',
               en: 'Forest of Kumano 2017',
-            },
-            link: {
-              ja: '/dna-of-forests/kumano/',
-              en: '/dna-of-forests/kumano/en/'
             },
             position: new google.maps.LatLng(34.170286, 131.461427)
           }
