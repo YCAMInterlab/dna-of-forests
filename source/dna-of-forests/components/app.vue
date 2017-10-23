@@ -19,9 +19,6 @@ router-view.root
 
 import Vue from 'vue';
 
-// 登録
-Vue.component('global-nav', require('./global-nav.vue').default);
-
 export default Vue.extend({
   mounted: function(){
     console.log('mounted');

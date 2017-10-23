@@ -48,16 +48,6 @@ import Vue from 'vue';
 Vue.component('global-nav', require('../global-nav.vue').default);
 
 export default Vue.extend({
-  methods: {
-    linkUrl(default_path) {
-      if(this.$route.params.index){
-        return default_path+'/'+this.$route.params.index;
-      }
-      else {
-        return default_path;
-      }
-    }
-  }
 });
 
 </script>
