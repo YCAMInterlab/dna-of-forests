@@ -5,7 +5,7 @@
     <instruction-modal v-if="!$root.isAlreadyDragged"/>
   </transition>
   <transition name="fade">
-    <entrance-modal v-if="$route.path=='/'"/>
+    <entrance-modal v-if="isTop()"/>
   </transition>
   a.ycam(:href="$t('panorama.ycam')" target="_blank")
     imgr(src="panorama/ycam-logo.png" alt="YCAM" global)
@@ -365,7 +365,7 @@ export default Vue.extend({
       // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
       // default_lon += 27;
     }
-    else if(this.$route.path != '/') {
+    else if(!this.isTop()) {
 
       default_lon = (Cookies.get('lon')*1 || default_lon);
       default_lat = (Cookies.get('lat')*1 || default_lat);
@@ -380,6 +380,15 @@ export default Vue.extend({
   },
 
   methods: {
+
+    isTop(){
+      if(this.$route.path.match(/^\/[A-Za-z0-9]+\/*$/)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    },
 
     // 英語名を全部小文字にしたり置換してファイル名を取得
     filename(str){
@@ -580,7 +589,7 @@ export default Vue.extend({
 
     onMouseDown( e ) {
       // Canvas部分でドラッグ開始したら
-      if( e.target === this.renderer.domElement && this.$route.path!='/' ){
+      if( e.target === this.renderer.domElement && !this.isTop() ){
         e.preventDefault();
 
         this.isUserInteracting = true;
@@ -626,7 +635,7 @@ export default Vue.extend({
     },
 
     onMouseWheel( e ) {
-      if(this.$route.path!='/'){
+      if(!this.isTop()){
         // WebKit
         if ( e.wheelDeltaY ) {
           this.lon += e.wheelDeltaY * 0.05;
@@ -643,7 +652,7 @@ export default Vue.extend({
     },
 
     resetAutoScroll() {
-      if(this.$route.path==='/'){
+      if(this.isTop()){
         this.autoScroll = true;
       }
     }
