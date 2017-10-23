@@ -47,6 +47,17 @@
           opacity: 1
           background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png)
 
+  // round style (on global top)
+  &.round
+    a.en
+      width: 45px
+      border-top-left-radius: 30px
+      border-bottom-left-radius: 30px
+    a.ja
+      width: 44px
+      border-top-right-radius: 30px
+      border-bottom-right-radius: 30px
+
 @media (max-width: 660px)
   .buttons
     width: 50px
@@ -101,10 +112,10 @@ export default Vue.extend({
       var ja = this.$el.querySelector('.ja');
       if(this.$root.$i18n.locale === 'en') {
         en.removeAttribute('href');
-        ja.href = `/dna-of-forests/${this.$route.params.forest}#${this.$route.path}`;
+        ja.href = `/dna-of-forests/#${this.$route.path}`;
       }
       else {
-        en.href = `/dna-of-forests/${this.$route.params.forest}/en/#${this.$route.path}`;
+        en.href = `/dna-of-forests/en/#${this.$route.path}`;
         ja.removeAttribute('href');
       }
     }

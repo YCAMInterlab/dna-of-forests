@@ -1,30 +1,103 @@
 <template lang="pug">
 
 .root
-  nav
-    router-link(v-bind:to="linkUrl('niho')") NIHO
-    router-link(v-bind:to="linkUrl('kumano')") KUMANO
+  aside
+    h1(v-bind:class="this.$root.$i18n.locale")
+      span YCAM
+    imgr.lead(:alt="$t('top.lead')" src='top/lead.png' locale global)
+    a.ycam(:href="$t('panorama.ycam')" target="_blank")
+      imgr(src="top/ycam-logo.png" alt="YCAM" global)
+    p.copyright
+      | Field Guide “DNA of Forests”
+      br
+      | by
+      a(:href="$t('panorama.ycam')" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
+      br
+      | is licensed under a
+      br
+      a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
+    nav
+      router-link(v-bind:to="linkUrl('niho')") NIHO
+      router-link(v-bind:to="linkUrl('kumano')") KUMANO
   #map
+  <lang-button class="lang round" />
 
 </template>
 
 <style lang="sass?indentedSyntax" scoped>
 
-nav
+.lang
+  position: absolute
+  top: 30px
+  right: 30px
+
+aside
+  position: relative
   float: left
-  width: 200px
-  height: 100%
+  width: 260px
+  height: calc(100% - 40px)
+  margin: 20px
+
+nav
+  display: none
   a
     display: block
     color: #fff
     text-decoration: none
     font-size: 15px
     line-height: 2em
+
+h1
+  width: 100%
+  span
+    display: none
+  &.ja
+    height: calc(100% - 197px)
+    background: url(/dna-of-forests/img/top/logo-ja.png) no-repeat center
+    background-size: 213px 145px
+  &.en
+    height: calc(100% - 197px)
+    background: url(/dna-of-forests/img/top/logo-en.png) no-repeat left
+    background-size: 209px 189px
+
+.lead
+  position: absolute
+  left: 0
+  bottom: 84px
+
+.ycam
+  position: absolute
+  bottom: 3px
+  left: 0
+  &:hover
+    opacity: 0.7
+
+.copyright
+  position: absolute
+  bottom: 0
+  right: 0
+  font-family: 'Roboto'
+  font-size: 9px
+  line-height: 13px
+  text-align: right
+  color: #4c4c4c
+  a
+    color: #4c4c4c
+    text-decoration: none
+    &:hover
+      border-bottom: 1px dotted #4c4c4c
+
 #map
   float: left
-  width: calc(100% - 200px)
-  height: 100%
+  width: calc(100% - 320px)
+  height: calc(100% - 40px)
   background-color: #fff
+  border-radius: 5px
+  margin: 20px 20px 20px 0
+
+@media (max-width: 660px)
+  nav
+    display: block
 
 </style>
 
@@ -33,7 +106,7 @@ nav
 import Vue from 'vue';
 
 // 登録
-Vue.component('global-nav', require('../global-nav.vue').default);
+Vue.component('lang-button', require('../lang-button.vue').default);
 
 export default Vue.extend({
   watch: {
@@ -69,7 +142,7 @@ export default Vue.extend({
               position: b.position,
               map: map,
               title: b.title[locale],
-              icon: `/dna-of-forests/img/top/marker-${_prop}-${locale}.png`
+              icon: `/dna-of-forests/img/top/markers/${_prop}-${locale}.png`
             });
             marker.addListener('click', function() {
               location.href = `#/${_prop}`;
