@@ -237,9 +237,9 @@ const visibleGrid = false;
 
 export default Vue.extend({
   components: {
-    'dna-barcode-bg':    require('../dna-barcode-bg.vue').default,
-    'entrance-modal':    require('../modal/entrance-modal.vue').default,
-    'instruction-modal': require('../modal/instruction-modal.vue').default,
+    'dna-barcode-bg':    require('../../dna-barcode-bg.vue').default,
+    'entrance-modal':    require('../../modal/entrance-modal.vue').default,
+    'instruction-modal': require('../../modal/instruction-modal.vue').default,
   },
   watch: {
     '$route': 'resetAutoScroll'
@@ -651,7 +651,7 @@ export default Vue.extend({
   },
   data () {
     // autoScrollを追加する
-    var _data = _.cloneDeep(require(`../../${this.$route.params.forest}/script/markers.json`));
+    var _data = _.cloneDeep(require(`../../../${this.$route.params.forest}/script/markers.json`));
     _data['autoScroll'] = false;
     return _data;
   }
