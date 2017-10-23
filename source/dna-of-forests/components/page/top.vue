@@ -141,7 +141,7 @@ export default Vue.extend({
             var marker = new google.maps.Marker({
               position: b.position,
               map: map,
-              title: b.title[locale],
+              title: `${b.title[locale]}をみる`,
               icon: `/dna-of-forests/img/top/markers/${_prop}-${locale}.png`
             });
             marker.addListener('click', function() {
