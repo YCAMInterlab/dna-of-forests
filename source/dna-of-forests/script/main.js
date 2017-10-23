@@ -74,15 +74,15 @@ const router = new VueRouter({
       component: require('../components/page/top.vue').default
     },
     {
-      path: '/:forest',
+      path: '/:forest/',
       component: require('../components/page/guide.vue').default,
       children: [
-        { path: '/',                component: require('../components/page/guide/panorama.vue').default },
-        { path: '/panorama',        component: require('../components/page/guide/panorama.vue').default },
-        { path: '/panorama/:index', component: require('../components/page/guide/panorama.vue').default },
-        { path: '/list',            component: require('../components/page/guide/list.vue').default },
-        { path: '/list/:index',     component: require('../components/page/guide/list.vue').default },
-        { path: '/about',           component: require('../niho/components/page/about.vue').default }
+        { path: '',                component: require('../components/page/guide/panorama.vue').default },
+        { path: 'panorama',        component: require('../components/page/guide/panorama.vue').default },
+        { path: 'panorama/:index', component: require('../components/page/guide/panorama.vue').default },
+        { path: 'list',            component: require('../components/page/guide/list.vue').default },
+        { path: 'list/:index',     component: require('../components/page/guide/list.vue').default },
+        { path: 'about',           component: require('../niho/components/page/about.vue').default }
       ]
     }
   ]
