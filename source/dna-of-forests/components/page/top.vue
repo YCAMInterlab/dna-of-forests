@@ -69,7 +69,7 @@ export default Vue.extend({
               position: b.position,
               map: map,
               title: b.title[locale],
-              icon: '/dna-of-forests/img/top/marker-'+_prop+'-'+locale+'.png'
+              icon: `/dna-of-forests/img/top/marker-${_prop}-${locale}.png`
             });
             marker.addListener('click', function() {
               location.href = b.link[locale];
