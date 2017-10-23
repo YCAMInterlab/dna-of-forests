@@ -2,6 +2,7 @@
 
 .wrapper
   .containter
+    router-link.backTop(to="/") 他の図鑑をみる
     .modal
       imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
       imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
@@ -27,6 +28,13 @@
 img
   user-select: none
   pointer-events: none
+
+.backTop
+  color: #fff
+  position: absolute
+  right: 25px
+  top: 50%
+  text-decoration: none
 
 .modal
   background-color: #000
