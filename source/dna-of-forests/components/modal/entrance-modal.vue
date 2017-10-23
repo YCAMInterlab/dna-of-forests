@@ -2,7 +2,7 @@
 
 .wrapper
   .containter
-    router-link.backTop(to="/") 他の図鑑をみる
+    router-link.backTop(to="/") See other guides
     .modal
       imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
       imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
