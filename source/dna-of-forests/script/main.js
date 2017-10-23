@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
-import MobileDetect from 'mobile-detect';
 import _ from 'lodash';
 import AppGuide from '../components/app.vue';
 
@@ -9,14 +8,6 @@ Vue.use(VueRouter);
 Vue.use(VueI18n);
 
 var userAgent = window.navigator.userAgent.toLowerCase();
-if( userAgent.match(/(msie|MSIE)/) || userAgent.match(/(T|t)rident/) ) {
-  var isIE = true;
-  // var ieVersion = userAgent.match(/((msie|MSIE)\s|rv:)([\d\.]+)/)[3];
-  // ieVersion = parseInt(ieVersion);
-}
-// else {
-//   var isIE = false;
-// }
 
 // Facebook InApp Browser
 if(userAgent.indexOf('fban/fbios;fbav') != -1){
@@ -30,15 +21,6 @@ if(userAgent.indexOf('fban/fbios;fbav') != -1){
 }
 
 var ua = navigator.userAgent;
-if(!isIE && (ua.indexOf('Edge') < 0) && (!new MobileDetect(window.navigator.userAgent).mobile())) {
-  var video = document.createElement('video');
-  video.id = 'video';
-  video.src = '/dna-of-forests/niho/img/panorama/forest.mp4';
-  video.autoplay = true;
-  video.loop = true;
-  video.style.display = 'none';
-  document.body.appendChild(video);
-}
 
 // iPhoneでLandscapeにした時に見にくくなるのを何とかする
 var setViewportByOrientation = function(){
