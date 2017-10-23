@@ -383,7 +383,7 @@ export default Vue.extend({
 
     // 英語名を全部小文字にしたり置換してファイル名を取得
     filename(str){
-      return str.toLowerCase().replace(/[\(|\)|.]/g , '').replace(/ /g , '-');
+      return str.toLowerCase().replace(/[(|)|.]/g , '').replace(/ /g , '-');
     },
 
     animate( ts ) {
