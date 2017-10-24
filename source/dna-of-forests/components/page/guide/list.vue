@@ -11,7 +11,7 @@ section.list(:data-lang="$root.$i18n.locale")
         th(colspan='2').dna {{ $t('list.samples.dna') }}
         th.collection_date {{ $t('list.samples.collection_date') }}
     tbody
-      tr(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="$router.push('/list/s-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/s-'+(index+1) }")
+      tr(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="goMarker('s-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
 
         td.result(v-if="$root.$i18n.locale === 'ja'")
@@ -41,7 +41,7 @@ section.list(:data-lang="$root.$i18n.locale")
     imgr(:alt="$t('list.tips.title')" src='list/title-knowledges.png' locale)
   table#knowledges
     tbody
-      tr(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="$router.push('/list/k-'+(index+1))" v-bind:class="{ selected: $route.path=='/list/k-'+(index+1) }")
+      tr(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="goMarker('k-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.title {{ item.title[$root.$i18n.locale] }}
         td.description {{ item.description[$root.$i18n.locale] | striptags }}
@@ -209,6 +209,9 @@ export default Vue.extend({
     dateFormat(date){
       var format = (this.$root.$i18n.locale === 'en') ? 'DD MMM YYYY' : 'YYYY.MM.DD';
       return moment(date, 'YYYY.MM.DD').format(format); // moment()の第２引数がないとSafariで正しく作成されない
+    },
+    goMarker(id) {
+      this.$router.push(`/${this.$route.params.forest}/list/${id}`);
     }
   }
 });
