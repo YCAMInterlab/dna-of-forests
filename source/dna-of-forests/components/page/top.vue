@@ -1,11 +1,11 @@
 <template lang="pug">
 
-.root
+.root(v-bind:class="this.$root.$i18n.locale")
   #map
   aside
-    h1(v-bind:class="this.$root.$i18n.locale")
-      span YCAM
-    imgr-sp.lead(:alt="$t('top.lead')" src='top/lead.png' locale global)
+    h1
+      imgr-sp.logo(:alt="TODO" src='top/logo.png' locale global)
+    imgr-sp.lead(:alt="TODO" src='top/lead.png' locale global)
     nav
       router-link(v-bind:to="linkUrl('niho')") NIHO
       router-link(v-bind:to="linkUrl('kumano')") KUMANO
@@ -21,7 +21,7 @@
         | is licensed under a
         br
         a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
-  <lang-button class="lang round" />
+  <lang-button-top class="lang round" />
 
 </template>
 
@@ -40,19 +40,30 @@ aside
   margin: 20px
   display: flex
   flex-direction: column
-  // min-height: 100vh
 
 h1
   width: 100%
   flex: 1
-  span
-    display: none
-  &.ja
-    background: url(/dna-of-forests/img/top/logo-ja-pc.png) no-repeat center
-    background-size: 213px 145px
-  &.en
-    background: url(/dna-of-forests/img/top/logo-en-pc.png) no-repeat left
-    background-size: 209px 189px
+  .logo
+    position: relative
+    width: 100%
+    height: 100%
+    img
+      position: absolute
+
+.root.ja
+  h1
+    .logo
+      img
+        top: 50%
+        left: 50%
+        transform: translateY(-50%) translateX(-50%)
+.root.en
+  h1
+    .logo
+      img
+        top: 50%
+        transform: translateY(-50%)
 
 .lead
   margin: 32px 0
@@ -111,6 +122,9 @@ nav
     height: 552px
     clear: both
     float: none
+  aside
+    width: 100%
+    display: block
   nav
     display: block
 
@@ -121,7 +135,7 @@ nav
 import Vue from 'vue';
 
 // 登録
-Vue.component('lang-button', require('../lang-button.vue').default);
+Vue.component('lang-button-top', require('../lang-button-top.vue').default);
 
 export default Vue.extend({
   watch: {

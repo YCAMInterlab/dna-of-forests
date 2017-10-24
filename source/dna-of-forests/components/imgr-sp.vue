@@ -6,10 +6,16 @@ div
 
 </template>
 
-<style lang="sass?indentedSyntax" scoped>
+<style lang="sass?indentedSyntax">
+
+img.sp
+  display: none
 
 @media (max-width: 660px)
-  img
+  img.pc
+    display: none
+  img.sp
+    display: inherit
 
 </style>
 
