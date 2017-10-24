@@ -2,11 +2,11 @@
 
 .wrapper
   .containter
-    router-link.backTop(to="/") See other guides
     .modal
       imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
       imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
       router-link(v-bind:to="'/'+$route.params.forest+'/panorama'") ENTER
+    router-link.backTop(to="/") See other guides
 
 </template>
 
@@ -72,5 +72,13 @@ html[lang=en]
     .logo
       margin-top: 42px
       margin-bottom: 68px
+
+@media (max-width: 660px)
+  .backTop
+    right: inherit
+    top: inherit
+    left: 50%
+    transform: translateX(-50%)
+    margin-top: 30px
 
 </style>
