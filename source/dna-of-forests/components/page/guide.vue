@@ -34,7 +34,7 @@ body.facebook
     top: 0
 
 @media (max-width: 660px)
-  .content
+  .guide-content
     width: 100%
     height: calc(100% - 100px)
 
