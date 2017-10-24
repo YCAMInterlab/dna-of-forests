@@ -38,15 +38,6 @@ aside
   height: calc(100% - 40px)
   margin: 20px
 
-nav
-  display: none
-  a
-    display: block
-    color: #fff
-    text-decoration: none
-    font-size: 15px
-    line-height: 2em
-
 h1
   width: 100%
   span
@@ -86,6 +77,15 @@ h1
     text-decoration: none
     &:hover
       border-bottom: 1px dotted #4c4c4c
+
+nav
+  display: none
+  a
+    display: block
+    color: #fff
+    text-decoration: none
+    font-size: 15px
+    line-height: 2em
 
 #map
   float: left
