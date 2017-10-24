@@ -7,8 +7,13 @@
       imgr-sp.logo(:alt="TODO" src='top/logo.png' locale global)
     imgr-sp.lead(:alt="TODO" src='top/lead.png' locale global)
     nav
-      router-link(v-bind:to="linkUrl('niho')") NIHO
-      router-link(v-bind:to="linkUrl('kumano')") KUMANO
+      h2
+        imgr(:alt="TODO" src='top/title-guides.png' locale global)
+      .links
+        router-link(v-bind:to="linkUrl('kumano')")
+          imgr(:alt="TODO" src='top/guides/kumano/list.png' locale global)
+        router-link(v-bind:to="linkUrl('niho')")
+          imgr(:alt="TODO" src='top/guides/niho/list.png' locale global)
     footer
       a.ycam(:href="$t('panorama.ycam')" target="_blank")
         imgr(src="top/ycam-logo.png" alt="YCAM" global)
@@ -113,17 +118,45 @@ nav
   margin: 20px 20px 20px 0
 
 @media (max-width: 660px)
+  .root
+    overflow: auto
   #map
     margin: 0
     width: 100%
-    height: 552px
+    height: 604px
+    border-radius: 0
     clear: both
     float: none
   aside
-    width: 100%
+    width: calc(100% - 60px)
+    margin: 30px
+    height: auto
     display: block
+  .root.en
+    h1
+      height: 265px
+  .lead
+    position: relative
+    bottom: inherit
+    margin-bottom: 100px
   nav
     display: block
+    h2
+      margin-bottom: 40px
+    a
+      display: block
+      padding: 58px 34px
+      margin-bottom: 15px
+      &:nth-child(4n+1)
+        background-color: #ff33a5
+      &:nth-child(4n+2)
+        background-color: #337eff
+      &:nth-child(4n+3)
+        background-color: #33ff6d
+      &:nth-child(4n+4)
+        background-color: #f5ff8a
+  footer
+    position: relative
 
 </style>
 
@@ -173,7 +206,7 @@ export default Vue.extend({
               position: b.position,
               map: map,
               title: `${b.title[locale]}をみる`,
-              icon: `/dna-of-forests/img/top/markers/${_prop}-${locale}.png`
+              icon: `/dna-of-forests/img/top/guides/${_prop}/marker-${locale}.png`
             });
             marker.addListener('click', function() {
               location.href = `#/${_prop}`;
