@@ -12,7 +12,7 @@
 
 .buttons
   a
-    display: none
+    display: block
     float: left
     height: 30px
     background-color: #0d0d0d

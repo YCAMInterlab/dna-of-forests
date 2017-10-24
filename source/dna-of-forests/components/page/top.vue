@@ -38,39 +38,36 @@ aside
   width: 260px
   height: calc(100% - 40px)
   margin: 20px
-  display: flex
-  flex-direction: column
 
 h1
   width: 100%
-  flex: 1
+  position: relative
   .logo
-    position: relative
-    width: 100%
-    height: 100%
-    img
-      position: absolute
+    position: absolute
 
 .root.ja
   h1
+    height: calc(100% - 197px)
     .logo
-      img
-        top: 50%
-        left: 50%
-        transform: translateY(-50%) translateX(-50%)
+      top: 50%
+      left: 50%
+      transform: translateY(-50%) translateX(-50%)
 .root.en
   h1
+    height: calc(100% - 197px)
     .logo
-      img
-        top: 50%
-        transform: translateY(-50%)
+      top: 50%
+      transform: translateY(-50%)
 
 .lead
-  margin: 32px 0
+  position: absolute
+  bottom: 84px
 
 footer
   height: 52px
-  position: relative
+  width: 100%
+  position: absolute
+  bottom: 0
   .ycam
     position: absolute
     bottom: 3px
