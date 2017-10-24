@@ -135,6 +135,11 @@ nav
   .root.en
     h1
       height: 265px
+  .root.ja
+    #map
+      height: 553px
+    h1
+      height: 365px
   .lead
     position: relative
     bottom: inherit
@@ -148,6 +153,9 @@ nav
       display: block
       padding: 58px 34px
       margin-bottom: 15px
+      background-image: url(/dna-of-forests/img/top/list-icon.png)
+      background-repeat: no-repeat
+      background-position: right 38px center
       &:nth-child(4n+1)
         background-color: #ff33a5
       &:nth-child(4n+2)
