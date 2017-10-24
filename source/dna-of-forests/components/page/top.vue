@@ -16,7 +16,7 @@
           imgr(:alt="TODO" src='top/guides/niho/list.png' locale global)
     footer
       a.ycam(:href="$t('panorama.ycam')" target="_blank")
-        imgr(src="top/ycam-logo.png" alt="YCAM" global)
+        imgr-sp(src="top/ycam-logo.png" alt="YCAM" global)
       p.copyright
         | Field Guide “DNA of Forests”
         br
@@ -141,6 +141,7 @@ nav
     margin-bottom: 100px
   nav
     display: block
+    margin-bottom: 100px
     h2
       margin-bottom: 40px
     a
@@ -157,6 +158,18 @@ nav
         background-color: #f5ff8a
   footer
     position: relative
+    height: auto
+    .ycam
+      position: relative
+      float: left
+    .copyright
+      position: relative
+      float: right
+      font-size: 15px
+      line-height: 22px
+      // Chromeでは10px以下のフォントサイズが使えないので、その対応
+      &.chrome
+        line-height: 22px
 
 </style>
 
