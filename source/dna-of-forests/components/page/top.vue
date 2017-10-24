@@ -1,25 +1,26 @@
 <template lang="pug">
 
 .root
+  #map
   aside
     h1(v-bind:class="this.$root.$i18n.locale")
       span YCAM
     imgr.lead(:alt="$t('top.lead')" src='top/lead.png' locale global)
-    a.ycam(:href="$t('panorama.ycam')" target="_blank")
-      imgr(src="top/ycam-logo.png" alt="YCAM" global)
-    p.copyright
-      | Field Guide “DNA of Forests”
-      br
-      | by
-      a(:href="$t('panorama.ycam')" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
-      br
-      | is licensed under a
-      br
-      a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
     nav
       router-link(v-bind:to="linkUrl('niho')") NIHO
       router-link(v-bind:to="linkUrl('kumano')") KUMANO
-  #map
+    footer
+      a.ycam(:href="$t('panorama.ycam')" target="_blank")
+        imgr(src="top/ycam-logo.png" alt="YCAM" global)
+      p.copyright
+        | Field Guide “DNA of Forests”
+        br
+        | by
+        a(:href="$t('panorama.ycam')" target="_blank" style="margin-left: 0.4em;") Yamaguchi Center for Arts and Media [YCAM]
+        br
+        | is licensed under a
+        br
+        a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
   <lang-button class="lang round" />
 
 </template>
@@ -37,46 +38,56 @@ aside
   width: 260px
   height: calc(100% - 40px)
   margin: 20px
+  display: flex
+  flex-direction: column
+  // min-height: 100vh
 
 h1
   width: 100%
+  flex: 1
   span
     display: none
   &.ja
-    height: calc(100% - 197px)
+    // height: calc(100% - 197px)
     background: url(/dna-of-forests/img/top/logo-ja.png) no-repeat center
     background-size: 213px 145px
   &.en
-    height: calc(100% - 197px)
+    // height: calc(100% - 197px)
     background: url(/dna-of-forests/img/top/logo-en.png) no-repeat left
     background-size: 209px 189px
 
 .lead
-  position: absolute
-  left: 0
-  bottom: 84px
+  margin: 32px 0
 
-.ycam
-  position: absolute
-  bottom: 3px
-  left: 0
-  &:hover
-    opacity: 0.7
-
-.copyright
-  position: absolute
-  bottom: 0
-  right: 0
-  font-family: 'Roboto'
-  font-size: 9px
-  line-height: 13px
-  text-align: right
-  color: #4c4c4c
-  a
-    color: #4c4c4c
-    text-decoration: none
+footer
+  height: 52px
+  position: relative
+  .ycam
+    position: absolute
+    bottom: 3px
+    left: 0
     &:hover
-      border-bottom: 1px dotted #4c4c4c
+      opacity: 0.7
+
+  .copyright
+    position: absolute
+    right: 0
+    font-family: 'Roboto'
+    font-size: 9px
+    line-height: 13px
+    letter-spacing: 0
+    text-align: right
+    color: #4c4c4c
+    // Chromeでは10px以下のフォントサイズが使えないので、その対応
+    &.chrome
+      line-height: 14px
+      -webkit-transform: scale(0.9)
+      -webkit-transform-origin: 100% 0
+    a
+      color: #4c4c4c
+      text-decoration: none
+      &:hover
+        border-bottom: 1px dotted #4c4c4c
 
 nav
   display: none
@@ -88,7 +99,7 @@ nav
     line-height: 2em
 
 #map
-  float: left
+  float: right
   width: calc(100% - 320px)
   height: calc(100% - 40px)
   background-color: #fff
@@ -96,6 +107,12 @@ nav
   margin: 20px 20px 20px 0
 
 @media (max-width: 660px)
+  #map
+    margin: 0
+    width: 100%
+    height: 552px
+    clear: both
+    float: none
   nav
     display: block
 
@@ -117,6 +134,11 @@ export default Vue.extend({
   },
   methods: {
     init() {
+
+      if(document.querySelector('body').classList.contains('chrome')) {
+        this.$el.querySelector('.copyright').classList.add('chrome');
+      }
+
       if( this.$route.path == '/') {
         var mapOptions = {
           mapTypeId: 'satellite',
