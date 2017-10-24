@@ -664,7 +664,7 @@ export default Vue.extend({
   },
   data () {
     // autoScrollを追加する
-    var _data = _.cloneDeep(require(`../../../${this.$route.params.forest}/script/markers.json`));
+    var _data = _.cloneDeep(require(`../../../${this.$route.params.forest}/markers.json`));
     _data['autoScroll'] = false;
     return _data;
   }

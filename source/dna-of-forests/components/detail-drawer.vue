@@ -297,7 +297,7 @@ export default Vue.extend({
   },
 
   data: function(){
-    var markers = require(`../${this.$route.params.forest}/script/markers.json`);
+    var markers = require(`../${this.$route.params.forest}/markers.json`);
     var _data = _.merge(_.cloneDeep(markers['knowledges'][0]), _.cloneDeep(markers['samples'][0]));
     _data.type = null; // typeプロパティを追加
 

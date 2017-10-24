@@ -182,7 +182,7 @@ export default Vue.extend({
     'dna-barcode': require('../../dna-barcode.vue').default
   },
   data () {
-    return require(`../../../${this.$route.params.forest}/script/markers.json`);
+    return require(`../../../${this.$route.params.forest}/markers.json`);
   },
   mounted: function() {
 

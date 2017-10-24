@@ -79,11 +79,11 @@ new AppGuide({
   router: router,
   i18n: new VueI18n({
     locale: document.querySelector('html').getAttribute('lang'),
-    messages: require('../niho/script/messages.json')
+    messages: require('../niho/messages.json')
   }),
   data: function(){
     // isAlreadyDraggedを追加する
-    var _data = _.cloneDeep(require('../niho/script/markers.json'));
+    var _data = _.cloneDeep(require('../niho/markers.json'));
     _data['isAlreadyDragged'] = false;
     return _data;
   }
