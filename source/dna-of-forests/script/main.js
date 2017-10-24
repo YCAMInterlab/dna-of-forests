@@ -94,8 +94,9 @@ const router = new VueRouter({
 
 // 登録
 Vue.component('detail-drawer', require('../components/detail-drawer.vue').default);
-Vue.component('global-nav', require('../components/global-nav.vue').default);
-Vue.component('imgr', require('../components/imgr.vue').default);
+Vue.component('global-nav',    require('../components/global-nav.vue').default);
+Vue.component('imgr',          require('../components/imgr.vue').default);
+Vue.component('imgr-sp',       require('../components/imgr-sp.vue').default);
 
 new AppGuide({
   router: router,

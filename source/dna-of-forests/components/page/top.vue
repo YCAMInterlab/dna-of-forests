@@ -5,7 +5,7 @@
   aside
     h1(v-bind:class="this.$root.$i18n.locale")
       span YCAM
-    imgr.lead(:alt="$t('top.lead')" src='top/lead.png' locale global)
+    imgr-sp.lead(:alt="$t('top.lead')" src='top/lead.png' locale global)
     nav
       router-link(v-bind:to="linkUrl('niho')") NIHO
       router-link(v-bind:to="linkUrl('kumano')") KUMANO
@@ -48,12 +48,10 @@ h1
   span
     display: none
   &.ja
-    // height: calc(100% - 197px)
-    background: url(/dna-of-forests/img/top/logo-ja.png) no-repeat center
+    background: url(/dna-of-forests/img/top/logo-ja-pc.png) no-repeat center
     background-size: 213px 145px
   &.en
-    // height: calc(100% - 197px)
-    background: url(/dna-of-forests/img/top/logo-en.png) no-repeat left
+    background: url(/dna-of-forests/img/top/logo-en-pc.png) no-repeat left
     background-size: 209px 189px
 
 .lead

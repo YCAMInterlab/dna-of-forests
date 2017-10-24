@@ -18,10 +18,10 @@ export default Vue.extend({
       this.$el.alt = this.alt;
 
       // 相対パスを絶対パスに（globalがついていたらルートのimgフォルダを読みに行く）
-      var _src = this.global ? `/dna-of-forests/img/${this.src}` : `/dna-of-forests/${this.$route.params.forest}/img/${this.src}`;
+      const _src = this.global ? `/dna-of-forests/img/${this.src}` : `/dna-of-forests/${this.$route.params.forest}/img/${this.src}`;
 
       // locale属性があれば、言語毎に画像パスを切り替え
-      var _locale = this.locale ? '-'+this.$root.$i18n.locale : '';
+      const _locale = this.locale ? '-'+this.$root.$i18n.locale : '';
 
       this.$el.src    = _src.replace(/(\.\w+)$/, _locale+'$1');
       this.$el.srcset = _src.replace(/(\.\w+)$/, _locale+'@2x$1')+' 2x';
