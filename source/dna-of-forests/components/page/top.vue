@@ -4,8 +4,21 @@
   #map
   aside
     h1
-      imgr-sp.logo(:alt="TODO" src='top/logo.png' locale global)
-    imgr-sp.lead(:alt="TODO" src='top/lead.png' locale global)
+      //- imgにwidth:100%のスタイルを当てたいのでimgr-spは使えなかった
+      template(v-if="this.$root.$i18n.locale=='ja'")
+        imgr.logo.pc.ja(:alt="TODO" src="top/logo-ja-pc.png" global)
+        imgr.logo.sp.ja(:alt="TODO" src="top/logo-ja-sp.png" global)
+      template(v-else)
+        imgr.logo.pc.en(:alt="TODO" src="top/logo-en-pc.png" global)
+        imgr.logo.sp.en(:alt="TODO" src="top/logo-en-sp.png" global)
+    .lead
+      //- imgにwidth:100%のスタイルを当てたいのでimgr-spは使えなかった
+      template(v-if="this.$root.$i18n.locale=='ja'")
+        imgr.pc(:alt="TODO" src="top/lead-ja-pc.png" global)
+        imgr.sp(:alt="TODO" src="top/lead-ja-sp.png" global)
+      template(v-else)
+        imgr.pc(:alt="TODO" src="top/lead-en-pc.png" global)
+        imgr.sp(:alt="TODO" src="top/lead-en-sp.png" global)
     nav
       h2
         imgr(:alt="TODO" src='top/title-guides.png' locale global)
@@ -26,7 +39,7 @@
         | is licensed under a
         br
         a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
-  <lang-button-top class="lang round" />
+  <lang-button-top class="lang" />
 
 </template>
 
@@ -127,6 +140,10 @@ nav
     border-radius: 0
     clear: both
     float: none
+  .lang
+    right: default
+    top: 15px
+    left: 15px
   aside
     width: calc(100% - 60px)
     margin: 30px
@@ -140,10 +157,15 @@ nav
       height: 553px
     h1
       height: 365px
+  .logo.en
+    width: 100%
+    max-width: 570px
   .lead
     position: relative
     bottom: inherit
     margin-bottom: 100px
+    >img
+      width: 100%
   nav
     display: block
     margin-bottom: 100px

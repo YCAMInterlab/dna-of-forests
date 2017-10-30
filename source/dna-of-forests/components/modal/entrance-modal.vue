@@ -6,7 +6,8 @@
       imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
       imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
       router-link(v-bind:to="'/'+$route.params.forest+'/panorama'") ENTER
-    router-link.backTop(to="/") See other guides
+    router-link.backTop(to="/")
+      imgr(:alt="TODO" src='entrance-modal/backtoindex.png' locale global)
 
 </template>
 
@@ -35,6 +36,9 @@ img
   right: 25px
   top: 50%
   text-decoration: none
+  opacity: 0.4
+  &:hover
+    opacity: 0.8
 
 .modal
   background-color: #000

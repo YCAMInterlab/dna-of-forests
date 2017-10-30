@@ -26,68 +26,62 @@
       >div
         opacity: 0.9
     &.en
-      width: 39px
-      margin-right: 1px
-      >div
-        background-image: url(/dna-of-forests/img/gnav/language-en@2x.png)
-        background-size: auto 9px
-      &:not([href])
-        cursor: default
-        >div
-          opacity: 1
-          background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png)
-    &.ja
-      width: 40px
-      >div
-        background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png)
-        background-size: auto 9px
-      &:not([href])
-        cursor: default
-        >div
-          opacity: 1
-          background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png)
-
-  // round style (on global top)
-  &.round
-    a.en
       width: 45px
       border-top-left-radius: 30px
       border-bottom-left-radius: 30px
-    a.ja
+      border-right: 1px solid #1a1a1a
+      >div
+        background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-pc@2x.png)
+        background-size: auto 9px
+      &:not([href])
+        cursor: default
+        >div
+          opacity: 1
+          background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-active-pc@2x.png)
+    &.ja
       width: 44px
       border-top-right-radius: 30px
       border-bottom-right-radius: 30px
+      >div
+        background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-pc@2x.png)
+        background-size: auto 9px
+      &:not([href])
+        cursor: default
+        >div
+          opacity: 1
+          background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-active-pc@2x.png)
 
 @media (max-width: 660px)
   .buttons
-    width: 50px
+    width: 162px
     height: 100%
     a
-      float: none
       &.en
-        width: 50px
-        margin-right: 1px
-        height: 49px
-        margin-bottom: 1px
+        width: 80px
+        height: 60px
+        border-right: 2px solid #1a1a1a
+        margin: 0
         >div
-          background-image: url(/dna-of-forests/img/gnav/language-en@2x.png)
-          background-size: auto 9px
+          background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-sp@2x.png)
+          background-size: auto 18px
+          background-position: 31px center
         &:not([href])
           cursor: default
           >div
             opacity: 1
-            background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png)
+            background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-active-sp@2x.png)
       &.ja
-        width: 50px
-        height: 50px
+        width: 80px
+        height: 60px
         >div
-          background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png)
-          background-size: auto 9px
+          background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-sp@2x.png)
+          background-size: auto 18px
+          background-position: 22px center
         &:not([href])
           cursor: default
           >div
             opacity: 1
-            background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png)
+            background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-active-sp@2x.png)
 </style>
 
 <script>
