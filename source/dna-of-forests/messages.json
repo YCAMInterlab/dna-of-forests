@@ -2,9 +2,11 @@
   "ja": {
     "top": {
       "logo": "森のDNA図鑑 YCAM Bio Research",
-      "lead": "TODO"
+      "lead": "TODO",
+      "index": "図鑑一覧"
     },
     "panorama": {
+      "backtoindex": "他の図鑑をみる",
       "ycam": "http://www.ycam.jp/",
       "cc": "https://creativecommons.org/licenses/by-sa/4.0/deed.ja"
     },
@@ -56,9 +58,11 @@
   "en": {
     "top": {
       "logo": "Field Guide “DNA of Forests” YCAM Bio Research",
-      "lead": "TODO"
+      "lead": "TODO",
+      "index": "Field guides"
     },
     "panorama": {
+      "backtoindex": "See the other guides",
       "ycam": "http://www.ycam.jp/en/",
       "cc": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
     },

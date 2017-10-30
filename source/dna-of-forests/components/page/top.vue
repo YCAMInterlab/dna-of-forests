@@ -6,27 +6,27 @@
     h1
       //- imgにwidth:100%のスタイルを当てたいのでimgr-spは使えなかった
       template(v-if="this.$root.$i18n.locale=='ja'")
-        imgr.logo.pc.ja(:alt="'TODO'" src="top/logo-ja-pc.png" global)
-        imgr.logo.sp.ja(:alt="'TODO'" src="top/logo-ja-sp.png" global)
+        imgr.logo.pc.ja(:alt="$t('top.logo')" src="top/logo-ja-pc.png" global)
+        imgr.logo.sp.ja(:alt="$t('top.logo')" src="top/logo-ja-sp.png" global)
       template(v-else)
-        imgr.logo.pc.en(:alt="'TODO'" src="top/logo-en-pc.png" global)
-        imgr.logo.sp.en(:alt="'TODO'" src="top/logo-en-sp.png" global)
+        imgr.logo.pc.en(:alt="$t('top.logo')" src="top/logo-en-pc.png" global)
+        imgr.logo.sp.en(:alt="$t('top.logo')" src="top/logo-en-sp.png" global)
     .lead
       //- imgにwidth:100%のスタイルを当てたいのでimgr-spは使えなかった
       template(v-if="this.$root.$i18n.locale=='ja'")
-        imgr.pc(:alt="'TODO'" src="top/lead-ja-pc.png" global)
-        imgr.sp(:alt="'TODO'" src="top/lead-ja-sp.png" global)
+        imgr.pc(:alt="$t('top.lead')" src="top/lead-ja-pc.png" global)
+        imgr.sp(:alt="$t('top.lead')" src="top/lead-ja-sp.png" global)
       template(v-else)
-        imgr.pc(:alt="'TODO'" src="top/lead-en-pc.png" global)
-        imgr.sp(:alt="'TODO'" src="top/lead-en-sp.png" global)
+        imgr.pc(:alt="$t('top.lead')" src="top/lead-en-pc.png" global)
+        imgr.sp(:alt="$t('top.lead')" src="top/lead-en-sp.png" global)
     nav
       h2
-        imgr(:alt="'TODO'" src='top/title-guides.png' locale global)
+        imgr(:alt="$t('top.index')" src='top/title-guides.png' locale global)
       .links
         router-link(:to="linkUrl('kumano')")
-          imgr(:alt="'TODO'" src='top/guides/kumano/list.png' locale global)
+          imgr(alt='kumano' src='top/guides/kumano/list.png' locale global)
         router-link(:to="linkUrl('niho')")
-          imgr(:alt="'TODO'" src='top/guides/niho/list.png' locale global)
+          imgr(alt='niho' src='top/guides/niho/list.png' locale global)
     footer
       a.ycam(:href="$t('panorama.ycam')" target="_blank")
         imgr-sp(src="top/ycam-logo.png" alt="YCAM" global)
