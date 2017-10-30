@@ -130,7 +130,7 @@ export default Vue.extend({
   methods: {
     linkUrl(path) {
       const p = this.$route.params;
-      if(p.index){
+      if(['/panorama','/list'].includes(path) && p.index){
         return `/${p.forest}${path}/${p.index}`;
       }
       else {
