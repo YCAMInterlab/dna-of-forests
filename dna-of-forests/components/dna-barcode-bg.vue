@@ -1,7 +1,7 @@
 <template lang="pug">
 
 .dna_barcode
-  <dna-barcode :dna="dna" v-bind:height="1" v-on:drawcomplete="onDrawComplete" />
+  <dna-barcode :dna="dna" :height="1" v-on:drawcomplete="onDrawComplete" />
 
 </template>
 

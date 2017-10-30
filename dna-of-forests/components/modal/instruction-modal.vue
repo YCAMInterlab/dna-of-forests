@@ -3,7 +3,7 @@
 .wrapper
   .containter
     .modal
-      imgr.icon(alt="Icon" src='instruction-modal/drag-icon.png')
+      imgr.icon(alt="Icon" src='instruction-modal/drag-icon.png' global)
       p Drag or Swipe
 
 </template>

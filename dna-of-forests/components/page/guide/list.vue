@@ -2,7 +2,7 @@
 
 section.list(:data-lang="$root.$i18n.locale")
   h1
-    imgr(:alt="$t('list.samples.title')" src='list/title-samples.png' locale)
+    imgr(:alt="$t('list.samples.title')" src='list/title-samples.png' locale global)
   table#samples
     thead
       tr
@@ -11,7 +11,7 @@ section.list(:data-lang="$root.$i18n.locale")
         th(colspan='2').dna {{ $t('list.samples.dna') }}
         th.collection_date {{ $t('list.samples.collection_date') }}
     tbody
-      tr(v-for="(item, index) in samples" v-bind:id="'s-'+(index+1)" v-on:click="goMarker('s-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/s-'+(index+1) }")
+      tr(v-for="(item, index) in samples" :id="'s-'+(index+1)" v-on:click="goMarker('s-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
 
         td.result(v-if="$root.$i18n.locale === 'ja'")
@@ -38,10 +38,10 @@ section.list(:data-lang="$root.$i18n.locale")
           td.dna(colspan='2')
         td.collection_date {{ dateFormat(item.collection_date) }}
   h1
-    imgr(:alt="$t('list.tips.title')" src='list/title-knowledges.png' locale)
+    imgr(:alt="$t('list.tips.title')" src='list/title-knowledges.png' locale global)
   table#knowledges
     tbody
-      tr(v-for="(item, index) in knowledges" v-bind:id="'k-'+(index+1)" v-on:click="goMarker('k-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/k-'+(index+1) }")
+      tr(v-for="(item, index) in knowledges" :id="'k-'+(index+1)" v-on:click="goMarker('k-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.title {{ item.title[$root.$i18n.locale] }}
         td.description {{ item.description[$root.$i18n.locale] | striptags }}

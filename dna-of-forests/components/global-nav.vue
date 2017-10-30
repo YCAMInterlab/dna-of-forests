@@ -1,16 +1,16 @@
 <template lang="pug">
 
 nav
-  router-link.top(v-bind:to="linkUrl('/')" v-bind:exact="true")
+  router-link.top(:to="linkUrl('/')" :exact="true")
     div
       span TOP
-  router-link.panorama(v-bind:to="linkUrl('/panorama')")
+  router-link.panorama(:to="linkUrl('/panorama')")
     div
       span 360
-  router-link.list(v-bind:to="linkUrl('/list')")
+  router-link.list(:to="linkUrl('/list')")
     div
       span LIST
-  router-link.about(v-bind:to="linkUrl('/about')")
+  router-link.about(:to="linkUrl('/about')")
     div
       span ABOUT
   <sound-button />
@@ -130,7 +130,7 @@ export default Vue.extend({
   methods: {
     linkUrl(path) {
       const p = this.$route.params;
-      if(p.index){
+      if(['/panorama','/list'].includes(path) && p.index){
         return `/${p.forest}${path}/${p.index}`;
       }
       else {

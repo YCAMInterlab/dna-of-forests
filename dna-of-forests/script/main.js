@@ -47503,7 +47503,7 @@ new _app2.default({
   router: router,
   i18n: new _vueI18n2.default({
     locale: document.querySelector('html').getAttribute('lang'),
-    messages: __webpack_require__(314)
+    messages: _lodash2.default.merge(__webpack_require__(314), __webpack_require__(315), __webpack_require__(316))
   }),
   data: function data() {
     // isAlreadyDraggedを追加する
@@ -53013,13 +53013,14 @@ exports.default = _vue2.default.extend({
           for (var _prop in guides) {
             var b = guides[_prop];
             var marker = new google.maps.Marker({
+              name: _prop,
               position: b.position,
               map: map,
               title: b.title[locale] + '\u3092\u307F\u308B',
               icon: '/dna-of-forests/img/top/guides/' + _prop + '/marker-' + locale + '.png'
             });
-            marker.addListener('click', function () {
-              location.href = '#/' + _prop;
+            marker.addListener('click', function (e) {
+              location.href = '#/' + this.name;
             });
           }
         };
@@ -53519,7 +53520,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo pc ja",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/logo-ja-pc.png",
                       global: "global"
                     }
@@ -53527,7 +53528,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo sp ja",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/logo-ja-sp.png",
                       global: "global"
                     }
@@ -53537,7 +53538,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo pc en",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/logo-en-pc.png",
                       global: "global"
                     }
@@ -53545,7 +53546,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo sp en",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/logo-en-sp.png",
                       global: "global"
                     }
@@ -53563,7 +53564,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "pc",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/lead-ja-pc.png",
                       global: "global"
                     }
@@ -53571,7 +53572,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "sp",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/lead-ja-sp.png",
                       global: "global"
                     }
@@ -53581,7 +53582,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "pc",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/lead-en-pc.png",
                       global: "global"
                     }
@@ -53589,7 +53590,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "sp",
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/lead-en-sp.png",
                       global: "global"
                     }
@@ -53604,7 +53605,7 @@ var render = function() {
             [
               _c("imgr", {
                 attrs: {
-                  alt: _vm.TODO,
+                  alt: "TODO",
                   src: "top/title-guides.png",
                   locale: "locale",
                   global: "global"
@@ -53623,7 +53624,7 @@ var render = function() {
                 [
                   _c("imgr", {
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/guides/kumano/list.png",
                       locale: "locale",
                       global: "global"
@@ -53638,7 +53639,7 @@ var render = function() {
                 [
                   _c("imgr", {
                     attrs: {
-                      alt: _vm.TODO,
+                      alt: "TODO",
                       src: "top/guides/niho/list.png",
                       locale: "locale",
                       global: "global"
@@ -53801,7 +53802,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.root[data-v-67895125] {\n  position: relative;\n  height: 100%;\n  min-height: 100%;\n  width: 100%;\n  overflow: hidden;\n}\n.guide-content[data-v-67895125] {\n  width: calc(100% - 80px);\n  float: left;\n  height: 100%;\n  overflow: hidden;\n  background-color: #000;\n  position: relative;\n  -webkit-overflow-scrolling: touch;\n}\nbody.facebook .guide-content[data-v-67895125] {\n  position: fixed;\n  top: 0;\n}\n@media (max-width: 660px) {\n.guide-content[data-v-67895125] {\n    width: 100%;\n    height: calc(100% - 100px);\n}\n}\n", ""]);
+exports.push([module.i, "\n.root[data-v-67895125] {\n  position: relative;\n  height: 100%;\n  min-height: 100%;\n  width: 100%;\n  overflow: hidden;\n}\n.guide-content[data-v-67895125] {\n  width: calc(100% - 80px);\n  float: left;\n  height: 100%;\n  background-color: #000;\n  position: relative;\n  -webkit-overflow-scrolling: touch;\n}\nbody.facebook .guide-content[data-v-67895125] {\n  position: fixed;\n  top: 0;\n}\n@media (max-width: 660px) {\n.guide-content[data-v-67895125] {\n    width: 100%;\n    height: calc(100% - 100px);\n}\n}\n", ""]);
 
 // exports
 
@@ -53825,7 +53826,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // 登録
 _vue2.default.component('global-nav', __webpack_require__(18).default); //
-//
 //
 //
 //
@@ -54056,7 +54056,7 @@ exports.default = _vue2.default.extend({
   methods: {
     linkUrl: function linkUrl(path) {
       var p = this.$route.params;
-      if (p.index) {
+      if (['/panorama', '/list'].includes(path) && p.index) {
         return '/' + p.forest + path + '/' + p.index;
       } else {
         return '/' + p.forest + path;
@@ -109480,7 +109480,7 @@ var render = function() {
             _c("imgr", {
               staticClass: "logo",
               attrs: {
-                alt: _vm.$t("top.logo"),
+                alt: _vm.$t(this.$route.params.forest + ".top.logo"),
                 src: "entrance-modal/logo.png",
                 locale: "locale"
               }
@@ -109488,7 +109488,7 @@ var render = function() {
             _c("imgr", {
               staticClass: "lead",
               attrs: {
-                alt: _vm.$t("top.lead"),
+                alt: _vm.$t(this.$route.params.forest + ".top.lead"),
                 src: "entrance-modal/lead.png",
                 locale: "locale"
               }
@@ -109507,7 +109507,7 @@ var render = function() {
           [
             _c("imgr", {
               attrs: {
-                alt: _vm.TODO,
+                alt: "TODO",
                 src: "entrance-modal/backtoindex.png",
                 locale: "locale",
                 global: "global"
@@ -109645,7 +109645,11 @@ var render = function() {
         [
           _c("imgr", {
             staticClass: "icon",
-            attrs: { alt: "Icon", src: "instruction-modal/drag-icon.png" }
+            attrs: {
+              alt: "Icon",
+              src: "instruction-modal/drag-icon.png",
+              global: "global"
+            }
           }),
           _c("p", [_vm._v("Drag or Swipe")])
         ],
@@ -110620,7 +110624,8 @@ var render = function() {
             attrs: {
               alt: _vm.$t("list.samples.title"),
               src: "list/title-samples.png",
-              locale: "locale"
+              locale: "locale",
+              global: "global"
             }
           })
         ],
@@ -110750,7 +110755,8 @@ var render = function() {
             attrs: {
               alt: _vm.$t("list.tips.title"),
               src: "list/title-knowledges.png",
-              locale: "locale"
+              locale: "locale",
+              global: "global"
             }
           })
         ],
@@ -110903,7 +110909,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\narticle.about {\n  height: 100%;\n  overflow-y: auto;\n  overflow-x: hidden;\n}\narticle.about h1 {\n    text-align: center;\n    margin-top: 130px;\n    margin-bottom: 130px;\n}\narticle.about h2 {\n    text-align: center;\n    margin-bottom: 38px;\n}\narticle.about h3 {\n    text-align: center;\n    margin-bottom: 24px;\n}\narticle.about p {\n    font-size: 15px;\n    line-height: 2.2em;\n    letter-spacing: 0.05em;\n    text-align: left;\n    margin-bottom: 2.2em;\n    text-align: justify;\n}\narticle.about a {\n    color: inherit;\n    text-decoration: none;\n}\narticle.about section {\n    width: 620px;\n    margin: 0 auto;\n    text-align: center;\n    margin-bottom: 96px;\n}\narticle.about section#credit {\n      width: auto;\n      background-color: #191919;\n      padding: 108px 0;\n      margin-bottom: 0;\n}\narticle.about section#credit h3#planning_production {\n        margin-bottom: 53px;\n}\narticle.about section#credit h3#production,\n      article.about section#credit h3#cooperation {\n        margin-bottom: 40px;\n        margin-top: 80px;\n}\narticle.about section#credit > a {\n        display: block;\n        width: 600px;\n        margin: 0 auto 40px;\n}\narticle.about section#credit > a:hover {\n          opacity: 0.7;\n}\narticle.about section#credit p {\n        font-size: 14px;\n        text-align: center;\n}\narticle.about section#credit p a {\n          color: inherit;\n          text-decoration: none;\n}\narticle.about section#credit p a:hover {\n            opacity: 0.7;\n            cursor: pointer;\n}\narticle.about section#credit p.small {\n          font-size: 12px;\n}\narticle.about section#credit h4 {\n        margin-bottom: 10px;\n}\narticle.about .carousel {\n    width: 760px;\n    height: 506px;\n    margin: 50px -80px 38px;\n}\narticle.about .carousel:before {\n      content: url(/dna-of-forests/niho/img/about/slide-round.png);\n      width: 100%;\n      height: 100%;\n      position: absolute;\n      z-index: 10;\n      left: 0;\n      pointer-events: none;\n}\narticle.about .carousel .carousel-cell {\n      width: 100%;\n      height: 100%;\n      margin-right: 0;\n      background-position: center;\n      background-size: cover;\n}\narticle.about .carousel .flickity-page-dots {\n      bottom: -66px;\n}\narticle.about .carousel .flickity-page-dots .dot {\n        width: 7px;\n        height: 7px;\n        background-color: #fff;\n        opacity: 0.3;\n        margin: 0 6px;\n}\narticle.about .carousel .flickity-page-dots .dot.is-selected {\n          opacity: 1;\n}\narticle.about .carousel .flickity-prev-next-button {\n      outline: 0;\n      height: 100%;\n      border-radius: 0;\n      transition-duration: 0.2s;\n      opacity: 0;\n      background: transparent;\n      width: 80px;\n}\narticle.about .carousel .flickity-prev-next-button .arrow {\n        fill: #fff;\n}\narticle.about .carousel .flickity-prev-next-button svg {\n        left: calc(50% - 20px);\n        top: calc(50% - 20px);\n        width: 40px;\n        height: auto;\n}\narticle.about .carousel .flickity-prev-next-button.next {\n        right: 0;\n}\narticle.about .carousel .flickity-prev-next-button.previous {\n        left: 0;\n}\narticle.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow {\n        opacity: 0.5;\n}\narticle.about .carousel .flickity-prev-next-button[disabled] {\n        display: none;\n}\narticle.about .carousel:hover .flickity-prev-next-button:not([disabled]) {\n      opacity: 1;\n}\narticle.about center.credit {\n    margin-top: -20px;\n    color: #696969;\n    font-size: 12px;\n    line-height: 1.8em;\n    font-weight: bold;\n}\nhtml[lang=en] article.about h1 {\n  margin-top: 116px;\n  margin-bottom: 146px;\n}\nhtml[lang=en] article.about h2 {\n  margin-bottom: 50px;\n}\nhtml[lang=en] article.about p {\n  font-size: 15px;\n  line-height: 2.2em;\n  letter-spacing: 0.1em;\n  color: #cacaca;\n}\nhtml[lang=en] article.about section {\n  width: 600px;\n}\nhtml[lang=en] article.about section#credit > a {\n    width: 630px;\n}\nhtml[lang=en] article.about section#credit h3#planning_production {\n    margin-bottom: 49px;\n}\nhtml[lang=en] article.about section#credit h3#production,\n  html[lang=en] article.about section#credit h3#cooperation {\n    margin-top: 114px;\n    margin-bottom: 33px;\n}\nhtml[lang=en] article.about section#credit h4 {\n    margin-bottom: 12px;\n}\nhtml[lang=en] article.about section#credit > a {\n    margin-bottom: 44px;\n}\n@media (max-width: 900px) {\narticle.about section {\n    width: 100%;\n}\narticle.about section p {\n      padding-left: 50px;\n      padding-right: 50px;\n      font-size: 18px;\n}\narticle.about section .carousel {\n      width: 100%;\n      margin-left: 0;\n      margin-right: 0;\n}\narticle.about section .carousel:before {\n        display: none;\n}\nhtml[lang=en] article.about section p {\n    padding-left: 40px;\n    padding-right: 40px;\n}\n}\n", ""]);
+exports.push([module.i, "\narticle.about {\n  height: 100%;\n  overflow-y: auto;\n  overflow-x: hidden;\n}\narticle.about h1 {\n    text-align: center;\n    margin-top: 130px;\n    margin-bottom: 130px;\n}\narticle.about h2 {\n    text-align: center;\n    margin-bottom: 38px;\n}\narticle.about h3 {\n    text-align: center;\n    margin-bottom: 24px;\n}\narticle.about p {\n    font-size: 15px;\n    line-height: 2.2em;\n    letter-spacing: 0.05em;\n    text-align: left;\n    margin-bottom: 2.2em;\n    text-align: justify;\n}\narticle.about a {\n    color: inherit;\n    text-decoration: none;\n}\narticle.about section {\n    width: 620px;\n    margin: 0 auto;\n    text-align: center;\n    margin-bottom: 96px;\n}\narticle.about section#credit {\n      width: auto;\n      background-color: #191919;\n      padding: 108px 0;\n      margin-bottom: 0;\n}\narticle.about section#credit h3#planning_production {\n        margin-bottom: 53px;\n}\narticle.about section#credit h3#production,\n      article.about section#credit h3#cooperation {\n        margin-bottom: 40px;\n        margin-top: 80px;\n}\narticle.about section#credit > a {\n        display: block;\n        width: 600px;\n        margin: 0 auto 40px;\n}\narticle.about section#credit > a:hover {\n          opacity: 0.7;\n}\narticle.about section#credit p {\n        font-size: 14px;\n        text-align: center;\n}\narticle.about section#credit p a {\n          color: inherit;\n          text-decoration: none;\n}\narticle.about section#credit p a:hover {\n            opacity: 0.7;\n            cursor: pointer;\n}\narticle.about section#credit p.small {\n          font-size: 12px;\n}\narticle.about section#credit h4 {\n        margin-bottom: 10px;\n}\narticle.about .carousel {\n    width: 760px;\n    height: 506px;\n    margin: 50px -80px 38px;\n}\narticle.about .carousel:before {\n      content: url(/dna-of-forests/img/about/slide-round.png);\n      width: 100%;\n      height: 100%;\n      position: absolute;\n      z-index: 10;\n      left: 0;\n      pointer-events: none;\n}\narticle.about .carousel .carousel-cell {\n      width: 100%;\n      height: 100%;\n      margin-right: 0;\n      background-position: center;\n      background-size: cover;\n}\narticle.about .carousel .flickity-page-dots {\n      bottom: -66px;\n}\narticle.about .carousel .flickity-page-dots .dot {\n        width: 7px;\n        height: 7px;\n        background-color: #fff;\n        opacity: 0.3;\n        margin: 0 6px;\n}\narticle.about .carousel .flickity-page-dots .dot.is-selected {\n          opacity: 1;\n}\narticle.about .carousel .flickity-prev-next-button {\n      outline: 0;\n      height: 100%;\n      border-radius: 0;\n      transition-duration: 0.2s;\n      opacity: 0;\n      background: transparent;\n      width: 80px;\n}\narticle.about .carousel .flickity-prev-next-button .arrow {\n        fill: #fff;\n}\narticle.about .carousel .flickity-prev-next-button svg {\n        left: calc(50% - 20px);\n        top: calc(50% - 20px);\n        width: 40px;\n        height: auto;\n}\narticle.about .carousel .flickity-prev-next-button.next {\n        right: 0;\n}\narticle.about .carousel .flickity-prev-next-button.previous {\n        left: 0;\n}\narticle.about .carousel .flickity-prev-next-button:not([disabled]):active .arrow {\n        opacity: 0.5;\n}\narticle.about .carousel .flickity-prev-next-button[disabled] {\n        display: none;\n}\narticle.about .carousel:hover .flickity-prev-next-button:not([disabled]) {\n      opacity: 1;\n}\narticle.about center.credit {\n    margin-top: -20px;\n    color: #696969;\n    font-size: 12px;\n    line-height: 1.8em;\n    font-weight: bold;\n}\nhtml[lang=en] article.about h1 {\n  margin-top: 116px;\n  margin-bottom: 146px;\n}\nhtml[lang=en] article.about h2 {\n  margin-bottom: 50px;\n}\nhtml[lang=en] article.about p {\n  font-size: 15px;\n  line-height: 2.2em;\n  letter-spacing: 0.1em;\n  color: #cacaca;\n}\nhtml[lang=en] article.about section {\n  width: 600px;\n}\nhtml[lang=en] article.about section#credit > a {\n    width: 630px;\n}\nhtml[lang=en] article.about section#credit h3#planning_production {\n    margin-bottom: 49px;\n}\nhtml[lang=en] article.about section#credit h3#production,\n  html[lang=en] article.about section#credit h3#cooperation {\n    margin-top: 114px;\n    margin-bottom: 33px;\n}\nhtml[lang=en] article.about section#credit h4 {\n    margin-bottom: 12px;\n}\nhtml[lang=en] article.about section#credit > a {\n    margin-bottom: 44px;\n}\n@media (max-width: 900px) {\narticle.about section {\n    width: 100%;\n}\narticle.about section p {\n      padding-left: 50px;\n      padding-right: 50px;\n      font-size: 18px;\n}\narticle.about section .carousel {\n      width: 100%;\n      margin-left: 0;\n      margin-right: 0;\n}\narticle.about section .carousel:before {\n        display: none;\n}\nhtml[lang=en] article.about section p {\n    padding-left: 40px;\n    padding-right: 40px;\n}\n}\n", ""]);
 
 // exports
 
@@ -113345,7 +113351,7 @@ var render = function() {
       [
         _c("imgr", {
           attrs: {
-            alt: _vm.$t("about.logo"),
+            alt: _vm.$t("niho.about.logo"),
             src: "about/logo.png",
             locale: "locale"
           }
@@ -113362,7 +113368,7 @@ var render = function() {
           [
             _c("imgr", {
               attrs: {
-                alt: _vm.$t("about.about.title"),
+                alt: _vm.$t("niho.about.about.title"),
                 src: "about/title-about.png",
                 locale: "locale"
               }
@@ -113371,7 +113377,7 @@ var render = function() {
           1
         ),
         _c("p", {
-          domProps: { innerHTML: _vm._s(_vm.$t("about.about.body")) }
+          domProps: { innerHTML: _vm._s(_vm.$t("niho.about.about.body")) }
         }),
         _c("div", { staticClass: "carousel" }, [
           _c("div", { staticClass: "carousel-cell", style: _vm.bgImage(1) }),
@@ -113390,7 +113396,7 @@ var render = function() {
         ]),
         _c("center", {
           staticClass: "credit",
-          domProps: { innerHTML: _vm._s(_vm.$t("about.about.credit")) }
+          domProps: { innerHTML: _vm._s(_vm.$t("niho.about.about.credit")) }
         })
       ],
       1
@@ -113401,7 +113407,7 @@ var render = function() {
         [
           _c("imgr", {
             attrs: {
-              alt: _vm.$t("about.dna_barcoding.title"),
+              alt: _vm.$t("niho.about.dna_barcoding.title"),
               src: "about/title-dna_barcoding.png",
               locale: "locale"
             }
@@ -113410,7 +113416,7 @@ var render = function() {
         1
       ),
       _c("p", {
-        domProps: { innerHTML: _vm._s(_vm.$t("about.dna_barcoding.body")) }
+        domProps: { innerHTML: _vm._s(_vm.$t("niho.about.dna_barcoding.body")) }
       })
     ]),
     _c("section", { attrs: { id: "niho_forest" } }, [
@@ -113419,7 +113425,7 @@ var render = function() {
         [
           _c("imgr", {
             attrs: {
-              alt: _vm.$t("about.niho_forest.title"),
+              alt: _vm.$t("niho.about.niho_forest.title"),
               src: "about/title-niho_forest.png",
               locale: "locale"
             }
@@ -113428,7 +113434,7 @@ var render = function() {
         1
       ),
       _c("p", {
-        domProps: { innerHTML: _vm._s(_vm.$t("about.niho_forest.body")) }
+        domProps: { innerHTML: _vm._s(_vm.$t("niho.about.niho_forest.body")) }
       })
     ]),
     _c("section", { attrs: { id: "credit" } }, [
@@ -113438,7 +113444,7 @@ var render = function() {
         [
           _c("imgr", {
             attrs: {
-              alt: _vm.$t("about.planning_production"),
+              alt: _vm.$t("niho.about.planning_production"),
               src: "about/title-planning_production.png",
               locale: "locale"
             }
@@ -113450,7 +113456,7 @@ var render = function() {
         "a",
         {
           attrs: {
-            href: _vm.$t("about.ycam-bioresearch.link"),
+            href: _vm.$t("niho.about.ycam-bioresearch.link"),
             target: "_blank"
           }
         },
@@ -113460,7 +113466,7 @@ var render = function() {
             [
               _c("imgr", {
                 attrs: {
-                  alt: _vm.$t("about.ycam-bioresearch.title"),
+                  alt: _vm.$t("niho.about.ycam-bioresearch.title"),
                   src: "about/ycam-bioresearch.png",
                   locale: "locale"
                 }
@@ -113470,21 +113476,21 @@ var render = function() {
           ),
           _c("p", {
             domProps: {
-              innerHTML: _vm._s(_vm.$t("about.ycam-bioresearch.body"))
+              innerHTML: _vm._s(_vm.$t("niho.about.ycam-bioresearch.body"))
             }
           })
         ]
       ),
       _c(
         "a",
-        { attrs: { href: _vm.$t("about.iteota.link"), target: "_blank" } },
+        { attrs: { href: _vm.$t("niho.about.iteota.link"), target: "_blank" } },
         [
           _c(
             "h4",
             [
               _c("imgr", {
                 attrs: {
-                  alt: _vm.$t("about.iteota.title"),
+                  alt: _vm.$t("niho.about.iteota.title"),
                   src: "about/iteota.png",
                   locale: "locale"
                 }
@@ -113493,20 +113499,20 @@ var render = function() {
             1
           ),
           _c("p", {
-            domProps: { innerHTML: _vm._s(_vm.$t("about.iteota.body")) }
+            domProps: { innerHTML: _vm._s(_vm.$t("niho.about.iteota.body")) }
           })
         ]
       ),
       _c(
         "a",
-        { attrs: { href: _vm.$t("about.ycam.link"), target: "_blank" } },
+        { attrs: { href: _vm.$t("niho.about.ycam.link"), target: "_blank" } },
         [
           _c(
             "h4",
             [
               _c("imgr", {
                 attrs: {
-                  alt: _vm.$t("about.ycam.title"),
+                  alt: _vm.$t("niho.about.ycam.title"),
                   src: "about/ycam.png",
                   locale: "locale"
                 }
@@ -113515,7 +113521,7 @@ var render = function() {
             1
           ),
           _c("p", {
-            domProps: { innerHTML: _vm._s(_vm.$t("about.ycam.body")) }
+            domProps: { innerHTML: _vm._s(_vm.$t("niho.about.ycam.body")) }
           })
         ]
       ),
@@ -113525,7 +113531,7 @@ var render = function() {
         [
           _c("imgr", {
             attrs: {
-              alt: _vm.$t("about.production"),
+              alt: _vm.$t("niho.about.production"),
               src: "about/title-production.png",
               locale: "locale"
             }
@@ -113536,22 +113542,28 @@ var render = function() {
       _c("p", [
         _c(
           "a",
-          { attrs: { href: _vm.$t("about.tanaka.link"), target: "_blank" } },
-          [_vm._v(_vm._s(_vm.$t("about.tanaka.text")))]
+          {
+            attrs: { href: _vm.$t("niho.about.tanaka.link"), target: "_blank" }
+          },
+          [_vm._v(_vm._s(_vm.$t("niho.about.tanaka.text")))]
         ),
         _c("br"),
         _vm._v(" "),
         _c(
           "a",
-          { attrs: { href: _vm.$t("about.karappo.link"), target: "_blank" } },
-          [_vm._v(_vm._s(_vm.$t("about.karappo.text")))]
+          {
+            attrs: { href: _vm.$t("niho.about.karappo.link"), target: "_blank" }
+          },
+          [_vm._v(_vm._s(_vm.$t("niho.about.karappo.text")))]
         ),
         _c("br"),
         _vm._v(" "),
         _c(
           "a",
-          { attrs: { href: _vm.$t("about.antoine.link"), target: "_blank" } },
-          [_vm._v(_vm._s(_vm.$t("about.antoine.text")))]
+          {
+            attrs: { href: _vm.$t("niho.about.antoine.link"), target: "_blank" }
+          },
+          [_vm._v(_vm._s(_vm.$t("niho.about.antoine.text")))]
         ),
         _c("br")
       ]),
@@ -113561,7 +113573,7 @@ var render = function() {
         [
           _c("imgr", {
             attrs: {
-              alt: _vm.$t("about.cooperation"),
+              alt: _vm.$t("niho.about.cooperation"),
               src: "about/title-cooperation.png",
               locale: "locale"
             }
@@ -113571,7 +113583,7 @@ var render = function() {
       ),
       _c("p", {
         staticClass: "small",
-        domProps: { innerHTML: _vm._s(_vm.$t("about.cooperations")) }
+        domProps: { innerHTML: _vm._s(_vm.$t("niho.about.cooperations")) }
       })
     ])
   ])
@@ -114494,7 +114506,7 @@ var render = function() {
                             alt: _vm.$t(
                               "detail_drawer.sample.article.dna.photo_of_the_sample"
                             ),
-                            src: "sample/" + _vm.id + ".jpg"
+                            src: "detail-drawer/sample/" + _vm.id + ".jpg"
                           }
                         })
                       ],
@@ -115036,7 +115048,19 @@ if (false) {
 /* 314 */
 /***/ (function(module, exports) {
 
-module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 仁保の森 2016 YCAM Bio Research","lead":"YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。"},"panorama":{"ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"about":{"logo":"森のDNA図鑑 仁保の森 2016","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。","credit":"写真提供：山口情報芸術センター［YCAM］"},"dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・昆虫・菌類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の特定を試みました。具体的には、植物では葉緑体のrbcLやmatK、昆虫ではミトコンドリアのCOI、菌類ではITSと呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"niho_forest":{"title":"仁保の森について","body":"YCAMから車で約30分、山口市仁保上郷（にほ かみごう）にある森。森の奥には落差20メートルの「犬鳴（いぬなき）の滝」があり、そこから流れる川は森と里をつなぎ、仁保川に流れ込んでいます。山や里によくいる生き物に加えて渓流系の生き物も住んでいる豊かな森であり、典型的な山口の里山の風景が広がっています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"iteota":{"title":"「もしも、森のいきものになったら」チーム","body":"Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）","link":"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"山口情報芸術センター［YCAM］","body":"Yamaguchi Center for Arts and Media","link":"http://www.ycam.jp/"},"production":"制作","tanaka":{"text":"講師：田中 浩（山口県立博物館動物担当理学博士）","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/"},"karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"録音・音源編集：Antoine Bertin（antoinebertin.org）","link":"http://www.antoinebertin.org/"},"cooperation":"協力","cooperations":"スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、<a href=\"#/about/\" class=\"border dark\">アバウトページ</a>の「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016 YCAM Bio Research","lead":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop “DNA of the Forest” conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples."},"panorama":{"ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016","about":{"title":"About the Field Guide “DNA of Forests”","body":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; COI from mitochondria for insects; and ITS for fungi.<br>To search, we used a program called <a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">“BLAST”</a> that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"niho_forest":{"title":"About the Forest in Niho","body":"The forest is located within a 30 minute driving distance from YCAM, in the area of Niho Kamigo in Yamaguchi city. Deep in the forests, there is a 20 meter Inunaki Waterfall, which forms a river that links the forests and villages and flows into a main stream of Niho River. The presence of the creatures that dwell in the mountains and villages, as well as rivers connect them, is a feature of typical landscape of Satoyama in Yamaguchi city, and that can be found in the forests of Niho."},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"iteota":{"title":"In the Eyes of the Animal","body":"Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])","link":"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"Yamaguchi Center for Arts and Media [YCAM]","body":"","link":"http://www.ycam.jp/en/"},"production":"Production","tanaka":{"text":"Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"},"karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"Field recording and mixing: Antoine Bertin (antoinebertin.org)","link":"http://www.antoinebertin.org/"},"cooperation":"Cooperation","cooperations":"With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
+module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 YCAM Bio Research","lead":"TODO"},"panorama":{"ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、<a href=\"#/about/\" class=\"border dark\">アバウトページ</a>の「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” YCAM Bio Research","lead":"TODO"},"panorama":{"ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
+
+/***/ }),
+/* 315 */
+/***/ (function(module, exports) {
+
+module.exports = {"ja":{"niho":{"top":{"logo":"森のDNA図鑑 仁保の森 2016 YCAM Bio Research","lead":"YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。"},"about":{"logo":"森のDNA図鑑 仁保の森 2016","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。","credit":"写真提供：山口情報芸術センター［YCAM］"},"dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・昆虫・菌類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の特定を試みました。具体的には、植物では葉緑体のrbcLやmatK、昆虫ではミトコンドリアのCOI、菌類ではITSと呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"niho_forest":{"title":"仁保の森について","body":"YCAMから車で約30分、山口市仁保上郷（にほ かみごう）にある森。森の奥には落差20メートルの「犬鳴（いぬなき）の滝」があり、そこから流れる川は森と里をつなぎ、仁保川に流れ込んでいます。山や里によくいる生き物に加えて渓流系の生き物も住んでいる豊かな森であり、典型的な山口の里山の風景が広がっています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"iteota":{"title":"「もしも、森のいきものになったら」チーム","body":"Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）","link":"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"山口情報芸術センター［YCAM］","body":"Yamaguchi Center for Arts and Media","link":"http://www.ycam.jp/"},"production":"制作","tanaka":{"text":"講師：田中 浩（山口県立博物館動物担当理学博士）","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/"},"karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"録音・音源編集：Antoine Bertin（antoinebertin.org）","link":"http://www.antoinebertin.org/"},"cooperation":"協力","cooperations":"スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"}}},"en":{"niho":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016 YCAM Bio Research","lead":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop “DNA of the Forest” conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016","about":{"title":"About the Field Guide “DNA of Forests”","body":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; COI from mitochondria for insects; and ITS for fungi.<br>To search, we used a program called <a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">“BLAST”</a> that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"niho_forest":{"title":"About the Forest in Niho","body":"The forest is located within a 30 minute driving distance from YCAM, in the area of Niho Kamigo in Yamaguchi city. Deep in the forests, there is a 20 meter Inunaki Waterfall, which forms a river that links the forests and villages and flows into a main stream of Niho River. The presence of the creatures that dwell in the mountains and villages, as well as rivers connect them, is a feature of typical landscape of Satoyama in Yamaguchi city, and that can be found in the forests of Niho."},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"iteota":{"title":"In the Eyes of the Animal","body":"Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])","link":"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"Yamaguchi Center for Arts and Media [YCAM]","body":"","link":"http://www.ycam.jp/en/"},"production":"Production","tanaka":{"text":"Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"},"karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"Field recording and mixing: Antoine Bertin (antoinebertin.org)","link":"http://www.antoinebertin.org/"},"cooperation":"Cooperation","cooperations":"With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"}}}}
+
+/***/ }),
+/* 316 */
+/***/ (function(module, exports) {
+
+module.exports = {"ja":{"kumano":{"top":{"logo":"森のDNA図鑑 熊野の森 2017 YCAM Bio Research","lead":"YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の熊野の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。"},"about":{"logo":"森のDNA図鑑 熊野の森 2017","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の熊野の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">熊野の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の熊野の森ツアープログラムとして開催されました。","credit":"写真提供：山口情報芸術センター［YCAM］"},"dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・昆虫・菌類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の特定を試みました。具体的には、植物では葉緑体のrbcLやmatK、昆虫ではミトコンドリアのCOI、菌類ではITSと呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"niho_forest":{"title":"熊野の森について","body":"YCAMから車で約30分、山口市仁保上郷（にほ かみごう）にある森。森の奥には落差20メートルの「犬鳴（いぬなき）の滝」があり、そこから流れる川は森と里をつなぎ、仁保川に流れ込んでいます。山や里によくいる生き物に加えて渓流系の生き物も住んでいる豊かな森であり、典型的な山口の里山の風景が広がっています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"iteota":{"title":"「もしも、森のいきものになったら」チーム","body":"Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）","link":"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"山口情報芸術センター［YCAM］","body":"Yamaguchi Center for Arts and Media","link":"http://www.ycam.jp/"},"production":"制作","tanaka":{"text":"講師：田中 浩（山口県立博物館動物担当理学博士）","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/"},"karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"録音・音源編集：Antoine Bertin（antoinebertin.org）","link":"http://www.antoinebertin.org/"},"cooperation":"協力","cooperations":"スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"}}},"en":{"kumano":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2017 YCAM Bio Research","lead":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop “DNA of the Forest” conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2017","about":{"title":"About the Field Guide “DNA of Forests”","body":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; COI from mitochondria for insects; and ITS for fungi.<br>To search, we used a program called <a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">“BLAST”</a> that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"niho_forest":{"title":"About the Forest in Niho","body":"The forest is located within a 30 minute driving distance from YCAM, in the area of Niho Kamigo in Yamaguchi city. Deep in the forests, there is a 20 meter Inunaki Waterfall, which forms a river that links the forests and villages and flows into a main stream of Niho River. The presence of the creatures that dwell in the mountains and villages, as well as rivers connect them, is a feature of typical landscape of Satoyama in Yamaguchi city, and that can be found in the forests of Niho."},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"iteota":{"title":"In the Eyes of the Animal","body":"Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])","link":"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"Yamaguchi Center for Arts and Media [YCAM]","body":"","link":"http://www.ycam.jp/en/"},"production":"Production","tanaka":{"text":"Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"},"karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"Field recording and mixing: Antoine Bertin (antoinebertin.org)","link":"http://www.antoinebertin.org/"},"cooperation":"Cooperation","cooperations":"With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"}}}}
 
 /***/ })
 /******/ ]);

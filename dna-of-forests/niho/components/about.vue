@@ -2,12 +2,12 @@
 
 article.about
   h1
-    imgr(:alt="$t('about.logo')" src='about/logo.png' locale)
+    imgr(:alt="$t('niho.about.logo')" src='about/logo.png' locale)
 
   section#about
     h2
-      imgr(:alt="$t('about.about.title')" src='about/title-about.png' locale)
-    p(v-html="$t('about.about.body')")
+      imgr(:alt="$t('niho.about.about.title')" src='about/title-about.png' locale)
+    p(v-html="$t('niho.about.about.body')")
     .carousel
       .carousel-cell(:style="bgImage(1)")
       .carousel-cell(:style="bgImage(2)")
@@ -22,39 +22,39 @@ article.about
       .carousel-cell(:style="bgImage(11)")
       .carousel-cell(:style="bgImage(12)")
       .carousel-cell(:style="bgImage(13)")
-    center.credit(v-html="$t('about.about.credit')")
+    center.credit(v-html="$t('niho.about.about.credit')")
   section#dna_barcoding
     h2
-      imgr(:alt="$t('about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
-    p(v-html="$t('about.dna_barcoding.body')")
+      imgr(:alt="$t('niho.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
+    p(v-html="$t('niho.about.dna_barcoding.body')")
   section#niho_forest
     h2
-      imgr(:alt="$t('about.niho_forest.title')" src='about/title-niho_forest.png' locale)
-    p(v-html="$t('about.niho_forest.body')")
+      imgr(:alt="$t('niho.about.niho_forest.title')" src='about/title-niho_forest.png' locale)
+    p(v-html="$t('niho.about.niho_forest.body')")
   section#credit
     h3#planning_production
-      imgr(:alt="$t('about.planning_production')" src='about/title-planning_production.png' locale)
-    a(:href="$t('about.ycam-bioresearch.link')" target="_blank")
+      imgr(:alt="$t('niho.about.planning_production')" src='about/title-planning_production.png' locale)
+    a(:href="$t('niho.about.ycam-bioresearch.link')" target="_blank")
       h4
-        imgr(:alt="$t('about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
-      p(v-html="$t('about.ycam-bioresearch.body')")
-    a(:href="$t('about.iteota.link')" target="_blank")
+        imgr(:alt="$t('niho.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
+      p(v-html="$t('niho.about.ycam-bioresearch.body')")
+    a(:href="$t('niho.about.iteota.link')" target="_blank")
       h4
-        imgr(:alt="$t('about.iteota.title')" src='about/iteota.png' locale)
-      p(v-html="$t('about.iteota.body')")
-    a(:href="$t('about.ycam.link')" target="_blank")
+        imgr(:alt="$t('niho.about.iteota.title')" src='about/iteota.png' locale)
+      p(v-html="$t('niho.about.iteota.body')")
+    a(:href="$t('niho.about.ycam.link')" target="_blank")
       h4
-        imgr(:alt="$t('about.ycam.title')" src='about/ycam.png' locale)
-      p(v-html="$t('about.ycam.body')")
+        imgr(:alt="$t('niho.about.ycam.title')" src='about/ycam.png' locale)
+      p(v-html="$t('niho.about.ycam.body')")
     h3#production
-      imgr(:alt="$t('about.production')" src='about/title-production.png' locale)
+      imgr(:alt="$t('niho.about.production')" src='about/title-production.png' locale)
     p
-      | <a :href="$t('about.tanaka.link')" target="_blank">{{ $t('about.tanaka.text') }}</a><br>
-      | <a :href="$t('about.karappo.link')" target="_blank">{{ $t('about.karappo.text') }}</a><br>
-      | <a :href="$t('about.antoine.link')" target="_blank">{{ $t('about.antoine.text') }}</a><br>
+      | <a :href="$t('niho.about.tanaka.link')" target="_blank">{{ $t('niho.about.tanaka.text') }}</a><br>
+      | <a :href="$t('niho.about.karappo.link')" target="_blank">{{ $t('niho.about.karappo.text') }}</a><br>
+      | <a :href="$t('niho.about.antoine.link')" target="_blank">{{ $t('niho.about.antoine.text') }}</a><br>
     h3#cooperation
-      imgr(:alt="$t('about.cooperation')" src='about/title-cooperation.png' locale)
-    p.small(v-html="$t('about.cooperations')")
+      imgr(:alt="$t('niho.about.cooperation')" src='about/title-cooperation.png' locale)
+    p.small(v-html="$t('niho.about.cooperations')")
 
 </template>
 
@@ -130,7 +130,7 @@ article.about
     //   overflow: hidden !important
     // 上記で角丸にするとスライド中に効かないのでしょうがなく、下のように画像を重ねて代用
     &:before
-      content: url(/dna-of-forests/niho/img/about/slide-round.png)
+      content: url(/dna-of-forests/img/about/slide-round.png)
       width: 100%
       height: 100%
       position: absolute

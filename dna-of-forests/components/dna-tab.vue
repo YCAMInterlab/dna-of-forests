@@ -4,16 +4,16 @@
   header
     a.barcode(v-on:click="switchTab('barcode')" v-bind:class="{ current: current==='barcode' }")
       span
-        imgr(v-bind:alt="$t('dna_tab.barcode')" src="detail-drawer/icon-barcode.png" global)
+        imgr(:alt="$t('dna_tab.barcode')" src="detail-drawer/icon-barcode.png" global)
         | {{ $t('dna_tab.barcode') }}
     a.text(v-on:click="switchTab('text')" v-bind:class="{ current: current==='text' }")
       span
-        imgr(v-bind:alt="$t('dna_tab.text')" src="detail-drawer/icon-text.png" global)
+        imgr(:alt="$t('dna_tab.text')" src="detail-drawer/icon-text.png" global)
         | {{ $t('dna_tab.text') }}
   div.contents
-    div.barcode(v-bind:class="{ current: current=='barcode' }")
-      <dna-barcode v-bind:dna="this.text" v-bind:max_width="403" />
-    div.text(v-bind:class="{ current: current=='text' }")
+    div.barcode(:class="{ current: current=='barcode' }")
+      <dna-barcode :dna="this.text" :max_width="403" />
+    div.text(:class="{ current: current=='text' }")
       //- p.dna_text(v-html="colorize(text)" v-on:click="selectAll")
       p.dna_text(v-html="colorize(text)")
 

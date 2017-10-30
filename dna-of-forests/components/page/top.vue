@@ -1,32 +1,32 @@
 <template lang="pug">
 
-.root(v-bind:class="this.$root.$i18n.locale")
+.root(:class="this.$root.$i18n.locale")
   #map
   aside
     h1
       //- imgにwidth:100%のスタイルを当てたいのでimgr-spは使えなかった
       template(v-if="this.$root.$i18n.locale=='ja'")
-        imgr.logo.pc.ja(:alt="TODO" src="top/logo-ja-pc.png" global)
-        imgr.logo.sp.ja(:alt="TODO" src="top/logo-ja-sp.png" global)
+        imgr.logo.pc.ja(:alt="'TODO'" src="top/logo-ja-pc.png" global)
+        imgr.logo.sp.ja(:alt="'TODO'" src="top/logo-ja-sp.png" global)
       template(v-else)
-        imgr.logo.pc.en(:alt="TODO" src="top/logo-en-pc.png" global)
-        imgr.logo.sp.en(:alt="TODO" src="top/logo-en-sp.png" global)
+        imgr.logo.pc.en(:alt="'TODO'" src="top/logo-en-pc.png" global)
+        imgr.logo.sp.en(:alt="'TODO'" src="top/logo-en-sp.png" global)
     .lead
       //- imgにwidth:100%のスタイルを当てたいのでimgr-spは使えなかった
       template(v-if="this.$root.$i18n.locale=='ja'")
-        imgr.pc(:alt="TODO" src="top/lead-ja-pc.png" global)
-        imgr.sp(:alt="TODO" src="top/lead-ja-sp.png" global)
+        imgr.pc(:alt="'TODO'" src="top/lead-ja-pc.png" global)
+        imgr.sp(:alt="'TODO'" src="top/lead-ja-sp.png" global)
       template(v-else)
-        imgr.pc(:alt="TODO" src="top/lead-en-pc.png" global)
-        imgr.sp(:alt="TODO" src="top/lead-en-sp.png" global)
+        imgr.pc(:alt="'TODO'" src="top/lead-en-pc.png" global)
+        imgr.sp(:alt="'TODO'" src="top/lead-en-sp.png" global)
     nav
       h2
-        imgr(:alt="TODO" src='top/title-guides.png' locale global)
+        imgr(:alt="'TODO'" src='top/title-guides.png' locale global)
       .links
-        router-link(v-bind:to="linkUrl('kumano')")
-          imgr(:alt="TODO" src='top/guides/kumano/list.png' locale global)
-        router-link(v-bind:to="linkUrl('niho')")
-          imgr(:alt="TODO" src='top/guides/niho/list.png' locale global)
+        router-link(:to="linkUrl('kumano')")
+          imgr(:alt="'TODO'" src='top/guides/kumano/list.png' locale global)
+        router-link(:to="linkUrl('niho')")
+          imgr(:alt="'TODO'" src='top/guides/niho/list.png' locale global)
     footer
       a.ycam(:href="$t('panorama.ycam')" target="_blank")
         imgr-sp(src="top/ycam-logo.png" alt="YCAM" global)
@@ -246,13 +246,14 @@ export default Vue.extend({
           for(var _prop in guides) {
             var b = guides[_prop];
             var marker = new google.maps.Marker({
+              name: _prop,
               position: b.position,
               map: map,
               title: `${b.title[locale]}をみる`,
               icon: `/dna-of-forests/img/top/guides/${_prop}/marker-${locale}.png`
             });
-            marker.addListener('click', function() {
-              location.href = `#/${_prop}`;
+            marker.addListener('click', function(e) {
+              location.href = `#/${this.name}`;
             });
           }
         };

@@ -3,11 +3,11 @@
 .wrapper
   .containter
     .modal
-      imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
-      imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
-      router-link(v-bind:to="'/'+$route.params.forest+'/panorama'") ENTER
+      imgr.logo(:alt="$t(this.$route.params.forest+'.top.logo')" src='entrance-modal/logo.png' locale)
+      imgr.lead(:alt="$t(this.$route.params.forest+'.top.lead')" src='entrance-modal/lead.png' locale)
+      router-link(:to="'/'+$route.params.forest+'/panorama'") ENTER
     router-link.backTop(to="/")
-      imgr(:alt="TODO" src='entrance-modal/backtoindex.png' locale global)
+      imgr(:alt="'TODO'" src='entrance-modal/backtoindex.png' locale global)
 
 </template>
 
