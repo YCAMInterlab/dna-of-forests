@@ -1,6 +1,6 @@
 <template lang="pug">
 
-.root(:class="this.$root.$i18n.locale")
+.root(:class="this.$root.$i18n.locale" v-resize:debounce.500="init")
   #map
   aside
     h1
@@ -209,6 +209,7 @@ nav
 <script>
 
 import Vue from 'vue';
+import resize from 'vue-resize-directive';
 
 // 登録
 Vue.component('lang-button-top', require('../lang-button-top.vue').default);
@@ -216,6 +217,9 @@ Vue.component('lang-button-top', require('../lang-button-top.vue').default);
 export default Vue.extend({
   watch: {
     '$route': 'init'
+  },
+  directives: {
+    resize
   },
   mounted: function(){
     this.init();
