@@ -63,6 +63,9 @@ h1
   .logo
     position: absolute
 
+.root
+  -webkit-overflow-scrolling: touch
+
 .root.ja
   h1
     height: calc(100% - 197px)
