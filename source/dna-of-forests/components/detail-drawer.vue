@@ -15,7 +15,7 @@
           imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale global)
         h4 1. {{ $t('detail_drawer.sample.article.dna.photo_of_the_sample') }}
         .image_wrapper
-          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" :src="'sample/'+id+'.jpg'")
+          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" :src="'detail-drawer/sample/'+id+'.jpg'")
         h4 2. {{ $t('detail_drawer.sample.article.dna.dna_sequence_to_identify') }}
         div.dna_sequence(v-for="item in dna_sequences")
           p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
