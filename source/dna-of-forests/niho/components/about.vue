@@ -130,7 +130,7 @@ article.about
     //   overflow: hidden !important
     // 上記で角丸にするとスライド中に効かないのでしょうがなく、下のように画像を重ねて代用
     &:before
-      content: url(/dna-of-forests/niho/img/about/slide-round.png)
+      content: url(/dna-of-forests/img/about/slide-round.png)
       width: 100%
       height: 100%
       position: absolute
