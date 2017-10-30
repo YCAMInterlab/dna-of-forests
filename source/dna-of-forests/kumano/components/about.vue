@@ -2,12 +2,12 @@
 
 article.about
   h1
-    imgr(:alt="$t('about.logo')" src='about/logo.png' locale)
+    imgr(:alt="$t('kumano.about.logo')" src='about/logo.png' locale)
 
   section#about
     h2
-      imgr(:alt="$t('about.about.title')" src='about/title-about.png' locale)
-    p(v-html="$t('about.about.body')")
+      imgr(:alt="$t('kumano.about.about.title')" src='about/title-about.png' locale)
+    p(v-html="$t('kumano.about.about.body')")
     .carousel
       .carousel-cell(:style="bgImage(1)")
       .carousel-cell(:style="bgImage(2)")
@@ -22,39 +22,39 @@ article.about
       .carousel-cell(:style="bgImage(11)")
       .carousel-cell(:style="bgImage(12)")
       .carousel-cell(:style="bgImage(13)")
-    center.credit(v-html="$t('about.about.credit')")
+    center.credit(v-html="$t('kumano.about.about.credit')")
   section#dna_barcoding
     h2
-      imgr(:alt="$t('about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
-    p(v-html="$t('about.dna_barcoding.body')")
+      imgr(:alt="$t('kumano.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
+    p(v-html="$t('kumano.about.dna_barcoding.body')")
   section#kumano_forest
     h2
-      imgr(:alt="$t('about.kumano_forest.title')" src='about/title-kumano_forest.png' locale)
-    p(v-html="$t('about.kumano_forest.body')")
+      imgr(:alt="$t('kumano.about.kumano_forest.title')" src='about/title-kumano_forest.png' locale)
+    p(v-html="$t('kumano.about.kumano_forest.body')")
   section#credit
     h3#planning_production
-      imgr(:alt="$t('about.planning_production')" src='about/title-planning_production.png' locale)
-    a(:href="$t('about.ycam-bioresearch.link')" target="_blank")
+      imgr(:alt="$t('kumano.about.planning_production')" src='about/title-planning_production.png' locale)
+    a(:href="$t('kumano.about.ycam-bioresearch.link')" target="_blank")
       h4
-        imgr(:alt="$t('about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
-      p(v-html="$t('about.ycam-bioresearch.body')")
-    a(:href="$t('about.iteota.link')" target="_blank")
+        imgr(:alt="$t('kumano.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
+      p(v-html="$t('kumano.about.ycam-bioresearch.body')")
+    a(:href="$t('kumano.about.iteota.link')" target="_blank")
       h4
-        imgr(:alt="$t('about.iteota.title')" src='about/iteota.png' locale)
-      p(v-html="$t('about.iteota.body')")
-    a(:href="$t('about.ycam.link')" target="_blank")
+        imgr(:alt="$t('kumano.about.iteota.title')" src='about/iteota.png' locale)
+      p(v-html="$t('kumano.about.iteota.body')")
+    a(:href="$t('kumano.about.ycam.link')" target="_blank")
       h4
-        imgr(:alt="$t('about.ycam.title')" src='about/ycam.png' locale)
-      p(v-html="$t('about.ycam.body')")
+        imgr(:alt="$t('kumano.about.ycam.title')" src='about/ycam.png' locale)
+      p(v-html="$t('kumano.about.ycam.body')")
     h3#production
-      imgr(:alt="$t('about.production')" src='about/title-production.png' locale)
+      imgr(:alt="$t('kumano.about.production')" src='about/title-production.png' locale)
     p
-      | <a :href="$t('about.tanaka.link')" target="_blank">{{ $t('about.tanaka.text') }}</a><br>
-      | <a :href="$t('about.karappo.link')" target="_blank">{{ $t('about.karappo.text') }}</a><br>
-      | <a :href="$t('about.antoine.link')" target="_blank">{{ $t('about.antoine.text') }}</a><br>
+      | <a :href="$t('kumano.about.tanaka.link')" target="_blank">{{ $t('kumano.about.tanaka.text') }}</a><br>
+      | <a :href="$t('kumano.about.karappo.link')" target="_blank">{{ $t('kumano.about.karappo.text') }}</a><br>
+      | <a :href="$t('kumano.about.antoine.link')" target="_blank">{{ $t('kumano.about.antoine.text') }}</a><br>
     h3#cooperation
-      imgr(:alt="$t('about.cooperation')" src='about/title-cooperation.png' locale)
-    p.small(v-html="$t('about.cooperations')")
+      imgr(:alt="$t('kumano.about.cooperation')" src='about/title-cooperation.png' locale)
+    p.small(v-html="$t('kumano.about.cooperations')")
 
 </template>
 

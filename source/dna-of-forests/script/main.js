@@ -102,7 +102,11 @@ new AppGuide({
   router: router,
   i18n: new VueI18n({
     locale: document.querySelector('html').getAttribute('lang'),
-    messages: require('../niho/messages.json')
+    messages: _.merge(
+      require('../messages.json'),
+      require('../niho/messages.json'),
+      require('../kumano/messages.json')
+    )
   }),
   data: function(){
     // isAlreadyDraggedを追加する
