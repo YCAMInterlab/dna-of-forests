@@ -223,9 +223,12 @@ export default Vue.extend({
   methods: {
     init() {
 
+      // chromeで10pxより小さい文字が使えない問題対策
       if(document.querySelector('body').classList.contains('chrome')) {
         this.$el.querySelector('.copyright').classList.add('chrome');
       }
+      // SP判定
+      const isSP = this.$el.querySelector('nav').offsetParent != null;
 
       if( this.$route.path == '/') {
         var mapOptions = {
@@ -245,15 +248,16 @@ export default Vue.extend({
           }
           map.fitBounds (bounds);
 
-
           for(var _prop in guides) {
             var b = guides[_prop];
+            // SPの時
+            const icon_img = isSP ? `marker-sp.png` : `marker-${locale}-pc.png`;
             var marker = new google.maps.Marker({
               name: _prop,
               position: b.position,
               map: map,
               title: `${b.title[locale]}をみる`,
-              icon: `/dna-of-forests/img/top/guides/${_prop}/marker-${locale}.png`
+              icon: `/dna-of-forests/img/top/guides/${_prop}/${icon_img}`
             });
             marker.addListener('click', function(e) {
               location.href = `#/${this.name}`;
