@@ -246,13 +246,14 @@ export default Vue.extend({
           for(var _prop in guides) {
             var b = guides[_prop];
             var marker = new google.maps.Marker({
+              name: _prop,
               position: b.position,
               map: map,
               title: `${b.title[locale]}をみる`,
               icon: `/dna-of-forests/img/top/guides/${_prop}/marker-${locale}.png`
             });
-            marker.addListener('click', function() {
-              location.href = `#/${_prop}`;
+            marker.addListener('click', function(e) {
+              location.href = `#/${this.name}`;
             });
           }
         };
