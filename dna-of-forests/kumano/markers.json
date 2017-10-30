@@ -1,0 +1,149 @@
+{
+  "samples": [
+    {
+      "id": "dummy-0",
+      "genus": {
+        "ja": "0°",
+        "en": "0°"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "A"
+        }
+      ],
+      "marker_position": { "latitude": 0, "longtitude": 0, "radius": 500 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "質問項目１": "質問に対する答え１",
+        "質問項目２": "質問に対する答え２",
+        "質問項目３": "質問に対する答え３",
+        "質問項目４": "質問に対する答え４"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "dummy-60",
+      "genus": {
+        "ja": "60°",
+        "en": "60°"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "A"
+        }
+      ],
+      "marker_position": { "latitude": 0, "longtitude": 60, "radius": 500 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "質問項目１": "質問に対する答え１",
+        "質問項目２": "質問に対する答え２",
+        "質問項目３": "質問に対する答え３",
+        "質問項目４": "質問に対する答え４"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "dummy-120",
+      "genus": {
+        "ja": "120°",
+        "en": "120°"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "A"
+        }
+      ],
+      "marker_position": { "latitude": 0, "longtitude": 120, "radius": 500 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "質問項目１": "質問に対する答え１",
+        "質問項目２": "質問に対する答え２",
+        "質問項目３": "質問に対する答え３",
+        "質問項目４": "質問に対する答え４"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "dummy-180",
+      "genus": {
+        "ja": "180°",
+        "en": "180°"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "A"
+        }
+      ],
+      "marker_position": { "latitude": 0, "longtitude": 180, "radius": 500 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "質問項目１": "質問に対する答え１",
+        "質問項目２": "質問に対する答え２",
+        "質問項目３": "質問に対する答え３",
+        "質問項目４": "質問に対する答え４"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "dummy-240",
+      "genus": {
+        "ja": "240°",
+        "en": "240°"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "A"
+        }
+      ],
+      "marker_position": { "latitude": 0, "longtitude": 240, "radius": 500 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "質問項目１": "質問に対する答え１",
+        "質問項目２": "質問に対する答え２",
+        "質問項目３": "質問に対する答え３",
+        "質問項目４": "質問に対する答え４"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "dummy-300",
+      "genus": {
+        "ja": "300°",
+        "en": "300°"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "A"
+        }
+      ],
+      "marker_position": { "latitude": 0, "longtitude": 300, "radius": 500 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "質問項目１": "質問に対する答え１",
+        "質問項目２": "質問に対する答え２",
+        "質問項目３": "質問に対する答え３",
+        "質問項目４": "質問に対する答え４"
+      },
+      "memofig_width": "230px"
+    }
+  ],
+  "knowledges": [
+    {
+      "title": {
+        "ja": "知識のテストマーカー",
+        "en": "test knowledge marker"
+      },
+      "description": {
+        "ja": "日本語の説明文章が入ります。",
+        "en": "Description in English will be here."
+      },
+      "marker_position": { "latitude": -10, "longtitude": -130, "radius": 6 }
+    }
+  ]
+}

@@ -4,11 +4,11 @@
   header
     a.barcode(v-on:click="switchTab('barcode')" v-bind:class="{ current: current==='barcode' }")
       span
-        imgr(v-bind:alt="$t('dna_tab.barcode')" src="detail-drawer/icon-barcode.png")
+        imgr(v-bind:alt="$t('dna_tab.barcode')" src="detail-drawer/icon-barcode.png" global)
         | {{ $t('dna_tab.barcode') }}
     a.text(v-on:click="switchTab('text')" v-bind:class="{ current: current==='text' }")
       span
-        imgr(v-bind:alt="$t('dna_tab.text')" src="detail-drawer/icon-text.png")
+        imgr(v-bind:alt="$t('dna_tab.text')" src="detail-drawer/icon-text.png" global)
         | {{ $t('dna_tab.text') }}
   div.contents
     div.barcode(v-bind:class="{ current: current=='barcode' }")
@@ -82,7 +82,7 @@ import Vue from 'vue';
 import dna_colors from '../script/dna_colors.js';
 
 // 登録
-Vue.component('dna-barcode', require('./dna-barcode.vue'));
+Vue.component('dna-barcode', require('./dna-barcode.vue').default);
 
 export default Vue.extend({
   props: ['text'],

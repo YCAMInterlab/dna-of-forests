@@ -5,7 +5,9 @@
     .modal
       imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
       imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
-      router-link(to='/panorama') ENTER
+      router-link(v-bind:to="'/'+$route.params.forest+'/panorama'") ENTER
+    router-link.backTop(to="/")
+      imgr(:alt="TODO" src='entrance-modal/backtoindex.png' locale global)
 
 </template>
 
@@ -27,6 +29,16 @@
 img
   user-select: none
   pointer-events: none
+
+.backTop
+  color: #fff
+  position: absolute
+  right: 25px
+  top: 50%
+  text-decoration: none
+  opacity: 0.4
+  &:hover
+    opacity: 0.8
 
 .modal
   background-color: #000
@@ -64,5 +76,13 @@ html[lang=en]
     .logo
       margin-top: 42px
       margin-bottom: 68px
+
+@media (max-width: 660px)
+  .backTop
+    right: inherit
+    top: inherit
+    left: 50%
+    transform: translateX(-50%)
+    margin-top: 30px
 
 </style>

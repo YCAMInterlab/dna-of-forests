@@ -1,7 +1,7 @@
 <template lang="pug">
 
 nav
-  router-link.top(to='/' v-bind:exact="true")
+  router-link.top(v-bind:to="linkUrl('/')" v-bind:exact="true")
     div
       span TOP
   router-link.panorama(v-bind:to="linkUrl('/panorama')")
@@ -10,7 +10,7 @@ nav
   router-link.list(v-bind:to="linkUrl('/list')")
     div
       span LIST
-  router-link.about(to='/about')
+  router-link.about(v-bind:to="linkUrl('/about')")
     div
       span ABOUT
   <sound-button />
@@ -123,17 +123,18 @@ nav
 import Vue from 'vue';
 
 // 登録
-Vue.component('sound-button', require('./sound-button.vue'));
-Vue.component('lang-button', require('./lang-button.vue'));
+Vue.component('sound-button', require('./sound-button.vue').default);
+Vue.component('lang-button', require('./lang-button.vue').default);
 
 export default Vue.extend({
   methods: {
-    linkUrl(default_path) {
-      if(this.$route.params.index){
-        return default_path+'/'+this.$route.params.index;
+    linkUrl(path) {
+      const p = this.$route.params;
+      if(p.index){
+        return `/${p.forest}${path}/${p.index}`;
       }
       else {
-        return default_path;
+        return `/${p.forest}${path}`;
       }
     }
   }

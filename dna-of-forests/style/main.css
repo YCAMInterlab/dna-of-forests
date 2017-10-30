@@ -96,12 +96,12 @@ section {
 
 @font-face {
   font-family: "Roboto";
-  src: url("Roboto-Medium.ttf");
+  src: url("../font/Roboto-Medium.ttf");
   font-weight: normal;
   font-style: normal; }
 @font-face {
   font-family: "Roboto";
-  src: url("Roboto-Bold.ttf");
+  src: url("../font/Roboto-Bold.ttf");
   font-weight: bold;
   font-style: normal; }
 html,
@@ -149,26 +149,6 @@ a.border {
     a.border.dark:hover {
       color: #fff; }
 
-#app {
-  position: relative;
-  height: 100%;
-  min-height: 100%;
-  width: 100%;
-  overflow: hidden; }
-
-#content {
-  width: calc(100% - 80px);
-  float: left;
-  height: 100%;
-  overflow: hidden;
-  background-color: #000;
-  position: relative;
-  -webkit-overflow-scrolling: touch; }
-
-body.facebook #content {
-  position: fixed;
-  top: 0; }
-
 @media (max-width: 900px) {
   a.border {
     border: none;
@@ -182,7 +162,3 @@ body.facebook #content {
       background-repeat: repeat-x;
       background-size: 8px 2px;
       background-position: 2px bottom; } }
-@media (max-width: 660px) {
-  #content {
-    width: 100%;
-    height: calc(100% - 100px); } }
