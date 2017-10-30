@@ -1,6 +1,6 @@
 <template lang="pug">
 
-.root(v-bind:class="this.$root.$i18n.locale")
+.root(:class="this.$root.$i18n.locale")
   #map
   aside
     h1
@@ -23,9 +23,9 @@
       h2
         imgr(:alt="'TODO'" src='top/title-guides.png' locale global)
       .links
-        router-link(v-bind:to="linkUrl('kumano')")
+        router-link(:to="linkUrl('kumano')")
           imgr(:alt="'TODO'" src='top/guides/kumano/list.png' locale global)
-        router-link(v-bind:to="linkUrl('niho')")
+        router-link(:to="linkUrl('niho')")
           imgr(:alt="'TODO'" src='top/guides/niho/list.png' locale global)
     footer
       a.ycam(:href="$t('panorama.ycam')" target="_blank")

@@ -4,7 +4,7 @@ a(v-on:click="click")
   div
     span SOUND
   audio(loop)
-    source(v-bind:src='soundUrl()' type='audio/mp3')
+    source(:src='soundUrl()' type='audio/mp3')
 
 </template>
 

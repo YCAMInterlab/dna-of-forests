@@ -15,11 +15,11 @@
           imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale global)
         h4 1. {{ $t('detail_drawer.sample.article.dna.photo_of_the_sample') }}
         .image_wrapper
-          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" v-bind:src="'sample/'+id+'.jpg'")
+          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" :src="'sample/'+id+'.jpg'")
         h4 2. {{ $t('detail_drawer.sample.article.dna.dna_sequence_to_identify') }}
         div.dna_sequence(v-for="item in dna_sequences")
           p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
-          <dna-tab v-bind:text="item.text" />
+          <dna-tab :text="item.text" />
         h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
         div.result(v-if="$root.$i18n.locale === 'ja'")
           small {{ genus.en }}
@@ -33,7 +33,7 @@
       section.microscope(v-if="microscope")
         h3
           imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale global)
-        iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
+        iframe(v-if="microscope.youtube_id" width="297" height="528" :src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="$root.$i18n.locale === 'ja' && microscope.memo")
           dl
             dd(v-html="microscope.memo")
@@ -45,13 +45,13 @@
           dl(v-if="$root.$i18n.locale === 'ja'" v-for="(answer, question) in memo")
             dt {{ question }}
             dd(v-html="answer")
-          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/'+$route.params.forest+'/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
+          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" :src="'/dna-of-forests/'+$route.params.forest+'/img/detail-drawer/memo/'+id+'.png'" :style="{ width: memofig_width }")
 
 
     template(v-if="type=='knowledge'")
       h3 {{ title[$root.$i18n.locale] }}
       .image_wrapper
-        imgr(:alt="title[$root.$i18n.locale]" v-bind:src="'detail-drawer/knowledge/'+id+'.jpg'")
+        imgr(:alt="title[$root.$i18n.locale]" :src="'detail-drawer/knowledge/'+id+'.jpg'")
       p(v-html="description[$root.$i18n.locale]")
 
 
