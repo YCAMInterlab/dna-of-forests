@@ -52748,7 +52748,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.lang[data-v-6e71333e] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\naside[data-v-6e71333e] {\n  position: relative;\n  float: left;\n  width: 260px;\n  height: calc(100% - 40px);\n  margin: 20px;\n}\nh1[data-v-6e71333e] {\n  width: 100%;\n  position: relative;\n}\nh1 .logo[data-v-6e71333e] {\n    position: absolute;\n}\n.root.ja h1[data-v-6e71333e] {\n  height: calc(100% - 197px);\n}\n.root.ja h1 .logo[data-v-6e71333e] {\n    top: 50%;\n    left: 50%;\n    transform: translateY(-50%) translateX(-50%);\n}\n.root.en h1[data-v-6e71333e] {\n  height: calc(100% - 197px);\n}\n.root.en h1 .logo[data-v-6e71333e] {\n    top: 50%;\n    transform: translateY(-50%);\n}\n.lead[data-v-6e71333e] {\n  position: absolute;\n  bottom: 84px;\n}\nfooter[data-v-6e71333e] {\n  height: 52px;\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n}\nfooter .ycam[data-v-6e71333e] {\n    position: absolute;\n    bottom: 3px;\n    left: 0;\n}\nfooter .ycam[data-v-6e71333e]:hover {\n      opacity: 0.7;\n}\nfooter .copyright[data-v-6e71333e] {\n    position: absolute;\n    right: 0;\n    font-family: 'Roboto';\n    font-size: 9px;\n    line-height: 13px;\n    letter-spacing: 0;\n    text-align: right;\n    color: #4c4c4c;\n}\nfooter .copyright.chrome[data-v-6e71333e] {\n      line-height: 14px;\n      -webkit-transform: scale(0.9);\n      -webkit-transform-origin: 100% 0;\n}\nfooter .copyright a[data-v-6e71333e] {\n      color: #4c4c4c;\n      text-decoration: none;\n}\nfooter .copyright a[data-v-6e71333e]:hover {\n        border-bottom: 1px dotted #4c4c4c;\n}\nnav[data-v-6e71333e] {\n  display: none;\n}\nnav a[data-v-6e71333e] {\n    display: block;\n    color: #fff;\n    text-decoration: none;\n    font-size: 15px;\n    line-height: 2em;\n}\n#map[data-v-6e71333e] {\n  float: right;\n  width: calc(100% - 320px);\n  height: calc(100% - 40px);\n  background-color: #fff;\n  border-radius: 5px;\n  margin: 20px 20px 20px 0;\n}\n@media (max-width: 660px) {\n.root[data-v-6e71333e] {\n    overflow: auto;\n}\n#map[data-v-6e71333e] {\n    margin: 0;\n    width: 100%;\n    height: 604px;\n    border-radius: 0;\n    clear: both;\n    float: none;\n}\n.lang[data-v-6e71333e] {\n    right: default;\n    top: 15px;\n    left: 15px;\n}\naside[data-v-6e71333e] {\n    width: calc(100% - 60px);\n    margin: 30px;\n    height: auto;\n    display: block;\n}\n.root.en h1[data-v-6e71333e] {\n    height: 265px;\n}\n.root.ja #map[data-v-6e71333e] {\n    height: 553px;\n}\n.root.ja h1[data-v-6e71333e] {\n    height: 365px;\n}\n.logo.en[data-v-6e71333e] {\n    width: 100%;\n    max-width: 570px;\n}\n.lead[data-v-6e71333e] {\n    position: relative;\n    bottom: inherit;\n    margin-bottom: 100px;\n}\n.lead > img[data-v-6e71333e] {\n      width: 100%;\n}\nnav[data-v-6e71333e] {\n    display: block;\n    margin-bottom: 100px;\n}\nnav h2[data-v-6e71333e] {\n      margin-bottom: 40px;\n}\nnav a[data-v-6e71333e] {\n      display: block;\n      padding: 58px 34px;\n      margin-bottom: 15px;\n      background-image: url(/dna-of-forests/img/top/list-icon.png);\n      background-repeat: no-repeat;\n      background-position: right 38px center;\n}\nnav a[data-v-6e71333e]:nth-child(4n+1) {\n        background-color: #ff33a5;\n}\nnav a[data-v-6e71333e]:nth-child(4n+2) {\n        background-color: #337eff;\n}\nnav a[data-v-6e71333e]:nth-child(4n+3) {\n        background-color: #33ff6d;\n}\nnav a[data-v-6e71333e]:nth-child(4n+4) {\n        background-color: #f5ff8a;\n}\nfooter[data-v-6e71333e] {\n    position: relative;\n    height: auto;\n}\nfooter .ycam[data-v-6e71333e] {\n      position: relative;\n      float: left;\n}\nfooter .copyright[data-v-6e71333e] {\n      position: relative;\n      float: right;\n      font-size: 15px;\n      line-height: 22px;\n}\nfooter .copyright.chrome[data-v-6e71333e] {\n        line-height: 22px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.lang[data-v-6e71333e] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\naside[data-v-6e71333e] {\n  position: relative;\n  float: left;\n  width: 260px;\n  height: calc(100% - 40px);\n  margin: 20px;\n}\nh1[data-v-6e71333e] {\n  width: 100%;\n  position: relative;\n}\nh1 .logo[data-v-6e71333e] {\n    position: absolute;\n}\n.root[data-v-6e71333e] {\n  -webkit-overflow-scrolling: touch;\n}\n.root.ja h1[data-v-6e71333e] {\n  height: calc(100% - 197px);\n}\n.root.ja h1 .logo[data-v-6e71333e] {\n    top: 50%;\n    left: 50%;\n    transform: translateY(-50%) translateX(-50%);\n}\n.root.en h1[data-v-6e71333e] {\n  height: calc(100% - 197px);\n}\n.root.en h1 .logo[data-v-6e71333e] {\n    top: 50%;\n    transform: translateY(-50%);\n}\n.lead[data-v-6e71333e] {\n  position: absolute;\n  bottom: 84px;\n}\nfooter[data-v-6e71333e] {\n  height: 52px;\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n}\nfooter .ycam[data-v-6e71333e] {\n    position: absolute;\n    bottom: 3px;\n    left: 0;\n}\nfooter .ycam[data-v-6e71333e]:hover {\n      opacity: 0.7;\n}\nfooter .copyright[data-v-6e71333e] {\n    position: absolute;\n    right: 0;\n    font-family: 'Roboto';\n    font-size: 9px;\n    line-height: 13px;\n    letter-spacing: 0;\n    text-align: right;\n    color: #4c4c4c;\n}\nfooter .copyright.chrome[data-v-6e71333e] {\n      line-height: 14px;\n      -webkit-transform: scale(0.9);\n      -webkit-transform-origin: 100% 0;\n}\nfooter .copyright a[data-v-6e71333e] {\n      color: #4c4c4c;\n      text-decoration: none;\n}\nfooter .copyright a[data-v-6e71333e]:hover {\n        border-bottom: 1px dotted #4c4c4c;\n}\nnav[data-v-6e71333e] {\n  display: none;\n}\nnav a[data-v-6e71333e] {\n    display: block;\n    color: #fff;\n    text-decoration: none;\n    font-size: 15px;\n    line-height: 2em;\n}\n#map[data-v-6e71333e] {\n  float: right;\n  width: calc(100% - 320px);\n  height: calc(100% - 40px);\n  background-color: #fff;\n  border-radius: 5px;\n  margin: 20px 20px 20px 0;\n}\n@media (max-width: 660px) {\n.root[data-v-6e71333e] {\n    overflow: auto;\n}\n#map[data-v-6e71333e] {\n    margin: 0;\n    width: 100%;\n    height: 604px;\n    border-radius: 0;\n    clear: both;\n    float: none;\n}\n.lang[data-v-6e71333e] {\n    right: default;\n    top: 15px;\n    left: 15px;\n}\naside[data-v-6e71333e] {\n    width: calc(100% - 60px);\n    margin: 30px;\n    height: auto;\n    display: block;\n}\n.root.en h1[data-v-6e71333e] {\n    height: 265px;\n}\n.root.ja #map[data-v-6e71333e] {\n    height: 553px;\n}\n.root.ja h1[data-v-6e71333e] {\n    height: 365px;\n}\n.logo.en[data-v-6e71333e] {\n    width: 100%;\n    max-width: 570px;\n}\n.lead[data-v-6e71333e] {\n    position: relative;\n    bottom: inherit;\n    margin-bottom: 100px;\n}\n.lead > img[data-v-6e71333e] {\n      width: 100%;\n}\nnav[data-v-6e71333e] {\n    display: block;\n    margin-bottom: 100px;\n}\nnav h2[data-v-6e71333e] {\n      margin-bottom: 40px;\n}\nnav a[data-v-6e71333e] {\n      display: block;\n      padding: 58px 34px;\n      margin-bottom: 15px;\n      background-image: url(/dna-of-forests/img/top/list-icon.png);\n      background-repeat: no-repeat;\n      background-position: right 38px center;\n}\nnav a[data-v-6e71333e]:nth-child(4n+1) {\n        background-color: #ff33a5;\n}\nnav a[data-v-6e71333e]:nth-child(4n+2) {\n        background-color: #337eff;\n}\nnav a[data-v-6e71333e]:nth-child(4n+3) {\n        background-color: #33ff6d;\n}\nnav a[data-v-6e71333e]:nth-child(4n+4) {\n        background-color: #f5ff8a;\n}\nfooter[data-v-6e71333e] {\n    position: relative;\n    height: auto;\n}\nfooter .ycam[data-v-6e71333e] {\n      position: relative;\n      float: left;\n}\nfooter .copyright[data-v-6e71333e] {\n      position: relative;\n      float: right;\n      font-size: 15px;\n      line-height: 22px;\n}\nfooter .copyright.chrome[data-v-6e71333e] {\n        line-height: 22px;\n}\n}\n", ""]);
 
 // exports
 
@@ -52772,6 +52772,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // 登録
 _vue2.default.component('lang-button-top', __webpack_require__(164).default); //
+//
+//
+//
 //
 //
 //
@@ -53520,7 +53523,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo pc ja",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.logo"),
                       src: "top/logo-ja-pc.png",
                       global: "global"
                     }
@@ -53528,7 +53531,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo sp ja",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.logo"),
                       src: "top/logo-ja-sp.png",
                       global: "global"
                     }
@@ -53538,7 +53541,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo pc en",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.logo"),
                       src: "top/logo-en-pc.png",
                       global: "global"
                     }
@@ -53546,7 +53549,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "logo sp en",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.logo"),
                       src: "top/logo-en-sp.png",
                       global: "global"
                     }
@@ -53564,7 +53567,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "pc",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.lead"),
                       src: "top/lead-ja-pc.png",
                       global: "global"
                     }
@@ -53572,7 +53575,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "sp",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.lead"),
                       src: "top/lead-ja-sp.png",
                       global: "global"
                     }
@@ -53582,7 +53585,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "pc",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.lead"),
                       src: "top/lead-en-pc.png",
                       global: "global"
                     }
@@ -53590,7 +53593,7 @@ var render = function() {
                   _c("imgr", {
                     staticClass: "sp",
                     attrs: {
-                      alt: "TODO",
+                      alt: _vm.$t("top.lead"),
                       src: "top/lead-en-sp.png",
                       global: "global"
                     }
@@ -53605,7 +53608,7 @@ var render = function() {
             [
               _c("imgr", {
                 attrs: {
-                  alt: "TODO",
+                  alt: _vm.$t("top.index"),
                   src: "top/title-guides.png",
                   locale: "locale",
                   global: "global"
@@ -53624,7 +53627,7 @@ var render = function() {
                 [
                   _c("imgr", {
                     attrs: {
-                      alt: "TODO",
+                      alt: "kumano",
                       src: "top/guides/kumano/list.png",
                       locale: "locale",
                       global: "global"
@@ -53639,7 +53642,7 @@ var render = function() {
                 [
                   _c("imgr", {
                     attrs: {
-                      alt: "TODO",
+                      alt: "niho",
                       src: "top/guides/niho/list.png",
                       locale: "locale",
                       global: "global"
@@ -109507,7 +109510,7 @@ var render = function() {
           [
             _c("imgr", {
               attrs: {
-                alt: "TODO",
+                alt: _vm.$t("panorama.backtoindex"),
                 src: "entrance-modal/backtoindex.png",
                 locale: "locale",
                 global: "global"
@@ -115048,7 +115051,7 @@ if (false) {
 /* 314 */
 /***/ (function(module, exports) {
 
-module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 YCAM Bio Research","lead":"TODO"},"panorama":{"ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、<a href=\"#/about/\" class=\"border dark\">アバウトページ</a>の「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” YCAM Bio Research","lead":"TODO"},"panorama":{"ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
+module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 YCAM Bio Research","lead":"TODO","index":"図鑑一覧"},"panorama":{"backtoindex":"他の図鑑をみる","ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、<a href=\"#/about/\" class=\"border dark\">アバウトページ</a>の「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” YCAM Bio Research","lead":"TODO","index":"Field guides"},"panorama":{"backtoindex":"See the other guides","ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
 
 /***/ }),
 /* 315 */
