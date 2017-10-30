@@ -1,6 +1,6 @@
 <template lang="pug">
 
-.root(:class="this.$root.$i18n.locale")
+.root(:class="this.$root.$i18n.locale" v-resize:debounce.500="init")
   #map
   aside
     h1
@@ -209,6 +209,7 @@ nav
 <script>
 
 import Vue from 'vue';
+import resize from 'vue-resize-directive';
 
 // 登録
 Vue.component('lang-button-top', require('../lang-button-top.vue').default);
@@ -217,15 +218,21 @@ export default Vue.extend({
   watch: {
     '$route': 'init'
   },
+  directives: {
+    resize
+  },
   mounted: function(){
     this.init();
   },
   methods: {
     init() {
 
+      // chromeで10pxより小さい文字が使えない問題対策
       if(document.querySelector('body').classList.contains('chrome')) {
         this.$el.querySelector('.copyright').classList.add('chrome');
       }
+      // SP判定
+      const isSP = this.$el.querySelector('nav').offsetParent != null;
 
       if( this.$route.path == '/') {
         var mapOptions = {
@@ -245,15 +252,16 @@ export default Vue.extend({
           }
           map.fitBounds (bounds);
 
-
           for(var _prop in guides) {
             var b = guides[_prop];
+            // SPの時
+            const icon_img = isSP ? `marker-sp.png` : `marker-${locale}-pc.png`;
             var marker = new google.maps.Marker({
               name: _prop,
               position: b.position,
               map: map,
               title: `${b.title[locale]}をみる`,
-              icon: `/dna-of-forests/img/top/guides/${_prop}/marker-${locale}.png`
+              icon: `/dna-of-forests/img/top/guides/${_prop}/${icon_img}`
             });
             marker.addListener('click', function(e) {
               location.href = `#/${this.name}`;
