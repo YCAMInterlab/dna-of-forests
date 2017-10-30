@@ -21,7 +21,6 @@
   width: calc(100% - 80px)
   float: left
   height: 100%
-  overflow: hidden
   background-color: #000
   position: relative
   // ↓これがないとiOS Safariで慣性スクロールが有効化されない
