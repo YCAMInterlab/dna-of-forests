@@ -19,10 +19,6 @@ router-view.root
 
 import Vue from 'vue';
 
-export default Vue.extend({
-  mounted: function(){
-    console.log('mounted');
-  }
-});
+export default Vue;
 
 </script>
