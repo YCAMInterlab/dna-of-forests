@@ -238,9 +238,10 @@ export default Vue.extend({
           type: false,
           zoomControl: false
         };
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        var guides = {
+        const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        const guides = {
           niho: {
             title: {
               ja: '仁保の森 2016',
@@ -274,13 +275,12 @@ export default Vue.extend({
             location.href = `#/${this.name}`;
           });
         }
-
         // 表示領域の調整
         var bounds = new google.maps.LatLngBounds();
         for(var prop in guides) {
           bounds.extend (guides[prop].position);
         }
-        map.fitBounds (bounds);
+        map.fitBounds(bounds);
       }
     },
     linkUrl(default_path) {
