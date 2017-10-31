@@ -215,9 +215,6 @@ import resize from 'vue-resize-directive';
 Vue.component('lang-button-top', require('../lang-button-top.vue').default);
 
 export default Vue.extend({
-  watch: {
-    '$route': 'init'
-  },
   directives: {
     resize
   },
