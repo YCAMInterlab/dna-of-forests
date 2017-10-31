@@ -215,9 +215,6 @@ import resize from 'vue-resize-directive';
 Vue.component('lang-button-top', require('../lang-button-top.vue').default);
 
 export default Vue.extend({
-  watch: {
-    '$route': 'init'
-  },
   directives: {
     resize
   },
@@ -241,35 +238,10 @@ export default Vue.extend({
           type: false,
           zoomControl: false
         };
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        map.setTilt(45);
 
-        var initMap = function(guides, locale){
-          // 表示領域の調整
-          var bounds = new google.maps.LatLngBounds();
-          for(var prop in guides) {
-            bounds.extend (guides[prop].position);
-          }
-          map.fitBounds (bounds);
+        const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-          for(var _prop in guides) {
-            var b = guides[_prop];
-            // SPの時
-            const icon_img = isSP ? `marker-sp.png` : `marker-${locale}-pc.png`;
-            var marker = new google.maps.Marker({
-              name: _prop,
-              position: b.position,
-              map: map,
-              title: `${b.title[locale]}をみる`,
-              icon: `/dna-of-forests/img/top/guides/${_prop}/${icon_img}`
-            });
-            marker.addListener('click', function(e) {
-              location.href = `#/${this.name}`;
-            });
-          }
-        };
-
-        var guides = {
+        const guides = {
           niho: {
             title: {
               ja: '仁保の森 2016',
@@ -287,7 +259,28 @@ export default Vue.extend({
         };
 
         const locale = location.pathname == '/dna-of-forests/' ? 'ja' : 'en';
-        initMap(guides, locale);
+
+        for(var _prop in guides) {
+          var b = guides[_prop];
+          // SPの時
+          const icon_img = isSP ? `marker-sp.png` : `marker-${locale}-pc.png`;
+          var marker = new google.maps.Marker({
+            name: _prop,
+            position: b.position,
+            map: map,
+            title: `${b.title[locale]}をみる`,
+            icon: `/dna-of-forests/img/top/guides/${_prop}/${icon_img}`
+          });
+          marker.addListener('click', function(e) {
+            location.href = `#/${this.name}`;
+          });
+        }
+        // 表示領域の調整
+        var bounds = new google.maps.LatLngBounds();
+        for(var prop in guides) {
+          bounds.extend (guides[prop].position);
+        }
+        map.fitBounds(bounds);
       }
     },
     linkUrl(default_path) {
