@@ -1,67 +1,118 @@
-var ua = navigator.userAgent;
-if((ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0)){
-  // do nothing
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+import VueRouter from 'vue-router';
+import _ from 'lodash';
+import AppGuide from '../components/app.vue';
+
+Vue.use(VueRouter);
+Vue.use(VueI18n);
+
+var userAgent = window.navigator.userAgent.toLowerCase();
+
+// iPhoneでLandscapeにした時に見にくくなるのを何とかする
+var setViewportByOrientation = function(){
+  var vp = document.querySelector('head>meta[name="viewport"]');
+  switch (window.orientation) {
+  case 0:
+  case 180:
+    // Portrait
+    vp.content = 'width=640';
+    break;
+  case -90:
+  case 90:
+    // Landscape
+    vp.content = 'width=1320';
+    break;
+  }
+};
+
+var ua = window.navigator.userAgent;
+
+if(ua.toLowerCase().indexOf('fban/fbios;fbav') != -1){
+  // Facebook InApp Browser
+  document.querySelector('body').classList.add('fb_in_app_browser');
+  // 下記でスクロールをOFFにできるが、サイト全体に影響してしまう
+  // $(window).on('touchmove.noScroll', function(e) {
+  //   e.preventDefault();
+  // });
+  // スクロール復活
+  // $(window).off('.noScroll');
 }
-else if((ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0)){
+else if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
+  document.querySelector('body').classList.add('mobile');
+  setViewportByOrientation();
+  window.addEventListener('orientationchange', setViewportByOrientation);
+}
+else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
+  document.querySelector('body').classList.add('pad');
   // TODO 正規表現でwidthだけ変える
-  document.querySelector('head>meta[name="viewport"]').setAttribute('content','width=1050');
+  var vp = document.querySelector('head>meta[name="viewport"]');
+  vp.content = 'width=1150';
+}
+else if(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1) {
+  document.querySelector('body').classList.add('ie');
+}
+else if(userAgent.indexOf('edge') != -1) {
+  document.querySelector('body').classList.add('edge');
+}
+else if(userAgent.indexOf('chrome') != -1) {
+  document.querySelector('body').classList.add('chrome');
+}
+else if(userAgent.indexOf('safari') != -1) {
+  document.querySelector('body').classList.add('safari');
+}
+else if(userAgent.indexOf('firefox') != -1) {
+  document.querySelector('body').classList.add('firefox');
+}
+else if(userAgent.indexOf('opera') != -1) {
+  document.querySelector('body').classList.add('opera');
+}
+else {
+  //
 }
 
-var mapOptions = {
-  mapTypeId: 'satellite',
-  disableDefaultUI: true,
-  type: false,
-  zoomControl: false
-};
-var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-map.setTilt(45);
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/',
+      component: require('../components/page/top.vue').default
+    },
+    {
+      path: '/:forest/',
+      component: require('../components/page/guide.vue').default,
+      children: [
+        { path: '',                component: require('../components/page/guide/panorama.vue').default },
+        { path: 'panorama',        component: require('../components/page/guide/panorama.vue').default },
+        { path: 'panorama/:index', component: require('../components/page/guide/panorama.vue').default },
+        { path: 'list',            component: require('../components/page/guide/list.vue').default },
+        { path: 'list/:index',     component: require('../components/page/guide/list.vue').default },
+        { path: 'about',           component: require('../niho/components/about.vue').default }
+      ]
+    }
+  ]
+});
 
-var initMap = function(guides, locale){
-  // 表示領域の調整
-  var bounds = new google.maps.LatLngBounds();
-  for(var prop in guides) {
-    bounds.extend (guides[prop].position);
+// 登録
+Vue.component('detail-drawer', require('../components/detail-drawer.vue').default);
+Vue.component('global-nav',    require('../components/global-nav.vue').default);
+Vue.component('imgr',          require('../components/imgr.vue').default);
+Vue.component('imgr-sp',       require('../components/imgr-sp.vue').default);
+
+new AppGuide({
+  router: router,
+  i18n: new VueI18n({
+    locale: document.querySelector('html').getAttribute('lang'),
+    messages: _.merge(
+      require('../messages.json'),
+      require('../niho/messages.json'),
+      require('../kumano/messages.json')
+    )
+  }),
+  data: function(){
+    // isAlreadyDraggedを追加する
+    // TODO ここ変える？
+    var _data = _.cloneDeep(require('../niho/markers.json'));
+    _data['isAlreadyDragged'] = false;
+    return _data;
   }
-  map.fitBounds (bounds);
-
-
-  for(var _prop in guides) {
-    var b = guides[_prop];
-    var marker = new google.maps.Marker({
-      position: b.position,
-      map: map,
-      title: b.title[locale]
-    });
-    marker.addListener('click', function() {
-      location.href = b.link[locale];
-    });
-  }
-};
-
-var guides = {
-  niho: {
-    title: {
-      ja: '仁保の森 2016',
-      en: 'Forest of Niho 2016'
-    },
-    link: {
-      ja: '/dna-of-forests/niho/',
-      en: '/dna-of-forests/niho/en/'
-    },
-    position: new google.maps.LatLng(34.2505833, 131.5789502)
-  },
-  kumano: {
-    title: {
-      ja: '熊野の森 2017',
-      en: 'Forest of Kumano 2017',
-    },
-    link: {
-      ja: '/dna-of-forests/kumano/',
-      en: '/dna-of-forests/kumano/en/'
-    },
-    position: new google.maps.LatLng(34.170286, 131.461427)
-  }
-};
-
-const locale = location.pathname == '/dna-of-forests/' ? 'ja' : 'en';
-initMap(guides, locale);
+}).$mount('#app');

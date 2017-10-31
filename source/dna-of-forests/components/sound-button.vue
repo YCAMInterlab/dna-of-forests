@@ -4,7 +4,7 @@ a(v-on:click="click")
   div
     span SOUND
   audio(loop)
-    source(v-bind:src='soundUrl()' type='audio/mp3')
+    source(:src='soundUrl()' type='audio/mp3')
 
 </template>
 
@@ -87,7 +87,7 @@ export default Vue.extend({
       }
     },
     soundUrl(){
-      return `/dna-of-forests/${this.$root.forestId}/sound/forest.mp3`;
+      return `/dna-of-forests/${this.$route.params.forest}/sound/forest.mp3`;
     }
   },
   data: function(){

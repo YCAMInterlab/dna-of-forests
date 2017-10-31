@@ -4,7 +4,7 @@
 - host = 'http://special.ycam.jp'
 -#
 -# TODO: 画像を変えた場合は、ここも変更
-- chache_param = 'number-for-cache-clear-20170411'
+- chache_param = 'number-for-cache-clear-20171114'
 !!!
 %html{ lang: data.lang }
   %head
@@ -32,7 +32,7 @@
     %meta{name: "twitter:card", content: 'summary_large_image'}
     %meta{name: "twitter:url", content: "#{host}/dna-of-forests/"}
     %meta{name: "twitter:description", content: data.description}
-    %meta{name: "twitter:image", content: "#{host}/dna-of-forests/img/share.png?#{chache_param}"}
+    %meta{name: "twitter:image", content: "#{host}/dna-of-forests/img/share-#{data.lang}.png?#{chache_param}"}
 
     - if data.styles
       - data.styles.each do |file|

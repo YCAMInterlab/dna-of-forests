@@ -2,15 +2,10 @@ var Clean = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    top: './source/dna-of-forests/script/main.js',
-    niho: './source/dna-of-forests/niho/script/main.js',
-    kumano: './source/dna-of-forests/kumano/script/main.js'
+    main:   './source/dna-of-forests/script/main.js'
   },
 
   resolve: {
-    root: __dirname + '/source/dna-of-forests/niho/script',
-    // extensions: ['','.js','.jsx'],
-
     // HTMLファイル内でVueの記法を可能にする
     alias: {
       'vue$': 'vue/dist/vue.js'
@@ -19,7 +14,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/.tmp/dist',
-    filename: '/dna-of-forests/[name]/script/main.js',
+    filename: './dna-of-forests/script/[name].js',
   },
 
   module: {
