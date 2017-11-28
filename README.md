@@ -16,6 +16,8 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
     - [Set up environments and install dependencies](#set-up-environments-and-install-dependencies)
     - [Start middleman server](#start-middleman-server)
     - [Doesn't work?](#doesnt-work)
+- [Tips and tools for development](#tips-and-tools-for-development)
+    - [Remove sound from movie file](#remove-sound-from-movie-file)
 - [Licenses](#licenses)
     - [Exception list](#exception-list)
 
@@ -110,6 +112,12 @@ rbenv exec bundle update
 npm update
 ```
 
+
+## Tips and tools for development
+
+### Remove sound from movie file
+
+[AudioRemover](http://www.audioremover.com/)
 
 ## Licenses
 
