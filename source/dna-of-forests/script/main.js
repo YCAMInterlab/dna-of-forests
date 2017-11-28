@@ -7,7 +7,7 @@ import AppGuide from '../components/app.vue';
 Vue.use(VueRouter);
 Vue.use(VueI18n);
 
-var userAgent = window.navigator.userAgent.toLowerCase();
+var ua = window.navigator.userAgent.toLowerCase();
 
 // iPhoneでLandscapeにした時に見にくくなるのを何とかする
 var setViewportByOrientation = function(){
@@ -26,9 +26,7 @@ var setViewportByOrientation = function(){
   }
 };
 
-var ua = window.navigator.userAgent;
-
-if(ua.toLowerCase().indexOf('fban/fbios;fbav') != -1){
+if(ua.indexOf('fban/fbios;fbav') != -1){
   // Facebook InApp Browser
   document.querySelector('body').classList.add('fb_in_app_browser');
   // 下記でスクロールをOFFにできるが、サイト全体に影響してしまう
@@ -38,33 +36,33 @@ if(ua.toLowerCase().indexOf('fban/fbios;fbav') != -1){
   // スクロール復活
   // $(window).off('.noScroll');
 }
-else if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
+else if(ua.indexOf('iphone') > 0 || ua.indexOf('ipod') > 0 || ua.indexOf('android') > 0 && ua.indexOf('mobile') > 0){
   document.querySelector('body').classList.add('mobile');
   setViewportByOrientation();
   window.addEventListener('orientationchange', setViewportByOrientation);
 }
-else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
+else if(ua.indexOf('ipad') > 0 || ua.indexOf('android') > 0){
   document.querySelector('body').classList.add('pad');
   // TODO 正規表現でwidthだけ変える
   var vp = document.querySelector('head>meta[name="viewport"]');
   vp.content = 'width=1150';
 }
-else if(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1) {
+else if(ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1) {
   document.querySelector('body').classList.add('ie');
 }
-else if(userAgent.indexOf('edge') != -1) {
+else if(ua.indexOf('edge') != -1) {
   document.querySelector('body').classList.add('edge');
 }
-else if(userAgent.indexOf('chrome') != -1) {
+else if(ua.indexOf('chrome') != -1) {
   document.querySelector('body').classList.add('chrome');
 }
-else if(userAgent.indexOf('safari') != -1) {
+else if(ua.indexOf('safari') != -1) {
   document.querySelector('body').classList.add('safari');
 }
-else if(userAgent.indexOf('firefox') != -1) {
+else if(ua.indexOf('firefox') != -1) {
   document.querySelector('body').classList.add('firefox');
 }
-else if(userAgent.indexOf('opera') != -1) {
+else if(ua.indexOf('opera') != -1) {
   document.querySelector('body').classList.add('opera');
 }
 else {
