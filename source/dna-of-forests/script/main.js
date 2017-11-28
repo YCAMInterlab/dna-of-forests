@@ -26,9 +26,13 @@ var setViewportByOrientation = function(){
   }
 };
 
+var addBodyClass = function(class_name){
+  document.querySelector('body').classList.add(class_name);
+};
+
 if(ua.indexOf('fban/fbios;fbav') != -1){
   // Facebook InApp Browser
-  document.querySelector('body').classList.add('fb_in_app_browser');
+  addBodyClass('fb_in_app_browser');
   // 下記でスクロールをOFFにできるが、サイト全体に影響してしまう
   // $(window).on('touchmove.noScroll', function(e) {
   //   e.preventDefault();
@@ -37,33 +41,33 @@ if(ua.indexOf('fban/fbios;fbav') != -1){
   // $(window).off('.noScroll');
 }
 else if(ua.indexOf('iphone') > 0 || ua.indexOf('ipod') > 0 || ua.indexOf('android') > 0 && ua.indexOf('mobile') > 0){
-  document.querySelector('body').classList.add('mobile');
+  addBodyClass('mobile');
   setViewportByOrientation();
   window.addEventListener('orientationchange', setViewportByOrientation);
 }
 else if(ua.indexOf('ipad') > 0 || ua.indexOf('android') > 0){
-  document.querySelector('body').classList.add('pad');
+  addBodyClass('pad');
   // TODO 正規表現でwidthだけ変える
   var vp = document.querySelector('head>meta[name="viewport"]');
   vp.content = 'width=1150';
 }
 else if(ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1) {
-  document.querySelector('body').classList.add('ie');
+  addBodyClass('ie');
 }
 else if(ua.indexOf('edge') != -1) {
-  document.querySelector('body').classList.add('edge');
+  addBodyClass('edge');
 }
 else if(ua.indexOf('chrome') != -1) {
-  document.querySelector('body').classList.add('chrome');
+  addBodyClass('chrome');
 }
 else if(ua.indexOf('safari') != -1) {
-  document.querySelector('body').classList.add('safari');
+  addBodyClass('safari');
 }
 else if(ua.indexOf('firefox') != -1) {
-  document.querySelector('body').classList.add('firefox');
+  addBodyClass('firefox');
 }
 else if(ua.indexOf('opera') != -1) {
-  document.querySelector('body').classList.add('opera');
+  addBodyClass('opera');
 }
 else {
   //
