@@ -227,6 +227,7 @@ import Vue from 'vue';
 import THREELib from 'three-js';
 import Cookies from 'js-cookie';
 import _ from 'lodash';
+import MobileDetect from 'mobile-detect'
 
 var THREE = THREELib(['Projector']);
 
@@ -474,15 +475,30 @@ export default Vue.extend({
       geometry.scale( - 1, 1, 1 );
 
       var texture = null;
-      var video = document.getElementById( 'video' );
-      if(video) {
+      var hasClass = function(class_name) {
+        return document.querySelector('body').classList.contains(class_name);
+      };
+      if(hasClass('ie') || hasClass('edge') || new MobileDetect(window.navigator.userAgent).mobile()) {
+        texture = new THREE.TextureLoader().load(`/dna-of-forests/${this.$route.params.forest}/img/panorama/forest.jpg`);
+      }
+      else {
+        var id = `video_${this.$route.params.forest}`;
+        var video = document.getElementById(id);
+        if(!video) {
+          video = document.createElement('video');
+          video.id = id;
+          video.className = 'video';
+          video.src = `/dna-of-forests/${this.$route.params.forest}/img/panorama/forest.mp4`;
+          video.autoplay = true;
+          video.loop = true;
+          video.style.display = 'none';
+          document.body.appendChild(video);
+        }
+
         texture = new THREE.VideoTexture( video );
         texture.minFilter = THREE.LinearFilter;
         texture.magFilter = THREE.LinearFilter;
         texture.format = THREE.RGBFormat;
-      }
-      else {
-        texture = new THREE.TextureLoader().load(`/dna-of-forests/${this.$route.params.forest}/img/panorama/forest.jpg`);
       }
 
       var material = new THREE.MeshBasicMaterial({ map: texture });
