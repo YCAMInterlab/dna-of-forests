@@ -7,7 +7,7 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
 - English ver. [http://dna-of-forests.ycam.jp/en/](http://dna-of-forests.ycam.jp/en/)
 - Japanese ver. [http://dna-of-forests.ycam.jp/](http://dna-of-forests.ycam.jp/)
 
-## Table of Contents
+## Table of contents
 
 <!-- MarkdownTOC depth="0" bracket="round" autolink="true" indent="    " -->
 
@@ -17,7 +17,7 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
     - [Start middleman server](#start-middleman-server)
     - [Doesn't work?](#doesnt-work)
 - [Licenses](#licenses)
-    - [Exception List](#exception-list)
+    - [Exception list](#exception-list)
 
 <!-- /MarkdownTOC -->
 
@@ -115,7 +115,7 @@ npm update
 
 Field Guide “DNA of Forests” by [YCAM InterLab](https://github.com/YCAMInterlab) and [Karappo Inc.](https://github.com/karappo) is licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html) (**except the files in [the list](#exception-list) below**)
 
-### Exception List
+### Exception list
 
 - [Font files licensed from "Google Fonts"](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/font)
 - [Images files in slide](https://github.com/YCAMInterlab/dna-of-forests/tree/source/source/dna-of-forests/img/about/slides)
