@@ -88,7 +88,7 @@ const router = new VueRouter({
         { path: 'panorama/:index', component: require('../components/page/guide/panorama.vue').default },
         { path: 'list',            component: require('../components/page/guide/list.vue').default },
         { path: 'list/:index',     component: require('../components/page/guide/list.vue').default },
-        { path: 'about',           component: require('../niho/components/about.vue').default }
+        { path: 'about',           component: require('../components/page/about.vue').default }
       ]
     }
   ]
