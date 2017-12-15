@@ -6,7 +6,7 @@ article.about
 
   section#about
     h2
-      imgr(:alt="$t('kumano.about.about.title')" src='about/title-about.png' locale)
+      imgr(:alt="$t('kumano.about.about.title')" src='about/title-about.png' locale global)
     p(v-html="$t('kumano.about.about.body')")
     .carousel
       .carousel-cell(:style="bgImage(1)")
@@ -25,7 +25,7 @@ article.about
     center.credit(v-html="$t('kumano.about.about.credit')")
   section#dna_barcoding
     h2
-      imgr(:alt="$t('kumano.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
+      imgr(:alt="$t('kumano.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale global)
     p(v-html="$t('kumano.about.dna_barcoding.body')")
   section#kumano_forest
     h2
@@ -33,27 +33,17 @@ article.about
     p(v-html="$t('kumano.about.kumano_forest.body')")
   section#credit
     h3#planning_production
-      imgr(:alt="$t('kumano.about.planning_production')" src='about/title-planning_production.png' locale)
+      imgr(:alt="$t('kumano.about.planning_production')" src='about/title-planning_production.png' locale global)
     a(:href="$t('kumano.about.ycam-bioresearch.link')" target="_blank")
       h4
-        imgr(:alt="$t('kumano.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
+        imgr(:alt="$t('kumano.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale global)
       p(v-html="$t('kumano.about.ycam-bioresearch.body')")
-    a(:href="$t('kumano.about.iteota.link')" target="_blank")
-      h4
-        imgr(:alt="$t('kumano.about.iteota.title')" src='about/iteota.png' locale)
-      p(v-html="$t('kumano.about.iteota.body')")
-    a(:href="$t('kumano.about.ycam.link')" target="_blank")
-      h4
-        imgr(:alt="$t('kumano.about.ycam.title')" src='about/ycam.png' locale)
-      p(v-html="$t('kumano.about.ycam.body')")
     h3#production
-      imgr(:alt="$t('kumano.about.production')" src='about/title-production.png' locale)
+      imgr(:alt="$t('kumano.about.production')" src='about/title-production.png' locale global)
     p
-      | <a :href="$t('kumano.about.tanaka.link')" target="_blank">{{ $t('kumano.about.tanaka.text') }}</a><br>
       | <a :href="$t('kumano.about.karappo.link')" target="_blank">{{ $t('kumano.about.karappo.text') }}</a><br>
-      | <a :href="$t('kumano.about.antoine.link')" target="_blank">{{ $t('kumano.about.antoine.text') }}</a><br>
     h3#cooperation
-      imgr(:alt="$t('kumano.about.cooperation')" src='about/title-cooperation.png' locale)
+      imgr(:alt="$t('kumano.about.cooperation')" src='about/title-cooperation.png' locale global)
     p.small(v-html="$t('kumano.about.cooperations')")
 
 </template>
