@@ -8,21 +8,33 @@ article.about
     h2
       imgr(:alt="$t('kumano.about.about.title')" src='about/title-about.png' locale global)
     p(v-html="$t('kumano.about.about.body')")
-    .carousel
-      .carousel-cell(:style="bgImage(1)")
-      .carousel-cell(:style="bgImage(2)")
-      .carousel-cell(:style="bgImage(3)")
-      .carousel-cell(:style="bgImage(4)")
-      .carousel-cell(:style="bgImage(5)")
-      .carousel-cell(:style="bgImage(6)")
-      .carousel-cell(:style="bgImage(7)")
-      .carousel-cell(:style="bgImage(8)")
-      .carousel-cell(:style="bgImage(9)")
-      .carousel-cell(:style="bgImage(10)")
-      .carousel-cell(:style="bgImage(11)")
-      .carousel-cell(:style="bgImage(12)")
-      .carousel-cell(:style="bgImage(13)")
-    center.credit(v-html="$t('kumano.about.about.credit')")
+    #day1.day
+      h3(v-html="$t('kumano.about.day1')")
+      .carousel
+        .carousel-cell(:style="bgImage('day1',1)")
+        .carousel-cell(:style="bgImage('day1',2)")
+        .carousel-cell(:style="bgImage('day1',3)")
+        .carousel-cell(:style="bgImage('day1',4)")
+        .carousel-cell(:style="bgImage('day1',5)")
+        .carousel-cell(:style="bgImage('day1',6)")
+        .carousel-cell(:style="bgImage('day1',7)")
+        .carousel-cell(:style="bgImage('day1',8)")
+        .carousel-cell(:style="bgImage('day1',9)")
+        .carousel-cell(:style="bgImage('day1',10)")
+      center.credit(v-html="$t('kumano.about.about.credit')")
+    #day2.day
+      h3(v-html="$t('kumano.about.day2')")
+      .carousel
+        .carousel-cell(:style="bgImage('day2',1)")
+        .carousel-cell(:style="bgImage('day2',2)")
+        .carousel-cell(:style="bgImage('day2',3)")
+        .carousel-cell(:style="bgImage('day2',4)")
+        .carousel-cell(:style="bgImage('day2',5)")
+        .carousel-cell(:style="bgImage('day2',6)")
+        .carousel-cell(:style="bgImage('day2',7)")
+        .carousel-cell(:style="bgImage('day2',8)")
+        .carousel-cell(:style="bgImage('day2',9)")
+      center.credit(v-html="$t('kumano.about.about.credit')")
   section#dna_barcoding
     h2
       imgr(:alt="$t('kumano.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale global)
@@ -110,7 +122,11 @@ article.about
 
       h4
         margin-bottom: 10px
-
+  .day
+    margin-bottom: 120px
+    h3
+      font-size: 16px
+      line-height: 1em
   .carousel
     width: 760px
     height: 506px
@@ -238,15 +254,18 @@ import Flickity from 'flickity';
 
 export default Vue.extend({
   mounted: function() {
-    var elem = document.querySelector('.carousel');
-    new Flickity( elem, {
-      autoPlay: true,
-      wrapAround: true
-    });
+    var carousels = document.querySelectorAll('.carousel');
+    for ( var i=0, len = carousels.length; i < len; i++ ) {
+      var elem = carousels[i];
+      new Flickity( elem, {
+        autoPlay: true,
+        wrapAround: true
+      });
+    }
   },
   methods: {
-    bgImage(image_num) {
-      return 'background-image: url(/dna-of-forests/kumano/img/about/slides/'+image_num+'-'+this.$root.$i18n.locale+'@2x.jpg);';
+    bgImage(day, num) {
+      return `background-image: url(/dna-of-forests/kumano/img/about/slides/${day}/${num}-${this.$root.$i18n.locale}@2x.jpg);`;
     }
   }
 });
