@@ -3,7 +3,8 @@
 .wrapper
   .containter
     .modal
-      imgr.logo(:alt="$t(this.$route.params.forest+'.top.logo')" src='entrance-modal/logo.png' locale)
+      .logo
+        imgr(:alt="$t(this.$route.params.forest+'.top.logo')" src='entrance-modal/logo.png' locale)
       imgr.lead(:alt="$t(this.$route.params.forest+'.top.lead')" src='entrance-modal/lead.png' locale)
       router-link(:to="'/'+$route.params.forest+'/panorama'") ENTER
     router-link.backTop(to="/")
@@ -50,9 +51,15 @@ img
   margin-left: auto
   margin-right: auto
   text-align: center
+  display: -webkit-flex
+  display: flex
+  flex-direction: column
   .logo
-    margin-top: 95px
-    margin-bottom: 110px
+    flex: 1
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
   a
     cursor: pointer
     display: block

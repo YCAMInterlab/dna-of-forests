@@ -6,54 +6,56 @@ article.about
 
   section#about
     h2
-      imgr(:alt="$t('kumano.about.about.title')" src='about/title-about.png' locale)
+      imgr(:alt="$t('kumano.about.about.title')" src='about/title-about.png' locale global)
     p(v-html="$t('kumano.about.about.body')")
-    .carousel
-      .carousel-cell(:style="bgImage(1)")
-      .carousel-cell(:style="bgImage(2)")
-      .carousel-cell(:style="bgImage(3)")
-      .carousel-cell(:style="bgImage(4)")
-      .carousel-cell(:style="bgImage(5)")
-      .carousel-cell(:style="bgImage(6)")
-      .carousel-cell(:style="bgImage(7)")
-      .carousel-cell(:style="bgImage(8)")
-      .carousel-cell(:style="bgImage(9)")
-      .carousel-cell(:style="bgImage(10)")
-      .carousel-cell(:style="bgImage(11)")
-      .carousel-cell(:style="bgImage(12)")
-      .carousel-cell(:style="bgImage(13)")
-    center.credit(v-html="$t('kumano.about.about.credit')")
+    #day1.day
+      h3(v-html="$t('kumano.about.day1')")
+      .carousel
+        .carousel-cell(:style="bgImage('day1',1)")
+        .carousel-cell(:style="bgImage('day1',2)")
+        .carousel-cell(:style="bgImage('day1',3)")
+        .carousel-cell(:style="bgImage('day1',4)")
+        .carousel-cell(:style="bgImage('day1',5)")
+        .carousel-cell(:style="bgImage('day1',6)")
+        .carousel-cell(:style="bgImage('day1',7)")
+        .carousel-cell(:style="bgImage('day1',8)")
+        .carousel-cell(:style="bgImage('day1',9)")
+        .carousel-cell(:style="bgImage('day1',10)")
+      center.credit(v-html="$t('kumano.about.about.credit')")
+    #day2.day
+      h3(v-html="$t('kumano.about.day2')")
+      .carousel
+        .carousel-cell(:style="bgImage('day2',1)")
+        .carousel-cell(:style="bgImage('day2',2)")
+        .carousel-cell(:style="bgImage('day2',3)")
+        .carousel-cell(:style="bgImage('day2',4)")
+        .carousel-cell(:style="bgImage('day2',5)")
+        .carousel-cell(:style="bgImage('day2',6)")
+        .carousel-cell(:style="bgImage('day2',7)")
+        .carousel-cell(:style="bgImage('day2',8)")
+        .carousel-cell(:style="bgImage('day2',9)")
+      center.credit(v-html="$t('kumano.about.about.credit')")
   section#dna_barcoding
     h2
-      imgr(:alt="$t('kumano.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
+      imgr(:alt="$t('kumano.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale global)
     p(v-html="$t('kumano.about.dna_barcoding.body')")
-  section#kumano_forest
+  section#about_forest
     h2
-      imgr(:alt="$t('kumano.about.kumano_forest.title')" src='about/title-kumano_forest.png' locale)
-    p(v-html="$t('kumano.about.kumano_forest.body')")
+      imgr(:alt="$t('kumano.about.about_forest.title')" src='about/title-kumano_forest.png' locale)
+    p(v-html="$t('kumano.about.about_forest.body')")
   section#credit
     h3#planning_production
-      imgr(:alt="$t('kumano.about.planning_production')" src='about/title-planning_production.png' locale)
+      imgr(:alt="$t('kumano.about.planning_production')" src='about/title-planning_production.png' locale global)
     a(:href="$t('kumano.about.ycam-bioresearch.link')" target="_blank")
       h4
-        imgr(:alt="$t('kumano.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
+        imgr(:alt="$t('kumano.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale global)
       p(v-html="$t('kumano.about.ycam-bioresearch.body')")
-    a(:href="$t('kumano.about.iteota.link')" target="_blank")
-      h4
-        imgr(:alt="$t('kumano.about.iteota.title')" src='about/iteota.png' locale)
-      p(v-html="$t('kumano.about.iteota.body')")
-    a(:href="$t('kumano.about.ycam.link')" target="_blank")
-      h4
-        imgr(:alt="$t('kumano.about.ycam.title')" src='about/ycam.png' locale)
-      p(v-html="$t('kumano.about.ycam.body')")
     h3#production
-      imgr(:alt="$t('kumano.about.production')" src='about/title-production.png' locale)
+      imgr(:alt="$t('kumano.about.production')" src='about/title-production.png' locale global)
     p
-      | <a :href="$t('kumano.about.tanaka.link')" target="_blank">{{ $t('kumano.about.tanaka.text') }}</a><br>
       | <a :href="$t('kumano.about.karappo.link')" target="_blank">{{ $t('kumano.about.karappo.text') }}</a><br>
-      | <a :href="$t('kumano.about.antoine.link')" target="_blank">{{ $t('kumano.about.antoine.text') }}</a><br>
     h3#cooperation
-      imgr(:alt="$t('kumano.about.cooperation')" src='about/title-cooperation.png' locale)
+      imgr(:alt="$t('kumano.about.cooperation')" src='about/title-cooperation.png' locale global)
     p.small(v-html="$t('kumano.about.cooperations')")
 
 </template>
@@ -120,7 +122,12 @@ article.about
 
       h4
         margin-bottom: 10px
-
+  .day
+    margin-top: 60px
+    margin-bottom: 120px
+    h3
+      font-size: 16px
+      line-height: 1em
   .carousel
     width: 760px
     height: 506px
@@ -248,15 +255,18 @@ import Flickity from 'flickity';
 
 export default Vue.extend({
   mounted: function() {
-    var elem = document.querySelector('.carousel');
-    new Flickity( elem, {
-      autoPlay: true,
-      wrapAround: true
-    });
+    var carousels = document.querySelectorAll('.carousel');
+    for ( var i=0, len = carousels.length; i < len; i++ ) {
+      var elem = carousels[i];
+      new Flickity( elem, {
+        autoPlay: true,
+        wrapAround: true
+      });
+    }
   },
   methods: {
-    bgImage(image_num) {
-      return 'background-image: url(/dna-of-forests/kumano/img/about/slides/'+image_num+'-'+this.$root.$i18n.locale+'@2x.jpg);';
+    bgImage(day, num) {
+      return `background-image: url(/dna-of-forests/kumano/img/about/slides/${day}/${num}-${this.$root.$i18n.locale}.jpg);`;
     }
   }
 });
