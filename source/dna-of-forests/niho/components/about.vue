@@ -6,7 +6,7 @@ article.about
 
   section#about
     h2
-      imgr(:alt="$t('niho.about.about.title')" src='about/title-about.png' locale)
+      imgr(:alt="$t('niho.about.about.title')" src='about/title-about.png' locale global)
     p(v-html="$t('niho.about.about.body')")
     .carousel
       .carousel-cell(:style="bgImage(1)")
@@ -25,7 +25,7 @@ article.about
     center.credit(v-html="$t('niho.about.about.credit')")
   section#dna_barcoding
     h2
-      imgr(:alt="$t('niho.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale)
+      imgr(:alt="$t('niho.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale global)
     p(v-html="$t('niho.about.dna_barcoding.body')")
   section#niho_forest
     h2
@@ -33,10 +33,10 @@ article.about
     p(v-html="$t('niho.about.niho_forest.body')")
   section#credit
     h3#planning_production
-      imgr(:alt="$t('niho.about.planning_production')" src='about/title-planning_production.png' locale)
+      imgr(:alt="$t('niho.about.planning_production')" src='about/title-planning_production.png' locale global)
     a(:href="$t('niho.about.ycam-bioresearch.link')" target="_blank")
       h4
-        imgr(:alt="$t('niho.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale)
+        imgr(:alt="$t('niho.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale global)
       p(v-html="$t('niho.about.ycam-bioresearch.body')")
     a(:href="$t('niho.about.iteota.link')" target="_blank")
       h4
@@ -44,16 +44,16 @@ article.about
       p(v-html="$t('niho.about.iteota.body')")
     a(:href="$t('niho.about.ycam.link')" target="_blank")
       h4
-        imgr(:alt="$t('niho.about.ycam.title')" src='about/ycam.png' locale)
+        imgr(:alt="$t('niho.about.ycam.title')" src='about/ycam.png' locale global)
       p(v-html="$t('niho.about.ycam.body')")
     h3#production
-      imgr(:alt="$t('niho.about.production')" src='about/title-production.png' locale)
+      imgr(:alt="$t('niho.about.production')" src='about/title-production.png' locale global)
     p
       | <a :href="$t('niho.about.tanaka.link')" target="_blank">{{ $t('niho.about.tanaka.text') }}</a><br>
       | <a :href="$t('niho.about.karappo.link')" target="_blank">{{ $t('niho.about.karappo.text') }}</a><br>
       | <a :href="$t('niho.about.antoine.link')" target="_blank">{{ $t('niho.about.antoine.text') }}</a><br>
     h3#cooperation
-      imgr(:alt="$t('niho.about.cooperation')" src='about/title-cooperation.png' locale)
+      imgr(:alt="$t('niho.about.cooperation')" src='about/title-cooperation.png' locale global)
     p.small(v-html="$t('niho.about.cooperations')")
 
 </template>
