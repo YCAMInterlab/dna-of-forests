@@ -18,7 +18,7 @@
           "title": "解析方法（DNAバーコーディング）について",
           "body": "すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・地衣類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の推定を試みました。具体的には、植物では葉緑体のrbcLやmatK、地衣類ではITS1と呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"
         },
-        "kumano_forest": {
+        "about_forest": {
           "title": "熊野の森について",
           "body": "熊野神社は古来から当地鎮守の神として祀られてきました。およそ700年前、当地を治める大内氏が国を領した時に、紀州熊野神社を熊野の山頂に勧請したのがはじまりです。その後、毛利氏が引き継ぎ、大守大江宗広朝臣が、御神殿、拝殿を再興しました。熊野権現を祭る熊野神社が存在することから名前が由来された権現山には、その昔、権現山の白虎伝説で知られる白狐が住んでいたと言われています。周辺植生は照葉樹林を中心とした典型的な社寺林、かつて赤松も見られましたが、近年松食い虫の被害により松枯れし、現在の姿となりました。詩人の中原中也の縁の場所としても知られており、中也が学校をさぼってはここから街並みを眺めていたり、息子を肩車して登ったりしたといわれています。高木層にはコジイ、イチイガシ、ウラジロガシ、アラカシ、クスノキ、タブノキなどが、低木層にはシャシャンボ、サカキなどが生息しています。"
         },
@@ -41,25 +41,25 @@
   "en": {
     "kumano": {
       "top": {
-        "logo": "Field Guide “DNA of Forests” in the forest of Niho 2017 YCAM Bio Research",
-        "lead": "In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop “DNA of the Forest” conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples."
+        "logo": "Field Guide “DNA of Forests” in the forest of Kumano 2017 YCAM Bio Research",
+        "lead": "TODO"
       },
       "about": {
-        "logo": "Field Guide “DNA of Forests” in the forest of Niho 2017",
+        "logo": "Field Guide “DNA of Forests” in the forest of Kumano 2017",
         "about": {
           "title": "About the Field Guide “DNA of Forests”",
-          "body": "In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.",
+          "body": "TODO",
           "credit": "Courtesy of Yamaguchi Center for Arts and Media [YCAM]"
         },
         "day1": "Appearance of DAY 1",
         "day2": "Appearance of DAY 2",
         "dna_barcoding": {
           "title": "DNA Barcoding Method",
-          "body": "All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; COI from mitochondria for insects; and ITS for fungi.<br>To search, we used a program called <a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">“BLAST”</a> that allows comparison between the resembling regions of DNA with the application of bioinformatics."
+          "body": "TODO"
         },
-        "niho_forest": {
-          "title": "About the Forest in Niho",
-          "body": "The forest is located within a 30 minute driving distance from YCAM, in the area of Niho Kamigo in Yamaguchi city. Deep in the forests, there is a 20 meter Inunaki Waterfall, which forms a river that links the forests and villages and flows into a main stream of Niho River. The presence of the creatures that dwell in the mountains and villages, as well as rivers connect them, is a feature of typical landscape of Satoyama in Yamaguchi city, and that can be found in the forests of Niho."
+        "about_forest": {
+          "title": "About the Forest in Kumano",
+          "body": "TODO"
         },
         "planning_production": "Planning and Production",
         "ycam-bioresearch": {
@@ -67,31 +67,13 @@
           "body": "Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.",
           "link": "http://www.ycam.jp/en/projects/ycam-bio-research/"
         },
-        "iteota": {
-          "title": "In the Eyes of the Animal",
-          "body": "Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])",
-          "link": "http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"
-        },
-        "ycam": {
-          "title": "Yamaguchi Center for Arts and Media [YCAM]",
-          "body": "",
-          "link": "http://www.ycam.jp/en/"
-        },
         "production": "Production",
-        "tanaka": {
-          "text": "Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)",
-          "link": "http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"
-        },
         "karappo": {
           "text": "Web design and development: KARAPPO Inc.",
           "link": "http://karappo.net"
         },
-        "antoine": {
-          "text": "Field recording and mixing: Antoine Bertin (antoinebertin.org)",
-          "link": "http://www.antoinebertin.org/"
-        },
         "cooperation": "Cooperation",
-        "cooperations": "With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"
+        "cooperations": "TODO"
       }
     }
   }

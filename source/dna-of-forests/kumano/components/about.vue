@@ -39,10 +39,10 @@ article.about
     h2
       imgr(:alt="$t('kumano.about.dna_barcoding.title')" src='about/title-dna_barcoding.png' locale global)
     p(v-html="$t('kumano.about.dna_barcoding.body')")
-  section#kumano_forest
+  section#about_forest
     h2
-      imgr(:alt="$t('kumano.about.kumano_forest.title')" src='about/title-kumano_forest.png' locale)
-    p(v-html="$t('kumano.about.kumano_forest.body')")
+      imgr(:alt="$t('kumano.about.about_forest.title')" src='about/title-kumano_forest.png' locale)
+    p(v-html="$t('kumano.about.about_forest.body')")
   section#credit
     h3#planning_production
       imgr(:alt="$t('kumano.about.planning_production')" src='about/title-planning_production.png' locale global)
@@ -123,6 +123,7 @@ article.about
       h4
         margin-bottom: 10px
   .day
+    margin-top: 60px
     margin-bottom: 120px
     h3
       font-size: 16px
@@ -265,7 +266,7 @@ export default Vue.extend({
   },
   methods: {
     bgImage(day, num) {
-      return `background-image: url(/dna-of-forests/kumano/img/about/slides/${day}/${num}-${this.$root.$i18n.locale}@2x.jpg);`;
+      return `background-image: url(/dna-of-forests/kumano/img/about/slides/${day}/${num}-${this.$root.$i18n.locale}.jpg);`;
     }
   }
 });
