@@ -79,10 +79,8 @@ img
 
 html[lang=en]
   .modal
-    text-align: left
     .logo
-      margin-top: 42px
-      margin-bottom: 68px
+      align-items: flex-start
 
 @media (max-width: 660px)
   .backTop
