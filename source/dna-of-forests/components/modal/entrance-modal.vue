@@ -38,6 +38,7 @@ img
   top: 50%
   text-decoration: none
   opacity: 0.4
+  text-align: right
   &:hover
     opacity: 0.8
 
