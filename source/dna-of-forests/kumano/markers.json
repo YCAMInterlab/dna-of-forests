@@ -3,8 +3,8 @@
     {
       "id": "A",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "オオイタチシダ",
+        "en": "Dryopteris pacifica"
       },
       "dna_sequences": [
         {
@@ -24,8 +24,8 @@
     {
       "id": "B",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "ヤツデ",
+        "en": "Fatsia japonica"
       },
       "dna_sequences": [
         {
@@ -49,8 +49,8 @@
     {
       "id": "C",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "テイカカズラ",
+        "en": "Trachelospermum asiaticum"
       },
       "dna_sequences": [
         {
@@ -70,8 +70,8 @@
     {
       "id": "D",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "クロバイ",
+        "en": "Symplocos prunifolia"
       },
       "dna_sequences": [
         {
@@ -94,8 +94,8 @@
     {
       "id": "E",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "ウメノキゴケ",
+        "en": "Parmotrema tinctorum"
       },
       "dna_sequences": [
         {
@@ -115,8 +115,8 @@
     {
       "id": "F",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "モミ",
+        "en": "Abies firma"
       },
       "dna_sequences": [
         {
@@ -140,8 +140,8 @@
     {
       "id": "G",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "シュロ",
+        "en": "Trachycarpus"
       },
       "dna_sequences": [
         {
@@ -165,8 +165,8 @@
     {
       "id": "I",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "タラヨウ",
+        "en": "Ilex Iatifolia"
       },
       "dna_sequences": [
         {
@@ -190,8 +190,8 @@
     {
       "id": "J",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "チャノキ",
+        "en": "Camellia sinensis"
       },
       "dna_sequences": [
         {
@@ -215,8 +215,8 @@
     {
       "id": "K",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "モチノキ属",
+        "en": "Ilex"
       },
       "dna_sequences": [
         {
@@ -240,8 +240,8 @@
     {
       "id": "L",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "コモチイトコゲ",
+        "en": "Pylaisiadelpha tenuitostris"
       },
       "dna_sequences": [
         {
@@ -260,8 +260,8 @@
     {
       "id": "M",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "スゲ属",
+        "en": "Carex"
       },
       "dna_sequences": [
         {
@@ -284,8 +284,8 @@
     {
       "id": "N",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "ヒサカキ",
+        "en": "Eurya japonica"
       },
       "dna_sequences": [
         {
@@ -304,8 +304,8 @@
     {
       "id": "O",
       "genus": {
-        "ja": "TODO",
-        "en": "TODO"
+        "ja": "サカキ",
+        "en": "Cleyera japonica"
       },
       "dna_sequences": [
         {
