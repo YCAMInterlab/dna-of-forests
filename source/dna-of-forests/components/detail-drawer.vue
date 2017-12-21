@@ -294,7 +294,10 @@ export default Vue.extend({
     return this.initWithNullValue(_.merge(
       _.cloneDeep(this.markers.knowledges[0]),
       _.cloneDeep(this.markers.samples[0]),
-      { type: null } // typeプロパティを追加
+      {
+        microscope: null, // error could happen withhout 'microscope'
+        type: null // Add 'type' prop
+      }
     ));
   },
 
