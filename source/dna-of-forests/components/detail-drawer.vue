@@ -248,14 +248,8 @@ h4
       margin-top: 36px
     dt
       font-weight: bold
-      // width: 170px
-      // margin-right: 10px
-      // float: left
-      // clear: bot
     dd
       font-weight: normal
-      // width: calc(100% - 180px)
-      // float: left
 
   >img
     margin: 18px auto 36px
