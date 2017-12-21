@@ -11,7 +11,7 @@ section.list(:data-lang="$root.$i18n.locale")
         th(colspan='2').dna {{ $t('list.samples.dna') }}
         th.collection_date {{ $t('list.samples.collection_date') }}
     tbody
-      tr(v-for="(item, index) in samples" :id="'s-'+(index+1)" v-on:click="goMarker('s-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/s-'+(index+1) }")
+      tr(v-for="(item, index) in markers.samples" :id="'s-'+(index+1)" v-on:click="goMarker('s-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/s-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
 
         td.result(v-if="$root.$i18n.locale === 'ja'")
@@ -41,7 +41,7 @@ section.list(:data-lang="$root.$i18n.locale")
     imgr(:alt="$t('list.tips.title')" src='list/title-knowledges.png' locale global)
   table#knowledges
     tbody
-      tr(v-for="(item, index) in knowledges" :id="'k-'+(index+1)" v-on:click="goMarker('k-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/k-'+(index+1) }")
+      tr(v-for="(item, index) in markers.knowledges" :id="'k-'+(index+1)" v-on:click="goMarker('k-'+(index+1))" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/list/k-'+(index+1) }")
         td.index {{ (index+1) | zero-pad }}
         td.title {{ item.title[$root.$i18n.locale] }}
         td.description {{ item.description[$root.$i18n.locale] | striptags }}
@@ -181,9 +181,7 @@ export default Vue.extend({
   components: {
     'dna-barcode': require('../../dna-barcode.vue').default
   },
-  data () {
-    return require(`../../../${this.$route.params.forest}/markers.json`);
-  },
+  props: ['markers'],
   mounted: function() {
 
     // 選択された行がある場合は、そこまでスクロール
@@ -193,7 +191,6 @@ export default Vue.extend({
       this.$el.scrollTop = offset;
     }
   },
-
   methods: {
     getOffsetTop(el){
       var offsetTop = 0;

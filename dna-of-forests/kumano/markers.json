@@ -1,134 +1,323 @@
 {
   "samples": [
     {
-      "id": "dummy-0",
+      "id": "A",
       "genus": {
-        "ja": "0°",
-        "en": "0°"
+        "ja": "オオイタチシダ",
+        "en": "Dryopteris pacifica"
       },
       "dna_sequences": [
         {
           "region": "rbcL",
-          "text": "A"
+          "text": "NTNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNAGNAANNNTNACNCCCCCGAATACAAGACCAAAGATACCGATATCTTAGCAGCCTTTAGAATGACCCCACAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCGGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCTTTGGATCTATTCGAAGAAGGTTCTGTCACCAACTCGTTCACCTCTATTGTAGGTAATGTCTTTGGATTTAAGGCTCTACGCGCTTTACGCTTGGAAGACCTTCGAATTCCCCCCGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGTCTGTCTGCTAAGAATTATGGTAGAGCCGTCTACGAATGCCTCCGNGNNTTTTTTTTTNNNNNAAAAAAAAANNNNNNNNNNNNNNNNNNNNNTTTTNNNTNNNNTTTNNNCCNTTTTNNNNNTNNNTNNNNNNNNNGNCNNTNCNNTNNNNNTTTTNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTCTNNNNNNCNNNNNNNNNNNNNNNNNCNNTTNNNNCCNNNNNNCTTTTCNNNNCNNNNNNNNTTAANNNAATTTTNNTANNNNACCNTTNCTTCNANTANATCCNANNNAATAANCNTACATACCNNNNTATACTNNTTTTCCTCCCCNNNNANCNNNTTNCNNTTTCNNANNCANCNNCCCNTNNNAANNNTNCAAAACNNNTCAACCCNATCTTTNCNNTACNNTNNNCCNANNNACCCNTNNAAGAATTCCNNACCTNCCNNANCCTCCNGGCTTCCTCNNCNNNNTACTCCNNNTTTTNGGGNTCATTNTAANGGCTGCTAAA"
         }
       ],
-      "marker_position": { "latitude": 0, "longtitude": 0, "radius": 500 },
+      "marker_position": { "latitude": -5, "longtitude": 252, "radius": 100 },
       "collection_date": "2017.10.8",
       "memo": {
-        "質問項目１": "質問に対する答え１",
-        "質問項目２": "質問に対する答え２",
-        "質問項目３": "質問に対する答え３",
-        "質問項目４": "質問に対する答え４"
+        "形、色、におい、におい、さわりごごち、など": "シダ系、背が低い、硬い、小さい葉がたくさんある、うらに胞子、他の葉に比べて",
+        "なんの植物だと思いますか？": "ワラビ",
+        "採集者ID": "Whatab"
       },
       "memofig_width": "230px"
     },
     {
-      "id": "dummy-60",
+      "id": "B",
       "genus": {
-        "ja": "60°",
-        "en": "60°"
+        "ja": "ヤツデ",
+        "en": "Fatsia japonica"
       },
       "dna_sequences": [
         {
+          "region": "matK",
+          "text": "NNNNNNNNNNNNNNNNNNTNNNNNNNNNTACTTTATTCGATACAAACTCTTTTTTTGTGAGGATCCACTATGATAATGAGAAAGATTTCTGCATATACGCCCAAATCGGTCAATAATATCAGAATCTGATAAATCGGTCCAAACCGCCTTACTAATAGGATGCCCCAATACGTTACAAAATTTCGCTTTAGCCAATGATCCAATCAGAGGAATAATTGGAACAATAGTATCGAACTTATTAATAGCATTATCAATTAGAAATGAATTTTCTAGCATTTGACCGCGTACCATTGAAGGGTTTAGCCGCGCACTTGATAGATAGCCCAGAAGGTCGAGGGAATGATTGTATAATTGGTTTATACAGATCCTTCCCGGTTGAGACCACAGGTAAAAATGACATTGCCATAAATTAACAAAGTAATATGTCCATTTTTTCATCAAAAAGGGCGTCCCTTTTGAAGCGAGAATTGATTTTCCTTGATACCTAACATAATGCATGAAAGGATCCTTCAACAACAATAGATTGACTTGAAAAGCCTTAACAAAGACTTTTACAAGATATTTTATTTTTCCATAGAAATATATTCGTTCAAGAAGGGTTCCAGAAGATGTTGAGCGTAAATGAGAAGATTGGTTACGGAGAAAGATGAAGATGGATTCGTATTCACATAGATGAGAATTATATAGGAAGAAGAATAGTCTTTGATTTCTTTTTGAAAAAGAAGAACCGGCTTTATTTGGAGTATTCCAATTACAATACTCGTGGAGAAAGAATCGTAATAAATGCAAAGAAGAAGCATCTTTTACCCAGTAGCGAAGAGTTGAACA"
+        },
+        {
           "region": "rbcL",
-          "text": "A"
+          "text": "NNNNNNNNNNNNNNANNNATACTCCTGACTATGAAACCAAAGATACTGACATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACGGAATCGAGCCCGTTGCTGGAGACGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATCTGCGAATCCCTGTTGCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTCCGTGGTGNATNNNATTTTTACANNA"
         }
       ],
-      "marker_position": { "latitude": 0, "longtitude": 60, "radius": 500 },
+      "marker_position": { "latitude": -11.5, "longtitude": 225, "radius": 100 },
       "collection_date": "2017.10.8",
       "memo": {
-        "質問項目１": "質問に対する答え１",
-        "質問項目２": "質問に対する答え２",
-        "質問項目３": "質問に対する答え３",
-        "質問項目４": "質問に対する答え４"
+        "形、色、におい、におい、さわりごごち、など": "主脈が８本（8.3本？）",
+        "なんの植物だと思いますか？": "ヤツデ科",
+        "採集者ID": "8.3hand"
       },
       "memofig_width": "230px"
     },
     {
-      "id": "dummy-120",
+      "id": "C",
       "genus": {
-        "ja": "120°",
-        "en": "120°"
+        "ja": "テイカカズラ",
+        "en": "Trachelospermum asiaticum"
       },
       "dna_sequences": [
         {
           "region": "rbcL",
-          "text": "A"
+          "text": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNANTNNTGNCTNATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGCGGTGNATNNGATTTTACANNAN"
         }
       ],
-      "marker_position": { "latitude": 0, "longtitude": 120, "radius": 500 },
+      "marker_position": { "latitude": -7, "longtitude": 243, "radius": 100 },
       "collection_date": "2017.10.8",
       "memo": {
-        "質問項目１": "質問に対する答え１",
-        "質問項目２": "質問に対する答え２",
-        "質問項目３": "質問に対する答え３",
-        "質問項目４": "質問に対する答え４"
+        "形、色、におい、におい、さわりごごち、など": "木の幹に巻きついている<br>地面から生えている<br>葉は濃い緑、葉は厚め<br>木の幹に多く巻きついていているが地面からも生えている<br>幹もしっかりしている<br>同じ木で３mくらいの高さまで生えているものもある<br>高いところまで生えているものは葉が大きい同じものか？",
+        "なんの植物だと思いますか？": "ツタ",
+        "採集者ID": "kytsuta"
       },
       "memofig_width": "230px"
     },
     {
-      "id": "dummy-180",
+      "id": "D",
       "genus": {
-        "ja": "180°",
-        "en": "180°"
+        "ja": "クロバイ",
+        "en": "Symplocos prunifolia"
       },
       "dna_sequences": [
         {
+          "region": "matK",
+          "text": "NNNNNNNNAANNNNNTTTTTTTTGAGGATCCACTATGATAATGAGAAAGATTTCTATATATACGCCCGAATCGGTCAATAATATCAGAATCTGATAAATCGGCCCAGACTGGCTTACTAATGGGATATCCTAACACGTTACAAAATTTCGCTTTAGACAATGATCCGATCAGAGGAATAATTGGAACTAGGGTATCGAACTTTTTAATAGCATTTCCTATTAGAAATGCGTTTTCTAGCAGTTGACTCCGTACCATTGAAGGGTTTAGTCGCACACTTGAAAGATAGCCCAGAAAGTCGAGGGAATGATTGGATAATTGGTTTATATGGATCCTTCCTGGTTGAGACCACATGTAAAAATAACATTGCCATAAATTGACAAAGTAATATTTCCATTTCTTCATCAAAATAAACGTCCCTTTTGAAACCAAAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATCCTTGAACAACCATAGAATGGCCCGAAAATCCTTAGTAAATACTTCTACAAAATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAAAATTCCAGAAGATATTAATCGTAAATGAGAAGATTGGTTGCGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAGGAACAAGAATAATCTTTGATTTTTTTTTGAAAAAGAAAAAGTAGATTTCTTTGGAGTAATAAGACTATTCCNATTACGATACTCGTGGAGAAAGAATCGTANNANNTGCAAAGAAAGGGCANNNTTTACCAGCAGCGAANNTNNNNNNNNNNNNNNANGGGGGANTGTGTGANNNAGNNNNNNNNNGNNNNNNNNNNNNNNNNNTGTGTGAAAAAAAAAAANNNNNNNNACACAG"
+        },
+        {
           "region": "rbcL",
-          "text": "A"
+          "text": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNANNANNNNNATTNAANACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAAGTCCTCAACCCGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCCACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACGACATCGAGCCCGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAATATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTAGAAGATCTGCGAATCCCTCCGGCGTATACTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGGGATAAATTGAACAAGTATGGCCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTAGGGTTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTCCGCGNNNNNNNNNNNTTTNNNAAAAAAAAANNNNN"
         }
       ],
-      "marker_position": { "latitude": 0, "longtitude": 180, "radius": 500 },
+      "marker_position": { "latitude": -10, "longtitude": 239, "radius": 100 },
       "collection_date": "2017.10.8",
       "memo": {
-        "質問項目１": "質問に対する答え１",
-        "質問項目２": "質問に対する答え２",
-        "質問項目３": "質問に対する答え３",
-        "質問項目４": "質問に対する答え４"
+        "形、色、におい、におい、さわりごごち、など": "葉の縦横比は55:2くらい、表側はテラテラ。ふちのギザギザは若い葉ほどゆるい。葉の長さ約55mm（目測）",
+        "採集者ID": "talikng-saw"
       },
       "memofig_width": "230px"
     },
     {
-      "id": "dummy-240",
+      "id": "E",
       "genus": {
-        "ja": "240°",
-        "en": "240°"
+        "ja": "ウメノキゴケ",
+        "en": "Parmotrema tinctorum"
       },
       "dna_sequences": [
         {
-          "region": "rbcL",
-          "text": "A"
+          "region": "matK",
+          "text": "GGAGGTANTTACTGANNGAGGGNCNNCGCNNNCCCGGGGGTCTCGGCCCCCAACTCTNNACCCTGTGTGTACCTACCTTTGTTGCTTTGGCGGGCCTCGGGGGTCTCCCTCCGCGTCNNCTTTCGGGTCGATGAGCGTCCGTCAGAGGCCCATTTACATTNNGTTTATCAGTGTNNNCCGAGTACAAAATGAATAAATAAAAACTTTCAACAANNNATCTCTTGGTTCNNNNNNNATGNNAAACGNNNNNNATNNNNNNNGGAANNANNNCTGCCATATGANGGTNANNNNGNNNGTGNTNNNNNGNGNATCNNGGGNCGTTCTNNNTNNNNNTNNTNNNNCGAGNNTGACTGNNNNTGCGACCGNNNNNNTNGTANNCGANNTNNNNNNCTGANNTTTNNNNNNNNCCNTTTCTTTCTTTCTTNNANCTTTTNANTTTTTGGTGNNCNTCTGTGNNGNNNNANNNAGNNNCGNNNNATTNTCANANTGGNNNNNNACCANNCGNNNNNNNACATGATTNNNACNNNNTNCGTNNGNGNAGNNNNCATCACTTGCTGGTGANNNATGTGGNNCAGNNNGAATNNNNNNNNNNNCTCGCCTGNNNNNTNTNNNTNGGGGANNNNGCATAGTTTGCTCATCTCANNNANGNNNNATGNCTNNGGAAAAATATNTTNNNNNNNNNCCAGTNNNTTNANNCTNNCAATCGATATTNNTNNNNCNCNATCCANCCCNTGNTNGCACGCANNNCTNNNNNNNNNNNAAACGGAATCCGGGGCCTTTGAGAANNTNCCCNNNNNNNTNCCCNNNNNNNNNCNNNGNNNTCNNNNNNNNNNNNNTCCTCNANTCACTGCATATNGCANNNNNNTNNNCNAANNACTGTTGCCNCAATGT"
         }
       ],
-      "marker_position": { "latitude": 0, "longtitude": 240, "radius": 500 },
+      "marker_position": { "latitude": -6, "longtitude": 41, "radius": 100 },
       "collection_date": "2017.10.8",
       "memo": {
-        "質問項目１": "質問に対する答え１",
-        "質問項目２": "質問に対する答え２",
-        "質問項目３": "質問に対する答え３",
-        "質問項目４": "質問に対する答え４"
+        "形、色、におい、におい、さわりごごち、など": "群生している、平べったい",
+        "なんの植物だと思いますか？": "カビゴケ",
+        "採集者ID": "exigua.seaslug"
       },
       "memofig_width": "230px"
     },
     {
-      "id": "dummy-300",
+      "id": "F",
       "genus": {
-        "ja": "300°",
-        "en": "300°"
+        "ja": "モミ",
+        "en": "Abies firma"
+      },
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNNNNNNNNNNNNNNNGNNNCTTNNGGTGGTTNACGCGTNNNNNACTTTNGGTGGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGTACAGTACTTTTGTGTTTACGCGNANNNNNCTTTNNTGTTNANTNATTNNNNNNTTNGTTNNTNNAGATCCTTCCCGGTTGAGACCACAGGTAAAAATGACATTGCCATAAATTAACANNGTAANNTNNCCATTTTTTCATCAAAANNGNNGTCCCTTTTGAAGCCAGAATTGATTTTCCTTGATACCTAACATAATGCATGAAAGGATCCTTCAACAACNATAGATTGACNNGAAAAGCCTTAACAAAGACTTCTACAAGATATTNNTTTTNNNATAGAAATATATTCGTTNNNGAAGGGTTCCAGAAGATGTTGATCGTAAATGAGAAGATTGNTNACGGAGAAAANNGAAGANNGATTCGTATTCACATACATGAGAATTATATAAGAATAAGAATAATCTTTGATTTCTTTTTGAAAAAGAAGAACCGGCTTTCTTNGNNGTATTCCGACTACTCCACTTACGAACCTCGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNNNNNANNNNNNNGTTANNATTACAGNATTAACTTATTATACTCCTGNANTATCAGACCAAAGATACGGATATCTTGGCGGCATTCCGAGTAACTCCTCAACCTGGGGTGCCGCCCGAGGAAGCGGGAGCAGCAGTAGCTGCTGAATCTTCCACCGGTACATGGACCACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTACAAAGGGCGATGCTATGACATCGAGCCCGTTGCTGGAGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCCTTAGACCTTTTCGAAGAAGGTTCTGTTACTAACTTGTTCACTTCCATTGTAGGTAATGTATTTGGATTCAAGGCCCTACGGGCTTTACGTTTGGAAGATTTGCGGATTCCCCCTGCTTATTCCAAAACTTTTCAAGGTCCACCTCATGGTATCCAAGTTGAAAGAGATAAATTGAACAAATATGGCCGTCCTTTGTTGGGATGTACTATCAAACCAAAATTGGGTCTATCGGCTAAGAACTATGGTAGAGCAGTTTACGAATGTCTTCGTGGTGNNNNNNATTTTTTACNNANN"
+        }
+      ],
+      "marker_position": { "latitude": -2, "longtitude": 32, "radius": 100 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "大木、こい緑、におい-緑茶風、葉はかたくトゲ状、針葉樹、葉は小さなササ状のあつまり",
+        "なんの植物だと思いますか？": "カヤ？",
+        "採集者ID": "ANAKUMAMORI"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "G",
+      "genus": {
+        "ja": "シュロ",
+        "en": "Trachycarpus"
+      },
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNCCCTTTTTTTNNGGAGNNCCNGCTGNNGATAATTGAAAANGATTTCTNCATANACNNCCAAATCGATCAATAATATNNCAATCTGATAAATCGNTCCGAANCGGCTTACTAATGGGATGCCCCANTCCGGTACAAAATTTCGCTTTCGACAACGATCCAATCAGAGGAATAACTGGAANNNTGANATCGAACTTCTTAATAGCATTATCTATTAGAAATNCATTCTCTAGCATTTGATTCNNTACNNNNAANGGATTTATTNNCACACTTGAAANNTAACCNATAAAGTNNNNNNAACNNTTGGAAAATTGGTTTATATNNNNNNTNCCNGGTTGAGACCACAANNNAAAATAACATTGCCAGAAATTGACAAGGNNACGTTTCCATTTNTNCATCAAAAGANNNGTCCNNTTNGAANCCAGAATTGATTTNNNTTGATACNTAACATAATNNATGAAAGGATCCTTGAANAACCATAGNNNGNNNTGAAAAGCCTTACNNNNNNCNNCTACNNGATATTCTATTTTTCCATAGAAATATATTTCNNTCAAGAAGAACTCCAGAAGATGTTGATCGTAAATGAGAAGATTGATTACNANGAAAAACTAATNNAGATTCNNATTCACATACATGAGAATTATATGGGAANNANNNNAATCTTTNGATTTNNCTTTTGAAAAANAAAAANNNGNTTTCTGCGAAGTAATAAGACTATTCCAATTACGATCCTCGTNANGAAAGAATCGTAATAAATGCAAAGAAGAANNNTCTTGNNCCAGAACTGAA"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTTGACTTATTATACTCCTGACTACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCACCTGAGGAAGCAGGGGCAGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAAACCGTTGTCGGGGAGGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGTCTGGAGGATCTGCGAATTCCCACTTCTTATTCCAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAAAGAGATAAGTTGAACAAGTATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCGGTTTATGAATGTCTACGCGGTGGATAAAA"
+        }
+      ],
+      "marker_position": { "latitude": -9.5, "longtitude": 70, "radius": 100 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "葉がかたくて下の茎が竹",
+        "なんの植物だと思いますか？": "シロ",
+        "採集者ID": "TOiAPROTZWNLB"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "I",
+      "genus": {
+        "ja": "タラヨウ",
+        "en": "Ilex Iatifolia"
+      },
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNCTCNATACAAACTCTTTTTTTTTGAGGATCCGCTATGATAATGAAAAAGATTTCTGTATATACGCCCAAATCGATCAATAATATCAGAATCTGATAAATCGGCCCGAACCGGCTTACTAATAGGATGCCCTAATCCGTTACAAAATTTCGCTTTCGCCAACGATCCAATCAGAGGAATAATTGGAACACTGATATCGAACTTCTTAATAGCATTATCGATTAGAAATGCATTTTCTAGCATTTGATTCCGTACCATTAAAGGATTTAGTCGCACACTTGAAAAATAGCCCATAAAGTCAAGATAATAATTGGAAAATTGGTTTATATGGATTCTTCCTGGTTGAGACCACAGGTAAAAATAACATTGCCAGAAATTGACAAGGTAATGTTTCCATTTATTCATCAAAAGAGACGTCCCTTTTGAAGCCAGAATTGATTTTTCTTGATACCTAACATAATGTATGAAAGGATCCTTGAACAACCATAGGTTGACCTGAAAAGCCTTAGCAAAGACTTCTACAAGATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAGAACTCCAGAAGATGTTGATCGTAAATGAGAAGATTGATTACGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAAGAAGAAAAAGAATCTTTGATTTCTTTTTGAAAAAGAAGAACCGGGTTTCTGTGAAGTAATAAGACTATTCCAATTACGATCCTCGTAGAGAAAGAATCGTAATAATGCAAAGAAGAAGTATCTTTTACNNGTAACGAAGNNTGAACNNNAAAANNNNNGGGGGNNTGTGNNNAAAAAAAAAAAAAAAAAAAANTAANNNCTNGTGTGGATTAAAAAANNNTTNTTNCTCAG"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNNNNNNNNCTGGTGTTNNNATTACAAATTGAATTATTATACTCCTGACTATGTCACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGGTGGACTTNGATTTNNN"
+        }
+      ],
+      "marker_position": { "latitude": -28, "longtitude": 142, "radius": 100 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "少しギザギザ<br>表面ツルツル<br>根っこ、くさっている",
+        "なんの植物だと思いますか？": "",
+        "採集者ID": "From GOEMON"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "J",
+      "genus": {
+        "ja": "チャノキ",
+        "en": "Camellia sinensis"
+      },
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNATATATTTTATTCTATACAANCTCGTTTTTTTTGAGGATCCGCTATGATAATGAGAAAGATTTCTATATATACGCCCGAATCGGTCAATAATATCAGAATCTGATAAATCGGCCCAGACTGGTTTACTAATGGGATGTCCTAACACGTTACAAAATTTCGCTTTAGACAATGATCCAATCATAGGAATAATAGGAACTATGGTATCGAACCTCTTAATAGCATTACCTATTAGAAATGAATTTTCTAGCATTTGACTCCGTACCATTGAAGGGTTTAGTCGCACACTTGAAAGATAGCCCAGAAAGTCTGGGGAATGCTTAGATAATTGGTTTATATGGATCCTTCCTGGTTGAGACCACATGTAAAAATAACATTGCCAGAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGAGACGTACCTTTTGAAGCCAAAATGTATTTTCCTTGATACCTAACATAATGAATAAAAGGATCCTTGAACAACCACAGAATGACCTGAAAATCCTTAGTAAAGACTTCTAACAAATGNNCTANNTTTCCATAGANNNNNCTTCGTTCGAGAAANNNNNNNNANNNNATTGATCGGATNNGAGAAGATTGCTTNNNNNNNNNNNCGAAGATAGATTCGTATTNNNATNNNNGNNCATNNNATAGAAACAAGACTNNNNNNAGNTTTNCATTTNTNNTNNATTNNGAGNNNTNGGCGGAGTTNNAAGAAAATTNNTTTNNNATTACAATGCGNCNNTAACNANNNNNNNNNNNNNNAAAAANNCATTATCCTNACCTTNNGCTAGAAAAAAAAAAAAAANNNACGCNNTNNNNAAAAAAAAAAAAAANCCCNNNNNNTGNAATTNANNCGATTCTTCCCCNNNNNNNNGGAATTGGAATAGTCTTANNNNCNANGGAATCNNNTTTNNTTTNCAAANNAATCANNNNTNTNNTGTNNNNNNAATTNCAATATGNAACCAATCNTTNCG"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNANNNNATANNNGATANNTTGGCAGCATTCCGAGTAACTCCGCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCGTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTACTGCGTATGTTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGAAGAGCAGTTTATGAATGTNNNNNCGNNNNNNNNNNTTTTTNNNNNNNAAA"
+        }
+      ],
+      "marker_position": { "latitude": -25, "longtitude": 200, "radius": 50 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "大きさ、約10cm×4cm<br>大きなお茶の葉のような形<br>表面がぼこぼこ<br>表面には光沢<br>小さなギザギザあり<br>林がきれた陽の当たるところ<br>白いつぼみあり",
+        "なんの植物だと思いますか？": "ヤブチャ",
+        "採集者ID": "YABUCHAYA"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "K",
+      "genus": {
+        "ja": "モチノキ属",
+        "en": "Ilex"
+      },
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNNNNTTTTTTTTNGAGGANCCGCTATGATAATGAAAAAGATTTCTGTATATACGCCCAAATCGATCAATAATATCAGAATCTGATAAATCGGCCCGAACCGGCTTACTAATGGGATGCCCTAATCCGTTACAAAATTTCGCTTTCGCCAACGATCCAATCAGAGGAATAATTGGAACACTGATATCGAACTTCTTAATAGCATTATCGATTAGAAATGCATTTTCTAGCATTTGATTCCGTACCATTAAAGGATTTAGTCGCACACTTGAAAAATAGCCCATAAAGTCAAGATAATAATTGGAAAATTGGTTTATATGGATTCTTCCTGGTTGAGACCACAGGTAAAAATAACATTGCCAGAAATTGACAAGGTAATGTTTCCATTTATTCATCAAAAGAGACGTCCCTTTTGAAGCCAGAATTGATTTTTCTTGATACCTAACATAATGTATGAAAGGATCCTTGAACAACCATAGGTTGACCTGAAAAGCCTTAGCAAAGACTTCTACAAGATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAGAACTCCAGAAGATGTTGATCGTAAATGAGAAGATTGATTACGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAAGAATAAAAAGAATCTTTGATTTCTTTTTGAAAAAGAAAAACCGGGTTTCTGTGAAGTAATAAGACTATTCCAATTACGATCCTCGTAGAGAAAGAATCGTAATAANTGCAAAGAAGAAGTATCTTTTACCNNTAACGAAAATNGACATGCGGGGGGGGGGGGG"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNATNGNNACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTGACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGNNNNNNNNANNNTNTNNNNNNANAAAAAN"
+        }
+      ],
+      "marker_position": { "latitude": -19, "longtitude": 193, "radius": 150 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "みどり色（くさ色）<br>普通の草のにおい<br>さらっとしている（さわり心地）",
+        "なんの植物だと思いますか？": "くさ",
+        "採集者ID": "SYOKONISETIQTS"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "L",
+      "genus": {
+        "ja": "コモチイトコゲ",
+        "en": "Pylaisiadelpha tenuitostris"
       },
       "dna_sequences": [
         {
           "region": "rbcL",
-          "text": "A"
+          "text": "TNNNNNNNNNNNNNCNNNCAACCATGGANTACCCGCTGNAAGAGGCAGGAGCTGCAGTAGCTGCTGAATCCTCCACCGGTACATGGACCACTGTTTGGACCGATGGGCTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCCTGAAGCAGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACCTCTATTGTTGGTAATGTTTTTGGATTCAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGTCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTGGGTTTATCCGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTG"
         }
       ],
-      "marker_position": { "latitude": 0, "longtitude": 300, "radius": 500 },
+      "marker_position": { "latitude": -12, "longtitude": 212, "radius": 100 },
       "collection_date": "2017.10.8",
       "memo": {
-        "質問項目１": "質問に対する答え１",
-        "質問項目２": "質問に対する答え２",
-        "質問項目３": "質問に対する答え３",
-        "質問項目４": "質問に対する答え４"
+        "形、色、におい、におい、さわりごごち、など": "ぬれている<br>よくみるとギザギザのある小さな葉。それのかたまりとして全体になっている！<br>さわると、うぶ毛みたいにせんさいなタッチだった",
+        "採集者ID": "MOSYAMAGUCHI"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "M",
+      "genus": {
+        "ja": "スゲ属",
+        "en": "Carex"
+      },
+      "dna_sequences": [
+        {
+          "region": "matK",
+          "text": "NNNNNNNNNNNNNNNNNNNNNNAATACTTGNGTAGATACAANTGTCTCTTTTGAGAAGATCCNNTATAAAAATGAAAAAGATTTTTATATATTCGACCAAATCGACTAATANTATNATAATCTGATAAATCTGTCCAGATTGGCTTACTAGTAGGTTGTCCTACTACAGTACAAAGTGAAGCTTTAGACAATGATTTAATGAGAGGAAGGACTGGAACTAAAGTATCAAATCTCTTAATAAGAGTATCTATTAATATAGAATCCTCTAGTATTTGACTCCTTACCACCAAGTAATTTATTTTGACACTTATAAAATAACCGATAAAGTAGAACGAATAATAAGAGAATTGGTTTCTATGAAACCTATTAGGCTCAGACCAAAAATGAAAATAATATTGCCAAAAATAGACAAGGTAAGATTTCAATTTCTTAATAAAAAGATCAGCCCCTTTTGATGCTAGAATAGCTTTACCTTGATATCGAAGATAGTGCATGAGAGGATCTGTGAAGATCCATAAAGTTTTCTTCAAAAAAACATGATGCACTATTCTAAAATGTTCTATTTTTCCATAGAAGTAAATTCTTTCAAGAAAGCTTCTAAAAGATCTTAATCGTAAACAAGAAGATTTTTTACGAAAAAACAGGAATAAAAACTCATATTCTGATACATAAGAATTGTATAAGAAACGAGAGAGTCTTATATTTTCTTTTGAGAATATAGAAACCGATTTCTTTAAAGTAATGATACTATTCGAATTAGAATTATCGAAGAGAAAAAATCGCAATAAATGCAAAGAAGAAATATCTTGGATCCAGCATTGAAGGATTTGAACCAAGAT"
+        },
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNATNGNNACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTGACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGNNNNNNNNANNNTNTNNNNNNANAAAAAN"
+        }
+      ],
+      "marker_position": { "latitude": -28, "longtitude": 131, "radius": 200 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "根元ではが別れている。葉が他の植物と比べて極めて細い。にニオイは特に他と変わらない。裏はツルツルしているが、表は裏と比べてザラつきがある。<br>生息地：しゃ面",
+        "採集者ID": "higenosou satou"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "N",
+      "genus": {
+        "ja": "ヒサカキ",
+        "en": "Eurya japonica"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "NNNNNNNNNNNTNNNNNNNANNNNNNNNNNNACAAATTGACTATATTATACTCCTGACTATGAAACCAAAGCGACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGTCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTGACTTCTATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTCCTGCGTATACTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTCCGCGGTGNATNNNNATTTTACANNNAN"
+        }
+      ],
+      "marker_position": { "latitude": -27, "longtitude": 126, "radius": 100 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "葉がギザギザしていて硬い。<br>裏側の色が濃く、裏側は薄い。<br>斜面に生えている。<br>葉はツバキっぽい",
+        "採集者ID": "0826nCm2"
+      },
+      "memofig_width": "230px"
+    },
+    {
+      "id": "O",
+      "genus": {
+        "ja": "サカキ",
+        "en": "Cleyera japonica"
+      },
+      "dna_sequences": [
+        {
+          "region": "rbcL",
+          "text": "ANNNNNNNNNNNNNNNNNNNNNNNNNNANNTACTAATTGACTTANTATCCTCCTGACTATGAAACCGATGCGAGAGATATTGGGAANACTGNAAGTNTCTCCCNNCCNGNANAATATCATNATAAGCTNGNNNNGNNNACACAGCGGACTCCTGGGAGGCTATCCNACCACTCGAGATTTCNNTGGNTCNTACAANNNNCGNNNNGAGGAATGGTGGACTTCNTCNAANTTCCTTTTTACGGTAACTAATAATAATGCATTTTCTTTCTATTGATTCCCTACCAATAATTGGANNAGNCAGNNCTTGATTNTGTCNNATAANGTCGAGANNATGGATGGANNNNTGNNTTGTATGAATTCTTCCCGGTNGAGACCACACGTNAAAACATCNTGGCCTTACATTGACTTGGCAAGGTTTCCCCTTTTTCTCTTCANAGACGTCCCTTTTGTGCCGAAATTGATTTGTCTTGTTCTNGAAAGCAATGTAAGAGCGGATCNGGGTNCTTGATCTGTTGACCTGGGAGCCNTATTCATGACTGCNTCCNGATAGTCNATTTTTTCNTANAAATAAANTCTTTCNNCNNNAACTCCNANNANGTNGATANNTATGCGTANATTNGATTGCNGANANGCNCGAANNANNTTCATATTCNNCTACNTGANAANTATNAAAANTAAAAANNAACNTNNATATTCTTTTTGTATNTNTATNTGCCGGNTTNCTGTGAAGTTANNNTANTNTTCCNANTACTATTCC"
+        }
+      ],
+      "marker_position": { "latitude": -15, "longtitude": 101, "radius": 100 },
+      "collection_date": "2017.10.8",
+      "memo": {
+        "形、色、におい、におい、さわりごごち、など": "木の幹がなめらか、赤っぽい大きな木の下、葉がツルツル、においはない",
+        "採集者ID": "kumano20171008"
       },
       "memofig_width": "230px"
     }
@@ -136,14 +325,102 @@
   "knowledges": [
     {
       "title": {
-        "ja": "知識のテストマーカー",
-        "en": "test knowledge marker"
+        "ja": "トンボ",
+        "en": "Dragonflies"
       },
       "description": {
-        "ja": "日本語の説明文章が入ります。",
-        "en": "Description in English will be here."
+        "ja": "細長い翅と腹をもつトンボ目の昆虫。トンボの多くは秋に産卵し、冬を幼虫（ヤゴ）で越し、春に羽化します。幼虫（ヤゴ）は水中で生活するため、山を飛んでいるトンボも産卵は近くの田んぼで行います。山口市熊野町の辺りでは、山裾や川の近くでモノサシトンボ、山の中でマユタテアカネなどをよく見かけることができます。",
+        "en": "Dragonflies are Odonata insects that have long slender wings and abdomen. Most of them lay egges in autumn, and emerge as an adult after spending a winter as a larva. Dragonflies inhabiting in mountains travel to rice fields nearby when laying eggs, since larvae live underwater. In Kumano of Yamaguchi city, you can find Copera annulata at the foot of the mountains and near rivers, as well as Sympetrum eroticum in the mountains."
       },
-      "marker_position": { "latitude": -10, "longtitude": -130, "radius": 6 }
+      "marker_position": { "latitude": -18, "longtitude": 158, "radius": 100 }
+    },
+    {
+      "title": {
+        "ja": "境内の穴",
+        "en": "Holes on the shrine grounds"
+      },
+      "description": {
+        "ja": "神社に至る石段のすきまや、境内の至るところで見つかる穴の多くは、土壌中で生活している動物の地下トンネルへの入り口です。直径5cmくらいの大きな穴からはモグラやアカネズミなど、小さな穴からは昆虫、特にアリやハチが出入りしているようです。羽化するために地中から出たセミの幼虫が残した穴もあります。その他、熊野の森の竹やぶ近くではタケノコが掘られた後の穴も多く見つかります。",
+        "en": "Gaps between the shrine’s stone steps and many holes found within the precinct are the entrance to the underground tunnels for animals that inhabit beneath the ground. Animals such as moles and large Japanese field mice are using bigger holes that are approximately 5 cm in diameter, and insects such as ants and bees are going through smaller holes. There are also holes left by cicada nymphs that have emerged from the ground. In addition, around the bamboo grove in the Kumano forest, you can also find lots of holes which people dug out to get bamboo shoots."
+      },
+      "marker_position": { "latitude": -14, "longtitude": 23, "radius": 100 }
+    },
+    {
+      "title": {
+        "ja": "キツネ",
+        "en": "Foxes"
+      },
+      "description": {
+        "ja": "日本に自然分布していて最も身近なのは、ネコ目イヌ科キツネ属のアカギツネです。国道9号線以北の山が続くところで生活しており、時折、人家の近くにも姿をあらわします。食性は雑食で、ノネズミやノウサギなどを捕食したり、アケビや柿などの果物を食べたりして生活しています。",
+        "en": "Red fox, or Vulpes vulpes (Carnivora, Canidae, Vulpes), is the most familiarized animal that have distributed naturally in Japan. They inhabit the mountains that continue in the north of National Road Route 9, and occassionally show up near people’s houses. They are omnivores, preying on animals such as wild mice and wild rabbits, as well as feeding on fruits such as akebi and persimmons."
+      },
+      "marker_position": { "latitude": -2, "longtitude": 268, "radius": 100 }
+    },
+    {
+      "title": {
+        "ja": "ハチ",
+        "en": "Bees"
+      },
+      "description": {
+        "ja": "昆虫綱ハチ目の昆虫。スズメバチ、アシナガバチ、ミツバチなどがよく知られています。熊野神社では、オオスズメバチが（腐った根っこの間から入って）土の中、アシナガバチが植え込みのツツジやサザンカの枝の下、キイロスズメバチが本殿に巣をつくっていることが目撃されています。基本的には雨があたりにくいところに巣をつくります。",
+        "en": "Bees are the members of order Hymenoptera from class Insecta. Species such as hornets, paper wasp, and honeybees are widely known. In the Kumano shrine, honeycombs of Asian giant hornet can be found beneath the ground (entered from the gaps of rotten roots). Also, honeycombs of paper wasps have been found underneath the branches of planted azalea and sasanqua, and of Japanese yellow hornets at the main shrine. They generally make honeycombs at places which don’t get hit by the rain."
+      },
+      "marker_position": { "latitude": 40, "longtitude": 60, "radius": 100 }
+    },
+    {
+      "title": {
+        "ja": "鳥の混群",
+        "en": "Swarm comprised of various birds"
+      },
+      "description": {
+        "ja": "森にすむシジュウカラ、ヤマガラ、エナガ、コゲラなどの異なった種類の小鳥が、秋から冬にかけて一つの群れをつくって行動することを、混群（こんぐん）といいます。繁殖は春で、それ以外の時期は縄張りをはらずに一緒に生活することが知られています。",
+        "en": "During the months from autumn to winter, various kinds of small birds such as Parus major, Parus varius, Aegithalos caudatus, and Dendrocopos kizuki that inhabit in the forest form a group and migrate. This type of swarm with various bird species is called “kongun” in Japanese. It is known that spring is their breeding season, and in other seasons, they live together without owing territories."
+      },
+      "marker_position": { "latitude": 45, "longtitude": 210, "radius": 200 }
+    },
+    {
+      "title": {
+        "ja": "クモ",
+        "en": "Spiders"
+      },
+      "description": {
+        "ja": "クモ綱クモ目に属する陸上節足動物。糸を使って垂直や水平に網を張る種と、網を張らずに獲物を捕まえる種がいます。夏から秋にかけて熊野の森の中を歩くと、ジョロウグモが張った大きな網を見つけることができます。",
+        "en": "Spiders are arthropods that dwell on land, belonging to the order Araneae within the class Arachnida. There are species that spin web vertically and horizontally, and others that capture their prey without forming a web. If you take a walk in the forest of Kumano in summer and autumn, you can find big spider webs constructed by Nephila clavata."
+      },
+      "marker_position": { "latitude": -3, "longtitude": 58, "radius": 100 }
+    },
+    {
+      "title": {
+        "ja": "白狐の言い伝え",
+        "en": "Byakko (white fox) folklore"
+      },
+      "description": {
+        "ja": "その昔、傷ついた白狐が（現在、熊野神社のある）権現山の麓のお寺の池に浸かって傷を治していたそうです。和尚さんがこれを目撃し、不思議に思い、池の水をすくうとなんと温かく、それが湯田温泉の発見につながったと言い伝えられています。そのため湯田温泉は「白狐の湯」と呼ばれています。熊野の森の小道沿いには「いなりのほこら」と呼ばれる祠が今でも祀られています。",
+        "en": "Once upon a time, an injured byakko (white fox) was bathing in the pond of the temple, located at the foot of Mt. Gongen (where the Kumano Shrine is now enshrined), and curing the wound. The chief priest who witnessed the scene got curious and scooped the water from the pond, and surprisingly, found out that the water is warm. It has been told that this has led to the discovery of Yuda Onsen (Hot Springs), and for this reason, people call the Onsen as “byakko’s hot water”. Along the small path in Kumano forest, a small shrine called “Inari* no hokora (Inari’s small shine)” still stands for worshipping.<br><br>*Inari is the god of the harvest, often represented in a form of fox."
+      },
+      "marker_position": { "latitude": -5.6, "longtitude": 0, "radius": 100 }
+    },
+    {
+      "title": {
+        "ja": "ドングリ",
+        "en": "Acorns"
+      },
+      "description": {
+        "ja": "秋に熊野の森を散策すると、色々な形をしたドングリを見つけることができます。ドングリはブナ科の樹木の果実です。この辺りにはイチイガシ、ウラジロガシ、アラカシといったカシの仲間や、コジイなどシイの仲間の樹木が植わっています。シイのドングリ（小さくて黒い実）は渋みとなるタンニンの量が比較的少ないため、ネズミやイノシシなどの動物が好んで食べるようです。",
+        "en": "When you walk around the autumn forest of Kumano, you can find many acorns in various shapes. Acorns are the fruit of beech tree. Oak trees such as Quercus Gilva, Quercus Salicina, and Quercus Glauca, and chinquapins such as Castanopsis cuspidata are planted in this area. Animals such as mice and boars prefer to feed on the small black acorns from chinquapin trees, since the nuts have relatively less amount of tannin that creates a bitter taste."
+      },
+      "marker_position": { "latitude": -50, "longtitude": 130, "radius": 100 }
+    },
+    {
+      "title": {
+        "ja": "土壌微生物",
+        "en": "Soil microbes"
+      },
+      "description": {
+        "ja": "あるクスノキの大木の下の土壌を採取し、微生物群集のゲノムを網羅的に解析することができる「メタゲノム解析」を実施したところ、480種を超える菌種数を確認することができました。その中には培養（人工的に生育・増殖させること）が比較的難しい菌も含まれていました。",
+        "en": "After collecting the soil samples from beneath a big camphor tree and conducting ”metagenome analysis” that can analyze the genomes of a microbial community comprehensively, more than 480 types of bacteria have been detected. Among them, bacteria that are relatively difficult to cultivate were found."
+      },
+      "marker_position": { "latitude": -5, "longtitude": 285, "radius": 100 }
     }
   ]
 }

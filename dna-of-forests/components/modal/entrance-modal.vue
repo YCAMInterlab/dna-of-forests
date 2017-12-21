@@ -38,6 +38,7 @@ img
   top: 50%
   text-decoration: none
   opacity: 0.4
+  text-align: right
   &:hover
     opacity: 0.8
 
@@ -79,10 +80,8 @@ img
 
 html[lang=en]
   .modal
-    text-align: left
     .logo
-      margin-top: 42px
-      margin-bottom: 68px
+      align-items: flex-start
 
 @media (max-width: 660px)
   .backTop

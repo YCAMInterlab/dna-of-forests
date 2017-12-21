@@ -2,7 +2,7 @@
 
 #container(:data-lang="$root.$i18n.locale")
   <transition name="instruction_anim">
-    <instruction-modal v-if="!$root.isAlreadyDragged"/>
+    <instruction-modal v-if="!isAlreadyDragged"/>
   </transition>
   <transition name="fade">
     <entrance-modal v-if="isTop()"/>
@@ -18,12 +18,12 @@
     | is licensed under a
     br
     a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
-  .marker.sample(v-for="(item, index) in samples" :id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/s-'+(index+1) }" v-on:click="goMarker('s-'+(index+1))")
+  .marker.sample(v-for="(item, index) in markers.samples" :id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/s-'+(index+1) }" v-on:click="goMarker('s-'+(index+1))")
     //- 日本語なら画像、英語ならテキストでラベルを表示
     imgr.label(:alt="item.genus.ja" :src="'panorama/marker-text/sample-ja/'+filename(item.genus.en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.genus.en }}
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text" />
-  .marker.knowledge(v-for="(item, index) in knowledges" :id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/k-'+(index+1) }" v-on:click="goMarker('k-'+(index+1))")
+  .marker.knowledge(v-for="(item, index) in markers.knowledges" :id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/k-'+(index+1) }" v-on:click="goMarker('k-'+(index+1))")
     //- 日本語なら画像、英語ならテキストでラベルを表示
     imgr.label(:src="'panorama/marker-text/knowledge/'+(index+1)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.title.en }}
@@ -264,7 +264,7 @@ export default Vue.extend({
     this.onPointerDownPointerY = null;
     this.isUserInteracting = false;
     this.isDragged = false;
-    this.markers = [];
+    this.markerArray = [];
 
     this.projector     = new THREE.Projector();
     this.frustum       = new THREE.Frustum();
@@ -298,13 +298,13 @@ export default Vue.extend({
 
     // 並び順に沿って、URLに現出する"alias"を設定
 
-    for(var i = 0; i<this.samples.length; i++){
-      this.samples[i]['alias'] = 's-'+(i+1);
+    for(var i = 0; i<this.markers.samples.length; i++){
+      this.markers.samples[i]['alias'] = 's-'+(i+1);
     }
-    for(i = 0; i<this.knowledges.length; i++){
-      this.knowledges[i]['alias'] = 'k-'+(i+1);
+    for(i = 0; i<this.markers.knowledges.length; i++){
+      this.markers.knowledges[i]['alias'] = 'k-'+(i+1);
     }
-    var marker_all = this.samples.concat(this.knowledges);
+    var marker_all = this.markers.samples.concat(this.markers.knowledges);
     // 距離でソートして、重なり順序がおかしくならないように
     marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
     for(i = 0; i<marker_all.length; i++){
@@ -358,7 +358,7 @@ export default Vue.extend({
 
       // // 選択された行がある場合は、そこまでスクロール
       var key = this.$route.params.index;
-      var selectedMarker = _.filter(this.markers, function(m){ return m.key==key; })[0];
+      var selectedMarker = _.filter(this.markerArray, function(m){ return m.key==key; })[0];
       default_lat = selectedMarker.latitude;
       default_lon = -selectedMarker.longtitude;
 
@@ -441,8 +441,8 @@ export default Vue.extend({
       this.frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( this.camera.projectionMatrix, this.camera.matrixWorldInverse ) );
 
       // Update 2D markers
-      for(var i = 0; i < this.markers.length; i++){
-        var marker = this.markers[i];
+      for(var i = 0; i < this.markerArray.length; i++){
+        var marker = this.markerArray[i];
         var pos = this.getTwoDPosition(marker.position);
         var el = this.$el.querySelector('#' + marker.key);
         if(pos){
@@ -582,7 +582,7 @@ export default Vue.extend({
       marker.key = key;
       marker.type = type;
 
-      this.markers.push( marker );
+      this.markerArray.push( marker );
 
       return marker;
     },
@@ -628,7 +628,7 @@ export default Vue.extend({
         this.lon = ( this.onPointerDownPointerX - e.clientX ) * 0.1 + this.onPointerDownLon;
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
         // -----
-        this.$root.isAlreadyDragged = true;
+        this.isAlreadyDragged = true;
         this.autoScroll = false;
       }
     },
@@ -662,7 +662,7 @@ export default Vue.extend({
         } else if ( e.detail ) {
           this.lon -= e.detail * 1.0;
         }
-        this.$root.isAlreadyDragged = true;
+        this.isAlreadyDragged = true;
         this.autoScroll = false;
       }
     },
@@ -678,11 +678,12 @@ export default Vue.extend({
     }
 
   },
-  data () {
-    // autoScrollを追加する
-    var _data = _.cloneDeep(require(`../../../${this.$route.params.forest}/markers.json`));
-    _data['autoScroll'] = false;
-    return _data;
-  }
+  data() {
+    return {
+      isAlreadyDragged: false,
+      autoScroll: false
+    };
+  },
+  props: ['markers']
 });
 </script>

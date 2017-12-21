@@ -248,14 +248,8 @@ h4
       margin-top: 36px
     dt
       font-weight: bold
-      // width: 170px
-      // margin-right: 10px
-      // float: left
-      // clear: bot
     dd
       font-weight: normal
-      // width: calc(100% - 180px)
-      // float: left
 
   >img
     margin: 18px auto 36px
@@ -297,15 +291,14 @@ export default Vue.extend({
   },
 
   data: function(){
-    var markers = require(`../${this.$route.params.forest}/markers.json`);
-    var _data = _.merge(_.cloneDeep(markers['knowledges'][0]), _.cloneDeep(markers['samples'][0]));
-    _data.type = null; // typeプロパティを追加
-
-    // initialize
-    _data = this.initWithNullValue(_data);
-
-    return _data;
+    return this.initWithNullValue(_.merge(
+      _.cloneDeep(this.markers.knowledges[0]),
+      _.cloneDeep(this.markers.samples[0]),
+      { type: null } // typeプロパティを追加
+    ));
   },
+
+  props: ['markers'],
 
   methods: {
     // 全valueをnullにする
@@ -339,14 +332,15 @@ export default Vue.extend({
     },
     fetchData() {
       var idx, _data;
-      if(0<=this.$route.params.index.indexOf('s-')){
-        idx = this.$route.params.index.replace('s-','') - 1;
-        _data = this.$root.samples[idx];
+      var p_index = this.$route.params.index;
+      if(0<=p_index.indexOf('s-')){
+        idx = p_index.replace('s-','') - 1;
+        _data = this.markers.samples[idx];
         _data.type = 'sample';
       }
-      else if(0<=this.$route.params.index.indexOf('k-')){
-        idx = this.$route.params.index.replace('k-','') - 1;
-        _data = this.$root.knowledges[idx];
+      else if(0<=p_index.indexOf('k-')){
+        idx = p_index.replace('k-','') - 1;
+        _data = this.markers.knowledges[idx];
         _data.id = idx+1;
         _data.type = 'knowledge';
       }
