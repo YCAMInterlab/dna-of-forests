@@ -298,8 +298,8 @@ export default Vue.extend({
 
   data: function(){
     return this.initWithNullValue(_.merge(
-      this.markers.knowledges[0],
-      this.markers.samples[0],
+      _.cloneDeep(this.markers.knowledges[0]),
+      _.cloneDeep(this.markers.samples[0]),
       { type: null } // typeプロパティを追加
     ));
   },
