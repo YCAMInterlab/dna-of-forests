@@ -19,7 +19,7 @@
         "なんの植物だと思いますか？": "ワラビ",
         "採集者ID": "Whatab"
       },
-      "memofig_width": "230px"
+      "memofig_width": "200px"
     },
     {
       "id": "B",
@@ -44,7 +44,7 @@
         "なんの植物だと思いますか？": "ヤツデ科",
         "採集者ID": "8.3hand"
       },
-      "memofig_width": "230px"
+      "memofig_width": "316px"
     },
     {
       "id": "C",
@@ -65,7 +65,7 @@
         "なんの植物だと思いますか？": "ツタ",
         "採集者ID": "kytsuta"
       },
-      "memofig_width": "230px"
+      "memofig_width": "200px"
     },
     {
       "id": "D",
@@ -88,8 +88,7 @@
       "memo": {
         "形、色、におい、におい、さわりごごち、など": "葉の縦横比は55:2くらい、表側はテラテラ。ふちのギザギザは若い葉ほどゆるい。葉の長さ約55mm（目測）",
         "採集者ID": "talikng-saw"
-      },
-      "memofig_width": "230px"
+      }
     },
     {
       "id": "E",
@@ -99,7 +98,7 @@
       },
       "dna_sequences": [
         {
-          "region": "matK",
+          "region": "ITS1",
           "text": "GGAGGTANTTACTGANNGAGGGNCNNCGCNNNCCCGGGGGTCTCGGCCCCCAACTCTNNACCCTGTGTGTACCTACCTTTGTTGCTTTGGCGGGCCTCGGGGGTCTCCCTCCGCGTCNNCTTTCGGGTCGATGAGCGTCCGTCAGAGGCCCATTTACATTNNGTTTATCAGTGTNNNCCGAGTACAAAATGAATAAATAAAAACTTTCAACAANNNATCTCTTGGTTCNNNNNNNATGNNAAACGNNNNNNATNNNNNNNGGAANNANNNCTGCCATATGANGGTNANNNNGNNNGTGNTNNNNNGNGNATCNNGGGNCGTTCTNNNTNNNNNTNNTNNNNCGAGNNTGACTGNNNNTGCGACCGNNNNNNTNGTANNCGANNTNNNNNNCTGANNTTTNNNNNNNNCCNTTTCTTTCTTTCTTNNANCTTTTNANTTTTTGGTGNNCNTCTGTGNNGNNNNANNNAGNNNCGNNNNATTNTCANANTGGNNNNNNACCANNCGNNNNNNNACATGATTNNNACNNNNTNCGTNNGNGNAGNNNNCATCACTTGCTGGTGANNNATGTGGNNCAGNNNGAATNNNNNNNNNNNCTCGCCTGNNNNNTNTNNNTNGGGGANNNNGCATAGTTTGCTCATCTCANNNANGNNNNATGNCTNNGGAAAAATATNTTNNNNNNNNNCCAGTNNNTTNANNCTNNCAATCGATATTNNTNNNNCNCNATCCANCCCNTGNTNGCACGCANNNCTNNNNNNNNNNNAAACGGAATCCGGGGCCTTTGAGAANNTNCCCNNNNNNNTNCCCNNNNNNNNNCNNNGNNNTCNNNNNNNNNNNNNTCCTCNANTCACTGCATATNGCANNNNNNTNNNCNAANNACTGTTGCCNCAATGT"
         }
       ],
@@ -110,7 +109,7 @@
         "なんの植物だと思いますか？": "カビゴケ",
         "採集者ID": "exigua.seaslug"
       },
-      "memofig_width": "230px"
+      "memofig_width": "179px"
     },
     {
       "id": "F",
@@ -134,8 +133,7 @@
         "形、色、におい、におい、さわりごごち、など": "大木、こい緑、におい-緑茶風、葉はかたくトゲ状、針葉樹、葉は小さなササ状のあつまり",
         "なんの植物だと思いますか？": "カヤ？",
         "採集者ID": "ANAKUMAMORI"
-      },
-      "memofig_width": "230px"
+      }
     },
     {
       "id": "G",
@@ -160,7 +158,7 @@
         "なんの植物だと思いますか？": "シロ",
         "採集者ID": "TOiAPROTZWNLB"
       },
-      "memofig_width": "230px"
+      "memofig_width": "301px"
     },
     {
       "id": "I",
@@ -182,10 +180,9 @@
       "collection_date": "2017.10.8",
       "memo": {
         "形、色、におい、におい、さわりごごち、など": "少しギザギザ<br>表面ツルツル<br>根っこ、くさっている",
-        "なんの植物だと思いますか？": "",
         "採集者ID": "From GOEMON"
       },
-      "memofig_width": "230px"
+      "memofig_width": "311px"
     },
     {
       "id": "J",
@@ -210,7 +207,7 @@
         "なんの植物だと思いますか？": "ヤブチャ",
         "採集者ID": "YABUCHAYA"
       },
-      "memofig_width": "230px"
+      "memofig_width": "330px"
     },
     {
       "id": "K",
@@ -235,12 +232,12 @@
         "なんの植物だと思いますか？": "くさ",
         "採集者ID": "SYOKONISETIQTS"
       },
-      "memofig_width": "230px"
+      "memofig_width": "300px"
     },
     {
       "id": "L",
       "genus": {
-        "ja": "コモチイトコゲ",
+        "ja": "コモチイトゴケ",
         "en": "Pylaisiadelpha tenuitostris"
       },
       "dna_sequences": [
@@ -398,7 +395,7 @@
         "ja": "その昔、傷ついた白狐が（現在、熊野神社のある）権現山の麓のお寺の池に浸かって傷を治していたそうです。和尚さんがこれを目撃し、不思議に思い、池の水をすくうとなんと温かく、それが湯田温泉の発見につながったと言い伝えられています。そのため湯田温泉は「白狐の湯」と呼ばれています。熊野の森の小道沿いには「いなりのほこら」と呼ばれる祠が今でも祀られています。",
         "en": "Once upon a time, an injured byakko (white fox) was bathing in the pond of the temple, located at the foot of Mt. Gongen (where the Kumano Shrine is now enshrined), and curing the wound. The chief priest who witnessed the scene got curious and scooped the water from the pond, and surprisingly, found out that the water is warm. It has been told that this has led to the discovery of Yuda Onsen (Hot Springs), and for this reason, people call the Onsen as “byakko’s hot water”. Along the small path in Kumano forest, a small shrine called “Inari* no hokora (Inari’s small shine)” still stands for worshipping.<br><br>*Inari is the god of the harvest, often represented in a form of fox."
       },
-      "marker_position": { "latitude": -5.6, "longtitude": 0, "radius": 100 }
+      "marker_position": { "latitude": -2, "longtitude": 278, "radius": 100 }
     },
     {
       "title": {
