@@ -2,7 +2,7 @@
 
 #container(:data-lang="$root.$i18n.locale")
   <transition name="instruction_anim">
-    <instruction-modal v-if="!$root.isAlreadyDragged"/>
+    <instruction-modal v-if="!isAlreadyDragged"/>
   </transition>
   <transition name="fade">
     <entrance-modal v-if="isTop()"/>
@@ -628,7 +628,7 @@ export default Vue.extend({
         this.lon = ( this.onPointerDownPointerX - e.clientX ) * 0.1 + this.onPointerDownLon;
         this.lat = ( e.clientY - this.onPointerDownPointerY ) * 0.1 + this.onPointerDownLat;
         // -----
-        this.$root.isAlreadyDragged = true;
+        this.isAlreadyDragged = true;
         this.autoScroll = false;
       }
     },
@@ -662,7 +662,7 @@ export default Vue.extend({
         } else if ( e.detail ) {
           this.lon -= e.detail * 1.0;
         }
-        this.$root.isAlreadyDragged = true;
+        this.isAlreadyDragged = true;
         this.autoScroll = false;
       }
     },
@@ -678,7 +678,12 @@ export default Vue.extend({
     }
 
   },
-  data() { return { autoScroll: false }; },
+  data() {
+    return {
+      isAlreadyDragged: false,
+      autoScroll: false
+    };
+  },
   props: ['markers']
 });
 </script>

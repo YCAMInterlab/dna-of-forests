@@ -49,9 +49,7 @@ Vue.component('global-nav', require('../global-nav.vue').default);
 export default Vue.extend({
   data: function(){
     return {
-      markers: require(`../../${this.$route.params.forest}/markers.json`),
-      isAlreadyDragged: false,
-      autoScroll: false
+      markers: require(`../../${this.$route.params.forest}/markers.json`)
     };
   },
 });
