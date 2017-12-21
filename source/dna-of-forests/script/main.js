@@ -110,12 +110,5 @@ new AppGuide({
       require('../niho/messages.json'),
       require('../kumano/messages.json')
     )
-  }),
-  data: function(){
-    // isAlreadyDraggedを追加する
-    // TODO ここ変える？
-    var _data = _.cloneDeep(require('../niho/markers.json'));
-    _data['isAlreadyDragged'] = false;
-    return _data;
-  }
+  })
 }).$mount('#app');
