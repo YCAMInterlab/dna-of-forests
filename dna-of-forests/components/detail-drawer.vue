@@ -38,6 +38,11 @@
           dl
             dd(v-html="microscope.memo")
 
+      section.specimen(v-if="specimen")
+        h3
+          imgr(:alt="$t('detail_drawer.sample.article.specimen.title')" src='detail-drawer/title-specimen.png' locale global)
+        img.photo(:src="'/dna-of-forests/'+$route.params.forest+'/img/detail-drawer/specimen/'+id+'.jpg'")
+
       section.memo(v-if="($root.$i18n.locale === 'en' && memofig_width) || ($root.$i18n.locale === 'ja' && memo)")
         h3
           imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale global)
@@ -225,6 +230,11 @@ h4
   .bg_line
     margin-top: 25px
 
+.specimen
+  text-align: center
+  .photo
+    width: calc(100% - 50px)
+
 .bg_line
   background-image: url(/dna-of-forests/img/detail-drawer/memo-line.png)
   padding-bottom: 1px
@@ -295,8 +305,11 @@ export default Vue.extend({
       _.cloneDeep(this.markers.knowledges[0]),
       _.cloneDeep(this.markers.samples[0]),
       {
-        microscope: null, // error could happen withhout 'microscope'
-        type: null // Add 'type' prop
+        type: null,
+        // error could happen withhout these
+        // TODO: markers内を全部捜査して必要なkeyを確かめるようにすれば、ここでいちいち追加しなくて良い
+        specimen: null,
+        microscope: null
       }
     ));
   },
