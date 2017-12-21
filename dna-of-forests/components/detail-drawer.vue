@@ -20,7 +20,7 @@
         div.dna_sequence(v-for="item in dna_sequences")
           p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
           <dna-tab :text="item.text" />
-        h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
+        h4 3. {{ label() }}
         div.result(v-if="$root.$i18n.locale === 'ja'")
           small {{ genus.en }}
           | {{ genus.ja }}
@@ -294,7 +294,10 @@ export default Vue.extend({
     return this.initWithNullValue(_.merge(
       _.cloneDeep(this.markers.knowledges[0]),
       _.cloneDeep(this.markers.samples[0]),
-      { type: null } // typeプロパティを追加
+      {
+        microscope: null, // error could happen withhout 'microscope'
+        type: null // Add 'type' prop
+      }
     ));
   },
 
@@ -353,6 +356,15 @@ export default Vue.extend({
       // initialized_dataに_dataを上書きしてdataに格納
       _data = _.defaultsDeep(_data, initialized_data);
       this.initWithData(this, _data);
+    },
+    label() {
+      // TODO: This is messy implementation. How can I override messages depend on current forest?
+      if(this.$route.params.forest == 'kumano' && this.$root.$i18n.locale == 'ja') {
+        return '採集者による推定結果';
+      }
+      else {
+        return this.$t('detail_drawer.sample.article.dna.result_of_identification');
+      }
     }
   }
 });
