@@ -339,14 +339,15 @@ export default Vue.extend({
     },
     fetchData() {
       var idx, _data;
-      if(0<=this.$route.params.index.indexOf('s-')){
-        idx = this.$route.params.index.replace('s-','') - 1;
-        _data = this.$root.samples[idx];
+      var p_index = this.$route.params.index;
+      if(0<=p_index.indexOf('s-')){
+        idx = p_index.replace('s-','') - 1;
+        _data = this.markers.samples[idx];
         _data.type = 'sample';
       }
-      else if(0<=this.$route.params.index.indexOf('k-')){
-        idx = this.$route.params.index.replace('k-','') - 1;
-        _data = this.$root.knowledges[idx];
+      else if(0<=p_index.indexOf('k-')){
+        idx = p_index.replace('k-','') - 1;
+        _data = this.markers.knowledges[idx];
         _data.id = idx+1;
         _data.type = 'knowledge';
       }
