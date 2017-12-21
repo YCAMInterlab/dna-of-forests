@@ -4,7 +4,7 @@
   <global-nav />
   router-view.guide-content(:markers="markers")
   transition(name='fade')
-    detail-drawer('v-if'="$route.params.index")
+    detail-drawer(:markers="markers" 'v-if'="$route.params.index")
 
 </template>
 
