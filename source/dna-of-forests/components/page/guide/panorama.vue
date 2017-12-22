@@ -353,10 +353,10 @@ export default Vue.extend({
 
     // Camera position -------
 
-    var default_lon = 1882;
-    var default_lat = 46.2;
-    if(this.$route.params.index) {
+    var default_lon = this.config.camera_default_position.longtitude;
+    var default_lat = this.config.camera_default_position.latitude;
 
+    if(this.$route.params.index) {
       // If there is a selected line, scroll to that point
       var key = this.$route.params.index;
       var selectedMarker = _.filter(this.markerArray, function(m){ return m.key==key; })[0];
@@ -683,6 +683,6 @@ export default Vue.extend({
       autoScroll: false
     };
   },
-  props: ['markers']
+  props: ['markers', 'config']
 });
 </script>
