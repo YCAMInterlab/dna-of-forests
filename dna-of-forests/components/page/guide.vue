@@ -2,7 +2,7 @@
 
 .root
   <global-nav />
-  router-view.guide-content(:markers="markers")
+  router-view.guide-content(:markers="markers" :config="config")
   transition(name='fade')
     detail-drawer(:markers="markers" 'v-if'="$route.params.index")
 
@@ -42,6 +42,7 @@ body.facebook
 <script>
 
 import Vue from 'vue';
+import _ from 'lodash';
 
 // 登録
 Vue.component('global-nav', require('../global-nav.vue').default);
@@ -49,7 +50,11 @@ Vue.component('global-nav', require('../global-nav.vue').default);
 export default Vue.extend({
   data: function(){
     return {
-      markers: require(`../../${this.$route.params.forest}/markers.json`)
+      markers: require(`../../${this.$route.params.forest}/markers.json`),
+      config: _.merge(
+        require(`../../config.json`),
+        require(`../../${this.$route.params.forest}/config.json`)
+      )
     };
   },
 });

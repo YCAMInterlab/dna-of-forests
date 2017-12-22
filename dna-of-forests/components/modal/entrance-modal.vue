@@ -84,6 +84,8 @@ html[lang=en]
       align-items: flex-start
 
 @media (max-width: 660px)
+  .wrapper
+    height: calc(100% - 50px)
   .backTop
     right: inherit
     top: inherit
