@@ -18,13 +18,16 @@
     | is licensed under a
     br
     a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
+
   .marker.sample(v-for="(item, index) in markers.samples" :id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/s-'+(index+1) }" v-on:click="goMarker('s-'+(index+1))")
-    //- 日本語なら画像、英語ならテキストでラベルを表示
+    //- [2] Labels are displayed with images in Japanese, text in English
     imgr.label(:alt="item.genus.ja" :src="'panorama/marker-text/sample-ja/'+filename(item.genus.en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.genus.en }}
+
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text" />
+
   .marker.knowledge(v-for="(item, index) in markers.knowledges" :id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/k-'+(index+1) }" v-on:click="goMarker('k-'+(index+1))")
-    //- 日本語なら画像、英語ならテキストでラベルを表示
+    //- Ref: [2]
     imgr.label(:src="'panorama/marker-text/knowledge/'+(index+1)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.title.en }}
 
@@ -94,7 +97,7 @@
   height: 100%
   overflow: hidden
 
-  // 中心にマーカーを描画
+  // Draw a marker in the center
   // &:after
   //   content: ''
   //   display: block
@@ -140,7 +143,7 @@
   line-height: 14px
   white-space: nowrap
 
-  // 左中央を中心に回転
+  // Rotate around the left center
   transform-origin: 0% 50%
   -webkit-transform-origin: 0% 50%
   transform: rotate(-90deg)
@@ -166,7 +169,7 @@
     -moz-animation: flash 1s infinite linear
 
   &.sample
-    // 矢印の先端が基準点になるようにずらす
+    // Move so that the center of the arrow becomes the reference point
     margin-left: 7px
     &:before
       display: inline-block
@@ -177,7 +180,6 @@
     .dna_barcode
       margin-left: 5px
       cursor: pointer
-    // ボバーした時にDNAの動きを遅くする
     &:hover
       .dna_barcode
         animation-duration: 500s !important
@@ -185,7 +187,7 @@
         -moz-animation-duration: 500s !important
 
   &.knowledge
-    // markerの中央が基準点になるようにずらす
+    // Move so that the center of the marker becomes the reference point
     margin-top: 3.5px
     margin-left: 3.5px
     &:before
@@ -231,7 +233,7 @@ import MobileDetect from 'mobile-detect'
 
 var THREE = THREELib(['Projector']);
 
-// 表示の切り替え
+// Visiblities
 const visibleAxisHelper = false;
 const visible3dMaker = false;
 const visibleGrid = false;
@@ -274,15 +276,15 @@ export default Vue.extend({
     this.camera        = new THREE.PerspectiveCamera( 75, this.width / this.height, 1, 1100 );
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
 
-    // 光
+    // Light
     var ambient = new THREE.AmbientLight(0xffffff);
     this.scene.add(ambient);
 
-    // ジオメトリの追加
+    // Add Geometry
     var pano_sphere = this.create_pano_sphere();
     this.scene.add( pano_sphere );
 
-    // グリッド
+    // Grid
     if(visibleGrid){
       var sphere = new THREE.Mesh(
         new THREE.SphereGeometry( 500, 36, 18 ),
@@ -294,10 +296,9 @@ export default Vue.extend({
       this.scene.add(sphere);
     }
 
-    // マーカー
+    // Markers
 
-    // 並び順に沿って、URLに現出する"alias"を設定
-
+    // Set "alias" appearing in the URL according to the sorting order
     for(var i = 0; i<this.markers.samples.length; i++){
       this.markers.samples[i]['alias'] = 's-'+(i+1);
     }
@@ -305,7 +306,8 @@ export default Vue.extend({
       this.markers.knowledges[i]['alias'] = 'k-'+(i+1);
     }
     var marker_all = this.markers.samples.concat(this.markers.knowledges);
-    // 距離でソートして、重なり順序がおかしくならないように
+
+    // Sort by distance, so that the overlap order will not be strange
     marker_all = _.sortBy(marker_all, [(m)=>{ return m.marker_position.radius; }]).reverse();
     for(i = 0; i<marker_all.length; i++){
       var data = marker_all[i];
@@ -313,7 +315,7 @@ export default Vue.extend({
     }
 
 
-    // 脚立を隠す円形を配置
+    // Place a circle to hide the stepladder
     var geometry = new THREE.CircleGeometry( 0.6, 128 );
     var material = new THREE.MeshBasicMaterial({
       map: new THREE.TextureLoader().load(`/dna-of-forests/${this.$route.params.forest}/img/panorama/logo-cover-${this.$i18n.locale}@2x.png`)
@@ -321,15 +323,14 @@ export default Vue.extend({
     var circle = new THREE.Mesh( geometry, material );
 
 
-    circle.position.set(0, -1.5, 0); // 原点だとカメラと同じ視点になるので表示されない
+    circle.position.set(0, -1.5, 0); // [1] Since it is the same viewpoint as the camera at the origin, it is not displayed
     circle.rotateZ(Math.PI/2);
     circle.rotateY(Math.PI/2);
     this.scene.add( circle );
 
-    // 座標軸の表示
     if(visibleAxisHelper){
       var axis = new THREE.AxisHelper(300);
-      axis.position.set(0,-10,0); // 原点だとカメラと同じ視点になるので表示されない
+      axis.position.set(0,-10,0); // Ref: [1]
       this.scene.add(axis);
     }
 
@@ -350,13 +351,13 @@ export default Vue.extend({
     this.$el.addEventListener( 'mousewheel', this.onMouseWheel, false );
     this.$el.addEventListener( 'MozMousePixelScroll', this.onMouseWheel, false);
 
-    // カメラ位置の設定 -------
+    // Camera position -------
 
     var default_lon = 1882;
     var default_lat = 46.2;
     if(this.$route.params.index) {
 
-      // // 選択された行がある場合は、そこまでスクロール
+      // If there is a selected line, scroll to that point
       var key = this.$route.params.index;
       var selectedMarker = _.filter(this.markerArray, function(m){ return m.key==key; })[0];
       default_lat = selectedMarker.latitude;
@@ -391,7 +392,7 @@ export default Vue.extend({
       }
     },
 
-    // 英語名を全部小文字にしたり置換してファイル名を取得
+    // Retrieve file name
     filename(str){
       return str.toLowerCase().replace(/[(|)|.]/g , '').replace(/ /g , '-');
     },
@@ -425,7 +426,7 @@ export default Vue.extend({
         this.lon += 0.04;
       }
 
-      // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); 少し上向きにしたい場合
+      // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); // If you want to be a little upward
       this.lat = Math.max( -90, Math.min( 90, this.lat ) );
       this.phi = THREE.Math.degToRad( 90 - this.lat );
       this.theta = THREE.Math.degToRad( this.lon );
@@ -469,7 +470,7 @@ export default Vue.extend({
       }
     },
 
-    // パノラマ画像を貼り付けた球体
+    // Sphere with panoramic image pasted
     create_pano_sphere(){
       var geometry = new THREE.SphereGeometry( 500, 120, 120 );
       geometry.scale( - 1, 1, 1 );
@@ -506,13 +507,11 @@ export default Vue.extend({
       return new THREE.Mesh( geometry, material );
     },
 
-    // 緯度経度から位置を算出
+    // Calculate position
     translateGeoCoords(latitude, longitude, radius) {
 
-      // 仰角
-      var phi = (latitude) * Math.PI / 180;
-      // 方位角
-      var theta = (longitude - 180) * Math.PI / 180;
+      var phi = (latitude) * Math.PI / 180;　// Elevation angle
+      var theta = (longitude - 180) * Math.PI / 180;　// Azimuth angle
 
       var x = -(radius) * Math.cos(phi) * Math.cos(theta);
       var y = (radius) * Math.sin(phi);
@@ -527,7 +526,7 @@ export default Vue.extend({
       var widthHalf = 0.5*this.renderer.context.canvas.width;
       var heightHalf = 0.5*this.renderer.context.canvas.height;
 
-      // 何もしないと対角線上の位置も返してしまうので、ここで間引く
+      // If you do not do anything, it will also return the position on the diagonal, so decimate here
       if(this.frustum.containsPoint(vector)) {
 
         // Within camera
@@ -544,7 +543,7 @@ export default Vue.extend({
       return null;
     },
 
-    // マーカー
+    // Marker
     create_marker(_data, _key){
       var key = _data.alias;
       var type = (key.indexOf('s-')==0) ? 'sample' : 'knowledge';
@@ -558,7 +557,7 @@ export default Vue.extend({
 
       // 3D marker -----------
       if(visible3dMaker){
-        // 15cmくらい
+        // about 15cm
         var geometry = (type=='sample') ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
         // geometry.scale( - 1, 1, 1 );
         var color = (_data.id && _data.id.indexOf('B-')==0) ? 0xff0000 : 0xffffff;
@@ -575,7 +574,7 @@ export default Vue.extend({
 
       marker.position = new THREE.Vector3( x, y, z );
 
-      // カメラ位置をあわせる時に使う
+      // Used to align the camera position
       marker.latitude = latitude;
       marker.longtitude = longtitude;
 
@@ -604,7 +603,7 @@ export default Vue.extend({
     },
 
     onMouseDown( e ) {
-      // Canvas部分でドラッグ開始したら
+      // When user starts dragging on the canvas
       if( e.target === this.renderer.domElement && !this.isTop() ){
         e.preventDefault();
 
@@ -636,9 +635,9 @@ export default Vue.extend({
     onMouseUp( e ) {
       if(this.isUserInteracting === true) {
 
-        // クリック
+        // Click
         if(!this.isDragged && e.target === this.renderer.domElement && this.$route.path!=`/${this.$route.params.forest}/panorama/` ) {
-          // 詳細を閉じる
+          // Close detail-drawer
           this.$router.push(`/${this.$route.params.forest}/panorama/`);
         }
 
