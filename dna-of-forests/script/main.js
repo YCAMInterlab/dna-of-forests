@@ -56105,7 +56105,7 @@ webpackContext.id = 194;
 /* 195 */
 /***/ (function(module, exports) {
 
-module.exports = {"camera_default_position":{"longtitude":180,"latitude":0}}
+module.exports = {"camera_default_position":{"longtitude":265,"latitude":0}}
 
 /***/ }),
 /* 196 */
