@@ -369,11 +369,11 @@
     {
       "title": {
         "ja": "鳥の混群",
-        "en": "Swarm comprised of various birds"
+        "en": "Mixed-species flock"
       },
       "description": {
         "ja": "森にすむシジュウカラ、ヤマガラ、エナガ、コゲラなどの異なった種類の小鳥が、秋から冬にかけて一つの群れをつくって行動することを、混群（こんぐん）といいます。繁殖は春で、それ以外の時期は縄張りをはらずに一緒に生活することが知られています。",
-        "en": "During the months from autumn to winter, various kinds of small birds such as Parus major, Parus varius, Aegithalos caudatus, and Dendrocopos kizuki that inhabit in the forest form a group and migrate. This type of swarm with various bird species is called “kongun” in Japanese. It is known that spring is their breeding season, and in other seasons, they live together without owing territories."
+        "en": "During the months from autumn to winter, various kinds of small birds such as Parus major, Parus varius, Aegithalos caudatus, and Dendrocopos kizuki that inhabit in the forest form a group and migrate. This type of mixed-species flock is called “kongun” in Japanese. It is known that spring is their breeding season, and in other seasons, they live together without owing territories."
       },
       "marker_position": { "latitude": 45, "longtitude": 210, "radius": 200 }
     },
