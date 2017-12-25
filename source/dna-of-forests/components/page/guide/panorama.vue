@@ -524,6 +524,7 @@ export default Vue.extend({
           video.autoplay = true;
           video.loop = true;
           video.style.display = 'none';
+          video.play(); // for Safari
           document.body.appendChild(video);
         }
 
