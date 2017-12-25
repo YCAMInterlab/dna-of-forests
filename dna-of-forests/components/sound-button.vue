@@ -66,8 +66,8 @@ export default Vue.extend({
       }, false);
     }
 
-    this.toggleSound(!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0));
-
+    // Safari changed its specification that playing sound needs user action, so set default off.
+    this.toggleSound( !document.querySelector('body.safari') && (!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0)));
   },
 
   methods: {

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 145);
+/******/ 	return __webpack_require__(__webpack_require__.s = 164);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console, module) {var require;//! moment.js
-//! version : 2.19.1
+//! version : 2.20.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -728,7 +728,7 @@ var matchTimestamp = /[+-]?\d+(\.\d{1,3})?/; // 123456789 123456789.123
 
 // any word (or two) characters or numbers including two/three word month in arabic.
 // includes scottish gaelic two word and hyphenated months
-var matchWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
+var matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i;
 
 
 var regexes = {};
@@ -883,7 +883,7 @@ function get (mom, unit) {
 
 function set$1 (mom, unit, value) {
     if (mom.isValid() && !isNaN(value)) {
-        if (unit === 'FullYear' && isLeapYear(mom.year())) {
+        if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
             mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
         }
         else {
@@ -1911,7 +1911,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(285)("./" + name);
+            __webpack_require__(293)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -1989,10 +1989,11 @@ function defineLocale (name, config) {
 
 function updateLocale(name, config) {
     if (config != null) {
-        var locale, parentConfig = baseConfig;
+        var locale, tmpLocale, parentConfig = baseConfig;
         // MERGE
-        if (locales[name] != null) {
-            parentConfig = locales[name]._config;
+        tmpLocale = loadLocale(name);
+        if (tmpLocale != null) {
+            parentConfig = tmpLocale._config;
         }
         config = mergeConfigs(parentConfig, config);
         locale = new Locale(config);
@@ -2097,7 +2098,7 @@ function currentDateArray(config) {
 // note: all values past the year are optional and will default to the lowest possible value.
 // [year, month, day , hour, minute, second, millisecond]
 function configFromArray (config) {
-    var i, date, input = [], currentDate, yearToUse;
+    var i, date, input = [], currentDate, expectedWeekday, yearToUse;
 
     if (config._d) {
         return;
@@ -2147,6 +2148,8 @@ function configFromArray (config) {
     }
 
     config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
+    expectedWeekday = config._useUTC ? config._d.getUTCDay() : config._d.getDay();
+
     // Apply timezone offset from input. The actual utcOffset can be changed
     // with parseZone.
     if (config._tzm != null) {
@@ -2158,7 +2161,7 @@ function configFromArray (config) {
     }
 
     // check for mismatching day of week
-    if (config._w && typeof config._w.d !== 'undefined' && config._w.d !== config._d.getDay()) {
+    if (config._w && typeof config._w.d !== 'undefined' && config._w.d !== expectedWeekday) {
         getParsingFlags(config).weekdayMismatch = true;
     }
 }
@@ -3366,19 +3369,24 @@ function toString () {
     return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
 }
 
-function toISOString() {
+function toISOString(keepOffset) {
     if (!this.isValid()) {
         return null;
     }
-    var m = this.clone().utc();
+    var utc = keepOffset !== true;
+    var m = utc ? this.clone().utc() : this;
     if (m.year() < 0 || m.year() > 9999) {
-        return formatMoment(m, 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+        return formatMoment(m, utc ? 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYYYY-MM-DD[T]HH:mm:ss.SSSZ');
     }
     if (isFunction(Date.prototype.toISOString)) {
         // native implementation is ~50x faster, use it when we can
-        return this.toDate().toISOString();
+        if (utc) {
+            return this.toDate().toISOString();
+        } else {
+            return new Date(this._d.valueOf()).toISOString().replace('Z', formatMoment(m, 'Z'));
+        }
     }
-    return formatMoment(m, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+    return formatMoment(m, utc ? 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]' : 'YYYY-MM-DD[T]HH:mm:ss.SSSZ');
 }
 
 /**
@@ -3734,7 +3742,7 @@ addRegexToken('Do', function (isStrict, locale) {
 
 addParseToken(['D', 'DD'], DATE);
 addParseToken('Do', function (input, array) {
-    array[DATE] = toInt(input.match(match1to2)[0], 10);
+    array[DATE] = toInt(input.match(match1to2)[0]);
 });
 
 // MOMENTS
@@ -4546,7 +4554,7 @@ addParseToken('x', function (input, array, config) {
 // Side effect imports
 
 
-hooks.version = '2.19.1';
+hooks.version = '2.20.1';
 
 setHookCallback(createLocal);
 
@@ -4578,6 +4586,19 @@ hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
 hooks.calendarFormat        = getCalendarFormat;
 hooks.prototype             = proto;
 
+// currently HTML5 input type only supports 24-hour formats
+hooks.HTML5_FMT = {
+    DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm',             // <input type="datetime-local" />
+    DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss',  // <input type="datetime-local" step="1" />
+    DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS',   // <input type="datetime-local" step="0.001" />
+    DATE: 'YYYY-MM-DD',                             // <input type="date" />
+    TIME: 'HH:mm',                                  // <input type="time" />
+    TIME_SECONDS: 'HH:mm:ss',                       // <input type="time" step="1" />
+    TIME_MS: 'HH:mm:ss.SSS',                        // <input type="time" step="0.001" />
+    WEEK: 'YYYY-[W]WW',                             // <input type="week" />
+    MONTH: 'YYYY-MM'                                // <input type="month" />
+};
+
 return hooks;
 
 })));
@@ -4590,8 +4611,8 @@ return hooks;
 
 /* WEBPACK VAR INJECTION */(function(global) {/*global window, global*/
 var util = __webpack_require__(14)
-var assert = __webpack_require__(148)
-var now = __webpack_require__(149)
+var assert = __webpack_require__(167)
+var now = __webpack_require__(168)
 
 var slice = Array.prototype.slice
 var console
@@ -4791,7 +4812,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, console, setImmediate) {/*!
- * Vue.js v2.5.2
+ * Vue.js v2.5.13
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
@@ -4802,6 +4823,8 @@ module.exports = function normalizeComponent (
 }(this, (function () { 'use strict';
 
 /*  */
+
+var emptyObject = Object.freeze({});
 
 // these helpers produces better vm code in JS engines due to their
 // explicitness and function inlining
@@ -4828,6 +4851,8 @@ function isPrimitive (value) {
   return (
     typeof value === 'string' ||
     typeof value === 'number' ||
+    // $flow-disable-line
+    typeof value === 'symbol' ||
     typeof value === 'boolean'
   )
 }
@@ -5136,6 +5161,7 @@ var config = ({
   /**
    * Option merge strategies (used in core/util/options)
    */
+  // $flow-disable-line
   optionMergeStrategies: Object.create(null),
 
   /**
@@ -5176,6 +5202,7 @@ var config = ({
   /**
    * Custom user key aliases for v-on
    */
+  // $flow-disable-line
   keyCodes: Object.create(null),
 
   /**
@@ -5220,8 +5247,6 @@ var config = ({
 
 /*  */
 
-var emptyObject = Object.freeze({});
-
 /**
  * Check if a string starts with $ or _
  */
@@ -5262,17 +5287,20 @@ function parsePath (path) {
 
 /*  */
 
+
 // can we use __proto__?
 var hasProto = '__proto__' in {};
 
 // Browser environment sniffing
 var inBrowser = typeof window !== 'undefined';
+var inWeex = typeof WXEnvironment !== 'undefined' && !!WXEnvironment.platform;
+var weexPlatform = inWeex && WXEnvironment.platform.toLowerCase();
 var UA = inBrowser && window.navigator.userAgent.toLowerCase();
 var isIE = UA && /msie|trident/.test(UA);
 var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
 var isEdge = UA && UA.indexOf('edge/') > 0;
-var isAndroid = UA && UA.indexOf('android') > 0;
-var isIOS = UA && /iphone|ipad|ipod|ios/.test(UA);
+var isAndroid = (UA && UA.indexOf('android') > 0) || (weexPlatform === 'android');
+var isIOS = (UA && /iphone|ipad|ipod|ios/.test(UA)) || (weexPlatform === 'ios');
 var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
 
 // Firefox has a "watch" function on Object.prototype...
@@ -5510,9 +5538,9 @@ var VNode = function VNode (
   this.elm = elm;
   this.ns = undefined;
   this.context = context;
-  this.functionalContext = undefined;
-  this.functionalOptions = undefined;
-  this.functionalScopeId = undefined;
+  this.fnContext = undefined;
+  this.fnOptions = undefined;
+  this.fnScopeId = undefined;
   this.key = data && data.key;
   this.componentOptions = componentOptions;
   this.componentInstance = undefined;
@@ -5556,6 +5584,7 @@ function createTextVNode (val) {
 // multiple renders, cloning them avoids errors when DOM manipulations rely
 // on their elm reference.
 function cloneVNode (vnode, deep) {
+  var componentOptions = vnode.componentOptions;
   var cloned = new VNode(
     vnode.tag,
     vnode.data,
@@ -5563,16 +5592,24 @@ function cloneVNode (vnode, deep) {
     vnode.text,
     vnode.elm,
     vnode.context,
-    vnode.componentOptions,
+    componentOptions,
     vnode.asyncFactory
   );
   cloned.ns = vnode.ns;
   cloned.isStatic = vnode.isStatic;
   cloned.key = vnode.key;
   cloned.isComment = vnode.isComment;
+  cloned.fnContext = vnode.fnContext;
+  cloned.fnOptions = vnode.fnOptions;
+  cloned.fnScopeId = vnode.fnScopeId;
   cloned.isCloned = true;
-  if (deep && vnode.children) {
-    cloned.children = cloneVNodes(vnode.children);
+  if (deep) {
+    if (vnode.children) {
+      cloned.children = cloneVNodes(vnode.children, true);
+    }
+    if (componentOptions && componentOptions.children) {
+      componentOptions.children = cloneVNodes(componentOptions.children, true);
+    }
   }
   return cloned
 }
@@ -5600,8 +5637,7 @@ var arrayMethods = Object.create(arrayProto);[
   'splice',
   'sort',
   'reverse'
-]
-.forEach(function (method) {
+].forEach(function (method) {
   // cache original method
   var original = arrayProto[method];
   def(arrayMethods, method, function mutator () {
@@ -5805,7 +5841,7 @@ function set (target, key, val) {
     target.splice(key, 1, val);
     return val
   }
-  if (hasOwn(target, key)) {
+  if (key in target && !(key in Object.prototype)) {
     target[key] = val;
     return val
   }
@@ -5933,18 +5969,18 @@ function mergeDataOrFn (
     // it has to be a function to pass previous merges.
     return function mergedDataFn () {
       return mergeData(
-        typeof childVal === 'function' ? childVal.call(this) : childVal,
-        typeof parentVal === 'function' ? parentVal.call(this) : parentVal
+        typeof childVal === 'function' ? childVal.call(this, this) : childVal,
+        typeof parentVal === 'function' ? parentVal.call(this, this) : parentVal
       )
     }
-  } else if (parentVal || childVal) {
+  } else {
     return function mergedInstanceDataFn () {
       // instance merge
       var instanceData = typeof childVal === 'function'
-        ? childVal.call(vm)
+        ? childVal.call(vm, vm)
         : childVal;
       var defaultData = typeof parentVal === 'function'
-        ? parentVal.call(vm)
+        ? parentVal.call(vm, vm)
         : parentVal;
       if (instanceData) {
         return mergeData(instanceData, defaultData)
@@ -5971,7 +6007,7 @@ strats.data = function (
 
       return parentVal
     }
-    return mergeDataOrFn.call(this, parentVal, childVal)
+    return mergeDataOrFn(parentVal, childVal)
   }
 
   return mergeDataOrFn(parentVal, childVal, vm)
@@ -6096,13 +6132,23 @@ var defaultStrat = function (parentVal, childVal) {
  */
 function checkComponents (options) {
   for (var key in options.components) {
-    var lower = key.toLowerCase();
-    if (isBuiltInTag(lower) || config.isReservedTag(lower)) {
-      warn(
-        'Do not use built-in or reserved HTML elements as component ' +
-        'id: ' + key
-      );
-    }
+    validateComponentName(key);
+  }
+}
+
+function validateComponentName (name) {
+  if (!/^[a-zA-Z][\w-]*$/.test(name)) {
+    warn(
+      'Invalid component name: "' + name + '". Component names ' +
+      'can only contain alphanumeric characters and the hyphen, ' +
+      'and must start with a letter.'
+    );
+  }
+  if (isBuiltInTag(name) || config.isReservedTag(name)) {
+    warn(
+      'Do not use built-in or reserved HTML elements as component ' +
+      'id: ' + name
+    );
   }
 }
 
@@ -6149,6 +6195,7 @@ function normalizeProps (options, vm) {
  */
 function normalizeInject (options, vm) {
   var inject = options.inject;
+  if (!inject) { return }
   var normalized = options.inject = {};
   if (Array.isArray(inject)) {
     for (var i = 0; i < inject.length; i++) {
@@ -6161,7 +6208,7 @@ function normalizeInject (options, vm) {
         ? extend({ from: key }, val)
         : { from: val };
     }
-  } else if ("development" !== 'production' && inject) {
+  } else {
     warn(
       "Invalid value for option \"inject\": expected an Array or an Object, " +
       "but got " + (toRawType(inject)) + ".",
@@ -6481,7 +6528,7 @@ function logError (err, vm, info) {
     warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
   }
   /* istanbul ignore else */
-  if (inBrowser && typeof console !== 'undefined') {
+  if ((inBrowser || inWeex) && typeof console !== 'undefined') {
     console.error(err);
   } else {
     throw err
@@ -6705,6 +6752,43 @@ var initProxy;
 
 /*  */
 
+var seenObjects = new _Set();
+
+/**
+ * Recursively traverse an object to evoke all converted
+ * getters, so that every nested property inside the object
+ * is collected as a "deep" dependency.
+ */
+function traverse (val) {
+  _traverse(val, seenObjects);
+  seenObjects.clear();
+}
+
+function _traverse (val, seen) {
+  var i, keys;
+  var isA = Array.isArray(val);
+  if ((!isA && !isObject(val)) || Object.isFrozen(val)) {
+    return
+  }
+  if (val.__ob__) {
+    var depId = val.__ob__.dep.id;
+    if (seen.has(depId)) {
+      return
+    }
+    seen.add(depId);
+  }
+  if (isA) {
+    i = val.length;
+    while (i--) { _traverse(val[i], seen); }
+  } else {
+    keys = Object.keys(val);
+    i = keys.length;
+    while (i--) { _traverse(val[keys[i]], seen); }
+  }
+}
+
+/*  */
+
 var normalizeEvent = cached(function (name) {
   var passive = name.charAt(0) === '&';
   name = passive ? name.slice(1) : name;
@@ -6746,11 +6830,12 @@ function updateListeners (
   remove$$1,
   vm
 ) {
-  var name, cur, old, event;
+  var name, def, cur, old, event;
   for (name in on) {
-    cur = on[name];
+    def = cur = on[name];
     old = oldOn[name];
     event = normalizeEvent(name);
+    /* istanbul ignore if */
     if (isUndef(cur)) {
       "development" !== 'production' && warn(
         "Invalid handler for event \"" + (event.name) + "\": got " + String(cur),
@@ -6760,7 +6845,7 @@ function updateListeners (
       if (isUndef(cur.fns)) {
         cur = on[name] = createFnInvoker(cur);
       }
-      add(event.name, cur, event.once, event.capture, event.passive);
+      add(event.name, cur, event.once, event.capture, event.passive, event.params);
     } else if (cur !== old) {
       old.fns = cur;
       on[name] = old;
@@ -6777,6 +6862,9 @@ function updateListeners (
 /*  */
 
 function mergeVNodeHook (def, hookKey, hook) {
+  if (def instanceof VNode) {
+    def = def.data.hook || (def.data.hook = {});
+  }
   var invoker;
   var oldHook = def[hookKey];
 
@@ -7142,6 +7230,7 @@ function updateComponentListeners (
 ) {
   target = vm;
   updateListeners(listeners, oldListeners || {}, add, remove$1, vm);
+  target = undefined;
 }
 
 function eventsMixin (Vue) {
@@ -7197,7 +7286,7 @@ function eventsMixin (Vue) {
     if (!cbs) {
       return vm
     }
-    if (arguments.length === 1) {
+    if (!fn) {
       vm._events[event] = null;
       return vm
     }
@@ -7248,6 +7337,8 @@ function eventsMixin (Vue) {
 
 /*  */
 
+
+
 /**
  * Runtime helper for resolving raw children VNodes into a slot object.
  */
@@ -7259,7 +7350,6 @@ function resolveSlots (
   if (!children) {
     return slots
   }
-  var defaultSlot = [];
   for (var i = 0, l = children.length; i < l; i++) {
     var child = children[i];
     var data = child.data;
@@ -7269,29 +7359,31 @@ function resolveSlots (
     }
     // named slots should only be respected if the vnode was rendered in the
     // same context.
-    if ((child.context === context || child.functionalContext === context) &&
+    if ((child.context === context || child.fnContext === context) &&
       data && data.slot != null
     ) {
-      var name = child.data.slot;
+      var name = data.slot;
       var slot = (slots[name] || (slots[name] = []));
       if (child.tag === 'template') {
-        slot.push.apply(slot, child.children);
+        slot.push.apply(slot, child.children || []);
       } else {
         slot.push(child);
       }
     } else {
-      defaultSlot.push(child);
+      (slots.default || (slots.default = [])).push(child);
     }
   }
-  // ignore whitespace
-  if (!defaultSlot.every(isWhitespace)) {
-    slots.default = defaultSlot;
+  // ignore slots that contains only whitespace
+  for (var name$1 in slots) {
+    if (slots[name$1].every(isWhitespace)) {
+      delete slots[name$1];
+    }
   }
   return slots
 }
 
 function isWhitespace (node) {
-  return node.isComment || node.text === ' '
+  return (node.isComment && !node.asyncFactory) || node.text === ' '
 }
 
 function resolveScopedSlots (
@@ -7487,7 +7579,10 @@ function mountComponent (
     };
   }
 
-  vm._watcher = new Watcher(vm, updateComponent, noop);
+  // we set this to vm._watcher inside the watcher's constructor
+  // since the watcher's initial patch may call $forceUpdate (e.g. inside child
+  // component's mounted hook), which relies on vm._watcher being already defined
+  new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */);
   hydrating = false;
 
   // manually mounted instance, call mounted on self
@@ -7774,9 +7869,13 @@ var Watcher = function Watcher (
   vm,
   expOrFn,
   cb,
-  options
+  options,
+  isRenderWatcher
 ) {
   this.vm = vm;
+  if (isRenderWatcher) {
+    vm._watcher = this;
+  }
   vm._watchers.push(this);
   // options
   if (options) {
@@ -7968,40 +8067,6 @@ Watcher.prototype.teardown = function teardown () {
   }
 };
 
-/**
- * Recursively traverse an object to evoke all converted
- * getters, so that every nested property inside the object
- * is collected as a "deep" dependency.
- */
-var seenObjects = new _Set();
-function traverse (val) {
-  seenObjects.clear();
-  _traverse(val, seenObjects);
-}
-
-function _traverse (val, seen) {
-  var i, keys;
-  var isA = Array.isArray(val);
-  if ((!isA && !isObject(val)) || !Object.isExtensible(val)) {
-    return
-  }
-  if (val.__ob__) {
-    var depId = val.__ob__.dep.id;
-    if (seen.has(depId)) {
-      return
-    }
-    seen.add(depId);
-  }
-  if (isA) {
-    i = val.length;
-    while (i--) { _traverse(val[i], seen); }
-  } else {
-    keys = Object.keys(val);
-    i = keys.length;
-    while (i--) { _traverse(val[keys[i]], seen); }
-  }
-}
-
 /*  */
 
 var sharedPropertyDefinition = {
@@ -8137,6 +8202,7 @@ function getData (data, vm) {
 var computedWatcherOptions = { lazy: true };
 
 function initComputed (vm, computed) {
+  // $flow-disable-line
   var watchers = vm._computedWatchers = Object.create(null);
   // computed properties are just getters during SSR
   var isSSR = isServerRendering();
@@ -8365,11 +8431,11 @@ function resolveInject (inject, vm) {
     // inject is :any because flow is not smart enough to figure out cached
     var result = Object.create(null);
     var keys = hasSymbol
-        ? Reflect.ownKeys(inject).filter(function (key) {
-          /* istanbul ignore next */
-          return Object.getOwnPropertyDescriptor(inject, key).enumerable
-        })
-        : Object.keys(inject);
+      ? Reflect.ownKeys(inject).filter(function (key) {
+        /* istanbul ignore next */
+        return Object.getOwnPropertyDescriptor(inject, key).enumerable
+      })
+      : Object.keys(inject);
 
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
@@ -8443,6 +8509,7 @@ function renderSlot (
   bindObject
 ) {
   var scopedSlotFn = this.$scopedSlots[name];
+  var nodes;
   if (scopedSlotFn) { // scoped slot
     props = props || {};
     if (bindObject) {
@@ -8454,19 +8521,28 @@ function renderSlot (
       }
       props = extend(extend({}, bindObject), props);
     }
-    return scopedSlotFn(props) || fallback
+    nodes = scopedSlotFn(props) || fallback;
   } else {
     var slotNodes = this.$slots[name];
     // warn duplicate slot usage
-    if (slotNodes && "development" !== 'production') {
-      slotNodes._rendered && warn(
-        "Duplicate presence of slot \"" + name + "\" found in the same render tree " +
-        "- this will likely cause render errors.",
-        this
-      );
+    if (slotNodes) {
+      if ("development" !== 'production' && slotNodes._rendered) {
+        warn(
+          "Duplicate presence of slot \"" + name + "\" found in the same render tree " +
+          "- this will likely cause render errors.",
+          this
+        );
+      }
       slotNodes._rendered = true;
     }
-    return slotNodes || fallback
+    nodes = slotNodes || fallback;
+  }
+
+  var target = props && props.slot;
+  if (target) {
+    return this.$createElement('template', { slot: target }, nodes)
+  } else {
+    return nodes
   }
 }
 
@@ -8567,10 +8643,7 @@ function renderStatic (
   index,
   isInFor
 ) {
-  // static trees can be rendered once and cached on the contructor options
-  // so every instance shares the same cached trees
-  var renderFns = this.$options.staticRenderFns;
-  var cached = renderFns.cached || (renderFns.cached = []);
+  var cached = this._staticTrees || (this._staticTrees = []);
   var tree = cached[index];
   // if has already-rendered static tree and not inside v-for,
   // we can reuse the same tree by doing a shallow clone.
@@ -8580,7 +8653,11 @@ function renderStatic (
       : cloneVNode(tree)
   }
   // otherwise, render a fresh tree.
-  tree = cached[index] = renderFns[index].call(this._renderProxy, null, this);
+  tree = cached[index] = this.$options.staticRenderFns[index].call(
+    this._renderProxy,
+    null,
+    this // for render fns generated for functional component templates
+  );
   markStatic(tree, ("__static__" + index), false);
   return tree
 }
@@ -8698,8 +8775,8 @@ function FunctionalRenderContext (
     this._c = function (a, b, c, d) {
       var vnode = createElement(contextVm, a, b, c, d, needNormalization);
       if (vnode) {
-        vnode.functionalScopeId = options._scopeId;
-        vnode.functionalContext = parent;
+        vnode.fnScopeId = options._scopeId;
+        vnode.fnContext = parent;
       }
       return vnode
     };
@@ -8740,8 +8817,8 @@ function createFunctionalComponent (
   var vnode = options.render.call(null, renderContext._c, renderContext);
 
   if (vnode instanceof VNode) {
-    vnode.functionalContext = contextVm;
-    vnode.functionalOptions = options;
+    vnode.fnContext = contextVm;
+    vnode.fnOptions = options;
     if (data.slot) {
       (vnode.data || (vnode.data = {})).slot = data.slot;
     }
@@ -8755,6 +8832,25 @@ function mergeProps (to, from) {
     to[camelize(key)] = from[key];
   }
 }
+
+/*  */
+
+
+
+
+// Register the component hook to weex native render engine.
+// The hook will be triggered by native, not javascript.
+
+
+// Updates the state of the component to weex native render engine.
+
+/*  */
+
+// https://github.com/Hanks10100/weex-native-directive/tree/master/component
+
+// listening on native callback
+
+/*  */
 
 /*  */
 
@@ -8923,6 +9019,11 @@ function createComponent (
     { Ctor: Ctor, propsData: propsData, listeners: listeners, tag: tag, children: children },
     asyncFactory
   );
+
+  // Weex specific: invoke recycle-list optimized @render function for
+  // extracting cell-slot template.
+  // https://github.com/Hanks10100/weex-native-directive/tree/master/component
+  /* istanbul ignore if */
   return vnode
 }
 
@@ -8932,15 +9033,10 @@ function createComponentInstanceForVnode (
   parentElm,
   refElm
 ) {
-  var vnodeComponentOptions = vnode.componentOptions;
   var options = {
     _isComponent: true,
     parent: parent,
-    propsData: vnodeComponentOptions.propsData,
-    _componentTag: vnodeComponentOptions.tag,
     _parentVnode: vnode,
-    _parentListeners: vnodeComponentOptions.listeners,
-    _renderChildren: vnodeComponentOptions.children,
     _parentElm: parentElm || null,
     _refElm: refElm || null
   };
@@ -8950,7 +9046,7 @@ function createComponentInstanceForVnode (
     options.render = inlineTemplate.render;
     options.staticRenderFns = inlineTemplate.staticRenderFns;
   }
-  return new vnodeComponentOptions.Ctor(options)
+  return new vnode.componentOptions.Ctor(options)
 }
 
 function mergeHooks (data) {
@@ -9038,11 +9134,13 @@ function _createElement (
   if ("development" !== 'production' &&
     isDef(data) && isDef(data.key) && !isPrimitive(data.key)
   ) {
-    warn(
-      'Avoid using non-primitive value as key, ' +
-      'use string/number value instead.',
-      context
-    );
+    {
+      warn(
+        'Avoid using non-primitive value as key, ' +
+        'use string/number value instead.',
+        context
+      );
+    }
   }
   // support single function children as default scoped slot
   if (Array.isArray(children) &&
@@ -9112,6 +9210,7 @@ function applyNS (vnode, ns, force) {
 
 function initRender (vm) {
   vm._vnode = null; // the root of the child tree
+  vm._staticTrees = null; // v-once cached trees
   var options = vm.$options;
   var parentVnode = vm.$vnode = options._parentVnode; // the placeholder node in parent tree
   var renderContext = parentVnode && parentVnode.context;
@@ -9160,7 +9259,9 @@ function renderMixin (Vue) {
       // last render. They need to be cloned to ensure "freshness" for this render.
       for (var key in vm.$slots) {
         var slot = vm.$slots[key];
-        if (slot._rendered) {
+        // _rendered is a flag added by renderSlot, but may not be present
+        // if the slot is passed from manually written render functions
+        if (slot._rendered || (slot[0] && slot[0].elm)) {
           vm.$slots[key] = cloneVNodes(slot, true /* deep */);
         }
       }
@@ -9274,14 +9375,18 @@ function initMixin (Vue) {
 function initInternalComponent (vm, options) {
   var opts = vm.$options = Object.create(vm.constructor.options);
   // doing this because it's faster than dynamic enumeration.
+  var parentVnode = options._parentVnode;
   opts.parent = options.parent;
-  opts.propsData = options.propsData;
-  opts._parentVnode = options._parentVnode;
-  opts._parentListeners = options._parentListeners;
-  opts._renderChildren = options._renderChildren;
-  opts._componentTag = options._componentTag;
+  opts._parentVnode = parentVnode;
   opts._parentElm = options._parentElm;
   opts._refElm = options._refElm;
+
+  var vnodeComponentOptions = parentVnode.componentOptions;
+  opts.propsData = vnodeComponentOptions.propsData;
+  opts._parentListeners = vnodeComponentOptions.listeners;
+  opts._renderChildren = vnodeComponentOptions.children;
+  opts._componentTag = vnodeComponentOptions.tag;
+
   if (options.render) {
     opts.render = options.render;
     opts.staticRenderFns = options.staticRenderFns;
@@ -9415,14 +9520,8 @@ function initExtend (Vue) {
     }
 
     var name = extendOptions.name || Super.options.name;
-    {
-      if (!/^[a-zA-Z][\w-]*$/.test(name)) {
-        warn(
-          'Invalid component name: "' + name + '". Component names ' +
-          'can only contain alphanumeric characters and the hyphen, ' +
-          'and must start with a letter.'
-        );
-      }
+    if ("development" !== 'production' && name) {
+      validateComponentName(name);
     }
 
     var Sub = function VueComponent (options) {
@@ -9504,13 +9603,8 @@ function initAssetRegisters (Vue) {
         return this.options[type + 's'][id]
       } else {
         /* istanbul ignore if */
-        {
-          if (type === 'component' && config.isReservedTag(id)) {
-            warn(
-              'Do not use built-in or reserved HTML elements as component ' +
-              'id: ' + id
-            );
-          }
+        if ("development" !== 'production' && type === 'component') {
+          validateComponentName(id);
         }
         if (type === 'component' && isPlainObject(definition)) {
           definition.name = definition.name || id;
@@ -9566,7 +9660,7 @@ function pruneCacheEntry (
   current
 ) {
   var cached$$1 = cache[key];
-  if (cached$$1 && cached$$1 !== current) {
+  if (cached$$1 && (!current || cached$$1.tag !== current.tag)) {
     cached$$1.componentInstance.$destroy();
   }
   cache[key] = null;
@@ -9608,21 +9702,27 @@ var KeepAlive = {
   },
 
   render: function render () {
-    var vnode = getFirstComponentChild(this.$slots.default);
+    var slot = this.$slots.default;
+    var vnode = getFirstComponentChild(slot);
     var componentOptions = vnode && vnode.componentOptions;
     if (componentOptions) {
       // check pattern
       var name = getComponentName(componentOptions);
-      if (name && (
-        (this.include && !matches(this.include, name)) ||
-        (this.exclude && matches(this.exclude, name))
-      )) {
+      var ref = this;
+      var include = ref.include;
+      var exclude = ref.exclude;
+      if (
+        // not included
+        (include && (!name || !matches(include, name))) ||
+        // excluded
+        (exclude && name && matches(exclude, name))
+      ) {
         return vnode
       }
 
-      var ref = this;
-      var cache = ref.cache;
-      var keys = ref.keys;
+      var ref$1 = this;
+      var cache = ref$1.cache;
+      var keys = ref$1.keys;
       var key = vnode.key == null
         // same constructor may get registered as different local components
         // so cid alone is not enough (#3269)
@@ -9644,7 +9744,7 @@ var KeepAlive = {
 
       vnode.data.keepAlive = true;
     }
-    return vnode
+    return vnode || (slot && slot[0])
   }
 };
 
@@ -9711,7 +9811,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
-Vue$3.version = '2.5.2';
+Vue$3.version = '2.5.13';
 
 /*  */
 
@@ -9763,12 +9863,12 @@ function genClassForVnode (vnode) {
   var childNode = vnode;
   while (isDef(childNode.componentInstance)) {
     childNode = childNode.componentInstance._vnode;
-    if (childNode.data) {
+    if (childNode && childNode.data) {
       data = mergeClassData(childNode.data, data);
     }
   }
   while (isDef(parentNode = parentNode.parent)) {
-    if (parentNode.data) {
+    if (parentNode && parentNode.data) {
       data = mergeClassData(data, parentNode.data);
     }
   }
@@ -10138,7 +10238,23 @@ function createPatchFunction (backend) {
     }
   }
 
-  var inPre = 0;
+  function isUnknownElement$$1 (vnode, inVPre) {
+    return (
+      !inVPre &&
+      !vnode.ns &&
+      !(
+        config.ignoredElements.length &&
+        config.ignoredElements.some(function (ignore) {
+          return isRegExp(ignore)
+            ? ignore.test(vnode.tag)
+            : ignore === vnode.tag
+        })
+      ) &&
+      config.isUnknownElement(vnode.tag)
+    )
+  }
+
+  var creatingElmInVPre = 0;
   function createElm (vnode, insertedVnodeQueue, parentElm, refElm, nested) {
     vnode.isRootInsert = !nested; // for transition enter check
     if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
@@ -10151,21 +10267,9 @@ function createPatchFunction (backend) {
     if (isDef(tag)) {
       {
         if (data && data.pre) {
-          inPre++;
+          creatingElmInVPre++;
         }
-        if (
-          !inPre &&
-          !vnode.ns &&
-          !(
-            config.ignoredElements.length &&
-            config.ignoredElements.some(function (ignore) {
-              return isRegExp(ignore)
-                ? ignore.test(tag)
-                : ignore === tag
-            })
-          ) &&
-          config.isUnknownElement(tag)
-        ) {
+        if (isUnknownElement$$1(vnode, creatingElmInVPre)) {
           warn(
             'Unknown custom element: <' + tag + '> - did you ' +
             'register the component correctly? For recursive components, ' +
@@ -10189,7 +10293,7 @@ function createPatchFunction (backend) {
       }
 
       if ("development" !== 'production' && data && data.pre) {
-        inPre--;
+        creatingElmInVPre--;
       }
     } else if (isTrue(vnode.isComment)) {
       vnode.elm = nodeOps.createComment(vnode.text);
@@ -10275,11 +10379,14 @@ function createPatchFunction (backend) {
 
   function createChildren (vnode, children, insertedVnodeQueue) {
     if (Array.isArray(children)) {
+      {
+        checkDuplicateKeys(children);
+      }
       for (var i = 0; i < children.length; ++i) {
         createElm(children[i], insertedVnodeQueue, vnode.elm, null, true);
       }
     } else if (isPrimitive(vnode.text)) {
-      nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(vnode.text));
+      nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(String(vnode.text)));
     }
   }
 
@@ -10306,7 +10413,7 @@ function createPatchFunction (backend) {
   // of going through the normal attribute patching process.
   function setScope (vnode) {
     var i;
-    if (isDef(i = vnode.functionalScopeId)) {
+    if (isDef(i = vnode.fnScopeId)) {
       nodeOps.setAttribute(vnode.elm, i, '');
     } else {
       var ancestor = vnode;
@@ -10320,7 +10427,7 @@ function createPatchFunction (backend) {
     // for slot content they should also get the scopeId from the host instance.
     if (isDef(i = activeInstance) &&
       i !== vnode.context &&
-      i !== vnode.functionalContext &&
+      i !== vnode.fnContext &&
       isDef(i = i.$options._scopeId)
     ) {
       nodeOps.setAttribute(vnode.elm, i, '');
@@ -10406,6 +10513,10 @@ function createPatchFunction (backend) {
     // during leaving transitions
     var canMove = !removeOnly;
 
+    {
+      checkDuplicateKeys(newCh);
+    }
+
     while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
       if (isUndef(oldStartVnode)) {
         oldStartVnode = oldCh[++oldStartIdx]; // Vnode has been moved left
@@ -10438,13 +10549,6 @@ function createPatchFunction (backend) {
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm);
         } else {
           vnodeToMove = oldCh[idxInOld];
-          /* istanbul ignore if */
-          if ("development" !== 'production' && !vnodeToMove) {
-            warn(
-              'It seems there are duplicate keys that is causing an update error. ' +
-              'Make sure each v-for item has a unique key.'
-            );
-          }
           if (sameVnode(vnodeToMove, newStartVnode)) {
             patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue);
             oldCh[idxInOld] = undefined;
@@ -10462,6 +10566,24 @@ function createPatchFunction (backend) {
       addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
     } else if (newStartIdx > newEndIdx) {
       removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
+    }
+  }
+
+  function checkDuplicateKeys (children) {
+    var seenKeys = {};
+    for (var i = 0; i < children.length; i++) {
+      var vnode = children[i];
+      var key = vnode.key;
+      if (isDef(key)) {
+        if (seenKeys[key]) {
+          warn(
+            ("Duplicate keys detected: '" + key + "'. This may cause an update error."),
+            vnode.context
+          );
+        } else {
+          seenKeys[key] = true;
+        }
+      }
     }
   }
 
@@ -10544,27 +10666,32 @@ function createPatchFunction (backend) {
     }
   }
 
-  var bailed = false;
+  var hydrationBailed = false;
   // list of modules that can skip create hook during hydration because they
   // are already rendered on the client or has no need for initialization
-  var isRenderedModule = makeMap('attrs,style,class,staticClass,staticStyle,key');
+  // Note: style is excluded because it relies on initial clone for future
+  // deep updates (#7063).
+  var isRenderedModule = makeMap('attrs,class,staticClass,staticStyle,key');
 
   // Note: this is a browser-only function so we can assume elms are DOM nodes.
-  function hydrate (elm, vnode, insertedVnodeQueue) {
-    if (isTrue(vnode.isComment) && isDef(vnode.asyncFactory)) {
-      vnode.elm = elm;
-      vnode.isAsyncPlaceholder = true;
-      return true
-    }
-    {
-      if (!assertNodeMatch(elm, vnode)) {
-        return false
-      }
-    }
-    vnode.elm = elm;
+  function hydrate (elm, vnode, insertedVnodeQueue, inVPre) {
+    var i;
     var tag = vnode.tag;
     var data = vnode.data;
     var children = vnode.children;
+    inVPre = inVPre || (data && data.pre);
+    vnode.elm = elm;
+
+    if (isTrue(vnode.isComment) && isDef(vnode.asyncFactory)) {
+      vnode.isAsyncPlaceholder = true;
+      return true
+    }
+    // assert node match
+    {
+      if (!assertNodeMatch(elm, vnode, inVPre)) {
+        return false
+      }
+    }
     if (isDef(data)) {
       if (isDef(i = data.hook) && isDef(i = i.init)) { i(vnode, true /* hydrating */); }
       if (isDef(i = vnode.componentInstance)) {
@@ -10585,9 +10712,9 @@ function createPatchFunction (backend) {
               /* istanbul ignore if */
               if ("development" !== 'production' &&
                 typeof console !== 'undefined' &&
-                !bailed
+                !hydrationBailed
               ) {
-                bailed = true;
+                hydrationBailed = true;
                 console.warn('Parent: ', elm);
                 console.warn('server innerHTML: ', i);
                 console.warn('client innerHTML: ', elm.innerHTML);
@@ -10599,7 +10726,7 @@ function createPatchFunction (backend) {
             var childrenMatch = true;
             var childNode = elm.firstChild;
             for (var i$1 = 0; i$1 < children.length; i$1++) {
-              if (!childNode || !hydrate(childNode, children[i$1], insertedVnodeQueue)) {
+              if (!childNode || !hydrate(childNode, children[i$1], insertedVnodeQueue, inVPre)) {
                 childrenMatch = false;
                 break
               }
@@ -10611,9 +10738,9 @@ function createPatchFunction (backend) {
               /* istanbul ignore if */
               if ("development" !== 'production' &&
                 typeof console !== 'undefined' &&
-                !bailed
+                !hydrationBailed
               ) {
-                bailed = true;
+                hydrationBailed = true;
                 console.warn('Parent: ', elm);
                 console.warn('Mismatching childNodes vs. VNodes: ', elm.childNodes, children);
               }
@@ -10623,11 +10750,17 @@ function createPatchFunction (backend) {
         }
       }
       if (isDef(data)) {
+        var fullInvoke = false;
         for (var key in data) {
           if (!isRenderedModule(key)) {
+            fullInvoke = true;
             invokeCreateHooks(vnode, insertedVnodeQueue);
             break
           }
+        }
+        if (!fullInvoke && data['class']) {
+          // ensure collecting deps for deep class bindings for future updates
+          traverse(data['class']);
         }
       }
     } else if (elm.data !== vnode.text) {
@@ -10636,10 +10769,10 @@ function createPatchFunction (backend) {
     return true
   }
 
-  function assertNodeMatch (node, vnode) {
+  function assertNodeMatch (node, vnode, inVPre) {
     if (isDef(vnode.tag)) {
-      return (
-        vnode.tag.indexOf('vue-component') === 0 ||
+      return vnode.tag.indexOf('vue-component') === 0 || (
+        !isUnknownElement$$1(vnode, inVPre) &&
         vnode.tag.toLowerCase() === (node.tagName && node.tagName.toLowerCase())
       )
     } else {
@@ -10692,9 +10825,12 @@ function createPatchFunction (backend) {
           // create an empty node and replace it
           oldVnode = emptyNodeAt(oldVnode);
         }
+
         // replacing existing element
         var oldElm = oldVnode.elm;
         var parentElm$1 = nodeOps.parentNode(oldElm);
+
+        // create new node
         createElm(
           vnode,
           insertedVnodeQueue,
@@ -10705,9 +10841,8 @@ function createPatchFunction (backend) {
           nodeOps.nextSibling(oldElm)
         );
 
+        // update parent placeholder node element, recursively
         if (isDef(vnode.parent)) {
-          // component root element replaced.
-          // update parent placeholder node element, recursively
           var ancestor = vnode.parent;
           var patchable = isPatchable(vnode);
           while (ancestor) {
@@ -10736,6 +10871,7 @@ function createPatchFunction (backend) {
           }
         }
 
+        // destroy old node
         if (isDef(parentElm$1)) {
           removeVnodes(parentElm$1, [oldVnode], 0, 0);
         } else if (isDef(oldVnode.tag)) {
@@ -10801,14 +10937,14 @@ function _update (oldVnode, vnode) {
       }
     };
     if (isCreate) {
-      mergeVNodeHook(vnode.data.hook || (vnode.data.hook = {}), 'insert', callInsert);
+      mergeVNodeHook(vnode, 'insert', callInsert);
     } else {
       callInsert();
     }
   }
 
   if (dirsWithPostpatch.length) {
-    mergeVNodeHook(vnode.data.hook || (vnode.data.hook = {}), 'postpatch', function () {
+    mergeVNodeHook(vnode, 'postpatch', function () {
       for (var i = 0; i < dirsWithPostpatch.length; i++) {
         callHook$1(dirsWithPostpatch[i], 'componentUpdated', vnode, oldVnode);
       }
@@ -10833,17 +10969,20 @@ function normalizeDirectives$1 (
 ) {
   var res = Object.create(null);
   if (!dirs) {
+    // $flow-disable-line
     return res
   }
   var i, dir;
   for (i = 0; i < dirs.length; i++) {
     dir = dirs[i];
     if (!dir.modifiers) {
+      // $flow-disable-line
       dir.modifiers = emptyModifiers;
     }
     res[getRawDirName(dir)] = dir;
     dir.def = resolveAsset(vm.$options, 'directives', dir.name, true);
   }
+  // $flow-disable-line
   return res
 }
 
@@ -10896,7 +11035,7 @@ function updateAttrs (oldVnode, vnode) {
   // #4391: in IE9, setting type can reset value for input[type=radio]
   // #6666: IE/Edge forces progress value down to 1 before setting a max
   /* istanbul ignore if */
-  if ((isIE9 || isEdge) && attrs.value !== oldAttrs.value) {
+  if ((isIE || isEdge) && attrs.value !== oldAttrs.value) {
     setAttr(elm, 'value', attrs.value);
   }
   for (key in oldAttrs) {
@@ -10936,6 +11075,23 @@ function setAttr (el, key, value) {
     if (isFalsyAttrValue(value)) {
       el.removeAttribute(key);
     } else {
+      // #7138: IE10 & 11 fires input event when setting placeholder on
+      // <textarea>... block the first input event and remove the blocker
+      // immediately.
+      /* istanbul ignore if */
+      if (
+        isIE && !isIE9 &&
+        el.tagName === 'TEXTAREA' &&
+        key === 'placeholder' && !el.__ieph
+      ) {
+        var blocker = function (e) {
+          e.stopImmediatePropagation();
+          el.removeEventListener('input', blocker);
+        };
+        el.addEventListener('input', blocker);
+        // $flow-disable-line
+        el.__ieph = true; /* IE placeholder patched */
+      }
       el.setAttribute(key, value);
     }
   }
@@ -11099,10 +11255,18 @@ function pluckModuleFunction (
 
 function addProp (el, name, value) {
   (el.props || (el.props = [])).push({ name: name, value: value });
+  el.plain = false;
 }
 
 function addAttr (el, name, value) {
   (el.attrs || (el.attrs = [])).push({ name: name, value: value });
+  el.plain = false;
+}
+
+// add a raw attr (use this in preTransforms)
+function addRawAttr (el, name, value) {
+  el.attrsMap[name] = value;
+  el.attrsList.push({ name: name, value: value });
 }
 
 function addDirective (
@@ -11114,6 +11278,7 @@ function addDirective (
   modifiers
 ) {
   (el.directives || (el.directives = [])).push({ name: name, rawName: rawName, value: value, arg: arg, modifiers: modifiers });
+  el.plain = false;
 }
 
 function addHandler (
@@ -11124,39 +11289,59 @@ function addHandler (
   important,
   warn
 ) {
+  modifiers = modifiers || emptyObject;
   // warn prevent and passive modifier
   /* istanbul ignore if */
   if (
     "development" !== 'production' && warn &&
-    modifiers && modifiers.prevent && modifiers.passive
+    modifiers.prevent && modifiers.passive
   ) {
     warn(
       'passive and prevent can\'t be used together. ' +
       'Passive handler can\'t prevent default event.'
     );
   }
+
   // check capture modifier
-  if (modifiers && modifiers.capture) {
+  if (modifiers.capture) {
     delete modifiers.capture;
     name = '!' + name; // mark the event as captured
   }
-  if (modifiers && modifiers.once) {
+  if (modifiers.once) {
     delete modifiers.once;
     name = '~' + name; // mark the event as once
   }
   /* istanbul ignore if */
-  if (modifiers && modifiers.passive) {
+  if (modifiers.passive) {
     delete modifiers.passive;
     name = '&' + name; // mark the event as passive
   }
+
+  // normalize click.right and click.middle since they don't actually fire
+  // this is technically browser-specific, but at least for now browsers are
+  // the only target envs that have right/middle clicks.
+  if (name === 'click') {
+    if (modifiers.right) {
+      name = 'contextmenu';
+      delete modifiers.right;
+    } else if (modifiers.middle) {
+      name = 'mouseup';
+    }
+  }
+
   var events;
-  if (modifiers && modifiers.native) {
+  if (modifiers.native) {
     delete modifiers.native;
     events = el.nativeEvents || (el.nativeEvents = {});
   } else {
     events = el.events || (el.events = {});
   }
-  var newHandler = { value: value, modifiers: modifiers };
+
+  var newHandler = { value: value };
+  if (modifiers !== emptyObject) {
+    newHandler.modifiers = modifiers;
+  }
+
   var handlers = events[name];
   /* istanbul ignore if */
   if (Array.isArray(handlers)) {
@@ -11166,6 +11351,8 @@ function addHandler (
   } else {
     events[name] = newHandler;
   }
+
+  el.plain = false;
 }
 
 function getBindingAttr (
@@ -11432,11 +11619,11 @@ function genCheckboxModel (
   var falseValueBinding = getBindingAttr(el, 'false-value') || 'false';
   addProp(el, 'checked',
     "Array.isArray(" + value + ")" +
-      "?_i(" + value + "," + valueBinding + ")>-1" + (
-        trueValueBinding === 'true'
-          ? (":(" + value + ")")
-          : (":_q(" + value + "," + trueValueBinding + ")")
-      )
+    "?_i(" + value + "," + valueBinding + ")>-1" + (
+      trueValueBinding === 'true'
+        ? (":(" + value + ")")
+        : (":_q(" + value + "," + trueValueBinding + ")")
+    )
   );
   addHandler(el, 'change',
     "var $$a=" + value + "," +
@@ -11453,9 +11640,9 @@ function genCheckboxModel (
 }
 
 function genRadioModel (
-    el,
-    value,
-    modifiers
+  el,
+  value,
+  modifiers
 ) {
   var number = modifiers && modifiers.number;
   var valueBinding = getBindingAttr(el, 'value') || 'null';
@@ -11465,9 +11652,9 @@ function genRadioModel (
 }
 
 function genSelect (
-    el,
-    value,
-    modifiers
+  el,
+  value,
+  modifiers
 ) {
   var number = modifiers && modifiers.number;
   var selectedVal = "Array.prototype.filter" +
@@ -11487,6 +11674,19 @@ function genDefaultModel (
   modifiers
 ) {
   var type = el.attrsMap.type;
+
+  // warn if v-bind:value conflicts with v-model
+  {
+    var value$1 = el.attrsMap['v-bind:value'] || el.attrsMap[':value'];
+    if (value$1) {
+      var binding = el.attrsMap['v-bind:value'] ? 'v-bind:value' : ':value';
+      warn$1(
+        binding + "=\"" + value$1 + "\" conflicts with v-model on the same element " +
+        'because the latter already expands to a value binding internally'
+      );
+    }
+  }
+
   var ref = modifiers || {};
   var lazy = ref.lazy;
   var number = ref.number;
@@ -11593,6 +11793,7 @@ function updateDOMListeners (oldVnode, vnode) {
   target$1 = vnode.elm;
   normalizeEvents(on);
   updateListeners(on, oldOn, add$1, remove$2, vnode.context);
+  target$1 = undefined;
 }
 
 var events = {
@@ -11656,12 +11857,12 @@ function updateDOMProps (oldVnode, vnode) {
 function shouldUpdateValue (elm, checkVal) {
   return (!elm.composing && (
     elm.tagName === 'OPTION' ||
-    isDirty(elm, checkVal) ||
-    isInputChanged(elm, checkVal)
+    isNotInFocusAndDirty(elm, checkVal) ||
+    isDirtyWithModifiers(elm, checkVal)
   ))
 }
 
-function isDirty (elm, checkVal) {
+function isNotInFocusAndDirty (elm, checkVal) {
   // return true when textbox (.number and .trim) loses focus and its value is
   // not equal to the updated value
   var notInFocus = true;
@@ -11671,14 +11872,20 @@ function isDirty (elm, checkVal) {
   return notInFocus && elm.value !== checkVal
 }
 
-function isInputChanged (elm, newVal) {
+function isDirtyWithModifiers (elm, newVal) {
   var value = elm.value;
   var modifiers = elm._vModifiers; // injected by v-model runtime
-  if (isDef(modifiers) && modifiers.number) {
-    return toNumber(value) !== toNumber(newVal)
-  }
-  if (isDef(modifiers) && modifiers.trim) {
-    return value.trim() !== newVal.trim()
+  if (isDef(modifiers)) {
+    if (modifiers.lazy) {
+      // inputs with lazy should only be updated when not in focus
+      return false
+    }
+    if (modifiers.number) {
+      return toNumber(value) !== toNumber(newVal)
+    }
+    if (modifiers.trim) {
+      return value.trim() !== newVal.trim()
+    }
   }
   return value !== newVal
 }
@@ -11736,7 +11943,10 @@ function getStyle (vnode, checkChild) {
     var childNode = vnode;
     while (childNode.componentInstance) {
       childNode = childNode.componentInstance._vnode;
-      if (childNode.data && (styleData = normalizeStyleData(childNode.data))) {
+      if (
+        childNode && childNode.data &&
+        (styleData = normalizeStyleData(childNode.data))
+      ) {
         extend(res, styleData);
       }
     }
@@ -12198,7 +12408,7 @@ function enter (vnode, toggleDisplay) {
 
   if (!vnode.data.show) {
     // remove pending leave element on enter by injecting an insert hook
-    mergeVNodeHook(vnode.data.hook || (vnode.data.hook = {}), 'insert', function () {
+    mergeVNodeHook(vnode, 'insert', function () {
       var parent = el.parentNode;
       var pendingNode = parent && parent._pending && parent._pending[vnode.key];
       if (pendingNode &&
@@ -12249,12 +12459,12 @@ function leave (vnode, rm) {
   }
 
   var data = resolveTransition(vnode.data.transition);
-  if (isUndef(data)) {
+  if (isUndef(data) || el.nodeType !== 1) {
     return rm()
   }
 
   /* istanbul ignore if */
-  if (isDef(el._leaveCb) || el.nodeType !== 1) {
+  if (isDef(el._leaveCb)) {
     return
   }
 
@@ -12437,10 +12647,17 @@ if (isIE9) {
   });
 }
 
-var model$1 = {
-  inserted: function inserted (el, binding, vnode) {
+var directive = {
+  inserted: function inserted (el, binding, vnode, oldVnode) {
     if (vnode.tag === 'select') {
-      setSelected(el, binding, vnode.context);
+      // #6903
+      if (oldVnode.elm && !oldVnode.elm._vOptions) {
+        mergeVNodeHook(vnode, 'postpatch', function () {
+          directive.componentUpdated(el, binding, vnode);
+        });
+      } else {
+        setSelected(el, binding, vnode.context);
+      }
       el._vOptions = [].map.call(el.options, getValue);
     } else if (vnode.tag === 'textarea' || isTextInputType(el.type)) {
       el._vModifiers = binding.modifiers;
@@ -12461,6 +12678,7 @@ var model$1 = {
       }
     }
   },
+
   componentUpdated: function componentUpdated (el, binding, vnode) {
     if (vnode.tag === 'select') {
       setSelected(el, binding, vnode.context);
@@ -12619,7 +12837,7 @@ var show = {
 };
 
 var platformDirectives = {
-  model: model$1,
+  model: directive,
   show: show
 };
 
@@ -12701,7 +12919,7 @@ var Transition = {
   render: function render (h) {
     var this$1 = this;
 
-    var children = this.$options._renderChildren;
+    var children = this.$slots.default;
     if (!children) {
       return
     }
@@ -12780,7 +12998,9 @@ var Transition = {
       oldChild &&
       oldChild.data &&
       !isSameChild(child, oldChild) &&
-      !isAsyncPlaceholder(oldChild)
+      !isAsyncPlaceholder(oldChild) &&
+      // #6687 component root is a comment node
+      !(oldChild.componentInstance && oldChild.componentInstance._vnode.isComment)
     ) {
       // replace old child transition data with fresh one
       // important for dynamic transitions!
@@ -12882,7 +13102,7 @@ var TransitionGroup = {
       this._vnode,
       this.kept,
       false, // hydrating
-      true // removeOnly (!important, avoids unnecessary moves)
+      true // removeOnly (!important avoids unnecessary moves)
     );
     this._vnode = this.kept;
   },
@@ -13036,19 +13256,6 @@ Vue$3.nextTick(function () {
 
 /*  */
 
-// check whether current browser encodes a char inside attribute values
-function shouldDecode (content, encoded) {
-  var div = document.createElement('div');
-  div.innerHTML = "<div a=\"" + content + "\"/>";
-  return div.innerHTML.indexOf(encoded) > 0
-}
-
-// #3663
-// IE encodes newlines inside attribute values while other browsers don't
-var shouldDecodeNewlines = inBrowser ? shouldDecode('\n', '&#10;') : false;
-
-/*  */
-
 var defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g;
 var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g;
 
@@ -13057,6 +13264,8 @@ var buildRegex = cached(function (delimiters) {
   var close = delimiters[1].replace(regexEscapeRE, '\\$&');
   return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
 });
+
+
 
 function parseText (
   text,
@@ -13067,23 +13276,30 @@ function parseText (
     return
   }
   var tokens = [];
+  var rawTokens = [];
   var lastIndex = tagRE.lastIndex = 0;
-  var match, index;
+  var match, index, tokenValue;
   while ((match = tagRE.exec(text))) {
     index = match.index;
     // push text token
     if (index > lastIndex) {
-      tokens.push(JSON.stringify(text.slice(lastIndex, index)));
+      rawTokens.push(tokenValue = text.slice(lastIndex, index));
+      tokens.push(JSON.stringify(tokenValue));
     }
     // tag token
     var exp = parseFilters(match[1].trim());
     tokens.push(("_s(" + exp + ")"));
+    rawTokens.push({ '@binding': exp });
     lastIndex = index + match[0].length;
   }
   if (lastIndex < text.length) {
-    tokens.push(JSON.stringify(text.slice(lastIndex)));
+    rawTokens.push(tokenValue = text.slice(lastIndex));
+    tokens.push(JSON.stringify(tokenValue));
   }
-  return tokens.join('+')
+  return {
+    expression: tokens.join('+'),
+    tokens: rawTokens
+  }
 }
 
 /*  */
@@ -13092,8 +13308,8 @@ function transformNode (el, options) {
   var warn = options.warn || baseWarn;
   var staticClass = getAndRemoveAttr(el, 'class');
   if ("development" !== 'production' && staticClass) {
-    var expression = parseText(staticClass, options.delimiters);
-    if (expression) {
+    var res = parseText(staticClass, options.delimiters);
+    if (res) {
       warn(
         "class=\"" + staticClass + "\": " +
         'Interpolation inside attributes has been removed. ' +
@@ -13136,8 +13352,8 @@ function transformNode$1 (el, options) {
   if (staticStyle) {
     /* istanbul ignore if */
     {
-      var expression = parseText(staticStyle, options.delimiters);
-      if (expression) {
+      var res = parseText(staticStyle, options.delimiters);
+      if (res) {
         warn(
           "style=\"" + staticStyle + "\": " +
           'Interpolation inside attributes has been removed. ' +
@@ -13245,10 +13461,11 @@ var decodingMap = {
   '&gt;': '>',
   '&quot;': '"',
   '&amp;': '&',
-  '&#10;': '\n'
+  '&#10;': '\n',
+  '&#9;': '\t'
 };
 var encodedAttr = /&(?:lt|gt|quot|amp);/g;
-var encodedAttrWithNewLines = /&(?:lt|gt|quot|amp|#10);/g;
+var encodedAttrWithNewLines = /&(?:lt|gt|quot|amp|#10|#9);/g;
 
 // #5992
 var isIgnoreNewlineTag = makeMap('pre,textarea', true);
@@ -13439,12 +13656,12 @@ function parseHTML (html, options) {
         if (args[5] === '') { delete args[5]; }
       }
       var value = args[3] || args[4] || args[5] || '';
+      var shouldDecodeNewlines = tagName === 'a' && args[1] === 'href'
+        ? options.shouldDecodeNewlinesForHref
+        : options.shouldDecodeNewlines;
       attrs[i] = {
         name: args[1],
-        value: decodeAttr(
-          value,
-          options.shouldDecodeNewlines
-        )
+        value: decodeAttr(value, shouldDecodeNewlines)
       };
     }
 
@@ -13518,7 +13735,8 @@ function parseHTML (html, options) {
 var onRE = /^@|^v-on:/;
 var dirRE = /^v-|^@|^:/;
 var forAliasRE = /(.*?)\s+(?:in|of)\s+(.*)/;
-var forIteratorRE = /\((\{[^}]*\}|[^,]*),([^,]*)(?:,([^,]*))?\)/;
+var forIteratorRE = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/;
+var stripParensRE = /^\(|\)$/g;
 
 var argRE = /:(.*)$/;
 var bindRE = /^:|^v-bind:/;
@@ -13587,13 +13805,17 @@ function parse (
     }
   }
 
-  function endPre (element) {
+  function closeElement (element) {
     // check pre state
     if (element.pre) {
       inVPre = false;
     }
     if (platformIsPreTag(element.tag)) {
       inPre = false;
+    }
+    // apply post-transforms
+    for (var i = 0; i < postTransforms.length; i++) {
+      postTransforms[i](element, options);
     }
   }
 
@@ -13603,6 +13825,7 @@ function parse (
     isUnaryTag: options.isUnaryTag,
     canBeLeftOpenTag: options.canBeLeftOpenTag,
     shouldDecodeNewlines: options.shouldDecodeNewlines,
+    shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
     shouldKeepComment: options.comments,
     start: function start (tag, attrs, unary) {
       // check namespace.
@@ -13706,11 +13929,7 @@ function parse (
         currentParent = element;
         stack.push(element);
       } else {
-        endPre(element);
-      }
-      // apply post-transforms
-      for (var i$1 = 0; i$1 < postTransforms.length; i$1++) {
-        postTransforms[i$1](element, options);
+        closeElement(element);
       }
     },
 
@@ -13724,7 +13943,7 @@ function parse (
       // pop stack
       stack.length -= 1;
       currentParent = stack[stack.length - 1];
-      endPre(element);
+      closeElement(element);
     },
 
     chars: function chars (text) {
@@ -13756,11 +13975,12 @@ function parse (
         // only preserve whitespace if its not right after a starting tag
         : preserveWhitespace && children.length ? ' ' : '';
       if (text) {
-        var expression;
-        if (!inVPre && text !== ' ' && (expression = parseText(text, delimiters))) {
+        var res;
+        if (!inVPre && text !== ' ' && (res = parseText(text, delimiters))) {
           children.push({
             type: 2,
-            expression: expression,
+            expression: res.expression,
+            tokens: res.tokens,
             text: text
           });
         } else if (text !== ' ' || !children.length || children[children.length - 1].text !== ' ') {
@@ -13841,26 +14061,34 @@ function processRef (el) {
 function processFor (el) {
   var exp;
   if ((exp = getAndRemoveAttr(el, 'v-for'))) {
-    var inMatch = exp.match(forAliasRE);
-    if (!inMatch) {
-      "development" !== 'production' && warn$2(
+    var res = parseFor(exp);
+    if (res) {
+      extend(el, res);
+    } else {
+      warn$2(
         ("Invalid v-for expression: " + exp)
       );
-      return
-    }
-    el.for = inMatch[2].trim();
-    var alias = inMatch[1].trim();
-    var iteratorMatch = alias.match(forIteratorRE);
-    if (iteratorMatch) {
-      el.alias = iteratorMatch[1].trim();
-      el.iterator1 = iteratorMatch[2].trim();
-      if (iteratorMatch[3]) {
-        el.iterator2 = iteratorMatch[3].trim();
-      }
-    } else {
-      el.alias = alias;
     }
   }
+}
+
+function parseFor (exp) {
+  var inMatch = exp.match(forAliasRE);
+  if (!inMatch) { return }
+  var res = {};
+  res.for = inMatch[2].trim();
+  var alias = inMatch[1].trim().replace(stripParensRE, '');
+  var iteratorMatch = alias.match(forIteratorRE);
+  if (iteratorMatch) {
+    res.alias = alias.replace(forIteratorRE, '');
+    res.iterator1 = iteratorMatch[1].trim();
+    if (iteratorMatch[2]) {
+      res.iterator2 = iteratorMatch[2].trim();
+    }
+  } else {
+    res.alias = alias;
+  }
+  return res
 }
 
 function processIf (el) {
@@ -13954,6 +14182,15 @@ function processSlot (el) {
       }
       el.slotScope = slotScope || getAndRemoveAttr(el, 'slot-scope');
     } else if ((slotScope = getAndRemoveAttr(el, 'slot-scope'))) {
+      /* istanbul ignore if */
+      if ("development" !== 'production' && el.attrsMap['v-for']) {
+        warn$2(
+          "Ambiguous combined usage of slot-scope and v-for on <" + (el.tag) + "> " +
+          "(v-for takes higher priority). Use a wrapper <template> for the " +
+          "scoped slot to make it clearer.",
+          true
+        );
+      }
       el.slotScope = slotScope;
     }
     var slotTarget = getBindingAttr(el, 'slot');
@@ -13961,7 +14198,7 @@ function processSlot (el) {
       el.slotTarget = slotTarget === '""' ? '"default"' : slotTarget;
       // preserve slot as an attribute for native shadow DOM compat
       // only for non-scoped slots.
-      if (!el.slotScope) {
+      if (el.tag !== 'template' && !el.slotScope) {
         addAttr(el, 'slot', slotTarget);
       }
     }
@@ -14039,8 +14276,8 @@ function processAttrs (el) {
     } else {
       // literal attribute
       {
-        var expression = parseText(value, delimiters);
-        if (expression) {
+        var res = parseText(value, delimiters);
+        if (res) {
           warn$2(
             name + "=\"" + value + "\": " +
             'Interpolation inside attributes has been removed. ' +
@@ -14050,6 +14287,13 @@ function processAttrs (el) {
         }
       }
       addAttr(el, name, JSON.stringify(value));
+      // #6887 firefox doesn't update muted state if set via attribute
+      // even immediately after element creation
+      if (!el.component &&
+          name === 'muted' &&
+          platformMustUseProp(el.tag, el.attrsMap.type, name)) {
+        addProp(el, name, 'true');
+      }
     }
   }
 }
@@ -14154,6 +14398,8 @@ function preTransformNode (el, options) {
       var typeBinding = getBindingAttr(el, 'type');
       var ifCondition = getAndRemoveAttr(el, 'v-if', true);
       var ifConditionExtra = ifCondition ? ("&&(" + ifCondition + ")") : "";
+      var hasElse = getAndRemoveAttr(el, 'v-else', true) != null;
+      var elseIfCondition = getAndRemoveAttr(el, 'v-else-if', true);
       // 1. checkbox
       var branch0 = cloneASTElement(el);
       // process for on the main node
@@ -14184,6 +14430,13 @@ function preTransformNode (el, options) {
         exp: ifCondition,
         block: branch2
       });
+
+      if (hasElse) {
+        branch0.else = true;
+      } else if (elseIfCondition) {
+        branch0.elseif = elseIfCondition;
+      }
+
       return branch0
     }
   }
@@ -14191,11 +14444,6 @@ function preTransformNode (el, options) {
 
 function cloneASTElement (el) {
   return createASTElement(el.tag, el.attrsList.slice(), el.parent)
-}
-
-function addRawAttr (el, name, value) {
-  el.attrsMap[name] = value;
-  el.attrsList.push({ name: name, value: value });
 }
 
 var model$2 = {
@@ -14415,18 +14663,7 @@ function genHandlers (
 ) {
   var res = isNative ? 'nativeOn:{' : 'on:{';
   for (var name in events) {
-    var handler = events[name];
-    // #5330: warn click.right, since right clicks do not actually fire click events.
-    if ("development" !== 'production' &&
-      name === 'click' &&
-      handler && handler.modifiers && handler.modifiers.right
-    ) {
-      warn(
-        "Use \"contextmenu\" instead of \"click.right\" since right clicks " +
-        "do not actually fire \"click\" events."
-      );
-    }
-    res += "\"" + name + "\":" + (genHandler(name, handler)) + ",";
+    res += "\"" + name + "\":" + (genHandler(name, events[name])) + ",";
   }
   return res.slice(0, -1) + '}'
 }
@@ -14447,9 +14684,11 @@ function genHandler (
   var isFunctionExpression = fnExpRE.test(handler.value);
 
   if (!handler.modifiers) {
-    return isMethodPath || isFunctionExpression
-      ? handler.value
-      : ("function($event){" + (handler.value) + "}") // inline statement
+    if (isMethodPath || isFunctionExpression) {
+      return handler.value
+    }
+    /* istanbul ignore if */
+    return ("function($event){" + (handler.value) + "}") // inline statement
   } else {
     var code = '';
     var genModifierCode = '';
@@ -14485,6 +14724,7 @@ function genHandler (
       : isFunctionExpression
         ? ("(" + (handler.value) + ")($event)")
         : handler.value;
+    /* istanbul ignore if */
     return ("function($event){" + code + handlerCode + "}")
   }
 }
@@ -14962,7 +15202,10 @@ function genProps (props) {
   var res = '';
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];
-    res += "\"" + (prop.name) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
+    /* istanbul ignore if */
+    {
+      res += "\"" + (prop.name) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
+    }
   }
   return res.slice(0, -1)
 }
@@ -14988,9 +15231,6 @@ var prohibitedKeywordRE = new RegExp('\\b' + (
 var unaryOperatorsRE = new RegExp('\\b' + (
   'delete,typeof,void'
 ).split(',').join('\\s*\\([^\\)]*\\)|\\b') + '\\s*\\([^\\)]*\\)');
-
-// check valid identifier for v-for
-var identRE = /[A-Za-z_$][\w$]*/;
 
 // strip strings in expressions
 var stripStringRE = /'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`/g;
@@ -15049,9 +15289,18 @@ function checkFor (node, text, errors) {
   checkIdentifier(node.iterator2, 'v-for iterator', text, errors);
 }
 
-function checkIdentifier (ident, type, text, errors) {
-  if (typeof ident === 'string' && !identRE.test(ident)) {
-    errors.push(("invalid " + type + " \"" + ident + "\" in expression: " + (text.trim())));
+function checkIdentifier (
+  ident,
+  type,
+  text,
+  errors
+) {
+  if (typeof ident === 'string') {
+    try {
+      new Function(("var " + ident + "=_"));
+    } catch (e) {
+      errors.push(("invalid " + type + " \"" + ident + "\" in expression: " + (text.trim())));
+    }
   }
 }
 
@@ -15196,7 +15445,7 @@ function createCompilerCreator (baseCompile) {
         // merge custom directives
         if (options.directives) {
           finalOptions.directives = extend(
-            Object.create(baseOptions.directives),
+            Object.create(baseOptions.directives || null),
             options.directives
           );
         }
@@ -15234,7 +15483,9 @@ var createCompiler = createCompilerCreator(function baseCompile (
   options
 ) {
   var ast = parse(template.trim(), options);
-  optimize(ast, options);
+  if (options.optimize !== false) {
+    optimize(ast, options);
+  }
   var code = generate(ast, options);
   return {
     ast: ast,
@@ -15247,6 +15498,21 @@ var createCompiler = createCompilerCreator(function baseCompile (
 
 var ref$1 = createCompiler(baseOptions);
 var compileToFunctions = ref$1.compileToFunctions;
+
+/*  */
+
+// check whether current browser encodes a char inside attribute values
+var div;
+function getShouldDecode (href) {
+  div = div || document.createElement('div');
+  div.innerHTML = href ? "<a href=\"\n\"/>" : "<div a=\"\n\"/>";
+  return div.innerHTML.indexOf('&#10;') > 0
+}
+
+// #3663: IE encodes newlines inside attribute values while other browsers don't
+var shouldDecodeNewlines = inBrowser ? getShouldDecode(false) : false;
+// #6828: chrome encodes content in a[href]
+var shouldDecodeNewlinesForHref = inBrowser ? getShouldDecode(true) : false;
 
 /*  */
 
@@ -15305,6 +15571,7 @@ Vue$3.prototype.$mount = function (
 
       var ref = compileToFunctions(template, {
         shouldDecodeNewlines: shouldDecodeNewlines,
+        shouldDecodeNewlinesForHref: shouldDecodeNewlinesForHref,
         delimiters: options.delimiters,
         comments: options.comments
       }, this);
@@ -15343,7 +15610,7 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(1), __webpack_require__(150).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(1), __webpack_require__(169).setImmediate))
 
 /***/ }),
 /* 4 */
@@ -15447,7 +15714,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(157)
+var listToStyles = __webpack_require__(176)
 
 /*
 type StyleObject = {
@@ -15666,10 +15933,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(293)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( matchesSelector ) {
+      __webpack_require__(299)
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( matchesSelector ) {
       return factory( window, matchesSelector );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -15932,14 +16199,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity main
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(13),
-      __webpack_require__(142),
+      __webpack_require__(156),
       __webpack_require__(6),
-      __webpack_require__(294),
-      __webpack_require__(295),
-      __webpack_require__(296)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, getSize, utils, Cell, Slide, animatePrototype ) {
+      __webpack_require__(300),
+      __webpack_require__(301),
+      __webpack_require__(302)
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter, getSize, utils, Cell, Slide, animatePrototype ) {
       return factory( window, EvEmitter, getSize, utils, Cell, Slide, animatePrototype );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -33854,9 +34121,9 @@ return Flickity;
 
     // Define as an anonymous module so, through path mapping, it can be
     // referenced as the "underscore" module.
-    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
       return _;
-    }.call(exports, __webpack_require__, exports, module),
+    }).call(exports, __webpack_require__, exports, module),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   }
   // Check for `exports` after `define` in case a build optimizer adds it.
@@ -34070,49 +34337,50 @@ process.umask = function() { return 0; };
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cca88f62_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_panorama_vue__ = __webpack_require__(280);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_52cbab82_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_panorama_vue__ = __webpack_require__(289);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(198)
+  __webpack_require__(210)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-cca88f62"
+var __vue_scopeId__ = "data-v-52cbab82"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cca88f62_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_panorama_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_52cbab82_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_panorama_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/page/guide/panorama.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-cca88f62", Component.options)
+    hotAPI.createRecord("data-v-52cbab82", Component.options)
   } else {
-    hotAPI.reload("data-v-cca88f62", Component.options)
-' + '  }
+    hotAPI.reload("data-v-52cbab82", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -34120,7 +34388,6 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 12 */
@@ -34128,17 +34395,19 @@ if (false) {(function () {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_def52f1e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(270);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_238d82b8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(279);
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
@@ -34147,26 +34416,25 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_def52f1e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_238d82b8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/dna-barcode.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-def52f1e", Component.options)
+    hotAPI.createRecord("data-v-238d82b8", Component.options)
   } else {
-    hotAPI.reload("data-v-def52f1e", Component.options)
-' + '  }
+    hotAPI.reload("data-v-238d82b8", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -34174,7 +34442,6 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 13 */
@@ -34827,7 +35094,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(146);
+exports.isBuffer = __webpack_require__(165);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -34871,7 +35138,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(147);
+exports.inherits = __webpack_require__(166);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -34921,53 +35188,506 @@ module.exports = function(module) {
 
 /***/ }),
 /* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueResizeDirective = __webpack_require__(181);
+
+var _vueResizeDirective2 = _interopRequireDefault(_vueResizeDirective);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 登録
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+_vue2.default.component('lang-button-top', __webpack_require__(184).default);
+
+exports.default = _vue2.default.extend({
+  directives: {
+    resize: _vueResizeDirective2.default
+  },
+  mounted: function mounted() {
+    this.init();
+  },
+  methods: {
+    init: function init() {
+
+      // chromeで10pxより小さい文字が使えない問題対策
+      if (document.querySelector('body').classList.contains('chrome')) {
+        this.$el.querySelector('.copyright').classList.add('chrome');
+      }
+      // SP判定
+      var isSP = this.$el.querySelector('nav').offsetParent != null;
+
+      if (this.$route.path == '/') {
+        var mapOptions = {
+          mapTypeId: 'satellite',
+          disableDefaultUI: true,
+          type: false,
+          zoomControl: false
+        };
+
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        var guides = {
+          niho: {
+            title: {
+              ja: '仁保の森 2016',
+              en: 'Forest of Niho 2016'
+            },
+            position: new google.maps.LatLng(34.2505833, 131.5789502)
+          },
+          kumano: {
+            title: {
+              ja: '熊野の森 2017',
+              en: 'Forest of Kumano 2017'
+            },
+            position: new google.maps.LatLng(34.170286, 131.461427)
+          }
+        };
+
+        var locale = location.pathname == '/dna-of-forests/' ? 'ja' : 'en';
+
+        for (var _prop in guides) {
+          var b = guides[_prop];
+          // SPの時
+          var icon_img = isSP ? 'marker-sp.png' : 'marker-' + locale + '-pc.png';
+          var marker = new google.maps.Marker({
+            name: _prop,
+            position: b.position,
+            map: map,
+            title: b.title[locale] + '\u3092\u307F\u308B',
+            icon: '/dna-of-forests/img/top/guides/' + _prop + '/' + icon_img
+          });
+          marker.addListener('click', function (e) {
+            location.href = '#/' + this.name;
+          });
+        }
+        // 表示領域の調整
+        var bounds = new google.maps.LatLngBounds();
+        for (var prop in guides) {
+          bounds.extend(guides[prop].position);
+        }
+        map.fitBounds(bounds);
+      }
+    },
+    linkUrl: function linkUrl(default_path) {
+      if (this.$route.params.index) {
+        return default_path + '/' + this.$route.params.index;
+      } else {
+        return default_path;
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default.extend(__webpack_require__(19).default); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bd0d69d0_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_vue__ = __webpack_require__(174);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01a5bd6a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_vue__ = __webpack_require__(189);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(171)
+  __webpack_require__(187)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-bd0d69d0"
+var __vue_scopeId__ = "data-v-01a5bd6a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bd0d69d0_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01a5bd6a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/lang-button.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-bd0d69d0", Component.options)
+    hotAPI.createRecord("data-v-01a5bd6a", Component.options)
   } else {
-    hotAPI.reload("data-v-bd0d69d0", Component.options)
-' + '  }
+    hotAPI.reload("data-v-01a5bd6a", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -34975,57 +35695,267 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 17 */
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default.extend({
+
+  mounted: function mounted() {
+    this.changeRoute();
+  },
+
+  watch: {
+    // ルートの変更を監視
+    '$route': 'changeRoute'
+  },
+
+  methods: {
+    changeRoute: function changeRoute() {
+      var en = this.$el.querySelector('.en');
+      var ja = this.$el.querySelector('.ja');
+      if (this.$root.$i18n.locale === 'en') {
+        en.removeAttribute('href');
+        ja.href = '/dna-of-forests/#' + this.$route.path;
+      } else {
+        en.href = '/dna-of-forests/en/#' + this.$route.path;
+        ja.removeAttribute('href');
+      }
+    }
+  }
+}); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _lodash = __webpack_require__(9);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 登録
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+_vue2.default.component('global-nav', __webpack_require__(22).default);
+
+exports.default = _vue2.default.extend({
+  data: function data() {
+    return {
+      markers: __webpack_require__(202)("./" + this.$route.params.forest + '/markers.json'),
+      config: _lodash2.default.merge(__webpack_require__(205), __webpack_require__(206)("./" + this.$route.params.forest + '/config.json'))
+    };
+  }
+});
+
+/***/ }),
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c43131bc_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_global_nav_vue__ = __webpack_require__(189);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_46167e8f_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_global_nav_vue__ = __webpack_require__(201);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(181)
+  __webpack_require__(195)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-c43131bc"
+var __vue_scopeId__ = "data-v-46167e8f"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c43131bc_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_global_nav_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_46167e8f_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_global_nav_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/global-nav.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c43131bc", Component.options)
+    hotAPI.createRecord("data-v-46167e8f", Component.options)
   } else {
-    hotAPI.reload("data-v-c43131bc", Component.options)
-' + '  }
+    hotAPI.reload("data-v-46167e8f", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -35033,14 +35963,284 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 18 */
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 登録
+_vue2.default.component('sound-button', __webpack_require__(197).default); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+_vue2.default.component('lang-button', __webpack_require__(19).default);
+
+exports.default = _vue2.default.extend({
+  methods: {
+    linkUrl: function linkUrl(path) {
+      var p = this.$route.params;
+      if (['/panorama', '/list'].includes(path) && p.index) {
+        return '/' + p.forest + path + '/' + p.index;
+      } else {
+        return '/' + p.forest + path;
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _mobileDetect = __webpack_require__(25);
+
+var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
+
+var _jsCookie = __webpack_require__(27);
+
+var _jsCookie2 = _interopRequireDefault(_jsCookie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default.extend({
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var md = new _mobileDetect2.default(window.navigator.userAgent);
+
+    this.sound = this.$el.querySelector('audio');
+    this.sound.volume = 0.3;
+
+    if (md.mobile()) {
+      // モバイルのときだけ、ウィンドウが背面にいくとサウンド停止（戻ってくると復帰）
+      window.addEventListener('blur', function () {
+        if (!_this.sound.paused) {
+          _this.pauseByWindowBlur = true;
+          _this.toggleSound(false);
+        } else {
+          _this.pauseByWindowBlur = false;
+        }
+      }, false);
+      window.addEventListener('focus', function () {
+        if (_this.pauseByWindowBlur) {
+          _this.toggleSound(true);
+        }
+      }, false);
+    }
+
+    // Safari changed its specification that playing sound needs user action, so set default off.
+    this.toggleSound(!document.querySelector('body.safari') && !(md.mobile() || parseInt(_jsCookie2.default.get('isSoundOn'), 10) == 0));
+  },
+
+  methods: {
+    click: function click() {
+      this.toggleSound(this.$el.className === 'off');
+    },
+    toggleSound: function toggleSound(_on) {
+      if (_on) {
+        this.sound.play();
+        _jsCookie2.default.set('isSoundOn', 1);
+        this.$el.className = '';
+      } else {
+        this.sound.pause();
+        _jsCookie2.default.set('isSoundOn', 0);
+        this.$el.className = 'off';
+      }
+    },
+    soundUrl: function soundUrl() {
+      return '/dna-of-forests/' + this.$route.params.forest + '/sound/forest.mp3';
+    }
+  },
+  data: function data() {
+    return {
+      pauseByWindowBlur: false
+    };
+  }
+}); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // THIS FILE IS GENERATED - DO NOT EDIT!
-/*!mobile-detect v1.3.7 2017-09-06*/
+/*!mobile-detect v1.4.1 2017-12-24*/
 /*global module:false, define:false*/
 /*jshint latedef:false*/
 /*!@license Copyright 2013, Heinrich Goebl, License: MIT, see https://github.com/hgoebl/mobile-detect.js*/
@@ -35054,11 +36254,11 @@ define(function () {
     "phones": {
         "iPhone": "\\biPhone\\b|\\biPod\\b",
         "BlackBerry": "BlackBerry|\\bBB10\\b|rim[0-9]+",
-        "HTC": "HTC|HTC.*(Sensation|Evo|Vision|Explorer|6800|8100|8900|A7272|S510e|C110e|Legend|Desire|T8282)|APX515CKT|Qtek9090|APA9292KT|HD_mini|Sensation.*Z710e|PG86100|Z715e|Desire.*(A8181|HD)|ADR6200|ADR6400L|ADR6425|001HT|Inspire 4G|Android.*\\bEVO\\b|T-Mobile G1|Z520m",
+        "HTC": "HTC|HTC.*(Sensation|Evo|Vision|Explorer|6800|8100|8900|A7272|S510e|C110e|Legend|Desire|T8282)|APX515CKT|Qtek9090|APA9292KT|HD_mini|Sensation.*Z710e|PG86100|Z715e|Desire.*(A8181|HD)|ADR6200|ADR6400L|ADR6425|001HT|Inspire 4G|Android.*\\bEVO\\b|T-Mobile G1|Z520m|Android [0-9.]+; Pixel",
         "Nexus": "Nexus One|Nexus S|Galaxy.*Nexus|Android.*Nexus.*Mobile|Nexus 4|Nexus 5|Nexus 6",
-        "Dell": "Dell.*Streak|Dell.*Aero|Dell.*Venue|DELL.*Venue Pro|Dell Flash|Dell Smoke|Dell Mini 3iX|XCD28|XCD35|\\b001DL\\b|\\b101DL\\b|\\bGS01\\b",
-        "Motorola": "Motorola|DROIDX|DROID BIONIC|\\bDroid\\b.*Build|Android.*Xoom|HRI39|MOT-|A1260|A1680|A555|A853|A855|A953|A955|A956|Motorola.*ELECTRIFY|Motorola.*i1|i867|i940|MB200|MB300|MB501|MB502|MB508|MB511|MB520|MB525|MB526|MB611|MB612|MB632|MB810|MB855|MB860|MB861|MB865|MB870|ME501|ME502|ME511|ME525|ME600|ME632|ME722|ME811|ME860|ME863|ME865|MT620|MT710|MT716|MT720|MT810|MT870|MT917|Motorola.*TITANIUM|WX435|WX445|XT300|XT301|XT311|XT316|XT317|XT319|XT320|XT390|XT502|XT530|XT531|XT532|XT535|XT603|XT610|XT611|XT615|XT681|XT701|XT702|XT711|XT720|XT800|XT806|XT860|XT862|XT875|XT882|XT883|XT894|XT901|XT907|XT909|XT910|XT912|XT928|XT926|XT915|XT919|XT925|XT1021|\\bMoto E\\b",
-        "Samsung": "\\bSamsung\\b|SM-G9250|GT-19300|SGH-I337|BGT-S5230|GT-B2100|GT-B2700|GT-B2710|GT-B3210|GT-B3310|GT-B3410|GT-B3730|GT-B3740|GT-B5510|GT-B5512|GT-B5722|GT-B6520|GT-B7300|GT-B7320|GT-B7330|GT-B7350|GT-B7510|GT-B7722|GT-B7800|GT-C3010|GT-C3011|GT-C3060|GT-C3200|GT-C3212|GT-C3212I|GT-C3262|GT-C3222|GT-C3300|GT-C3300K|GT-C3303|GT-C3303K|GT-C3310|GT-C3322|GT-C3330|GT-C3350|GT-C3500|GT-C3510|GT-C3530|GT-C3630|GT-C3780|GT-C5010|GT-C5212|GT-C6620|GT-C6625|GT-C6712|GT-E1050|GT-E1070|GT-E1075|GT-E1080|GT-E1081|GT-E1085|GT-E1087|GT-E1100|GT-E1107|GT-E1110|GT-E1120|GT-E1125|GT-E1130|GT-E1160|GT-E1170|GT-E1175|GT-E1180|GT-E1182|GT-E1200|GT-E1210|GT-E1225|GT-E1230|GT-E1390|GT-E2100|GT-E2120|GT-E2121|GT-E2152|GT-E2220|GT-E2222|GT-E2230|GT-E2232|GT-E2250|GT-E2370|GT-E2550|GT-E2652|GT-E3210|GT-E3213|GT-I5500|GT-I5503|GT-I5700|GT-I5800|GT-I5801|GT-I6410|GT-I6420|GT-I7110|GT-I7410|GT-I7500|GT-I8000|GT-I8150|GT-I8160|GT-I8190|GT-I8320|GT-I8330|GT-I8350|GT-I8530|GT-I8700|GT-I8703|GT-I8910|GT-I9000|GT-I9001|GT-I9003|GT-I9010|GT-I9020|GT-I9023|GT-I9070|GT-I9082|GT-I9100|GT-I9103|GT-I9220|GT-I9250|GT-I9300|GT-I9305|GT-I9500|GT-I9505|GT-M3510|GT-M5650|GT-M7500|GT-M7600|GT-M7603|GT-M8800|GT-M8910|GT-N7000|GT-S3110|GT-S3310|GT-S3350|GT-S3353|GT-S3370|GT-S3650|GT-S3653|GT-S3770|GT-S3850|GT-S5210|GT-S5220|GT-S5229|GT-S5230|GT-S5233|GT-S5250|GT-S5253|GT-S5260|GT-S5263|GT-S5270|GT-S5300|GT-S5330|GT-S5350|GT-S5360|GT-S5363|GT-S5369|GT-S5380|GT-S5380D|GT-S5560|GT-S5570|GT-S5600|GT-S5603|GT-S5610|GT-S5620|GT-S5660|GT-S5670|GT-S5690|GT-S5750|GT-S5780|GT-S5830|GT-S5839|GT-S6102|GT-S6500|GT-S7070|GT-S7200|GT-S7220|GT-S7230|GT-S7233|GT-S7250|GT-S7500|GT-S7530|GT-S7550|GT-S7562|GT-S7710|GT-S8000|GT-S8003|GT-S8500|GT-S8530|GT-S8600|SCH-A310|SCH-A530|SCH-A570|SCH-A610|SCH-A630|SCH-A650|SCH-A790|SCH-A795|SCH-A850|SCH-A870|SCH-A890|SCH-A930|SCH-A950|SCH-A970|SCH-A990|SCH-I100|SCH-I110|SCH-I400|SCH-I405|SCH-I500|SCH-I510|SCH-I515|SCH-I600|SCH-I730|SCH-I760|SCH-I770|SCH-I830|SCH-I910|SCH-I920|SCH-I959|SCH-LC11|SCH-N150|SCH-N300|SCH-R100|SCH-R300|SCH-R351|SCH-R400|SCH-R410|SCH-T300|SCH-U310|SCH-U320|SCH-U350|SCH-U360|SCH-U365|SCH-U370|SCH-U380|SCH-U410|SCH-U430|SCH-U450|SCH-U460|SCH-U470|SCH-U490|SCH-U540|SCH-U550|SCH-U620|SCH-U640|SCH-U650|SCH-U660|SCH-U700|SCH-U740|SCH-U750|SCH-U810|SCH-U820|SCH-U900|SCH-U940|SCH-U960|SCS-26UC|SGH-A107|SGH-A117|SGH-A127|SGH-A137|SGH-A157|SGH-A167|SGH-A177|SGH-A187|SGH-A197|SGH-A227|SGH-A237|SGH-A257|SGH-A437|SGH-A517|SGH-A597|SGH-A637|SGH-A657|SGH-A667|SGH-A687|SGH-A697|SGH-A707|SGH-A717|SGH-A727|SGH-A737|SGH-A747|SGH-A767|SGH-A777|SGH-A797|SGH-A817|SGH-A827|SGH-A837|SGH-A847|SGH-A867|SGH-A877|SGH-A887|SGH-A897|SGH-A927|SGH-B100|SGH-B130|SGH-B200|SGH-B220|SGH-C100|SGH-C110|SGH-C120|SGH-C130|SGH-C140|SGH-C160|SGH-C170|SGH-C180|SGH-C200|SGH-C207|SGH-C210|SGH-C225|SGH-C230|SGH-C417|SGH-C450|SGH-D307|SGH-D347|SGH-D357|SGH-D407|SGH-D415|SGH-D780|SGH-D807|SGH-D980|SGH-E105|SGH-E200|SGH-E315|SGH-E316|SGH-E317|SGH-E335|SGH-E590|SGH-E635|SGH-E715|SGH-E890|SGH-F300|SGH-F480|SGH-I200|SGH-I300|SGH-I320|SGH-I550|SGH-I577|SGH-I600|SGH-I607|SGH-I617|SGH-I627|SGH-I637|SGH-I677|SGH-I700|SGH-I717|SGH-I727|SGH-i747M|SGH-I777|SGH-I780|SGH-I827|SGH-I847|SGH-I857|SGH-I896|SGH-I897|SGH-I900|SGH-I907|SGH-I917|SGH-I927|SGH-I937|SGH-I997|SGH-J150|SGH-J200|SGH-L170|SGH-L700|SGH-M110|SGH-M150|SGH-M200|SGH-N105|SGH-N500|SGH-N600|SGH-N620|SGH-N625|SGH-N700|SGH-N710|SGH-P107|SGH-P207|SGH-P300|SGH-P310|SGH-P520|SGH-P735|SGH-P777|SGH-Q105|SGH-R210|SGH-R220|SGH-R225|SGH-S105|SGH-S307|SGH-T109|SGH-T119|SGH-T139|SGH-T209|SGH-T219|SGH-T229|SGH-T239|SGH-T249|SGH-T259|SGH-T309|SGH-T319|SGH-T329|SGH-T339|SGH-T349|SGH-T359|SGH-T369|SGH-T379|SGH-T409|SGH-T429|SGH-T439|SGH-T459|SGH-T469|SGH-T479|SGH-T499|SGH-T509|SGH-T519|SGH-T539|SGH-T559|SGH-T589|SGH-T609|SGH-T619|SGH-T629|SGH-T639|SGH-T659|SGH-T669|SGH-T679|SGH-T709|SGH-T719|SGH-T729|SGH-T739|SGH-T746|SGH-T749|SGH-T759|SGH-T769|SGH-T809|SGH-T819|SGH-T839|SGH-T919|SGH-T929|SGH-T939|SGH-T959|SGH-T989|SGH-U100|SGH-U200|SGH-U800|SGH-V205|SGH-V206|SGH-X100|SGH-X105|SGH-X120|SGH-X140|SGH-X426|SGH-X427|SGH-X475|SGH-X495|SGH-X497|SGH-X507|SGH-X600|SGH-X610|SGH-X620|SGH-X630|SGH-X700|SGH-X820|SGH-X890|SGH-Z130|SGH-Z150|SGH-Z170|SGH-ZX10|SGH-ZX20|SHW-M110|SPH-A120|SPH-A400|SPH-A420|SPH-A460|SPH-A500|SPH-A560|SPH-A600|SPH-A620|SPH-A660|SPH-A700|SPH-A740|SPH-A760|SPH-A790|SPH-A800|SPH-A820|SPH-A840|SPH-A880|SPH-A900|SPH-A940|SPH-A960|SPH-D600|SPH-D700|SPH-D710|SPH-D720|SPH-I300|SPH-I325|SPH-I330|SPH-I350|SPH-I500|SPH-I600|SPH-I700|SPH-L700|SPH-M100|SPH-M220|SPH-M240|SPH-M300|SPH-M305|SPH-M320|SPH-M330|SPH-M350|SPH-M360|SPH-M370|SPH-M380|SPH-M510|SPH-M540|SPH-M550|SPH-M560|SPH-M570|SPH-M580|SPH-M610|SPH-M620|SPH-M630|SPH-M800|SPH-M810|SPH-M850|SPH-M900|SPH-M910|SPH-M920|SPH-M930|SPH-N100|SPH-N200|SPH-N240|SPH-N300|SPH-N400|SPH-Z400|SWC-E100|SCH-i909|GT-N7100|GT-N7105|SCH-I535|SM-N900A|SGH-I317|SGH-T999L|GT-S5360B|GT-I8262|GT-S6802|GT-S6312|GT-S6310|GT-S5312|GT-S5310|GT-I9105|GT-I8510|GT-S6790N|SM-G7105|SM-N9005|GT-S5301|GT-I9295|GT-I9195|SM-C101|GT-S7392|GT-S7560|GT-B7610|GT-I5510|GT-S7582|GT-S7530E|GT-I8750|SM-G9006V|SM-G9008V|SM-G9009D|SM-G900A|SM-G900D|SM-G900F|SM-G900H|SM-G900I|SM-G900J|SM-G900K|SM-G900L|SM-G900M|SM-G900P|SM-G900R4|SM-G900S|SM-G900T|SM-G900V|SM-G900W8|SHV-E160K|SCH-P709|SCH-P729|SM-T2558|GT-I9205|SM-G9350|SM-J120F|SM-G920F|SM-G920V|SM-G930F|SM-N910C",
+        "Dell": "Dell[;]? (Streak|Aero|Venue|Venue Pro|Flash|Smoke|Mini 3iX)|XCD28|XCD35|\\b001DL\\b|\\b101DL\\b|\\bGS01\\b",
+        "Motorola": "Motorola|DROIDX|DROID BIONIC|\\bDroid\\b.*Build|Android.*Xoom|HRI39|MOT-|A1260|A1680|A555|A853|A855|A953|A955|A956|Motorola.*ELECTRIFY|Motorola.*i1|i867|i940|MB200|MB300|MB501|MB502|MB508|MB511|MB520|MB525|MB526|MB611|MB612|MB632|MB810|MB855|MB860|MB861|MB865|MB870|ME501|ME502|ME511|ME525|ME600|ME632|ME722|ME811|ME860|ME863|ME865|MT620|MT710|MT716|MT720|MT810|MT870|MT917|Motorola.*TITANIUM|WX435|WX445|XT300|XT301|XT311|XT316|XT317|XT319|XT320|XT390|XT502|XT530|XT531|XT532|XT535|XT603|XT610|XT611|XT615|XT681|XT701|XT702|XT711|XT720|XT800|XT806|XT860|XT862|XT875|XT882|XT883|XT894|XT901|XT907|XT909|XT910|XT912|XT928|XT926|XT915|XT919|XT925|XT1021|\\bMoto E\\b|XT1068|XT1092",
+        "Samsung": "\\bSamsung\\b|SM-G950F|SM-G955F|SM-G9250|GT-19300|SGH-I337|BGT-S5230|GT-B2100|GT-B2700|GT-B2710|GT-B3210|GT-B3310|GT-B3410|GT-B3730|GT-B3740|GT-B5510|GT-B5512|GT-B5722|GT-B6520|GT-B7300|GT-B7320|GT-B7330|GT-B7350|GT-B7510|GT-B7722|GT-B7800|GT-C3010|GT-C3011|GT-C3060|GT-C3200|GT-C3212|GT-C3212I|GT-C3262|GT-C3222|GT-C3300|GT-C3300K|GT-C3303|GT-C3303K|GT-C3310|GT-C3322|GT-C3330|GT-C3350|GT-C3500|GT-C3510|GT-C3530|GT-C3630|GT-C3780|GT-C5010|GT-C5212|GT-C6620|GT-C6625|GT-C6712|GT-E1050|GT-E1070|GT-E1075|GT-E1080|GT-E1081|GT-E1085|GT-E1087|GT-E1100|GT-E1107|GT-E1110|GT-E1120|GT-E1125|GT-E1130|GT-E1160|GT-E1170|GT-E1175|GT-E1180|GT-E1182|GT-E1200|GT-E1210|GT-E1225|GT-E1230|GT-E1390|GT-E2100|GT-E2120|GT-E2121|GT-E2152|GT-E2220|GT-E2222|GT-E2230|GT-E2232|GT-E2250|GT-E2370|GT-E2550|GT-E2652|GT-E3210|GT-E3213|GT-I5500|GT-I5503|GT-I5700|GT-I5800|GT-I5801|GT-I6410|GT-I6420|GT-I7110|GT-I7410|GT-I7500|GT-I8000|GT-I8150|GT-I8160|GT-I8190|GT-I8320|GT-I8330|GT-I8350|GT-I8530|GT-I8700|GT-I8703|GT-I8910|GT-I9000|GT-I9001|GT-I9003|GT-I9010|GT-I9020|GT-I9023|GT-I9070|GT-I9082|GT-I9100|GT-I9103|GT-I9220|GT-I9250|GT-I9300|GT-I9305|GT-I9500|GT-I9505|GT-M3510|GT-M5650|GT-M7500|GT-M7600|GT-M7603|GT-M8800|GT-M8910|GT-N7000|GT-S3110|GT-S3310|GT-S3350|GT-S3353|GT-S3370|GT-S3650|GT-S3653|GT-S3770|GT-S3850|GT-S5210|GT-S5220|GT-S5229|GT-S5230|GT-S5233|GT-S5250|GT-S5253|GT-S5260|GT-S5263|GT-S5270|GT-S5300|GT-S5330|GT-S5350|GT-S5360|GT-S5363|GT-S5369|GT-S5380|GT-S5380D|GT-S5560|GT-S5570|GT-S5600|GT-S5603|GT-S5610|GT-S5620|GT-S5660|GT-S5670|GT-S5690|GT-S5750|GT-S5780|GT-S5830|GT-S5839|GT-S6102|GT-S6500|GT-S7070|GT-S7200|GT-S7220|GT-S7230|GT-S7233|GT-S7250|GT-S7500|GT-S7530|GT-S7550|GT-S7562|GT-S7710|GT-S8000|GT-S8003|GT-S8500|GT-S8530|GT-S8600|SCH-A310|SCH-A530|SCH-A570|SCH-A610|SCH-A630|SCH-A650|SCH-A790|SCH-A795|SCH-A850|SCH-A870|SCH-A890|SCH-A930|SCH-A950|SCH-A970|SCH-A990|SCH-I100|SCH-I110|SCH-I400|SCH-I405|SCH-I500|SCH-I510|SCH-I515|SCH-I600|SCH-I730|SCH-I760|SCH-I770|SCH-I830|SCH-I910|SCH-I920|SCH-I959|SCH-LC11|SCH-N150|SCH-N300|SCH-R100|SCH-R300|SCH-R351|SCH-R400|SCH-R410|SCH-T300|SCH-U310|SCH-U320|SCH-U350|SCH-U360|SCH-U365|SCH-U370|SCH-U380|SCH-U410|SCH-U430|SCH-U450|SCH-U460|SCH-U470|SCH-U490|SCH-U540|SCH-U550|SCH-U620|SCH-U640|SCH-U650|SCH-U660|SCH-U700|SCH-U740|SCH-U750|SCH-U810|SCH-U820|SCH-U900|SCH-U940|SCH-U960|SCS-26UC|SGH-A107|SGH-A117|SGH-A127|SGH-A137|SGH-A157|SGH-A167|SGH-A177|SGH-A187|SGH-A197|SGH-A227|SGH-A237|SGH-A257|SGH-A437|SGH-A517|SGH-A597|SGH-A637|SGH-A657|SGH-A667|SGH-A687|SGH-A697|SGH-A707|SGH-A717|SGH-A727|SGH-A737|SGH-A747|SGH-A767|SGH-A777|SGH-A797|SGH-A817|SGH-A827|SGH-A837|SGH-A847|SGH-A867|SGH-A877|SGH-A887|SGH-A897|SGH-A927|SGH-B100|SGH-B130|SGH-B200|SGH-B220|SGH-C100|SGH-C110|SGH-C120|SGH-C130|SGH-C140|SGH-C160|SGH-C170|SGH-C180|SGH-C200|SGH-C207|SGH-C210|SGH-C225|SGH-C230|SGH-C417|SGH-C450|SGH-D307|SGH-D347|SGH-D357|SGH-D407|SGH-D415|SGH-D780|SGH-D807|SGH-D980|SGH-E105|SGH-E200|SGH-E315|SGH-E316|SGH-E317|SGH-E335|SGH-E590|SGH-E635|SGH-E715|SGH-E890|SGH-F300|SGH-F480|SGH-I200|SGH-I300|SGH-I320|SGH-I550|SGH-I577|SGH-I600|SGH-I607|SGH-I617|SGH-I627|SGH-I637|SGH-I677|SGH-I700|SGH-I717|SGH-I727|SGH-i747M|SGH-I777|SGH-I780|SGH-I827|SGH-I847|SGH-I857|SGH-I896|SGH-I897|SGH-I900|SGH-I907|SGH-I917|SGH-I927|SGH-I937|SGH-I997|SGH-J150|SGH-J200|SGH-L170|SGH-L700|SGH-M110|SGH-M150|SGH-M200|SGH-N105|SGH-N500|SGH-N600|SGH-N620|SGH-N625|SGH-N700|SGH-N710|SGH-P107|SGH-P207|SGH-P300|SGH-P310|SGH-P520|SGH-P735|SGH-P777|SGH-Q105|SGH-R210|SGH-R220|SGH-R225|SGH-S105|SGH-S307|SGH-T109|SGH-T119|SGH-T139|SGH-T209|SGH-T219|SGH-T229|SGH-T239|SGH-T249|SGH-T259|SGH-T309|SGH-T319|SGH-T329|SGH-T339|SGH-T349|SGH-T359|SGH-T369|SGH-T379|SGH-T409|SGH-T429|SGH-T439|SGH-T459|SGH-T469|SGH-T479|SGH-T499|SGH-T509|SGH-T519|SGH-T539|SGH-T559|SGH-T589|SGH-T609|SGH-T619|SGH-T629|SGH-T639|SGH-T659|SGH-T669|SGH-T679|SGH-T709|SGH-T719|SGH-T729|SGH-T739|SGH-T746|SGH-T749|SGH-T759|SGH-T769|SGH-T809|SGH-T819|SGH-T839|SGH-T919|SGH-T929|SGH-T939|SGH-T959|SGH-T989|SGH-U100|SGH-U200|SGH-U800|SGH-V205|SGH-V206|SGH-X100|SGH-X105|SGH-X120|SGH-X140|SGH-X426|SGH-X427|SGH-X475|SGH-X495|SGH-X497|SGH-X507|SGH-X600|SGH-X610|SGH-X620|SGH-X630|SGH-X700|SGH-X820|SGH-X890|SGH-Z130|SGH-Z150|SGH-Z170|SGH-ZX10|SGH-ZX20|SHW-M110|SPH-A120|SPH-A400|SPH-A420|SPH-A460|SPH-A500|SPH-A560|SPH-A600|SPH-A620|SPH-A660|SPH-A700|SPH-A740|SPH-A760|SPH-A790|SPH-A800|SPH-A820|SPH-A840|SPH-A880|SPH-A900|SPH-A940|SPH-A960|SPH-D600|SPH-D700|SPH-D710|SPH-D720|SPH-I300|SPH-I325|SPH-I330|SPH-I350|SPH-I500|SPH-I600|SPH-I700|SPH-L700|SPH-M100|SPH-M220|SPH-M240|SPH-M300|SPH-M305|SPH-M320|SPH-M330|SPH-M350|SPH-M360|SPH-M370|SPH-M380|SPH-M510|SPH-M540|SPH-M550|SPH-M560|SPH-M570|SPH-M580|SPH-M610|SPH-M620|SPH-M630|SPH-M800|SPH-M810|SPH-M850|SPH-M900|SPH-M910|SPH-M920|SPH-M930|SPH-N100|SPH-N200|SPH-N240|SPH-N300|SPH-N400|SPH-Z400|SWC-E100|SCH-i909|GT-N7100|GT-N7105|SCH-I535|SM-N900A|SGH-I317|SGH-T999L|GT-S5360B|GT-I8262|GT-S6802|GT-S6312|GT-S6310|GT-S5312|GT-S5310|GT-I9105|GT-I8510|GT-S6790N|SM-G7105|SM-N9005|GT-S5301|GT-I9295|GT-I9195|SM-C101|GT-S7392|GT-S7560|GT-B7610|GT-I5510|GT-S7582|GT-S7530E|GT-I8750|SM-G9006V|SM-G9008V|SM-G9009D|SM-G900A|SM-G900D|SM-G900F|SM-G900H|SM-G900I|SM-G900J|SM-G900K|SM-G900L|SM-G900M|SM-G900P|SM-G900R4|SM-G900S|SM-G900T|SM-G900V|SM-G900W8|SHV-E160K|SCH-P709|SCH-P729|SM-T2558|GT-I9205|SM-G9350|SM-J120F|SM-G920F|SM-G920V|SM-G930F|SM-N910C|SM-A310F|GT-I9190|SM-J500FN|SM-G903F",
         "LG": "\\bLG\\b;|LG[- ]?(C800|C900|E400|E610|E900|E-900|F160|F180K|F180L|F180S|730|855|L160|LS740|LS840|LS970|LU6200|MS690|MS695|MS770|MS840|MS870|MS910|P500|P700|P705|VM696|AS680|AS695|AX840|C729|E970|GS505|272|C395|E739BK|E960|L55C|L75C|LS696|LS860|P769BK|P350|P500|P509|P870|UN272|US730|VS840|VS950|LN272|LN510|LS670|LS855|LW690|MN270|MN510|P509|P769|P930|UN200|UN270|UN510|UN610|US670|US740|US760|UX265|UX840|VN271|VN530|VS660|VS700|VS740|VS750|VS910|VS920|VS930|VX9200|VX11000|AX840A|LW770|P506|P925|P999|E612|D955|D802|MS323)",
         "Sony": "SonyST|SonyLT|SonyEricsson|SonyEricssonLT15iv|LT18i|E10i|LT28h|LT26w|SonyEricssonMT27i|C5303|C6902|C6903|C6906|C6943|D2533",
         "Asus": "Asus.*Galaxy|PadFone.*Mobile",
@@ -35081,7 +36281,7 @@ define(function () {
     "tablets": {
         "iPad": "iPad|iPad.*Mobile",
         "NexusTablet": "Android.*Nexus[\\s]+(7|9|10)",
-        "SamsungTablet": "SAMSUNG.*Tablet|Galaxy.*Tab|SC-01C|GT-P1000|GT-P1003|GT-P1010|GT-P3105|GT-P6210|GT-P6800|GT-P6810|GT-P7100|GT-P7300|GT-P7310|GT-P7500|GT-P7510|SCH-I800|SCH-I815|SCH-I905|SGH-I957|SGH-I987|SGH-T849|SGH-T859|SGH-T869|SPH-P100|GT-P3100|GT-P3108|GT-P3110|GT-P5100|GT-P5110|GT-P6200|GT-P7320|GT-P7511|GT-N8000|GT-P8510|SGH-I497|SPH-P500|SGH-T779|SCH-I705|SCH-I915|GT-N8013|GT-P3113|GT-P5113|GT-P8110|GT-N8010|GT-N8005|GT-N8020|GT-P1013|GT-P6201|GT-P7501|GT-N5100|GT-N5105|GT-N5110|SHV-E140K|SHV-E140L|SHV-E140S|SHV-E150S|SHV-E230K|SHV-E230L|SHV-E230S|SHW-M180K|SHW-M180L|SHW-M180S|SHW-M180W|SHW-M300W|SHW-M305W|SHW-M380K|SHW-M380S|SHW-M380W|SHW-M430W|SHW-M480K|SHW-M480S|SHW-M480W|SHW-M485W|SHW-M486W|SHW-M500W|GT-I9228|SCH-P739|SCH-I925|GT-I9200|GT-P5200|GT-P5210|GT-P5210X|SM-T311|SM-T310|SM-T310X|SM-T210|SM-T210R|SM-T211|SM-P600|SM-P601|SM-P605|SM-P900|SM-P901|SM-T217|SM-T217A|SM-T217S|SM-P6000|SM-T3100|SGH-I467|XE500|SM-T110|GT-P5220|GT-I9200X|GT-N5110X|GT-N5120|SM-P905|SM-T111|SM-T2105|SM-T315|SM-T320|SM-T320X|SM-T321|SM-T520|SM-T525|SM-T530NU|SM-T230NU|SM-T330NU|SM-T900|XE500T1C|SM-P605V|SM-P905V|SM-T337V|SM-T537V|SM-T707V|SM-T807V|SM-P600X|SM-P900X|SM-T210X|SM-T230|SM-T230X|SM-T325|GT-P7503|SM-T531|SM-T330|SM-T530|SM-T705|SM-T705C|SM-T535|SM-T331|SM-T800|SM-T700|SM-T537|SM-T807|SM-P907A|SM-T337A|SM-T537A|SM-T707A|SM-T807A|SM-T237|SM-T807P|SM-P607T|SM-T217T|SM-T337T|SM-T807T|SM-T116NQ|SM-T116BU|SM-P550|SM-T350|SM-T550|SM-T9000|SM-P9000|SM-T705Y|SM-T805|GT-P3113|SM-T710|SM-T810|SM-T815|SM-T360|SM-T533|SM-T113|SM-T335|SM-T715|SM-T560|SM-T670|SM-T677|SM-T377|SM-T567|SM-T357T|SM-T555|SM-T561|SM-T713|SM-T719|SM-T813|SM-T819|SM-T580|SM-T355Y|SM-T280|SM-T817A|SM-T820|SM-W700|SM-P580|SM-T587|SM-P350|SM-P555M|SM-P355M|SM-T113NU|SM-T815Y",
+        "SamsungTablet": "SAMSUNG.*Tablet|Galaxy.*Tab|SC-01C|GT-P1000|GT-P1003|GT-P1010|GT-P3105|GT-P6210|GT-P6800|GT-P6810|GT-P7100|GT-P7300|GT-P7310|GT-P7500|GT-P7510|SCH-I800|SCH-I815|SCH-I905|SGH-I957|SGH-I987|SGH-T849|SGH-T859|SGH-T869|SPH-P100|GT-P3100|GT-P3108|GT-P3110|GT-P5100|GT-P5110|GT-P6200|GT-P7320|GT-P7511|GT-N8000|GT-P8510|SGH-I497|SPH-P500|SGH-T779|SCH-I705|SCH-I915|GT-N8013|GT-P3113|GT-P5113|GT-P8110|GT-N8010|GT-N8005|GT-N8020|GT-P1013|GT-P6201|GT-P7501|GT-N5100|GT-N5105|GT-N5110|SHV-E140K|SHV-E140L|SHV-E140S|SHV-E150S|SHV-E230K|SHV-E230L|SHV-E230S|SHW-M180K|SHW-M180L|SHW-M180S|SHW-M180W|SHW-M300W|SHW-M305W|SHW-M380K|SHW-M380S|SHW-M380W|SHW-M430W|SHW-M480K|SHW-M480S|SHW-M480W|SHW-M485W|SHW-M486W|SHW-M500W|GT-I9228|SCH-P739|SCH-I925|GT-I9200|GT-P5200|GT-P5210|GT-P5210X|SM-T311|SM-T310|SM-T310X|SM-T210|SM-T210R|SM-T211|SM-P600|SM-P601|SM-P605|SM-P900|SM-P901|SM-T217|SM-T217A|SM-T217S|SM-P6000|SM-T3100|SGH-I467|XE500|SM-T110|GT-P5220|GT-I9200X|GT-N5110X|GT-N5120|SM-P905|SM-T111|SM-T2105|SM-T315|SM-T320|SM-T320X|SM-T321|SM-T520|SM-T525|SM-T530NU|SM-T230NU|SM-T330NU|SM-T900|XE500T1C|SM-P605V|SM-P905V|SM-T337V|SM-T537V|SM-T707V|SM-T807V|SM-P600X|SM-P900X|SM-T210X|SM-T230|SM-T230X|SM-T325|GT-P7503|SM-T531|SM-T330|SM-T530|SM-T705|SM-T705C|SM-T535|SM-T331|SM-T800|SM-T700|SM-T537|SM-T807|SM-P907A|SM-T337A|SM-T537A|SM-T707A|SM-T807A|SM-T237|SM-T807P|SM-P607T|SM-T217T|SM-T337T|SM-T807T|SM-T116NQ|SM-T116BU|SM-P550|SM-T350|SM-T550|SM-T9000|SM-P9000|SM-T705Y|SM-T805|GT-P3113|SM-T710|SM-T810|SM-T815|SM-T360|SM-T533|SM-T113|SM-T335|SM-T715|SM-T560|SM-T670|SM-T677|SM-T377|SM-T567|SM-T357T|SM-T555|SM-T561|SM-T713|SM-T719|SM-T813|SM-T819|SM-T580|SM-T355Y?|SM-T280|SM-T817A|SM-T820|SM-W700|SM-P580|SM-T587|SM-P350|SM-P555M|SM-P355M|SM-T113NU|SM-T815Y",
         "Kindle": "Kindle|Silk.*Accelerated|Android.*\\b(KFOT|KFTT|KFJWI|KFJWA|KFOTE|KFSOWI|KFTHWI|KFTHWA|KFAPWI|KFAPWA|WFJWAE|KFSAWA|KFSAWI|KFASWI|KFARWI|KFFOWI|KFGIWI|KFMEWI)\\b|Android.*Silk\/[0-9.]+ like Chrome\/[0-9.]+ (?!Mobile)",
         "SurfaceTablet": "Windows NT [0-9.]+; ARM;.*(Tablet|ARMBJS)",
         "HPTablet": "HP Slate (7|8|10)|HP ElitePad 900|hp-tablet|EliteBook.*Touch|HP 8|Slate 21|HP SlateBook 10",
@@ -35095,7 +36295,7 @@ define(function () {
         "LGTablet": "\\bL-06C|LG-V909|LG-V900|LG-V700|LG-V510|LG-V500|LG-V410|LG-V400|LG-VK810\\b",
         "FujitsuTablet": "Android.*\\b(F-01D|F-02F|F-05E|F-10D|M532|Q572)\\b",
         "PrestigioTablet": "PMP3170B|PMP3270B|PMP3470B|PMP7170B|PMP3370B|PMP3570C|PMP5870C|PMP3670B|PMP5570C|PMP5770D|PMP3970B|PMP3870C|PMP5580C|PMP5880D|PMP5780D|PMP5588C|PMP7280C|PMP7280C3G|PMP7280|PMP7880D|PMP5597D|PMP5597|PMP7100D|PER3464|PER3274|PER3574|PER3884|PER5274|PER5474|PMP5097CPRO|PMP5097|PMP7380D|PMP5297C|PMP5297C_QUAD|PMP812E|PMP812E3G|PMP812F|PMP810E|PMP880TD|PMT3017|PMT3037|PMT3047|PMT3057|PMT7008|PMT5887|PMT5001|PMT5002",
-        "LenovoTablet": "Lenovo TAB|Idea(Tab|Pad)( A1|A10| K1|)|ThinkPad([ ]+)?Tablet|YT3-850M|YT3-X90L|YT3-X90F|YT3-X90X|Lenovo.*(S2109|S2110|S5000|S6000|K3011|A3000|A3500|A1000|A2107|A2109|A1107|A5500|A7600|B6000|B8000|B8080)(-|)(FL|F|HV|H|)",
+        "LenovoTablet": "Lenovo TAB|Idea(Tab|Pad)( A1|A10| K1|)|ThinkPad([ ]+)?Tablet|YT3-850M|YT3-X90L|YT3-X90F|YT3-X90X|Lenovo.*(S2109|S2110|S5000|S6000|K3011|A3000|A3500|A1000|A2107|A2109|A1107|A5500|A7600|B6000|B8000|B8080)(-|)(FL|F|HV|H|)|TB-X103F|TB-X304F|TB-8703F",
         "DellTablet": "Venue 11|Venue 8|Venue 7|Dell Streak 10|Dell Streak 7",
         "YarvikTablet": "Android.*\\b(TAB210|TAB211|TAB224|TAB250|TAB260|TAB264|TAB310|TAB360|TAB364|TAB410|TAB411|TAB420|TAB424|TAB450|TAB460|TAB461|TAB464|TAB465|TAB467|TAB468|TAB07-100|TAB07-101|TAB07-150|TAB07-151|TAB07-152|TAB07-200|TAB07-201-3G|TAB07-210|TAB07-211|TAB07-212|TAB07-214|TAB07-220|TAB07-400|TAB07-485|TAB08-150|TAB08-200|TAB08-201-3G|TAB08-201-30|TAB09-100|TAB09-211|TAB09-410|TAB10-150|TAB10-201|TAB10-211|TAB10-400|TAB10-410|TAB13-201|TAB274EUK|TAB275EUK|TAB374EUK|TAB462EUK|TAB474EUK|TAB9-200)\\b",
         "MedionTablet": "Android.*\\bOYO\\b|LIFE.*(P9212|P9514|P9516|S9512)|LIFETAB",
@@ -35117,8 +36317,8 @@ define(function () {
         "SMiTTablet": "Android.*(\\bMID\\b|MID-560|MTV-T1200|MTV-PND531|MTV-P1101|MTV-PND530)",
         "RockChipTablet": "Android.*(RK2818|RK2808A|RK2918|RK3066)|RK2738|RK2808A",
         "FlyTablet": "IQ310|Fly Vision",
-        "bqTablet": "Android.*(bq)?.*(Elcano|Curie|Edison|Maxwell|Kepler|Pascal|Tesla|Hypatia|Platon|Newton|Livingstone|Cervantes|Avant|Aquaris [E|M]10)|Maxwell.*Lite|Maxwell.*Plus",
-        "HuaweiTablet": "MediaPad|MediaPad 7 Youth|IDEOS S7|S7-201c|S7-202u|S7-101|S7-103|S7-104|S7-105|S7-106|S7-201|S7-Slim",
+        "bqTablet": "Android.*(bq)?.*(Elcano|Curie|Edison|Maxwell|Kepler|Pascal|Tesla|Hypatia|Platon|Newton|Livingstone|Cervantes|Avant|Aquaris ([E|M]10|M8))|Maxwell.*Lite|Maxwell.*Plus",
+        "HuaweiTablet": "MediaPad|MediaPad 7 Youth|IDEOS S7|S7-201c|S7-202u|S7-101|S7-103|S7-104|S7-105|S7-106|S7-201|S7-Slim|M2-A01L",
         "NecTablet": "\\bN-06D|\\bN-08D",
         "PantechTablet": "Pantech.*P4100",
         "BronchoTablet": "Broncho.*(N701|N708|N802|a710)",
@@ -35143,7 +36343,7 @@ define(function () {
         "ChangJiaTablet": "TPC7102|TPC7103|TPC7105|TPC7106|TPC7107|TPC7201|TPC7203|TPC7205|TPC7210|TPC7708|TPC7709|TPC7712|TPC7110|TPC8101|TPC8103|TPC8105|TPC8106|TPC8203|TPC8205|TPC8503|TPC9106|TPC9701|TPC97101|TPC97103|TPC97105|TPC97106|TPC97111|TPC97113|TPC97203|TPC97603|TPC97809|TPC97205|TPC10101|TPC10103|TPC10106|TPC10111|TPC10203|TPC10205|TPC10503",
         "GUTablet": "TX-A1301|TX-M9002|Q702|kf026",
         "PointOfViewTablet": "TAB-P506|TAB-navi-7-3G-M|TAB-P517|TAB-P-527|TAB-P701|TAB-P703|TAB-P721|TAB-P731N|TAB-P741|TAB-P825|TAB-P905|TAB-P925|TAB-PR945|TAB-PL1015|TAB-P1025|TAB-PI1045|TAB-P1325|TAB-PROTAB[0-9]+|TAB-PROTAB25|TAB-PROTAB26|TAB-PROTAB27|TAB-PROTAB26XL|TAB-PROTAB2-IPS9|TAB-PROTAB30-IPS9|TAB-PROTAB25XXL|TAB-PROTAB26-IPS10|TAB-PROTAB30-IPS10",
-        "OvermaxTablet": "OV-(SteelCore|NewBase|Basecore|Baseone|Exellen|Quattor|EduTab|Solution|ACTION|BasicTab|TeddyTab|MagicTab|Stream|TB-08|TB-09)",
+        "OvermaxTablet": "OV-(SteelCore|NewBase|Basecore|Baseone|Exellen|Quattor|EduTab|Solution|ACTION|BasicTab|TeddyTab|MagicTab|Stream|TB-08|TB-09)|Qualcore 1027",
         "HCLTablet": "HCL.*Tablet|Connect-3G-2.0|Connect-2G-2.0|ME Tablet U1|ME Tablet U2|ME Tablet G1|ME Tablet X1|ME Tablet Y2|ME Tablet Sync",
         "DPSTablet": "DPS Dream 9|DPS Dual 7",
         "VistureTablet": "V97 HD|i75 3G|Visture V4( HD)?|Visture V5( HD)?|Visture V10",
@@ -35169,6 +36369,7 @@ define(function () {
         "FX2Tablet": "FX2 PAD7|FX2 PAD10",
         "XoroTablet": "KidsPAD 701|PAD[ ]?712|PAD[ ]?714|PAD[ ]?716|PAD[ ]?717|PAD[ ]?718|PAD[ ]?720|PAD[ ]?721|PAD[ ]?722|PAD[ ]?790|PAD[ ]?792|PAD[ ]?900|PAD[ ]?9715D|PAD[ ]?9716DR|PAD[ ]?9718DR|PAD[ ]?9719QR|PAD[ ]?9720QR|TelePAD1030|Telepad1032|TelePAD730|TelePAD731|TelePAD732|TelePAD735Q|TelePAD830|TelePAD9730|TelePAD795|MegaPAD 1331|MegaPAD 1851|MegaPAD 2151",
         "ViewsonicTablet": "ViewPad 10pi|ViewPad 10e|ViewPad 10s|ViewPad E72|ViewPad7|ViewPad E100|ViewPad 7e|ViewSonic VB733|VB100a",
+        "VerizonTablet": "QTAQZ3|QTAIR7|QTAQTZ3|QTASUN1|QTASUN2|QTAXIA1",
         "OdysTablet": "LOOX|XENO10|ODYS[ -](Space|EVO|Xpress|NOON)|\\bXELIO\\b|Xelio10Pro|XELIO7PHONETAB|XELIO10EXTREME|XELIOPT2|NEO_QUAD10",
         "CaptivaTablet": "CAPTIVA PAD",
         "IconbitTablet": "NetTAB|NT-3702|NT-3702S|NT-3702S|NT-3603P|NT-3603P|NT-0704S|NT-0704S|NT-3805C|NT-3805C|NT-0806C|NT-0806C|NT-0909T|NT-0909T|NT-0907S|NT-0907S|NT-0902S|NT-0902S",
@@ -35202,7 +36403,7 @@ define(function () {
         "SymbianOS": "Symbian|SymbOS|Series60|Series40|SYB-[0-9]+|\\bS60\\b",
         "WindowsMobileOS": "Windows CE.*(PPC|Smartphone|Mobile|[0-9]{3}x[0-9]{3})|Window Mobile|Windows Phone [0-9.]+|WCE;",
         "WindowsPhoneOS": "Windows Phone 10.0|Windows Phone 8.1|Windows Phone 8.0|Windows Phone OS|XBLWP7|ZuneWP7|Windows NT 6.[23]; ARM;",
-        "iOS": "\\biPhone.*Mobile|\\biPod|\\biPad",
+        "iOS": "\\biPhone.*Mobile|\\biPod|\\biPad|AppleCoreMedia",
         "MeeGoOS": "MeeGo",
         "MaemoOS": "Maemo",
         "JavaOS": "J2ME\/|\\bMIDP\\b|\\bCLDC\\b",
@@ -35272,7 +36473,10 @@ define(function () {
         ],
         "Opera Mini": "Opera Mini\/[VER]",
         "Opera Mobi": "Version\/[VER]",
-        "UC Browser": "UC Browser[VER]",
+        "UCBrowser": [
+            "UCWEB[VER]",
+            "UC.*Browser\/[VER]"
+        ],
         "MQQBrowser": "MQQBrowser\/[VER]",
         "MicroMessenger": "MicroMessenger\/[VER]",
         "baiduboxapp": "baiduboxapp\/[VER]",
@@ -35368,6 +36572,10 @@ define(function () {
                 object[key] = new RegExp(object[key], 'i');
             }
         }
+    }
+
+    function prepareUserAgent(userAgent) {
+        return (userAgent || '').substr(0, 500); // mitigate vulnerable to ReDoS
     }
 
     (function init() {
@@ -35716,7 +36924,7 @@ define(function () {
      * @global
      */
     function MobileDetect(userAgent, maxPhoneWidth) {
-        this.ua = userAgent || '';
+        this.ua = prepareUserAgent(userAgent);
         this._cache = {};
         //600dp is typical 7" tablet minimum width
         this.maxPhoneWidth = maxPhoneWidth || 600;
@@ -35803,11 +37011,11 @@ define(function () {
          * ECSTablet, StorexTablet, VodafoneTablet, EssentielBTablet, RossMoorTablet,
          * iMobileTablet, TolinoTablet, AudioSonicTablet, AMPETablet, SkkTablet,
          * TecnoTablet, JXDTablet, iJoyTablet, FX2Tablet, XoroTablet, ViewsonicTablet,
-         * OdysTablet, CaptivaTablet, IconbitTablet, TeclastTablet, OndaTablet,
-         * JaytechTablet, BlaupunktTablet, DigmaTablet, EvolioTablet, LavaTablet,
-         * AocTablet, MpmanTablet, CelkonTablet, WolderTablet, MiTablet, NibiruTablet,
-         * NexoTablet, LeaderTablet, UbislateTablet, PocketBookTablet, KocasoTablet,
-         * HisenseTablet, Hudl, TelstraTablet, GenericTablet</tt><br>
+         * VerizonTablet, OdysTablet, CaptivaTablet, IconbitTablet, TeclastTablet,
+         * OndaTablet, JaytechTablet, BlaupunktTablet, DigmaTablet, EvolioTablet,
+         * LavaTablet, AocTablet, MpmanTablet, CelkonTablet, WolderTablet, MiTablet,
+         * NibiruTablet, NexoTablet, LeaderTablet, UbislateTablet, PocketBookTablet,
+         * KocasoTablet, HisenseTablet, Hudl, TelstraTablet, GenericTablet</tt><br>
          * <br>
          * If the device is not detected by the regular expressions from Mobile-Detect, a test is made against
          * the patterns of <a href="http://detectmobilebrowsers.com/">detectmobilebrowsers.com</a>. If this test
@@ -35903,7 +37111,7 @@ define(function () {
          *        You can use one of following keys:<br>
          * <br><tt>Mobile, Build, Version, VendorID, iPad, iPhone, iPod, Kindle, Chrome, Coast,
          * Dolfin, Firefox, Fennec, Edge, IE, NetFront, NokiaBrowser, Opera, Opera Mini,
-         * Opera Mobi, UC Browser, MQQBrowser, MicroMessenger, baiduboxapp, baidubrowser,
+         * Opera Mobi, UCBrowser, MQQBrowser, MicroMessenger, baiduboxapp, baidubrowser,
          * SamsungBrowser, Iron, Safari, Skyfire, Tizen, Webkit, PaleMoon, Gecko, Trident,
          * Presto, Goanna, iOS, Android, BlackBerry, BREW, Java, Windows Phone OS, Windows
          * Phone, Windows CE, Windows NT, Symbian, webOS</tt><br>
@@ -35924,7 +37132,7 @@ define(function () {
          *        You can use one of following keys:<br>
          * <br><tt>Mobile, Build, Version, VendorID, iPad, iPhone, iPod, Kindle, Chrome, Coast,
          * Dolfin, Firefox, Fennec, Edge, IE, NetFront, NokiaBrowser, Opera, Opera Mini,
-         * Opera Mobi, UC Browser, MQQBrowser, MicroMessenger, baiduboxapp, baidubrowser,
+         * Opera Mobi, UCBrowser, MQQBrowser, MicroMessenger, baiduboxapp, baidubrowser,
          * SamsungBrowser, Iron, Safari, Skyfire, Tizen, Webkit, PaleMoon, Gecko, Trident,
          * Presto, Goanna, iOS, Android, BlackBerry, BREW, Java, Windows Phone OS, Windows
          * Phone, Windows CE, Windows NT, Symbian, webOS</tt><br>
@@ -36014,7 +37222,7 @@ define(function () {
     // should not be replaced by a completely new object - just overwrite existing methods
     MobileDetect._impl = impl;
     
-    MobileDetect.version = '1.3.7 2017-09-06';
+    MobileDetect.version = '1.4.1 2017-12-24';
 
     return MobileDetect;
 }); // end of call of define()
@@ -36022,7 +37230,7 @@ define(function () {
     if (typeof module !== 'undefined' && module.exports) {
         return function (factory) { module.exports = factory(); };
     } else if (true) {
-        return __webpack_require__(19);
+        return __webpack_require__(26);
     } else if (typeof window !== 'undefined') {
         return function (factory) { window.MobileDetect = factory(); };
     } else {
@@ -36032,7 +37240,7 @@ define(function () {
 })());
 
 /***/ }),
-/* 19 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -36041,11 +37249,11 @@ module.exports = function() {
 
 
 /***/ }),
-/* 20 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * JavaScript Cookie v2.1.4
+ * JavaScript Cookie v2.2.0
  * https://github.com/js-cookie/js-cookie
  *
  * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
@@ -36159,7 +37367,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 				var parts = cookies[i].split('=');
 				var cookie = parts.slice(1).join('=');
 
-				if (cookie.charAt(0) === '"') {
+				if (!this.json && cookie.charAt(0) === '"') {
 					cookie = cookie.slice(1, -1);
 				}
 
@@ -36216,7 +37424,908 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 21 */
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _threeJs = __webpack_require__(212);
+
+var _threeJs2 = _interopRequireDefault(_threeJs);
+
+var _jsCookie = __webpack_require__(27);
+
+var _jsCookie2 = _interopRequireDefault(_jsCookie);
+
+var _lodash = __webpack_require__(9);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _mobileDetect = __webpack_require__(25);
+
+var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var THREE = (0, _threeJs2.default)(['Projector']);
+
+// Visiblities
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var visibleAxisHelper = false;
+var visible3dMaker = false;
+var visibleGrid = false;
+
+exports.default = _vue2.default.extend({
+  components: {
+    'dna-barcode-bg': __webpack_require__(276).default,
+    'entrance-modal': __webpack_require__(281).default,
+    'instruction-modal': __webpack_require__(285).default
+  },
+  watch: {
+    '$route': 'resetAutoScroll'
+  },
+  mounted: function mounted() {
+
+    this.resetAutoScroll();
+
+    this.width = this.$el.offsetWidth;
+    this.height = window.innerHeight;
+    this.camera = null;
+    this.scene = null;
+    this.renderer = null;
+    this.raycaster = null;
+    this.mouse = null;
+    this.onPointerDownLon = null;
+    this.onPointerDownLat = null;
+    this.phi = 0;
+    this.theta = 0;
+    this.onPointerDownPointerX = null;
+    this.onPointerDownPointerY = null;
+    this.isUserInteracting = false;
+    this.isDragged = false;
+    this.markerArray = [];
+
+    this.projector = new THREE.Projector();
+    this.frustum = new THREE.Frustum();
+    this.scene = new THREE.Scene();
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2();
+    this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 1, 1100);
+    this.camera.target = new THREE.Vector3(0, 0, 0);
+
+    // Light
+    var ambient = new THREE.AmbientLight(0xffffff);
+    this.scene.add(ambient);
+
+    // Add Geometry
+    var pano_sphere = this.create_pano_sphere();
+    this.scene.add(pano_sphere);
+
+    // Grid
+    if (visibleGrid) {
+      var sphere = new THREE.Mesh(new THREE.SphereGeometry(500, 36, 18), new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        wireframe: true
+      }));
+      this.scene.add(sphere);
+    }
+
+    // Markers
+
+    // Set "alias" appearing in the URL according to the sorting order
+    for (var i = 0; i < this.markers.samples.length; i++) {
+      this.markers.samples[i]['alias'] = 's-' + (i + 1);
+    }
+    for (i = 0; i < this.markers.knowledges.length; i++) {
+      this.markers.knowledges[i]['alias'] = 'k-' + (i + 1);
+    }
+    var marker_all = this.markers.samples.concat(this.markers.knowledges);
+
+    // Sort by distance, so that the overlap order will not be strange
+    marker_all = _lodash2.default.sortBy(marker_all, [function (m) {
+      return m.marker_position.radius;
+    }]).reverse();
+    for (i = 0; i < marker_all.length; i++) {
+      var data = marker_all[i];
+      this.create_marker(data);
+    }
+
+    // Place a circle to hide the stepladder
+    var geometry = new THREE.CircleGeometry(0.6, 128);
+    var material = new THREE.MeshBasicMaterial({
+      map: new THREE.TextureLoader().load('/dna-of-forests/' + this.$route.params.forest + '/img/panorama/logo-cover-' + this.$i18n.locale + '@2x.png')
+    });
+    var circle = new THREE.Mesh(geometry, material);
+
+    circle.position.set(0, -1.5, 0); // [1] Since it is the same viewpoint as the camera at the origin, it is not displayed
+    circle.rotateZ(Math.PI / 2);
+    circle.rotateY(Math.PI / 2);
+    this.scene.add(circle);
+
+    if (visibleAxisHelper) {
+      var axis = new THREE.AxisHelper(300);
+      axis.position.set(0, -10, 0); // Ref: [1]
+      this.scene.add(axis);
+    }
+
+    this.renderer = new THREE.WebGLRenderer();
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(this.width, this.height);
+    this.renderer.domElement.style.position = 'absolute';
+    this.renderer.domElement.style.top = '0';
+    this.$el.appendChild(this.renderer.domElement);
+
+    window.addEventListener('resize', this.onWindowResize, false);
+    this.$el.addEventListener('mousedown', this.onMouseDown, false);
+    this.$el.addEventListener('touchstart', this.onTouchStart, false);
+    this.$el.addEventListener('touchmove', this.onTouchMove, false);
+    this.$el.addEventListener('touchend', this.onTouchEnd, false);
+    this.$el.addEventListener('mousemove', this.onMouseMove, false);
+    this.$el.addEventListener('mouseup', this.onMouseUp, false);
+    this.$el.addEventListener('mousewheel', this.onMouseWheel, false);
+    this.$el.addEventListener('MozMousePixelScroll', this.onMouseWheel, false);
+
+    // Camera position -------
+
+    var default_lon = this.config.camera_default_position.longtitude;
+    var default_lat = this.config.camera_default_position.latitude;
+
+    if (this.$route.params.index) {
+      // If there is a selected line, scroll to that point
+      var key = this.$route.params.index;
+      var selectedMarker = _lodash2.default.filter(this.markerArray, function (m) {
+        return m.key == key;
+      })[0];
+      default_lat = selectedMarker.latitude;
+      default_lon = -selectedMarker.longtitude;
+
+      // Drawer分差し引いた領域の中心になるように
+      // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
+      // default_lon += 27;
+    } else if (!this.isTop()) {
+
+      default_lon = _jsCookie2.default.get('lon') * 1 || default_lon;
+      default_lat = _jsCookie2.default.get('lat') * 1 || default_lat;
+    }
+
+    this.lon = default_lon;
+    this.lat = default_lat;
+
+    // ----------------------
+
+    this.animate();
+  },
+
+  methods: {
+    isTop: function isTop() {
+      if (this.$route.path.match(/^\/[A-Za-z0-9]+\/*$/)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+
+
+    // Retrieve file name
+    filename: function filename(str) {
+      return str.toLowerCase().replace(/[(|)|.]/g, '').replace(/ /g, '-');
+    },
+    animate: function animate(ts) {
+
+      requestAnimationFrame(this.animate);
+      this.update();
+    },
+    render: function render(elapsed, ts) {
+
+      if (this.options.postprocessing) {
+        this.postprocessing.render(elapsed, ts, this.tick);
+      } else {
+        this.renderer.render(this.scene, this.camera);
+      }
+    },
+    onWindowResize: function onWindowResize() {
+      this.width = this.$el.offsetWidth;
+      this.height = this.$el.offsetHeight;
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(this.width, this.height);
+    },
+    update: function update() {
+
+      if (this.autoScroll) {
+        this.lon += 0.04;
+      }
+
+      // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); // If you want to be a little upward
+      this.lat = Math.max(-90, Math.min(90, this.lat));
+      this.phi = THREE.Math.degToRad(90 - this.lat);
+      this.theta = THREE.Math.degToRad(this.lon);
+
+      this.camera.target.x = 500 * Math.sin(this.phi) * Math.cos(this.theta);
+      this.camera.target.y = 500 * Math.cos(this.phi);
+      this.camera.target.z = 500 * Math.sin(this.phi) * Math.sin(this.theta);
+
+      this.camera.lookAt(this.camera.target);
+
+      this.renderer.render(this.scene, this.camera);
+
+      this.frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse));
+
+      // Update 2D markers
+      for (var i = 0; i < this.markerArray.length; i++) {
+        var marker = this.markerArray[i];
+        var pos = this.getTwoDPosition(marker.position);
+        var el = this.$el.querySelector('#' + marker.key);
+        if (pos) {
+          // Within camera view
+          var top = pos.y;
+          var left = pos.x;
+          if (marker.type == 'sample') {
+            top -= 7;
+            left -= 7;
+          } else {
+            top -= 5;
+            left -= 5;
+          }
+
+          el.style.display = 'block';
+          el.style.top = parseInt(top, 10) + 'px';
+          el.style.left = parseInt(left, 10) + 'px';
+        } else {
+          // Outside camera view
+          el.style.display = 'none';
+        }
+      }
+    },
+
+
+    // Sphere with panoramic image pasted
+    create_pano_sphere: function create_pano_sphere() {
+      var geometry = new THREE.SphereGeometry(500, 120, 120);
+      geometry.scale(-1, 1, 1);
+
+      var texture = null;
+      var hasClass = function hasClass(class_name) {
+        return document.querySelector('body').classList.contains(class_name);
+      };
+      if (hasClass('ie') || hasClass('edge') || new _mobileDetect2.default(window.navigator.userAgent).mobile()) {
+        texture = new THREE.TextureLoader().load('/dna-of-forests/' + this.$route.params.forest + '/img/panorama/forest.jpg');
+      } else {
+        var id = 'video_' + this.$route.params.forest;
+        var video = document.getElementById(id);
+        if (!video) {
+          video = document.createElement('video');
+          video.id = id;
+          video.className = 'video';
+          video.src = '/dna-of-forests/' + this.$route.params.forest + '/img/panorama/forest.mp4';
+          video.autoplay = true;
+          video.loop = true;
+          video.style.display = 'none';
+          video.play(); // for Safari
+          document.body.appendChild(video);
+        }
+
+        texture = new THREE.VideoTexture(video);
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.format = THREE.RGBFormat;
+      }
+
+      var material = new THREE.MeshBasicMaterial({ map: texture });
+
+      return new THREE.Mesh(geometry, material);
+    },
+
+
+    // Calculate position
+    translateGeoCoords: function translateGeoCoords(latitude, longitude, radius) {
+
+      var phi = latitude * Math.PI / 180; // Elevation angle
+      var theta = (longitude - 180) * Math.PI / 180; // Azimuth angle
+
+      var x = -radius * Math.cos(phi) * Math.cos(theta);
+      var y = radius * Math.sin(phi);
+      var z = radius * Math.cos(phi) * Math.sin(theta);
+
+      return new THREE.Vector3(x, y, z);
+    },
+    getTwoDPosition: function getTwoDPosition(_vector) {
+
+      var vector = _vector.clone();
+      var widthHalf = 0.5 * this.renderer.context.canvas.width;
+      var heightHalf = 0.5 * this.renderer.context.canvas.height;
+
+      // If you do not do anything, it will also return the position on the diagonal, so decimate here
+      if (this.frustum.containsPoint(vector)) {
+
+        // Within camera
+        vector.project(this.camera);
+
+        vector.x = vector.x * widthHalf + widthHalf;
+        vector.y = -(vector.y * heightHalf) + heightHalf;
+
+        return {
+          x: vector.x / window.devicePixelRatio,
+          y: vector.y / window.devicePixelRatio
+        };
+      }
+      return null;
+    },
+
+
+    // Marker
+    create_marker: function create_marker(_data, _key) {
+      var key = _data.alias;
+      var type = key.indexOf('s-') == 0 ? 'sample' : 'knowledge';
+      var latitude = _data.marker_position.latitude;
+      var longtitude = _data.marker_position.longtitude;
+      var radius = _data.marker_position.radius;
+      var geo = this.translateGeoCoords(latitude, longtitude, radius);
+      var x = geo.x,
+          y = geo.y,
+          z = geo.z;
+
+      // 3D marker -----------
+      if (visible3dMaker) {
+        // about 15cm
+        var geometry = type == 'sample' ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
+        // geometry.scale( - 1, 1, 1 );
+        var color = _data.id && _data.id.indexOf('B-') == 0 ? 0xff0000 : 0xffffff;
+        var material = new THREE.MeshLambertMaterial({
+          color: color
+        });
+        var marker_3d = new THREE.Mesh(geometry, material);
+        marker_3d.position.set(x, y, z);
+        this.scene.add(marker_3d);
+      }
+      // ---------------------
+
+      var marker = {};
+
+      marker.position = new THREE.Vector3(x, y, z);
+
+      // Used to align the camera position
+      marker.latitude = latitude;
+      marker.longtitude = longtitude;
+
+      marker.key = key;
+      marker.type = type;
+
+      this.markerArray.push(marker);
+
+      return marker;
+    },
+    onTouchStart: function onTouchStart(e) {
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onMouseDown(e);
+    },
+    onTouchMove: function onTouchMove(e) {
+      e.clientX = e.touches[0].clientX;
+      e.clientY = e.touches[0].clientY;
+      this.onMouseMove(e);
+    },
+    onTouchEnd: function onTouchEnd(e) {
+      e.clientX = e.changedTouches[0].clientX;
+      e.clientY = e.changedTouches[0].clientY;
+      this.onMouseUp(e);
+    },
+    onMouseDown: function onMouseDown(e) {
+      // When user starts dragging on the canvas
+      if (e.target === this.renderer.domElement && !this.isTop()) {
+        e.preventDefault();
+
+        this.isUserInteracting = true;
+
+        this.onPointerDownPointerX = e.clientX;
+        this.onPointerDownPointerY = e.clientY;
+
+        this.onPointerDownLon = this.lon;
+        this.onPointerDownLat = this.lat;
+
+        this.mouse.x = e.clientX / this.renderer.domElement.clientWidth * 2 - 1;
+        this.mouse.y = -(e.clientY / this.renderer.domElement.clientHeight) * 2 + 1;
+      }
+    },
+    onMouseMove: function onMouseMove(e) {
+      if (this.isUserInteracting === true) {
+        this.isDragged = true;
+        this.lon = (this.onPointerDownPointerX - e.clientX) * 0.1 + this.onPointerDownLon;
+        this.lat = (e.clientY - this.onPointerDownPointerY) * 0.1 + this.onPointerDownLat;
+        // -----
+        this.isAlreadyDragged = true;
+        this.autoScroll = false;
+      }
+    },
+    onMouseUp: function onMouseUp(e) {
+      if (this.isUserInteracting === true) {
+
+        // Click
+        if (!this.isDragged && e.target === this.renderer.domElement && this.$route.path != '/' + this.$route.params.forest + '/panorama/') {
+          // Close detail-drawer
+          this.$router.push('/' + this.$route.params.forest + '/panorama/');
+        }
+
+        _jsCookie2.default.set('lon', this.lon);
+        _jsCookie2.default.set('lat', this.lat);
+
+        this.isUserInteracting = false;
+        this.isDragged = false;
+      }
+    },
+    onMouseWheel: function onMouseWheel(e) {
+      if (!this.isTop()) {
+        // WebKit
+        if (e.wheelDeltaY) {
+          this.lon += e.wheelDeltaY * 0.05;
+          // Opera / Explorer 9
+        } else if (e.wheelDelta) {
+          this.lon += e.wheelDelta * 0.05;
+          // Firefox
+        } else if (e.detail) {
+          this.lon -= e.detail * 1.0;
+        }
+        this.isAlreadyDragged = true;
+        this.autoScroll = false;
+      }
+    },
+    resetAutoScroll: function resetAutoScroll() {
+      if (this.isTop()) {
+        this.autoScroll = true;
+      }
+    },
+    goMarker: function goMarker(id) {
+      this.$router.push('/' + this.$route.params.forest + '/panorama/' + id);
+    }
+  },
+  data: function data() {
+    return {
+      isAlreadyDragged: false,
+      autoScroll: false
+    };
+  },
+
+  props: ['markers', 'config']
+});
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _lodash = __webpack_require__(9);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+exports.default = _vue2.default.extend({
+  props: ['dna'],
+  components: {
+    'dna-barcode': __webpack_require__(12).default
+  },
+  methods: {
+    onDrawComplete: function onDrawComplete(canvas) {
+      var rnd = _lodash2.default.random(70, 200);
+      this.$el.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+      this.$el.style.animation = 'bgscroll ' + rnd + 's linear infinite';
+      canvas.parentNode.removeChild(canvas);
+    }
+  }
+});
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _dna_colors = __webpack_require__(31);
+
+var _dna_colors2 = _interopRequireDefault(_dna_colors);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+
+
+exports.default = _vue2.default.extend({
+
+  props: ['dna', 'max_width', 'height'],
+
+  mounted: function mounted() {
+    this.renderBarcode();
+  },
+
+  watch: {
+    dna: function dna(newVal) {
+      this.renderBarcode();
+    }
+  },
+
+  methods: {
+    chunkString: function chunkString(str, length) {
+      // 文字数lengthでstrを分割した配列を返す
+      return str.match(new RegExp('.{1,' + length + '}', 'g'));
+    },
+    renderBarcode: function renderBarcode() {
+      var canvas = this.$el;
+
+      if (this.dna.length <= 0) {
+        canvas.height = 0;
+        canvas.width = 0;
+      } else if (canvas.getContext) {
+
+        var w = 2,
+            h = this.height || 10,
+            line_margin = 15,
+            // 行間
+        str_arr = null;
+
+        if (this.max_width) {
+
+          var str_len = Math.floor(this.max_width / w);
+          str_arr = this.chunkString(this.dna, str_len);
+          var lines = str_arr.length;
+          canvas.height = h * lines + line_margin * (lines - 1);
+          canvas.width = this.max_width;
+        } else {
+          str_arr = [this.dna];
+          canvas.height = h;
+          canvas.width = w * this.dna.length;
+        }
+
+        var context = canvas.getContext('2d');
+
+        for (var j = 0; j < str_arr.length; j++) {
+          var str = str_arr[j];
+          var x = 0,
+              y = (h + line_margin) * j;
+          for (var i = 0; i < str.length; i++) {
+
+            var c = str[i];
+            if (_dna_colors2.default[c] !== null) {
+              context.fillStyle = _dna_colors2.default[c].rgb;
+            } else {
+              context.fillStyle = _dna_colors2.default['N'].rgb;
+            }
+
+            x = w * i;
+            context.fillRect(x, y, w, h);
+          }
+        }
+        this.$emit('drawcomplete', canvas);
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36254,54 +38363,55 @@ exports.default = {
 };
 
 /***/ }),
-/* 22 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f2609210_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_list_vue__ = __webpack_require__(286);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c51188aa_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_list_vue__ = __webpack_require__(294);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(281)
+  __webpack_require__(290)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-f2609210"
+var __vue_scopeId__ = "data-v-c51188aa"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f2609210_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_list_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c51188aa_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_list_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/page/guide/list.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f2609210", Component.options)
+    hotAPI.createRecord("data-v-c51188aa", Component.options)
   } else {
-    hotAPI.reload("data-v-f2609210", Component.options)
-' + '  }
+    hotAPI.reload("data-v-c51188aa", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -36309,10 +38419,242 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 23 */
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _striptags2 = __webpack_require__(292);
+
+var _striptags3 = _interopRequireDefault(_striptags2);
+
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default.extend({
+  filters: {
+    'zero-pad': function zeroPad(value) {
+      return value < 10 ? '0' + value : '' + value;
+    },
+    'striptags': function striptags(html) {
+      return (0, _striptags3.default)(html);
+    }
+  },
+  components: {
+    'dna-barcode': __webpack_require__(12).default
+  },
+  props: ['markers'],
+  mounted: function mounted() {
+
+    // 選択された行がある場合は、そこまでスクロール
+    if (this.$route.params.index) {
+      var selectedRow = document.querySelector('#' + this.$route.params.index);
+      var offset = this.getOffsetTop(selectedRow);
+      this.$el.scrollTop = offset;
+    }
+  },
+  methods: {
+    getOffsetTop: function getOffsetTop(el) {
+      var offsetTop = 0;
+      do {
+        if (!isNaN(el.offsetTop)) {
+          offsetTop += el.offsetTop;
+        }
+        el = el.offsetParent;
+      } while (el.offsetParent != document.body);
+      return offsetTop;
+    },
+    dateFormat: function dateFormat(date) {
+      var format = this.$root.$i18n.locale === 'en' ? 'DD MMM YYYY' : 'YYYY.MM.DD';
+      return (0, _moment2.default)(date, 'YYYY.MM.DD').format(format); // moment()の第２引数がないとSafariで正しく作成されない
+    },
+    goMarker: function goMarker(id) {
+      this.$router.push('/' + this.$route.params.forest + '/list/' + id);
+    }
+  }
+}); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36363,6 +38705,7 @@ var af = moment.defineLocale('af', {
         future : 'oor %s',
         past : '%s gelede',
         s : '\'n paar sekondes',
+        ss : '%d sekondes',
         m : '\'n minuut',
         mm : '%d minute',
         h : '\'n uur',
@@ -36390,7 +38733,7 @@ return af;
 
 
 /***/ }),
-/* 24 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36452,18 +38795,18 @@ var pluralize = function (u) {
     };
 };
 var months = [
-    'كانون الثاني يناير',
-    'شباط فبراير',
-    'آذار مارس',
-    'نيسان أبريل',
-    'أيار مايو',
-    'حزيران يونيو',
-    'تموز يوليو',
-    'آب أغسطس',
-    'أيلول سبتمبر',
-    'تشرين الأول أكتوبر',
-    'تشرين الثاني نوفمبر',
-    'كانون الأول ديسمبر'
+    'يناير',
+    'فبراير',
+    'مارس',
+    'أبريل',
+    'مايو',
+    'يونيو',
+    'يوليو',
+    'أغسطس',
+    'سبتمبر',
+    'أكتوبر',
+    'نوفمبر',
+    'ديسمبر'
 ];
 
 var ar = moment.defineLocale('ar', {
@@ -36504,6 +38847,7 @@ var ar = moment.defineLocale('ar', {
         future : 'بعد %s',
         past : 'منذ %s',
         s : pluralize('s'),
+        ss : pluralize('s'),
         m : pluralize('m'),
         mm : pluralize('m'),
         h : pluralize('h'),
@@ -36537,7 +38881,7 @@ return ar;
 
 
 /***/ }),
-/* 25 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36578,6 +38922,7 @@ var arDz = moment.defineLocale('ar-dz', {
         future : 'في %s',
         past : 'منذ %s',
         s : 'ثوان',
+        ss : '%d ثانية',
         m : 'دقيقة',
         mm : '%d دقائق',
         h : 'ساعة',
@@ -36601,7 +38946,7 @@ return arDz;
 
 
 /***/ }),
-/* 26 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36642,6 +38987,7 @@ var arKw = moment.defineLocale('ar-kw', {
         future : 'في %s',
         past : 'منذ %s',
         s : 'ثوان',
+        ss : '%d ثانية',
         m : 'دقيقة',
         mm : '%d دقائق',
         h : 'ساعة',
@@ -36665,7 +39011,7 @@ return arKw;
 
 
 /***/ }),
-/* 27 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36765,6 +39111,7 @@ var arLy = moment.defineLocale('ar-ly', {
         future : 'بعد %s',
         past : 'منذ %s',
         s : pluralize('s'),
+        ss : pluralize('s'),
         m : pluralize('m'),
         mm : pluralize('m'),
         h : pluralize('h'),
@@ -36796,7 +39143,7 @@ return arLy;
 
 
 /***/ }),
-/* 28 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36838,6 +39185,7 @@ var arMa = moment.defineLocale('ar-ma', {
         future : 'في %s',
         past : 'منذ %s',
         s : 'ثوان',
+        ss : '%d ثانية',
         m : 'دقيقة',
         mm : '%d دقائق',
         h : 'ساعة',
@@ -36861,7 +39209,7 @@ return arMa;
 
 
 /***/ }),
-/* 29 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36938,6 +39286,7 @@ var arSa = moment.defineLocale('ar-sa', {
         future : 'في %s',
         past : 'منذ %s',
         s : 'ثوان',
+        ss : '%d ثانية',
         m : 'دقيقة',
         mm : '%d دقائق',
         h : 'ساعة',
@@ -36971,7 +39320,7 @@ return arSa;
 
 
 /***/ }),
-/* 30 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37012,6 +39361,7 @@ var arTn = moment.defineLocale('ar-tn', {
         future: 'في %s',
         past: 'منذ %s',
         s: 'ثوان',
+        ss : '%d ثانية',
         m: 'دقيقة',
         mm: '%d دقائق',
         h: 'ساعة',
@@ -37035,7 +39385,7 @@ return arTn;
 
 
 /***/ }),
-/* 31 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37097,6 +39447,7 @@ var az = moment.defineLocale('az', {
         future : '%s sonra',
         past : '%s əvvəl',
         s : 'birneçə saniyyə',
+        ss : '%d saniyə',
         m : 'bir dəqiqə',
         mm : '%d dəqiqə',
         h : 'bir saat',
@@ -37145,7 +39496,7 @@ return az;
 
 
 /***/ }),
-/* 32 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37167,6 +39518,7 @@ function plural(word, num) {
 }
 function relativeTimeWithPlural(number, withoutSuffix, key) {
     var format = {
+        'ss': withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
         'mm': withoutSuffix ? 'хвіліна_хвіліны_хвілін' : 'хвіліну_хвіліны_хвілін',
         'hh': withoutSuffix ? 'гадзіна_гадзіны_гадзін' : 'гадзіну_гадзіны_гадзін',
         'dd': 'дзень_дні_дзён',
@@ -37284,7 +39636,7 @@ return be;
 
 
 /***/ }),
-/* 33 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37336,6 +39688,7 @@ var bg = moment.defineLocale('bg', {
         future : 'след %s',
         past : 'преди %s',
         s : 'няколко секунди',
+        ss : '%d секунди',
         m : 'минута',
         mm : '%d минути',
         h : 'час',
@@ -37379,7 +39732,7 @@ return bg;
 
 
 /***/ }),
-/* 34 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37420,6 +39773,7 @@ var bm = moment.defineLocale('bm', {
         future : '%s kɔnɔ',
         past : 'a bɛ %s bɔ',
         s : 'sanga dama dama',
+        ss : 'sekondi %d',
         m : 'miniti kelen',
         mm : 'miniti %d',
         h : 'lɛrɛ kelen',
@@ -37443,7 +39797,7 @@ return bm;
 
 
 /***/ }),
-/* 35 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37508,6 +39862,7 @@ var bn = moment.defineLocale('bn', {
         future : '%s পরে',
         past : '%s আগে',
         s : 'কয়েক সেকেন্ড',
+        ss : '%d সেকেন্ড',
         m : 'এক মিনিট',
         mm : '%d মিনিট',
         h : 'এক ঘন্টা',
@@ -37567,7 +39922,7 @@ return bn;
 
 
 /***/ }),
-/* 36 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37632,6 +39987,7 @@ var bo = moment.defineLocale('bo', {
         future : '%s ལ་',
         past : '%s སྔན་ལ',
         s : 'ལམ་སང',
+        ss : '%d སྐར་ཆ།',
         m : 'སྐར་མ་གཅིག',
         mm : '%d སྐར་མ',
         h : 'ཆུ་ཚོད་གཅིག',
@@ -37691,7 +40047,7 @@ return bo;
 
 
 /***/ }),
-/* 37 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37776,6 +40132,7 @@ var br = moment.defineLocale('br', {
         future : 'a-benn %s',
         past : '%s \'zo',
         s : 'un nebeud segondennoù',
+        ss : '%d eilenn',
         m : 'ur vunutenn',
         mm : relativeTimeWithMutation,
         h : 'un eur',
@@ -37804,7 +40161,7 @@ return br;
 
 
 /***/ }),
-/* 38 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37822,6 +40179,15 @@ return br;
 function translate(number, withoutSuffix, key) {
     var result = number + ' ';
     switch (key) {
+        case 'ss':
+            if (number === 1) {
+                result += 'sekunda';
+            } else if (number === 2 || number === 3 || number === 4) {
+                result += 'sekunde';
+            } else {
+                result += 'sekundi';
+            }
+            return result;
         case 'm':
             return withoutSuffix ? 'jedna minuta' : 'jedne minute';
         case 'mm':
@@ -37927,6 +40293,7 @@ var bs = moment.defineLocale('bs', {
         future : 'za %s',
         past   : 'prije %s',
         s      : 'par sekundi',
+        ss     : translate,
         m      : translate,
         mm     : translate,
         h      : translate,
@@ -37952,7 +40319,7 @@ return bs;
 
 
 /***/ }),
-/* 39 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38011,6 +40378,7 @@ var ca = moment.defineLocale('ca', {
         future : 'd\'aquí %s',
         past : 'fa %s',
         s : 'uns segons',
+        ss : '%d segons',
         m : 'un minut',
         mm : '%d minuts',
         h : 'una hora',
@@ -38045,7 +40413,7 @@ return ca;
 
 
 /***/ }),
-/* 40 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38069,6 +40437,13 @@ function translate(number, withoutSuffix, key, isFuture) {
     switch (key) {
         case 's':  // a few seconds / in a few seconds / a few seconds ago
             return (withoutSuffix || isFuture) ? 'pár sekund' : 'pár sekundami';
+        case 'ss': // 9 seconds / in 9 seconds / 9 seconds ago
+            if (withoutSuffix || isFuture) {
+                return result + (plural(number) ? 'sekundy' : 'sekund');
+            } else {
+                return result + 'sekundami';
+            }
+            break;
         case 'm':  // a minute / in a minute / a minute ago
             return withoutSuffix ? 'minuta' : (isFuture ? 'minutu' : 'minutou');
         case 'mm': // 9 minutes / in 9 minutes / 9 minutes ago
@@ -38197,6 +40572,7 @@ var cs = moment.defineLocale('cs', {
         future : 'za %s',
         past : 'před %s',
         s : translate,
+        ss : translate,
         m : translate,
         mm : translate,
         h : translate,
@@ -38222,7 +40598,7 @@ return cs;
 
 
 /***/ }),
-/* 41 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38265,6 +40641,7 @@ var cv = moment.defineLocale('cv', {
         },
         past : '%s каялла',
         s : 'пӗр-ик ҫеккунт',
+        ss : '%d ҫеккунт',
         m : 'пӗр минут',
         mm : '%d минут',
         h : 'пӗр сехет',
@@ -38290,7 +40667,7 @@ return cv;
 
 
 /***/ }),
-/* 42 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38333,6 +40710,7 @@ var cy = moment.defineLocale('cy', {
         future: 'mewn %s',
         past: '%s yn ôl',
         s: 'ychydig eiliadau',
+        ss: '%d eiliad',
         m: 'munud',
         mm: '%d munud',
         h: 'awr',
@@ -38376,7 +40754,7 @@ return cy;
 
 
 /***/ }),
-/* 43 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38416,6 +40794,7 @@ var da = moment.defineLocale('da', {
         future : 'om %s',
         past : '%s siden',
         s : 'få sekunder',
+        ss : '%d sekunder',
         m : 'et minut',
         mm : '%d minutter',
         h : 'en time',
@@ -38441,7 +40820,7 @@ return da;
 
 
 /***/ }),
-/* 44 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38499,6 +40878,7 @@ var de = moment.defineLocale('de', {
         future : 'in %s',
         past : 'vor %s',
         s : 'ein paar Sekunden',
+        ss : '%d Sekunden',
         m : processRelativeTime,
         mm : '%d Minuten',
         h : processRelativeTime,
@@ -38524,7 +40904,7 @@ return de;
 
 
 /***/ }),
-/* 45 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38583,6 +40963,7 @@ var deAt = moment.defineLocale('de-at', {
         future : 'in %s',
         past : 'vor %s',
         s : 'ein paar Sekunden',
+        ss : '%d Sekunden',
         m : processRelativeTime,
         mm : '%d Minuten',
         h : processRelativeTime,
@@ -38608,7 +40989,7 @@ return deAt;
 
 
 /***/ }),
-/* 46 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38647,12 +41028,12 @@ var deCh = moment.defineLocale('de-ch', {
     weekdaysMin : 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
-        LT: 'HH.mm',
-        LTS: 'HH.mm.ss',
+        LT: 'HH:mm',
+        LTS: 'HH:mm:ss',
         L : 'DD.MM.YYYY',
         LL : 'D. MMMM YYYY',
-        LLL : 'D. MMMM YYYY HH.mm',
-        LLLL : 'dddd, D. MMMM YYYY HH.mm'
+        LLL : 'D. MMMM YYYY HH:mm',
+        LLLL : 'dddd, D. MMMM YYYY HH:mm'
     },
     calendar : {
         sameDay: '[heute um] LT [Uhr]',
@@ -38666,6 +41047,7 @@ var deCh = moment.defineLocale('de-ch', {
         future : 'in %s',
         past : 'vor %s',
         s : 'ein paar Sekunden',
+        ss : '%d Sekunden',
         m : processRelativeTime,
         mm : '%d Minuten',
         h : processRelativeTime,
@@ -38691,7 +41073,7 @@ return deCh;
 
 
 /***/ }),
-/* 47 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38767,6 +41149,7 @@ var dv = moment.defineLocale('dv', {
         future : 'ތެރޭގައި %s',
         past : 'ކުރިން %s',
         s : 'ސިކުންތުކޮޅެއް',
+        ss : 'd% ސިކުންތު',
         m : 'މިނިޓެއް',
         mm : 'މިނިޓު %d',
         h : 'ގަޑިއިރެއް',
@@ -38796,7 +41179,7 @@ return dv;
 
 
 /***/ }),
-/* 48 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38876,6 +41259,7 @@ var el = moment.defineLocale('el', {
         future : 'σε %s',
         past : '%s πριν',
         s : 'λίγα δευτερόλεπτα',
+        ss : '%d δευτερόλεπτα',
         m : 'ένα λεπτό',
         mm : '%d λεπτά',
         h : 'μία ώρα',
@@ -38901,7 +41285,7 @@ return el;
 
 
 /***/ }),
-/* 49 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38941,6 +41325,7 @@ var enAu = moment.defineLocale('en-au', {
         future : 'in %s',
         past : '%s ago',
         s : 'a few seconds',
+        ss : '%d seconds',
         m : 'a minute',
         mm : '%d minutes',
         h : 'an hour',
@@ -38973,7 +41358,7 @@ return enAu;
 
 
 /***/ }),
-/* 50 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39013,6 +41398,7 @@ var enCa = moment.defineLocale('en-ca', {
         future : 'in %s',
         past : '%s ago',
         s : 'a few seconds',
+        ss : '%d seconds',
         m : 'a minute',
         mm : '%d minutes',
         h : 'an hour',
@@ -39041,7 +41427,7 @@ return enCa;
 
 
 /***/ }),
-/* 51 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39081,6 +41467,7 @@ var enGb = moment.defineLocale('en-gb', {
         future : 'in %s',
         past : '%s ago',
         s : 'a few seconds',
+        ss : '%d seconds',
         m : 'a minute',
         mm : '%d minutes',
         h : 'an hour',
@@ -39113,7 +41500,7 @@ return enGb;
 
 
 /***/ }),
-/* 52 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39153,6 +41540,7 @@ var enIe = moment.defineLocale('en-ie', {
         future : 'in %s',
         past : '%s ago',
         s : 'a few seconds',
+        ss : '%d seconds',
         m : 'a minute',
         mm : '%d minutes',
         h : 'an hour',
@@ -39185,7 +41573,7 @@ return enIe;
 
 
 /***/ }),
-/* 53 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39225,6 +41613,7 @@ var enNz = moment.defineLocale('en-nz', {
         future : 'in %s',
         past : '%s ago',
         s : 'a few seconds',
+        ss : '%d seconds',
         m : 'a minute',
         mm : '%d minutes',
         h : 'an hour',
@@ -39257,7 +41646,7 @@ return enNz;
 
 
 /***/ }),
-/* 54 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39310,6 +41699,7 @@ var eo = moment.defineLocale('eo', {
         future : 'post %s',
         past : 'antaŭ %s',
         s : 'sekundoj',
+        ss : '%d sekundoj',
         m : 'minuto',
         mm : '%d minutoj',
         h : 'horo',
@@ -39335,7 +41725,7 @@ return eo;
 
 
 /***/ }),
-/* 55 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39407,6 +41797,7 @@ var es = moment.defineLocale('es', {
         future : 'en %s',
         past : 'hace %s',
         s : 'unos segundos',
+        ss : '%d segundos',
         m : 'un minuto',
         mm : '%d minutos',
         h : 'una hora',
@@ -39432,7 +41823,7 @@ return es;
 
 
 /***/ }),
-/* 56 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39503,6 +41894,7 @@ var esDo = moment.defineLocale('es-do', {
         future : 'en %s',
         past : 'hace %s',
         s : 'unos segundos',
+        ss : '%d segundos',
         m : 'un minuto',
         mm : '%d minutos',
         h : 'una hora',
@@ -39528,11 +41920,11 @@ return esDo;
 
 
 /***/ }),
-/* 57 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
-//! locale : Spanish(United State) [es-us]
+//! locale : Spanish (United States) [es-us]
 //! author : bustta : https://github.com/bustta
 
 ;(function (global, factory) {
@@ -39562,12 +41954,12 @@ var esUs = moment.defineLocale('es-us', {
     weekdaysMin : 'do_lu_ma_mi_ju_vi_sá'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
-        LT : 'H:mm',
-        LTS : 'H:mm:ss',
+        LT : 'h:mm A',
+        LTS : 'h:mm:ss A',
         L : 'MM/DD/YYYY',
         LL : 'MMMM [de] D [de] YYYY',
-        LLL : 'MMMM [de] D [de] YYYY H:mm',
-        LLLL : 'dddd, MMMM [de] D [de] YYYY H:mm'
+        LLL : 'MMMM [de] D [de] YYYY h:mm A',
+        LLLL : 'dddd, MMMM [de] D [de] YYYY h:mm A'
     },
     calendar : {
         sameDay : function () {
@@ -39591,6 +41983,7 @@ var esUs = moment.defineLocale('es-us', {
         future : 'en %s',
         past : 'hace %s',
         s : 'unos segundos',
+        ss : '%d segundos',
         m : 'un minuto',
         mm : '%d minutos',
         h : 'una hora',
@@ -39616,7 +42009,7 @@ return esUs;
 
 
 /***/ }),
-/* 58 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39634,6 +42027,7 @@ return esUs;
 function processRelativeTime(number, withoutSuffix, key, isFuture) {
     var format = {
         's' : ['mõne sekundi', 'mõni sekund', 'paar sekundit'],
+        'ss': [number + 'sekundi', number + 'sekundit'],
         'm' : ['ühe minuti', 'üks minut'],
         'mm': [number + ' minuti', number + ' minutit'],
         'h' : ['ühe tunni', 'tund aega', 'üks tund'],
@@ -39676,6 +42070,7 @@ var et = moment.defineLocale('et', {
         future : '%s pärast',
         past   : '%s tagasi',
         s      : processRelativeTime,
+        ss     : processRelativeTime,
         m      : processRelativeTime,
         mm     : processRelativeTime,
         h      : processRelativeTime,
@@ -39701,7 +42096,7 @@ return et;
 
 
 /***/ }),
-/* 59 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39747,6 +42142,7 @@ var eu = moment.defineLocale('eu', {
         future : '%s barru',
         past : 'duela %s',
         s : 'segundo batzuk',
+        ss : '%d segundo',
         m : 'minutu bat',
         mm : '%d minutu',
         h : 'ordu bat',
@@ -39772,7 +42168,7 @@ return eu;
 
 
 /***/ }),
-/* 60 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39849,6 +42245,7 @@ var fa = moment.defineLocale('fa', {
         future : 'در %s',
         past : '%s پیش',
         s : 'چند ثانیه',
+        ss : 'ثانیه d%',
         m : 'یک دقیقه',
         mm : '%d دقیقه',
         h : 'یک ساعت',
@@ -39884,7 +42281,7 @@ return fa;
 
 
 /***/ }),
-/* 61 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39908,6 +42305,8 @@ function translate(number, withoutSuffix, key, isFuture) {
     switch (key) {
         case 's':
             return isFuture ? 'muutaman sekunnin' : 'muutama sekunti';
+        case 'ss':
+            return isFuture ? 'sekunnin' : 'sekuntia';
         case 'm':
             return isFuture ? 'minuutin' : 'minuutti';
         case 'mm':
@@ -39971,6 +42370,7 @@ var fi = moment.defineLocale('fi', {
         future : '%s päästä',
         past : '%s sitten',
         s : translate,
+        ss : translate,
         m : translate,
         mm : translate,
         h : translate,
@@ -39996,7 +42396,7 @@ return fi;
 
 
 /***/ }),
-/* 62 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40036,6 +42436,7 @@ var fo = moment.defineLocale('fo', {
         future : 'um %s',
         past : '%s síðani',
         s : 'fá sekund',
+        ss : '%d sekundir',
         m : 'ein minutt',
         mm : '%d minuttir',
         h : 'ein tími',
@@ -40061,7 +42462,7 @@ return fo;
 
 
 /***/ }),
-/* 63 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40081,7 +42482,7 @@ var fr = moment.defineLocale('fr', {
     monthsParseExact : true,
     weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
     weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
-    weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+    weekdaysMin : 'di_lu_ma_me_je_ve_sa'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
         LT : 'HH:mm',
@@ -40103,6 +42504,7 @@ var fr = moment.defineLocale('fr', {
         future : 'dans %s',
         past : 'il y a %s',
         s : 'quelques secondes',
+        ss : '%d secondes',
         m : 'une minute',
         mm : '%d minutes',
         h : 'une heure',
@@ -40149,7 +42551,7 @@ return fr;
 
 
 /***/ }),
-/* 64 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40169,7 +42571,7 @@ var frCa = moment.defineLocale('fr-ca', {
     monthsParseExact : true,
     weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
     weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
-    weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+    weekdaysMin : 'di_lu_ma_me_je_ve_sa'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
         LT : 'HH:mm',
@@ -40191,6 +42593,7 @@ var frCa = moment.defineLocale('fr-ca', {
         future : 'dans %s',
         past : 'il y a %s',
         s : 'quelques secondes',
+        ss : '%d secondes',
         m : 'une minute',
         mm : '%d minutes',
         h : 'une heure',
@@ -40228,7 +42631,7 @@ return frCa;
 
 
 /***/ }),
-/* 65 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40248,7 +42651,7 @@ var frCh = moment.defineLocale('fr-ch', {
     monthsParseExact : true,
     weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
     weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
-    weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+    weekdaysMin : 'di_lu_ma_me_je_ve_sa'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
         LT : 'HH:mm',
@@ -40270,6 +42673,7 @@ var frCh = moment.defineLocale('fr-ch', {
         future : 'dans %s',
         past : 'il y a %s',
         s : 'quelques secondes',
+        ss : '%d secondes',
         m : 'une minute',
         mm : '%d minutes',
         h : 'une heure',
@@ -40311,7 +42715,7 @@ return frCh;
 
 
 /***/ }),
-/* 66 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40364,6 +42768,7 @@ var fy = moment.defineLocale('fy', {
         future : 'oer %s',
         past : '%s lyn',
         s : 'in pear sekonden',
+        ss : '%d sekonden',
         m : 'ien minút',
         mm : '%d minuten',
         h : 'ien oere',
@@ -40391,7 +42796,7 @@ return fy;
 
 
 /***/ }),
-/* 67 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40444,6 +42849,7 @@ var gd = moment.defineLocale('gd', {
         future : 'ann an %s',
         past : 'bho chionn %s',
         s : 'beagan diogan',
+        ss : '%d diogan',
         m : 'mionaid',
         mm : '%d mionaidean',
         h : 'uair',
@@ -40472,7 +42878,7 @@ return gd;
 
 
 /***/ }),
-/* 68 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40529,6 +42935,7 @@ var gl = moment.defineLocale('gl', {
         },
         past : 'hai %s',
         s : 'uns segundos',
+        ss : '%d segundos',
         m : 'un minuto',
         mm : '%d minutos',
         h : 'unha hora',
@@ -40554,7 +42961,7 @@ return gl;
 
 
 /***/ }),
-/* 69 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40571,6 +42978,7 @@ return gl;
 function processRelativeTime(number, withoutSuffix, key, isFuture) {
     var format = {
         's': ['thodde secondanim', 'thodde second'],
+        'ss': [number + ' secondanim', number + ' second'],
         'm': ['eka mintan', 'ek minute'],
         'mm': [number + ' mintanim', number + ' mintam'],
         'h': ['eka horan', 'ek hor'],
@@ -40614,6 +43022,7 @@ var gomLatn = moment.defineLocale('gom-latn', {
         future : '%s',
         past : '%s adim',
         s : processRelativeTime,
+        ss : processRelativeTime,
         m : processRelativeTime,
         mm : processRelativeTime,
         h : processRelativeTime,
@@ -40681,7 +43090,7 @@ return gomLatn;
 
 
 /***/ }),
-/* 70 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40747,6 +43156,7 @@ var gu = moment.defineLocale('gu', {
         future: '%s મા',
         past: '%s પેહલા',
         s: 'અમુક પળો',
+        ss: '%d સેકંડ',
         m: 'એક મિનિટ',
         mm: '%d મિનિટ',
         h: 'એક કલાક',
@@ -40810,7 +43220,7 @@ return gu;
 
 
 /***/ }),
-/* 71 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40856,6 +43266,7 @@ var he = moment.defineLocale('he', {
         future : 'בעוד %s',
         past : 'לפני %s',
         s : 'מספר שניות',
+        ss : '%d שניות',
         m : 'דקה',
         mm : '%d דקות',
         h : 'שעה',
@@ -40914,7 +43325,7 @@ return he;
 
 
 /***/ }),
-/* 72 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40980,6 +43391,7 @@ var hi = moment.defineLocale('hi', {
         future : '%s में',
         past : '%s पहले',
         s : 'कुछ ही क्षण',
+        ss : '%d सेकंड',
         m : 'एक मिनट',
         mm : '%d मिनट',
         h : 'एक घंटा',
@@ -41043,7 +43455,7 @@ return hi;
 
 
 /***/ }),
-/* 73 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41060,6 +43472,15 @@ return hi;
 function translate(number, withoutSuffix, key) {
     var result = number + ' ';
     switch (key) {
+        case 'ss':
+            if (number === 1) {
+                result += 'sekunda';
+            } else if (number === 2 || number === 3 || number === 4) {
+                result += 'sekunde';
+            } else {
+                result += 'sekundi';
+            }
+            return result;
         case 'm':
             return withoutSuffix ? 'jedna minuta' : 'jedne minute';
         case 'mm':
@@ -41168,6 +43589,7 @@ var hr = moment.defineLocale('hr', {
         future : 'za %s',
         past   : 'prije %s',
         s      : 'par sekundi',
+        ss     : translate,
         m      : translate,
         mm     : translate,
         h      : translate,
@@ -41193,7 +43615,7 @@ return hr;
 
 
 /***/ }),
-/* 74 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41209,11 +43631,12 @@ return hr;
 
 var weekEndings = 'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(' ');
 function translate(number, withoutSuffix, key, isFuture) {
-    var num = number,
-        suffix;
+    var num = number;
     switch (key) {
         case 's':
             return (isFuture || withoutSuffix) ? 'néhány másodperc' : 'néhány másodperce';
+        case 'ss':
+            return num + (isFuture || withoutSuffix) ? ' másodperc' : ' másodperce';
         case 'm':
             return 'egy' + (isFuture || withoutSuffix ? ' perc' : ' perce');
         case 'mm':
@@ -41282,6 +43705,7 @@ var hu = moment.defineLocale('hu', {
         future : '%s múlva',
         past : '%s',
         s : translate,
+        ss : translate,
         m : translate,
         mm : translate,
         h : translate,
@@ -41307,7 +43731,7 @@ return hu;
 
 
 /***/ }),
-/* 75 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41354,6 +43778,7 @@ var hyAm = moment.defineLocale('hy-am', {
         future : '%s հետո',
         past : '%s առաջ',
         s : 'մի քանի վայրկյան',
+        ss : '%d վայրկյան',
         m : 'րոպե',
         mm : '%d րոպե',
         h : 'ժամ',
@@ -41407,7 +43832,7 @@ return hyAm;
 
 
 /***/ }),
-/* 76 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41472,6 +43897,7 @@ var id = moment.defineLocale('id', {
         future : 'dalam %s',
         past : '%s yang lalu',
         s : 'beberapa detik',
+        ss : '%d detik',
         m : 'semenit',
         mm : '%d menit',
         h : 'sejam',
@@ -41495,7 +43921,7 @@ return id;
 
 
 /***/ }),
-/* 77 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41522,6 +43948,11 @@ function translate(number, withoutSuffix, key, isFuture) {
     switch (key) {
         case 's':
             return withoutSuffix || isFuture ? 'nokkrar sekúndur' : 'nokkrum sekúndum';
+        case 'ss':
+            if (plural(number)) {
+                return result + (withoutSuffix || isFuture ? 'sekúndur' : 'sekúndum');
+            }
+            return result + 'sekúnda';
         case 'm':
             return withoutSuffix ? 'mínúta' : 'mínútu';
         case 'mm':
@@ -41602,6 +44033,7 @@ var is = moment.defineLocale('is', {
         future : 'eftir %s',
         past : 'fyrir %s síðan',
         s : translate,
+        ss : translate,
         m : translate,
         mm : translate,
         h : 'klukkustund',
@@ -41627,7 +44059,7 @@ return is;
 
 
 /***/ }),
-/* 78 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41654,7 +44086,7 @@ var it = moment.defineLocale('it', {
         L : 'DD/MM/YYYY',
         LL : 'D MMMM YYYY',
         LLL : 'D MMMM YYYY HH:mm',
-        LLLL : 'dddd, D MMMM YYYY HH:mm'
+        LLLL : 'dddd D MMMM YYYY HH:mm'
     },
     calendar : {
         sameDay: '[Oggi alle] LT',
@@ -41677,6 +44109,7 @@ var it = moment.defineLocale('it', {
         },
         past : '%s fa',
         s : 'alcuni secondi',
+        ss : '%d secondi',
         m : 'un minuto',
         mm : '%d minuti',
         h : 'un\'ora',
@@ -41702,7 +44135,7 @@ return it;
 
 
 /***/ }),
-/* 79 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41768,6 +44201,7 @@ var ja = moment.defineLocale('ja', {
         future : '%s後',
         past : '%s前',
         s : '数秒',
+        ss : '%d秒',
         m : '1分',
         mm : '%d分',
         h : '1時間',
@@ -41787,7 +44221,7 @@ return ja;
 
 
 /***/ }),
-/* 80 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41852,6 +44286,7 @@ var jv = moment.defineLocale('jv', {
         future : 'wonten ing %s',
         past : '%s ingkang kepengker',
         s : 'sawetawis detik',
+        ss : '%d detik',
         m : 'setunggal menit',
         mm : '%d menit',
         h : 'setunggal jam',
@@ -41875,7 +44310,7 @@ return jv;
 
 
 /***/ }),
-/* 81 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41933,6 +44368,7 @@ var ka = moment.defineLocale('ka', {
             }
         },
         s : 'რამდენიმე წამი',
+        ss : '%d წამი',
         m : 'წუთი',
         mm : '%d წუთი',
         h : 'საათი',
@@ -41969,7 +44405,7 @@ return ka;
 
 
 /***/ }),
-/* 82 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42032,6 +44468,7 @@ var kk = moment.defineLocale('kk', {
         future : '%s ішінде',
         past : '%s бұрын',
         s : 'бірнеше секунд',
+        ss : '%d секунд',
         m : 'бір минут',
         mm : '%d минут',
         h : 'бір сағат',
@@ -42061,7 +44498,7 @@ return kk;
 
 
 /***/ }),
-/* 83 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42101,6 +44538,7 @@ var km = moment.defineLocale('km', {
         future: '%sទៀត',
         past: '%sមុន',
         s: 'ប៉ុន្មានវិនាទី',
+        ss: '%d វិនាទី',
         m: 'មួយនាទី',
         mm: '%d នាទី',
         h: 'មួយម៉ោង',
@@ -42124,7 +44562,7 @@ return km;
 
 
 /***/ }),
-/* 84 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42190,6 +44628,7 @@ var kn = moment.defineLocale('kn', {
         future : '%s ನಂತರ',
         past : '%s ಹಿಂದೆ',
         s : 'ಕೆಲವು ಕ್ಷಣಗಳು',
+        ss : '%d ಸೆಕೆಂಡುಗಳು',
         m : 'ಒಂದು ನಿಮಿಷ',
         mm : '%d ನಿಮಿಷ',
         h : 'ಒಂದು ಗಂಟೆ',
@@ -42255,7 +44694,7 @@ return kn;
 
 
 /***/ }),
-/* 85 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42343,7 +44782,7 @@ return ko;
 
 
 /***/ }),
-/* 86 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42407,6 +44846,7 @@ var ky = moment.defineLocale('ky', {
         future : '%s ичинде',
         past : '%s мурун',
         s : 'бирнече секунд',
+        ss : '%d секунд',
         m : 'бир мүнөт',
         mm : '%d мүнөт',
         h : 'бир саат',
@@ -42436,7 +44876,7 @@ return ky;
 
 
 /***/ }),
-/* 87 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42553,6 +44993,7 @@ var lb = moment.defineLocale('lb', {
         future : processFutureTime,
         past : processPastTime,
         s : 'e puer Sekonnen',
+        ss : '%d Sekonnen',
         m : processRelativeTime,
         mm : '%d Minutten',
         h : processRelativeTime,
@@ -42578,7 +45019,7 @@ return lb;
 
 
 /***/ }),
-/* 88 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42630,6 +45071,7 @@ var lo = moment.defineLocale('lo', {
         future : 'ອີກ %s',
         past : '%sຜ່ານມາ',
         s : 'ບໍ່ເທົ່າໃດວິນາທີ',
+        ss : '%d ວິນາທີ' ,
         m : '1 ນາທີ',
         mm : '%d ນາທີ',
         h : '1 ຊົ່ວໂມງ',
@@ -42653,7 +45095,7 @@ return lo;
 
 
 /***/ }),
-/* 89 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42668,6 +45110,7 @@ return lo;
 
 
 var units = {
+    'ss' : 'sekundė_sekundžių_sekundes',
     'm' : 'minutė_minutės_minutę',
     'mm': 'minutės_minučių_minutes',
     'h' : 'valanda_valandos_valandą',
@@ -42748,6 +45191,7 @@ var lt = moment.defineLocale('lt', {
         future : 'po %s',
         past : 'prieš %s',
         s : translateSeconds,
+        ss : translate,
         m : translateSingular,
         mm : translate,
         h : translateSingular,
@@ -42775,7 +45219,7 @@ return lt;
 
 
 /***/ }),
-/* 90 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42791,6 +45235,7 @@ return lt;
 
 
 var units = {
+    'ss': 'sekundes_sekundēm_sekunde_sekundes'.split('_'),
     'm': 'minūtes_minūtēm_minūte_minūtes'.split('_'),
     'mm': 'minūtes_minūtēm_minūte_minūtes'.split('_'),
     'h': 'stundas_stundām_stunda_stundas'.split('_'),
@@ -42852,6 +45297,7 @@ var lv = moment.defineLocale('lv', {
         future : 'pēc %s',
         past : 'pirms %s',
         s : relativeSeconds,
+        ss : relativeTimeWithPlural,
         m : relativeTimeWithSingular,
         mm : relativeTimeWithPlural,
         h : relativeTimeWithSingular,
@@ -42877,7 +45323,7 @@ return lv;
 
 
 /***/ }),
-/* 91 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42893,6 +45339,7 @@ return lv;
 
 var translator = {
     words: { //Different grammatical cases
+        ss: ['sekund', 'sekunda', 'sekundi'],
         m: ['jedan minut', 'jednog minuta'],
         mm: ['minut', 'minuta', 'minuta'],
         h: ['jedan sat', 'jednog sata'],
@@ -42968,6 +45415,7 @@ var me = moment.defineLocale('me', {
         future : 'za %s',
         past   : 'prije %s',
         s      : 'nekoliko sekundi',
+        ss     : translator.translate,
         m      : translator.translate,
         mm     : translator.translate,
         h      : translator.translate,
@@ -42993,7 +45441,7 @@ return me;
 
 
 /***/ }),
-/* 92 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43037,6 +45485,7 @@ var mi = moment.defineLocale('mi', {
         future: 'i roto i %s',
         past: '%s i mua',
         s: 'te hēkona ruarua',
+        ss: '%d hēkona',
         m: 'he meneti',
         mm: '%d meneti',
         h: 'te haora',
@@ -43062,7 +45511,7 @@ return mi;
 
 
 /***/ }),
-/* 93 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43114,6 +45563,7 @@ var mk = moment.defineLocale('mk', {
         future : 'после %s',
         past : 'пред %s',
         s : 'неколку секунди',
+        ss : '%d секунди',
         m : 'минута',
         mm : '%d минути',
         h : 'час',
@@ -43157,7 +45607,7 @@ return mk;
 
 
 /***/ }),
-/* 94 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43198,6 +45648,7 @@ var ml = moment.defineLocale('ml', {
         future : '%s കഴിഞ്ഞ്',
         past : '%s മുൻപ്',
         s : 'അൽപ നിമിഷങ്ങൾ',
+        ss : '%d സെക്കൻഡ്',
         m : 'ഒരു മിനിറ്റ്',
         mm : '%d മിനിറ്റ്',
         h : 'ഒരു മണിക്കൂർ',
@@ -43243,7 +45694,7 @@ return ml;
 
 
 /***/ }),
-/* 95 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43289,6 +45740,7 @@ function relativeTimeMr(number, withoutSuffix, string, isFuture)
     if (withoutSuffix) {
         switch (string) {
             case 's': output = 'काही सेकंद'; break;
+            case 'ss': output = '%d सेकंद'; break;
             case 'm': output = 'एक मिनिट'; break;
             case 'mm': output = '%d मिनिटे'; break;
             case 'h': output = 'एक तास'; break;
@@ -43304,6 +45756,7 @@ function relativeTimeMr(number, withoutSuffix, string, isFuture)
     else {
         switch (string) {
             case 's': output = 'काही सेकंदां'; break;
+            case 'ss': output = '%d सेकंदां'; break;
             case 'm': output = 'एका मिनिटा'; break;
             case 'mm': output = '%d मिनिटां'; break;
             case 'h': output = 'एका तासा'; break;
@@ -43346,6 +45799,7 @@ var mr = moment.defineLocale('mr', {
         future: '%sमध्ये',
         past: '%sपूर्वी',
         s: relativeTimeMr,
+        ss: relativeTimeMr,
         m: relativeTimeMr,
         mm: relativeTimeMr,
         h: relativeTimeMr,
@@ -43407,7 +45861,7 @@ return mr;
 
 
 /***/ }),
-/* 96 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43471,6 +45925,7 @@ var ms = moment.defineLocale('ms', {
         future : 'dalam %s',
         past : '%s yang lepas',
         s : 'beberapa saat',
+        ss : '%d saat',
         m : 'seminit',
         mm : '%d minit',
         h : 'sejam',
@@ -43494,7 +45949,7 @@ return ms;
 
 
 /***/ }),
-/* 97 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43559,6 +46014,7 @@ var msMy = moment.defineLocale('ms-my', {
         future : 'dalam %s',
         past : '%s yang lepas',
         s : 'beberapa saat',
+        ss : '%d saat',
         m : 'seminit',
         mm : '%d minit',
         h : 'sejam',
@@ -43582,7 +46038,73 @@ return msMy;
 
 
 /***/ }),
-/* 98 */
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Maltese (Malta) [mt]
+//! author : Alessandro Maruccia : https://github.com/alesma
+
+;(function (global, factory) {
+    true ? factory(__webpack_require__(0)) :
+   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
+   factory(global.moment)
+}(this, (function (moment) { 'use strict';
+
+
+var mt = moment.defineLocale('mt', {
+    months : 'Jannar_Frar_Marzu_April_Mejju_Ġunju_Lulju_Awwissu_Settembru_Ottubru_Novembru_Diċembru'.split('_'),
+    monthsShort : 'Jan_Fra_Mar_Apr_Mej_Ġun_Lul_Aww_Set_Ott_Nov_Diċ'.split('_'),
+    weekdays : 'Il-Ħadd_It-Tnejn_It-Tlieta_L-Erbgħa_Il-Ħamis_Il-Ġimgħa_Is-Sibt'.split('_'),
+    weekdaysShort : 'Ħad_Tne_Tli_Erb_Ħam_Ġim_Sib'.split('_'),
+    weekdaysMin : 'Ħa_Tn_Tl_Er_Ħa_Ġi_Si'.split('_'),
+    longDateFormat : {
+        LT : 'HH:mm',
+        LTS : 'HH:mm:ss',
+        L : 'DD/MM/YYYY',
+        LL : 'D MMMM YYYY',
+        LLL : 'D MMMM YYYY HH:mm',
+        LLLL : 'dddd, D MMMM YYYY HH:mm'
+    },
+    calendar : {
+        sameDay : '[Illum fil-]LT',
+        nextDay : '[Għada fil-]LT',
+        nextWeek : 'dddd [fil-]LT',
+        lastDay : '[Il-bieraħ fil-]LT',
+        lastWeek : 'dddd [li għadda] [fil-]LT',
+        sameElse : 'L'
+    },
+    relativeTime : {
+        future : 'f’ %s',
+        past : '%s ilu',
+        s : 'ftit sekondi',
+        ss : '%d sekondi',
+        m : 'minuta',
+        mm : '%d minuti',
+        h : 'siegħa',
+        hh : '%d siegħat',
+        d : 'ġurnata',
+        dd : '%d ġranet',
+        M : 'xahar',
+        MM : '%d xhur',
+        y : 'sena',
+        yy : '%d sni'
+    },
+    dayOfMonthOrdinalParse : /\d{1,2}º/,
+    ordinal: '%dº',
+    week : {
+        dow : 1, // Monday is the first day of the week.
+        doy : 4  // The week that contains Jan 4th is the first week of the year.
+    }
+});
+
+return mt;
+
+})));
+
+
+/***/ }),
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43650,6 +46172,7 @@ var my = moment.defineLocale('my', {
         future: 'လာမည့် %s မှာ',
         past: 'လွန်ခဲ့သော %s က',
         s: 'စက္ကန်.အနည်းငယ်',
+        ss : '%d စက္ကန့်',
         m: 'တစ်မိနစ်',
         mm: '%d မိနစ်',
         h: 'တစ်နာရီ',
@@ -43683,7 +46206,7 @@ return my;
 
 
 /***/ }),
-/* 99 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43726,6 +46249,7 @@ var nb = moment.defineLocale('nb', {
         future : 'om %s',
         past : '%s siden',
         s : 'noen sekunder',
+        ss : '%d sekunder',
         m : 'ett minutt',
         mm : '%d minutter',
         h : 'en time',
@@ -43751,7 +46275,7 @@ return nb;
 
 
 /***/ }),
-/* 100 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43856,6 +46380,7 @@ var ne = moment.defineLocale('ne', {
         future : '%sमा',
         past : '%s अगाडि',
         s : 'केही क्षण',
+        ss : '%d सेकेण्ड',
         m : 'एक मिनेट',
         mm : '%d मिनेट',
         h : 'एक घण्टा',
@@ -43879,7 +46404,7 @@ return ne;
 
 
 /***/ }),
-/* 101 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43945,6 +46470,7 @@ var nl = moment.defineLocale('nl', {
         future : 'over %s',
         past : '%s geleden',
         s : 'een paar seconden',
+        ss : '%d seconden',
         m : 'één minuut',
         mm : '%d minuten',
         h : 'één uur',
@@ -43972,7 +46498,7 @@ return nl;
 
 
 /***/ }),
-/* 102 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44038,6 +46564,7 @@ var nlBe = moment.defineLocale('nl-be', {
         future : 'over %s',
         past : '%s geleden',
         s : 'een paar seconden',
+        ss : '%d seconden',
         m : 'één minuut',
         mm : '%d minuten',
         h : 'één uur',
@@ -44065,7 +46592,7 @@ return nlBe;
 
 
 /***/ }),
-/* 103 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44105,6 +46632,7 @@ var nn = moment.defineLocale('nn', {
         future : 'om %s',
         past : '%s sidan',
         s : 'nokre sekund',
+        ss : '%d sekund',
         m : 'eit minutt',
         mm : '%d minutt',
         h : 'ein time',
@@ -44130,7 +46658,7 @@ return nn;
 
 
 /***/ }),
-/* 104 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44196,6 +46724,7 @@ var paIn = moment.defineLocale('pa-in', {
         future : '%s ਵਿੱਚ',
         past : '%s ਪਿਛਲੇ',
         s : 'ਕੁਝ ਸਕਿੰਟ',
+        ss : '%d ਸਕਿੰਟ',
         m : 'ਇਕ ਮਿੰਟ',
         mm : '%d ਮਿੰਟ',
         h : 'ਇੱਕ ਘੰਟਾ',
@@ -44259,7 +46788,7 @@ return paIn;
 
 
 /***/ }),
-/* 105 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44281,6 +46810,8 @@ function plural(n) {
 function translate(number, withoutSuffix, key) {
     var result = number + ' ';
     switch (key) {
+        case 'ss':
+            return result + (plural(number) ? 'sekundy' : 'sekund');
         case 'm':
             return withoutSuffix ? 'minuta' : 'minutę';
         case 'mm':
@@ -44363,6 +46894,7 @@ var pl = moment.defineLocale('pl', {
         future : 'za %s',
         past : '%s temu',
         s : 'kilka sekund',
+        ss : translate,
         m : translate,
         mm : translate,
         h : translate,
@@ -44388,7 +46920,7 @@ return pl;
 
 
 /***/ }),
-/* 106 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44433,6 +46965,7 @@ var pt = moment.defineLocale('pt', {
         future : 'em %s',
         past : 'há %s',
         s : 'segundos',
+        ss : '%d segundos',
         m : 'um minuto',
         mm : '%d minutos',
         h : 'uma hora',
@@ -44458,7 +46991,7 @@ return pt;
 
 
 /***/ }),
-/* 107 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44525,7 +47058,7 @@ return ptBr;
 
 
 /***/ }),
-/* 108 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44542,6 +47075,7 @@ return ptBr;
 
 function relativeTimeWithPlural(number, withoutSuffix, key) {
     var format = {
+            'ss': 'secunde',
             'mm': 'minute',
             'hh': 'ore',
             'dd': 'zile',
@@ -44582,6 +47116,7 @@ var ro = moment.defineLocale('ro', {
         future : 'peste %s',
         past : '%s în urmă',
         s : 'câteva secunde',
+        ss : relativeTimeWithPlural,
         m : 'un minut',
         mm : relativeTimeWithPlural,
         h : 'o oră',
@@ -44605,7 +47140,7 @@ return ro;
 
 
 /***/ }),
-/* 109 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44627,6 +47162,7 @@ function plural(word, num) {
 }
 function relativeTimeWithPlural(number, withoutSuffix, key) {
     var format = {
+        'ss': withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
         'mm': withoutSuffix ? 'минута_минуты_минут' : 'минуту_минуты_минут',
         'hh': 'час_часа_часов',
         'dd': 'день_дня_дней',
@@ -44678,12 +47214,12 @@ var ru = moment.defineLocale('ru', {
     // Выражение, которое соотвествует только сокращённым формам
     monthsShortStrictRegex: /^(янв\.|февр?\.|мар[т.]|апр\.|ма[яй]|июн[ья.]|июл[ья.]|авг\.|сент?\.|окт\.|нояб?\.|дек\.)/i,
     longDateFormat : {
-        LT : 'HH:mm',
-        LTS : 'HH:mm:ss',
+        LT : 'H:mm',
+        LTS : 'H:mm:ss',
         L : 'DD.MM.YYYY',
         LL : 'D MMMM YYYY г.',
-        LLL : 'D MMMM YYYY г., HH:mm',
-        LLLL : 'dddd, D MMMM YYYY г., HH:mm'
+        LLL : 'D MMMM YYYY г., H:mm',
+        LLLL : 'dddd, D MMMM YYYY г., H:mm'
     },
     calendar : {
         sameDay: '[Сегодня в] LT',
@@ -44739,6 +47275,7 @@ var ru = moment.defineLocale('ru', {
         future : 'через %s',
         past : '%s назад',
         s : 'несколько секунд',
+        ss : relativeTimeWithPlural,
         m : relativeTimeWithPlural,
         mm : relativeTimeWithPlural,
         h : 'час',
@@ -44793,7 +47330,7 @@ return ru;
 
 
 /***/ }),
-/* 110 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44867,6 +47404,7 @@ var sd = moment.defineLocale('sd', {
         future : '%s پوء',
         past : '%s اڳ',
         s : 'چند سيڪنڊ',
+        ss : '%d سيڪنڊ',
         m : 'هڪ منٽ',
         mm : '%d منٽ',
         h : 'هڪ ڪلاڪ',
@@ -44896,7 +47434,7 @@ return sd;
 
 
 /***/ }),
-/* 111 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44937,6 +47475,7 @@ var se = moment.defineLocale('se', {
         future : '%s geažes',
         past : 'maŋit %s',
         s : 'moadde sekunddat',
+        ss: '%d sekunddat',
         m : 'okta minuhta',
         mm : '%d minuhtat',
         h : 'okta diimmu',
@@ -44962,7 +47501,7 @@ return se;
 
 
 /***/ }),
-/* 112 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45004,6 +47543,7 @@ var si = moment.defineLocale('si', {
         future : '%sකින්',
         past : '%sකට පෙර',
         s : 'තත්පර කිහිපය',
+        ss : 'තත්පර %d',
         m : 'මිනිත්තුව',
         mm : 'මිනිත්තු %d',
         h : 'පැය',
@@ -45038,7 +47578,7 @@ return si;
 
 
 /***/ }),
-/* 113 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45063,6 +47603,13 @@ function translate(number, withoutSuffix, key, isFuture) {
     switch (key) {
         case 's':  // a few seconds / in a few seconds / a few seconds ago
             return (withoutSuffix || isFuture) ? 'pár sekúnd' : 'pár sekundami';
+        case 'ss': // 9 seconds / in 9 seconds / 9 seconds ago
+            if (withoutSuffix || isFuture) {
+                return result + (plural(number) ? 'sekundy' : 'sekúnd');
+            } else {
+                return result + 'sekundami';
+            }
+            break;
         case 'm':  // a minute / in a minute / a minute ago
             return withoutSuffix ? 'minúta' : (isFuture ? 'minútu' : 'minútou');
         case 'mm': // 9 minutes / in 9 minutes / 9 minutes ago
@@ -45168,6 +47715,7 @@ var sk = moment.defineLocale('sk', {
         future : 'za %s',
         past : 'pred %s',
         s : translate,
+        ss : translate,
         m : translate,
         mm : translate,
         h : translate,
@@ -45193,7 +47741,7 @@ return sk;
 
 
 /***/ }),
-/* 114 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45212,6 +47760,17 @@ function processRelativeTime(number, withoutSuffix, key, isFuture) {
     switch (key) {
         case 's':
             return withoutSuffix || isFuture ? 'nekaj sekund' : 'nekaj sekundami';
+        case 'ss':
+            if (number === 1) {
+                result += withoutSuffix ? 'sekundo' : 'sekundi';
+            } else if (number === 2) {
+                result += withoutSuffix || isFuture ? 'sekundi' : 'sekundah';
+            } else if (number < 5) {
+                result += withoutSuffix || isFuture ? 'sekunde' : 'sekundah';
+            } else {
+                result += withoutSuffix || isFuture ? 'sekund' : 'sekund';
+            }
+            return result;
         case 'm':
             return withoutSuffix ? 'ena minuta' : 'eno minuto';
         case 'mm':
@@ -45335,6 +47894,7 @@ var sl = moment.defineLocale('sl', {
         future : 'čez %s',
         past   : 'pred %s',
         s      : processRelativeTime,
+        ss     : processRelativeTime,
         m      : processRelativeTime,
         mm     : processRelativeTime,
         h      : processRelativeTime,
@@ -45360,7 +47920,7 @@ return sl;
 
 
 /***/ }),
-/* 115 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45410,6 +47970,7 @@ var sq = moment.defineLocale('sq', {
         future : 'në %s',
         past : '%s më parë',
         s : 'disa sekonda',
+        ss : '%d sekonda',
         m : 'një minutë',
         mm : '%d minuta',
         h : 'një orë',
@@ -45435,7 +47996,7 @@ return sq;
 
 
 /***/ }),
-/* 116 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45451,6 +48012,7 @@ return sq;
 
 var translator = {
     words: { //Different grammatical cases
+        ss: ['sekunda', 'sekunde', 'sekundi'],
         m: ['jedan minut', 'jedne minute'],
         mm: ['minut', 'minute', 'minuta'],
         h: ['jedan sat', 'jednog sata'],
@@ -45525,6 +48087,7 @@ var sr = moment.defineLocale('sr', {
         future : 'za %s',
         past   : 'pre %s',
         s      : 'nekoliko sekundi',
+        ss     : translator.translate,
         m      : translator.translate,
         mm     : translator.translate,
         h      : translator.translate,
@@ -45550,7 +48113,7 @@ return sr;
 
 
 /***/ }),
-/* 117 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45566,6 +48129,7 @@ return sr;
 
 var translator = {
     words: { //Different grammatical cases
+        ss: ['секунда', 'секунде', 'секунди'],
         m: ['један минут', 'једне минуте'],
         mm: ['минут', 'минуте', 'минута'],
         h: ['један сат', 'једног сата'],
@@ -45640,6 +48204,7 @@ var srCyrl = moment.defineLocale('sr-cyrl', {
         future : 'за %s',
         past   : 'пре %s',
         s      : 'неколико секунди',
+        ss     : translator.translate,
         m      : translator.translate,
         mm     : translator.translate,
         h      : translator.translate,
@@ -45665,7 +48230,7 @@ return srCyrl;
 
 
 /***/ }),
-/* 118 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45707,6 +48272,7 @@ var ss = moment.defineLocale('ss', {
         future : 'nga %s',
         past : 'wenteka nga %s',
         s : 'emizuzwana lomcane',
+        ss : '%d mzuzwana',
         m : 'umzuzu',
         mm : '%d emizuzu',
         h : 'lihora',
@@ -45759,7 +48325,7 @@ return ss;
 
 
 /***/ }),
-/* 119 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45801,6 +48367,7 @@ var sv = moment.defineLocale('sv', {
         future : 'om %s',
         past : 'för %s sedan',
         s : 'några sekunder',
+        ss : '%d sekunder',
         m : 'en minut',
         mm : '%d minuter',
         h : 'en timme',
@@ -45833,7 +48400,7 @@ return sv;
 
 
 /***/ }),
-/* 120 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45874,6 +48441,7 @@ var sw = moment.defineLocale('sw', {
         future : '%s baadaye',
         past : 'tokea %s',
         s : 'hivi punde',
+        ss : 'sekunde %d',
         m : 'dakika moja',
         mm : 'dakika %d',
         h : 'saa limoja',
@@ -45897,7 +48465,7 @@ return sw;
 
 
 /***/ }),
-/* 121 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45962,6 +48530,7 @@ var ta = moment.defineLocale('ta', {
         future : '%s இல்',
         past : '%s முன்',
         s : 'ஒரு சில விநாடிகள்',
+        ss : '%d விநாடிகள்',
         m : 'ஒரு நிமிடம்',
         mm : '%d நிமிடங்கள்',
         h : 'ஒரு மணி நேரம்',
@@ -46032,7 +48601,7 @@ return ta;
 
 
 /***/ }),
-/* 122 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46073,6 +48642,7 @@ var te = moment.defineLocale('te', {
         future : '%s లో',
         past : '%s క్రితం',
         s : 'కొన్ని క్షణాలు',
+        ss : '%d సెకన్లు',
         m : 'ఒక నిమిషం',
         mm : '%d నిమిషాలు',
         h : 'ఒక గంట',
@@ -46126,7 +48696,7 @@ return te;
 
 
 /***/ }),
-/* 123 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46167,6 +48737,7 @@ var tet = moment.defineLocale('tet', {
         future : 'iha %s',
         past : '%s liuba',
         s : 'minutu balun',
+        ss : 'minutu %d',
         m : 'minutu ida',
         mm : 'minutus %d',
         h : 'horas ida',
@@ -46199,7 +48770,7 @@ return tet;
 
 
 /***/ }),
-/* 124 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46252,6 +48823,7 @@ var th = moment.defineLocale('th', {
         future : 'อีก %s',
         past : '%sที่แล้ว',
         s : 'ไม่กี่วินาที',
+        ss : '%d วินาที',
         m : '1 นาที',
         mm : '%d นาที',
         h : '1 ชั่วโมง',
@@ -46271,7 +48843,7 @@ return th;
 
 
 /***/ }),
-/* 125 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46311,6 +48883,7 @@ var tlPh = moment.defineLocale('tl-ph', {
         future : 'sa loob ng %s',
         past : '%s ang nakalipas',
         s : 'ilang segundo',
+        ss : '%d segundo',
         m : 'isang minuto',
         mm : '%d minuto',
         h : 'isang oras',
@@ -46338,7 +48911,7 @@ return tlPh;
 
 
 /***/ }),
-/* 126 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46381,6 +48954,8 @@ function translatePast(output) {
 function translate(number, withoutSuffix, string, isFuture) {
     var numberNoun = numberAsNoun(number);
     switch (string) {
+        case 'ss':
+            return numberNoun + ' lup';
         case 'mm':
             return numberNoun + ' tup';
         case 'hh':
@@ -46438,6 +49013,7 @@ var tlh = moment.defineLocale('tlh', {
         future : translateFuture,
         past : translatePast,
         s : 'puS lup',
+        ss : translate,
         m : 'wa’ tup',
         mm : translate,
         h : 'wa’ rep',
@@ -46463,7 +49039,7 @@ return tlh;
 
 
 /***/ }),
-/* 127 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46525,6 +49101,7 @@ var tr = moment.defineLocale('tr', {
         future : '%s sonra',
         past : '%s önce',
         s : 'birkaç saniye',
+        ss : '%d saniye',
         m : 'bir dakika',
         mm : '%d dakika',
         h : 'bir saat',
@@ -46558,7 +49135,7 @@ return tr;
 
 
 /***/ }),
-/* 128 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46612,6 +49189,7 @@ var tzl = moment.defineLocale('tzl', {
         future : 'osprei %s',
         past : 'ja%s',
         s : processRelativeTime,
+        ss : processRelativeTime,
         m : processRelativeTime,
         mm : processRelativeTime,
         h : processRelativeTime,
@@ -46634,6 +49212,7 @@ var tzl = moment.defineLocale('tzl', {
 function processRelativeTime(number, withoutSuffix, key, isFuture) {
     var format = {
         's': ['viensas secunds', '\'iensas secunds'],
+        'ss': [number + ' secunds', '' + number + ' secunds'],
         'm': ['\'n míut', '\'iens míut'],
         'mm': [number + ' míuts', '' + number + ' míuts'],
         'h': ['\'n þora', '\'iensa þora'],
@@ -46654,7 +49233,7 @@ return tzl;
 
 
 /***/ }),
-/* 129 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46694,6 +49273,7 @@ var tzm = moment.defineLocale('tzm', {
         future : 'ⴷⴰⴷⵅ ⵙ ⵢⴰⵏ %s',
         past : 'ⵢⴰⵏ %s',
         s : 'ⵉⵎⵉⴽ',
+        ss : '%d ⵉⵎⵉⴽ',
         m : 'ⵎⵉⵏⵓⴺ',
         mm : '%d ⵎⵉⵏⵓⴺ',
         h : 'ⵙⴰⵄⴰ',
@@ -46717,7 +49297,7 @@ return tzm;
 
 
 /***/ }),
-/* 130 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46757,6 +49337,7 @@ var tzmLatn = moment.defineLocale('tzm-latn', {
         future : 'dadkh s yan %s',
         past : 'yan %s',
         s : 'imik',
+        ss : '%d imik',
         m : 'minuḍ',
         mm : '%d minuḍ',
         h : 'saɛa',
@@ -46780,7 +49361,7 @@ return tzmLatn;
 
 
 /***/ }),
-/* 131 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46801,6 +49382,7 @@ function plural(word, num) {
 }
 function relativeTimeWithPlural(number, withoutSuffix, key) {
     var format = {
+        'ss': withoutSuffix ? 'секунда_секунди_секунд' : 'секунду_секунди_секунд',
         'mm': withoutSuffix ? 'хвилина_хвилини_хвилин' : 'хвилину_хвилини_хвилин',
         'hh': withoutSuffix ? 'година_години_годин' : 'годину_години_годин',
         'dd': 'день_дні_днів',
@@ -46882,6 +49464,7 @@ var uk = moment.defineLocale('uk', {
         future : 'за %s',
         past : '%s тому',
         s : 'декілька секунд',
+        ss : relativeTimeWithPlural,
         m : relativeTimeWithPlural,
         mm : relativeTimeWithPlural,
         h : 'годину',
@@ -46936,7 +49519,7 @@ return uk;
 
 
 /***/ }),
-/* 132 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47011,6 +49594,7 @@ var ur = moment.defineLocale('ur', {
         future : '%s بعد',
         past : '%s قبل',
         s : 'چند سیکنڈ',
+        ss : '%d سیکنڈ',
         m : 'ایک منٹ',
         mm : '%d منٹ',
         h : 'ایک گھنٹہ',
@@ -47040,7 +49624,7 @@ return ur;
 
 
 /***/ }),
-/* 133 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47080,6 +49664,7 @@ var uz = moment.defineLocale('uz', {
         future : 'Якин %s ичида',
         past : 'Бир неча %s олдин',
         s : 'фурсат',
+        ss : '%d фурсат',
         m : 'бир дакика',
         mm : '%d дакика',
         h : 'бир соат',
@@ -47103,7 +49688,7 @@ return uz;
 
 
 /***/ }),
-/* 134 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47143,6 +49728,7 @@ var uzLatn = moment.defineLocale('uz-latn', {
         future : 'Yaqin %s ichida',
         past : 'Bir necha %s oldin',
         s : 'soniya',
+        ss : '%d soniya',
         m : 'bir daqiqa',
         mm : '%d daqiqa',
         h : 'bir soat',
@@ -47166,7 +49752,7 @@ return uzLatn;
 
 
 /***/ }),
-/* 135 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47223,6 +49809,7 @@ var vi = moment.defineLocale('vi', {
         future : '%s tới',
         past : '%s trước',
         s : 'vài giây',
+        ss : '%d giây' ,
         m : 'một phút',
         mm : '%d phút',
         h : 'một giờ',
@@ -47250,7 +49837,7 @@ return vi;
 
 
 /***/ }),
-/* 136 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47291,6 +49878,7 @@ var xPseudo = moment.defineLocale('x-pseudo', {
         future : 'í~ñ %s',
         past : '%s á~gó',
         s : 'á ~féw ~sécó~ñds',
+        ss : '%d s~écóñ~ds',
         m : 'á ~míñ~úté',
         mm : '%d m~íñú~tés',
         h : 'á~ñ hó~úr',
@@ -47323,7 +49911,7 @@ return xPseudo;
 
 
 /***/ }),
-/* 137 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47363,6 +49951,7 @@ var yo = moment.defineLocale('yo', {
         future : 'ní %s',
         past : '%s kọjá',
         s : 'ìsẹjú aayá die',
+        ss :'aayá %d',
         m : 'ìsẹjú kan',
         mm : 'ìsẹjú %d',
         h : 'wákati kan',
@@ -47388,7 +49977,7 @@ return yo;
 
 
 /***/ }),
-/* 138 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47412,14 +50001,14 @@ var zhCn = moment.defineLocale('zh-cn', {
     longDateFormat : {
         LT : 'HH:mm',
         LTS : 'HH:mm:ss',
-        L : 'YYYY年MMMD日',
-        LL : 'YYYY年MMMD日',
-        LLL : 'YYYY年MMMD日Ah点mm分',
-        LLLL : 'YYYY年MMMD日ddddAh点mm分',
-        l : 'YYYY年MMMD日',
-        ll : 'YYYY年MMMD日',
-        lll : 'YYYY年MMMD日 HH:mm',
-        llll : 'YYYY年MMMD日dddd HH:mm'
+        L : 'YYYY/MM/DD',
+        LL : 'YYYY年M月D日',
+        LLL : 'YYYY年M月D日Ah点mm分',
+        LLLL : 'YYYY年M月D日ddddAh点mm分',
+        l : 'YYYY/M/D',
+        ll : 'YYYY年M月D日',
+        lll : 'YYYY年M月D日 HH:mm',
+        llll : 'YYYY年M月D日dddd HH:mm'
     },
     meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
     meridiemHour: function (hour, meridiem) {
@@ -47480,6 +50069,7 @@ var zhCn = moment.defineLocale('zh-cn', {
         future : '%s内',
         past : '%s前',
         s : '几秒',
+        ss : '%d 秒',
         m : '1 分钟',
         mm : '%d 分钟',
         h : '1 小时',
@@ -47504,7 +50094,7 @@ return zhCn;
 
 
 /***/ }),
-/* 139 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47529,14 +50119,14 @@ var zhHk = moment.defineLocale('zh-hk', {
     longDateFormat : {
         LT : 'HH:mm',
         LTS : 'HH:mm:ss',
-        L : 'YYYY年MMMD日',
-        LL : 'YYYY年MMMD日',
-        LLL : 'YYYY年MMMD日 HH:mm',
-        LLLL : 'YYYY年MMMD日dddd HH:mm',
-        l : 'YYYY年MMMD日',
-        ll : 'YYYY年MMMD日',
-        lll : 'YYYY年MMMD日 HH:mm',
-        llll : 'YYYY年MMMD日dddd HH:mm'
+        L : 'YYYY/MM/DD',
+        LL : 'YYYY年M月D日',
+        LLL : 'YYYY年M月D日 HH:mm',
+        LLLL : 'YYYY年M月D日dddd HH:mm',
+        l : 'YYYY/M/D',
+        ll : 'YYYY年M月D日',
+        lll : 'YYYY年M月D日 HH:mm',
+        llll : 'YYYY年M月D日dddd HH:mm'
     },
     meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
     meridiemHour : function (hour, meridiem) {
@@ -47595,6 +50185,7 @@ var zhHk = moment.defineLocale('zh-hk', {
         future : '%s內',
         past : '%s前',
         s : '幾秒',
+        ss : '%d 秒',
         m : '1 分鐘',
         mm : '%d 分鐘',
         h : '1 小時',
@@ -47614,7 +50205,7 @@ return zhHk;
 
 
 /***/ }),
-/* 140 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47638,14 +50229,14 @@ var zhTw = moment.defineLocale('zh-tw', {
     longDateFormat : {
         LT : 'HH:mm',
         LTS : 'HH:mm:ss',
-        L : 'YYYY年MMMD日',
-        LL : 'YYYY年MMMD日',
-        LLL : 'YYYY年MMMD日 HH:mm',
-        LLLL : 'YYYY年MMMD日dddd HH:mm',
-        l : 'YYYY年MMMD日',
-        ll : 'YYYY年MMMD日',
-        lll : 'YYYY年MMMD日 HH:mm',
-        llll : 'YYYY年MMMD日dddd HH:mm'
+        L : 'YYYY/MM/DD',
+        LL : 'YYYY年M月D日',
+        LLL : 'YYYY年M月D日 HH:mm',
+        LLLL : 'YYYY年M月D日dddd HH:mm',
+        l : 'YYYY/M/D',
+        ll : 'YYYY年M月D日',
+        lll : 'YYYY年M月D日 HH:mm',
+        llll : 'YYYY年M月D日dddd HH:mm'
     },
     meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
     meridiemHour : function (hour, meridiem) {
@@ -47704,6 +50295,7 @@ var zhTw = moment.defineLocale('zh-tw', {
         future : '%s內',
         past : '%s前',
         s : '幾秒',
+        ss : '%d 秒',
         m : '1 分鐘',
         mm : '%d 分鐘',
         h : '1 小時',
@@ -47723,7 +50315,325 @@ return zhTw;
 
 
 /***/ }),
-/* 141 */
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default.extend({
+  // TODO URLを書き換えた時に再読み込みされないのをなんとかしたい
+  // 例：/#/niho/about → /#/kumano/about
+  data: function data() {
+    return {
+      currentView: this.$route.params.forest
+    };
+  },
+  // TODO 自動的に増えるようにしたい
+  components: {
+    niho: __webpack_require__(296).default,
+    kumano: __webpack_require__(311).default
+  }
+}); //
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _flickity = __webpack_require__(155);
+
+var _flickity2 = _interopRequireDefault(_flickity);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+exports.default = _vue2.default.extend({
+  mounted: function mounted() {
+    var elem = document.querySelector('.carousel');
+    new _flickity2.default(elem, {
+      autoPlay: true,
+      wrapAround: true
+    });
+  },
+  methods: {
+    bgImage: function bgImage(image_num) {
+      return 'background-image: url(/dna-of-forests/niho/img/about/slides/' + image_num + '-' + this.$root.$i18n.locale + '@2x.jpg);';
+    }
+  }
+});
+
+/***/ }),
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -47744,12 +50654,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(297),
-      __webpack_require__(299),
-      __webpack_require__(300),
-      __webpack_require__(301),
-      __webpack_require__(302),
-      __webpack_require__(303)
+      __webpack_require__(303),
+      __webpack_require__(305),
+      __webpack_require__(306),
+      __webpack_require__(307),
+      __webpack_require__(308),
+      __webpack_require__(309)
     ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -47774,7 +50684,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 142 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -47791,9 +50701,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   if ( true ) {
     // AMD
-    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
       return factory();
-    }.call(exports, __webpack_require__, exports, module),
+    }).call(exports, __webpack_require__, exports, module),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -47991,7 +50901,7 @@ return getSize;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 143 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -48009,9 +50919,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(13)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter ) {
       return factory( window, EvEmitter );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -48293,7 +51203,7 @@ return Unipointer;
 
 
 /***/ }),
-/* 144 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -48311,10 +51221,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(143)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Unipointer ) {
+      __webpack_require__(157)
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Unipointer ) {
       return factory( window, Unipointer );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -48413,7 +51323,929 @@ return TapListener;
 
 
 /***/ }),
-/* 145 */
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _flickity = __webpack_require__(155);
+
+var _flickity2 = _interopRequireDefault(_flickity);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+exports.default = _vue2.default.extend({
+  mounted: function mounted() {
+    var carousels = document.querySelectorAll('.carousel');
+    for (var i = 0, len = carousels.length; i < len; i++) {
+      var elem = carousels[i];
+      new _flickity2.default(elem, {
+        autoPlay: true,
+        wrapAround: true
+      });
+    }
+  },
+  methods: {
+    bgImage: function bgImage(day, num) {
+      return 'background-image: url(/dna-of-forests/kumano/img/about/slides/' + day + '/' + num + '-' + this.$root.$i18n.locale + '.jpg);';
+    }
+  }
+});
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(console) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _lodash = __webpack_require__(9);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 登録
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+_vue2.default.component('dna-tab', __webpack_require__(319).default);
+
+exports.default = _vue2.default.extend({
+  created: function created() {
+    this.fetchData();
+  },
+
+
+  watch: {
+    // ルートが変更されたらfetchDataを再び呼び出す
+    '$route': 'fetchData'
+  },
+
+  data: function data() {
+    return this.initWithNullValue(_lodash2.default.merge(_lodash2.default.cloneDeep(this.markers.knowledges[0]), _lodash2.default.cloneDeep(this.markers.samples[0]), {
+      type: null,
+      // error could happen withhout these
+      // TODO: markers内を全部捜査して必要なkeyを確かめるようにすれば、ここでいちいち追加しなくて良い
+      specimen: null,
+      microscope: null
+    }));
+  },
+
+  props: ['markers'],
+
+  methods: {
+    // 全valueをnullにする
+    initWithNullValue: function initWithNullValue(obj) {
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          // 再帰条件
+          if (key === 'genus') {
+            obj[key] = this.initWithNullValue(obj[key]);
+          } else {
+            obj[key] = null;
+          }
+        }
+      }
+      return obj;
+    },
+
+    // new_dataのもつプロパティを、old_dataのプロパティに代入する
+    initWithData: function initWithData(old_data, new_data) {
+      for (var key in new_data) {
+        if (new_data.hasOwnProperty(key)) {
+          // 再帰条件
+          if (key === 'genus') {
+            this.initWithData(old_data[key], new_data[key]);
+          } else {
+            old_data[key] = new_data[key];
+          }
+        }
+      }
+    },
+    fetchData: function fetchData() {
+      var idx, _data;
+      var p_index = this.$route.params.index;
+      if (0 <= p_index.indexOf('s-')) {
+        idx = p_index.replace('s-', '') - 1;
+        _data = this.markers.samples[idx];
+        _data.type = 'sample';
+      } else if (0 <= p_index.indexOf('k-')) {
+        idx = p_index.replace('k-', '') - 1;
+        _data = this.markers.knowledges[idx];
+        _data.id = idx + 1;
+        _data.type = 'knowledge';
+      } else {
+        console.error('Wrong index format...');
+      }
+
+      // 現在のdataをnullで初期化しinitialized_dataに格納
+      var initialized_data = this.initWithNullValue(_lodash2.default.cloneDeep(this.$data));
+      // initialized_dataに_dataを上書きしてdataに格納
+      _data = _lodash2.default.defaultsDeep(_data, initialized_data);
+      this.initWithData(this, _data);
+    },
+    label: function label() {
+      // TODO: This is messy implementation. How can I override messages depend on current forest?
+      if (this.$route.params.forest == 'kumano' && this.$root.$i18n.locale == 'ja') {
+        return '採集者による推定結果';
+      } else {
+        return this.$t('detail_drawer.sample.article.dna.result_of_identification');
+      }
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _dna_colors = __webpack_require__(31);
+
+var _dna_colors2 = _interopRequireDefault(_dna_colors);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 登録
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+_vue2.default.component('dna-barcode', __webpack_require__(12).default);
+
+exports.default = _vue2.default.extend({
+  props: ['text'],
+  data: function data() {
+    return {
+      current: 'barcode'
+    };
+  },
+  methods: {
+    colorize: function colorize(value) {
+      return value.replace(/A/g, '<span style="color: ' + _dna_colors2.default.A.hex + ';">A</span>').replace(/T/g, '<span style="color: ' + _dna_colors2.default.T.hex + ';">T</span>').replace(/G/g, '<span style="color: ' + _dna_colors2.default.G.hex + ';">G</span>').replace(/C/g, '<span style="color: ' + _dna_colors2.default.C.hex + ';">C</span>');
+    },
+    switchTab: function switchTab(val) {
+      this.current = val;
+    }
+  }
+});
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default.extend({
+  props: ['alt', 'src', 'locale', 'global'],
+  watch: {
+    src: 'setAttrs'
+  },
+  methods: {
+    setAttrs: function setAttrs() {
+      this.$el.alt = this.alt;
+
+      // 相対パスを絶対パスに（globalがついていたらルートのimgフォルダを読みに行く）
+      var _src = this.global ? '/dna-of-forests/img/' + this.src : '/dna-of-forests/' + this.$route.params.forest + '/img/' + this.src;
+
+      // locale属性があれば、言語毎に画像パスを切り替え
+      var _locale = this.locale ? '-' + this.$root.$i18n.locale : '';
+
+      this.$el.src = _src.replace(/(\.\w+)$/, _locale + '$1');
+      this.$el.srcset = _src.replace(/(\.\w+)$/, _locale + '@2x$1') + ' 2x';
+    }
+  },
+  mounted: function mounted() {
+    this.setAttrs();
+  }
+}); //
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(3);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _vue2.default.extend({
+  props: ['alt', 'src', 'locale', 'global'],
+  watch: {
+    src: 'setAttrs'
+  },
+  methods: {
+    setAttrs: function setAttrs() {
+      this.$el.alt = this.alt;
+      var devices = ['pc', 'sp'];
+      for (var i in devices) {
+
+        var el = this.$el.querySelector('.' + devices[i]);
+
+        // 相対パスを絶対パスに（globalがついていたらルートのimgフォルダを読みに行く）
+        var _src = this.global ? '/dna-of-forests/img/' + this.src : '/dna-of-forests/' + this.$route.params.forest + '/img/' + this.src;
+
+        // locale属性があれば、言語毎に画像パスを切り替え
+        var _locale = this.locale ? '-' + this.$root.$i18n.locale : '';
+
+        el.src = _src.replace(/(\.\w+)$/, _locale + '-' + devices[i] + '$1');
+        el.srcset = _src.replace(/(\.\w+)$/, _locale + '-' + devices[i] + '@2x$1') + ' 2x';
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.setAttrs();
+  }
+}); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+// PC,SP で画像を切替えたい場合にimgrの代わりに使用
+
+/***/ }),
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48423,11 +52255,11 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueI18n = __webpack_require__(152);
+var _vueI18n = __webpack_require__(171);
 
 var _vueI18n2 = _interopRequireDefault(_vueI18n);
 
-var _vueRouter = __webpack_require__(153);
+var _vueRouter = __webpack_require__(172);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -48435,7 +52267,7 @@ var _lodash = __webpack_require__(9);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _app = __webpack_require__(154);
+var _app = __webpack_require__(173);
 
 var _app2 = _interopRequireDefault(_app);
 
@@ -48482,9 +52314,9 @@ if (ua.indexOf('fban/fbios;fbav') != -1) {
   window.addEventListener('orientationchange', setViewportByOrientation);
 } else if (ua.indexOf('ipad') > 0 || ua.indexOf('android') > 0) {
   addBodyClass('pad');
-  // TODO 正規表現でwidthだけ変える
+  // replace viewport
   var vp = document.querySelector('head>meta[name="viewport"]');
-  vp.content = 'width=1150';
+  vp.content = vp.content.replace(/width=(\d+|device-width)/g, 'width=1150');
 } else if (ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1) {
   addBodyClass('ie');
 } else if (ua.indexOf('edge') != -1) {
@@ -48504,31 +52336,31 @@ if (ua.indexOf('fban/fbios;fbav') != -1) {
 var router = new _vueRouter2.default({
   routes: [{
     path: '/',
-    component: __webpack_require__(160).default
+    component: __webpack_require__(178).default
   }, {
     path: '/:forest/',
-    component: __webpack_require__(177).default,
-    children: [{ path: '', component: __webpack_require__(11).default }, { path: 'panorama', component: __webpack_require__(11).default }, { path: 'panorama/:index', component: __webpack_require__(11).default }, { path: 'list', component: __webpack_require__(22).default }, { path: 'list/:index', component: __webpack_require__(22).default }, { path: 'about', component: __webpack_require__(287).default }]
+    component: __webpack_require__(192).default,
+    children: [{ path: '', component: __webpack_require__(11).default }, { path: 'panorama', component: __webpack_require__(11).default }, { path: 'panorama/:index', component: __webpack_require__(11).default }, { path: 'list', component: __webpack_require__(32).default }, { path: 'list/:index', component: __webpack_require__(32).default }, { path: 'about', component: __webpack_require__(295).default }]
   }]
 });
 
 // Registration
-_vue2.default.component('detail-drawer', __webpack_require__(311).default);
-_vue2.default.component('global-nav', __webpack_require__(17).default);
-_vue2.default.component('imgr', __webpack_require__(321).default);
-_vue2.default.component('imgr-sp', __webpack_require__(324).default);
+_vue2.default.component('detail-drawer', __webpack_require__(316).default);
+_vue2.default.component('global-nav', __webpack_require__(22).default);
+_vue2.default.component('imgr', __webpack_require__(324).default);
+_vue2.default.component('imgr-sp', __webpack_require__(326).default);
 
 new _app2.default({
   router: router,
   // TODO should load indivisual messages in each guides(guide.vue)
   i18n: new _vueI18n2.default({
     locale: document.querySelector('html').getAttribute('lang'),
-    messages: _lodash2.default.merge(__webpack_require__(329), __webpack_require__(330), __webpack_require__(331))
+    messages: _lodash2.default.merge(__webpack_require__(330), __webpack_require__(331), __webpack_require__(332))
   })
 }).$mount('#app');
 
 /***/ }),
-/* 146 */
+/* 165 */
 /***/ (function(module, exports) {
 
 module.exports = function isBuffer(arg) {
@@ -48539,7 +52371,7 @@ module.exports = function isBuffer(arg) {
 }
 
 /***/ }),
-/* 147 */
+/* 166 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -48568,7 +52400,7 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 148 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49066,7 +52898,7 @@ var objectKeys = Object.keys || function (obj) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 149 */
+/* 168 */
 /***/ (function(module, exports) {
 
 module.exports = now
@@ -49077,7 +52909,7 @@ function now() {
 
 
 /***/ }),
-/* 150 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -49130,13 +52962,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(151);
+__webpack_require__(170);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 151 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -49329,13 +53161,13 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(10)))
 
 /***/ }),
-/* 152 */
+/* 171 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(console, process) {/*!
- * vue-i18n v7.3.2 
+ * vue-i18n v7.3.3 
  * (c) 2017 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -49502,42 +53334,73 @@ var canUseNumberFormat =
 /*  */
 
 function extend (Vue) {
-  Vue.prototype.$t = function (key) {
-    var values = [], len = arguments.length - 1;
-    while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
+  // $FlowFixMe
+  Object.defineProperty(Vue.prototype, '$t', {
+    get: function get () {
+      var this$1 = this;
 
-    var i18n = this.$i18n;
-    return i18n._t.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this ].concat( values ))
-  };
+      return function (key) {
+        var values = [], len = arguments.length - 1;
+        while ( len-- > 0 ) values[ len ] = arguments[ len + 1 ];
 
-  Vue.prototype.$tc = function (key, choice) {
-    var values = [], len = arguments.length - 2;
-    while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
+        var i18n = this$1.$i18n;
+        return i18n._t.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this$1 ].concat( values ))
+      }
+    }
+  });
+  // $FlowFixMe
+  Object.defineProperty(Vue.prototype, '$tc', {
+    get: function get$1 () {
+      var this$1 = this;
 
-    var i18n = this.$i18n;
-    return i18n._tc.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this, choice ].concat( values ))
-  };
+      return function (key, choice) {
+        var values = [], len = arguments.length - 2;
+        while ( len-- > 0 ) values[ len ] = arguments[ len + 2 ];
 
-  Vue.prototype.$te = function (key, locale) {
-    var i18n = this.$i18n;
-    return i18n._te(key, i18n.locale, i18n._getMessages(), locale)
-  };
+        var i18n = this$1.$i18n;
+        return i18n._tc.apply(i18n, [ key, i18n.locale, i18n._getMessages(), this$1, choice ].concat( values ))
+      }
+    }
+  });
+  // $FlowFixMe
+  Object.defineProperty(Vue.prototype, '$te', {
+    get: function get$2 () {
+      var this$1 = this;
 
-  Vue.prototype.$d = function (value) {
-    var args = [], len = arguments.length - 1;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+      return function (key, locale) {
+        var i18n = this$1.$i18n;
+        return i18n._te(key, i18n.locale, i18n._getMessages(), locale)
+      }
+    }
+  });
+  // $FlowFixMe
+  Object.defineProperty(Vue.prototype, '$d', {
+    get: function get$3 () {
+      var this$1 = this;
 
-    return (ref = this.$i18n).d.apply(ref, [ value ].concat( args ))
-    var ref;
-  };
+      return function (value) {
+        var args = [], len = arguments.length - 1;
+        while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
 
-  Vue.prototype.$n = function (value) {
-    var args = [], len = arguments.length - 1;
-    while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+        return (ref = this$1.$i18n).d.apply(ref, [ value ].concat( args ))
+        var ref;
+      }
+    }
+  });
+  // $FlowFixMe
+  Object.defineProperty(Vue.prototype, '$n', {
+    get: function get$4 () {
+      var this$1 = this;
 
-    return (ref = this.$i18n).n.apply(ref, [ value ].concat( args ))
-    var ref;
-  };
+      return function (value) {
+        var args = [], len = arguments.length - 1;
+        while ( len-- > 0 ) args[ len ] = arguments[ len + 1 ];
+
+        return (ref = this$1.$i18n).n.apply(ref, [ value ].concat( args ))
+        var ref;
+      }
+    }
+  });
 }
 
 /*  */
@@ -50833,7 +54696,7 @@ VueI18n.availabilities = {
   numberFormat: canUseNumberFormat
 };
 VueI18n.install = install;
-VueI18n.version = '7.3.2';
+VueI18n.version = '7.3.3';
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
@@ -50845,7 +54708,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1), __webpack_require__(10)))
 
 /***/ }),
-/* 153 */
+/* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53477,54 +57340,55 @@ if (inBrowser && window.Vue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(10), __webpack_require__(1)))
 
 /***/ }),
-/* 154 */
+/* 173 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_41111448_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_app_vue__ = __webpack_require__(159);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1aebcd7b_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_app_vue__ = __webpack_require__(177);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(155)
+  __webpack_require__(174)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-41111448"
+var __vue_scopeId__ = "data-v-1aebcd7b"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_41111448_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_app_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1aebcd7b_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_app_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/app.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-41111448", Component.options)
+    hotAPI.createRecord("data-v-1aebcd7b", Component.options)
   } else {
-    hotAPI.reload("data-v-41111448", Component.options)
-' + '  }
+    hotAPI.reload("data-v-1aebcd7b", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -53532,26 +57396,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 155 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(156);
+var content = __webpack_require__(175);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("42ec9c67", content, false);
+var update = __webpack_require__(5)("131cf57c", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41111448\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./app.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41111448\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./app.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1aebcd7b\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./app.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1aebcd7b\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./app.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -53561,7 +57424,7 @@ if(false) {
 }
 
 /***/ }),
-/* 156 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -53569,13 +57432,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.root[data-v-41111448] {\n  position: relative;\n  height: 100%;\n  min-height: 100%;\n  width: 100%;\n  overflow: hidden;\n}\n", ""]);
+exports.push([module.i, "\n.root[data-v-1aebcd7b] {\n  position: relative;\n  height: 100%;\n  min-height: 100%;\n  width: 100%;\n  overflow: hidden;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 157 */
+/* 176 */
 /***/ (function(module, exports) {
 
 /**
@@ -53608,42 +57471,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 158 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 159 */
+/* 177 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53660,59 +57488,60 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-41111448", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-1aebcd7b", esExports)
   }
 }
 
 /***/ }),
-/* 160 */
+/* 178 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6e71333e_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_top_vue__ = __webpack_require__(176);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_972d7c2a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_top_vue__ = __webpack_require__(191);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(161)
+  __webpack_require__(179)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-6e71333e"
+var __vue_scopeId__ = "data-v-972d7c2a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6e71333e_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_top_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_972d7c2a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_top_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/page/top.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6e71333e", Component.options)
+    hotAPI.createRecord("data-v-972d7c2a", Component.options)
   } else {
-    hotAPI.reload("data-v-6e71333e", Component.options)
-' + '  }
+    hotAPI.reload("data-v-972d7c2a", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -53720,26 +57549,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 161 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(162);
+var content = __webpack_require__(180);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("0c41eb42", content, false);
+var update = __webpack_require__(5)("5bbfad52", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6e71333e\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./top.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6e71333e\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./top.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-972d7c2a\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./top.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-972d7c2a\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./top.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -53749,7 +57577,7 @@ if(false) {
 }
 
 /***/ }),
-/* 162 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -53757,333 +57585,20 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.lang[data-v-6e71333e] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\naside[data-v-6e71333e] {\n  position: relative;\n  float: left;\n  width: 260px;\n  height: calc(100% - 40px);\n  margin: 20px;\n}\nh1[data-v-6e71333e] {\n  width: 100%;\n  position: relative;\n}\nh1 .logo[data-v-6e71333e] {\n    position: absolute;\n}\n.root[data-v-6e71333e] {\n  -webkit-overflow-scrolling: touch;\n}\n.root.ja h1[data-v-6e71333e] {\n  height: calc(100% - 197px);\n}\n.root.ja h1 .logo[data-v-6e71333e] {\n    top: 50%;\n    left: 50%;\n    transform: translateY(-50%) translateX(-50%);\n}\n.root.en h1[data-v-6e71333e] {\n  height: calc(100% - 197px);\n}\n.root.en h1 .logo[data-v-6e71333e] {\n    top: 50%;\n    transform: translateY(-50%);\n}\n.lead[data-v-6e71333e] {\n  position: absolute;\n  bottom: 84px;\n}\nfooter[data-v-6e71333e] {\n  height: 52px;\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n}\nfooter .ycam[data-v-6e71333e] {\n    position: absolute;\n    bottom: 3px;\n    left: 0;\n}\nfooter .ycam[data-v-6e71333e]:hover {\n      opacity: 0.7;\n}\nfooter .copyright[data-v-6e71333e] {\n    position: absolute;\n    right: 0;\n    font-family: 'Roboto';\n    font-size: 9px;\n    line-height: 13px;\n    letter-spacing: 0;\n    text-align: right;\n    color: #4c4c4c;\n}\nfooter .copyright.chrome[data-v-6e71333e] {\n      line-height: 14px;\n      -webkit-transform: scale(0.9);\n      -webkit-transform-origin: 100% 0;\n}\nfooter .copyright a[data-v-6e71333e] {\n      color: #4c4c4c;\n      text-decoration: none;\n}\nfooter .copyright a[data-v-6e71333e]:hover {\n        border-bottom: 1px dotted #4c4c4c;\n}\nnav[data-v-6e71333e] {\n  display: none;\n}\nnav a[data-v-6e71333e] {\n    display: block;\n    color: #fff;\n    text-decoration: none;\n    font-size: 15px;\n    line-height: 2em;\n}\n#map[data-v-6e71333e] {\n  float: right;\n  width: calc(100% - 320px);\n  height: calc(100% - 40px);\n  background-color: #fff;\n  border-radius: 5px;\n  margin: 20px 20px 20px 0;\n}\n@media (max-width: 660px) {\n.root[data-v-6e71333e] {\n    overflow: auto;\n}\n#map[data-v-6e71333e] {\n    margin: 0;\n    width: 100%;\n    height: 604px;\n    border-radius: 0;\n    clear: both;\n    float: none;\n}\n.lang[data-v-6e71333e] {\n    right: default;\n    top: 15px;\n    left: 15px;\n}\naside[data-v-6e71333e] {\n    width: calc(100% - 60px);\n    margin: 30px;\n    height: auto;\n    display: block;\n}\n.root.en h1[data-v-6e71333e] {\n    height: 265px;\n}\n.root.ja #map[data-v-6e71333e] {\n    height: 553px;\n}\n.root.ja h1[data-v-6e71333e] {\n    height: 365px;\n}\n.logo.en[data-v-6e71333e] {\n    width: 100%;\n    max-width: 570px;\n}\n.lead[data-v-6e71333e] {\n    position: relative;\n    bottom: inherit;\n    margin-bottom: 100px;\n}\n.lead > img[data-v-6e71333e] {\n      width: 100%;\n}\nnav[data-v-6e71333e] {\n    display: block;\n    margin-bottom: 100px;\n}\nnav h2[data-v-6e71333e] {\n      margin-bottom: 40px;\n}\nnav a[data-v-6e71333e] {\n      display: block;\n      padding: 58px 34px;\n      margin-bottom: 15px;\n      background-image: url(/dna-of-forests/img/top/list-icon.png);\n      background-repeat: no-repeat;\n      background-position: right 38px center;\n}\nnav a[data-v-6e71333e]:nth-child(4n+1) {\n        background-color: #ff33a5;\n}\nnav a[data-v-6e71333e]:nth-child(4n+2) {\n        background-color: #337eff;\n}\nnav a[data-v-6e71333e]:nth-child(4n+3) {\n        background-color: #33ff6d;\n}\nnav a[data-v-6e71333e]:nth-child(4n+4) {\n        background-color: #f5ff8a;\n}\nfooter[data-v-6e71333e] {\n    position: relative;\n    height: auto;\n}\nfooter .ycam[data-v-6e71333e] {\n      position: relative;\n      float: left;\n}\nfooter .copyright[data-v-6e71333e] {\n      position: relative;\n      float: right;\n      font-size: 15px;\n      line-height: 22px;\n}\nfooter .copyright.chrome[data-v-6e71333e] {\n        line-height: 22px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.lang[data-v-972d7c2a] {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n}\naside[data-v-972d7c2a] {\n  position: relative;\n  float: left;\n  width: 260px;\n  height: calc(100% - 40px);\n  margin: 20px;\n}\nh1[data-v-972d7c2a] {\n  width: 100%;\n  position: relative;\n}\nh1 .logo[data-v-972d7c2a] {\n    position: absolute;\n}\n.root[data-v-972d7c2a] {\n  -webkit-overflow-scrolling: touch;\n}\n.root.ja h1[data-v-972d7c2a] {\n  height: calc(100% - 197px);\n}\n.root.ja h1 .logo[data-v-972d7c2a] {\n    top: 50%;\n    left: 50%;\n    transform: translateY(-50%) translateX(-50%);\n}\n.root.en h1[data-v-972d7c2a] {\n  height: calc(100% - 197px);\n}\n.root.en h1 .logo[data-v-972d7c2a] {\n    top: 50%;\n    transform: translateY(-50%);\n}\n.lead[data-v-972d7c2a] {\n  position: absolute;\n  bottom: 84px;\n}\nfooter[data-v-972d7c2a] {\n  height: 52px;\n  width: 100%;\n  position: absolute;\n  bottom: 0;\n}\nfooter .ycam[data-v-972d7c2a] {\n    position: absolute;\n    bottom: 3px;\n    left: 0;\n}\nfooter .ycam[data-v-972d7c2a]:hover {\n      opacity: 0.7;\n}\nfooter .copyright[data-v-972d7c2a] {\n    position: absolute;\n    right: 0;\n    font-family: 'Roboto';\n    font-size: 9px;\n    line-height: 13px;\n    letter-spacing: 0;\n    text-align: right;\n    color: #4c4c4c;\n}\nfooter .copyright.chrome[data-v-972d7c2a] {\n      line-height: 14px;\n      -webkit-transform: scale(0.9);\n      -webkit-transform-origin: 100% 0;\n}\nfooter .copyright a[data-v-972d7c2a] {\n      color: #4c4c4c;\n      text-decoration: none;\n}\nfooter .copyright a[data-v-972d7c2a]:hover {\n        border-bottom: 1px dotted #4c4c4c;\n}\nnav[data-v-972d7c2a] {\n  display: none;\n}\nnav a[data-v-972d7c2a] {\n    display: block;\n    color: #fff;\n    text-decoration: none;\n    font-size: 15px;\n    line-height: 2em;\n}\n#map[data-v-972d7c2a] {\n  float: right;\n  width: calc(100% - 320px);\n  height: calc(100% - 40px);\n  background-color: #fff;\n  border-radius: 5px;\n  margin: 20px 20px 20px 0;\n}\n@media (max-width: 660px) {\n.root[data-v-972d7c2a] {\n    overflow: auto;\n}\n#map[data-v-972d7c2a] {\n    margin: 0;\n    width: 100%;\n    height: 604px;\n    border-radius: 0;\n    clear: both;\n    float: none;\n}\n.lang[data-v-972d7c2a] {\n    right: default;\n    top: 15px;\n    left: 15px;\n}\naside[data-v-972d7c2a] {\n    width: calc(100% - 60px);\n    margin: 30px;\n    height: auto;\n    display: block;\n}\n.root.en h1[data-v-972d7c2a] {\n    height: 265px;\n}\n.root.ja #map[data-v-972d7c2a] {\n    height: 553px;\n}\n.root.ja h1[data-v-972d7c2a] {\n    height: 365px;\n}\n.logo.en[data-v-972d7c2a] {\n    width: 100%;\n    max-width: 570px;\n}\n.lead[data-v-972d7c2a] {\n    position: relative;\n    bottom: inherit;\n    margin-bottom: 100px;\n}\n.lead > img[data-v-972d7c2a] {\n      width: 100%;\n}\nnav[data-v-972d7c2a] {\n    display: block;\n    margin-bottom: 100px;\n}\nnav h2[data-v-972d7c2a] {\n      margin-bottom: 40px;\n}\nnav a[data-v-972d7c2a] {\n      display: block;\n      padding: 58px 34px;\n      margin-bottom: 15px;\n      background-image: url(/dna-of-forests/img/top/list-icon.png);\n      background-repeat: no-repeat;\n      background-position: right 38px center;\n}\nnav a[data-v-972d7c2a]:nth-child(4n+1) {\n        background-color: #ff33a5;\n}\nnav a[data-v-972d7c2a]:nth-child(4n+2) {\n        background-color: #337eff;\n}\nnav a[data-v-972d7c2a]:nth-child(4n+3) {\n        background-color: #33ff6d;\n}\nnav a[data-v-972d7c2a]:nth-child(4n+4) {\n        background-color: #f5ff8a;\n}\nfooter[data-v-972d7c2a] {\n    position: relative;\n    height: auto;\n}\nfooter .ycam[data-v-972d7c2a] {\n      position: relative;\n      float: left;\n}\nfooter .copyright[data-v-972d7c2a] {\n      position: relative;\n      float: right;\n      font-size: 15px;\n      line-height: 22px;\n}\nfooter .copyright.chrome[data-v-972d7c2a] {\n        line-height: 22px;\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 163 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _vueResizeDirective = __webpack_require__(164);
-
-var _vueResizeDirective2 = _interopRequireDefault(_vueResizeDirective);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// 登録
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-_vue2.default.component('lang-button-top', __webpack_require__(167).default);
-
-exports.default = _vue2.default.extend({
-  directives: {
-    resize: _vueResizeDirective2.default
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-  methods: {
-    init: function init() {
-
-      // chromeで10pxより小さい文字が使えない問題対策
-      if (document.querySelector('body').classList.contains('chrome')) {
-        this.$el.querySelector('.copyright').classList.add('chrome');
-      }
-      // SP判定
-      var isSP = this.$el.querySelector('nav').offsetParent != null;
-
-      if (this.$route.path == '/') {
-        var mapOptions = {
-          mapTypeId: 'satellite',
-          disableDefaultUI: true,
-          type: false,
-          zoomControl: false
-        };
-
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        var guides = {
-          niho: {
-            title: {
-              ja: '仁保の森 2016',
-              en: 'Forest of Niho 2016'
-            },
-            position: new google.maps.LatLng(34.2505833, 131.5789502)
-          },
-          kumano: {
-            title: {
-              ja: '熊野の森 2017',
-              en: 'Forest of Kumano 2017'
-            },
-            position: new google.maps.LatLng(34.170286, 131.461427)
-          }
-        };
-
-        var locale = location.pathname == '/dna-of-forests/' ? 'ja' : 'en';
-
-        for (var _prop in guides) {
-          var b = guides[_prop];
-          // SPの時
-          var icon_img = isSP ? 'marker-sp.png' : 'marker-' + locale + '-pc.png';
-          var marker = new google.maps.Marker({
-            name: _prop,
-            position: b.position,
-            map: map,
-            title: b.title[locale] + '\u3092\u307F\u308B',
-            icon: '/dna-of-forests/img/top/guides/' + _prop + '/' + icon_img
-          });
-          marker.addListener('click', function (e) {
-            location.href = '#/' + this.name;
-          });
-        }
-        // 表示領域の調整
-        var bounds = new google.maps.LatLngBounds();
-        for (var prop in guides) {
-          bounds.extend(guides[prop].position);
-        }
-        map.fitBounds(bounds);
-      }
-    },
-    linkUrl: function linkUrl(default_path) {
-      if (this.$route.params.index) {
-        return default_path + '/' + this.$route.params.index;
-      } else {
-        return default_path;
-      }
-    }
-  }
-});
-
-/***/ }),
-/* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-!function(t,n){ true?module.exports=n(__webpack_require__(165),__webpack_require__(166)):"function"==typeof define&&define.amd?define(["css-element-queries/src/ResizeSensor.js","lodash.debounce"],n):"object"==typeof exports?exports.Vueresize=n(require("css-element-queries/src/ResizeSensor.js"),require("lodash.debounce")):t.Vueresize=n(t.ResizeSensor,t._)}(this,function(t,n){return function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="/",n(0)}([function(t,n,e){var r,o,u;!function(i,c){o=[t,n,e(9),e(36),e(37)],r=c,u="function"==typeof r?r.apply(n,o):r,!(void 0!==u&&(t.exports=u))}(this,function(t,n,e,r,o){"use strict";function u(t){return t&&t.__esModule?t:{default:t}}function i(t){if(!t)return l;var n=(0,c.default)(t);return n.length?Number(n[0]):l}Object.defineProperty(n,"__esModule",{value:!0});var c=u(e),f=u(r),s=u(o),a=s.default.debounce,p=void 0===a?s.default:a,l=150;n.default={inserted:function(t,n){var e=n.value,r=n.arg,o=n.modifiers,u=function(){return e(t)};switch(r){case"debounce":u=p(function(){return e(t)},i(o));break;case"throttle":var c=i(o);u=p(function(){return e(t)},c,{leading:!0,trailing:!0,maxWait:c})}(0,f.default)(t,u)}},t.exports=n.default})},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n,e){t.exports=!e(3)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(22),o=e(6);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports={default:e(10),__esModule:!0}},function(t,n,e){e(35),t.exports=e(1).Object.keys},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n,e){var r=e(5);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n,e){var r=e(8),o=e(31),u=e(30);t.exports=function(t){return function(n,e,i){var c,f=r(n),s=o(f.length),a=u(i,s);if(t&&e!=e){for(;s>a;)if(c=f[a++],c!=c)return!0}else for(;s>a;a++)if((t||a in f)&&f[a]===e)return t||a||0;return!t&&-1}}},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(5),o=e(4).document,u=r(o)&&r(o.createElement);t.exports=function(t){return u?o.createElement(t):{}}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n,e){var r=e(4),o=e(1),u=e(15),i=e(20),c="prototype",f=function(t,n,e){var s,a,p,l=t&f.F,v=t&f.G,d=t&f.S,x=t&f.P,y=t&f.B,h=t&f.W,b=v?o:o[n]||(o[n]={}),m=b[c],j=v?r:d?r[n]:(r[n]||{})[c];v&&(e=n);for(s in e)a=!l&&j&&void 0!==j[s],a&&s in b||(p=a?j[s]:e[s],b[s]=v&&"function"!=typeof j[s]?e[s]:y&&a?u(p,r):h&&j[s]==p?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[c]=t[c],n}(p):x&&"function"==typeof p?u(Function.call,p):p,x&&((b.virtual||(b.virtual={}))[s]=p,t&f.R&&m&&!m[s]&&i(m,s,p)))};f.F=1,f.G=2,f.S=4,f.P=8,f.B=16,f.W=32,f.U=64,f.R=128,t.exports=f},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(23),o=e(27);t.exports=e(2)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){t.exports=!e(2)&&!e(3)(function(){return 7!=Object.defineProperty(e(16)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(14);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(12),o=e(21),u=e(33),i=Object.defineProperty;n.f=e(2)?Object.defineProperty:function(t,n,e){if(r(t),n=u(n,!0),r(e),o)try{return i(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(19),o=e(8),u=e(13)(!1),i=e(28)("IE_PROTO");t.exports=function(t,n){var e,c=o(t),f=0,s=[];for(e in c)e!=i&&r(c,e)&&s.push(e);for(;n.length>f;)r(c,e=n[f++])&&(~u(s,e)||s.push(e));return s}},function(t,n,e){var r=e(24),o=e(17);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(18),o=e(1),u=e(3);t.exports=function(t,n){var e=(o.Object||{})[t]||Object[t],i={};i[t]=n(e),r(r.S+r.F*u(function(){e(1)}),"Object",i)}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n,e){var r=e(29)("keys"),o=e(34);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(4),o="__core-js_shared__",u=r[o]||(r[o]={});t.exports=function(t){return u[t]||(u[t]={})}},function(t,n,e){var r=e(7),o=Math.max,u=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):u(t,n)}},function(t,n,e){var r=e(7),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){var r=e(6);t.exports=function(t){return Object(r(t))}},function(t,n,e){var r=e(5);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n,e){var r=e(32),o=e(25);e(26)("keys",function(){return function(t){return o(r(t))}})},function(n,e){n.exports=t},function(t,e){t.exports=n}])});
+!function(t,n){ true?module.exports=n(__webpack_require__(182),__webpack_require__(183)):"function"==typeof define&&define.amd?define(["css-element-queries/src/ResizeSensor.js","lodash.debounce"],n):"object"==typeof exports?exports.Vueresize=n(require("css-element-queries/src/ResizeSensor.js"),require("lodash.debounce")):t.Vueresize=n(t.ResizeSensor,t._)}(this,function(t,n){return function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="/",n(0)}([function(t,n,e){var r,o,u;!function(i,c){o=[t,n,e(9),e(36),e(37)],r=c,u="function"==typeof r?r.apply(n,o):r,!(void 0!==u&&(t.exports=u))}(this,function(t,n,e,r,o){"use strict";function u(t){return t&&t.__esModule?t:{default:t}}function i(t){if(!t)return l;var n=(0,c.default)(t);return n.length?Number(n[0]):l}Object.defineProperty(n,"__esModule",{value:!0});var c=u(e),f=u(r),s=u(o),a=s.default.debounce,p=void 0===a?s.default:a,l=150;n.default={inserted:function(t,n){var e=n.value,r=n.arg,o=n.modifiers,u=function(){return e(t)};switch(r){case"debounce":u=p(function(){return e(t)},i(o));break;case"throttle":var c=i(o);u=p(function(){return e(t)},c,{leading:!0,trailing:!0,maxWait:c})}(0,f.default)(t,u)}},t.exports=n.default})},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n,e){t.exports=!e(3)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(22),o=e(6);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports={default:e(10),__esModule:!0}},function(t,n,e){e(35),t.exports=e(1).Object.keys},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n,e){var r=e(5);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n,e){var r=e(8),o=e(31),u=e(30);t.exports=function(t){return function(n,e,i){var c,f=r(n),s=o(f.length),a=u(i,s);if(t&&e!=e){for(;s>a;)if(c=f[a++],c!=c)return!0}else for(;s>a;a++)if((t||a in f)&&f[a]===e)return t||a||0;return!t&&-1}}},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(5),o=e(4).document,u=r(o)&&r(o.createElement);t.exports=function(t){return u?o.createElement(t):{}}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n,e){var r=e(4),o=e(1),u=e(15),i=e(20),c="prototype",f=function(t,n,e){var s,a,p,l=t&f.F,v=t&f.G,d=t&f.S,x=t&f.P,y=t&f.B,h=t&f.W,b=v?o:o[n]||(o[n]={}),m=b[c],j=v?r:d?r[n]:(r[n]||{})[c];v&&(e=n);for(s in e)a=!l&&j&&void 0!==j[s],a&&s in b||(p=a?j[s]:e[s],b[s]=v&&"function"!=typeof j[s]?e[s]:y&&a?u(p,r):h&&j[s]==p?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[c]=t[c],n}(p):x&&"function"==typeof p?u(Function.call,p):p,x&&((b.virtual||(b.virtual={}))[s]=p,t&f.R&&m&&!m[s]&&i(m,s,p)))};f.F=1,f.G=2,f.S=4,f.P=8,f.B=16,f.W=32,f.U=64,f.R=128,t.exports=f},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(23),o=e(27);t.exports=e(2)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){t.exports=!e(2)&&!e(3)(function(){return 7!=Object.defineProperty(e(16)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(14);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(12),o=e(21),u=e(33),i=Object.defineProperty;n.f=e(2)?Object.defineProperty:function(t,n,e){if(r(t),n=u(n,!0),r(e),o)try{return i(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(19),o=e(8),u=e(13)(!1),i=e(28)("IE_PROTO");t.exports=function(t,n){var e,c=o(t),f=0,s=[];for(e in c)e!=i&&r(c,e)&&s.push(e);for(;n.length>f;)r(c,e=n[f++])&&(~u(s,e)||s.push(e));return s}},function(t,n,e){var r=e(24),o=e(17);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(18),o=e(1),u=e(3);t.exports=function(t,n){var e=(o.Object||{})[t]||Object[t],i={};i[t]=n(e),r(r.S+r.F*u(function(){e(1)}),"Object",i)}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n,e){var r=e(29)("keys"),o=e(34);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(4),o="__core-js_shared__",u=r[o]||(r[o]={});t.exports=function(t){return u[t]||(u[t]={})}},function(t,n,e){var r=e(7),o=Math.max,u=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):u(t,n)}},function(t,n,e){var r=e(7),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){var r=e(6);t.exports=function(t){return Object(r(t))}},function(t,n,e){var r=e(5);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n,e){var r=e(32),o=e(25);e(26)("keys",function(){return function(t){return o(r(t))}})},function(n,e){n.exports=t},function(t,e){t.exports=n}])});
 //# sourceMappingURL=Vueresize.js.map
 
 /***/ }),
-/* 165 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -54320,7 +57835,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 
 /***/ }),
-/* 166 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -54704,54 +58219,55 @@ module.exports = debounce;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 167 */
+/* 184 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f81605c0_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_top_vue__ = __webpack_require__(175);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cac6fc5a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_top_vue__ = __webpack_require__(190);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(168)
+  __webpack_require__(185)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-f81605c0"
+var __vue_scopeId__ = "data-v-cac6fc5a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f81605c0_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_top_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cac6fc5a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_top_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/lang-button-top.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-f81605c0", Component.options)
+    hotAPI.createRecord("data-v-cac6fc5a", Component.options)
   } else {
-    hotAPI.reload("data-v-f81605c0", Component.options)
-' + '  }
+    hotAPI.reload("data-v-cac6fc5a", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -54759,26 +58275,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 168 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(169);
+var content = __webpack_require__(186);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("75bc6e98", content, false);
+var update = __webpack_require__(5)("03099fa5", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f81605c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button-top.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f81605c0\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button-top.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cac6fc5a\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button-top.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cac6fc5a\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button-top.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -54788,7 +58303,7 @@ if(false) {
 }
 
 /***/ }),
-/* 169 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -54796,133 +58311,29 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.buttons a[data-v-f81605c0] {\n  display: block;\n  float: left;\n  height: 30px;\n  background-color: #0d0d0d;\n}\n.buttons a > div[data-v-f81605c0] {\n    height: 100%;\n    background-position: center;\n    background-repeat: no-repeat;\n    transition-duration: 0.2s;\n    opacity: 0.5;\n}\n.buttons a:hover > div[data-v-f81605c0] {\n    opacity: 0.9;\n}\n.buttons a.en[data-v-f81605c0] {\n    width: 45px;\n    border-top-left-radius: 30px;\n    border-bottom-left-radius: 30px;\n    border-right: 1px solid #1a1a1a;\n}\n.buttons a.en > div[data-v-f81605c0] {\n      background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-pc@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.en[data-v-f81605c0]:not([href]) {\n      cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-f81605c0] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-active-pc@2x.png);\n}\n.buttons a.ja[data-v-f81605c0] {\n    width: 44px;\n    border-top-right-radius: 30px;\n    border-bottom-right-radius: 30px;\n}\n.buttons a.ja > div[data-v-f81605c0] {\n      background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-pc@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.ja[data-v-f81605c0]:not([href]) {\n      cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-f81605c0] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-active-pc@2x.png);\n}\n@media (max-width: 660px) {\n.buttons[data-v-f81605c0] {\n    width: 162px;\n    height: 100%;\n}\n.buttons a.en[data-v-f81605c0] {\n      width: 80px;\n      height: 60px;\n      border-right: 2px solid #1a1a1a;\n      margin: 0;\n}\n.buttons a.en > div[data-v-f81605c0] {\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-sp@2x.png);\n        background-size: auto 18px;\n        background-position: 31px center;\n}\n.buttons a.en[data-v-f81605c0]:not([href]) {\n        cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-f81605c0] {\n          opacity: 1;\n          background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-active-sp@2x.png);\n}\n.buttons a.ja[data-v-f81605c0] {\n      width: 80px;\n      height: 60px;\n}\n.buttons a.ja > div[data-v-f81605c0] {\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-sp@2x.png);\n        background-size: auto 18px;\n        background-position: 22px center;\n}\n.buttons a.ja[data-v-f81605c0]:not([href]) {\n        cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-f81605c0] {\n          opacity: 1;\n          background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-active-sp@2x.png);\n}\n}\n", ""]);
+exports.push([module.i, "\n.buttons a[data-v-cac6fc5a] {\n  display: block;\n  float: left;\n  height: 30px;\n  background-color: #0d0d0d;\n}\n.buttons a > div[data-v-cac6fc5a] {\n    height: 100%;\n    background-position: center;\n    background-repeat: no-repeat;\n    transition-duration: 0.2s;\n    opacity: 0.5;\n}\n.buttons a:hover > div[data-v-cac6fc5a] {\n    opacity: 0.9;\n}\n.buttons a.en[data-v-cac6fc5a] {\n    width: 45px;\n    border-top-left-radius: 30px;\n    border-bottom-left-radius: 30px;\n    border-right: 1px solid #1a1a1a;\n}\n.buttons a.en > div[data-v-cac6fc5a] {\n      background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-pc@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.en[data-v-cac6fc5a]:not([href]) {\n      cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-cac6fc5a] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-active-pc@2x.png);\n}\n.buttons a.ja[data-v-cac6fc5a] {\n    width: 44px;\n    border-top-right-radius: 30px;\n    border-bottom-right-radius: 30px;\n}\n.buttons a.ja > div[data-v-cac6fc5a] {\n      background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-pc@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.ja[data-v-cac6fc5a]:not([href]) {\n      cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-cac6fc5a] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-active-pc@2x.png);\n}\n@media (max-width: 660px) {\n.buttons[data-v-cac6fc5a] {\n    width: 162px;\n    height: 100%;\n}\n.buttons a.en[data-v-cac6fc5a] {\n      width: 80px;\n      height: 60px;\n      border-right: 2px solid #1a1a1a;\n      margin: 0;\n}\n.buttons a.en > div[data-v-cac6fc5a] {\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-sp@2x.png);\n        background-size: auto 18px;\n        background-position: 31px center;\n}\n.buttons a.en[data-v-cac6fc5a]:not([href]) {\n        cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-cac6fc5a] {\n          opacity: 1;\n          background-image: url(/dna-of-forests/img/top/lang-button-top/language-en-active-sp@2x.png);\n}\n.buttons a.ja[data-v-cac6fc5a] {\n      width: 80px;\n      height: 60px;\n}\n.buttons a.ja > div[data-v-cac6fc5a] {\n        background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-sp@2x.png);\n        background-size: auto 18px;\n        background-position: 22px center;\n}\n.buttons a.ja[data-v-cac6fc5a]:not([href]) {\n        cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-cac6fc5a] {\n          opacity: 1;\n          background-image: url(/dna-of-forests/img/top/lang-button-top/language-ja-active-sp@2x.png);\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 170 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default.extend(__webpack_require__(16).default); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 171 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(172);
+var content = __webpack_require__(188);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("446a3150", content, false);
+var update = __webpack_require__(5)("2c120935", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bd0d69d0\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bd0d69d0\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-01a5bd6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-01a5bd6a\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./lang-button.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -54932,7 +58343,7 @@ if(false) {
 }
 
 /***/ }),
-/* 172 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -54940,147 +58351,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.buttons a[data-v-bd0d69d0] {\n  display: block;\n  float: left;\n  height: 30px;\n  background-color: #0d0d0d;\n}\n.buttons a > div[data-v-bd0d69d0] {\n    height: 100%;\n    background-position: center;\n    background-repeat: no-repeat;\n    transition-duration: 0.2s;\n    opacity: 0.5;\n}\n.buttons a:hover > div[data-v-bd0d69d0] {\n    opacity: 0.9;\n}\n.buttons a.en[data-v-bd0d69d0] {\n    width: 39px;\n    margin-right: 1px;\n}\n.buttons a.en > div[data-v-bd0d69d0] {\n      background-image: url(/dna-of-forests/img/gnav/language-en@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.en[data-v-bd0d69d0]:not([href]) {\n      cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-bd0d69d0] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png);\n}\n.buttons a.ja[data-v-bd0d69d0] {\n    width: 40px;\n}\n.buttons a.ja > div[data-v-bd0d69d0] {\n      background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.ja[data-v-bd0d69d0]:not([href]) {\n      cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-bd0d69d0] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png);\n}\n.buttons.round a.en[data-v-bd0d69d0] {\n  width: 45px;\n  border-top-left-radius: 30px;\n  border-bottom-left-radius: 30px;\n}\n.buttons.round a.ja[data-v-bd0d69d0] {\n  width: 44px;\n  border-top-right-radius: 30px;\n  border-bottom-right-radius: 30px;\n}\n@media (max-width: 660px) {\n.buttons[data-v-bd0d69d0] {\n    width: 50px;\n    height: 100%;\n}\n.buttons a[data-v-bd0d69d0] {\n      float: none;\n}\n.buttons a.en[data-v-bd0d69d0] {\n        width: 50px;\n        margin-right: 1px;\n        height: 49px;\n        margin-bottom: 1px;\n}\n.buttons a.en > div[data-v-bd0d69d0] {\n          background-image: url(/dna-of-forests/img/gnav/language-en@2x.png);\n          background-size: auto 9px;\n}\n.buttons a.en[data-v-bd0d69d0]:not([href]) {\n          cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-bd0d69d0] {\n            opacity: 1;\n            background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png);\n}\n.buttons a.ja[data-v-bd0d69d0] {\n        width: 50px;\n        height: 50px;\n}\n.buttons a.ja > div[data-v-bd0d69d0] {\n          background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png);\n          background-size: auto 9px;\n}\n.buttons a.ja[data-v-bd0d69d0]:not([href]) {\n          cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-bd0d69d0] {\n            opacity: 1;\n            background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png);\n}\n}\n", ""]);
+exports.push([module.i, "\n.buttons a[data-v-01a5bd6a] {\n  display: block;\n  float: left;\n  height: 30px;\n  background-color: #0d0d0d;\n}\n.buttons a > div[data-v-01a5bd6a] {\n    height: 100%;\n    background-position: center;\n    background-repeat: no-repeat;\n    transition-duration: 0.2s;\n    opacity: 0.5;\n}\n.buttons a:hover > div[data-v-01a5bd6a] {\n    opacity: 0.9;\n}\n.buttons a.en[data-v-01a5bd6a] {\n    width: 39px;\n    margin-right: 1px;\n}\n.buttons a.en > div[data-v-01a5bd6a] {\n      background-image: url(/dna-of-forests/img/gnav/language-en@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.en[data-v-01a5bd6a]:not([href]) {\n      cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-01a5bd6a] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png);\n}\n.buttons a.ja[data-v-01a5bd6a] {\n    width: 40px;\n}\n.buttons a.ja > div[data-v-01a5bd6a] {\n      background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png);\n      background-size: auto 9px;\n}\n.buttons a.ja[data-v-01a5bd6a]:not([href]) {\n      cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-01a5bd6a] {\n        opacity: 1;\n        background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png);\n}\n.buttons.round a.en[data-v-01a5bd6a] {\n  width: 45px;\n  border-top-left-radius: 30px;\n  border-bottom-left-radius: 30px;\n}\n.buttons.round a.ja[data-v-01a5bd6a] {\n  width: 44px;\n  border-top-right-radius: 30px;\n  border-bottom-right-radius: 30px;\n}\n@media (max-width: 660px) {\n.buttons[data-v-01a5bd6a] {\n    width: 50px;\n    height: 100%;\n}\n.buttons a[data-v-01a5bd6a] {\n      float: none;\n}\n.buttons a.en[data-v-01a5bd6a] {\n        width: 50px;\n        margin-right: 1px;\n        height: 49px;\n        margin-bottom: 1px;\n}\n.buttons a.en > div[data-v-01a5bd6a] {\n          background-image: url(/dna-of-forests/img/gnav/language-en@2x.png);\n          background-size: auto 9px;\n}\n.buttons a.en[data-v-01a5bd6a]:not([href]) {\n          cursor: default;\n}\n.buttons a.en:not([href]) > div[data-v-01a5bd6a] {\n            opacity: 1;\n            background-image: url(/dna-of-forests/img/gnav/language-en-active@2x.png);\n}\n.buttons a.ja[data-v-01a5bd6a] {\n        width: 50px;\n        height: 50px;\n}\n.buttons a.ja > div[data-v-01a5bd6a] {\n          background-image: url(/dna-of-forests/img/gnav/language-ja@2x.png);\n          background-size: auto 9px;\n}\n.buttons a.ja[data-v-01a5bd6a]:not([href]) {\n          cursor: default;\n}\n.buttons a.ja:not([href]) > div[data-v-01a5bd6a] {\n            opacity: 1;\n            background-image: url(/dna-of-forests/img/gnav/language-ja-active@2x.png);\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 173 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default.extend({
-
-  mounted: function mounted() {
-    this.changeRoute();
-  },
-
-  watch: {
-    // ルートの変更を監視
-    '$route': 'changeRoute'
-  },
-
-  methods: {
-    changeRoute: function changeRoute() {
-      var en = this.$el.querySelector('.en');
-      var ja = this.$el.querySelector('.ja');
-      if (this.$root.$i18n.locale === 'en') {
-        en.removeAttribute('href');
-        ja.href = '/dna-of-forests/#' + this.$route.path;
-      } else {
-        en.href = '/dna-of-forests/en/#' + this.$route.path;
-        ja.removeAttribute('href');
-      }
-    }
-  }
-}); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 174 */
+/* 189 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55107,12 +58384,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-bd0d69d0", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-01a5bd6a", esExports)
   }
 }
 
 /***/ }),
-/* 175 */
+/* 190 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55139,12 +58416,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-f81605c0", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-cac6fc5a", esExports)
   }
 }
 
 /***/ }),
-/* 176 */
+/* 191 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55364,59 +58641,60 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-6e71333e", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-972d7c2a", esExports)
   }
 }
 
 /***/ }),
-/* 177 */
+/* 192 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_67895125_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_guide_vue__ = __webpack_require__(197);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0fb86892_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_guide_vue__ = __webpack_require__(209);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(178)
+  __webpack_require__(193)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-67895125"
+var __vue_scopeId__ = "data-v-0fb86892"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_67895125_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_guide_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0fb86892_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_guide_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/page/guide.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-67895125", Component.options)
+    hotAPI.createRecord("data-v-0fb86892", Component.options)
   } else {
-    hotAPI.reload("data-v-67895125", Component.options)
-' + '  }
+    hotAPI.reload("data-v-0fb86892", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -55424,26 +58702,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 178 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(179);
+var content = __webpack_require__(194);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("7fd2d021", content, false);
+var update = __webpack_require__(5)("29daf932", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67895125\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./guide.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-67895125\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./guide.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0fb86892\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./guide.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0fb86892\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./guide.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -55453,7 +58730,7 @@ if(false) {
 }
 
 /***/ }),
-/* 179 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -55461,105 +58738,29 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.root[data-v-67895125] {\n  position: relative;\n  height: 100%;\n  min-height: 100%;\n  width: 100%;\n  overflow: hidden;\n}\n.guide-content[data-v-67895125] {\n  width: calc(100% - 80px);\n  float: left;\n  height: 100%;\n  background-color: #000;\n  position: relative;\n  -webkit-overflow-scrolling: touch;\n}\nbody.facebook .guide-content[data-v-67895125] {\n  position: fixed;\n  top: 0;\n}\n@media (max-width: 660px) {\n.guide-content[data-v-67895125] {\n    width: 100%;\n    height: calc(100% - 100px);\n}\n}\n", ""]);
+exports.push([module.i, "\n.root[data-v-0fb86892] {\n  position: relative;\n  height: 100%;\n  min-height: 100%;\n  width: 100%;\n  overflow: hidden;\n}\n.guide-content[data-v-0fb86892] {\n  width: calc(100% - 80px);\n  float: left;\n  height: 100%;\n  background-color: #000;\n  position: relative;\n  -webkit-overflow-scrolling: touch;\n}\nbody.facebook .guide-content[data-v-0fb86892] {\n  position: fixed;\n  top: 0;\n}\n@media (max-width: 660px) {\n.guide-content[data-v-0fb86892] {\n    width: 100%;\n    height: calc(100% - 100px);\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 180 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _lodash = __webpack_require__(9);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// 登録
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-_vue2.default.component('global-nav', __webpack_require__(17).default);
-
-exports.default = _vue2.default.extend({
-  data: function data() {
-    return {
-      markers: __webpack_require__(190)("./" + this.$route.params.forest + '/markers.json'),
-      config: _lodash2.default.merge(__webpack_require__(193), __webpack_require__(194)("./" + this.$route.params.forest + '/config.json'))
-    };
-  }
-});
-
-/***/ }),
-/* 181 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(182);
+var content = __webpack_require__(196);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("2a068e29", content, false);
+var update = __webpack_require__(5)("4f688258", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c43131bc\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./global-nav.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c43131bc\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./global-nav.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-46167e8f\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./global-nav.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-46167e8f\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./global-nav.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -55569,7 +58770,7 @@ if(false) {
 }
 
 /***/ }),
-/* 182 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -55577,215 +58778,61 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\nnav[data-v-c43131bc] {\n  position: relative;\n  background: #000;\n  width: 80px;\n  height: 100%;\n  float: left;\n}\nnav > a[data-v-c43131bc] {\n    display: block;\n    width: 80px;\n    height: 80px;\n    background-color: #0d0d0d;\n    cursor: pointer;\n}\nnav > a[data-v-c43131bc]:not(:last-child) {\n      margin-bottom: 2px;\n}\nnav > a > div[data-v-c43131bc] {\n      height: 100%;\n      background-position: center;\n      background-repeat: no-repeat;\n      transition-duration: 0.2s;\n}\nnav > a > div > span[data-v-c43131bc] {\n        display: none;\n}\nnav > a:not(.router-link-active) > div[data-v-c43131bc] {\n      opacity: 0.5;\n}\nnav > a:not(.router-link-active):hover > div[data-v-c43131bc] {\n      opacity: 0.9;\n}\nnav > a.top > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/top@2x.png);\n      background-size: 21px 32px;\n}\nnav > a.top.router-link-active > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/top-active@2x.png);\n}\nnav > a.panorama > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/panorama@2x.png);\n      background-size: 20px 34px;\n}\nnav > a.panorama.router-link-active > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/panorama-active@2x.png);\n}\nnav > a.list > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/list@2x.png);\n      background-size: 20px 27px;\n}\nnav > a.list.router-link-active > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/list-active@2x.png);\n}\nnav > a.about > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/about@2x.png);\n      background-size: 34px 34px;\n}\nnav > a.about.router-link-active > div[data-v-c43131bc] {\n      background-image: url(/dna-of-forests/img/gnav/about-active@2x.png);\n}\nnav > a[data-v-c43131bc]:nth-last-child(2) {\n      position: absolute;\n      bottom: 30px;\n      margin-bottom: 2px;\n}\nnav > .lang[data-v-c43131bc] {\n    position: absolute;\n    height: 30px;\n    bottom: 0;\n}\n@media (max-width: 660px) {\nnav[data-v-c43131bc] {\n    position: fixed;\n    bottom: 0;\n    height: 100px;\n    width: 100%;\n    float: none;\n    z-index: 9999;\n}\nnav > a[data-v-c43131bc] {\n      width: 100px;\n      height: 100px;\n      float: left;\n      margin-right: 2px;\n}\nnav > a[data-v-c43131bc]:not(:last-child) {\n        margin-bottom: 0;\n}\nnav > a[data-v-c43131bc]:nth-last-child(2) {\n        right: 50px;\n        bottom: 0;\n        margin-bottom: 0;\n        margin-right: 2px;\n}\nnav > .lang[data-v-c43131bc] {\n      right: 0;\n      height: 100%;\n}\n}\n", ""]);
+exports.push([module.i, "\nnav[data-v-46167e8f] {\n  position: relative;\n  background: #000;\n  width: 80px;\n  height: 100%;\n  float: left;\n}\nnav > a[data-v-46167e8f] {\n    display: block;\n    width: 80px;\n    height: 80px;\n    background-color: #0d0d0d;\n    cursor: pointer;\n}\nnav > a[data-v-46167e8f]:not(:last-child) {\n      margin-bottom: 2px;\n}\nnav > a > div[data-v-46167e8f] {\n      height: 100%;\n      background-position: center;\n      background-repeat: no-repeat;\n      transition-duration: 0.2s;\n}\nnav > a > div > span[data-v-46167e8f] {\n        display: none;\n}\nnav > a:not(.router-link-active) > div[data-v-46167e8f] {\n      opacity: 0.5;\n}\nnav > a:not(.router-link-active):hover > div[data-v-46167e8f] {\n      opacity: 0.9;\n}\nnav > a.top > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/top@2x.png);\n      background-size: 21px 32px;\n}\nnav > a.top.router-link-active > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/top-active@2x.png);\n}\nnav > a.panorama > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/panorama@2x.png);\n      background-size: 20px 34px;\n}\nnav > a.panorama.router-link-active > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/panorama-active@2x.png);\n}\nnav > a.list > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/list@2x.png);\n      background-size: 20px 27px;\n}\nnav > a.list.router-link-active > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/list-active@2x.png);\n}\nnav > a.about > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/about@2x.png);\n      background-size: 34px 34px;\n}\nnav > a.about.router-link-active > div[data-v-46167e8f] {\n      background-image: url(/dna-of-forests/img/gnav/about-active@2x.png);\n}\nnav > a[data-v-46167e8f]:nth-last-child(2) {\n      position: absolute;\n      bottom: 30px;\n      margin-bottom: 2px;\n}\nnav > .lang[data-v-46167e8f] {\n    position: absolute;\n    height: 30px;\n    bottom: 0;\n}\n@media (max-width: 660px) {\nnav[data-v-46167e8f] {\n    position: fixed;\n    bottom: 0;\n    height: 100px;\n    width: 100%;\n    float: none;\n    z-index: 9999;\n}\nnav > a[data-v-46167e8f] {\n      width: 100px;\n      height: 100px;\n      float: left;\n      margin-right: 2px;\n}\nnav > a[data-v-46167e8f]:not(:last-child) {\n        margin-bottom: 0;\n}\nnav > a[data-v-46167e8f]:nth-last-child(2) {\n        right: 50px;\n        bottom: 0;\n        margin-bottom: 0;\n        margin-right: 2px;\n}\nnav > .lang[data-v-46167e8f] {\n      right: 0;\n      height: 100%;\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// 登録
-_vue2.default.component('sound-button', __webpack_require__(184).default); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-_vue2.default.component('lang-button', __webpack_require__(16).default);
-
-exports.default = _vue2.default.extend({
-  methods: {
-    linkUrl: function linkUrl(path) {
-      var p = this.$route.params;
-      if (['/panorama', '/list'].includes(path) && p.index) {
-        return '/' + p.forest + path + '/' + p.index;
-      } else {
-        return '/' + p.forest + path;
-      }
-    }
-  }
-});
-
-/***/ }),
-/* 184 */
+/* 197 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_ace335ce_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_sound_button_vue__ = __webpack_require__(188);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_02555546_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_sound_button_vue__ = __webpack_require__(200);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(185)
+  __webpack_require__(198)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-ace335ce"
+var __vue_scopeId__ = "data-v-02555546"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_ace335ce_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_sound_button_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_02555546_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_sound_button_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/sound-button.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ace335ce", Component.options)
+    hotAPI.createRecord("data-v-02555546", Component.options)
   } else {
-    hotAPI.reload("data-v-ace335ce", Component.options)
-' + '  }
+    hotAPI.reload("data-v-02555546", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -55793,26 +58840,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 185 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(186);
+var content = __webpack_require__(199);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("14961bac", content, false);
+var update = __webpack_require__(5)("a08f1088", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ace335ce\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./sound-button.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ace335ce\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./sound-button.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02555546\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./sound-button.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-02555546\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./sound-button.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -55822,7 +58868,7 @@ if(false) {
 }
 
 /***/ }),
-/* 186 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -55830,128 +58876,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\na > div[data-v-ace335ce] {\n  height: 100%;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-image: url(/dna-of-forests/img/gnav/sound-on@2x.png);\n  background-size: 18px 15px;\n  transition-duration: 0.2s;\n  opacity: 0.5;\n}\na > div > span[data-v-ace335ce] {\n    display: none;\n}\na:hover > div[data-v-ace335ce] {\n  opacity: 0.9;\n}\na.off > div[data-v-ace335ce] {\n  background-image: url(/dna-of-forests/img/gnav/sound-off@2x.png);\n  background-size: 17px 15px;\n}\n", ""]);
+exports.push([module.i, "\na > div[data-v-02555546] {\n  height: 100%;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-image: url(/dna-of-forests/img/gnav/sound-on@2x.png);\n  background-size: 18px 15px;\n  transition-duration: 0.2s;\n  opacity: 0.5;\n}\na > div > span[data-v-02555546] {\n    display: none;\n}\na:hover > div[data-v-02555546] {\n  opacity: 0.9;\n}\na.off > div[data-v-02555546] {\n  background-image: url(/dna-of-forests/img/gnav/sound-off@2x.png);\n  background-size: 17px 15px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _mobileDetect = __webpack_require__(18);
-
-var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
-
-var _jsCookie = __webpack_require__(20);
-
-var _jsCookie2 = _interopRequireDefault(_jsCookie);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default.extend({
-
-  mounted: function mounted() {
-    var _this = this;
-
-    var md = new _mobileDetect2.default(window.navigator.userAgent);
-
-    this.sound = this.$el.querySelector('audio');
-    this.sound.volume = 0.3;
-
-    if (md.mobile()) {
-      // モバイルのときだけ、ウィンドウが背面にいくとサウンド停止（戻ってくると復帰）
-      window.addEventListener('blur', function () {
-        if (!_this.sound.paused) {
-          _this.pauseByWindowBlur = true;
-          _this.toggleSound(false);
-        } else {
-          _this.pauseByWindowBlur = false;
-        }
-      }, false);
-      window.addEventListener('focus', function () {
-        if (_this.pauseByWindowBlur) {
-          _this.toggleSound(true);
-        }
-      }, false);
-    }
-
-    this.toggleSound(!(md.mobile() || parseInt(_jsCookie2.default.get('isSoundOn'), 10) == 0));
-  },
-
-  methods: {
-    click: function click() {
-      this.toggleSound(this.$el.className === 'off');
-    },
-    toggleSound: function toggleSound(_on) {
-      if (_on) {
-        this.sound.play();
-        _jsCookie2.default.set('isSoundOn', 1);
-        this.$el.className = '';
-      } else {
-        this.sound.pause();
-        _jsCookie2.default.set('isSoundOn', 0);
-        this.$el.className = 'off';
-      }
-    },
-    soundUrl: function soundUrl() {
-      return '/dna-of-forests/' + this.$route.params.forest + '/sound/forest.mp3';
-    }
-  },
-  data: function data() {
-    return {
-      pauseByWindowBlur: false
-    };
-  }
-}); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 188 */
+/* 200 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55980,12 +58911,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-ace335ce", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-02555546", esExports)
   }
 }
 
 /***/ }),
-/* 189 */
+/* 201 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56030,17 +58961,17 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-c43131bc", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-46167e8f", esExports)
   }
 }
 
 /***/ }),
-/* 190 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./kumano/markers.json": 191,
-	"./niho/markers.json": 192
+	"./kumano/markers.json": 203,
+	"./niho/markers.json": 204
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -56056,33 +58987,33 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 190;
+webpackContext.id = 202;
 
 /***/ }),
-/* 191 */
+/* 203 */
 /***/ (function(module, exports) {
 
 module.exports = {"samples":[{"id":"A","genus":{"ja":"オオイタチシダ","en":"Dryopteris pacifica"},"dna_sequences":[{"region":"rbcL","text":"NTNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNAGNAANNNTNACNCCCCCGAATACAAGACCAAAGATACCGATATCTTAGCAGCCTTTAGAATGACCCCACAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCGGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCTTTGGATCTATTCGAAGAAGGTTCTGTCACCAACTCGTTCACCTCTATTGTAGGTAATGTCTTTGGATTTAAGGCTCTACGCGCTTTACGCTTGGAAGACCTTCGAATTCCCCCCGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGTCTGTCTGCTAAGAATTATGGTAGAGCCGTCTACGAATGCCTCCGNGNNTTTTTTTTTNNNNNAAAAAAAAANNNNNNNNNNNNNNNNNNNNNTTTTNNNTNNNNTTTNNNCCNTTTTNNNNNTNNNTNNNNNNNNNGNCNNTNCNNTNNNNNTTTTNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTCTNNNNNNCNNNNNNNNNNNNNNNNNCNNTTNNNNCCNNNNNNCTTTTCNNNNCNNNNNNNNTTAANNNAATTTTNNTANNNNACCNTTNCTTCNANTANATCCNANNNAATAANCNTACATACCNNNNTATACTNNTTTTCCTCCCCNNNNANCNNNTTNCNNTTTCNNANNCANCNNCCCNTNNNAANNNTNCAAAACNNNTCAACCCNATCTTTNCNNTACNNTNNNCCNANNNACCCNTNNAAGAATTCCNNACCTNCCNNANCCTCCNGGCTTCCTCNNCNNNNTACTCCNNNTTTTNGGGNTCATTNTAANGGCTGCTAAA"}],"marker_position":{"latitude":-5,"longtitude":252,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"シダ系、背が低い、硬い、小さい葉がたくさんある、うらに胞子、他の葉に比べて","なんの植物だと思いますか？":"ワラビ","採集者ID":"Whatab"},"specimen":true,"memofig_width":"200px"},{"id":"B","genus":{"ja":"ヤツデ","en":"Fatsia japonica"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNNNNTNNNNNNNNNTACTTTATTCGATACAAACTCTTTTTTTGTGAGGATCCACTATGATAATGAGAAAGATTTCTGCATATACGCCCAAATCGGTCAATAATATCAGAATCTGATAAATCGGTCCAAACCGCCTTACTAATAGGATGCCCCAATACGTTACAAAATTTCGCTTTAGCCAATGATCCAATCAGAGGAATAATTGGAACAATAGTATCGAACTTATTAATAGCATTATCAATTAGAAATGAATTTTCTAGCATTTGACCGCGTACCATTGAAGGGTTTAGCCGCGCACTTGATAGATAGCCCAGAAGGTCGAGGGAATGATTGTATAATTGGTTTATACAGATCCTTCCCGGTTGAGACCACAGGTAAAAATGACATTGCCATAAATTAACAAAGTAATATGTCCATTTTTTCATCAAAAAGGGCGTCCCTTTTGAAGCGAGAATTGATTTTCCTTGATACCTAACATAATGCATGAAAGGATCCTTCAACAACAATAGATTGACTTGAAAAGCCTTAACAAAGACTTTTACAAGATATTTTATTTTTCCATAGAAATATATTCGTTCAAGAAGGGTTCCAGAAGATGTTGAGCGTAAATGAGAAGATTGGTTACGGAGAAAGATGAAGATGGATTCGTATTCACATAGATGAGAATTATATAGGAAGAAGAATAGTCTTTGATTTCTTTTTGAAAAAGAAGAACCGGCTTTATTTGGAGTATTCCAATTACAATACTCGTGGAGAAAGAATCGTAATAAATGCAAAGAAGAAGCATCTTTTACCCAGTAGCGAAGAGTTGAACA"},{"region":"rbcL","text":"NNNNNNNNNNNNNNANNNATACTCCTGACTATGAAACCAAAGATACTGACATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACGGAATCGAGCCCGTTGCTGGAGACGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATCTGCGAATCCCTGTTGCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTCCGTGGTGNATNNNATTTTTACANNA"}],"marker_position":{"latitude":-11.5,"longtitude":225,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"主脈が８本（8.3本？）","なんの植物だと思いますか？":"ヤツデ科","採集者ID":"8.3hand"},"specimen":true,"memofig_width":"316px"},{"id":"C","genus":{"ja":"テイカカズラ","en":"Trachelospermum asiaticum"},"label_shadow":true,"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNANTNNTGNCTNATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGCGGTGNATNNGATTTTACANNAN"}],"marker_position":{"latitude":-8,"longtitude":243,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"木の幹に巻きついている<br>地面から生えている<br>葉は濃い緑、葉は厚め<br>木の幹に多く巻きついていているが地面からも生えている<br>幹もしっかりしている<br>同じ木で３mくらいの高さまで生えているものもある<br>高いところまで生えているものは葉が大きい同じものか？","なんの植物だと思いますか？":"ツタ","採集者ID":"kytsuta"},"specimen":true,"memofig_width":"200px"},{"id":"D","genus":{"ja":"クロバイ","en":"Symplocos prunifolia"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNAANNNNNTTTTTTTTGAGGATCCACTATGATAATGAGAAAGATTTCTATATATACGCCCGAATCGGTCAATAATATCAGAATCTGATAAATCGGCCCAGACTGGCTTACTAATGGGATATCCTAACACGTTACAAAATTTCGCTTTAGACAATGATCCGATCAGAGGAATAATTGGAACTAGGGTATCGAACTTTTTAATAGCATTTCCTATTAGAAATGCGTTTTCTAGCAGTTGACTCCGTACCATTGAAGGGTTTAGTCGCACACTTGAAAGATAGCCCAGAAAGTCGAGGGAATGATTGGATAATTGGTTTATATGGATCCTTCCTGGTTGAGACCACATGTAAAAATAACATTGCCATAAATTGACAAAGTAATATTTCCATTTCTTCATCAAAATAAACGTCCCTTTTGAAACCAAAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATCCTTGAACAACCATAGAATGGCCCGAAAATCCTTAGTAAATACTTCTACAAAATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAAAATTCCAGAAGATATTAATCGTAAATGAGAAGATTGGTTGCGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAGGAACAAGAATAATCTTTGATTTTTTTTTGAAAAAGAAAAAGTAGATTTCTTTGGAGTAATAAGACTATTCCNATTACGATACTCGTGGAGAAAGAATCGTANNANNTGCAAAGAAAGGGCANNNTTTACCAGCAGCGAANNTNNNNNNNNNNNNNNANGGGGGANTGTGTGANNNAGNNNNNNNNNGNNNNNNNNNNNNNNNNNTGTGTGAAAAAAAAAAANNNNNNNNACACAG"},{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNANNANNNNNATTNAANACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAAGTCCTCAACCCGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCCACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACGACATCGAGCCCGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAATATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTAGAAGATCTGCGAATCCCTCCGGCGTATACTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGGGATAAATTGAACAAGTATGGCCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTAGGGTTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTCCGCGNNNNNNNNNNNTTTNNNAAAAAAAAANNNNN"}],"marker_position":{"latitude":-12,"longtitude":238.5,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"葉の縦横比は55:2くらい、表側はテラテラ。ふちのギザギザは若い葉ほどゆるい。葉の長さ約55mm（目測）","採集者ID":"talikng-saw"},"specimen":true},{"id":"E","genus":{"ja":"ウメノキゴケ","en":"Parmotrema tinctorum"},"label_shadow":true,"dna_sequences":[{"region":"ITS1","text":"GGAGGTANTTACTGANNGAGGGNCNNCGCNNNCCCGGGGGTCTCGGCCCCCAACTCTNNACCCTGTGTGTACCTACCTTTGTTGCTTTGGCGGGCCTCGGGGGTCTCCCTCCGCGTCNNCTTTCGGGTCGATGAGCGTCCGTCAGAGGCCCATTTACATTNNGTTTATCAGTGTNNNCCGAGTACAAAATGAATAAATAAAAACTTTCAACAANNNATCTCTTGGTTCNNNNNNNATGNNAAACGNNNNNNATNNNNNNNGGAANNANNNCTGCCATATGANGGTNANNNNGNNNGTGNTNNNNNGNGNATCNNGGGNCGTTCTNNNTNNNNNTNNTNNNNCGAGNNTGACTGNNNNTGCGACCGNNNNNNTNGTANNCGANNTNNNNNNCTGANNTTTNNNNNNNNCCNTTTCTTTCTTTCTTNNANCTTTTNANTTTTTGGTGNNCNTCTGTGNNGNNNNANNNAGNNNCGNNNNATTNTCANANTGGNNNNNNACCANNCGNNNNNNNACATGATTNNNACNNNNTNCGTNNGNGNAGNNNNCATCACTTGCTGGTGANNNATGTGGNNCAGNNNGAATNNNNNNNNNNNCTCGCCTGNNNNNTNTNNNTNGGGGANNNNGCATAGTTTGCTCATCTCANNNANGNNNNATGNCTNNGGAAAAATATNTTNNNNNNNNNCCAGTNNNTTNANNCTNNCAATCGATATTNNTNNNNCNCNATCCANCCCNTGNTNGCACGCANNNCTNNNNNNNNNNNAAACGGAATCCGGGGCCTTTGAGAANNTNCCCNNNNNNNTNCCCNNNNNNNNNCNNNGNNNTCNNNNNNNNNNNNNTCCTCNANTCACTGCATATNGCANNNNNNTNNNCNAANNACTGTTGCCNCAATGT"}],"marker_position":{"latitude":-6,"longtitude":41.3,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"群生している、平べったい","なんの植物だと思いますか？":"カビゴケ","採集者ID":"exigua.seaslug"},"specimen":true,"memofig_width":"179px"},{"id":"F","genus":{"ja":"モミ","en":"Abies firma"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNANNNNNNNGTTANNATTACAGNATTAACTTATTATACTCCTGNANTATCAGACCAAAGATACGGATATCTTGGCGGCATTCCGAGTAACTCCTCAACCTGGGGTGCCGCCCGAGGAAGCGGGAGCAGCAGTAGCTGCTGAATCTTCCACCGGTACATGGACCACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTACAAAGGGCGATGCTATGACATCGAGCCCGTTGCTGGAGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCCTTAGACCTTTTCGAAGAAGGTTCTGTTACTAACTTGTTCACTTCCATTGTAGGTAATGTATTTGGATTCAAGGCCCTACGGGCTTTACGTTTGGAAGATTTGCGGATTCCCCCTGCTTATTCCAAAACTTTTCAAGGTCCACCTCATGGTATCCAAGTTGAAAGAGATAAATTGAACAAATATGGCCGTCCTTTGTTGGGATGTACTATCAAACCAAAATTGGGTCTATCGGCTAAGAACTATGGTAGAGCAGTTTACGAATGTCTTCGTGGTGNNNNNNATTTTTTACNNANN"}],"marker_position":{"latitude":-2,"longtitude":32,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"大木、こい緑、におい-緑茶風、葉はかたくトゲ状、針葉樹、葉は小さなササ状のあつまり","なんの植物だと思いますか？":"カヤ？","採集者ID":"ANAKUMAMORI"},"specimen":true},{"id":"G","genus":{"ja":"シュロ","en":"Trachycarpus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTTGACTTATTATACTCCTGACTACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCACCTGAGGAAGCAGGGGCAGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAAACCGTTGTCGGGGAGGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGTCTGGAGGATCTGCGAATTCCCACTTCTTATTCCAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAAAGAGATAAGTTGAACAAGTATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCGGTTTATGAATGTCTACGCGGTGGATAAAA"}],"marker_position":{"latitude":-9.5,"longtitude":70,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"葉がかたくて下の茎が竹","なんの植物だと思いますか？":"シロ","採集者ID":"TOiAPROTZWNLB"},"specimen":true,"memofig_width":"301px"},{"id":"I","genus":{"ja":"タラヨウ","en":"Ilex Iatifolia"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNCTCNATACAAACTCTTTTTTTTTGAGGATCCGCTATGATAATGAAAAAGATTTCTGTATATACGCCCAAATCGATCAATAATATCAGAATCTGATAAATCGGCCCGAACCGGCTTACTAATAGGATGCCCTAATCCGTTACAAAATTTCGCTTTCGCCAACGATCCAATCAGAGGAATAATTGGAACACTGATATCGAACTTCTTAATAGCATTATCGATTAGAAATGCATTTTCTAGCATTTGATTCCGTACCATTAAAGGATTTAGTCGCACACTTGAAAAATAGCCCATAAAGTCAAGATAATAATTGGAAAATTGGTTTATATGGATTCTTCCTGGTTGAGACCACAGGTAAAAATAACATTGCCAGAAATTGACAAGGTAATGTTTCCATTTATTCATCAAAAGAGACGTCCCTTTTGAAGCCAGAATTGATTTTTCTTGATACCTAACATAATGTATGAAAGGATCCTTGAACAACCATAGGTTGACCTGAAAAGCCTTAGCAAAGACTTCTACAAGATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAGAACTCCAGAAGATGTTGATCGTAAATGAGAAGATTGATTACGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAAGAAGAAAAAGAATCTTTGATTTCTTTTTGAAAAAGAAGAACCGGGTTTCTGTGAAGTAATAAGACTATTCCAATTACGATCCTCGTAGAGAAAGAATCGTAATAATGCAAAGAAGAAGTATCTTTTACNNGTAACGAAGNNTGAACNNNAAAANNNNNGGGGGNNTGTGNNNAAAAAAAAAAAAAAAAAAAANTAANNNCTNGTGTGGATTAAAAAANNNTTNTTNCTCAG"},{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNCTGGTGTTNNNATTACAAATTGAATTATTATACTCCTGACTATGTCACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGGTGGACTTNGATTTNNN"}],"marker_position":{"latitude":-28,"longtitude":142,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"少しギザギザ<br>表面ツルツル<br>根っこ、くさっている","採集者ID":"From GOEMON"},"specimen":true,"memofig_width":"311px"},{"id":"J","genus":{"ja":"チャノキ","en":"Camellia sinensis"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNATATATTTTATTCTATACAANCTCGTTTTTTTTGAGGATCCGCTATGATAATGAGAAAGATTTCTATATATACGCCCGAATCGGTCAATAATATCAGAATCTGATAAATCGGCCCAGACTGGTTTACTAATGGGATGTCCTAACACGTTACAAAATTTCGCTTTAGACAATGATCCAATCATAGGAATAATAGGAACTATGGTATCGAACCTCTTAATAGCATTACCTATTAGAAATGAATTTTCTAGCATTTGACTCCGTACCATTGAAGGGTTTAGTCGCACACTTGAAAGATAGCCCAGAAAGTCTGGGGAATGCTTAGATAATTGGTTTATATGGATCCTTCCTGGTTGAGACCACATGTAAAAATAACATTGCCAGAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGAGACGTACCTTTTGAAGCCAAAATGTATTTTCCTTGATACCTAACATAATGAATAAAAGGATCCTTGAACAACCACAGAATGACCTGAAAATCCTTAGTAAAGACTTCTAACAAATGNNCTANNTTTCCATAGANNNNNCTTCGTTCGAGAAANNNNNNNNANNNNATTGATCGGATNNGAGAAGATTGCTTNNNNNNNNNNNCGAAGATAGATTCGTATTNNNATNNNNGNNCATNNNATAGAAACAAGACTNNNNNNAGNTTTNCATTTNTNNTNNATTNNGAGNNNTNGGCGGAGTTNNAAGAAAATTNNTTTNNNATTACAATGCGNCNNTAACNANNNNNNNNNNNNNNAAAAANNCATTATCCTNACCTTNNGCTAGAAAAAAAAAAAAAANNNACGCNNTNNNNAAAAAAAAAAAAAANCCCNNNNNNTGNAATTNANNCGATTCTTCCCCNNNNNNNNGGAATTGGAATAGTCTTANNNNCNANGGAATCNNNTTTNNTTTNCAAANNAATCANNNNTNTNNTGTNNNNNNAATTNCAATATGNAACCAATCNTTNCG"},{"region":"rbcL","text":"NNNNNANNNNATANNNGATANNTTGGCAGCATTCCGAGTAACTCCGCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCGTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTACTGCGTATGTTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGAAGAGCAGTTTATGAATGTNNNNNCGNNNNNNNNNNTTTTTNNNNNNNAAA"}],"marker_position":{"latitude":-25,"longtitude":200,"radius":50},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"大きさ、約10cm×4cm<br>大きなお茶の葉のような形<br>表面がぼこぼこ<br>表面には光沢<br>小さなギザギザあり<br>林がきれた陽の当たるところ<br>白いつぼみあり","なんの植物だと思いますか？":"ヤブチャ","採集者ID":"YABUCHAYA"},"specimen":true,"memofig_width":"330px"},{"id":"K","genus":{"ja":"モチノキ属","en":"Ilex"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNTTTTTTTTNGAGGANCCGCTATGATAATGAAAAAGATTTCTGTATATACGCCCAAATCGATCAATAATATCAGAATCTGATAAATCGGCCCGAACCGGCTTACTAATGGGATGCCCTAATCCGTTACAAAATTTCGCTTTCGCCAACGATCCAATCAGAGGAATAATTGGAACACTGATATCGAACTTCTTAATAGCATTATCGATTAGAAATGCATTTTCTAGCATTTGATTCCGTACCATTAAAGGATTTAGTCGCACACTTGAAAAATAGCCCATAAAGTCAAGATAATAATTGGAAAATTGGTTTATATGGATTCTTCCTGGTTGAGACCACAGGTAAAAATAACATTGCCAGAAATTGACAAGGTAATGTTTCCATTTATTCATCAAAAGAGACGTCCCTTTTGAAGCCAGAATTGATTTTTCTTGATACCTAACATAATGTATGAAAGGATCCTTGAACAACCATAGGTTGACCTGAAAAGCCTTAGCAAAGACTTCTACAAGATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAGAACTCCAGAAGATGTTGATCGTAAATGAGAAGATTGATTACGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAAGAATAAAAAGAATCTTTGATTTCTTTTTGAAAAAGAAAAACCGGGTTTCTGTGAAGTAATAAGACTATTCCAATTACGATCCTCGTAGAGAAAGAATCGTAATAANTGCAAAGAAGAAGTATCTTTTACCNNTAACGAAAATNGACATGCGGGGGGGGGGGGG"},{"region":"rbcL","text":"NNNNNNNNATNGNNACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTGACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGNNNNNNNNANNNTNTNNNNNNANAAAAAN"}],"marker_position":{"latitude":-19,"longtitude":193,"radius":150},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"みどり色（くさ色）<br>普通の草のにおい<br>さらっとしている（さわり心地）","なんの植物だと思いますか？":"くさ","採集者ID":"SYOKONISETIQTS"},"specimen":true,"memofig_width":"300px"},{"id":"L","genus":{"ja":"コモチイトゴケ","en":"Pylaisiadelpha tenuitostris"},"dna_sequences":[{"region":"rbcL","text":"TNNNNNNNNNNNNNCNNNCAACCATGGANTACCCGCTGNAAGAGGCAGGAGCTGCAGTAGCTGCTGAATCCTCCACCGGTACATGGACCACTGTTTGGACCGATGGGCTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCCTGAAGCAGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACCTCTATTGTTGGTAATGTTTTTGGATTCAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGTCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTGGGTTTATCCGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTG"}],"marker_position":{"latitude":-12,"longtitude":212,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"ぬれている<br>よくみるとギザギザのある小さな葉。それのかたまりとして全体になっている！<br>さわると、うぶ毛みたいにせんさいなタッチだった","採集者ID":"MOSYAMAGUCHI"},"specimen":true},{"id":"M","genus":{"ja":"スゲ属","en":"Carex"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNNNNNNNNAATACTTGNGTAGATACAANTGTCTCTTTTGAGAAGATCCNNTATAAAAATGAAAAAGATTTTTATATATTCGACCAAATCGACTAATANTATNATAATCTGATAAATCTGTCCAGATTGGCTTACTAGTAGGTTGTCCTACTACAGTACAAAGTGAAGCTTTAGACAATGATTTAATGAGAGGAAGGACTGGAACTAAAGTATCAAATCTCTTAATAAGAGTATCTATTAATATAGAATCCTCTAGTATTTGACTCCTTACCACCAAGTAATTTATTTTGACACTTATAAAATAACCGATAAAGTAGAACGAATAATAAGAGAATTGGTTTCTATGAAACCTATTAGGCTCAGACCAAAAATGAAAATAATATTGCCAAAAATAGACAAGGTAAGATTTCAATTTCTTAATAAAAAGATCAGCCCCTTTTGATGCTAGAATAGCTTTACCTTGATATCGAAGATAGTGCATGAGAGGATCTGTGAAGATCCATAAAGTTTTCTTCAAAAAAACATGATGCACTATTCTAAAATGTTCTATTTTTCCATAGAAGTAAATTCTTTCAAGAAAGCTTCTAAAAGATCTTAATCGTAAACAAGAAGATTTTTTACGAAAAAACAGGAATAAAAACTCATATTCTGATACATAAGAATTGTATAAGAAACGAGAGAGTCTTATATTTTCTTTTGAGAATATAGAAACCGATTTCTTTAAAGTAATGATACTATTCGAATTAGAATTATCGAAGAGAAAAAATCGCAATAAATGCAAAGAAGAAATATCTTGGATCCAGCATTGAAGGATTTGAACCAAGAT"},{"region":"rbcL","text":"NNNNNNNNATNGNNACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTGACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGNNNNNNNNANNNTNTNNNNNNANAAAAAN"}],"marker_position":{"latitude":-28,"longtitude":131,"radius":200},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"根元ではが別れている。葉が他の植物と比べて極めて細い。にニオイは特に他と変わらない。裏はツルツルしているが、表は裏と比べてザラつきがある。<br>生息地：しゃ面","採集者ID":"higenosou satou"},"specimen":true},{"id":"N","genus":{"ja":"ヒサカキ","en":"Eurya japonica"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNTNNNNNNNANNNNNNNNNNNACAAATTGACTATATTATACTCCTGACTATGAAACCAAAGCGACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGTCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTGACTTCTATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTCCTGCGTATACTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTCCGCGGTGNATNNNNATTTTACANNNAN"}],"marker_position":{"latitude":-27,"longtitude":126,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"葉がギザギザしていて硬い。<br>裏側の色が濃く、裏側は薄い。<br>斜面に生えている。<br>葉はツバキっぽい","採集者ID":"0826nCm2"},"specimen":true},{"id":"O","genus":{"ja":"サカキ","en":"Cleyera japonica"},"label_shadow":true,"dna_sequences":[{"region":"rbcL","text":"ANNNNNNNNNNNNNNNNNNNNNNNNNNANNTACTAATTGACTTANTATCCTCCTGACTATGAAACCGATGCGAGAGATATTGGGAANACTGNAAGTNTCTCCCNNCCNGNANAATATCATNATAAGCTNGNNNNGNNNACACAGCGGACTCCTGGGAGGCTATCCNACCACTCGAGATTTCNNTGGNTCNTACAANNNNCGNNNNGAGGAATGGTGGACTTCNTCNAANTTCCTTTTTACGGTAACTAATAATAATGCATTTTCTTTCTATTGATTCCCTACCAATAATTGGANNAGNCAGNNCTTGATTNTGTCNNATAANGTCGAGANNATGGATGGANNNNTGNNTTGTATGAATTCTTCCCGGTNGAGACCACACGTNAAAACATCNTGGCCTTACATTGACTTGGCAAGGTTTCCCCTTTTTCTCTTCANAGACGTCCCTTTTGTGCCGAAATTGATTTGTCTTGTTCTNGAAAGCAATGTAAGAGCGGATCNGGGTNCTTGATCTGTTGACCTGGGAGCCNTATTCATGACTGCNTCCNGATAGTCNATTTTTTCNTANAAATAAANTCTTTCNNCNNNAACTCCNANNANGTNGATANNTATGCGTANATTNGATTGCNGANANGCNCGAANNANNTTCATATTCNNCTACNTGANAANTATNAAAANTAAAAANNAACNTNNATATTCTTTTTGTATNTNTATNTGCCGGNTTNCTGTGAAGTTANNNTANTNTTCCNANTACTATTCC"}],"marker_position":{"latitude":-15,"longtitude":101,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"木の幹がなめらか、赤っぽい大きな木の下、葉がツルツル、においはない","採集者ID":"kumano20171008","":"※ 本サンプルに関しては、バイオインフォマティクスを用いた方法（採取したサンプルのDNA配列を用いたデータベース上での検索）では相同性の高い種を見つけられなかったため、植物の特徴や形状の観察による推定結果を掲載しています。"},"specimen":true}],"knowledges":[{"title":{"ja":"トンボ","en":"Dragonflies"},"description":{"ja":"細長い翅と腹をもつトンボ目の昆虫。トンボの多くは秋に産卵し、冬を幼虫（ヤゴ）で越し、春に羽化します。幼虫（ヤゴ）は水中で生活するため、山を飛んでいるトンボも産卵は近くの田んぼで行います。山口市熊野町の辺りでは、山裾や川の近くでモノサシトンボ、山の中でマユタテアカネなどをよく見かけることができます。","en":"Dragonflies are Odonata insects that have long slender wings and abdomen. Most of them lay egges in autumn, and emerge as an adult after spending a winter as a larva. Dragonflies inhabiting in mountains travel to rice fields nearby when laying eggs, since larvae live underwater. In Kumano of Yamaguchi city, you can find Copera annulata at the foot of the mountains and near rivers, as well as Sympetrum eroticum in the mountains."},"marker_position":{"latitude":-18,"longtitude":158,"radius":100}},{"title":{"ja":"境内の穴","en":"Holes on the shrine grounds"},"description":{"ja":"神社に至る石段のすきまや、境内の至るところで見つかる穴の多くは、土壌中で生活している動物の地下トンネルへの入り口です。直径5cmくらいの大きな穴からはモグラやアカネズミなど、小さな穴からは昆虫、特にアリやハチが出入りしているようです。羽化するために地中から出たセミの幼虫が残した穴もあります。その他、熊野の森の竹やぶ近くではタケノコが掘られた後の穴も多く見つかります。","en":"Gaps between the shrine’s stone steps and many holes found within the precinct are the entrance to the underground tunnels for animals that inhabit beneath the ground. Animals such as moles and large Japanese field mice are using bigger holes that are approximately 5 cm in diameter, and insects such as ants and bees are going through smaller holes. There are also holes left by cicada nymphs that have emerged from the ground. In addition, around the bamboo grove in the Kumano forest, you can also find lots of holes which people dug out to get bamboo shoots."},"marker_position":{"latitude":-14,"longtitude":23,"radius":100}},{"title":{"ja":"キツネ","en":"Foxes"},"description":{"ja":"日本に自然分布していて最も身近なのは、ネコ目イヌ科キツネ属のアカギツネです。国道9号線以北の山が続くところで生活しており、時折、人家の近くにも姿をあらわします。食性は雑食で、ノネズミやノウサギなどを捕食したり、アケビや柿などの果物を食べたりして生活しています。","en":"Red fox, or Vulpes vulpes (Carnivora, Canidae, Vulpes), is the most familiarized animal that have distributed naturally in Japan. They inhabit the mountains that continue in the north of National Road Route 9, and occassionally show up near people’s houses. They are omnivores, preying on animals such as wild mice and wild rabbits, as well as feeding on fruits such as akebi and persimmons."},"marker_position":{"latitude":-2,"longtitude":268,"radius":100}},{"title":{"ja":"ハチ","en":"Bees"},"description":{"ja":"昆虫綱ハチ目の昆虫。スズメバチ、アシナガバチ、ミツバチなどがよく知られています。熊野神社では、オオスズメバチが（腐った根っこの間から入って）土の中、アシナガバチが植え込みのツツジやサザンカの枝の下、キイロスズメバチが本殿に巣をつくっていることが目撃されています。基本的には雨があたりにくいところに巣をつくります。","en":"Bees are the members of order Hymenoptera from class Insecta. Species such as hornets, paper wasp, and honeybees are widely known. In the Kumano shrine, honeycombs of Asian giant hornet can be found beneath the ground (entered from the gaps of rotten roots). Also, honeycombs of paper wasps have been found underneath the branches of planted azalea and sasanqua, and of Japanese yellow hornets at the main shrine. They generally make honeycombs at places which don’t get hit by the rain."},"marker_position":{"latitude":40,"longtitude":60,"radius":100}},{"title":{"ja":"鳥の混群","en":"Mixed-species flock"},"description":{"ja":"森にすむシジュウカラ、ヤマガラ、エナガ、コゲラなどの異なった種類の小鳥が、秋から冬にかけて一つの群れをつくって行動することを、混群（こんぐん）といいます。繁殖は春で、それ以外の時期は縄張りをはらずに一緒に生活することが知られています。","en":"During the months from autumn to winter, various kinds of small birds such as Parus major, Parus varius, Aegithalos caudatus, and Dendrocopos kizuki that inhabit in the forest form a group and migrate. This type of mixed-species flock is called “kongun” in Japanese. It is known that spring is their breeding season, and in other seasons, they live together without owing territories."},"marker_position":{"latitude":45,"longtitude":210,"radius":200}},{"title":{"ja":"クモ","en":"Spiders"},"description":{"ja":"クモ綱クモ目に属する陸上節足動物。糸を使って垂直や水平に網を張る種と、網を張らずに獲物を捕まえる種がいます。夏から秋にかけて熊野の森の中を歩くと、ジョロウグモが張った大きな網を見つけることができます。","en":"Spiders are arthropods that dwell on land, belonging to the order Araneae within the class Arachnida. There are species that spin web vertically and horizontally, and others that capture their prey without forming a web. If you take a walk in the forest of Kumano in summer and autumn, you can find big spider webs constructed by Nephila clavata."},"marker_position":{"latitude":-3,"longtitude":58,"radius":100}},{"title":{"ja":"白狐の言い伝え","en":"Byakko (white fox) folklore"},"description":{"ja":"その昔、傷ついた白狐が（現在、熊野神社のある）権現山の麓のお寺の池に浸かって傷を治していたそうです。和尚さんがこれを目撃し、不思議に思い、池の水をすくうとなんと温かく、それが湯田温泉の発見につながったと言い伝えられています。そのため湯田温泉は「白狐の湯」と呼ばれています。熊野の森の小道沿いには「いなりのほこら」と呼ばれる祠が今でも祀られています。","en":"Once upon a time, an injured byakko (white fox) was bathing in the pond of the temple, located at the foot of Mt. Gongen (where the Kumano Shrine is now enshrined), and curing the wound. The chief priest who witnessed the scene got curious and scooped the water from the pond, and surprisingly, found out that the water is warm. It has been told that this has led to the discovery of Yuda Onsen (Hot Springs), and for this reason, people call the Onsen as “byakko’s hot water”. Along the small path in Kumano forest, a small shrine called “Inari* no hokora (Inari’s small shine)” still stands for worshipping.<br><br>*Inari is the god of the harvest, often represented in a form of fox."},"marker_position":{"latitude":-2,"longtitude":278,"radius":100}},{"title":{"ja":"ドングリ","en":"Acorns"},"description":{"ja":"秋に熊野の森を散策すると、色々な形をしたドングリを見つけることができます。ドングリはブナ科の樹木の果実です。この辺りにはイチイガシ、ウラジロガシ、アラカシといったカシの仲間や、コジイなどシイの仲間の樹木が植わっています。シイのドングリ（小さくて黒い実）は渋みとなるタンニンの量が比較的少ないため、ネズミやイノシシなどの動物が好んで食べるようです。","en":"When you walk around the autumn forest of Kumano, you can find many acorns in various shapes. Acorns are the fruit of beech tree. Oak trees such as Quercus Gilva, Quercus Salicina, and Quercus Glauca, and chinquapins such as Castanopsis cuspidata are planted in this area. Animals such as mice and boars prefer to feed on the small black acorns from chinquapin trees, since the nuts have relatively less amount of tannin that creates a bitter taste."},"marker_position":{"latitude":-50,"longtitude":130,"radius":100}},{"title":{"ja":"土壌微生物","en":"Soil microbes"},"description":{"ja":"あるクスノキの大木の下の土壌を採取し、微生物群集のゲノムを網羅的に解析することができる「メタゲノム解析」を実施したところ、480種を超える菌種数を確認することができました。その中には培養（人工的に生育・増殖させること）が比較的難しい菌も含まれていました。","en":"After collecting the soil samples from beneath a big camphor tree and conducting ”metagenome analysis” that can analyze the genomes of a microbial community comprehensively, more than 480 types of bacteria have been detected. Among them, bacteria that are relatively difficult to cultivate were found."},"marker_position":{"latitude":-5,"longtitude":285,"radius":100}}]}
 
 /***/ }),
-/* 192 */
+/* 204 */
 /***/ (function(module, exports) {
 
 module.exports = {"samples":[{"id":"9-1-A","genus":{"ja":"クシノハゴケ","en":"Ctenidium capillifolium"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNCTGGTGTAAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACAGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAGGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAGAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATCTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGNNNNNNNTTTTTNANAANAAAN"}],"marker_position":{"latitude":-10.7,"longtitude":39,"radius":3},"collection_date":"2016.10.09","microscope":{"youtube_id":"4EuIq5uTs4Y"},"memo":{"どんな場所で採ったか":"石の上。","なぜその植物を採取したか":"色がきれいで美しいから。","なんの植物だと思うか":"ミドリゴケ","植物の特徴を絵や文字で書いて下さい":"石にはうように、はりついて伸びている<br>わかめのよう<br>先端が細い、先の先まで生命を感じる"},"memofig_width":"230px"},{"id":"9-1-B","genus":{"ja":"スゲ属","en":"Carex"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNAGGGNTTANNGATTACAAACTTACTTATTATACTCCTGAGTACGAAACCAAAGATACTGATATTTTAGCAGCGTTCCGAGTAACTCCTCAACCCGGAGTCCCCCCTGAAGAAGCAGGAGCTGCAGTAGCGGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCATATCGAGCCTGTTGTTGGAGAAGAAAATCAATTTATTGCCTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCTATTGTAGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGCTTGGAAGACTTACGAATTCCCCCTGCTTATTCAAAAACTTTCCAAGGCCCACCTCATGGTATCCAATCCGAAAGAGATAAGTTGAACAAATATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCATGTTATGAATGTCTACGTGGTGGACTTGATTTTACAAATAAAAANCCCNNNNNCCCCNGGC"}],"marker_position":{"latitude":-18,"longtitude":-24,"radius":2.2},"collection_date":"2016.10.09","microscope":{"youtube_id":"Em72Ho5wHJI"},"memo":{"どんな場所で採ったか":"がけの下<br>しめった場所、腐った葉っぱたくさんあるところ<br>日陰<br>他の植物と合わさって、乱雑に植えている","なぜその植物を採取したか":"よく見るけど、名前が何も思いうかばない雑草だから。","なんの植物だと思うか":"ユリ科？","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"9-1-C","genus":{"ja":"ホウライタケ属","en":"Marasmius"},"dna_sequences":[{"region":"ITS1","text":"NNNNGNNTTATTGAACNTTGTNNGGAGAGTTGAGCTGGTCCTTCAAGGGCAAGTGCTCGCTTTTCTTTCAATATTCATCCACCTGTGCACTTTTTGTAGAGAGTTTCTGAGAAAACGGGCCTCAATTGGCCTCGAGTATTGGAACTTTCTATGTCTTTTTACAAACCCTTGATGTATGTCCTTGAATGCCTTTTACAAAGGGGACTTAGTTGGCCCTTTTATAAAAACAATACAACTTTCAGCAACGGATCTCTTGGCTCTCGCATCGANNNAAGAACGANANTNGNTNCGCGTAC"}],"marker_position":{"latitude":-9,"longtitude":-62,"radius":5.7},"collection_date":"2016.10.09","microscope":{"youtube_id":"dkGGG5nsN6w"},"memo":{"どんな場所で採ったか":"山道<br>コンクリートの横<br>コケが生えている岩の下<br>多くの落ち葉<br>しめっている","なぜその植物を採取したか":"足元にあったけれども、だれも気づかなかったから","なんの植物だと思うか":"何かのキノコ<br>ヒダヒダが多い<br>色が白色なので、食べられる？","植物の特徴を絵や文字で書いて下さい":"特有の臭いあり"}},{"id":"9-1-D","genus":{"ja":"キイチゴ属","en":"Rubus"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNGNGAGTCGAAGTATATATTTTATTCGATACAAACTTTTTTTTTTTGAGGATCCGCTATAATAATGAGAAAGATTTCCGCCTATACGCACAAATCGGTCGATAATATCAGAATCCGACGAATCCGCCCAAGTGGACTTACTAATAGGATGCCCTAATGTGTTACAAAATTTAACTTTAGCCAACGATCCTATCATTGGAATAATTGGAACTAATGTATCAAGCTTCTTCATAGCATTATCCATTAGAAACGAATTTTCTAGCAATTGACTCCGTACCACTGAAATATTCGGTCGTATGCTTGAAAGATAACCCAAAAAATCAAGGGAATGCTTGGATAATTGGTTTATATGGATTCTTCCTGGTTGAGACCATACATAAAAATGACATTGCCAAAAATTGACAAGATAATATTTCCACTTATTCATCAGAAGAGGAGTCTCTTTTGATGCCAGAATAGATTTTCCTCGATATCTAACATACTGCATAAAAGGATCCTTGAAGAACCATAAGGTGGCCGGAAAATCGTTAGCAAAGACTTCTTCAACAGGATATTTTATTTTTTCATAAAAAAATATTCGCTCAAAAAAGATCCCAGAAGAGGTTAATAGTAAATGATTAGATTGGTTACGGAGAAAAAGTAAAATGGATTCGTATTCNCATACATNAGAATTATATANGNAGNAGGANGNANCTTGGANTACTTTTTGTAAAATANNNTNNTTTTGGNGGNANGAGGANNNTNCCN"},{"region":"rbcL","text":"NNNNNNNNANNNNNCTGGTGTNNNNATTATAAATTGACTTATTATACTCCGGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAGGAAGCAGGGGCCGCGGTAGCTGCGGAATCTTCTACCGGTACATGGACAACTGTATGGACTGACGGGCTTACTAGTCTTGATCGTTACAAAGGGCGATGCTACCACATTGAACCTGTTGCTGGAGAAGAAACTCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCGGTTACTAACATGTTTACTTCCATTGTGGGTAATGTGTTTG"}],"marker_position":{"latitude":-20,"longtitude":-22,"radius":2},"collection_date":"2016.10.09","microscope":{"youtube_id":"bMUCJyIJCms"},"memo":{"どんな場所で採ったか":"滝付近の傾斜地の下のあたり","なぜその植物を採取したか":"実のようなものがフサフサ毛がはえていたので可愛らしかったから","なんの植物だと思うか":"フキ<br>柏餅の葉<br>など・・・","植物の特徴を絵や文字で書いて下さい":"臭い・・・青臭い<br>すったら粘り気がでた<br>THE 葉っぱ"},"memofig_width":"230px"},{"id":"9-2-A","genus":{"ja":"ミヤマサナダゴケ","en":"Plagiothecium nemorale"},"dna_sequences":[{"region":"rbcL","text":"GNNNNNNNNNNNNCTGGNGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAGGCGGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTGCTGGAGAAGAGAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACTAATTTATTTACTTCTATTGTTGGTAATGTCTTCGGATTCAAGCTTNAGAGCTTTNGTCTAGAAGATTACNATTCCTCCGCTTATTNNANNCTTTCCNNNCCCCCNNNGGGATNNNGANAAANANTAAATTAAGNNCTNTGNNGGNGGGNGTATATNNNCTNNTNGGGNNATCTGCNAANTTNGGTNNNCGGTTTGNNGCTCTCNNATTTTTTTTNNNAAAAAAANNAAANCN"}],"marker_position":{"latitude":-6.8,"longtitude":95,"radius":10},"collection_date":"2016.10.09","microscope":{"youtube_id":"PCl89RPUmFI"},"memo":{"どんな場所で採ったか":"道沿いの岩","なぜその植物を採取したか":"みずみずしい感じがしたため","なんの植物だと思うか":"こけ","植物の特徴を絵や文字で書いて下さい":"濃いみどり色<br>湿っている<br>長い<br>シダっぽい<br>細かい葉っぱがある"}},{"id":"9-2-B","genus":{"ja":"ツボゴケ","en":"Plagiomnium cuspidatum"},"dna_sequences":[{"region":"rbcL","text":"NNNNTGGNNNNNCTGGTGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTACAGAAACTGATATTTTAGCAGCATTTCGGATGACTCCTCAACCGGGAGTACCAGCTGAAGAGGCAGGAGCGGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACTGATGGACTTACTAGTCTTGATCGTTACAAAGGAAGATGCTATGGTATTGAAGCAGTTCCTGGAGAAGATAATCAATATATTGCTTATGTTGCTTACCCATTAGATTTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAACAAATATGGTCGTCCATTATTAGGGNGCACTATNAAACCNAAATTGGGTTTATCTGCTNNAAACTATGGTANAGCTGTATATGAATGNNTTCCNGGNGN"}],"marker_position":{"latitude":-12.5,"longtitude":116.3,"radius":7.8},"collection_date":"2016.10.09","microscope":{"youtube_id":"ldPNSvMfrt8"},"memo":{"どんな場所で採ったか":"川のすぐ近く<br>岩場","なぜその植物を採取したか":"こけをとりたいと思った為<br>小さな芽のようなものがかわいかった。","なんの植物だと思うか":"こけ","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"9-2-C","genus":{"ja":"ササクサ","en":"Lophatherum gracile"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNTGNNNGTCGNAGTATATATTTTAGTCGATACAAAGTCTGTTTTTTCGAAGATCCACTATGATAATGAAAAAGATTTCTACATATCCGACCAAAGCGATCAAGAATATCCCAATCTGATAAATCGGTCCAAACGGGTTTACTAATAGGATGCCCCGATCCAGTACAAAATTGAGCTTTTGATAAGGATCCAACGAGAGGAGTAGCGGGGACTGTGGTATCGAATTTTTTTATTCGAGTATTTATTAGAAAAGAATTCTCCAGCATTTGATTCCTTACTAACAAAGTATTTATTGGTACACTTGAAAGGTACCCCAGAAAATCGAAGCAAGAGTTTGTTAATTGGTTTAGACGGATCCTTTGTGGTTGAGTCCAAAAAGAGAAAAAATATTGCGAGAAATTGACAAGGTAAGATTTCCATTTCTTCTTCAAAAGAAGAGTTCCTTTTGATGCAAGAATCGCCTTTCCTTGATATCGAACATAATGCGTAAGAGGATCTATAAAGAACCATATGGTTTTCCGAAAAAACCCTGGGCACATTACCCCAAAATGTTCCATCTTCCTAGAACAGTGGATTCGTTCCAGAAAGGTTCCAGAAGATGTTAATCGTAAGCAAGAAGATTGTTTACGAAGAAACAACAAGAAAAATTCATATTCTGATACATAAGAGTTATATAGGAATCGAAATAGTCTTTTATTTGCTTTTTTCAAAAGCAAAATAGATTTCATTGAAGTAATAAGACTATTCCAATTCGAATAATAGTTGAGAAAGAATCGCAATAAATGCAAAGATGGAACATCTTGAATCCGGTATTCAAGGATTGNNNNAANTCNNANGG"},{"region":"rbcL","text":"NNNNNNNNNNNNNCTGGTGTTANGGATTATAAATTGACTTACTACACCCCGGAGTACGAAACCAAGGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAGCCCGGGGTTCCGCCTGAAGAAGCAGGGGCTGCAGTAGCTGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAGCCCGTTCCTGGGGAAGGAGATCAATATATCTGTTATGTAGCTTATCCATTAGACCTATTTGAAGAGGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAACGTATTTGGTTTCAAAGCCCTACGCGCTCTACGTTTGGAGGATCTACGAATTCCCCCTACTTATTCAAAAACTTTCCAAGGTCCGCCTCACGGTATCCAAGTTGAAAGGGATAAGTTGAACAAGTATGGCCGTCCTTTCTTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAAAATTACGGTAGAGCGTGTTATGAGTGTCTACGCGNNNTTTTTTTTTTTNNAAAAANNAAAAN"}],"marker_position":{"latitude":5.8,"longtitude":-42,"radius":18},"collection_date":"2016.10.09","microscope":{"youtube_id":"GwxhdABzRLQ"},"memo":{"どんな場所で採ったか":"道のそばの岩の間","なぜその植物を採取したか":"形が面白かった","なんの植物だと思うか":"ヌスットハギ？<br>猫じゃらし系","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"230px"},{"id":"9-2-D","genus":{"ja":"ヤマハッカ","en":"Isodon inflexus"},"dna_sequences":[{"region":"rbcL","text":"NNNGGANNNNCGGGTGTTNAGAGTATAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTACTGCTTATATTAAAACTTTCCAAGGTCCGCCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGCGGTGGATTGATTTTTTNNNAAAAAAAAAN"}],"marker_position":{"latitude":-25,"longtitude":-106,"radius":3.3},"collection_date":"2016.10.09","microscope":{"youtube_id":"2RX18v24nD8"},"memo":{"どんな場所で採ったか":"川のほとりに群生<br>鉱脈試掘跡そばに咲く夢の花","なぜその植物を採取したか":"お花としてきれい<br>他の班がとってないエリア<br>川辺でさがしたかった","なんの植物だと思うか":"むらさきりんどう的な？","植物の特徴を絵や文字で書いて下さい":"ホタル袋の小さいもののような花弁<br>うすむらさき<br>苦い無臭<br>エディブルではなさげ<br>葉っぱは普遍的な姿<br>ちょっとトンガリ系<br>虫が食べる、ちょっと野菜系で美味しそう"},"memofig_width":"230px"},{"id":"9-3-A","genus":{"ja":"カナワラビ属","en":"Arachniodes"},"dna_sequences":[{"region":"rbcL","text":"NNNNNTNGNNNNNCTGGTGTCAAAGATTATCGATTGACCTATTACACCCCCGAATACAAAACCAAAGATACCGATATCTTAGCAGCCTTCAGAATGACCCCGCAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCAGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCCTTGGATCTATTCGAAGAAGGTTCTGTCACCAATCTGTTCACCTCCATTGTAGGTAATGTCTTTGGATTCAAAGCTCTACGCGCTTTGCGCTTGGAAGACCTTCGAATTCCCCCTGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGCCTGTCTGCTAAAAATTATGGCAGAGCCGTCTACGAATGCCTTCNNGGTGGANNNNNNTTTTACANNNNANNNTTAANGGNCGNCCATNTTTGNTTAAGTAAACCNTANNNNNNTGAANANCANGNGGCGGTCAATGANNGTTTTAGAANNN"}],"marker_position":{"latitude":-4.5,"longtitude":142,"radius":21},"collection_date":"2016.10.09","microscope":{"youtube_id":"dYGkY5YyaYs"},"memo":{"どんな場所で採ったか":"川の対岸の岩壁の割れ目。","なぜその植物を採取したか":"人が足を踏み得れにくい場所なので、珍しいものがありそうな気がしたから。","なんの植物だと思うか":"わかりません。","植物の特徴を絵や文字で書いて下さい":"双子葉系。<br>岩の隙間から生えていた。<br>根本には苔がびっしり。"}},{"id":"9-3-B","genus":{"ja":"トウゲシバ","en":"Huperzia serrata"},"dna_sequences":[{"region":"rbcL","text":"NNNNNGGNNNNNNCTGGNGTTANGNNTTACNNATTAACTTATTACACTCCTGATTATAAAACCAAAGACACCGATATTTTGGCAGCATTTCGAATGACCCCCCAACCTGGAGTACCNCCCGAGGAGGCGGGGAGCCGCAGTAGCTGCTGAATCTTCCACTGGTACATGGACTACCGTTTGGACCGATGGACTTACCAGCCTTGATCGTTATAAAGGGCGATGCTATGAAATTGAACCTGTGACCGGAGAGAAAAATCAATTTATTGCTTATGTAGCTTATCCTTTGGATCTCTTTGAGGAAGGTTCCGTTACTAACTTATTCACCTCCATCGNGGGTAACGNATTCGGATTCAAAGCTTTACGAGCTTTACGTTTAGAAGATTCGCGAATTCCCCCCGCTTATTCCAAAACTTTCATAGGTCCACCCCATGGTATCCAAGTTGAAAGAGACAAATCAAACAAATATGGCCGTCCTTTATTAGGATGTACTATTAAACCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTTTATGAATGTCTCCGCGGNNNNNNNNTTTTTTTANNNAAANNNNAAGGACCCCAAAGGATGTTGGNCGTAAANNANANATTGGTCTTNGAANAANNNNNAAAATANNTTCNTANTCNCN"}],"marker_position":{"latitude":-1,"longtitude":53,"radius":9},"collection_date":"2016.10.09","microscope":{"youtube_id":"Zfq6MyccyJo"},"memo":{"どんな場所で採ったか":"岩肌<br>少し水気がある<br>斜面","なぜその植物を採取したか":"小さな木のようでキレイだったから。","なんの植物だと思うか":"？","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"280px"},{"id":"9-3-C","genus":{"ja":"ナンテン","en":"Nandina domestica"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNCGGNNGTNNNNATTACAAATTGANTTATTATACTCCTGACTATNNAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCTGTAGCTGCCGAATCTTCTACAGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTACCACATTGAGCCCGTTGCTGGAGAAGACAATCAATATATTTGTTATGTAGCCTATCCTTTAGACCTTTTNGAAGAAGGGTCTGTTACNAACATGTTTANTTCTATTNNAGGTAATGTTTTTGGNTTTCAAAGCNNCTAGCCGNGNCTTCTNANGCTCTGGGAAGGANNCTTGCCGAAATTTCCCCTACCNNTCTTTANTTGNTTAAAAAACCNTTTTCNNATAGGGGACCCCCGGCCCCTTCCAATTGGGGTCAATTTCCCCAAGGGGTTCTGGANNGANGGNANGNANNTNNAAAAANNTTNNGGANAANNNNNAAAAAGTTTANNTTGGGGNATCCNNNNGTTTCCCCCNNCCTCNTTTNNNANTTN"}],"marker_position":{"latitude":-1,"longtitude":-27,"radius":5.5},"collection_date":"2016.10.09","microscope":{"youtube_id":"roS_a3DVBoU"},"memo":{"どんな場所で採ったか":"開始地点の滝の対面<br>小さなガケになっている斜面<br>斜面に同じような植物<br>斜面に対して直角","なぜその植物を採取したか":"実が気になった<br>見たことがあるが名前がわからない","なんの植物だと思うか":"ナンテン","植物の特徴を絵や文字で書いて下さい":"葉が竹っぽい<br>葉にツヤがある<br>実は緑色<br>葉の先がトガっている<br>実のエダはブドウっぽい"}},{"id":"9-3-D","genus":{"ja":"ハネヒツジゴケ","en":"Brachythecium plumosum"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNCTGGTGTCAAGATTACANATTNNNTTATTACACTCCCGATTATCAAACCAAAGATACTGATATCTTAGCAGCCTTCCGAATGACTCCTCAACCCGGAGTACCCGCTGAAGAAGCAGGAGCTGCAGTAGCTGCCGAATCTTCCACTGGTACATGGACCACTGTTTGGACCGACGGACTTACCAGCCTCGATCGTTATAAAGGACGATGCTACGACCTTGAACCCGTTCCTGGAGAAGAAAATCAATATATTGCTCATGTAGCTTACCCCTTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTGTTTACTTCTATTGTTGGTAATGTTTTCGGATTTAAAGCTTTACGAGCTTTACGTCTGGAAGATTTACGAATTCCTCCTGCTTATTCCAAAACTTTCCAAGGACCACCTCATGGTATTCAAGTTGAGAGAGATAAATTAAACAAATATGGACGTCCTTTATTGGGATGTACTATTAAGCCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTCTATGAATGTCTTCGCGGNNNNNNNNTTTTNNNCNNANAAAATNAAGGNCGTCCCATTTTTGGTTTAGTTTATCCCTTTTCGANNCTGAANACNATGNNGCGGTCCANTGNANAGNTTTATAATATTCNNNNNNNNNATTCCNTANGATTTTATATANCNNNANNANNANNCTTN"}],"marker_position":{"latitude":-11.3,"longtitude":113.2,"radius":8},"collection_date":"2016.10.09","microscope":{"youtube_id":"J7iOMr5nnsU"},"memo":{"どんな場所で採ったか":"渓流沿いの岩場についていた","なぜその植物を採取したか":"苔は苔でも、綿毛の様な小さな芽が出ているのが珍しいから","なんの植物だと思うか":"つたに似た苔","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"280px"},{"id":"10-1-A","genus":{"ja":"カラムシ","en":"Boehmeria nivea"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNTCGAANTATATATTTTACTCGATACAAACTCTTTTTTTTTGAGGATCCGCTGTAATAATGAAAAAGATTTCTGCATATACGTACAAATCGATCAATAATATCAAAATCCGATAAATCGACCCAGGTCGACTTACTAACGGGATGTCCTAATACGTTACAAAATTTCATTTTAGCCAACGATCCAATCAGAGGACTAATTGGAATTAATGTATCAATCTTCTTCATAGCCTTATCCGTTATAAATGAATTTTCTAGCATTTGAGTCCGTACCACTGAAAGATTTATTCGCATACTTGAAAGATAGCCCAAAAAGACAAGGGAACGCTTGCATAATTGGTTTATATACATCCTTCCTGATTGAGACCACACATAAAAATTATATTGCCATAAATGGACAAAAAAAGATTTCCATTTATTTATCAAAAGGGGCGGATCCGTATCCTTTAAAGCCAGAATAGATTTTCCTTGATATCTAACATAATGCATGAAGAGATCCTGGAGAAACCATAGGCTAATCGGAAAATCATTAGCAAAGACGTCTTCTACGGGAGTCTTTATTTTTCCATAGAAAAATATTCGCTCAAAAAAGACACCGGAAGCTGTTAATCGTAAATGAGAAGATTTGTTGCGGAGAAAAAGTAAGATGGATTCGTATTCACAAAGATGAGAATTATACAGGAACAAGAAAAATCTTGGATTACTTTTTGAAAAATAGTAATAGATTTATTTATAAATTTNNNTGGGAATAATAAGACTATTCCAATTAGAATACTCGTAAAGAAAAAGTCTTAATAAATACAAAGAGGAGGCGTCTTTTACCNAGTAGCGAAGGGTTNGAANNNAGATTCNNGAATGGACNGGNTNNNNNTN"},{"region":"rbcL","text":"NNNNNNNNNNNANGCTGGTGTAAGATNATAAATTGACTTATTACACTCCCGAATATGAAACCAAGGATACTGATATTTTAGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCCCCTGAAGAAGCAGGGGCTGCGGTAGCAGCTGAATCTTCTACTGGTACATGGACAACTGTATGGACTGACGGGCTTACCAGTCTTGATCGCTACAAAGGTCGATGCTACCACATCGAGCCTGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAGGCCCTGCGCGCGCTACGTCTGGAGGATTTGCGAATCCCTCCTGCTTACACTAAAACTTTCCAAGGCCCACCGCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGCCGGCCCCTATTGGGATGTACTATTAAACCTAAATTGGGATTATCCGCTAAGAATTATGGTAGAGCAGTTTATGAATGTCTTCGCGGTGGNTTNGATTTTACAAAAAN"}],"marker_position":{"latitude":22,"longtitude":53,"radius":16},"collection_date":"2016.10.10","microscope":{"youtube_id":"m_dwnaYljfw"},"memo":{"どんな場所で採ったか":"崖ってほどでもない崖←少し登る<br>ジメジメしていた<br>日陰<br>コケがたくさん生えていた<br>コケの中から枝が出てきている感じ","なぜその植物を採取したか":"穴があいていたから<br>誰も知らなかったから","なんの植物だと思うか":"クサギか何か","植物の特徴を絵や文字で書いて下さい":"汁が臭い<br>ギザギザ<br>こんなに臭いのに虫に食われていて、なぜ虫が好むのか？<br>葉がやわらかい"},"memofig_width":"390px"},{"id":"10-1-B","genus":{"ja":"再解析中","en":"Under re-analysis"},"dna_sequences":null,"marker_position":{"latitude":5.4,"longtitude":-46,"radius":22},"collection_date":"2016.10.10","microscope":{"youtube_id":"hff7rKFclZ8"},"memo":{"どんな場所で採ったか":"滝付近の岩場（高いところ）","なぜその植物を採取したか":"周りの植物と比べて、背が高くて目立っていたから！","なんの植物だと思うか":"つるむらさき（？）","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"10-1-C","genus":{"ja":"マメヅタ","en":"Lemmaphyllum microphyllum"},"dna_sequences":[{"region":"rbcL","text":"GNNNNNNNNNNAGCTGGTGTCAAAGATTATCGATTGACTTATTACACCCCCGAATACAAAACCAAAGATACCGATATCTTAGCAGCATTTCGAATGACCCCACAACCTGGAGTACCGGCTGAGGAAGCTGGAGCTGCGGTAGCTGCAGAATCCTCCACAGGTACGTGGACCACTGTATGGACAGATGGGTTGACTAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAAGAGAATCAGTATATCGCGTATGTAGCTTATCCTTTGGATCTATTTGAAGAAGGTTCCGTTACTAATTTATTCACCTCCATAGTCGGTAATGTCTTCGGATTTAAGGCTCTGCGCGCTATACGCCTGGAAGACCTTCGAATTCCTCCTGCTTATTCTAAAACTTTCCAAGGACCGCCTCATGGTATTCAGGTTGAAAGGGATAAATTGAACAAATATGGACGTCCTCTATTGGGATGTACAATCAAGCCAAAATTGGGTCTGTCTGCCAAAAATTATGGTAGAGCCGTCTACGAATGCCTTCGCGGTGGATTNGNTTTNNACAAAAAATCCCNNTNGNNGN"}],"marker_position":{"latitude":4.5,"longtitude":76.6,"radius":15},"collection_date":"2016.10.10","microscope":{"youtube_id":"gyEHDuG3zTM","memo":"スキマが多い→細胞壁？<br>茶色のは死んでる？"},"memo":{"どんな場所で採ったか":"日のあたる木にまきついているツタ","なぜその植物を採取したか":"かわいいから<br>葉っぱがまるくて・・・<br>木にまきついているのを取りたかった","なんの植物だと思うか":"ツタ植物<br>ラシ植物（？）<br>葉がうすいから・・・","植物の特徴を絵や文字で書いて下さい":"多肉植物・・・食べられそう<br>意外と肉厚<br>葉のうらに白・茶のハンテンがあるものもある<br>すりつぶすと水がたくさん出た"},"memofig_width":"280px"},{"id":"10-1-D","genus":{"ja":"カタヒバ","en":"Selaginella involvens"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNGNCGGCGTGANGGATCACAGATTAACTCATTACACTCCCGATTACCAGACCAAAGACACCGATNTTCCGGCAGCATCCCGAATGACTCCGCAACCCGGAGTGCCCGCCGAAGAAGCGGGAGCCGCAGTAGCCGCGGAATCCTCCACAGGAACGTGGACTACCGTTTGGACCGATGGACTGACTAATCTTGATCGTTATAAAGGTCGGTGCTATGATATCGAACCCGTTCCGGGGGAAAAAGATCAATACATTGCTTATGCAGCTCATCCTTCGGACCTGTCTGAGGAAGGTTCCGTTACCAACATGTCCACCTCCATAGTGGGTAATGTTTTTGGATCCAAGGCCTTACGAGCCCCGCGTTCGGAAGATCTGCGAATCCCCCCCGCTTATTCCAAGACCTCCAAGGGTCCACCTCATGGTATCCAAGTCGAAAGGGATAAATCNAACAAATATGGCCGTCCCTCNNTGGGATGTACTATAAAACCCAAGTTGGGTCTATCCNNTAAAAACTACNGCAGANCANTCCATGAACGGCTTCGTGGTGGATNNNNANTTTTACANNAAAN"}],"marker_position":{"latitude":-7,"longtitude":-67,"radius":5.7},"collection_date":"2016.10.10","microscope":{"youtube_id":"quyJ7395yFw"},"memo":{"どんな場所で採ったか":"半日陰の岩肌<br>湿度があるところ","なぜその植物を採取したか":"葉の形状<br>コケが成長したようにみえる（コケより大きい）<br>この場所にしかなかったから<br>根っこがとても長い。水分をひろく取る為","なんの植物だと思うか":"こけ","植物の特徴を絵や文字で書いて下さい":"持って帰って切る時、乾燥したせいか葉がクルクルまるまって、かさかさになっていた。すりつぶしやすかった。"},"memofig_width":"200px"},{"id":"10-2-A","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNTCGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTGAGAGGANAATTAATAAGAAACGNATATANCTGCCCCTGACTCCTTATTGAAGAAGGGTCTAGTCCTAAANCNTNNCCTCCCCCGTNGAGTTTNGGGAANGANTGTGNNTCGCNTNNATANGNCCNGCNCGAGTGAAANNACNGGCACCTTCCATATTGACCAAACTTGANCCGGCTGGATTTCTATTTATTCATCAAGNGGGCCGGCCACCTTGAANGCAGAATGGATTTGCCCTGCTACCTCANATACTGNNTGNNAGGACATTTGAACAAGCTTNCGNTGGTGGGTGAANNNTGTACGAAGACTTCGGCAAATAGTGANANNNTTCCATAGAAATAGNTTCGN"},{"region":"rbcL","text":"NNNNNNNNNNNNNNNCCGGTGTNNNGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGTGGTGNATNNNNNNTTTTTACNNAA"}],"marker_position":{"latitude":-23,"longtitude":-164,"radius":3.5},"collection_date":"2016.10.10","microscope":{"youtube_id":"fzyCADXctj4"},"memo":{"どんな場所で採ったか":"Riverside, grow on the rock and with mosses","なぜその植物を採取したか":"川の側の他と違うツル状の植物だったから","なんの植物だと思うか":"ツタの仲間？","植物の特徴を絵や文字で書いて下さい":"The stem is thin.<br>Leaves are grow in pairs.<br>Root on the rock,and moss.<br>The plant grows really long."}},{"id":"10-2-B","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNCCGGTGTTNAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGN"}],"marker_position":{"latitude":5,"longtitude":-50,"radius":20},"collection_date":"2016.10.10","microscope":{"youtube_id":"9auE9oVaAUw"},"memo":{"どんな場所で採ったか":"ポールにからみついていた。","なぜその植物を採取したか":"ポールにからみついていたから。","なんの植物だと思うか":"豆科","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"200px"},{"id":"10-2-C","genus":{"ja":"ヤマハッカ","en":"Isodon inflexus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNTNNNNCGGGTGTTNNNAGTATAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTACTGCTTATATTAAAACTTTCCAAGGTCCGCCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGCGNNNNNNNNTTTTTTTTTNNANNNAN"}],"marker_position":{"latitude":-32,"longtitude":-120,"radius":3},"collection_date":"2016.10.10","microscope":{"youtube_id":"p9m-CR0jCWM"},"memo":{"どんな場所で採ったか":"水場に近い場所<br>日あたりが良くて水気のある場所","なぜその植物を採取したか":"花がその場でしかなかったから<br>紫色の花がきれいだったため","なんの植物だと思うか":"シソ科<br>虫にはを食べられていたため、食べることのできる植物","植物の特徴を絵や文字で書いて下さい":"花は紫色"},"memofig_width":"200px"},{"id":"10-2-D","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNAATNNTACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCATTATTAATTAGAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAATAGATTCGTTCAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGAGAAGATTGGTTANGGNAGAAAGACGAAAATAGATTCGTATTCACATACATAAAAATTATATAACAAGAAGAGTAATCTTTGATTTCTTTTTGTTAAAAAATGAAAACAGGTTTTCTTTGTAGAAAGAATCTTATTGCAATTACAATACTCGCGTAGAAAGAATCGTAATAAGTGCAAAGAAGGGGCATCTTTTACCCATAGCGAAGGGTTGNANANNTCGAANNNNNNNCCGGGAA"},{"region":"rbcL","text":"NNNNNNNNNNNNCCGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGTGGTGGNNNNNTTTTTTTANAANAAAN"}],"marker_position":{"latitude":23.4,"longtitude":5,"radius":20},"collection_date":"2016.10.10","microscope":{"youtube_id":"34JCTSSd6Xo","memo":"プツプツ丸いのがたくさん<br>黒い点々が各所にあった<br>つぶすと鮮やかな緑色<br>他のチームの葉と同じような緑ですが、つぶすと色の違いがでた。Dチームはきれな緑。Cチームは茶色い緑に・・・"},"memo":{"どんな場所で採ったか":"杉の木の横の少し高くなった土手の上<br>日陰<br>落ち葉（杉）が積もって腐葉土っぽくなっている","なぜその植物を採取したか":"園芸植物リシマキアの葉と少し似ているけど、微妙にちがうから。たくさん生えていると可愛いかもしれないので。<br>グランドカバー系？","なんの植物だと思うか":"ツル系か？","植物の特徴を絵や文字で書いて下さい":"他の植物の枯れ葉の間の地面からしっかり生えている<br>あまり背は高くない"},"memofig_width":"390px"},{"id":"10-3-A","genus":{"ja":"ツリミギボウシゴケ","en":"Grimmia apiculata"},"dna_sequences":[{"region":"rbcL","text":"NNTNNNNNTGGTGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCACCTGAAGAAGCAGGAGCTGCAGTAGCTGCGGAATCTTCTACTGGTACATGGACCACTGTTTGGACTGATGGACTTACTAGTCTTGATCGTTATAAAGGTCGATGTTATGATATTGAAGCAGTTCCTGGAGAAGAGAATCAATATATCGCTTATGTTGCTTACCCATTAGATTTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTGCGTATTCCTCCAGCTTATTCCAAAACTTTTCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAACAAATATGGACGTCCATTGTTAGGATGTACTATTAAACCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGNNTTGNNTTTTTTTNAAAAAAAAAAAN"}],"marker_position":{"latitude":23.4,"longtitude":-4,"radius":21},"collection_date":"2016.10.10","microscope":{"youtube_id":"lT4GW1cuex8"},"memo":{"どんな場所で採ったか":"切り立った岩の側面","なぜその植物を採取したか":"かわいかったから","なんの植物だと思うか":"コケ","植物の特徴を絵や文字で書いて下さい":"ふさふさした手触り<br>森の香り？（土の香り）"},"memofig_width":"390px"},{"id":"10-3-B","genus":{"ja":"再解析中","en":"Under re-analysis"},"dna_sequences":null,"marker_position":{"latitude":-0.5,"longtitude":-62.5,"radius":18},"collection_date":"2016.10.10","microscope":{"youtube_id":"tcJ2q_q9ye0"},"memo":{"どんな場所で採ったか":"水分をふくんだ岩","なぜその植物を採取したか":"岩から生えていたから<br>シダの形が他の植物と大きく違うので、遺伝子に特徴があるのではないかと思いました。","なんの植物だと思うか":"シダ","採取の手順にて":"①葉をカッターで細くする→においが発する（草っぽい）<br>②乳鉢と乳棒ですりつぶす<br>③（チューブのイラスト有り）にすりつぶしたサンプルを入れる"},"memofig_width":"250px"},{"id":"10-3-C","genus":{"ja":"再解析中","en":"Under re-analysis"},"dna_sequences":null,"marker_position":{"latitude":-13,"longtitude":93,"radius":4.6},"collection_date":"2016.10.10","microscope":{"youtube_id":"jkDc7iL5u-g"},"memo":{"どんな場所で採ったか":"岩肌","なぜその植物を採取したか":"かわいかったから","なんの植物だと思うか":"コケの進化したやつ","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"300px"},{"id":"10-3-D","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNANNTCGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCATTATTAATTAGAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAATAGATTCGTTCAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGAGAAGATTGGTTATGGAGAAAGACGAAAATAGATTCGTATTCACATACATAAAAATTATATAACAAGAAGAGTAATCTTTGATTTCTTTTTGTTAAAAANTGAAAACAGGTTTTCTTTGTAGAAAGAATCTTATTGCAATTACAATACTCGCGTAGAAAGAATCGTAATAAGTGCAAAGAAGGGGCATCTTTTACCCATAGCGAAGGGTTGACANNNNAAN"},{"region":"rbcL","text":"NNNNNNNANNNNNCCGGTGTTAAAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGTGGTGGACTTGNNNTTTACANNNNNNNNTTTCCATAANAAATNNTTTCNNTCANNANNGACCCCNTAGGATGTTGGTCGTAAATGAGAAGATTGGTTATGGGAGAAAGACNAANATAGATTCGTATTCNCATACNTAAAANTNNTNTNNCANGAAGAGTAATCTTTGATTTTCTTTTTGTTAAAAAATGAANACAGGNTTTTCTTTTGTAGAAAGAATCTTTATTTGCNATTACNNTACTCNCCGTAGNAANGAANCCNTAATAGNGGCANNNNANGGGNNATCTTTTTACCCNATNNNNNANNNNTGNAN"}],"marker_position":{"latitude":-0.4,"longtitude":-35,"radius":4.5},"collection_date":"2016.10.10","microscope":{"youtube_id":"ctqmt0sPtIA"},"memo":{"どんな場所で採ったか":"沢に接する小路の石にある<br>水もあり、日もよく当たる<br>コケといっしょにはえている","なぜその植物を採取したか":"形がきれいである<br>ひいらぎのようで、見かけない形だった","なんの植物だと思うか":"ツタの仲間","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"cristina","genus":{"ja":"シワカラカサタケ属","en":"Cystoderma sp."},"dna_sequences":[{"region":"ITS1","text":"NNNNNNNNNNNNNNNNTTGATAAAATGGATCAGGCTGTTGCTGGCTTTATATTTTTTTATAGAGCATGTGCACGCTTCGGTCTATATTCTTTCATTTATCCACTGTGCACCTATTGTAGACTTGAAGTAGTTCTGATAATTGCGTTGTTGCAGCTATCTATTCTATTTCATATCTATGTTAATTATATTAAAAACTTGGATTGACGTTTTAATATTGGATTAACAACCAATTACAACTTTCAACAACGGATCTCTTGGTTCTCGCATCNATGAAGAACCNNNTNANNNANN"}],"marker_position":{"latitude":2.3,"longtitude":-55,"radius":17},"collection_date":"2016.10.09","microscope":{"youtube_id":"L0tZZe86ipQ"}},{"id":"ersin","genus":{"ja":"属種が未同定の菌","en":"Uncultured fungus"},"dna_sequences":[{"region":"ITS1","text":"NNNNNNNNNNNTNTCGATGNNNNTTGGGATGTTGCTGGCTCACTGGGCAATGTGCACTTCCTTGATATTCAAATCCACCTGTGCACAATCAAGTAGGCATAGATTGAGTTCTGTGCCTATGTTTTTTTTTTCNCNCCCACCTCTCCTGTAAAAGAAGAGATGTTAAAAAAAAAAACATTACATTTTTNATCAATGGATCGGTTGTCTCGCGTCTCGATGANGAAAGAAACGAAANCCCTGNCTCAGCCGNATCTCTTCNTNTATNGCACATCCANNANGCNNTANANAGGACTTGAATAACGNTCTGNANNNTTNCGTTGCTTTCT"}],"marker_position":{"latitude":1.8,"longtitude":-57,"radius":18},"collection_date":"2016.10.09","microscope":{"youtube_id":"ha8d8GsV0eI"}},{"id":"B-3","genus":{"ja":"ツバキ属","en":"Camellia"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNATTNNNCTGGTGTTAAAGATTACAAATTGACTTATTATACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCGCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCGTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTACTGCGTATGTTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGAAGAGCAGTTTATGAATGTCTCCGCGGTGNANNNNNNTTTTTACN"}],"marker_position":{"latitude":0,"longtitude":-170,"radius":3.8},"collection_date":"2016.10.01","microscope":{"youtube_id":"3fQJA9LoZWQ"}},{"id":"B-4","genus":{"ja":"トウバナ","en":"Clinopodium gracile"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNGNGTGTTNNNAGTACAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCCGTTCCTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTGTTGCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGGATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTTCGCGGNNNNNNNNNNNTTTN"}],"marker_position":{"latitude":-20,"longtitude":-210,"radius":3.5},"collection_date":"2016.10.01","microscope":{"youtube_id":"gwNpgBQUZek"}},{"id":"B-5","genus":{"ja":"オオシノブゴケ","en":"Thuidium tamariscinum"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNGNNNNNNNNCTGGTGNTNNNATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGATACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAAGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACCGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAGAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACCATCAAGCCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGGACTTTGATTTTACAANAAN"}],"marker_position":{"latitude":-15.5,"longtitude":-238,"radius":4.5},"collection_date":"2016.10.01","microscope":{"youtube_id":"QqhyFgaGzIc"}},{"id":"B-6","genus":{"ja":"アオキ","en":"Aucuba japonica"},"dna_sequences":[{"region":"rbcL","text":"NNNNNGNNNNNNNNCTGGTGTNNNGATTACAAATTGACTTATTATACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCTGCAGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCCGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTGTTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGTATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTTCGCGGTGGACTTGGATTTTACANAN"}],"marker_position":{"latitude":6,"longtitude":107,"radius":36},"collection_date":"2016.10.01","microscope":{"youtube_id":"V9HPNK6c8jw"}},{"id":"B-8","genus":{"ja":"サツマイナモリ属","en":"Ophiorrhiza"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNGNANNNNNCGGGTGNTNNNAGTACAAATTAACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGGCTTACCAGTCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCAGTTCTTGGAGAAGAAGATCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATTTGCGAATCCCCCCTGCTTATACTAAAACCTTCCAAGGCCCGCCTCATGGCATTCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTAGGTTTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTTCGTGGNNNNNNNNANNTTTTTTNNNNAAA"}],"marker_position":{"latitude":-45,"longtitude":110,"radius":1.5},"collection_date":"2016.10.01","microscope":{"youtube_id":"tuSvN5_JQwA"}},{"id":"B-9","genus":{"ja":"キイチゴ属","en":"Rubus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNCTGGTGTTNNGATTATAAATTGACTTATTATACTCCGGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAGGAAGCAGGGGCCGCGGTAGCTGCGGAATCTTCTACCGGTACATGGACAACTGTATGGACTGACGGGCTTACTAGTCTTGATCGTTACAAAGGGCGATGCTACCACATTAAACCTGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCGGTTACTAACATGTTTACTTCCATTGTGGGTAATGTGTTTGGGTTCAAGGNCTTGNGCGCTCTACGTCTGGAGGATTTACGAATCCCTCCCGCTTATGTTAAAACTTTCCAAGGCCCGCCTCACGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGCCGCCCCCTATTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAGAATTACGGTAGAGCAGTTTATGAATGTCTCCGCGGTGGACTTGATTTTTANAAAAAAANNNNNNGGN"}],"marker_position":{"latitude":-22,"longtitude":-100,"radius":3.4},"collection_date":"2016.10.01","microscope":{"youtube_id":"TUwughfpsgI"}},{"id":"B-11","genus":{"ja":"オオイタチシダ","en":"Dryopteris pacifica"},"dna_sequences":[{"region":"rbcL","text":"GNNNNNNNNNNNNCTGGTGTCAAAGATTATCGATTGACCTATTACACCCCCGAATACAAGACCAAAGATACCGATATCTTAGCAGCCTTTAGAATGACCCCACAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCGGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCTTTGGATCTATTCGAAGAAGGTTCTGTCACCAACTTGTTCACCTCTATTGTAGGTAATGTCTTTGGATTTAAGGCTCTACGCGCTTTACGCTTGGAAGACCTTCGAATTCCCCCCGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGTCTGTCTGCTAAGAATTATGGTAGAGCCGTCTACGAATGCCTCCGCGNNNNNNNNNNTTTTTTANAANNNCNTNANGNNNCN"}],"marker_position":{"latitude":-5,"longtitude":-90,"radius":8},"collection_date":"2016.10.01","microscope":{"youtube_id":"GHOB5xv54WM"}},{"id":"B-12","genus":{"ja":"トウゲシバ","en":"Huperzia serrata"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNTGGCGTTAGGGANTACAGATTAACTTATTACACTCCTAATTATAAGACCAAAGACACCGATATTTTGGCAGCATTTCGGATGACCCCCCAACCTGGAGTACCACCCGAGGAGGCGGGAGCCGCAGTAGCTGCTGAATCTTCCACTGGTACATGGACTACCGTTTGGACCGATGGACTTACCAGCCTTGATCGTTATAAAGGTCGATGCTATGAAATTGAAGCTGTGACCGGGGAGAAAAATCAATTTATTGCTTATGTAGCTTATCCTTTGGATCTCTTTGAGGAAGGTTCCGTCACTAACTTATTCACCTCCATCGTGGGTAACGTATTCGGATTCAAAGCTTTACGAGCTTTACGTTTAGAAGATTCGCGAATTCCCCCCGCTTATTCCAAAACTTTCATAGGTCCACCCCATGGTATCCAAGTTGAAAGAGACAAATCAAACAAATATGGCCGTCCTTTATTAGGATGTACTATTAAACCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTTTATGAATGTCTCCGNGNNNNNNTTTTTTTTTNNANANAAAAAA"}],"marker_position":{"latitude":0,"longtitude":65,"radius":15},"collection_date":"2016.10.01","microscope":{"youtube_id":"YM1nOx5-0hw"}},{"id":"B-13","genus":{"ja":"スゲ属","en":"Carex"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNANCAGGGGTTNAGATTACAAACTTACTTATTATACTCCTGAGTACGAAACCAAAGATACTGATATCTTGGCAGCGTTCCGAGTAACTCCTCAACCCGGAGTCCCTCCTGAAGAAGCAGGAGCTGCAGTAGCGGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCATATCGAGCCTGTTGTTGGAGAAGAAAATCAATTTATTGCCTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCTATTGTAGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGCTTGGAAGACTTACGAATTCCCCCTGCTTATTCAAAAACTTTCCAAGGCCCACCTCATGGTATCCAATCCGAAAGAGATAAGTTGAACAAATATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCATGTTATGAATGTCTACGTGGTGGCTTNNNNTTTTNANAAAAAN"}],"marker_position":{"latitude":-11,"longtitude":-225,"radius":5.7},"collection_date":"2016.10.01","microscope":{"youtube_id":"k_Jb-hZ4bZk"}},{"id":"B-14","genus":{"ja":"トウバナ","en":"Clinopodium gracile"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNCGGGTGTTNNNAGTACAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCCGTTCCTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTGTTGCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGGATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTTCGCGGTGNTTTGANTTTTTTTAAAAAAN"}],"marker_position":{"latitude":-20,"longtitude":-220,"radius":4},"collection_date":"2016.10.01","microscope":{"youtube_id":"vh7shDaZ6R0"}},{"id":"B-15","genus":{"ja":"ニレ科","en":"Ulmaceae"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNGANNNNNCGGGTGTTNNNATTATAAATTGACTTATTACACTCCTGAATATGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCACCTGAGGAAGCAGGAGCTGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTATGGACTGACGGGCTTACTAGTCTTGATCGCTACAAAGGTCGATGCTACGGCATTGAGCCTGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTCGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAGGCCCTGCGCGCTCTACGTCTAGAGGATTTACGAATCCCTCCTGCTTATTCTAAAACTTTCCAAGGTCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGCCGCCCCCTATTAGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAGAATTATGGTAGAGCAGTTTATGAATGTCTTCGCGGTNNTTGGNNTTTTTTAAAAAAN"}],"marker_position":{"latitude":-3,"longtitude":98,"radius":23},"collection_date":"2016.10.01","microscope":{"youtube_id":"7EclZm3AePo"}},{"id":"B-16","genus":{"ja":"クサギ","en":"Clerodendrum trichotomum"},"dna_sequences":[{"region":"matK","text":"CCGGCCCGAAAGTTGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCGCTATAATAATGAGAAAGATTTCTGCATATACGACCAAATCGGTCAATAATATTAGAATCGGATAAATCAGCCCAAATCGGCTTACTAACAGGATGCCCAAATACGTTACAAAATTTCGCTTTAGCCAATGACGCAATCATTGGAATAATTGGAATAAGGGTATCAAACTTCTTAATAGCATTATTGATTAGAAATGCATTTTCTAGAATTTGACTCCGTACCACGGAGGGGTTCATTCGCACGCTTGAAAGATAGTCCAAAAATTCAAGGGAATAATTGGATAATTGGTTTATATAAATCCTTCTTGGATGAAACCACAGCGAAAAATGCCATTGCCAAAAAGTGACAAGATAAAATTGCCATTTTTTCATGAAAAAAGATGTTCCCTTTGAAGCCAGAATGGATCTTCTTTGATACCTAATATAATGCATGAAAGGTTCCTTGACCAACCACGAGTTCGCCCGAAAATTGTTAATCTTAACAAAGACGTTCACAAGACGTTCTACTTTTACATAGAAATGGATTCGTTCAAGAAGAACTCCAAAAGCTGTTGATCGTAAATGAAAAGATTGGTTACGTAGAAAGACGAAAACGGATTCATATTCACATACATGAGAATTATATAAGAATAAGAATAGTCTTGGATTTCGTTTTGAAAAAGAGGAGCCAGCTTTCGTTGGAATAATAAGACTATTCCAATTACAATATTCAGCGAGAAAGACTCGTAGTAAATGTAAAGAAGAAGCATCTTTTACCCAACCGCGAAGAGTTTGAACCAAGATTTCCAGATGGGACTGGGGT"},{"region":"rbcL","text":"TCTGGGATTACAAGCGGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACAAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGCCTTACCAGCCTTGATCGTTACAAAGGTCGATGCTACGACATCGAGCCCGTTCTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTATCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATCCCCACTGCTTATATTAAAACTTTCCAAGGCCCACCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGTTGGGATGTACTATTAAACCGAAATTGGGGTTATCCGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGTGGTGGACTTGATTTTACAAAA"}],"marker_position":{"latitude":1,"longtitude":115,"radius":35},"collection_date":"2016.10.01","microscope":{"youtube_id":"6zXd9mEi1PQ"}},{"id":"B-17","genus":{"ja":"スギ","en":"Cryptomeria japonica"},"dna_sequences":[{"region":"rbcL","text":"GAAGGCGGTATTAAGGCTGGTGTTAAAGATTACAGATTAACTTATTATACTCCGGAATATCAGACCAAAGATACTGATATCTTAGCAGCATTCCGAGTCACTCCTCAACCTGGAGTACCCCCCGAAGAAGCGGGAGCAGCAGTAGCCGCCGAATCTTCCACTGGTACGTGGACGACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTACAAGGGGCGATGCTATGATATTGAACCCGTTCCTGGAGAGGAAAGTCAATTTATTGCCTATGTGGCTTACCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACCTGTTCACTTCTATTGTAGGTAATGTATTTGGATTCAAAGCCTTACGGGCTCTACGTCTGGAAGATTTACGGATTCCTCCTGCTTATTCAAAAACTTTCCAAGGCCCACCACATGGTATTCAAGTAGAAAGAGATAAATTAAACAAATATGGTCGTCCTTTGTTGGGATGTACTATAAAACCAAAATTGGGTCTATCTGCCAAGAATTATGGTAGAGCGGTTTATGAATGTCTCCGTGGTGGACTTGATTTTACAAAA"}],"marker_position":{"latitude":1,"longtitude":104,"radius":30},"collection_date":"2016.10.01","microscope":{"youtube_id":"DFZ4EnxMF6g"}},{"id":"B-18","genus":{"ja":"イヌガヤ属","en":"Cephalotaxus"},"dna_sequences":[{"region":"rbcL","text":"NNCNNCAANGCTGGTGTTAAAGATTACAGATTAACTTATTATACTCCGGAATATAAGACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTGCCCCCTGAGGAAGCAGGAGCAGCAGTAGCTGCCGAATCTTCCACTGGTACATGGACTACTGTTTGGACCGATGGACTTACGAGTCTTGATCGTTACAAGGGACGATGCTATGATATTGAACCCGTTCCTGGAGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCCTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACCTGTTCACTTCCATTGTAGGTAATGTATTTGGATTCAAAGCCCTACGAGCTCTACGTCTGGAAGATCTGCGAATTCCTCCTGCTTATTCAAAAACTTTCCAAGGCCCACCACATGGTATCCAAGTGGAAAGAGATAAACTAAATAAATATGGTCGTCCTTTGTTGGGATGTACAATCAAACCAAAATTGGGTCTATCTGCCAAGAATTATGGTAGAGCGGTTTACGAATGTCTCCGCGGTGGCTNNNTTTTTTNNNAAAAAAATN"}],"marker_position":{"latitude":23,"longtitude":-28.5,"radius":23},"collection_date":"2016.10.01","microscope":{"youtube_id":"G3-OOTj_Ktk"}},{"id":"B-20","genus":{"ja":"シノブゴケ属","en":"Thuidium"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNGNNNNNNANCTGGTGTTANGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAGACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAAGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACCGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAGAGAGATAAATTAAACAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGGATNNGANTTTTACAAAAAN"}],"marker_position":{"latitude":-32,"longtitude":-52,"radius":1.7},"collection_date":"2016.10.01","microscope":{"youtube_id":"wJiPaxhgXm0"}},{"id":"B-23","genus":{"ja":"チヂミザサ","en":"Oplismenus undulatifolius"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNCTGGTGTTAGGATTATAAATTGAATTACTACACCCCGGAGTACGAAACCAAGGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAGCCCGGGGTTCCGCCTGAAGAAGCAGGGGCTGCAGTAGCTGCGGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAGCCCGTTCCTGGGGATGCAGATCAATATATCTGTTATGTAGCTTATCCATTAGACCTATTTGAAGAGGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAACGTATTTGGTTTCAAAGCCCTACGCGCTCTACGTTTGGAGGATCTACGAATTCCCACTACTTATTCAAAAACTTTCCAAGGCCCGCCTCACGGTATCCAAGTTGAAAGGGATAAGTTGAACAAGTATGGTCGTCCTTTTTTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAAAATTACGGTAGAGCGTGTTATGAGTGTCTACGCNNNNNNNTTTNNTNTN"}],"marker_position":{"latitude":-27,"longtitude":-114,"radius":3.2},"collection_date":"2016.10.01","microscope":{"youtube_id":"XdfnMKZwImU"}},{"id":"B-24","genus":{"ja":"タブノキ","en":"Machilus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNGNNNNNNNNCTGGTGTTAAGATTACAAATTGACTTATTATACTCCTGACTATGAAACCAAAAGTACTGATATTTTGGCAGCATTTCGAGTAACTCCTCAACCCGGAGTTCCACCTGAGGAAGCAGGGGCTGCCGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGACGATGCTACCACATCGAGCCCGTTGCTGGGGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACGAACATGTTTACTTCTATTGTGGGTAATGTATTTGGGTTCAAAGCTCTACGAGCTCTACGTCTGGAGGATCTGCGAATTCCTCCTGCTTATTCCAAAACTTTCCAAGGCCCGCCCCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTATTGGGATGTACTATTAAACCAAAATTGGGGTTATCCGCCAAGAACTACGGTAGAGCGGTTTATGAATGTCTCCGTGGTGNNTTNGAATTTTACAAAANAN"}],"marker_position":{"latitude":-1,"longtitude":-125,"radius":4.7},"collection_date":"2016.10.01","microscope":{"youtube_id":"au5oqDo4uoA"}}],"knowledges":[{"title":{"ja":"ユスリカ","en":"Chironomids"},"description":{"ja":"ハエ目の昆虫。蚊柱の多くはユスリカのオスの群飛で、メスはその群飛に飛び込み交尾をし、水辺に移動し産卵します。成虫の口器は退化し、食物をとらず、1日から数日の命です。幼虫は水底で成長し、魚類などの餌です。仁保の森には、山間渓流に生息する<a href=\"https://www.google.com/search?q='Tanypodinae'\" target=\"_blank\" class=\"border\">コヒメユスリカ（モンユスリカ亜科）</a>、<a href=\"https://www.google.com/search?q='Orthocladius'\" target=\"_blank\" class=\"border\">カニエリユスリカ（エリユスリカ亜科）</a>、水田など発生する<a href=\"https://www.google.com/search?q='Chironominae'\" target=\"_blank\" class=\"border\">ウスイロユスリカ（ユスリカ亜科）</a>をはじめ多種が生息。","en":"Chironomids are insects of the order Diptera. Most of the time, mosquito pillars are the swarming of flying male chironomids, and females fly into the swarm for copulation, then move to the waterside to lay eggs. The adults have atrophied mouthparts, and for this reason, they spend their lives without consuming any food and survive for one or a few days. Larval chironomids develop at the bottom of water, and animals such as fish prey on them. There are many species of chironomids inhabiting the forest of Niho, including <a href=\"https://www.google.com/search?q='Tanypodinae'\" target=\"_blank\" class=\"border\">Nilotanypus(Tanypodinae)</a> and <a href=\"https://www.google.com/search?q='Orthocladius'\" target=\"_blank\" class=\"border\">Orthocladius kanii(Orthocladius)</a> that live in mountain streams, and <a href=\"https://www.google.com/search?q='Chironominae'\" target=\"_blank\" class=\"border\">Chironomus kiiensis(Chironominae)</a> dwelling in paddy fields."},"marker_position":{"latitude":-10,"longtitude":-130,"radius":6}},{"title":{"ja":"トンボ","en":"Dragonflies"},"description":{"ja":"食虫性の昆虫。飛びながら小さな昆虫を捕えて食べます。体は細長く、早く、まっすぐに飛び、旋回やホバリングもこなします。大きな複眼は飛翔しながら昆虫を探すセンサーです。幼虫はヤゴとよばれ水棲で肉食です。仁保の森には、<a href=\"https://www.google.com/search?q='Coenagrionidae'\" target=\"_blank\" class=\"border\">イトトンボ</a>、<a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">カワトンボ</a>、<a href=\"https://www.google.com/search?q='Cordulegasteridae'\" target=\"_blank\" class=\"border\">オニヤンマ</a>、<a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">ヤンマ</a>、<a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">サナエ</a>、<a href=\"https://www.google.com/search?q='Libellulidae'\" target=\"_blank\" class=\"border\">トンボ</a>の仲間など多種類が生息。特に渓流では、春に<a href=\"https://www.google.com/search?q='Epiophlebiidae'\" target=\"_blank\" class=\"border\">ムカシトンボ</a>や<a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">カワトンボ</a>、5月頃から<a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">サナエ</a>の仲間、夏には<a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">ヤンマ</a>の仲間などがみられます。","en":"Dragonflies are insectivores. They capture small insects while flying and feed on them. With their thin and long body, they fly fast and straight, and can also circle and hover. Their big compound eyes are the sensor for hunting insects while flying in the air. The nymphs, called “yago” in Japanese, spend their juvenile stages underwater and are carnivorous. There are many species from the families <a href=\"https://www.google.com/search?q='Coenagrionidae'\" target=\"_blank\" class=\"border\">Coenagrionidae</a>, <a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">Calopterygidae</a>, <a href=\"https://www.google.com/search?q='Cordulegasteridae'\" target=\"_blank\" class=\"border\">Cordulegasteridae</a>, <a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">Aeshnidae</a>, <a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">Gomphidae</a>, and <a href=\"https://www.google.com/search?q='Libellulidae'\" target=\"_blank\" class=\"border\">Libellulidae</a> inhabiting in the forest of Niho. Especially near the mountain streams, you can find species from <a href=\"https://www.google.com/search?q='Epiophlebiidae'\" target=\"_blank\" class=\"border\">Epiophlebiidae</a> and <a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">Calopterygidae</a> families in spring, <a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">Gomphidae</a> from around May, and <a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">Aeshnidae</a> during summer."},"marker_position":{"latitude":10,"longtitude":-150,"radius":4}},{"title":{"ja":"カエル","en":"Frogs"},"description":{"ja":"水中と陸上の両方で活動する半水生、繁殖期以外は陸上で生活する陸生に分かれます。後足は長く、跳躍運動に適応し、水かきがあります。樹上性カエルの指には吸盤があります。オタマジャクシは水中で成長します。意外と視野は狭いが、動いているものは捉えることができます。渓流域の森林部には<a href=\"https://www.google.com/search?q='Buergeria+buergeri'\" target=\"_blank\" class=\"border\">カジカガエル</a>、<a href=\"https://www.google.com/search?q='Rhacophorus+arboreus'\" target=\"_blank\" class=\"border\">モリアオガエル</a>、<a href=\"https://www.google.com/search?q='Rana+ornativentris'\" target=\"_blank\" class=\"border\">ヤマアカガエル</a>、<a href=\"https://www.google.com/search?q='Rana+tagoi'\" target=\"_blank\" class=\"border\">タゴガエル</a>、<a href=\"https://www.google.com/search?q='Bufo+japonicus'\" target=\"_blank\" class=\"border\">二ホンヒキガエル</a>が生息。田畑周辺には<a href=\"https://www.google.com/search?q='Hyla+japonica'\" target=\"_blank\" class=\"border\">ニホンアマガエル</a>などが生息。","en":"Frogs are divided into two groups; one group is semiaquatic, active both in water and on land, and another is terrestrial that spend their lives on land other than the breeding season. Their long rear legs are webbed and adapted for jumping movement, and arboreal frogs have fingers with suckers. Tadpoles develop in water. Frogs actually have a narrow range of vision, but they are capable of recognizing moving animals or objects. There are species such as <a href=\"https://www.google.com/search?q='Buergeria+buergeri'\" target=\"_blank\" class=\"border\">Buergeria buergeri</a>, <a href=\"https://www.google.com/search?q='Rhacophorus+arboreus'\" target=\"_blank\" class=\"border\">Rhacophorus arboreus</a>, <a href=\"https://www.google.com/search?q='Rana+ornativentris'\" target=\"_blank\" class=\"border\">Rana ornativentris</a>, <a href=\"https://www.google.com/search?q='Rana+tagoi'\" target=\"_blank\" class=\"border\">Rana tagoi</a>, and <a href=\"https://www.google.com/search?q='Bufo+japonicus'\" target=\"_blank\" class=\"border\">Bufo japonicus</a> inhabiting the areas with mountain streams in the forest. Around the fields, frogs such as <a href=\"https://www.google.com/search?q='Hyla+japonica'\" target=\"_blank\" class=\"border\">Hyla japonica</a> can be found."},"marker_position":{"latitude":-20,"longtitude":-150,"radius":4}},{"title":{"ja":"フクロウ","en":"Owls"},"description":{"ja":"多くは肉食性の鳥類で、夜行性の種が多く、大型種はネズミ、小鳥、ヘビなどを捕食します。小型種は昆虫食です。風切羽に消音構造があり、羽音をたてずに飛びます。頭は大きく、鋭いくちばし、大きな目、発達した耳を持ちます。仁保の森に生息している種類は、留鳥では<a href=\"https://www.google.com/search?q='Ural+owls'\" target=\"_blank\" class=\"border\">フクロウ</a>、<a href=\"https://www.google.com/search?q='Otus+lempiji'\" target=\"_blank\" class=\"border\">オオコノハズク</a>、夏鳥では<a href=\"https://www.google.com/search?q='Ninox+scutulata'\" target=\"_blank\" class=\"border\">アオバズク</a>、<a href=\"https://www.google.com/search?q='Otus+sunia'\" target=\"_blank\" class=\"border\">コノハズク</a>、冬鳥では<a href=\"https://www.google.com/search?q='Asio+flammeus'\" target=\"_blank\" class=\"border\">コミミズク</a>、<a href=\"https://www.google.com/search?q='Asio+otus'\" target=\"_blank\" class=\"border\">トラフグス</a>。","en":"Mostly carnivorous and nocturnal, owls with large body feed on mice, small birds, and snakes, while smaller species prey on insects. Their flight feathers are designed to silence the sounds, hence, they can fly without emitting any sounds of flapping wings. Their heads are big, with features including a sharp beak, big eyes, and developed ears. There are several owl species in the forest of Niho: the resident <a href=\"https://www.google.com/search?q='Ural+owls'\" target=\"_blank\" class=\"border\">Ural owls</a> and <a href=\"https://www.google.com/search?q='Otus+lempiji'\" target=\"_blank\" class=\"border\">Otus lempiji</a>; <a href=\"https://www.google.com/search?q='Ninox+scutulata'\" target=\"_blank\" class=\"border\">Ninox scutulata</a> and <a href=\"https://www.google.com/search?q='Otus+sunia'\" target=\"_blank\" class=\"border\">Otus sunia</a> that migrate to the forests during summer; and <a href=\"https://www.google.com/search?q='Asio+flammeus'\" target=\"_blank\" class=\"border\">Asio flammeus</a> and <a href=\"https://www.google.com/search?q='Asio+otus'\" target=\"_blank\" class=\"border\">Asio otus</a> that are winter migrants."},"marker_position":{"latitude":45,"longtitude":280,"radius":20}},{"title":{"ja":"ウロ","en":"Tree hollow"},"description":{"ja":"ケヤキなどの大きく成長する樹にはウロと呼ばれる穴ができやすいので、そこにフクロウなどが巣をつくります。ウロは入口の直径が10cm程度のさほど大きくはないものでも、奥が広くなっていることが多く、体長約50cmのフクロウも暮らすことができます。複数の動物が利用するため、ムササビや、夏に渡ってくるアオバズクなども使います。","en":"Trees such as zelkova that grow large tend to form hollows inside, and animals such as owls use those space to build dens. In many cases, even the holes with a 10 cm wide entrance, the interior tends to be spacious, which would be large enough for a 50 cm owl to dwell inside. Hollows are used by several animals including flying squirrels and brown hawk owls that migrate to the forests in summer."},"marker_position":{"latitude":42,"longtitude":21,"radius":14}},{"title":{"ja":"犬鳴の滝","en":"Inunaki Waterfall"},"description":{"ja":"この森の奥には落差20メートルの「犬鳴の滝」があり、川となって森と里をつなぎ、仁保川に流れ込んでいます。そのため、山や里によくいる生き物に加えて、渓流系の生き物も住んでいます。また、この辺りは植林による針葉樹も少なく、自然に育った多様な広葉樹が残っている豊かな森です。","en":"Deep in the forest, there is a twenty-meter Inunaki Waterfall, which forms a river that links the forest and villages and flows into a main stream of Niho River. In addition to the wildlife often seen in mountains and village-vicinity woodlands, the types of creatures that dwell near mountain streams also inhabit the forest. Only a small number of coniferous trees are planted in this forest, where richness still remains with a wide diversity of naturally-grown broadleaved trees."},"marker_position":{"latitude":15,"longtitude":-60,"radius":25}},{"title":{"ja":"ハムシ","en":"Leaf beetles"},"description":{"ja":"ハムシ（葉虫）は幼虫も成虫も生きた植物にくっついて、葉っぱを食べて暮らしています。甲虫目で硬い虫であり、危険を察知するとすぐ葉っぱから落ちて身を守ります。食べる植物の好き嫌いがハッキリしていて、シソ科の多年草などを好みます。","en":"Adult and larval leaf beetles spend their lives attached to living plants and feed on leaves. They are coleopteran with hard body. When they sense impending danger, they protect themselves by immediately falling onto the ground. They have definite food likes and dislikes, and prefer eating perennial plants such as labiates."},"marker_position":{"latitude":-40,"longtitude":50,"radius":1.5}},{"title":{"ja":"山道と広場と崖の穴","en":"Mountain paths"},"description":{"ja":"人が通る山道は動物の通り道にもなっており、夜間にカメラを置いておくと動物たちが多く映ります。フクロウは広くひらけたところを狩場として利用します。夜、木の高いところから観察し、野ネズミなどが出てくると捉えて食べます。また、崖の穴は、ヒミズ（モグラの仲間）、モグラ、ヘビ、ノネズミなどの生息場所としてシェアされています。","en":"Mountain paths for humans also function as pathways for wildlife. A camera left on standby at nighttime would capture the records of many animals passing by. Wide and open areas are used as hunting field by owls, that would observe from high places on trees at night to wait for emerging field mice to prey on. Holes on the cliff sides are shared as habitats among animals such as shrew-moles, moles, snakes, and field mice."},"marker_position":{"latitude":-40,"longtitude":-90,"radius":1.7}},{"title":{"ja":"危険な生きもの","en":"Dangerous Creatures"},"description":{"ja":"秋の採集の時期はカエルがいたのでマムシも出てきていました。ヘビは草むらにいることも多く、草むらに入ることがある場合は気をつけて入る必要があります。ブト・ブヨや蚊にも注意が必要です。","en":"Frogs appeared during the fieldwork season in the autumn, but so as vipers, a type of venomous snake. It is important to be careful when entering into the grass, where snakes are often found, and keep wary eyes on black flies and mosquitos as well."},"marker_position":{"latitude":-5,"longtitude":-95,"radius":8}},{"title":{"ja":"ノネズミ","en":"Field mice"},"description":{"ja":"森にはたくさんのノネズミが生息しています。林の中では直径1-2cmの穴を多く見つけることができますが、これらはノネズミの巣穴であることも多いです。ノネズミは夜行性の動物で、夜に活動してドングリ類などを食べています。フクロウの主な食料でもあります。","en":"In the forest, there are many field mice. On the cliff sides, you can find lots of holes with diameter of 1-2 cm, which happens to be the burrows of field mice in many cases. The mice are nocturnal and eat acorns and such. They are the staple food for owls."},"marker_position":{"latitude":-5,"longtitude":0,"radius":6.5}},{"title":{"ja":"ザトウムシ","en":"Harvestmen"},"description":{"ja":"クモを連想するような長い足を持った外見のためザトウグモとも呼ばれますが、網状の巣をつくるクモとは別グループに属します。ザトウムシは川を超えられないので、川をはさんで、種が異なっている可能性もあります。","en":"Due to their appearance having long legs that remind us of spiders, harvestmen are also called as “Zatougumo” in Japanese, which the word “kumo (or gumo)” refers to “spider.” However, they actually belong to a group different from the spiders that construct spiderwebs. Since they are incapable to travel across water, their species may be distinct from the ones on the other side of the river."},"marker_position":{"latitude":20,"longtitude":22.5,"radius":10}}]}
 
 /***/ }),
-/* 193 */
+/* 205 */
 /***/ (function(module, exports) {
 
 module.exports = {"camera_default_position":{"longtitude":1882,"latitude":46.2}}
 
 /***/ }),
-/* 194 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./kumano/config.json": 195,
-	"./niho/config.json": 196
+	"./kumano/config.json": 207,
+	"./niho/config.json": 208
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -56098,22 +59029,22 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 194;
+webpackContext.id = 206;
 
 /***/ }),
-/* 195 */
+/* 207 */
 /***/ (function(module, exports) {
 
 module.exports = {"camera_default_position":{"longtitude":265,"latitude":0}}
 
 /***/ }),
-/* 196 */
+/* 208 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 197 */
+/* 209 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56151,28 +59082,28 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-67895125", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-0fb86892", esExports)
   }
 }
 
 /***/ }),
-/* 198 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(199);
+var content = __webpack_require__(211);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("1019dcfa", content, false);
+var update = __webpack_require__(5)("9ea3da38", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cca88f62\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./panorama.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cca88f62\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./panorama.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52cbab82\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./panorama.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-52cbab82\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./panorama.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -56182,7 +59113,7 @@ if(false) {
 }
 
 /***/ }),
-/* 199 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -56190,748 +59121,18 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n@keyframes flash-data-v-cca88f62 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-webkit-keyframes flash-data-v-cca88f62 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-moz-keyframes flash-data-v-cca88f62 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@keyframes hover_flash-data-v-cca88f62 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-webkit-keyframes hover_flash-data-v-cca88f62 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-moz-keyframes hover_flash-data-v-cca88f62 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n.fade-enter-active[data-v-cca88f62],\n.fade-leave-active[data-v-cca88f62] {\n  transition: opacity 1.5s;\n}\n.fade-enter[data-v-cca88f62],\n.fade-leave-active[data-v-cca88f62] {\n  opacity: 0;\n}\n.instruction_anim-enter-active[data-v-cca88f62],\n.instruction_anim-leave-active[data-v-cca88f62] {\n  transition: opacity 0.3s;\n}\n.instruction_anim-enter[data-v-cca88f62],\n.instruction_anim-leave-active[data-v-cca88f62] {\n  opacity: 0;\n}\n#container[data-v-cca88f62] {\n  height: 100%;\n  overflow: hidden;\n}\n.ycam[data-v-cca88f62] {\n  position: absolute;\n  top: 18px;\n  right: 22px;\n  z-index: 11;\n  user-select: none;\n}\n.ycam[data-v-cca88f62]:hover {\n    opacity: 0.7;\n}\n.copyright[data-v-cca88f62] {\n  position: absolute;\n  bottom: 19px;\n  right: 22px;\n  z-index: 11;\n  font-family: 'Roboto';\n  font-size: 9px;\n  line-height: 15px;\n  text-align: right;\n  opacity: 0.55;\n}\n.copyright a[data-v-cca88f62] {\n    color: #fff;\n    text-decoration: none;\n}\n.copyright a[data-v-cca88f62]:hover {\n      border-bottom: 1px dotted #ccc;\n}\n.marker[data-v-cca88f62] {\n  position: absolute;\n  cursor: pointer;\n  z-index: 10;\n  user-select: none;\n  height: 14px;\n  line-height: 14px;\n  white-space: nowrap;\n  transform-origin: 0% 50%;\n  -webkit-transform-origin: 0% 50%;\n  transform: rotate(-90deg);\n  -webkit-transform: rotate(-90deg);\n}\n.marker img[data-v-cca88f62] {\n    display: inline-block;\n    vertical-align: middle;\n    cursor: pointer;\n    user-select: none;\n    pointer-events: none;\n}\n.marker img.label[data-v-cca88f62] {\n    margin-left: 5px;\n}\n.marker[data-v-cca88f62]:hover {\n    animation: hover_flash-data-v-cca88f62 0.2s 1 linear;\n    -webkit-animation: hover_flash-data-v-cca88f62 0.2s 1 linear;\n    -moz-animation: hover_flash-data-v-cca88f62 0.2s 1 linear;\n}\n.marker.selected[data-v-cca88f62] {\n    animation: flash-data-v-cca88f62 1s infinite linear;\n    -webkit-animation: flash-data-v-cca88f62 1s infinite linear;\n    -moz-animation: flash-data-v-cca88f62 1s infinite linear;\n}\n.marker.sample[data-v-cca88f62] {\n    margin-left: 7px;\n}\n.marker.sample[data-v-cca88f62]:before {\n      display: inline-block;\n      content: '';\n      width: 13px;\n      height: 14px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow.png\");\n      background-size: 13px 14px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample[data-v-cca88f62]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow@2x.png\");\n}\n}\n.marker.sample .dna_barcode[data-v-cca88f62] {\n      margin-left: 5px;\n      cursor: pointer;\n}\n.marker.sample.shadow[data-v-cca88f62]:before {\n      display: inline-block;\n      width: 17px;\n      height: 18px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow.png\");\n      background-size: 17px 18px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample.shadow[data-v-cca88f62]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow@2x.png\");\n}\n}\n.marker.sample.shadow img.label[data-v-cca88f62] {\n      margin-left: 3px;\n}\n.marker.sample:hover .dna_barcode[data-v-cca88f62] {\n      animation-duration: 500s !important;\n      -webkit-animation-duration: 500s !important;\n      -moz-animation-duration: 500s !important;\n}\n.marker.knowledge[data-v-cca88f62] {\n    margin-top: 3.5px;\n    margin-left: 3.5px;\n}\n.marker.knowledge[data-v-cca88f62]:before {\n      display: inline-block;\n      content: '';\n      width: 14px;\n      height: 14px;\n      vertical-align: middle;\n      border-radius: 7px;\n      background-color: #fcff00;\n}\n@media (max-width: 660px) {\n.ycam[data-v-cca88f62] {\n    right: inherit;\n    left: 22px;\n    opacity: 0.5;\n}\n.copyright[data-v-cca88f62] {\n    bottom: inherit;\n    top: 19px;\n    right: 22px;\n    opacity: 0.5;\n}\n}\n[data-lang='en'] .marker span.label[data-v-cca88f62] {\n  font-family: 'Roboto';\n  color: #fcff00;\n  font-size: 11px;\n  letter-spacing: 0.1em;\n  margin-left: 5px;\n}\n[data-lang='en'] .marker.shadow span.label[data-v-cca88f62] {\n  text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px, rgba(0, 0, 0, 0.2) -1px -1px 1px, rgba(0, 0, 0, 0.2) -1px 1px 1px, rgba(0, 0, 0, 0.2) 1px -1px 1px, rgba(0, 0, 0, 0.2) 0px 1px 1px, rgba(0, 0, 0, 0.2) 0 -1px 1px, rgba(0, 0, 0, 0.2) -1px 0 1px, rgba(0, 0, 0, 0.2) 1px 0 1px;\n}\n", ""]);
+exports.push([module.i, "\n@keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-webkit-keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-moz-keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-webkit-keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-moz-keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n.fade-enter-active[data-v-52cbab82],\n.fade-leave-active[data-v-52cbab82] {\n  transition: opacity 1.5s;\n}\n.fade-enter[data-v-52cbab82],\n.fade-leave-active[data-v-52cbab82] {\n  opacity: 0;\n}\n.instruction_anim-enter-active[data-v-52cbab82],\n.instruction_anim-leave-active[data-v-52cbab82] {\n  transition: opacity 0.3s;\n}\n.instruction_anim-enter[data-v-52cbab82],\n.instruction_anim-leave-active[data-v-52cbab82] {\n  opacity: 0;\n}\n#container[data-v-52cbab82] {\n  height: 100%;\n  overflow: hidden;\n}\n.ycam[data-v-52cbab82] {\n  position: absolute;\n  top: 18px;\n  right: 22px;\n  z-index: 11;\n  user-select: none;\n}\n.ycam[data-v-52cbab82]:hover {\n    opacity: 0.7;\n}\n.copyright[data-v-52cbab82] {\n  position: absolute;\n  bottom: 19px;\n  right: 22px;\n  z-index: 11;\n  font-family: 'Roboto';\n  font-size: 9px;\n  line-height: 15px;\n  text-align: right;\n  opacity: 0.55;\n}\n.copyright a[data-v-52cbab82] {\n    color: #fff;\n    text-decoration: none;\n}\n.copyright a[data-v-52cbab82]:hover {\n      border-bottom: 1px dotted #ccc;\n}\n.marker[data-v-52cbab82] {\n  position: absolute;\n  cursor: pointer;\n  z-index: 10;\n  user-select: none;\n  height: 14px;\n  line-height: 14px;\n  white-space: nowrap;\n  transform-origin: 0% 50%;\n  -webkit-transform-origin: 0% 50%;\n  transform: rotate(-90deg);\n  -webkit-transform: rotate(-90deg);\n}\n.marker img[data-v-52cbab82] {\n    display: inline-block;\n    vertical-align: middle;\n    cursor: pointer;\n    user-select: none;\n    pointer-events: none;\n}\n.marker img.label[data-v-52cbab82] {\n    margin-left: 5px;\n}\n.marker[data-v-52cbab82]:hover {\n    animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n    -webkit-animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n    -moz-animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n}\n.marker.selected[data-v-52cbab82] {\n    animation: flash-data-v-52cbab82 1s infinite linear;\n    -webkit-animation: flash-data-v-52cbab82 1s infinite linear;\n    -moz-animation: flash-data-v-52cbab82 1s infinite linear;\n}\n.marker.sample[data-v-52cbab82] {\n    margin-left: 7px;\n}\n.marker.sample[data-v-52cbab82]:before {\n      display: inline-block;\n      content: '';\n      width: 13px;\n      height: 14px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow.png\");\n      background-size: 13px 14px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample[data-v-52cbab82]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow@2x.png\");\n}\n}\n.marker.sample .dna_barcode[data-v-52cbab82] {\n      margin-left: 5px;\n      cursor: pointer;\n}\n.marker.sample.shadow[data-v-52cbab82]:before {\n      display: inline-block;\n      width: 17px;\n      height: 18px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow.png\");\n      background-size: 17px 18px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample.shadow[data-v-52cbab82]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow@2x.png\");\n}\n}\n.marker.sample.shadow img.label[data-v-52cbab82] {\n      margin-left: 3px;\n}\n.marker.sample:hover .dna_barcode[data-v-52cbab82] {\n      animation-duration: 500s !important;\n      -webkit-animation-duration: 500s !important;\n      -moz-animation-duration: 500s !important;\n}\n.marker.knowledge[data-v-52cbab82] {\n    margin-top: 3.5px;\n    margin-left: 3.5px;\n}\n.marker.knowledge[data-v-52cbab82]:before {\n      display: inline-block;\n      content: '';\n      width: 14px;\n      height: 14px;\n      vertical-align: middle;\n      border-radius: 7px;\n      background-color: #fcff00;\n}\n@media (max-width: 660px) {\n.ycam[data-v-52cbab82] {\n    right: inherit;\n    left: 22px;\n    opacity: 0.5;\n}\n.copyright[data-v-52cbab82] {\n    bottom: inherit;\n    top: 19px;\n    right: 22px;\n    opacity: 0.5;\n}\n}\n[data-lang='en'] .marker span.label[data-v-52cbab82] {\n  font-family: 'Roboto';\n  color: #fcff00;\n  font-size: 11px;\n  letter-spacing: 0.1em;\n  margin-left: 5px;\n}\n[data-lang='en'] .marker.shadow span.label[data-v-52cbab82] {\n  text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px, rgba(0, 0, 0, 0.2) -1px -1px 1px, rgba(0, 0, 0, 0.2) -1px 1px 1px, rgba(0, 0, 0, 0.2) 1px -1px 1px, rgba(0, 0, 0, 0.2) 0px 1px 1px, rgba(0, 0, 0, 0.2) 0 -1px 1px, rgba(0, 0, 0, 0.2) -1px 0 1px, rgba(0, 0, 0, 0.2) 1px 0 1px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 200 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _threeJs = __webpack_require__(201);
-
-var _threeJs2 = _interopRequireDefault(_threeJs);
-
-var _jsCookie = __webpack_require__(20);
-
-var _jsCookie2 = _interopRequireDefault(_jsCookie);
-
-var _lodash = __webpack_require__(9);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _mobileDetect = __webpack_require__(18);
-
-var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var THREE = (0, _threeJs2.default)(['Projector']);
-
-// Visiblities
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-var visibleAxisHelper = false;
-var visible3dMaker = false;
-var visibleGrid = false;
-
-exports.default = _vue2.default.extend({
-  components: {
-    'dna-barcode-bg': __webpack_require__(265).default,
-    'entrance-modal': __webpack_require__(272).default,
-    'instruction-modal': __webpack_require__(276).default
-  },
-  watch: {
-    '$route': 'resetAutoScroll'
-  },
-  mounted: function mounted() {
-
-    this.resetAutoScroll();
-
-    this.width = this.$el.offsetWidth;
-    this.height = window.innerHeight;
-    this.camera = null;
-    this.scene = null;
-    this.renderer = null;
-    this.raycaster = null;
-    this.mouse = null;
-    this.onPointerDownLon = null;
-    this.onPointerDownLat = null;
-    this.phi = 0;
-    this.theta = 0;
-    this.onPointerDownPointerX = null;
-    this.onPointerDownPointerY = null;
-    this.isUserInteracting = false;
-    this.isDragged = false;
-    this.markerArray = [];
-
-    this.projector = new THREE.Projector();
-    this.frustum = new THREE.Frustum();
-    this.scene = new THREE.Scene();
-    this.raycaster = new THREE.Raycaster();
-    this.mouse = new THREE.Vector2();
-    this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 1, 1100);
-    this.camera.target = new THREE.Vector3(0, 0, 0);
-
-    // Light
-    var ambient = new THREE.AmbientLight(0xffffff);
-    this.scene.add(ambient);
-
-    // Add Geometry
-    var pano_sphere = this.create_pano_sphere();
-    this.scene.add(pano_sphere);
-
-    // Grid
-    if (visibleGrid) {
-      var sphere = new THREE.Mesh(new THREE.SphereGeometry(500, 36, 18), new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        wireframe: true
-      }));
-      this.scene.add(sphere);
-    }
-
-    // Markers
-
-    // Set "alias" appearing in the URL according to the sorting order
-    for (var i = 0; i < this.markers.samples.length; i++) {
-      this.markers.samples[i]['alias'] = 's-' + (i + 1);
-    }
-    for (i = 0; i < this.markers.knowledges.length; i++) {
-      this.markers.knowledges[i]['alias'] = 'k-' + (i + 1);
-    }
-    var marker_all = this.markers.samples.concat(this.markers.knowledges);
-
-    // Sort by distance, so that the overlap order will not be strange
-    marker_all = _lodash2.default.sortBy(marker_all, [function (m) {
-      return m.marker_position.radius;
-    }]).reverse();
-    for (i = 0; i < marker_all.length; i++) {
-      var data = marker_all[i];
-      this.create_marker(data);
-    }
-
-    // Place a circle to hide the stepladder
-    var geometry = new THREE.CircleGeometry(0.6, 128);
-    var material = new THREE.MeshBasicMaterial({
-      map: new THREE.TextureLoader().load('/dna-of-forests/' + this.$route.params.forest + '/img/panorama/logo-cover-' + this.$i18n.locale + '@2x.png')
-    });
-    var circle = new THREE.Mesh(geometry, material);
-
-    circle.position.set(0, -1.5, 0); // [1] Since it is the same viewpoint as the camera at the origin, it is not displayed
-    circle.rotateZ(Math.PI / 2);
-    circle.rotateY(Math.PI / 2);
-    this.scene.add(circle);
-
-    if (visibleAxisHelper) {
-      var axis = new THREE.AxisHelper(300);
-      axis.position.set(0, -10, 0); // Ref: [1]
-      this.scene.add(axis);
-    }
-
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setSize(this.width, this.height);
-    this.renderer.domElement.style.position = 'absolute';
-    this.renderer.domElement.style.top = '0';
-    this.$el.appendChild(this.renderer.domElement);
-
-    window.addEventListener('resize', this.onWindowResize, false);
-    this.$el.addEventListener('mousedown', this.onMouseDown, false);
-    this.$el.addEventListener('touchstart', this.onTouchStart, false);
-    this.$el.addEventListener('touchmove', this.onTouchMove, false);
-    this.$el.addEventListener('touchend', this.onTouchEnd, false);
-    this.$el.addEventListener('mousemove', this.onMouseMove, false);
-    this.$el.addEventListener('mouseup', this.onMouseUp, false);
-    this.$el.addEventListener('mousewheel', this.onMouseWheel, false);
-    this.$el.addEventListener('MozMousePixelScroll', this.onMouseWheel, false);
-
-    // Camera position -------
-
-    var default_lon = this.config.camera_default_position.longtitude;
-    var default_lat = this.config.camera_default_position.latitude;
-
-    if (this.$route.params.index) {
-      // If there is a selected line, scroll to that point
-      var key = this.$route.params.index;
-      var selectedMarker = _lodash2.default.filter(this.markerArray, function (m) {
-        return m.key == key;
-      })[0];
-      default_lat = selectedMarker.latitude;
-      default_lon = -selectedMarker.longtitude;
-
-      // Drawer分差し引いた領域の中心になるように
-      // (TODO: 本来はカメラの視野に応じて計算するべき。(window.innerHeight==this.$el.offsetHeight)でSPビューも考慮すること。)
-      // default_lon += 27;
-    } else if (!this.isTop()) {
-
-      default_lon = _jsCookie2.default.get('lon') * 1 || default_lon;
-      default_lat = _jsCookie2.default.get('lat') * 1 || default_lat;
-    }
-
-    this.lon = default_lon;
-    this.lat = default_lat;
-
-    // ----------------------
-
-    this.animate();
-  },
-
-  methods: {
-    isTop: function isTop() {
-      if (this.$route.path.match(/^\/[A-Za-z0-9]+\/*$/)) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-
-
-    // Retrieve file name
-    filename: function filename(str) {
-      return str.toLowerCase().replace(/[(|)|.]/g, '').replace(/ /g, '-');
-    },
-    animate: function animate(ts) {
-
-      requestAnimationFrame(this.animate);
-      this.update();
-    },
-    render: function render(elapsed, ts) {
-
-      if (this.options.postprocessing) {
-        this.postprocessing.render(elapsed, ts, this.tick);
-      } else {
-        this.renderer.render(this.scene, this.camera);
-      }
-    },
-    onWindowResize: function onWindowResize() {
-      this.width = this.$el.offsetWidth;
-      this.height = this.$el.offsetHeight;
-      this.camera.aspect = this.width / this.height;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(this.width, this.height);
-    },
-    update: function update() {
-
-      if (this.autoScroll) {
-        this.lon += 0.04;
-      }
-
-      // this.lat = Math.max( -85, Math.min( 85, this.lat ) ); // If you want to be a little upward
-      this.lat = Math.max(-90, Math.min(90, this.lat));
-      this.phi = THREE.Math.degToRad(90 - this.lat);
-      this.theta = THREE.Math.degToRad(this.lon);
-
-      this.camera.target.x = 500 * Math.sin(this.phi) * Math.cos(this.theta);
-      this.camera.target.y = 500 * Math.cos(this.phi);
-      this.camera.target.z = 500 * Math.sin(this.phi) * Math.sin(this.theta);
-
-      this.camera.lookAt(this.camera.target);
-
-      this.renderer.render(this.scene, this.camera);
-
-      this.frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(this.camera.projectionMatrix, this.camera.matrixWorldInverse));
-
-      // Update 2D markers
-      for (var i = 0; i < this.markerArray.length; i++) {
-        var marker = this.markerArray[i];
-        var pos = this.getTwoDPosition(marker.position);
-        var el = this.$el.querySelector('#' + marker.key);
-        if (pos) {
-          // Within camera view
-          var top = pos.y;
-          var left = pos.x;
-          if (marker.type == 'sample') {
-            top -= 7;
-            left -= 7;
-          } else {
-            top -= 5;
-            left -= 5;
-          }
-
-          el.style.display = 'block';
-          el.style.top = parseInt(top, 10) + 'px';
-          el.style.left = parseInt(left, 10) + 'px';
-        } else {
-          // Outside camera view
-          el.style.display = 'none';
-        }
-      }
-    },
-
-
-    // Sphere with panoramic image pasted
-    create_pano_sphere: function create_pano_sphere() {
-      var geometry = new THREE.SphereGeometry(500, 120, 120);
-      geometry.scale(-1, 1, 1);
-
-      var texture = null;
-      var hasClass = function hasClass(class_name) {
-        return document.querySelector('body').classList.contains(class_name);
-      };
-      if (hasClass('ie') || hasClass('edge') || new _mobileDetect2.default(window.navigator.userAgent).mobile()) {
-        texture = new THREE.TextureLoader().load('/dna-of-forests/' + this.$route.params.forest + '/img/panorama/forest.jpg');
-      } else {
-        var id = 'video_' + this.$route.params.forest;
-        var video = document.getElementById(id);
-        if (!video) {
-          video = document.createElement('video');
-          video.id = id;
-          video.className = 'video';
-          video.src = '/dna-of-forests/' + this.$route.params.forest + '/img/panorama/forest.mp4';
-          video.autoplay = true;
-          video.loop = true;
-          video.style.display = 'none';
-          document.body.appendChild(video);
-        }
-
-        texture = new THREE.VideoTexture(video);
-        texture.minFilter = THREE.LinearFilter;
-        texture.magFilter = THREE.LinearFilter;
-        texture.format = THREE.RGBFormat;
-      }
-
-      var material = new THREE.MeshBasicMaterial({ map: texture });
-
-      return new THREE.Mesh(geometry, material);
-    },
-
-
-    // Calculate position
-    translateGeoCoords: function translateGeoCoords(latitude, longitude, radius) {
-
-      var phi = latitude * Math.PI / 180; // Elevation angle
-      var theta = (longitude - 180) * Math.PI / 180; // Azimuth angle
-
-      var x = -radius * Math.cos(phi) * Math.cos(theta);
-      var y = radius * Math.sin(phi);
-      var z = radius * Math.cos(phi) * Math.sin(theta);
-
-      return new THREE.Vector3(x, y, z);
-    },
-    getTwoDPosition: function getTwoDPosition(_vector) {
-
-      var vector = _vector.clone();
-      var widthHalf = 0.5 * this.renderer.context.canvas.width;
-      var heightHalf = 0.5 * this.renderer.context.canvas.height;
-
-      // If you do not do anything, it will also return the position on the diagonal, so decimate here
-      if (this.frustum.containsPoint(vector)) {
-
-        // Within camera
-        vector.project(this.camera);
-
-        vector.x = vector.x * widthHalf + widthHalf;
-        vector.y = -(vector.y * heightHalf) + heightHalf;
-
-        return {
-          x: vector.x / window.devicePixelRatio,
-          y: vector.y / window.devicePixelRatio
-        };
-      }
-      return null;
-    },
-
-
-    // Marker
-    create_marker: function create_marker(_data, _key) {
-      var key = _data.alias;
-      var type = key.indexOf('s-') == 0 ? 'sample' : 'knowledge';
-      var latitude = _data.marker_position.latitude;
-      var longtitude = _data.marker_position.longtitude;
-      var radius = _data.marker_position.radius;
-      var geo = this.translateGeoCoords(latitude, longtitude, radius);
-      var x = geo.x,
-          y = geo.y,
-          z = geo.z;
-
-      // 3D marker -----------
-      if (visible3dMaker) {
-        // about 15cm
-        var geometry = type == 'sample' ? new THREE.TetrahedronGeometry(0.15) : new THREE.SphereGeometry(0.15, 8, 8);
-        // geometry.scale( - 1, 1, 1 );
-        var color = _data.id && _data.id.indexOf('B-') == 0 ? 0xff0000 : 0xffffff;
-        var material = new THREE.MeshLambertMaterial({
-          color: color
-        });
-        var marker_3d = new THREE.Mesh(geometry, material);
-        marker_3d.position.set(x, y, z);
-        this.scene.add(marker_3d);
-      }
-      // ---------------------
-
-      var marker = {};
-
-      marker.position = new THREE.Vector3(x, y, z);
-
-      // Used to align the camera position
-      marker.latitude = latitude;
-      marker.longtitude = longtitude;
-
-      marker.key = key;
-      marker.type = type;
-
-      this.markerArray.push(marker);
-
-      return marker;
-    },
-    onTouchStart: function onTouchStart(e) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onMouseDown(e);
-    },
-    onTouchMove: function onTouchMove(e) {
-      e.clientX = e.touches[0].clientX;
-      e.clientY = e.touches[0].clientY;
-      this.onMouseMove(e);
-    },
-    onTouchEnd: function onTouchEnd(e) {
-      e.clientX = e.changedTouches[0].clientX;
-      e.clientY = e.changedTouches[0].clientY;
-      this.onMouseUp(e);
-    },
-    onMouseDown: function onMouseDown(e) {
-      // When user starts dragging on the canvas
-      if (e.target === this.renderer.domElement && !this.isTop()) {
-        e.preventDefault();
-
-        this.isUserInteracting = true;
-
-        this.onPointerDownPointerX = e.clientX;
-        this.onPointerDownPointerY = e.clientY;
-
-        this.onPointerDownLon = this.lon;
-        this.onPointerDownLat = this.lat;
-
-        this.mouse.x = e.clientX / this.renderer.domElement.clientWidth * 2 - 1;
-        this.mouse.y = -(e.clientY / this.renderer.domElement.clientHeight) * 2 + 1;
-      }
-    },
-    onMouseMove: function onMouseMove(e) {
-      if (this.isUserInteracting === true) {
-        this.isDragged = true;
-        this.lon = (this.onPointerDownPointerX - e.clientX) * 0.1 + this.onPointerDownLon;
-        this.lat = (e.clientY - this.onPointerDownPointerY) * 0.1 + this.onPointerDownLat;
-        // -----
-        this.isAlreadyDragged = true;
-        this.autoScroll = false;
-      }
-    },
-    onMouseUp: function onMouseUp(e) {
-      if (this.isUserInteracting === true) {
-
-        // Click
-        if (!this.isDragged && e.target === this.renderer.domElement && this.$route.path != '/' + this.$route.params.forest + '/panorama/') {
-          // Close detail-drawer
-          this.$router.push('/' + this.$route.params.forest + '/panorama/');
-        }
-
-        _jsCookie2.default.set('lon', this.lon);
-        _jsCookie2.default.set('lat', this.lat);
-
-        this.isUserInteracting = false;
-        this.isDragged = false;
-      }
-    },
-    onMouseWheel: function onMouseWheel(e) {
-      if (!this.isTop()) {
-        // WebKit
-        if (e.wheelDeltaY) {
-          this.lon += e.wheelDeltaY * 0.05;
-          // Opera / Explorer 9
-        } else if (e.wheelDelta) {
-          this.lon += e.wheelDelta * 0.05;
-          // Firefox
-        } else if (e.detail) {
-          this.lon -= e.detail * 1.0;
-        }
-        this.isAlreadyDragged = true;
-        this.autoScroll = false;
-      }
-    },
-    resetAutoScroll: function resetAutoScroll() {
-      if (this.isTop()) {
-        this.autoScroll = true;
-      }
-    },
-    goMarker: function goMarker(id) {
-      this.$router.push('/' + this.$route.params.forest + '/panorama/' + id);
-    }
-  },
-  data: function data() {
-    return {
-      isAlreadyDragged: false,
-      autoScroll: false
-    };
-  },
-
-  props: ['markers', 'config']
-});
-
-/***/ }),
-/* 201 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function( self ){
 
-	var THREE = __webpack_require__(202);
+	var THREE = __webpack_require__(213);
 
 	module.exports = function( addons ){
 
@@ -56948,7 +59149,7 @@ exports.default = _vue2.default.extend({
 				}
 				else if( typeof addon === "string" ){
 
-					__webpack_require__(204)("./" + addon + ".js")(THREE);
+					__webpack_require__(215)("./" + addon + ".js")(THREE);
 
 				}
 				else {
@@ -56969,7 +59170,7 @@ exports.default = _vue2.default.extend({
 
 
 /***/ }),
-/* 202 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {var __WEBPACK_AMD_DEFINE_RESULT__;(function( self ){
@@ -98721,13 +100922,13 @@ exports.default = _vue2.default.extend({
 
 	};
 
-	if( "function" !== "undefined" && __webpack_require__(19) instanceof Function && __webpack_require__(203) != undefined ){
+	if( "function" !== "undefined" && __webpack_require__(26) instanceof Function && __webpack_require__(214) != undefined ){
 
-		!(__WEBPACK_AMD_DEFINE_RESULT__ = function(){
+		!(__WEBPACK_AMD_DEFINE_RESULT__ = (function(){
 
 			return THREE;
 
-		}.call(exports, __webpack_require__, exports, module),
+		}).call(exports, __webpack_require__, exports, module),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 	}
@@ -98746,7 +100947,7 @@ exports.default = _vue2.default.extend({
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 203 */
+/* 214 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -98755,70 +100956,70 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 204 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./AdaptiveToneMappingPass.js": 205,
-	"./BasicShader.js": 206,
-	"./BleachBypassShader.js": 207,
-	"./BlendShader.js": 208,
-	"./BloomPass.js": 209,
-	"./BokehPass.js": 210,
-	"./BokehShader.js": 211,
-	"./BokehShader2.js": 212,
-	"./BrightnessContrastShader.js": 213,
-	"./CanvasRenderer.js": 214,
-	"./ColorCorrectionShader.js": 215,
-	"./ColorifyShader.js": 216,
-	"./ConvolutionShader.js": 217,
-	"./CopyShader.js": 218,
-	"./DDSLoader.js": 219,
-	"./DOFMipMapShader.js": 220,
-	"./DigitalGlitch.js": 221,
-	"./DotScreenPass.js": 222,
-	"./DotScreenShader.js": 223,
-	"./EdgeShader.js": 224,
-	"./EdgeShader2.js": 225,
-	"./EffectComposer.js": 226,
-	"./FXAAShader.js": 227,
-	"./FilmPass.js": 228,
-	"./FilmShader.js": 229,
-	"./FocusShader.js": 230,
-	"./FresnelShader.js": 231,
-	"./GammaCorrectionShader.js": 232,
-	"./GlitchPass.js": 233,
-	"./HorizontalBlurShader.js": 234,
-	"./HorizontalTiltShiftShader.js": 235,
-	"./HueSaturationShader.js": 236,
-	"./JSONLoader.js": 237,
-	"./KaleidoShader.js": 238,
-	"./LuminosityShader.js": 239,
-	"./MTLLoader.js": 240,
-	"./MarchingCubes.js": 241,
-	"./MaskPass.js": 242,
-	"./MirrorShader.js": 243,
-	"./NormalMapShader.js": 244,
-	"./OBJLoader.js": 245,
-	"./OceanShaders.js": 246,
-	"./OrbitControls.js": 247,
-	"./ParallaxShader.js": 248,
-	"./Projector.js": 249,
-	"./RGBShiftShader.js": 250,
-	"./RenderPass.js": 251,
-	"./SSAOShader.js": 252,
-	"./SVGLoader.js": 253,
-	"./SavePass.js": 254,
-	"./SepiaShader.js": 255,
-	"./ShaderPass.js": 256,
-	"./TechnicolorShader.js": 257,
-	"./TexturePass.js": 258,
-	"./ToneMapShader.js": 259,
-	"./TriangleBlurShader.js": 260,
-	"./UnpackDepthRGBAShader.js": 261,
-	"./VerticalBlurShader.js": 262,
-	"./VerticalTiltShiftShader.js": 263,
-	"./VignetteShader.js": 264
+	"./AdaptiveToneMappingPass.js": 216,
+	"./BasicShader.js": 217,
+	"./BleachBypassShader.js": 218,
+	"./BlendShader.js": 219,
+	"./BloomPass.js": 220,
+	"./BokehPass.js": 221,
+	"./BokehShader.js": 222,
+	"./BokehShader2.js": 223,
+	"./BrightnessContrastShader.js": 224,
+	"./CanvasRenderer.js": 225,
+	"./ColorCorrectionShader.js": 226,
+	"./ColorifyShader.js": 227,
+	"./ConvolutionShader.js": 228,
+	"./CopyShader.js": 229,
+	"./DDSLoader.js": 230,
+	"./DOFMipMapShader.js": 231,
+	"./DigitalGlitch.js": 232,
+	"./DotScreenPass.js": 233,
+	"./DotScreenShader.js": 234,
+	"./EdgeShader.js": 235,
+	"./EdgeShader2.js": 236,
+	"./EffectComposer.js": 237,
+	"./FXAAShader.js": 238,
+	"./FilmPass.js": 239,
+	"./FilmShader.js": 240,
+	"./FocusShader.js": 241,
+	"./FresnelShader.js": 242,
+	"./GammaCorrectionShader.js": 243,
+	"./GlitchPass.js": 244,
+	"./HorizontalBlurShader.js": 245,
+	"./HorizontalTiltShiftShader.js": 246,
+	"./HueSaturationShader.js": 247,
+	"./JSONLoader.js": 248,
+	"./KaleidoShader.js": 249,
+	"./LuminosityShader.js": 250,
+	"./MTLLoader.js": 251,
+	"./MarchingCubes.js": 252,
+	"./MaskPass.js": 253,
+	"./MirrorShader.js": 254,
+	"./NormalMapShader.js": 255,
+	"./OBJLoader.js": 256,
+	"./OceanShaders.js": 257,
+	"./OrbitControls.js": 258,
+	"./ParallaxShader.js": 259,
+	"./Projector.js": 260,
+	"./RGBShiftShader.js": 261,
+	"./RenderPass.js": 262,
+	"./SSAOShader.js": 263,
+	"./SVGLoader.js": 264,
+	"./SavePass.js": 265,
+	"./SepiaShader.js": 266,
+	"./ShaderPass.js": 267,
+	"./TechnicolorShader.js": 268,
+	"./TexturePass.js": 269,
+	"./ToneMapShader.js": 270,
+	"./TriangleBlurShader.js": 271,
+	"./UnpackDepthRGBAShader.js": 272,
+	"./VerticalBlurShader.js": 273,
+	"./VerticalTiltShiftShader.js": 274,
+	"./VignetteShader.js": 275
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -98834,10 +101035,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 204;
+webpackContext.id = 215;
 
 /***/ }),
-/* 205 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -99163,7 +101364,7 @@ webpackContext.id = 204;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 206 */
+/* 217 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -99203,7 +101404,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 207 */
+/* 218 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -99276,7 +101477,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 208 */
+/* 219 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -99335,7 +101536,7 @@ module.exports = function( THREE ){
 }
 
 /***/ }),
-/* 209 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -99461,7 +101662,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 210 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -99574,7 +101775,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 211 */
+/* 222 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -99699,7 +101900,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 212 */
+/* 223 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -100078,7 +102279,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 213 */
+/* 224 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -100145,7 +102346,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 214 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -101269,7 +103470,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 215 */
+/* 226 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101328,7 +103529,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 216 */
+/* 227 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101386,7 +103587,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 217 */
+/* 228 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101496,7 +103697,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 218 */
+/* 229 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101551,7 +103752,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 219 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -101830,7 +104031,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 220 */
+/* 231 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101897,7 +104098,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 221 */
+/* 232 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102009,7 +104210,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 222 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -102080,7 +104281,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 223 */
+/* 234 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102157,7 +104358,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 224 */
+/* 235 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102259,7 +104460,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 225 */
+/* 236 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102341,7 +104542,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 226 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -102489,7 +104690,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 227 */
+/* 238 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102517,7 +104718,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 228 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -102589,7 +104790,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 229 */
+/* 240 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102702,7 +104903,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 230 */
+/* 241 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102802,7 +105003,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 231 */
+/* 242 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102885,7 +105086,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 232 */
+/* 243 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102944,7 +105145,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 233 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -103067,7 +105268,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 234 */
+/* 245 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103138,7 +105339,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 235 */
+/* 246 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103212,7 +105413,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 236 */
+/* 247 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103290,7 +105491,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 237 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -103855,7 +106056,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 238 */
+/* 249 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103924,7 +106125,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 239 */
+/* 250 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103983,7 +106184,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 240 */
+/* 251 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104409,7 +106610,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 241 */
+/* 252 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105475,7 +107676,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 242 */
+/* 253 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105571,7 +107772,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 243 */
+/* 254 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105638,7 +107839,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 244 */
+/* 255 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105700,7 +107901,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 245 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -106113,7 +108314,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 246 */
+/* 257 */
 /***/ (function(module, exports) {
 
 ﻿module.exports = function( THREE ){
@@ -106510,7 +108711,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 247 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -107557,7 +109758,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 248 */
+/* 259 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -107750,7 +109951,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 249 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -108681,7 +110882,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 250 */
+/* 261 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -108746,7 +110947,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 251 */
+/* 262 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -108806,7 +111007,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 252 */
+/* 263 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109040,7 +111241,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 253 */
+/* 264 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109082,7 +111283,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 254 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -109155,7 +111356,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 255 */
+/* 266 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109218,7 +111419,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 256 */
+/* 267 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109287,7 +111488,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 257 */
+/* 268 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109343,7 +111544,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 258 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -109400,7 +111601,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 259 */
+/* 270 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109484,7 +111685,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 260 */
+/* 271 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109571,7 +111772,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 261 */
+/* 272 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109637,7 +111838,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 262 */
+/* 273 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109708,7 +111909,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 263 */
+/* 274 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109782,7 +111983,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 264 */
+/* 275 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109854,26 +112055,28 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 265 */
+/* 276 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_861d635e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(271);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_00863184_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(280);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(266)
+  __webpack_require__(277)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
@@ -109882,26 +112085,25 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_861d635e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_bg_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_00863184_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_bg_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/dna-barcode-bg.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-861d635e", Component.options)
+    hotAPI.createRecord("data-v-00863184", Component.options)
   } else {
-    hotAPI.reload("data-v-861d635e", Component.options)
-' + '  }
+    hotAPI.reload("data-v-00863184", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -109909,26 +112111,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 266 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(267);
+var content = __webpack_require__(278);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("5f8949a7", content, false);
+var update = __webpack_require__(5)("2e78f93e", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-861d635e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-barcode-bg.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-861d635e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-barcode-bg.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00863184\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-barcode-bg.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-00863184\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-barcode-bg.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -109938,7 +112139,7 @@ if(false) {
 }
 
 /***/ }),
-/* 267 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -109952,177 +112153,7 @@ exports.push([module.i, "\n@-webkit-keyframes bgscroll {\n0% {\n    background-p
 
 
 /***/ }),
-/* 268 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _lodash = __webpack_require__(9);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-exports.default = _vue2.default.extend({
-  props: ['dna'],
-  components: {
-    'dna-barcode': __webpack_require__(12).default
-  },
-  methods: {
-    onDrawComplete: function onDrawComplete(canvas) {
-      var rnd = _lodash2.default.random(70, 200);
-      this.$el.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
-      this.$el.style.animation = 'bgscroll ' + rnd + 's linear infinite';
-      canvas.parentNode.removeChild(canvas);
-    }
-  }
-});
-
-/***/ }),
-/* 269 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _dna_colors = __webpack_require__(21);
-
-var _dna_colors2 = _interopRequireDefault(_dna_colors);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-
-
-exports.default = _vue2.default.extend({
-
-  props: ['dna', 'max_width', 'height'],
-
-  mounted: function mounted() {
-    this.renderBarcode();
-  },
-
-  watch: {
-    dna: function dna(newVal) {
-      this.renderBarcode();
-    }
-  },
-
-  methods: {
-    chunkString: function chunkString(str, length) {
-      // 文字数lengthでstrを分割した配列を返す
-      return str.match(new RegExp('.{1,' + length + '}', 'g'));
-    },
-    renderBarcode: function renderBarcode() {
-      var canvas = this.$el;
-
-      if (this.dna.length <= 0) {
-        canvas.height = 0;
-        canvas.width = 0;
-      } else if (canvas.getContext) {
-
-        var w = 2,
-            h = this.height || 10,
-            line_margin = 15,
-            // 行間
-        str_arr = null;
-
-        if (this.max_width) {
-
-          var str_len = Math.floor(this.max_width / w);
-          str_arr = this.chunkString(this.dna, str_len);
-          var lines = str_arr.length;
-          canvas.height = h * lines + line_margin * (lines - 1);
-          canvas.width = this.max_width;
-        } else {
-          str_arr = [this.dna];
-          canvas.height = h;
-          canvas.width = w * this.dna.length;
-        }
-
-        var context = canvas.getContext('2d');
-
-        for (var j = 0; j < str_arr.length; j++) {
-          var str = str_arr[j];
-          var x = 0,
-              y = (h + line_margin) * j;
-          for (var i = 0; i < str.length; i++) {
-
-            var c = str[i];
-            if (_dna_colors2.default[c] !== null) {
-              context.fillStyle = _dna_colors2.default[c].rgb;
-            } else {
-              context.fillStyle = _dna_colors2.default['N'].rgb;
-            }
-
-            x = w * i;
-            context.fillRect(x, y, w, h);
-          }
-        }
-        this.$emit('drawcomplete', canvas);
-      }
-    }
-  }
-});
-
-/***/ }),
-/* 270 */
+/* 279 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110139,12 +112170,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-def52f1e", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-238d82b8", esExports)
   }
 }
 
 /***/ }),
-/* 271 */
+/* 280 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110171,21 +112202,21 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-861d635e", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-00863184", esExports)
   }
 }
 
 /***/ }),
-/* 272 */
+/* 281 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_212886e1_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_entrance_modal_vue__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e7f20be4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_entrance_modal_vue__ = __webpack_require__(284);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(273)
+  __webpack_require__(282)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -110193,35 +112224,34 @@ var __vue_script__ = null
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-212886e1"
+var __vue_scopeId__ = "data-v-e7f20be4"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __vue_script__,
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_212886e1_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_entrance_modal_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e7f20be4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_entrance_modal_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/modal/entrance-modal.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-212886e1", Component.options)
+    hotAPI.createRecord("data-v-e7f20be4", Component.options)
   } else {
-    hotAPI.reload("data-v-212886e1", Component.options)
-' + '  }
+    hotAPI.reload("data-v-e7f20be4", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -110229,26 +112259,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 273 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(274);
+var content = __webpack_require__(283);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("7a9f6b9a", content, false);
+var update = __webpack_require__(5)("482162c3", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-212886e1\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./entrance-modal.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-212886e1\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./entrance-modal.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e7f20be4\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./entrance-modal.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e7f20be4\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./entrance-modal.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -110258,7 +112287,7 @@ if(false) {
 }
 
 /***/ }),
-/* 274 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -110266,13 +112295,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-212886e1] {\n  display: table;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n}\n.containter[data-v-212886e1] {\n  display: table-cell;\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n}\nimg[data-v-212886e1] {\n  user-select: none;\n  pointer-events: none;\n}\n.backTop[data-v-212886e1] {\n  color: #fff;\n  position: absolute;\n  right: 25px;\n  top: 50%;\n  text-decoration: none;\n  opacity: 0.4;\n  text-align: right;\n}\n.backTop[data-v-212886e1]:hover {\n    opacity: 0.8;\n}\n.modal[data-v-212886e1] {\n  background-color: #000;\n  padding: 10px;\n  width: 252px;\n  height: 558px;\n  padding: 25px;\n  border-radius: 20px;\n  margin-left: auto;\n  margin-right: auto;\n  text-align: center;\n  display: -webkit-flex;\n  display: flex;\n  flex-direction: column;\n}\n.modal .logo[data-v-212886e1] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.modal a[data-v-212886e1] {\n    cursor: pointer;\n    display: block;\n    font-family: \"Roboto\";\n    font-size: 15px;\n    border-radius: 2px;\n    padding: 20px;\n    border: 1px solid #3f3f3f;\n    color: #fff;\n    text-decoration: none;\n    letter-spacing: 0.15em;\n    margin-top: 28px;\n    transition-duration: 0.2s;\n    text-align: center;\n}\n.modal a[data-v-212886e1]:hover {\n      border-color: #aaa;\n}\nhtml[lang=en] .modal .logo[data-v-212886e1] {\n  align-items: flex-start;\n}\n@media (max-width: 660px) {\n.wrapper[data-v-212886e1] {\n    height: calc(100% - 50px);\n}\n.backTop[data-v-212886e1] {\n    right: inherit;\n    top: inherit;\n    left: 50%;\n    transform: translateX(-50%);\n    margin-top: 30px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-e7f20be4] {\n  display: table;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n}\n.containter[data-v-e7f20be4] {\n  display: table-cell;\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n}\nimg[data-v-e7f20be4] {\n  user-select: none;\n  pointer-events: none;\n}\n.backTop[data-v-e7f20be4] {\n  color: #fff;\n  position: absolute;\n  right: 25px;\n  top: 50%;\n  text-decoration: none;\n  opacity: 0.4;\n  text-align: right;\n}\n.backTop[data-v-e7f20be4]:hover {\n    opacity: 0.8;\n}\n.modal[data-v-e7f20be4] {\n  background-color: #000;\n  padding: 10px;\n  width: 252px;\n  height: 558px;\n  padding: 25px;\n  border-radius: 20px;\n  margin-left: auto;\n  margin-right: auto;\n  text-align: center;\n  display: -webkit-flex;\n  display: flex;\n  flex-direction: column;\n}\n.modal .logo[data-v-e7f20be4] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.modal a[data-v-e7f20be4] {\n    cursor: pointer;\n    display: block;\n    font-family: \"Roboto\";\n    font-size: 15px;\n    border-radius: 2px;\n    padding: 20px;\n    border: 1px solid #3f3f3f;\n    color: #fff;\n    text-decoration: none;\n    letter-spacing: 0.15em;\n    margin-top: 28px;\n    transition-duration: 0.2s;\n    text-align: center;\n}\n.modal a[data-v-e7f20be4]:hover {\n      border-color: #aaa;\n}\nhtml[lang=en] .modal .logo[data-v-e7f20be4] {\n  align-items: flex-start;\n}\n@media (max-width: 660px) {\n.wrapper[data-v-e7f20be4] {\n    height: calc(100% - 50px);\n}\n.backTop[data-v-e7f20be4] {\n    right: inherit;\n    top: inherit;\n    left: 50%;\n    transform: translateX(-50%);\n    margin-top: 30px;\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 275 */
+/* 284 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110346,21 +112375,21 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-212886e1", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-e7f20be4", esExports)
   }
 }
 
 /***/ }),
-/* 276 */
+/* 285 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fb314f3_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_instruction_modal_vue__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_371f92b4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_instruction_modal_vue__ = __webpack_require__(288);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(277)
+  __webpack_require__(286)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -110368,35 +112397,34 @@ var __vue_script__ = null
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-6fb314f3"
+var __vue_scopeId__ = "data-v-371f92b4"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __vue_script__,
-  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6fb314f3_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_instruction_modal_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_371f92b4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_instruction_modal_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/modal/instruction-modal.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6fb314f3", Component.options)
+    hotAPI.createRecord("data-v-371f92b4", Component.options)
   } else {
-    hotAPI.reload("data-v-6fb314f3", Component.options)
-' + '  }
+    hotAPI.reload("data-v-371f92b4", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -110404,26 +112432,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 277 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(278);
+var content = __webpack_require__(287);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("2d59173f", content, false);
+var update = __webpack_require__(5)("1f393132", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6fb314f3\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./instruction-modal.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6fb314f3\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./instruction-modal.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-371f92b4\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./instruction-modal.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-371f92b4\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./instruction-modal.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -110433,7 +112460,7 @@ if(false) {
 }
 
 /***/ }),
-/* 278 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -110441,13 +112468,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-6fb314f3] {\n  display: table;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n  pointer-events: none;\n  user-select: none;\n}\n.containter[data-v-6fb314f3] {\n  display: table-cell;\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  pointer-events: none;\n}\n.modal[data-v-6fb314f3] {\n  background-color: rgba(0, 0, 0, 0.9);\n  width: 130px;\n  height: 130px;\n  border-radius: 20px;\n  margin-left: auto;\n  margin-right: auto;\n  text-align: center;\n  pointer-events: none;\n}\n.modal .icon[data-v-6fb314f3] {\n    margin-top: 22px;\n    margin-bottom: 16px;\n    user-select: none;\n    pointer-events: none;\n}\n.modal p[data-v-6fb314f3] {\n    font-family: 'Roboto';\n    font-weight: normal;\n    font-size: 12px;\n    letter-spacing: 0.05em;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-371f92b4] {\n  display: table;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 9999;\n  pointer-events: none;\n  user-select: none;\n}\n.containter[data-v-371f92b4] {\n  display: table-cell;\n  width: 100%;\n  height: 100%;\n  vertical-align: middle;\n  pointer-events: none;\n}\n.modal[data-v-371f92b4] {\n  background-color: rgba(0, 0, 0, 0.9);\n  width: 130px;\n  height: 130px;\n  border-radius: 20px;\n  margin-left: auto;\n  margin-right: auto;\n  text-align: center;\n  pointer-events: none;\n}\n.modal .icon[data-v-371f92b4] {\n    margin-top: 22px;\n    margin-bottom: 16px;\n    user-select: none;\n    pointer-events: none;\n}\n.modal p[data-v-371f92b4] {\n    font-family: 'Roboto';\n    font-weight: normal;\n    font-size: 12px;\n    letter-spacing: 0.05em;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 279 */
+/* 288 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110483,12 +112510,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-6fb314f3", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-371f92b4", esExports)
   }
 }
 
 /***/ }),
-/* 280 */
+/* 289 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110635,28 +112662,28 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-cca88f62", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-52cbab82", esExports)
   }
 }
 
 /***/ }),
-/* 281 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(282);
+var content = __webpack_require__(291);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("201ac2d4", content, false);
+var update = __webpack_require__(5)("5e8f4ea0", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f2609210\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./list.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f2609210\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./list.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c51188aa\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./list.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c51188aa\",\"scoped\":true,\"hasInlineConfig\":false}!../../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./list.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -110666,7 +112693,7 @@ if(false) {
 }
 
 /***/ }),
-/* 282 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -110674,246 +112701,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\nsection.list[data-v-f2609210] {\n  height: 100%;\n  overflow-y: auto;\n  background-color: #151515;\n}\nh1[data-v-f2609210] {\n  padding: 28px 27px;\n  background-color: #0d0d0d;\n  border-bottom: 1px solid #1a1a1a;\n}\ntable[data-v-f2609210] {\n  width: 100%;\n  max-width: 100%;\n  font-size: 14px;\n}\ntable tr[data-v-f2609210] {\n    height: 55px;\n}\ntable tr th[data-v-f2609210], table tr td[data-v-f2609210] {\n      vertical-align: middle;\n      padding-left: 27px;\n}\ntable tr th[data-v-f2609210]:last-child, table tr td[data-v-f2609210]:last-child {\n        padding-right: 27px;\n}\ntable thead[data-v-f2609210] {\n    background-color: #0d0d0d;\n}\ntable thead th[data-v-f2609210] {\n      text-align: left;\n      color: #656566;\n      font-size: 12px;\n}\ntable tbody[data-v-f2609210] {\n    color: #979799;\n}\ntable tbody tr[data-v-f2609210]:hover {\n      background-color: #1d1d1d;\n      cursor: pointer;\n}\ntable tbody tr.selected[data-v-f2609210] {\n      background-color: #202020;\n}\ntable tbody td[data-v-f2609210] {\n      white-space: nowrap;\n}\ntable tbody td .genus_en[data-v-f2609210] {\n        margin-left: 1em;\n        color: #979799;\n}\ntable tbody td.dna[data-v-f2609210] {\n        max-width: 300px;\n        overflow: hidden;\n        white-space: nowrap;\n}\ntable tbody td.dna1[data-v-f2609210], table tbody td.dna2[data-v-f2609210] {\n        max-width: 150px;\n        overflow: hidden;\n        white-space: nowrap;\n}\ntable tbody td .region[data-v-f2609210] {\n        display: inline-block;\n        width: 32px;\n        margin-right: 8px;\n        text-align: right;\n}\ntable tbody td.index[data-v-f2609210] {\n        font-family: 'Roboto';\n        font-weight: bold;\n        letter-spacing: 0.025em;\n        width: 30px;\n}\ntable tbody td.title[data-v-f2609210], table tbody td.description[data-v-f2609210], table tbody td.index[data-v-f2609210], table tbody td.result[data-v-f2609210] {\n        color: #fff;\n}\ntable tbody td.title[data-v-f2609210], table tbody td.result[data-v-f2609210], table tbody td.description[data-v-f2609210] {\n        overflow: hidden;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n}\ntable tbody td.title[data-v-f2609210] {\n        width: 150px;\n}\ntable tbody td.result[data-v-f2609210], table tbody td.description[data-v-f2609210] {\n        max-width: 150px;\n}\ntable tbody td.collection_date[data-v-f2609210] {\n        width: 80px;\n}\n@media (max-width: 1000px) {\ntable td.result[data-v-f2609210] {\n    width: 150px;\n}\ntable td.result .genus_en[data-v-f2609210] {\n      display: none;\n}\n}\n@media (max-width: 660px) {\ntable .genus_en[data-v-f2609210],\n  table .collection_date[data-v-f2609210] {\n    display: none;\n}\n}\n[data-lang='en'] table thead th[data-v-f2609210] {\n  letter-spacing: 0.1em;\n}\n[data-lang='en'] table#samples tr th[data-v-f2609210]:last-child, [data-lang='en'] table#samples tr td[data-v-f2609210]:last-child {\n  width: 100px;\n}\n[data-lang='en'] table#samples tr td.result[data-v-f2609210] {\n  letter-spacing: 0.1em;\n}\n[data-lang='en'] table#knowledges tr td.title[data-v-f2609210],\n[data-lang='en'] table#knowledges tr td.description[data-v-f2609210] {\n  letter-spacing: 0.09em;\n}\n[data-lang='en'] table#knowledges tr td.description[data-v-f2609210] {\n  color: #979799;\n}\n", ""]);
+exports.push([module.i, "\nsection.list[data-v-c51188aa] {\n  height: 100%;\n  overflow-y: auto;\n  background-color: #151515;\n}\nh1[data-v-c51188aa] {\n  padding: 28px 27px;\n  background-color: #0d0d0d;\n  border-bottom: 1px solid #1a1a1a;\n}\ntable[data-v-c51188aa] {\n  width: 100%;\n  max-width: 100%;\n  font-size: 14px;\n}\ntable tr[data-v-c51188aa] {\n    height: 55px;\n}\ntable tr th[data-v-c51188aa], table tr td[data-v-c51188aa] {\n      vertical-align: middle;\n      padding-left: 27px;\n}\ntable tr th[data-v-c51188aa]:last-child, table tr td[data-v-c51188aa]:last-child {\n        padding-right: 27px;\n}\ntable thead[data-v-c51188aa] {\n    background-color: #0d0d0d;\n}\ntable thead th[data-v-c51188aa] {\n      text-align: left;\n      color: #656566;\n      font-size: 12px;\n}\ntable tbody[data-v-c51188aa] {\n    color: #979799;\n}\ntable tbody tr[data-v-c51188aa]:hover {\n      background-color: #1d1d1d;\n      cursor: pointer;\n}\ntable tbody tr.selected[data-v-c51188aa] {\n      background-color: #202020;\n}\ntable tbody td[data-v-c51188aa] {\n      white-space: nowrap;\n}\ntable tbody td .genus_en[data-v-c51188aa] {\n        margin-left: 1em;\n        color: #979799;\n}\ntable tbody td.dna[data-v-c51188aa] {\n        max-width: 300px;\n        overflow: hidden;\n        white-space: nowrap;\n}\ntable tbody td.dna1[data-v-c51188aa], table tbody td.dna2[data-v-c51188aa] {\n        max-width: 150px;\n        overflow: hidden;\n        white-space: nowrap;\n}\ntable tbody td .region[data-v-c51188aa] {\n        display: inline-block;\n        width: 32px;\n        margin-right: 8px;\n        text-align: right;\n}\ntable tbody td.index[data-v-c51188aa] {\n        font-family: 'Roboto';\n        font-weight: bold;\n        letter-spacing: 0.025em;\n        width: 30px;\n}\ntable tbody td.title[data-v-c51188aa], table tbody td.description[data-v-c51188aa], table tbody td.index[data-v-c51188aa], table tbody td.result[data-v-c51188aa] {\n        color: #fff;\n}\ntable tbody td.title[data-v-c51188aa], table tbody td.result[data-v-c51188aa], table tbody td.description[data-v-c51188aa] {\n        overflow: hidden;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n}\ntable tbody td.title[data-v-c51188aa] {\n        width: 150px;\n}\ntable tbody td.result[data-v-c51188aa], table tbody td.description[data-v-c51188aa] {\n        max-width: 150px;\n}\ntable tbody td.collection_date[data-v-c51188aa] {\n        width: 80px;\n}\n@media (max-width: 1000px) {\ntable td.result[data-v-c51188aa] {\n    width: 150px;\n}\ntable td.result .genus_en[data-v-c51188aa] {\n      display: none;\n}\n}\n@media (max-width: 660px) {\ntable .genus_en[data-v-c51188aa],\n  table .collection_date[data-v-c51188aa] {\n    display: none;\n}\n}\n[data-lang='en'] table thead th[data-v-c51188aa] {\n  letter-spacing: 0.1em;\n}\n[data-lang='en'] table#samples tr th[data-v-c51188aa]:last-child, [data-lang='en'] table#samples tr td[data-v-c51188aa]:last-child {\n  width: 100px;\n}\n[data-lang='en'] table#samples tr td.result[data-v-c51188aa] {\n  letter-spacing: 0.1em;\n}\n[data-lang='en'] table#knowledges tr td.title[data-v-c51188aa],\n[data-lang='en'] table#knowledges tr td.description[data-v-c51188aa] {\n  letter-spacing: 0.09em;\n}\n[data-lang='en'] table#knowledges tr td.description[data-v-c51188aa] {\n  color: #979799;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 283 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _striptags2 = __webpack_require__(284);
-
-var _striptags3 = _interopRequireDefault(_striptags2);
-
-var _moment = __webpack_require__(0);
-
-var _moment2 = _interopRequireDefault(_moment);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default.extend({
-  filters: {
-    'zero-pad': function zeroPad(value) {
-      return value < 10 ? '0' + value : '' + value;
-    },
-    'striptags': function striptags(html) {
-      return (0, _striptags3.default)(html);
-    }
-  },
-  components: {
-    'dna-barcode': __webpack_require__(12).default
-  },
-  props: ['markers'],
-  mounted: function mounted() {
-
-    // 選択された行がある場合は、そこまでスクロール
-    if (this.$route.params.index) {
-      var selectedRow = document.querySelector('#' + this.$route.params.index);
-      var offset = this.getOffsetTop(selectedRow);
-      this.$el.scrollTop = offset;
-    }
-  },
-  methods: {
-    getOffsetTop: function getOffsetTop(el) {
-      var offsetTop = 0;
-      do {
-        if (!isNaN(el.offsetTop)) {
-          offsetTop += el.offsetTop;
-        }
-        el = el.offsetParent;
-      } while (el.offsetParent != document.body);
-      return offsetTop;
-    },
-    dateFormat: function dateFormat(date) {
-      var format = this.$root.$i18n.locale === 'en' ? 'DD MMM YYYY' : 'YYYY.MM.DD';
-      return (0, _moment2.default)(date, 'YYYY.MM.DD').format(format); // moment()の第２引数がないとSafariで正しく作成されない
-    },
-    goMarker: function goMarker(id) {
-      this.$router.push('/' + this.$route.params.forest + '/list/' + id);
-    }
-  }
-}); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 284 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -111139,7 +112933,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 
     if (true) {
         // AMD
-        !(__WEBPACK_AMD_DEFINE_RESULT__ = function module_factory() { return striptags; }.call(exports, __webpack_require__, exports, module),
+        !(__WEBPACK_AMD_DEFINE_RESULT__ = (function module_factory() { return striptags; }).call(exports, __webpack_require__, exports, module),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
     }
 
@@ -111156,246 +112950,248 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 
 
 /***/ }),
-/* 285 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 23,
-	"./af.js": 23,
-	"./ar": 24,
-	"./ar-dz": 25,
-	"./ar-dz.js": 25,
-	"./ar-kw": 26,
-	"./ar-kw.js": 26,
-	"./ar-ly": 27,
-	"./ar-ly.js": 27,
-	"./ar-ma": 28,
-	"./ar-ma.js": 28,
-	"./ar-sa": 29,
-	"./ar-sa.js": 29,
-	"./ar-tn": 30,
-	"./ar-tn.js": 30,
-	"./ar.js": 24,
-	"./az": 31,
-	"./az.js": 31,
-	"./be": 32,
-	"./be.js": 32,
-	"./bg": 33,
-	"./bg.js": 33,
-	"./bm": 34,
-	"./bm.js": 34,
-	"./bn": 35,
-	"./bn.js": 35,
-	"./bo": 36,
-	"./bo.js": 36,
-	"./br": 37,
-	"./br.js": 37,
-	"./bs": 38,
-	"./bs.js": 38,
-	"./ca": 39,
-	"./ca.js": 39,
-	"./cs": 40,
-	"./cs.js": 40,
-	"./cv": 41,
-	"./cv.js": 41,
-	"./cy": 42,
-	"./cy.js": 42,
-	"./da": 43,
-	"./da.js": 43,
-	"./de": 44,
-	"./de-at": 45,
-	"./de-at.js": 45,
-	"./de-ch": 46,
-	"./de-ch.js": 46,
-	"./de.js": 44,
-	"./dv": 47,
-	"./dv.js": 47,
-	"./el": 48,
-	"./el.js": 48,
-	"./en-au": 49,
-	"./en-au.js": 49,
-	"./en-ca": 50,
-	"./en-ca.js": 50,
-	"./en-gb": 51,
-	"./en-gb.js": 51,
-	"./en-ie": 52,
-	"./en-ie.js": 52,
-	"./en-nz": 53,
-	"./en-nz.js": 53,
-	"./eo": 54,
-	"./eo.js": 54,
-	"./es": 55,
-	"./es-do": 56,
-	"./es-do.js": 56,
-	"./es-us": 57,
-	"./es-us.js": 57,
-	"./es.js": 55,
-	"./et": 58,
-	"./et.js": 58,
-	"./eu": 59,
-	"./eu.js": 59,
-	"./fa": 60,
-	"./fa.js": 60,
-	"./fi": 61,
-	"./fi.js": 61,
-	"./fo": 62,
-	"./fo.js": 62,
-	"./fr": 63,
-	"./fr-ca": 64,
-	"./fr-ca.js": 64,
-	"./fr-ch": 65,
-	"./fr-ch.js": 65,
-	"./fr.js": 63,
-	"./fy": 66,
-	"./fy.js": 66,
-	"./gd": 67,
-	"./gd.js": 67,
-	"./gl": 68,
-	"./gl.js": 68,
-	"./gom-latn": 69,
-	"./gom-latn.js": 69,
-	"./gu": 70,
-	"./gu.js": 70,
-	"./he": 71,
-	"./he.js": 71,
-	"./hi": 72,
-	"./hi.js": 72,
-	"./hr": 73,
-	"./hr.js": 73,
-	"./hu": 74,
-	"./hu.js": 74,
-	"./hy-am": 75,
-	"./hy-am.js": 75,
-	"./id": 76,
-	"./id.js": 76,
-	"./is": 77,
-	"./is.js": 77,
-	"./it": 78,
-	"./it.js": 78,
-	"./ja": 79,
-	"./ja.js": 79,
-	"./jv": 80,
-	"./jv.js": 80,
-	"./ka": 81,
-	"./ka.js": 81,
-	"./kk": 82,
-	"./kk.js": 82,
-	"./km": 83,
-	"./km.js": 83,
-	"./kn": 84,
-	"./kn.js": 84,
-	"./ko": 85,
-	"./ko.js": 85,
-	"./ky": 86,
-	"./ky.js": 86,
-	"./lb": 87,
-	"./lb.js": 87,
-	"./lo": 88,
-	"./lo.js": 88,
-	"./lt": 89,
-	"./lt.js": 89,
-	"./lv": 90,
-	"./lv.js": 90,
-	"./me": 91,
-	"./me.js": 91,
-	"./mi": 92,
-	"./mi.js": 92,
-	"./mk": 93,
-	"./mk.js": 93,
-	"./ml": 94,
-	"./ml.js": 94,
-	"./mr": 95,
-	"./mr.js": 95,
-	"./ms": 96,
-	"./ms-my": 97,
-	"./ms-my.js": 97,
-	"./ms.js": 96,
-	"./my": 98,
-	"./my.js": 98,
-	"./nb": 99,
-	"./nb.js": 99,
-	"./ne": 100,
-	"./ne.js": 100,
-	"./nl": 101,
-	"./nl-be": 102,
-	"./nl-be.js": 102,
-	"./nl.js": 101,
-	"./nn": 103,
-	"./nn.js": 103,
-	"./pa-in": 104,
-	"./pa-in.js": 104,
-	"./pl": 105,
-	"./pl.js": 105,
-	"./pt": 106,
-	"./pt-br": 107,
-	"./pt-br.js": 107,
-	"./pt.js": 106,
-	"./ro": 108,
-	"./ro.js": 108,
-	"./ru": 109,
-	"./ru.js": 109,
-	"./sd": 110,
-	"./sd.js": 110,
-	"./se": 111,
-	"./se.js": 111,
-	"./si": 112,
-	"./si.js": 112,
-	"./sk": 113,
-	"./sk.js": 113,
-	"./sl": 114,
-	"./sl.js": 114,
-	"./sq": 115,
-	"./sq.js": 115,
-	"./sr": 116,
-	"./sr-cyrl": 117,
-	"./sr-cyrl.js": 117,
-	"./sr.js": 116,
-	"./ss": 118,
-	"./ss.js": 118,
-	"./sv": 119,
-	"./sv.js": 119,
-	"./sw": 120,
-	"./sw.js": 120,
-	"./ta": 121,
-	"./ta.js": 121,
-	"./te": 122,
-	"./te.js": 122,
-	"./tet": 123,
-	"./tet.js": 123,
-	"./th": 124,
-	"./th.js": 124,
-	"./tl-ph": 125,
-	"./tl-ph.js": 125,
-	"./tlh": 126,
-	"./tlh.js": 126,
-	"./tr": 127,
-	"./tr.js": 127,
-	"./tzl": 128,
-	"./tzl.js": 128,
-	"./tzm": 129,
-	"./tzm-latn": 130,
-	"./tzm-latn.js": 130,
-	"./tzm.js": 129,
-	"./uk": 131,
-	"./uk.js": 131,
-	"./ur": 132,
-	"./ur.js": 132,
-	"./uz": 133,
-	"./uz-latn": 134,
-	"./uz-latn.js": 134,
-	"./uz.js": 133,
-	"./vi": 135,
-	"./vi.js": 135,
-	"./x-pseudo": 136,
-	"./x-pseudo.js": 136,
-	"./yo": 137,
-	"./yo.js": 137,
-	"./zh-cn": 138,
-	"./zh-cn.js": 138,
-	"./zh-hk": 139,
-	"./zh-hk.js": 139,
-	"./zh-tw": 140,
-	"./zh-tw.js": 140
+	"./af": 34,
+	"./af.js": 34,
+	"./ar": 35,
+	"./ar-dz": 36,
+	"./ar-dz.js": 36,
+	"./ar-kw": 37,
+	"./ar-kw.js": 37,
+	"./ar-ly": 38,
+	"./ar-ly.js": 38,
+	"./ar-ma": 39,
+	"./ar-ma.js": 39,
+	"./ar-sa": 40,
+	"./ar-sa.js": 40,
+	"./ar-tn": 41,
+	"./ar-tn.js": 41,
+	"./ar.js": 35,
+	"./az": 42,
+	"./az.js": 42,
+	"./be": 43,
+	"./be.js": 43,
+	"./bg": 44,
+	"./bg.js": 44,
+	"./bm": 45,
+	"./bm.js": 45,
+	"./bn": 46,
+	"./bn.js": 46,
+	"./bo": 47,
+	"./bo.js": 47,
+	"./br": 48,
+	"./br.js": 48,
+	"./bs": 49,
+	"./bs.js": 49,
+	"./ca": 50,
+	"./ca.js": 50,
+	"./cs": 51,
+	"./cs.js": 51,
+	"./cv": 52,
+	"./cv.js": 52,
+	"./cy": 53,
+	"./cy.js": 53,
+	"./da": 54,
+	"./da.js": 54,
+	"./de": 55,
+	"./de-at": 56,
+	"./de-at.js": 56,
+	"./de-ch": 57,
+	"./de-ch.js": 57,
+	"./de.js": 55,
+	"./dv": 58,
+	"./dv.js": 58,
+	"./el": 59,
+	"./el.js": 59,
+	"./en-au": 60,
+	"./en-au.js": 60,
+	"./en-ca": 61,
+	"./en-ca.js": 61,
+	"./en-gb": 62,
+	"./en-gb.js": 62,
+	"./en-ie": 63,
+	"./en-ie.js": 63,
+	"./en-nz": 64,
+	"./en-nz.js": 64,
+	"./eo": 65,
+	"./eo.js": 65,
+	"./es": 66,
+	"./es-do": 67,
+	"./es-do.js": 67,
+	"./es-us": 68,
+	"./es-us.js": 68,
+	"./es.js": 66,
+	"./et": 69,
+	"./et.js": 69,
+	"./eu": 70,
+	"./eu.js": 70,
+	"./fa": 71,
+	"./fa.js": 71,
+	"./fi": 72,
+	"./fi.js": 72,
+	"./fo": 73,
+	"./fo.js": 73,
+	"./fr": 74,
+	"./fr-ca": 75,
+	"./fr-ca.js": 75,
+	"./fr-ch": 76,
+	"./fr-ch.js": 76,
+	"./fr.js": 74,
+	"./fy": 77,
+	"./fy.js": 77,
+	"./gd": 78,
+	"./gd.js": 78,
+	"./gl": 79,
+	"./gl.js": 79,
+	"./gom-latn": 80,
+	"./gom-latn.js": 80,
+	"./gu": 81,
+	"./gu.js": 81,
+	"./he": 82,
+	"./he.js": 82,
+	"./hi": 83,
+	"./hi.js": 83,
+	"./hr": 84,
+	"./hr.js": 84,
+	"./hu": 85,
+	"./hu.js": 85,
+	"./hy-am": 86,
+	"./hy-am.js": 86,
+	"./id": 87,
+	"./id.js": 87,
+	"./is": 88,
+	"./is.js": 88,
+	"./it": 89,
+	"./it.js": 89,
+	"./ja": 90,
+	"./ja.js": 90,
+	"./jv": 91,
+	"./jv.js": 91,
+	"./ka": 92,
+	"./ka.js": 92,
+	"./kk": 93,
+	"./kk.js": 93,
+	"./km": 94,
+	"./km.js": 94,
+	"./kn": 95,
+	"./kn.js": 95,
+	"./ko": 96,
+	"./ko.js": 96,
+	"./ky": 97,
+	"./ky.js": 97,
+	"./lb": 98,
+	"./lb.js": 98,
+	"./lo": 99,
+	"./lo.js": 99,
+	"./lt": 100,
+	"./lt.js": 100,
+	"./lv": 101,
+	"./lv.js": 101,
+	"./me": 102,
+	"./me.js": 102,
+	"./mi": 103,
+	"./mi.js": 103,
+	"./mk": 104,
+	"./mk.js": 104,
+	"./ml": 105,
+	"./ml.js": 105,
+	"./mr": 106,
+	"./mr.js": 106,
+	"./ms": 107,
+	"./ms-my": 108,
+	"./ms-my.js": 108,
+	"./ms.js": 107,
+	"./mt": 109,
+	"./mt.js": 109,
+	"./my": 110,
+	"./my.js": 110,
+	"./nb": 111,
+	"./nb.js": 111,
+	"./ne": 112,
+	"./ne.js": 112,
+	"./nl": 113,
+	"./nl-be": 114,
+	"./nl-be.js": 114,
+	"./nl.js": 113,
+	"./nn": 115,
+	"./nn.js": 115,
+	"./pa-in": 116,
+	"./pa-in.js": 116,
+	"./pl": 117,
+	"./pl.js": 117,
+	"./pt": 118,
+	"./pt-br": 119,
+	"./pt-br.js": 119,
+	"./pt.js": 118,
+	"./ro": 120,
+	"./ro.js": 120,
+	"./ru": 121,
+	"./ru.js": 121,
+	"./sd": 122,
+	"./sd.js": 122,
+	"./se": 123,
+	"./se.js": 123,
+	"./si": 124,
+	"./si.js": 124,
+	"./sk": 125,
+	"./sk.js": 125,
+	"./sl": 126,
+	"./sl.js": 126,
+	"./sq": 127,
+	"./sq.js": 127,
+	"./sr": 128,
+	"./sr-cyrl": 129,
+	"./sr-cyrl.js": 129,
+	"./sr.js": 128,
+	"./ss": 130,
+	"./ss.js": 130,
+	"./sv": 131,
+	"./sv.js": 131,
+	"./sw": 132,
+	"./sw.js": 132,
+	"./ta": 133,
+	"./ta.js": 133,
+	"./te": 134,
+	"./te.js": 134,
+	"./tet": 135,
+	"./tet.js": 135,
+	"./th": 136,
+	"./th.js": 136,
+	"./tl-ph": 137,
+	"./tl-ph.js": 137,
+	"./tlh": 138,
+	"./tlh.js": 138,
+	"./tr": 139,
+	"./tr.js": 139,
+	"./tzl": 140,
+	"./tzl.js": 140,
+	"./tzm": 141,
+	"./tzm-latn": 142,
+	"./tzm-latn.js": 142,
+	"./tzm.js": 141,
+	"./uk": 143,
+	"./uk.js": 143,
+	"./ur": 144,
+	"./ur.js": 144,
+	"./uz": 145,
+	"./uz-latn": 146,
+	"./uz-latn.js": 146,
+	"./uz.js": 145,
+	"./vi": 147,
+	"./vi.js": 147,
+	"./x-pseudo": 148,
+	"./x-pseudo.js": 148,
+	"./yo": 149,
+	"./yo.js": 149,
+	"./zh-cn": 150,
+	"./zh-cn.js": 150,
+	"./zh-hk": 151,
+	"./zh-hk.js": 151,
+	"./zh-tw": 152,
+	"./zh-tw.js": 152
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -111411,10 +113207,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 285;
+webpackContext.id = 293;
 
 /***/ }),
-/* 286 */
+/* 294 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -111621,27 +113417,29 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-f2609210", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-c51188aa", esExports)
   }
 }
 
 /***/ }),
-/* 287 */
+/* 295 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d918ed94_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(310);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3ba2a0a3_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(315);
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
@@ -111650,26 +113448,25 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_d918ed94_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3ba2a0a3_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/page/about.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d918ed94", Component.options)
+    hotAPI.createRecord("data-v-3ba2a0a3", Component.options)
   } else {
-    hotAPI.reload("data-v-d918ed94", Component.options)
-' + '  }
+    hotAPI.reload("data-v-3ba2a0a3", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -111677,66 +113474,30 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 288 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default.extend({
-  // TODO URLを書き換えた時に再読み込みされないのをなんとかしたい
-  // 例：/#/niho/about → /#/kumano/about
-  data: function data() {
-    return {
-      currentView: this.$route.params.forest
-    };
-  },
-  // TODO 自動的に増えるようにしたい
-  components: {
-    niho: __webpack_require__(289).default,
-    kumano: __webpack_require__(305).default
-  }
-}); //
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 289 */
+/* 296 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_62c9a65e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(304);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_76ca443e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(310);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(290)
+  __webpack_require__(297)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
@@ -111745,26 +113506,25 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_62c9a65e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_76ca443e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/niho/components/about.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-62c9a65e", Component.options)
+    hotAPI.createRecord("data-v-76ca443e", Component.options)
   } else {
-    hotAPI.reload("data-v-62c9a65e", Component.options)
-' + '  }
+    hotAPI.reload("data-v-76ca443e", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -111772,26 +113532,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 290 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(291);
+var content = __webpack_require__(298);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("56777917", content, false);
+var update = __webpack_require__(5)("849de702", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62c9a65e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62c9a65e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-76ca443e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-76ca443e\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -111801,7 +113560,7 @@ if(false) {
 }
 
 /***/ }),
-/* 291 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -111815,288 +113574,7 @@ exports.push([module.i, "\narticle.about {\n  height: 100%;\n  overflow-y: auto;
 
 
 /***/ }),
-/* 292 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _flickity = __webpack_require__(141);
-
-var _flickity2 = _interopRequireDefault(_flickity);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-exports.default = _vue2.default.extend({
-  mounted: function mounted() {
-    var elem = document.querySelector('.carousel');
-    new _flickity2.default(elem, {
-      autoPlay: true,
-      wrapAround: true
-    });
-  },
-  methods: {
-    bgImage: function bgImage(image_num) {
-      return 'background-image: url(/dna-of-forests/niho/img/about/slides/' + image_num + '-' + this.$root.$i18n.locale + '@2x.jpg);';
-    }
-  }
-});
-
-/***/ }),
-/* 293 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -112159,7 +113637,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 
 /***/ }),
-/* 294 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity.Cell
@@ -112169,10 +113647,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity.Cell
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(142)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( getSize ) {
+      __webpack_require__(156)
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( getSize ) {
       return factory( window, getSize );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -112256,7 +113734,7 @@ return Cell;
 
 
 /***/ }),
-/* 295 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// slide
@@ -112342,7 +113820,7 @@ return Slide;
 
 
 /***/ }),
-/* 296 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// animate
@@ -112353,9 +113831,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// animate
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(6)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( utils ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( utils ) {
       return factory( window, utils );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -112568,7 +114046,7 @@ return proto;
 
 
 /***/ }),
-/* 297 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// drag
@@ -112579,11 +114057,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// drag
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(298),
+      __webpack_require__(304),
       __webpack_require__(6)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, Unidragger, utils ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, Unidragger, utils ) {
       return factory( window, Flickity, Unidragger, utils );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -112961,7 +114439,7 @@ return Flickity;
 
 
 /***/ }),
-/* 298 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -112979,10 +114457,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(143)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Unipointer ) {
+      __webpack_require__(157)
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Unipointer ) {
       return factory( window, Unipointer );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -113239,7 +114717,7 @@ return Unidragger;
 
 
 /***/ }),
-/* 299 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// prev/next buttons
@@ -113250,11 +114728,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// prev/next but
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(144),
+      __webpack_require__(158),
       __webpack_require__(6)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, TapListener, utils ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, TapListener, utils ) {
       return factory( window, Flickity, TapListener, utils );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -113466,7 +114944,7 @@ return Flickity;
 
 
 /***/ }),
-/* 300 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// page dots
@@ -113477,11 +114955,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// page dots
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(144),
+      __webpack_require__(158),
       __webpack_require__(6)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, TapListener, utils ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, TapListener, utils ) {
       return factory( window, Flickity, TapListener, utils );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -113651,7 +115129,7 @@ return Flickity;
 
 
 /***/ }),
-/* 301 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// player & autoPlay
@@ -113664,9 +115142,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// player & auto
       __webpack_require__(13),
       __webpack_require__(6),
       __webpack_require__(8)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter, utils, Flickity ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter, utils, Flickity ) {
       return factory( EvEmitter, utils, Flickity );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -113871,7 +115349,7 @@ return Flickity;
 
 
 /***/ }),
-/* 302 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// add, remove cell
@@ -113883,9 +115361,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// add, remove c
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
       __webpack_require__(6)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, utils ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, utils ) {
       return factory( window, Flickity, utils );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -114060,7 +115538,7 @@ return Flickity;
 
 
 /***/ }),
-/* 303 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// lazyload
@@ -114072,9 +115550,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// lazyload
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
       __webpack_require__(6)
-    ], __WEBPACK_AMD_DEFINE_RESULT__ = function( Flickity, utils ) {
+    ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, utils ) {
       return factory( window, Flickity, utils );
-    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
@@ -114186,7 +115664,7 @@ return Flickity;
 
 
 /***/ }),
-/* 304 */
+/* 310 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114451,31 +115929,33 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-62c9a65e", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-76ca443e", esExports)
   }
 }
 
 /***/ }),
-/* 305 */
+/* 311 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4306bf98_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(309);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_37439061_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(314);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(306)
+  __webpack_require__(312)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
@@ -114484,26 +115964,25 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4306bf98_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_37439061_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/kumano/components/about.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4306bf98", Component.options)
+    hotAPI.createRecord("data-v-37439061", Component.options)
   } else {
-    hotAPI.reload("data-v-4306bf98", Component.options)
-' + '  }
+    hotAPI.reload("data-v-37439061", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -114511,26 +115990,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 306 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(307);
+var content = __webpack_require__(313);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("4024ecc6", content, false);
+var update = __webpack_require__(5)("ce77794e", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4306bf98\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4306bf98\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37439061\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37439061\",\"scoped\":false,\"hasInlineConfig\":false}!../../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./about.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -114540,7 +116018,7 @@ if(false) {
 }
 
 /***/ }),
-/* 307 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -114554,298 +116032,7 @@ exports.push([module.i, "\narticle.about {\n  height: 100%;\n  overflow-y: auto;
 
 
 /***/ }),
-/* 308 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _flickity = __webpack_require__(141);
-
-var _flickity2 = _interopRequireDefault(_flickity);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-exports.default = _vue2.default.extend({
-  mounted: function mounted() {
-    var carousels = document.querySelectorAll('.carousel');
-    for (var i = 0, len = carousels.length; i < len; i++) {
-      var elem = carousels[i];
-      new _flickity2.default(elem, {
-        autoPlay: true,
-        wrapAround: true
-      });
-    }
-  },
-  methods: {
-    bgImage: function bgImage(day, num) {
-      return 'background-image: url(/dna-of-forests/kumano/img/about/slides/' + day + '/' + num + '-' + this.$root.$i18n.locale + '.jpg);';
-    }
-  }
-});
-
-/***/ }),
-/* 309 */
+/* 314 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -115138,12 +116325,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4306bf98", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-37439061", esExports)
   }
 }
 
 /***/ }),
-/* 310 */
+/* 315 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -115160,59 +116347,60 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-d918ed94", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-3ba2a0a3", esExports)
   }
 }
 
 /***/ }),
-/* 311 */
+/* 316 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(314);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6abacb54_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(320);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ad1e0c7_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(323);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(312)
+  __webpack_require__(317)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-6abacb54"
+var __vue_scopeId__ = "data-v-2ad1e0c7"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6abacb54_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_detail_drawer_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ad1e0c7_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_detail_drawer_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/detail-drawer.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6abacb54", Component.options)
+    hotAPI.createRecord("data-v-2ad1e0c7", Component.options)
   } else {
-    hotAPI.reload("data-v-6abacb54", Component.options)
-' + '  }
+    hotAPI.reload("data-v-2ad1e0c7", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -115220,26 +116408,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 312 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(313);
+var content = __webpack_require__(318);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("22f28e7f", content, false);
+var update = __webpack_require__(5)("a40d6e9c", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6abacb54\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./detail-drawer.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6abacb54\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./detail-drawer.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ad1e0c7\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./detail-drawer.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ad1e0c7\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./detail-drawer.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -115249,7 +116436,7 @@ if(false) {
 }
 
 /***/ }),
-/* 313 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -115257,455 +116444,61 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.drawer[data-v-6abacb54] {\n  position: fixed;\n  width: 490px;\n  height: 100%;\n  right: 0;\n  background-color: #151515;\n  z-index: 9999;\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);\n  overflow: hidden;\n}\n.drawer.fade-enter-active[data-v-6abacb54] {\n    transition-duration: 0.45s;\n}\n.drawer.fade-leave-active[data-v-6abacb54] {\n    transition-duration: 0.45s;\n}\n.drawer.fade-enter[data-v-6abacb54], .drawer.fade-leave-active[data-v-6abacb54] {\n    right: -490px;\n    opacity: 0;\n}\nheader[data-v-6abacb54] {\n  background-color: #0d0d0d;\n  padding: 28.5px 25px;\n  position: relative;\n  border-bottom: 1px solid #1a1a1a;\n}\nheader h2[data-v-6abacb54] {\n    text-align: center;\n}\nheader .close_btn[data-v-6abacb54] {\n    display: inline-block;\n    padding: 28.5px 25px;\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer;\n    opacity: 0.3;\n}\nheader .close_btn[data-v-6abacb54]:hover {\n      opacity: 0.5;\n}\narticle[data-v-6abacb54] {\n  padding: 25px;\n  overflow-y: auto;\n  height: calc(100% - 125px);\n  -webkit-overflow-scrolling: touch;\n}\nh3[data-v-6abacb54] {\n  font-size: 16px;\n  margin-bottom: 26px;\n  text-align: center;\n}\np[data-v-6abacb54] {\n  font-size: 13px;\n  line-height: 32px;\n  letter-spacing: 0.075em;\n  margin-top: 25px;\n}\nsection[data-v-6abacb54] {\n  max-height: inherit;\n}\nsection h3[data-v-6abacb54] {\n    margin: 25px -25px;\n    text-align: center;\n    background-color: #0d0d0d;\n    padding: 21px;\n}\nsection:first-child h3[data-v-6abacb54] {\n    margin-top: -25px;\n}\nh4[data-v-6abacb54] {\n  margin-bottom: 13px;\n  color: #ccc;\n}\nh4[data-v-6abacb54]:not(:first-child) {\n    margin-top: 30px;\n}\n@-moz-keyframes spin-data-v-6abacb54 {\n0% {\n    -moz-transform: rotate(0deg);\n}\n100% {\n    -moz-transform: rotate(360deg);\n}\n}\n@-webkit-keyframes spin-data-v-6abacb54 {\n0% {\n    -webkit-transform: rotate(0deg);\n}\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-6abacb54 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n.image_wrapper[data-v-6abacb54] {\n  width: 440px;\n  height: 277px;\n  border-radius: 5px;\n  background-color: #262626;\n  position: relative;\n  overflow: hidden;\n}\n.image_wrapper[data-v-6abacb54]:before {\n    content: \"\";\n    position: absolute;\n    width: 32px;\n    height: 32px;\n    top: calc(50% - 16px);\n    left: calc(50% - 16px);\n    z-index: 1;\n    background: transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat center;\n    -webkit-animation-name: spin-data-v-6abacb54;\n    -webkit-animation-duration: 400ms;\n    -webkit-animation-iteration-count: infinite;\n    -webkit-animation-timing-function: linear;\n    -moz-animation-name: spin-data-v-6abacb54;\n    -moz-animation-duration: 400ms;\n    -moz-animation-iteration-count: infinite;\n    -moz-animation-timing-function: linear;\n    -ms-animation-name: spin-data-v-6abacb54;\n    -ms-animation-duration: 400ms;\n    -ms-animation-iteration-count: infinite;\n    -ms-animation-timing-function: linear;\n    animation-name: spin-data-v-6abacb54;\n    animation-duration: 400ms;\n    animation-iteration-count: infinite;\n    animation-timing-function: linear;\n}\n.image_wrapper > img[data-v-6abacb54] {\n    z-index: 2;\n    position: absolute;\n    border-radius: 5px;\n}\n.dna_sequence p[data-v-6abacb54] {\n  color: #808080;\n}\n.dna_sequence textarea[data-v-6abacb54] {\n  width: 100%;\n  overflow: hidden;\n}\n.result[data-v-6abacb54] {\n  background-color: #333333;\n  font-size: 20px;\n  text-align: center;\n  font-weight: bold;\n  padding: 19px 0 23px;\n  border-radius: 5px;\n}\n.result small[data-v-6abacb54] {\n    font-size: 11px;\n    display: block;\n    margin-bottom: 12px;\n}\n.result.expand[data-v-6abacb54] {\n    padding: 34px 0;\n}\n.description[data-v-6abacb54] {\n  margin: 25px -25px -25px;\n  padding: 25px;\n  border-top: 1px solid #333333;\n  color: #808080;\n}\n.description h4[data-v-6abacb54] {\n    color: #808080;\n}\n.description p[data-v-6abacb54] {\n    font-size: 13px;\n    line-height: 28px;\n    letter-spacing: 0;\n}\n.microscope[data-v-6abacb54] {\n  text-align: center;\n}\n.microscope .bg_line[data-v-6abacb54] {\n    margin-top: 25px;\n}\n.specimen[data-v-6abacb54] {\n  text-align: center;\n}\n.specimen .photo[data-v-6abacb54] {\n    width: calc(100% - 50px);\n}\n.bg_line[data-v-6abacb54] {\n  background-image: url(/dna-of-forests/img/detail-drawer/memo-line.png);\n  padding-bottom: 1px;\n  text-align: center;\n  min-height: 1px;\n}\n.bg_line[data-v-6abacb54]:after {\n    content: '.';\n    display: block;\n    clear: both;\n    height: 0;\n    visibility: hidden;\n}\n.bg_line dl[data-v-6abacb54] {\n    font-size: 13px;\n    line-height: 36px;\n    text-align: left;\n    clear: both;\n}\n.bg_line dl[data-v-6abacb54]:not(:first-child) {\n      margin-top: 36px;\n}\n.bg_line dl dt[data-v-6abacb54] {\n      font-weight: bold;\n}\n.bg_line dl dd[data-v-6abacb54] {\n      font-weight: normal;\n}\n.bg_line > img[data-v-6abacb54] {\n    margin: 18px auto 36px;\n    width: 230px;\n    transform: rotate(-3deg);\n    -webkit-transform: rotate(-3deg);\n}\n@media (max-width: 660px) {\n.drawer[data-v-6abacb54] {\n    height: calc(100% - 100px);\n}\n}\n[data-lang='en'] h3[data-v-6abacb54],\n[data-lang='en'] h4[data-v-6abacb54],\n[data-lang='en'] .result[data-v-6abacb54] {\n  letter-spacing: 0.09em;\n}\n[data-lang='en'] p[data-v-6abacb54] {\n  letter-spacing: 0.09em;\n}\n", ""]);
+exports.push([module.i, "\n.drawer[data-v-2ad1e0c7] {\n  position: fixed;\n  width: 490px;\n  height: 100%;\n  right: 0;\n  background-color: #151515;\n  z-index: 9999;\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);\n  overflow: hidden;\n}\n.drawer.fade-enter-active[data-v-2ad1e0c7] {\n    transition-duration: 0.45s;\n}\n.drawer.fade-leave-active[data-v-2ad1e0c7] {\n    transition-duration: 0.45s;\n}\n.drawer.fade-enter[data-v-2ad1e0c7], .drawer.fade-leave-active[data-v-2ad1e0c7] {\n    right: -490px;\n    opacity: 0;\n}\nheader[data-v-2ad1e0c7] {\n  background-color: #0d0d0d;\n  padding: 28.5px 25px;\n  position: relative;\n  border-bottom: 1px solid #1a1a1a;\n}\nheader h2[data-v-2ad1e0c7] {\n    text-align: center;\n}\nheader .close_btn[data-v-2ad1e0c7] {\n    display: inline-block;\n    padding: 28.5px 25px;\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer;\n    opacity: 0.3;\n}\nheader .close_btn[data-v-2ad1e0c7]:hover {\n      opacity: 0.5;\n}\narticle[data-v-2ad1e0c7] {\n  padding: 25px;\n  overflow-y: auto;\n  height: calc(100% - 125px);\n  -webkit-overflow-scrolling: touch;\n}\nh3[data-v-2ad1e0c7] {\n  font-size: 16px;\n  margin-bottom: 26px;\n  text-align: center;\n}\np[data-v-2ad1e0c7] {\n  font-size: 13px;\n  line-height: 32px;\n  letter-spacing: 0.075em;\n  margin-top: 25px;\n}\nsection[data-v-2ad1e0c7] {\n  max-height: inherit;\n}\nsection h3[data-v-2ad1e0c7] {\n    margin: 25px -25px;\n    text-align: center;\n    background-color: #0d0d0d;\n    padding: 21px;\n}\nsection:first-child h3[data-v-2ad1e0c7] {\n    margin-top: -25px;\n}\nh4[data-v-2ad1e0c7] {\n  margin-bottom: 13px;\n  color: #ccc;\n}\nh4[data-v-2ad1e0c7]:not(:first-child) {\n    margin-top: 30px;\n}\n@-moz-keyframes spin-data-v-2ad1e0c7 {\n0% {\n    -moz-transform: rotate(0deg);\n}\n100% {\n    -moz-transform: rotate(360deg);\n}\n}\n@-webkit-keyframes spin-data-v-2ad1e0c7 {\n0% {\n    -webkit-transform: rotate(0deg);\n}\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-2ad1e0c7 {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n.image_wrapper[data-v-2ad1e0c7] {\n  width: 440px;\n  height: 277px;\n  border-radius: 5px;\n  background-color: #262626;\n  position: relative;\n  overflow: hidden;\n}\n.image_wrapper[data-v-2ad1e0c7]:before {\n    content: \"\";\n    position: absolute;\n    width: 32px;\n    height: 32px;\n    top: calc(50% - 16px);\n    left: calc(50% - 16px);\n    z-index: 1;\n    background: transparent url(/dna-of-forests/img/detail-drawer/loader.png) no-repeat center;\n    -webkit-animation-name: spin-data-v-2ad1e0c7;\n    -webkit-animation-duration: 400ms;\n    -webkit-animation-iteration-count: infinite;\n    -webkit-animation-timing-function: linear;\n    -moz-animation-name: spin-data-v-2ad1e0c7;\n    -moz-animation-duration: 400ms;\n    -moz-animation-iteration-count: infinite;\n    -moz-animation-timing-function: linear;\n    -ms-animation-name: spin-data-v-2ad1e0c7;\n    -ms-animation-duration: 400ms;\n    -ms-animation-iteration-count: infinite;\n    -ms-animation-timing-function: linear;\n    animation-name: spin-data-v-2ad1e0c7;\n    animation-duration: 400ms;\n    animation-iteration-count: infinite;\n    animation-timing-function: linear;\n}\n.image_wrapper > img[data-v-2ad1e0c7] {\n    z-index: 2;\n    position: absolute;\n    border-radius: 5px;\n}\n.dna_sequence p[data-v-2ad1e0c7] {\n  color: #808080;\n}\n.dna_sequence textarea[data-v-2ad1e0c7] {\n  width: 100%;\n  overflow: hidden;\n}\n.result[data-v-2ad1e0c7] {\n  background-color: #333333;\n  font-size: 20px;\n  text-align: center;\n  font-weight: bold;\n  padding: 19px 0 23px;\n  border-radius: 5px;\n}\n.result small[data-v-2ad1e0c7] {\n    font-size: 11px;\n    display: block;\n    margin-bottom: 12px;\n}\n.result.expand[data-v-2ad1e0c7] {\n    padding: 34px 0;\n}\n.description[data-v-2ad1e0c7] {\n  margin: 25px -25px -25px;\n  padding: 25px;\n  border-top: 1px solid #333333;\n  color: #808080;\n}\n.description h4[data-v-2ad1e0c7] {\n    color: #808080;\n}\n.description p[data-v-2ad1e0c7] {\n    font-size: 13px;\n    line-height: 28px;\n    letter-spacing: 0;\n}\n.microscope[data-v-2ad1e0c7] {\n  text-align: center;\n}\n.microscope .bg_line[data-v-2ad1e0c7] {\n    margin-top: 25px;\n}\n.specimen[data-v-2ad1e0c7] {\n  text-align: center;\n}\n.specimen .photo[data-v-2ad1e0c7] {\n    width: calc(100% - 50px);\n}\n.bg_line[data-v-2ad1e0c7] {\n  background-image: url(/dna-of-forests/img/detail-drawer/memo-line.png);\n  padding-bottom: 1px;\n  text-align: center;\n  min-height: 1px;\n}\n.bg_line[data-v-2ad1e0c7]:after {\n    content: '.';\n    display: block;\n    clear: both;\n    height: 0;\n    visibility: hidden;\n}\n.bg_line dl[data-v-2ad1e0c7] {\n    font-size: 13px;\n    line-height: 36px;\n    text-align: left;\n    clear: both;\n}\n.bg_line dl[data-v-2ad1e0c7]:not(:first-child) {\n      margin-top: 36px;\n}\n.bg_line dl dt[data-v-2ad1e0c7] {\n      font-weight: bold;\n}\n.bg_line dl dd[data-v-2ad1e0c7] {\n      font-weight: normal;\n}\n.bg_line > img[data-v-2ad1e0c7] {\n    margin: 18px auto 36px;\n    width: 230px;\n    transform: rotate(-3deg);\n    -webkit-transform: rotate(-3deg);\n}\n@media (max-width: 660px) {\n.drawer[data-v-2ad1e0c7] {\n    height: calc(100% - 100px);\n}\n}\n[data-lang='en'] h3[data-v-2ad1e0c7],\n[data-lang='en'] h4[data-v-2ad1e0c7],\n[data-lang='en'] .result[data-v-2ad1e0c7] {\n  letter-spacing: 0.09em;\n}\n[data-lang='en'] p[data-v-2ad1e0c7] {\n  letter-spacing: 0.09em;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 314 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(console) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _lodash = __webpack_require__(9);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// 登録
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-_vue2.default.component('dna-tab', __webpack_require__(315).default);
-
-exports.default = _vue2.default.extend({
-  created: function created() {
-    this.fetchData();
-  },
-
-
-  watch: {
-    // ルートが変更されたらfetchDataを再び呼び出す
-    '$route': 'fetchData'
-  },
-
-  data: function data() {
-    return this.initWithNullValue(_lodash2.default.merge(_lodash2.default.cloneDeep(this.markers.knowledges[0]), _lodash2.default.cloneDeep(this.markers.samples[0]), {
-      type: null,
-      // error could happen withhout these
-      // TODO: markers内を全部捜査して必要なkeyを確かめるようにすれば、ここでいちいち追加しなくて良い
-      specimen: null,
-      microscope: null
-    }));
-  },
-
-  props: ['markers'],
-
-  methods: {
-    // 全valueをnullにする
-    initWithNullValue: function initWithNullValue(obj) {
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          // 再帰条件
-          if (key === 'genus') {
-            obj[key] = this.initWithNullValue(obj[key]);
-          } else {
-            obj[key] = null;
-          }
-        }
-      }
-      return obj;
-    },
-
-    // new_dataのもつプロパティを、old_dataのプロパティに代入する
-    initWithData: function initWithData(old_data, new_data) {
-      for (var key in new_data) {
-        if (new_data.hasOwnProperty(key)) {
-          // 再帰条件
-          if (key === 'genus') {
-            this.initWithData(old_data[key], new_data[key]);
-          } else {
-            old_data[key] = new_data[key];
-          }
-        }
-      }
-    },
-    fetchData: function fetchData() {
-      var idx, _data;
-      var p_index = this.$route.params.index;
-      if (0 <= p_index.indexOf('s-')) {
-        idx = p_index.replace('s-', '') - 1;
-        _data = this.markers.samples[idx];
-        _data.type = 'sample';
-      } else if (0 <= p_index.indexOf('k-')) {
-        idx = p_index.replace('k-', '') - 1;
-        _data = this.markers.knowledges[idx];
-        _data.id = idx + 1;
-        _data.type = 'knowledge';
-      } else {
-        console.error('Wrong index format...');
-      }
-
-      // 現在のdataをnullで初期化しinitialized_dataに格納
-      var initialized_data = this.initWithNullValue(_lodash2.default.cloneDeep(this.$data));
-      // initialized_dataに_dataを上書きしてdataに格納
-      _data = _lodash2.default.defaultsDeep(_data, initialized_data);
-      this.initWithData(this, _data);
-    },
-    label: function label() {
-      // TODO: This is messy implementation. How can I override messages depend on current forest?
-      if (this.$route.params.forest == 'kumano' && this.$root.$i18n.locale == 'ja') {
-        return '採集者による推定結果';
-      } else {
-        return this.$t('detail_drawer.sample.article.dna.result_of_identification');
-      }
-    }
-  }
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 315 */
+/* 319 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bed77cf4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_tab_vue__ = __webpack_require__(319);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2f392939_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_tab_vue__ = __webpack_require__(322);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(316)
+  __webpack_require__(320)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-bed77cf4"
+var __vue_scopeId__ = "data-v-2f392939"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bed77cf4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_tab_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2f392939_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_tab_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/dna-tab.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-bed77cf4", Component.options)
+    hotAPI.createRecord("data-v-2f392939", Component.options)
   } else {
-    hotAPI.reload("data-v-bed77cf4", Component.options)
-' + '  }
+    hotAPI.reload("data-v-2f392939", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -115713,26 +116506,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 316 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(317);
+var content = __webpack_require__(321);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("16384015", content, false);
+var update = __webpack_require__(5)("4d39f7ac", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bed77cf4\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-tab.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bed77cf4\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-tab.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2f392939\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-tab.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2f392939\",\"scoped\":true,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./dna-tab.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -115742,7 +116534,7 @@ if(false) {
 }
 
 /***/ }),
-/* 317 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -115750,134 +116542,13 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.tab > div.contents[data-v-bed77cf4] {\n  padding: 18px 11px;\n  background-color: #333;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n}\n.tab > div.contents > div[data-v-bed77cf4]:not(.current) {\n    display: none;\n}\nheader[data-v-bed77cf4] {\n  width: 100%;\n}\nheader a[data-v-bed77cf4] {\n    background-color: #262626;\n    width: 50%;\n    padding: 10px 0;\n    text-align: center;\n    display: inline-block;\n    cursor: pointer;\n}\nheader a img[data-v-bed77cf4] {\n      margin-right: 7px;\n      cursor: pointer;\n}\nheader a span[data-v-bed77cf4] {\n      font-size: 12px;\n      color: #fff;\n      opacity: 0.3;\n      cursor: pointer;\n}\nheader a[data-v-bed77cf4]:first-child {\n      border-top-left-radius: 5px;\n}\nheader a[data-v-bed77cf4]:last-child {\n      border-top-right-radius: 5px;\n}\nheader a.current[data-v-bed77cf4] {\n      background-color: #333;\n}\nheader a.current span[data-v-bed77cf4] {\n        opacity: 0.75;\n}\nheader a:hover span[data-v-bed77cf4] {\n      opacity: 0.5;\n}\n.contents .text p[data-v-bed77cf4] {\n  word-wrap: break-word;\n  font-size: 12px;\n  line-height: 2em;\n  font-weight: bold;\n}\n[data-lang='en'] header a span[data-v-bed77cf4] {\n  letter-spacing: 0.09em;\n}\n", ""]);
+exports.push([module.i, "\n.tab > div.contents[data-v-2f392939] {\n  padding: 18px 11px;\n  background-color: #333;\n  border-bottom-left-radius: 5px;\n  border-bottom-right-radius: 5px;\n}\n.tab > div.contents > div[data-v-2f392939]:not(.current) {\n    display: none;\n}\nheader[data-v-2f392939] {\n  width: 100%;\n}\nheader a[data-v-2f392939] {\n    background-color: #262626;\n    width: 50%;\n    padding: 10px 0;\n    text-align: center;\n    display: inline-block;\n    cursor: pointer;\n}\nheader a img[data-v-2f392939] {\n      margin-right: 7px;\n      cursor: pointer;\n}\nheader a span[data-v-2f392939] {\n      font-size: 12px;\n      color: #fff;\n      opacity: 0.3;\n      cursor: pointer;\n}\nheader a[data-v-2f392939]:first-child {\n      border-top-left-radius: 5px;\n}\nheader a[data-v-2f392939]:last-child {\n      border-top-right-radius: 5px;\n}\nheader a.current[data-v-2f392939] {\n      background-color: #333;\n}\nheader a.current span[data-v-2f392939] {\n        opacity: 0.75;\n}\nheader a:hover span[data-v-2f392939] {\n      opacity: 0.5;\n}\n.contents .text p[data-v-2f392939] {\n  word-wrap: break-word;\n  font-size: 12px;\n  line-height: 2em;\n  font-weight: bold;\n}\n[data-lang='en'] header a span[data-v-2f392939] {\n  letter-spacing: 0.09em;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 318 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _dna_colors = __webpack_require__(21);
-
-var _dna_colors2 = _interopRequireDefault(_dna_colors);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// 登録
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-_vue2.default.component('dna-barcode', __webpack_require__(12).default);
-
-exports.default = _vue2.default.extend({
-  props: ['text'],
-  data: function data() {
-    return {
-      current: 'barcode'
-    };
-  },
-  methods: {
-    colorize: function colorize(value) {
-      return value.replace(/A/g, '<span style="color: ' + _dna_colors2.default.A.hex + ';">A</span>').replace(/T/g, '<span style="color: ' + _dna_colors2.default.T.hex + ';">T</span>').replace(/G/g, '<span style="color: ' + _dna_colors2.default.G.hex + ';">G</span>').replace(/C/g, '<span style="color: ' + _dna_colors2.default.C.hex + ';">C</span>');
-    },
-    switchTab: function switchTab(val) {
-      this.current = val;
-    }
-  }
-});
-
-/***/ }),
-/* 319 */
+/* 322 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -115978,12 +116649,12 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-bed77cf4", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-2f392939", esExports)
   }
 }
 
 /***/ }),
-/* 320 */
+/* 323 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116320,27 +116991,29 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-6abacb54", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-2ad1e0c7", esExports)
   }
 }
 
 /***/ }),
-/* 321 */
+/* 324 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__ = __webpack_require__(322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_75aa15f8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_vue__ = __webpack_require__(323);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_51b2f9b6_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_vue__ = __webpack_require__(325);
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
@@ -116349,26 +117022,25 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_75aa15f8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_51b2f9b6_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/imgr.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-75aa15f8", Component.options)
+    hotAPI.createRecord("data-v-51b2f9b6", Component.options)
   } else {
-    hotAPI.reload("data-v-75aa15f8", Component.options)
-' + '  }
+    hotAPI.reload("data-v-51b2f9b6", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -116376,56 +117048,9 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 322 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default.extend({
-  props: ['alt', 'src', 'locale', 'global'],
-  watch: {
-    src: 'setAttrs'
-  },
-  methods: {
-    setAttrs: function setAttrs() {
-      this.$el.alt = this.alt;
-
-      // 相対パスを絶対パスに（globalがついていたらルートのimgフォルダを読みに行く）
-      var _src = this.global ? '/dna-of-forests/img/' + this.src : '/dna-of-forests/' + this.$route.params.forest + '/img/' + this.src;
-
-      // locale属性があれば、言語毎に画像パスを切り替え
-      var _locale = this.locale ? '-' + this.$root.$i18n.locale : '';
-
-      this.$el.src = _src.replace(/(\.\w+)$/, _locale + '$1');
-      this.$el.srcset = _src.replace(/(\.\w+)$/, _locale + '@2x$1') + ' 2x';
-    }
-  },
-  mounted: function mounted() {
-    this.setAttrs();
-  }
-}); //
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 323 */
+/* 325 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116442,31 +117067,33 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-75aa15f8", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-51b2f9b6", esExports)
   }
 }
 
 /***/ }),
-/* 324 */
+/* 326 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(console) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(327);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_fc9fd4fc_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(328);
+/* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1054fd35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(329);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(325)
+  __webpack_require__(327)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 
+
 /* template */
 
 /* template functional */
-  var __vue_template_functional__ = false
+var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
@@ -116475,26 +117102,25 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_fc9fd4fc_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_sp_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1054fd35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_sp_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
 Component.options.__file = "source/dna-of-forests/components/imgr-sp.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-fc9fd4fc", Component.options)
+    hotAPI.createRecord("data-v-1054fd35", Component.options)
   } else {
-    hotAPI.reload("data-v-fc9fd4fc", Component.options)
-' + '  }
+    hotAPI.reload("data-v-1054fd35", Component.options)
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -116502,26 +117128,25 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["default"] = (Component.exports);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 325 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(326);
+var content = __webpack_require__(328);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("39e651de", content, false);
+var update = __webpack_require__(5)("0bbe87ea", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fc9fd4fc\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./imgr-sp.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-fc9fd4fc\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./imgr-sp.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1054fd35\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./imgr-sp.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1054fd35\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js?indentedSyntax!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./imgr-sp.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -116531,7 +117156,7 @@ if(false) {
 }
 
 /***/ }),
-/* 326 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -116545,76 +117170,7 @@ exports.push([module.i, "\nimg.sp {\n  display: none;\n}\n@media (max-width: 660
 
 
 /***/ }),
-/* 327 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _vue = __webpack_require__(3);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _vue2.default.extend({
-  props: ['alt', 'src', 'locale', 'global'],
-  watch: {
-    src: 'setAttrs'
-  },
-  methods: {
-    setAttrs: function setAttrs() {
-      this.$el.alt = this.alt;
-      var devices = ['pc', 'sp'];
-      for (var i in devices) {
-
-        var el = this.$el.querySelector('.' + devices[i]);
-
-        // 相対パスを絶対パスに（globalがついていたらルートのimgフォルダを読みに行く）
-        var _src = this.global ? '/dna-of-forests/img/' + this.src : '/dna-of-forests/' + this.$route.params.forest + '/img/' + this.src;
-
-        // locale属性があれば、言語毎に画像パスを切り替え
-        var _locale = this.locale ? '-' + this.$root.$i18n.locale : '';
-
-        el.src = _src.replace(/(\.\w+)$/, _locale + '-' + devices[i] + '$1');
-        el.srcset = _src.replace(/(\.\w+)$/, _locale + '-' + devices[i] + '@2x$1') + ' 2x';
-      }
-    }
-  },
-  mounted: function mounted() {
-    this.setAttrs();
-  }
-}); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-// PC,SP で画像を切替えたい場合にimgrの代わりに使用
-
-/***/ }),
-/* 328 */
+/* 329 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116641,27 +117197,27 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-fc9fd4fc", esExports)
+    require("vue-hot-reload-api")      .rerender("data-v-1054fd35", esExports)
   }
 }
-
-/***/ }),
-/* 329 */
-/***/ (function(module, exports) {
-
-module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 YCAM Bio Research","lead":"TODO","index":"図鑑一覧"},"panorama":{"backtoindex":"他の図鑑をみる","ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"specimen":{"title":"標本写真"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” YCAM Bio Research","lead":"TODO","index":"Field guides"},"panorama":{"backtoindex":"See the other guides","ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"specimen":{"title":"Specimen photograph"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
 
 /***/ }),
 /* 330 */
 /***/ (function(module, exports) {
 
-module.exports = {"ja":{"niho":{"top":{"logo":"森のDNA図鑑 仁保の森 2016 YCAM Bio Research","lead":"YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。"},"about":{"logo":"森のDNA図鑑 仁保の森 2016","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。","credit":"写真提供：山口情報芸術センター［YCAM］"},"dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・昆虫・菌類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の特定を試みました。具体的には、植物では葉緑体のrbcLやmatK、昆虫ではミトコンドリアのCOI、菌類ではITSと呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"niho_forest":{"title":"仁保の森について","body":"YCAMから車で約30分、山口市仁保上郷（にほ かみごう）にある森。森の奥には落差20メートルの「犬鳴（いぬなき）の滝」があり、そこから流れる川は森と里をつなぎ、仁保川に流れ込んでいます。山や里によくいる生き物に加えて渓流系の生き物も住んでいる豊かな森であり、典型的な山口の里山の風景が広がっています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"iteota":{"title":"「もしも、森のいきものになったら」チーム","body":"Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）","link":"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"山口情報芸術センター［YCAM］","body":"Yamaguchi Center for Arts and Media","link":"http://www.ycam.jp/"},"production":"制作","tanaka":{"text":"講師：田中 浩（山口県立博物館動物担当理学博士）","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/"},"karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"録音・音源編集：Antoine Bertin（antoinebertin.org）","link":"http://www.antoinebertin.org/"},"cooperation":"協力","cooperations":"スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"}}},"en":{"niho":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016 YCAM Bio Research","lead":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop “DNA of the Forest” conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016","about":{"title":"About the Field Guide “DNA of Forests”","body":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; COI from mitochondria for insects; and ITS for fungi.<br>To search, we used a program called <a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">“BLAST”</a> that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"niho_forest":{"title":"About the Forest in Niho","body":"The forest is located within a 30 minute driving distance from YCAM, in the area of Niho Kamigo in Yamaguchi city. Deep in the forests, there is a 20 meter Inunaki Waterfall, which forms a river that links the forests and villages and flows into a main stream of Niho River. The presence of the creatures that dwell in the mountains and villages, as well as rivers connect them, is a feature of typical landscape of Satoyama in Yamaguchi city, and that can be found in the forests of Niho."},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"iteota":{"title":"In the Eyes of the Animal","body":"Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])","link":"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"Yamaguchi Center for Arts and Media [YCAM]","body":"","link":"http://www.ycam.jp/en/"},"production":"Production","tanaka":{"text":"Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"},"karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"Field recording and mixing: Antoine Bertin (antoinebertin.org)","link":"http://www.antoinebertin.org/"},"cooperation":"Cooperation","cooperations":"With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"}}}}
+module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 YCAM Bio Research","lead":"TODO","index":"図鑑一覧"},"panorama":{"backtoindex":"他の図鑑をみる","ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"specimen":{"title":"標本写真"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” YCAM Bio Research","lead":"TODO","index":"Field guides"},"panorama":{"backtoindex":"See the other guides","ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"specimen":{"title":"Specimen photograph"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
 
 /***/ }),
 /* 331 */
 /***/ (function(module, exports) {
 
-module.exports = {"ja":{"kumano":{"top":{"logo":"森のDNA図鑑 熊野の森 2017 YCAM Bio Research","lead":"YCAMバイオ・リサーチが「未来の山口の授業β」として開催したワークショップ「森のDNA図鑑」の参加者と山口市の熊野神社の森で生き物を採集し、生息地での観察とDNA解析の情報から、参加者が推測した結果を収録しています。"},"about":{"logo":"森のDNA図鑑 熊野の森 2017","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチが「未来の山口の授業β」として開催したワークショップ「<a class=\"border\" target=\"_blank\" href=\"http://www.ycam.jp/events/2017/how-to-make-the-field-guide-dna-of-forests/\">森のDNA図鑑</a>」の参加者と山口市の熊野神社の森で生き物を採集し、生息地での観察とDNA解析の情報から、参加者が推測した結果を収録しています。熊野神社周辺の森のある地点から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集し、推測した生き物の種名などの情報を引き出すことができます。私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA図鑑」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。","credit":"写真提供：山口情報芸術センター［YCAM］"},"day1":"1日目の様子","day2":"2日目の様子","dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・地衣類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の推定を試みました。具体的には、植物では葉緑体のrbcLやmatK、地衣類ではITS1と呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"about_forest":{"title":"熊野の森について","body":"熊野神社は古来から当地鎮守の神として祀られてきました。およそ700年前、当地を治める大内氏が国を領した時に、紀州熊野神社を熊野の山頂に勧請したのがはじまりです。その後、毛利氏が引き継ぎ、大守大江宗広朝臣が、御神殿、拝殿を再興しました。熊野権現を祭る熊野神社が存在することから名前が由来された権現山には、その昔、権現山の白虎伝説で知られる白狐が住んでいたと言われています。周辺植生は照葉樹林を中心とした典型的な社寺林、かつて赤松も見られましたが、近年松食い虫の被害により松枯れし、現在の姿となりました。詩人の中原中也の縁の場所としても知られており、中也が学校をさぼってはここから街並みを眺めていたり、息子を肩車して登ったりしたといわれています。高木層にはコジイ、イチイガシ、ウラジロガシ、アラカシ、クスノキ、タブノキなどが、低木層にはシャシャンボ、サカキなどが生息しています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"production":"制作","karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"cooperation":"協力","cooperations":"現地協力：熊野神社<br>森の知識監修：田中 浩（山口県立博物館動物担当理学博士）<br>調査同行：セバスチャン・コシオバ（モレキュラー・フローリスト）<br>主催：山口市、公益財団法人山口市文化振興財団 <br>後援：山口市教育委員会<br>助成：平成29年度 文化庁 文化芸術創造活用プラットフォーム形成事業、<br>日本医療研究開発機構・研究倫理に関する情報共有と国民理解の推進事業<br>（ゲノム医療実用化に係るELSI分野）<br>「ポジティブな関与を促すELSIへの未来志向型アプローチ」<br>"}}},"en":{"kumano":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Kumano 2017 YCAM Bio Research","lead":"At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class β”, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Kumano 2017","about":{"title":"About the Field Guide “DNA of Forests”","body":"At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class β”, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis. From a standpoint, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants. In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"day1":"Appearance of the Day-1","day2":"Appearance of the Day-2","dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; and ITS1 for Lichenes.<br>To search, we used a program called “BLAST” that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"about_forest":{"title":"About the Forest in Kumano","body":"The god enshrined at the Kumano Shrine has been worshipped as the region’s guardian from old times. When the Ouchi clan who governed the region came to reign the province about 700 years ago, the Kishu Kumano Shrine was placed at the top of the mountain in Kumano through a propagation process called kanjo (transfer of a tutelary deity to a new location). The Mori clan subsequently took power and “Oe Munehiro no Ason” rebuilt the shrine and the hall of worship. In Mt. Kumano, which the name derives from the Kumano Shrine that enshrines Kumano Gongen*, it has been told that byakko, known from the ”Byakko (white fox) folklore” of Mt. Gongen, used to inhabit. The surrounding vegetation forms a typical Shajirin (temple forest) which mainly consists broadleaves. Red pines used to be present, but they have withered in recent years due to damage from pine sawyers and resulted in the current state. This place is also remembered in connection with the poet Chuya Nakahara, who ditched school and visited here to view the townscape, and climbed the mountain while carrying his son on his shoulders. The area consists trees from tree layer, such as Castanopsis cuspidata, Quercus Gilva, Quercus Salicina, Quercus Glauca, Cinnamomum camphora, and Machilus thunbergli, and shrub layer, including Vaccinium bracteatum and Cleyera japonica.<br><br>*Gongen refers to the manifestation of a Buddha in the form of god"},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"production":"Production","karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"cooperation":"Cooperation","cooperations":"<br>In corporation with: Kumano Shrine<br>Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)<br>In field research with: Sebastian S. Cocioba (Molecular Florist)<br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education<br>Supported by: <br>The agency for Cultural Affairs, Government of Japan in the fiscal 2017, and<br>\"Future-oriented approach to ELSI for positive engagement\", <br>Public Understanding and Information Sharing on Research Ethics<br>(Ethical, legal and social issues on the practical application of genome medicine), <br>Japan Agency for Medical Research and Development (AMED)"}}}}
+module.exports = {"ja":{"niho":{"top":{"logo":"森のDNA図鑑 仁保の森 2016 YCAM Bio Research","lead":"YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。"},"about":{"logo":"森のDNA図鑑 仁保の森 2016","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。","credit":"写真提供：山口情報芸術センター［YCAM］"},"dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・昆虫・菌類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の特定を試みました。具体的には、植物では葉緑体のrbcLやmatK、昆虫ではミトコンドリアのCOI、菌類ではITSと呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"niho_forest":{"title":"仁保の森について","body":"YCAMから車で約30分、山口市仁保上郷（にほ かみごう）にある森。森の奥には落差20メートルの「犬鳴（いぬなき）の滝」があり、そこから流れる川は森と里をつなぎ、仁保川に流れ込んでいます。山や里によくいる生き物に加えて渓流系の生き物も住んでいる豊かな森であり、典型的な山口の里山の風景が広がっています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"iteota":{"title":"「もしも、森のいきものになったら」チーム","body":"Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）","link":"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"山口情報芸術センター［YCAM］","body":"Yamaguchi Center for Arts and Media","link":"http://www.ycam.jp/"},"production":"制作","tanaka":{"text":"講師：田中 浩（山口県立博物館動物担当理学博士）","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/"},"karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"録音・音源編集：Antoine Bertin（antoinebertin.org）","link":"http://www.antoinebertin.org/"},"cooperation":"協力","cooperations":"スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"}}},"en":{"niho":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016 YCAM Bio Research","lead":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop “DNA of the Forest” conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016","about":{"title":"About the Field Guide “DNA of Forests”","body":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; COI from mitochondria for insects; and ITS for fungi.<br>To search, we used a program called <a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">“BLAST”</a> that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"niho_forest":{"title":"About the Forest in Niho","body":"The forest is located within a 30 minute driving distance from YCAM, in the area of Niho Kamigo in Yamaguchi city. Deep in the forests, there is a 20 meter Inunaki Waterfall, which forms a river that links the forests and villages and flows into a main stream of Niho River. The presence of the creatures that dwell in the mountains and villages, as well as rivers connect them, is a feature of typical landscape of Satoyama in Yamaguchi city, and that can be found in the forests of Niho."},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"iteota":{"title":"In the Eyes of the Animal","body":"Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])","link":"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"Yamaguchi Center for Arts and Media [YCAM]","body":"","link":"http://www.ycam.jp/en/"},"production":"Production","tanaka":{"text":"Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"},"karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"Field recording and mixing: Antoine Bertin (antoinebertin.org)","link":"http://www.antoinebertin.org/"},"cooperation":"Cooperation","cooperations":"With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"}}}}
+
+/***/ }),
+/* 332 */
+/***/ (function(module, exports) {
+
+module.exports = {"ja":{"kumano":{"top":{"logo":"森のDNA図鑑 熊野の森 2017 YCAM Bio Research","lead":"YCAMバイオ・リサーチが「未来の山口の授業β」として開催したワークショップ「森のDNA図鑑」の参加者と山口市の熊野神社の森で生き物を採集し、生息地での観察とDNA解析の情報から、参加者が推測した結果を収録しています。"},"about":{"logo":"森のDNA図鑑 熊野の森 2017","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチが「未来の山口の授業β」として開催したワークショップ「<a class=\"border\" target=\"_blank\" href=\"http://www.ycam.jp/events/2017/how-to-make-the-field-guide-dna-of-forests/\">森のDNA図鑑</a>」の参加者と山口市の熊野神社の森で生き物を採集し、生息地での観察とDNA解析の情報から、参加者が推測した結果を収録しています。熊野神社周辺の森のある地点から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集し、推測した生き物の種名などの情報を引き出すことができます。私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA図鑑」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。","credit":"写真提供：山口情報芸術センター［YCAM］"},"day1":"ワークショップ 1日目","day2":"ワークショップ 2日目","dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・地衣類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の推定を試みました。具体的には、植物では葉緑体のrbcLやmatK、地衣類ではITS1と呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"about_forest":{"title":"熊野の森について","body":"熊野神社は古来から当地鎮守の神として祀られてきました。およそ700年前、当地を治める大内氏が国を領した時に、紀州熊野神社を熊野の山頂に勧請したのがはじまりです。その後、毛利氏が引き継ぎ、大守大江宗広朝臣が、御神殿、拝殿を再興しました。熊野権現を祭る熊野神社が存在することから名前が由来された権現山には、その昔、権現山の白虎伝説で知られる白狐が住んでいたと言われています。周辺植生は照葉樹林を中心とした典型的な社寺林、かつて赤松も見られましたが、近年松食い虫の被害により松枯れし、現在の姿となりました。詩人の中原中也の縁の場所としても知られており、中也が学校をさぼってはここから街並みを眺めていたり、息子を肩車して登ったりしたといわれています。高木層にはコジイ、イチイガシ、ウラジロガシ、アラカシ、クスノキ、タブノキなどが、低木層にはシャシャンボ、サカキなどが生息しています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"production":"制作","karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"cooperation":"協力","cooperations":"現地協力：熊野神社<br>森の知識監修：田中 浩（山口県立博物館動物担当理学博士）<br>調査同行：セバスチャン・コシオバ（モレキュラー・フローリスト）<br>主催：山口市、公益財団法人山口市文化振興財団 <br>後援：山口市教育委員会<br>助成：平成29年度 文化庁 文化芸術創造活用プラットフォーム形成事業、<br>日本医療研究開発機構・研究倫理に関する情報共有と国民理解の推進事業<br>（ゲノム医療実用化に係るELSI分野）<br>「ポジティブな関与を促すELSIへの未来志向型アプローチ」<br>"}}},"en":{"kumano":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Kumano 2017 YCAM Bio Research","lead":"At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class β”, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Kumano 2017","about":{"title":"About the Field Guide “DNA of Forests”","body":"At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class β”, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis. From a standpoint, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants. In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"day1":"Workshop Day 1","day2":"Workshop Day 2","dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; and ITS1 for Lichenes.<br>To search, we used a program called “BLAST” that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"about_forest":{"title":"About the Forest in Kumano","body":"The god enshrined at the Kumano Shrine has been worshipped as the region’s guardian from old times. When the Ouchi clan who governed the region came to reign the province about 700 years ago, the Kishu Kumano Shrine was placed at the top of the mountain in Kumano through a propagation process called kanjo (transfer of a tutelary deity to a new location). The Mori clan subsequently took power and “Oe Munehiro no Ason” rebuilt the shrine and the hall of worship. In Mt. Kumano, which the name derives from the Kumano Shrine that enshrines Kumano Gongen*, it has been told that byakko, known from the ”Byakko (white fox) folklore” of Mt. Gongen, used to inhabit. The surrounding vegetation forms a typical Shajirin (temple forest) which mainly consists broadleaves. Red pines used to be present, but they have withered in recent years due to damage from pine sawyers and resulted in the current state. This place is also remembered in connection with the poet Chuya Nakahara, who ditched school and visited here to view the townscape, and climbed the mountain while carrying his son on his shoulders. The area consists trees from tree layer, such as Castanopsis cuspidata, Quercus Gilva, Quercus Salicina, Quercus Glauca, Cinnamomum camphora, and Machilus thunbergli, and shrub layer, including Vaccinium bracteatum and Cleyera japonica.<br><br>*Gongen refers to the manifestation of a Buddha in the form of god"},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"production":"Production","karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"cooperation":"Cooperation","cooperations":"<br>In corporation with: Kumano Shrine<br>Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)<br>In field research with: Sebastian S. Cocioba (Molecular Florist)<br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education<br>Supported by: <br>The agency for Cultural Affairs, Government of Japan in the fiscal 2017, and<br>\"Future-oriented approach to ELSI for positive engagement\", <br>Public Understanding and Information Sharing on Research Ethics<br>(Ethical, legal and social issues on the practical application of genome medicine), <br>Japan Agency for Medical Research and Development (AMED)"}}}}
 
 /***/ })
 /******/ ]);
