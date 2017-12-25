@@ -47,9 +47,9 @@ else if(ua.indexOf('iphone') > 0 || ua.indexOf('ipod') > 0 || ua.indexOf('androi
 }
 else if(ua.indexOf('ipad') > 0 || ua.indexOf('android') > 0){
   addBodyClass('pad');
-  // TODO 正規表現でwidthだけ変える
+  // replace viewport
   var vp = document.querySelector('head>meta[name="viewport"]');
-  vp.content = 'width=1150';
+  vp.content = vp.content.replace(/width=(\d+|device-width)/g, 'width=1150');
 }
 else if(ua.indexOf('msie') != -1 || ua.indexOf('trident') != -1) {
   addBodyClass('ie');
