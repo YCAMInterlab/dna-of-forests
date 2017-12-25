@@ -319,8 +319,11 @@
       "collection_date": "2017.10.8",
       "memo": {
         "形、色、におい、におい、さわりごごち、など": "木の幹がなめらか、赤っぽい大きな木の下、葉がツルツル、においはない",
-        "採集者ID": "kumano20171008",
-        "": "※ 本サンプルに関しては、バイオインフォマティクスを用いた方法（採取したサンプルのDNA配列を用いたデータベース上での検索）では相同性の高い種を見つけられなかったため、植物の特徴や形状の観察による推定結果を掲載しています。"
+        "採集者ID": "kumano20171008"
+      },
+      "note": {
+        "ja": "※ 本サンプルに関しては、バイオインフォマティクスを用いた方法（採取したサンプルのDNA配列を用いたデータベース上での検索）では相同性の高い種を見つけられなかったため、植物の特徴や形状の観察による推定結果を掲載しています。",
+        "en": "Note: For this sample (No.14), the result of identification shows the candidate species that participants identified by using observation of the shape, not using bioinformatics, because we could not find the high homology sequence with that of this sample on database."
       },
       "specimen": true
     }

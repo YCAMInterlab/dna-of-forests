@@ -52,6 +52,8 @@
             dd(v-html="answer")
           img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" :src="'/dna-of-forests/'+$route.params.forest+'/img/detail-drawer/memo/'+id+'.png'" :style="{ width: memofig_width }")
 
+      section.note(v-if="note")
+        .bg_line {{ note[$root.$i18n.locale] }}
 
     template(v-if="type=='knowledge'")
       h3 {{ title[$root.$i18n.locale] }}
@@ -249,10 +251,11 @@ h4
     height: 0
     visibility: hidden
 
+  font-size: 13px
+  line-height: 36px
+  text-align: left
+
   dl
-    font-size: 13px
-    line-height: 36px
-    text-align: left
     clear: both
     &:not(:first-child)
       margin-top: 36px
@@ -266,6 +269,10 @@ h4
     width: 230px
     transform: rotate(-3deg)
     -webkit-transform: rotate(-3deg)
+
+section.note
+  margin-top: 36px
+  color: #808080
 
 @media (max-width: 660px)
   .drawer
