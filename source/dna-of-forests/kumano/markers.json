@@ -308,6 +308,7 @@
         "ja": "サカキ",
         "en": "Cleyera japonica"
       },
+      "label_shadow": true,
       "dna_sequences": [
         {
           "region": "rbcL",
