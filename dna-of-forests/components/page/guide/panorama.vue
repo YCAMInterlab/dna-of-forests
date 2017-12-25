@@ -19,7 +19,7 @@
     br
     a(:href="$t('panorama.cc')" target="_blank") Creative Commons License CC BY-SA 4.0
 
-  .marker.sample(v-for="(item, index) in markers.samples" :id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/s-'+(index+1) }" v-on:click="goMarker('s-'+(index+1))")
+  .marker.sample(v-for="(item, index) in markers.samples" :id="'s-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/s-'+(index+1), shadow: item.label_shadow }" v-on:click="goMarker('s-'+(index+1))")
     //- [2] Labels are displayed with images in Japanese, text in English
     imgr.label(:alt="item.genus.ja" :src="'panorama/marker-text/sample-ja/'+filename(item.genus.en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.genus.en }}
@@ -34,6 +34,19 @@
 </template>
 
 <style lang="sass?indentedSyntax" scoped>
+
+=bg2x($path, $ext: "png", $w: auto, $h: auto, $pos: center, $repeat: no-repeat)
+
+  $at1x_path: "#{$path}.#{$ext}"
+  $at2x_path: "#{$path}@2x.#{$ext}"
+
+  background-image: url("#{$at1x_path}")
+  background-size: $w $h
+  background-position: $pos
+  background-repeat: $repeat
+
+  @media all and (-webkit-min-device-pixel-ratio : 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5)
+    background-image: url("#{$at2x_path}")
 
 @keyframes flash
     0%
@@ -173,18 +186,32 @@
     margin-left: 7px
     &:before
       display: inline-block
-      content: url(/dna-of-forests/img/panorama/marker-arrow.png)
+      content: ''
       width: 13px
       height: 14px
+      @include bg2x('/dna-of-forests/img/panorama/marker-arrow', 'png', 13px, 14px)
       vertical-align: middle
     .dna_barcode
       margin-left: 5px
       cursor: pointer
+
+    &.shadow
+      &:before
+        display: inline-block
+        width: 17px
+        height: 18px
+        @include bg2x('/dna-of-forests/img/panorama/marker-arrow-shadow', 'png', 17px, 18px)
+        vertical-align: middle
+      img.label
+        margin-left: 3px
+
     &:hover
       .dna_barcode
         animation-duration: 500s !important
         -webkit-animation-duration: 500s !important
         -moz-animation-duration: 500s !important
+
+
 
   &.knowledge
     // Move so that the center of the marker becomes the reference point
@@ -221,6 +248,10 @@
       font-size: 11px
       letter-spacing: 0.1em
       margin-left: 5px
+    &.shadow
+      span.label
+        text-shadow: rgba(0,0,0,0.2) 1px 1px 1px, rgba(0,0,0,0.2) -1px -1px 1px, rgba(0,0,0,0.2) -1px 1px 1px, rgba(0,0,0,0.2) 1px -1px 1px, rgba(0,0,0,0.2) 0px 1px 1px, rgba(0,0,0,0.2)  0 -1px 1px, rgba(0,0,0,0.2) -1px 0 1px, rgba(0,0,0,0.2) 1px 0 1px
+
 </style>
 
 <script>

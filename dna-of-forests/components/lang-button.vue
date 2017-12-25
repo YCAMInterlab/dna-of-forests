@@ -107,7 +107,6 @@ export default Vue.extend({
 
   methods: {
     changeRoute(){
-      // TODO URLちゃんとする
       var en = this.$el.querySelector('.en');
       var ja = this.$el.querySelector('.ja');
       if(this.$root.$i18n.locale === 'en') {
