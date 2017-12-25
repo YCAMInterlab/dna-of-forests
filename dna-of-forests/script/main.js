@@ -37730,6 +37730,14 @@ exports.default = _vue2.default.extend({
   watch: {
     '$route': 'resetAutoScroll'
   },
+  beforeDestroy: function beforeDestroy() {
+    // Fix for video loading error when reload panorama view
+    // TODO: Find better way
+    if (document.querySelector('body.safari')) {
+      var video = document.getElementById('video_' + this.$route.params.forest);
+      document.body.removeChild(video);
+    }
+  },
   mounted: function mounted() {
 
     this.resetAutoScroll();
