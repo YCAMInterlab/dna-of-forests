@@ -282,8 +282,6 @@ export default Vue.extend({
 
     this.resetAutoScroll();
 
-    this.video = null;
-
     this.width = this.$el.offsetWidth;
     this.height = window.innerHeight;
     this.camera = null;
@@ -517,19 +515,19 @@ export default Vue.extend({
       }
       else {
         var id = `video_${this.$route.params.forest}`;
-        this.video = document.getElementById(id);
-        if(!this.video) {
-          this.video = document.createElement('video');
-          this.video.id = id;
-          this.video.className = 'video';
-          this.video.src = `/dna-of-forests/${this.$route.params.forest}/img/panorama/forest.mp4`;
-          this.video.autoplay = true;
-          this.video.loop = true;
-          this.video.style.display = 'none';
-          document.body.appendChild(this.video);
+        var video = document.getElementById(id);
+        if(!video) {
+          video = document.createElement('video');
+          video.id = id;
+          video.className = 'video';
+          video.src = `/dna-of-forests/${this.$route.params.forest}/img/panorama/forest.mp4`;
+          video.autoplay = true;
+          video.loop = true;
+          video.style.display = 'none';
+          document.body.appendChild(video);
         }
 
-        texture = new THREE.VideoTexture( this.video );
+        texture = new THREE.VideoTexture( video );
         texture.minFilter = THREE.LinearFilter;
         texture.magFilter = THREE.LinearFilter;
         texture.format = THREE.RGBFormat;
