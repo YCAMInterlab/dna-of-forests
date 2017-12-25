@@ -35,6 +35,19 @@
 
 <style lang="sass?indentedSyntax" scoped>
 
+=bg2x($path, $ext: "png", $w: auto, $h: auto, $pos: center, $repeat: no-repeat)
+
+  $at1x_path: "#{$path}.#{$ext}"
+  $at2x_path: "#{$path}@2x.#{$ext}"
+
+  background-image: url("#{$at1x_path}")
+  background-size: $w $h
+  background-position: $pos
+  background-repeat: $repeat
+
+  @media all and (-webkit-min-device-pixel-ratio : 1.5), all and (-o-min-device-pixel-ratio: 3/2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5)
+    background-image: url("#{$at2x_path}")
+
 @keyframes flash
     0%
       opacity: 0.4
@@ -173,9 +186,10 @@
     margin-left: 7px
     &:before
       display: inline-block
-      content: url(/dna-of-forests/img/panorama/marker-arrow.png)
+      content: ''
       width: 13px
       height: 14px
+      @include bg2x('/dna-of-forests/img/panorama/marker-arrow', 'png', 13px, 14px)
       vertical-align: middle
     .dna_barcode
       margin-left: 5px
@@ -184,10 +198,9 @@
     &.shadow
       &:before
         display: inline-block
-        content: url(/dna-of-forests/img/panorama/marker-arrow-shadow.png)
         width: 17px
         height: 18px
-        @bg
+        @include bg2x('/dna-of-forests/img/panorama/marker-arrow-shadow', 'png', 17px, 18px)
         vertical-align: middle
       img.label
         margin-left: 3px
