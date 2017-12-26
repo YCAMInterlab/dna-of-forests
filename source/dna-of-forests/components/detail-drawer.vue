@@ -292,6 +292,7 @@ section.note
 
 import Vue from 'vue';
 import _ from 'lodash';
+import util from '../script/util';
 
 // 登録
 Vue.component('dna-tab', require('./dna-tab.vue').default);
@@ -308,38 +309,12 @@ export default Vue.extend({
   },
 
   data: function(){
-    return this.initWithNullValue(_.merge(
-      _.cloneDeep(this.markers.knowledges[0]),
-      _.cloneDeep(this.markers.samples[0]),
-      {
-        type: null,
-        // error could happen withhout these
-        // TODO: markers内を全部捜査して必要なkeyを確かめるようにすれば、ここでいちいち追加しなくて良い
-        specimen: null,
-        microscope: null,
-        note: null
-      }
-    ));
+    return _.cloneDeep(this.initial_data);
   },
 
-  props: ['markers'],
+  props: ['markers','initial_data'],
 
   methods: {
-    // 全valueをnullにする
-    initWithNullValue(obj) {
-      for(var key in obj){
-        if(obj.hasOwnProperty(key)){
-          // 再帰条件
-          if(key === 'genus'){
-            obj[key] = this.initWithNullValue(obj[key]);
-          }
-          else {
-            obj[key] = null;
-          }
-        }
-      }
-      return obj;
-    },
     // new_dataのもつプロパティを、old_dataのプロパティに代入する
     initWithData(old_data, new_data) {
       for(var key in new_data){
@@ -373,7 +348,7 @@ export default Vue.extend({
       }
 
       // 現在のdataをnullで初期化しinitialized_dataに格納
-      var initialized_data = this.initWithNullValue(_.cloneDeep(this.$data));
+      var initialized_data = util.initWithNullValue(_.cloneDeep(this.$data));
       // initialized_dataに_dataを上書きしてdataに格納
       _data = _.defaultsDeep(_data, initialized_data);
       this.initWithData(this, _data);
