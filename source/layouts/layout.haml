@@ -41,7 +41,6 @@
     = partial 'google_analytics'
 
   %body{class: data['body_class']}
-    = partial 'facebook_like_button'
     = yield
     - if data.scripts
       - data.scripts.each do |file|
