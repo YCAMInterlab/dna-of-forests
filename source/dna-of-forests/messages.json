@@ -87,7 +87,7 @@
         "article": {
           "dna": {
             "title": "Identification of species with DNA-based technology",
-            "photo_of_the_sample": "Photo of the sample",
+            "photo_of_the_sample": "Photo of the sample in the field",
             "dna_sequence_to_identify": "DNA sequence to identify",
             "result_of_identification": "Result of identification",
             "dna_region": "DNA region: ",
