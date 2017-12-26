@@ -33,6 +33,7 @@
     "flickity": "^2.0.10",
     "js-cookie": "^2.2.0",
     "json-loader": "^0.5.7",
+    "load-google-maps-api": "^1.0.1",
     "lodash": "^4.17.0",
     "mobile-detect": "^1.4.1",
     "moment": "^2.20.1",

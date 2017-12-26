@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import _ from 'lodash';
 import AppGuide from '../components/app.vue';
 import VueGtm from 'vue-gtm'
+import loadGoogleMapsAPI from 'load-google-maps-api';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -108,15 +109,22 @@ Vue.component('global-nav',    require('../components/global-nav.vue').default);
 Vue.component('imgr',          require('../components/imgr.vue').default);
 Vue.component('imgr-sp',       require('../components/imgr-sp.vue').default);
 
-new AppGuide({
-  router: router,
-  // TODO should load indivisual messages in each guides(guide.vue)
-  i18n: new VueI18n({
-    locale: document.querySelector('html').getAttribute('lang'),
-    messages: _.merge(
-      require('../messages.json'),
-      require('../niho/messages.json'),
-      require('../kumano/messages.json')
-    )
-  })
-}).$mount('#app');
+loadGoogleMapsAPI({ key: 'AIzaSyDQoGu03t5Lxa7aVYgCMo7fwrgZmKIfIWQ' }).then(function(googleMaps) {
+
+  // initialize App after loading google object
+  new AppGuide({
+    router: router,
+    // TODO should load indivisual messages in each guides(guide.vue)
+    i18n: new VueI18n({
+      locale: document.querySelector('html').getAttribute('lang'),
+      messages: _.merge(
+        require('../messages.json'),
+        require('../niho/messages.json'),
+        require('../kumano/messages.json')
+      )
+    })
+  }).$mount('#app');
+
+}).catch((err) => {
+  console.error(err);
+});

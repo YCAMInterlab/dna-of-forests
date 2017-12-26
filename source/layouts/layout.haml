@@ -45,7 +45,6 @@
       - data.styles.each do |file|
         = stylesheet_link_tag "#{file}"
 
-    = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=AIzaSyDQoGu03t5Lxa7aVYgCMo7fwrgZmKIfIWQ"
     = partial 'google_analytics'
 
   %body{class: data['body_class']}
