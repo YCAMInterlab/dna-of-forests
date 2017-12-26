@@ -316,7 +316,8 @@ export default Vue.extend({
         // error could happen withhout these
         // TODO: markers内を全部捜査して必要なkeyを確かめるようにすれば、ここでいちいち追加しなくて良い
         specimen: null,
-        microscope: null
+        microscope: null,
+        note: null
       }
     ));
   },
