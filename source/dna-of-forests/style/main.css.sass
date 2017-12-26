@@ -48,7 +48,6 @@ body
 body
   position: relative
   font-family: $yu_gothic
-  color: #000
   font-size: 13px
   line-height: 1em
   color: #fff
@@ -76,36 +75,8 @@ a.border
     &:hover
       color: #fff
 
-#app
-  position: relative
-  height: 100%
-  min-height: 100%
-  width: 100%
-  overflow: hidden
-
-#content
-  width: calc(100% - 80px)
-  float: left
-  height: 100%
-  overflow: hidden
-  background-color: #000
-  position: relative
-  // ↓これがないとiOS Safariで慣性スクロールが有効化されない
-  -webkit-overflow-scrolling: touch
-
-// Facebookアプリで表示した時
-body.facebook
-  #content
-    position: fixed
-    top: 0
-
 @media (max-width: 900px)
   a.border
     +dotted(bottom, #ccc, 2, 6, 2)
     &:hover
       +dotted(bottom, #fff, 2, 6, 2)
-
-@media (max-width: 660px)
-  #content
-    width: 100%
-    height: calc(100% - 100px)

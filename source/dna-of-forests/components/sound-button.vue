@@ -4,7 +4,7 @@ a(v-on:click="click")
   div
     span SOUND
   audio(loop)
-    source(src='/dna-of-forests/sound/forest.mp3' type='audio/mp3')
+    source(:src='soundUrl()' type='audio/mp3')
 
 </template>
 
@@ -66,8 +66,8 @@ export default Vue.extend({
       }, false);
     }
 
-    this.toggleSound(!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0));
-
+    // Safari changed its specification that playing sound needs user action, so set default off.
+    this.toggleSound( !document.querySelector('body.safari') && (!(md.mobile() || parseInt(Cookies.get('isSoundOn'),10)==0)));
   },
 
   methods: {
@@ -85,6 +85,9 @@ export default Vue.extend({
         Cookies.set('isSoundOn', 0);
         this.$el.className = 'off';
       }
+    },
+    soundUrl(){
+      return `/dna-of-forests/${this.$route.params.forest}/sound/forest.mp3`;
     }
   },
   data: function(){

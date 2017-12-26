@@ -3,9 +3,12 @@
 .wrapper
   .containter
     .modal
-      imgr.logo(:alt="$t('top.logo')" src='entrance-modal/logo.png' locale)
-      imgr.lead(:alt="$t('top.lead')" src='entrance-modal/lead.png' locale)
-      router-link(to='/panorama') ENTER
+      .logo
+        imgr(:alt="$t(this.$route.params.forest+'.top.logo')" src='entrance-modal/logo.png' locale)
+      imgr.lead(:alt="$t(this.$route.params.forest+'.top.lead')" src='entrance-modal/lead.png' locale)
+      router-link(:to="'/'+$route.params.forest+'/panorama'") ENTER
+    router-link.backTop(to="/")
+      imgr(:alt="$t('panorama.backtoindex')" src='entrance-modal/backtoindex.png' locale global)
 
 </template>
 
@@ -28,6 +31,17 @@ img
   user-select: none
   pointer-events: none
 
+.backTop
+  color: #fff
+  position: absolute
+  right: 25px
+  top: 50%
+  text-decoration: none
+  opacity: 0.4
+  text-align: right
+  &:hover
+    opacity: 0.8
+
 .modal
   background-color: #000
   padding: 10px
@@ -38,9 +52,15 @@ img
   margin-left: auto
   margin-right: auto
   text-align: center
+  display: -webkit-flex
+  display: flex
+  flex-direction: column
   .logo
-    margin-top: 95px
-    margin-bottom: 110px
+    flex: 1
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
   a
     cursor: pointer
     display: block
@@ -60,9 +80,17 @@ img
 
 html[lang=en]
   .modal
-    text-align: left
     .logo
-      margin-top: 42px
-      margin-bottom: 68px
+      align-items: flex-start
+
+@media (max-width: 660px)
+  .wrapper
+    height: calc(100% - 50px)
+  .backTop
+    right: inherit
+    top: inherit
+    left: 50%
+    transform: translateX(-50%)
+    margin-top: 30px
 
 </style>

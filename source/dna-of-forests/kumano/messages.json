@@ -1,0 +1,80 @@
+{
+  "ja": {
+    "kumano": {
+      "top": {
+        "logo": "森のDNA図鑑 熊野の森 2017 YCAM Bio Research",
+        "lead": "YCAMバイオ・リサーチが開催しているワークショップ「森のDNA図鑑」では、一般の参加者とともに山口市内の森で生き物のサンプルを採集し、あたらしい図鑑の作成に取り組んでいます。参加者が観察とDNA解析の情報から生物種を推定した結果を収録しています。"
+      },
+      "about": {
+        "logo": "森のDNA図鑑 熊野の森 2017",
+        "about": {
+          "title": "「森のDNA図鑑」について",
+          "body": "YCAMバイオ・リサーチが「未来の山口の授業β」として開催したワークショップ「<a class=\"border\" target=\"_blank\" href=\"http://www.ycam.jp/events/2017/how-to-make-the-field-guide-dna-of-forests/\">森のDNA図鑑</a>」の参加者と山口市の熊野神社の森で生き物を採集し、生息地での観察とDNA解析の情報から、参加者が推測した結果を収録しています。熊野神社周辺の森のある地点から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集し、推測した生き物の種名などの情報を引き出すことができます。私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA図鑑」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。",
+          "credit": "写真提供：山口情報芸術センター［YCAM］"
+        },
+        "day1": "ワークショップ 1日目",
+        "day2": "ワークショップ 2日目",
+        "dna_barcoding": {
+          "title": "解析方法（DNAバーコーディング）について",
+          "body": "すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・地衣類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の推定を試みました。具体的には、植物では葉緑体のrbcLやmatK、地衣類ではITS1と呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"
+        },
+        "about_forest": {
+          "title": "熊野の森について",
+          "body": "熊野神社は古来から当地鎮守の神として祀られてきました。およそ700年前、当地を治める大内氏が国を領した時に、紀州熊野神社を熊野の山頂に勧請したのがはじまりです。その後、毛利氏が引き継ぎ、大守大江宗広朝臣が、御神殿、拝殿を再興しました。熊野権現を祭る熊野神社が存在することから名前が由来された権現山には、その昔、権現山の白虎伝説で知られる白狐が住んでいたと言われています。周辺植生は照葉樹林を中心とした典型的な社寺林、かつて赤松も見られましたが、近年松食い虫の被害により松枯れし、現在の姿となりました。詩人の中原中也の縁の場所としても知られており、中也が学校をさぼってはここから街並みを眺めていたり、息子を肩車して登ったりしたといわれています。高木層にはコジイ、イチイガシ、ウラジロガシ、アラカシ、クスノキ、タブノキなどが、低木層にはシャシャンボ、サカキなどが生息しています。"
+        },
+        "planning_production": "企画・制作",
+        "ycam-bioresearch": {
+          "title": "YCAM バイオ・リサーチ",
+          "body": "高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです",
+          "link": "http://www.ycam.jp/projects/ycam-bio-research/"
+        },
+        "production": "制作",
+        "karappo": {
+          "text": "図鑑ウェブ制作：KARAPPO Inc.",
+          "link": "http://karappo.net"
+        },
+        "cooperation": "協力",
+        "cooperations": "現地協力：熊野神社<br>森の知識監修：田中 浩（山口県立博物館動物担当理学博士）<br>調査同行：セバスチャン・コシオバ（モレキュラー・フローリスト）<br>主催：山口市、公益財団法人山口市文化振興財団 <br>後援：山口市教育委員会<br>助成：平成29年度 文化庁 文化芸術創造活用プラットフォーム形成事業、<br>日本医療研究開発機構・研究倫理に関する情報共有と国民理解の推進事業<br>（ゲノム医療実用化に係るELSI分野）<br>「ポジティブな関与を促すELSIへの未来志向型アプローチ」<br>"
+      }
+    }
+  },
+  "en": {
+    "kumano": {
+      "top": {
+        "logo": "Field Guide “DNA of Forests” in the forest of Kumano 2017 YCAM Bio Research",
+        "lead": "At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website contains the species that participants identified by using observation carried out in the field and DNA analysis."
+      },
+      "about": {
+        "logo": "Field Guide “DNA of Forests” in the forest of Kumano 2017",
+        "about": {
+          "title": "About the Field Guide “DNA of Forests”",
+          "body": "At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class β”, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis. From a standpoint, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants. In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.",
+          "credit": "Courtesy of Yamaguchi Center for Arts and Media [YCAM]"
+        },
+        "day1": "Workshop Day 1",
+        "day2": "Workshop Day 2",
+        "dna_barcoding": {
+          "title": "DNA Barcoding Method",
+          "body": "All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; and ITS1 for Lichenes.<br>To search, we used a program called “BLAST” that allows comparison between the resembling regions of DNA with the application of bioinformatics."
+        },
+        "about_forest": {
+          "title": "About the Forest in Kumano",
+          "body": "The god enshrined at the Kumano Shrine has been worshipped as the region’s guardian from old times. When the Ouchi clan who governed the region came to reign the province about 700 years ago, the Kishu Kumano Shrine was placed at the top of the mountain in Kumano through a propagation process called kanjo (transfer of a tutelary deity to a new location). The Mori clan subsequently took power and “Oe Munehiro no Ason” rebuilt the shrine and the hall of worship. In Mt. Kumano, which the name derives from the Kumano Shrine that enshrines Kumano Gongen*, it has been told that byakko, known from the ”Byakko (white fox) folklore” of Mt. Gongen, used to inhabit. The surrounding vegetation forms a typical Shajirin (temple forest) which mainly consists broadleaves. Red pines used to be present, but they have withered in recent years due to damage from pine sawyers and resulted in the current state. This place is also remembered in connection with the poet Chuya Nakahara, who ditched school and visited here to view the townscape, and climbed the mountain while carrying his son on his shoulders. The area consists trees from tree layer, such as Castanopsis cuspidata, Quercus Gilva, Quercus Salicina, Quercus Glauca, Cinnamomum camphora, and Machilus thunbergli, and shrub layer, including Vaccinium bracteatum and Cleyera japonica.<br><br>*Gongen refers to the manifestation of a Buddha in the form of god"
+        },
+        "planning_production": "Planning and Production",
+        "ycam-bioresearch": {
+          "title": "YCAM Bio Research",
+          "body": "Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.",
+          "link": "http://www.ycam.jp/en/projects/ycam-bio-research/"
+        },
+        "production": "Production",
+        "karappo": {
+          "text": "Web design and development: KARAPPO Inc.",
+          "link": "http://karappo.net"
+        },
+        "cooperation": "Cooperation",
+        "cooperations": "<br>In corporation with: Kumano Shrine<br>Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)<br>In field research with: Sebastian S. Cocioba (Molecular Florist)<br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education<br>Supported by: <br>The agency for Cultural Affairs, Government of Japan in the fiscal 2017, and<br>\"Future-oriented approach to ELSI for positive engagement\", <br>Public Understanding and Information Sharing on Research Ethics<br>(Ethical, legal and social issues on the practical application of genome medicine), <br>Japan Agency for Medical Research and Development (AMED)"
+      }
+    }
+  }
+}

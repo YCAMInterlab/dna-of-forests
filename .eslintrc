@@ -26,5 +26,8 @@
       "always"
     ],
     "no-console": 1
+  },
+  "globals": {
+    "google": true
   }
 }

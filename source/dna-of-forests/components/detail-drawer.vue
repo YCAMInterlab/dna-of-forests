@@ -3,24 +3,24 @@
 .drawer(:data-lang="$root.$i18n.locale")
   header
     h2
-      imgr(:alt="$t('detail_drawer.sample.title')" src='detail-drawer/title-sample.png' locale v-if="type=='sample'")
-      imgr(:alt="$t('detail_drawer.tips.title')" src='detail-drawer/title-tips.png' locale v-if="type=='knowledge'")
+      imgr(:alt="$t('detail_drawer.sample.title')" src='detail-drawer/title-sample.png' locale global v-if="type=='sample'")
+      imgr(:alt="$t('detail_drawer.tips.title')" src='detail-drawer/title-tips.png' locale global v-if="type=='knowledge'")
     router-link.close_btn(to='./')
-      imgr(alt='Close' src='detail-drawer/close-btn.png')
+      imgr(alt='Close' src='detail-drawer/close-btn.png' global)
   article
     template(v-if="type=='sample'")
 
       section.dna
         h3
-          imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale)
+          imgr(:alt="$t('detail_drawer.sample.article.dna.title')" src='detail-drawer/title-dna.png' locale global)
         h4 1. {{ $t('detail_drawer.sample.article.dna.photo_of_the_sample') }}
         .image_wrapper
-          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" v-bind:src="'sample/'+id+'.jpg'")
+          imgr(:alt="$t('detail_drawer.sample.article.dna.photo_of_the_sample')" :src="'detail-drawer/sample/'+id+'.jpg'")
         h4 2. {{ $t('detail_drawer.sample.article.dna.dna_sequence_to_identify') }}
         div.dna_sequence(v-for="item in dna_sequences")
           p {{ $t('detail_drawer.sample.article.dna.dna_region') }}{{ item.region }}
-          <dna-tab v-bind:text="item.text" />
-        h4 3. {{ $t('detail_drawer.sample.article.dna.result_of_identification') }}
+          <dna-tab :text="item.text" />
+        h4 3. {{ label() }}
         div.result(v-if="$root.$i18n.locale === 'ja'")
           small {{ genus.en }}
           | {{ genus.ja }}
@@ -32,26 +32,33 @@
 
       section.microscope(v-if="microscope")
         h3
-          imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale)
-        iframe(v-if="microscope.youtube_id" width="297" height="528" v-bind:src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
+          imgr(:alt="$t('detail_drawer.sample.article.microscope.title')" src='detail-drawer/title-sp_microscope.png' locale global)
+        iframe(v-if="microscope.youtube_id" width="297" height="528" :src="'https://www.youtube.com/embed/'+microscope.youtube_id+'?rel=0'" frameborder="0" allowfullscreen)
         .bg_line(v-if="$root.$i18n.locale === 'ja' && microscope.memo")
           dl
             dd(v-html="microscope.memo")
 
+      section.specimen(v-if="specimen")
+        h3
+          imgr(:alt="$t('detail_drawer.sample.article.specimen.title')" src='detail-drawer/title-specimen.png' locale global)
+        img.photo(:src="'/dna-of-forests/'+$route.params.forest+'/img/detail-drawer/specimen/'+id+'.jpg'")
+
       section.memo(v-if="($root.$i18n.locale === 'en' && memofig_width) || ($root.$i18n.locale === 'ja' && memo)")
         h3
-          imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale)
+          imgr(:alt="$t('detail_drawer.sample.article.memo.title')" src='detail-drawer/title-memo.png' locale global)
         .bg_line
           dl(v-if="$root.$i18n.locale === 'ja'" v-for="(answer, question) in memo")
             dt {{ question }}
             dd(v-html="answer")
-          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" v-bind:src="'/dna-of-forests/img/detail-drawer/memo/'+id+'.png'" v-bind:style="{ width: memofig_width }")
+          img(:alt="$t('detail_drawer.sample.article.memo.sketch')" v-if="memofig_width" :src="'/dna-of-forests/'+$route.params.forest+'/img/detail-drawer/memo/'+id+'.png'" :style="{ width: memofig_width }")
 
+      section.note(v-if="note")
+        .bg_line {{ note[$root.$i18n.locale] }}
 
     template(v-if="type=='knowledge'")
       h3 {{ title[$root.$i18n.locale] }}
       .image_wrapper
-        imgr(:alt="title[$root.$i18n.locale]" v-bind:src="'detail-drawer/knowledge/'+id+'.jpg'")
+        imgr(:alt="title[$root.$i18n.locale]" :src="'detail-drawer/knowledge/'+id+'.jpg'")
       p(v-html="description[$root.$i18n.locale]")
 
 
@@ -225,6 +232,11 @@ h4
   .bg_line
     margin-top: 25px
 
+.specimen
+  text-align: center
+  .photo
+    width: calc(100% - 50px)
+
 .bg_line
   background-image: url(/dna-of-forests/img/detail-drawer/memo-line.png)
   padding-bottom: 1px
@@ -239,29 +251,28 @@ h4
     height: 0
     visibility: hidden
 
+  font-size: 13px
+  line-height: 36px
+  text-align: left
+
   dl
-    font-size: 13px
-    line-height: 36px
-    text-align: left
     clear: both
     &:not(:first-child)
       margin-top: 36px
     dt
       font-weight: bold
-      // width: 170px
-      // margin-right: 10px
-      // float: left
-      // clear: bot
     dd
       font-weight: normal
-      // width: calc(100% - 180px)
-      // float: left
 
   >img
     margin: 18px auto 36px
     width: 230px
     transform: rotate(-3deg)
     -webkit-transform: rotate(-3deg)
+
+section.note
+  margin-top: 36px
+  color: #808080
 
 @media (max-width: 660px)
   .drawer
@@ -281,9 +292,10 @@ h4
 
 import Vue from 'vue';
 import _ from 'lodash';
+import util from '../script/util';
 
 // 登録
-Vue.component('dna-tab', require('./dna-tab.vue'));
+Vue.component('dna-tab', require('./dna-tab.vue').default);
 
 export default Vue.extend({
 
@@ -297,32 +309,12 @@ export default Vue.extend({
   },
 
   data: function(){
-    var makers = require('../script/markers.json');
-    var _data = _.merge(_.cloneDeep(makers['knowledges'][0]), _.cloneDeep(makers['samples'][0]));
-    _data.type = null; // typeプロパティを追加
-
-    // initialize
-    _data = this.initWithNullValue(_data);
-
-    return _data;
+    return _.cloneDeep(this.initial_data);
   },
 
+  props: ['markers','initial_data'],
+
   methods: {
-    // 全valueをnullにする
-    initWithNullValue(obj) {
-      for(var key in obj){
-        if(obj.hasOwnProperty(key)){
-          // 再帰条件
-          if(key === 'genus'){
-            obj[key] = this.initWithNullValue(obj[key]);
-          }
-          else {
-            obj[key] = null;
-          }
-        }
-      }
-      return obj;
-    },
     // new_dataのもつプロパティを、old_dataのプロパティに代入する
     initWithData(old_data, new_data) {
       for(var key in new_data){
@@ -339,14 +331,15 @@ export default Vue.extend({
     },
     fetchData() {
       var idx, _data;
-      if(0<=this.$route.params.index.indexOf('s-')){
-        idx = this.$route.params.index.replace('s-','') - 1;
-        _data = this.$root.samples[idx];
+      var p_index = this.$route.params.index;
+      if(0<=p_index.indexOf('s-')){
+        idx = p_index.replace('s-','') - 1;
+        _data = this.markers.samples[idx];
         _data.type = 'sample';
       }
-      else if(0<=this.$route.params.index.indexOf('k-')){
-        idx = this.$route.params.index.replace('k-','') - 1;
-        _data = this.$root.knowledges[idx];
+      else if(0<=p_index.indexOf('k-')){
+        idx = p_index.replace('k-','') - 1;
+        _data = this.markers.knowledges[idx];
         _data.id = idx+1;
         _data.type = 'knowledge';
       }
@@ -355,10 +348,19 @@ export default Vue.extend({
       }
 
       // 現在のdataをnullで初期化しinitialized_dataに格納
-      var initialized_data = this.initWithNullValue(_.cloneDeep(this.$data));
+      var initialized_data = util.initWithNullValue(_.cloneDeep(this.$data));
       // initialized_dataに_dataを上書きしてdataに格納
       _data = _.defaultsDeep(_data, initialized_data);
       this.initWithData(this, _data);
+    },
+    label() {
+      // TODO: This is messy implementation. How can I override messages depend on current forest?
+      if(this.$route.params.forest == 'kumano' && this.$root.$i18n.locale == 'ja') {
+        return '採集者による推定結果';
+      }
+      else {
+        return this.$t('detail_drawer.sample.article.dna.result_of_identification');
+      }
     }
   }
 });

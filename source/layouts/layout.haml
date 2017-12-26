@@ -4,15 +4,22 @@
 - host = 'http://special.ycam.jp'
 -#
 -# TODO: 画像を変えた場合は、ここも変更
-- chache_param = 'number-for-cache-clear-20170411'
+- chache_param = 'number-for-cache-clear-20171226'
 !!!
 %html{ lang: data.lang }
   %head
     %meta{charset: "utf-8"}
     %title= data.title
+    / Google Tag Manager
+    :javascript
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-W3BHRH8');
+    / End Google Tag Manager
     %meta{name: "description", lang: "ja", content: data.description}
-    %meta{name: "keywords",    lang: "ja", content: data.keywords}
-    %meta{name: "copyright",   content: "Copyright © 2016 Yamaguchi Center for Arts and Media, All Rights Reserved."}
+    %meta{name: "copyright",   content: "Copyright © Yamaguchi Center for Arts and Media, All Rights Reserved."}
     %meta{name: "viewport",    content: "width=640"}
 
     %meta{property: "og:locale", content: "ja_JP"}
@@ -32,18 +39,20 @@
     %meta{name: "twitter:card", content: 'summary_large_image'}
     %meta{name: "twitter:url", content: "#{host}/dna-of-forests/"}
     %meta{name: "twitter:description", content: data.description}
-    %meta{name: "twitter:image", content: "#{host}/dna-of-forests/img/share.png?#{chache_param}"}
+    %meta{name: "twitter:image", content: "#{host}/dna-of-forests/img/share-#{data.lang}.png?#{chache_param}"}
 
     - if data.styles
       - data.styles.each do |file|
         = stylesheet_link_tag "#{file}"
 
+    = partial 'google_analytics'
+
+  %body{class: data['body_class']}
+    / Google Tag Manager (noscript)
+    %noscript
+      %iframe{src: "https://www.googletagmanager.com/ns.html?id=GTM-W3BHRH8", height:"0", width:"0", style:"display:none;visibility:hidden"}
+    / End Google Tag Manager (noscript)
+    = yield
     - if data.scripts
       - data.scripts.each do |file|
         = javascript_include_tag "#{file}"
-
-    = partial 'google_analytics'
-
-  %body
-    = partial 'facebook_like_button'
-    = yield

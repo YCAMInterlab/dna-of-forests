@@ -1,0 +1,120 @@
+{
+  "ja": {
+    "top": {
+      "logo": "森のDNA図鑑 YCAM Bio Research",
+      "lead": "YCAMバイオ・リサーチが開催しているワークショップ「森のDNA図鑑」では、一般の参加者とともに山口市内の森で生き物のサンプルを採集し、あたらしい図鑑の作成に取り組んでいます。参加者が観察とDNA解析の情報から生物種を推定した結果を収録しています。",
+      "index": "図鑑一覧"
+    },
+    "panorama": {
+      "backtoindex": "他の図鑑をみる",
+      "ycam": "http://www.ycam.jp/",
+      "cc": "https://creativecommons.org/licenses/by-sa/4.0/deed.ja"
+    },
+    "list": {
+      "samples": {
+        "title": "採取したサンプル",
+        "index": "No.",
+        "result": "同定結果",
+        "dna": "同定に用いたDNA配列",
+        "collection_date": "採取日"
+      },
+      "tips": {
+        "title": "森の知識"
+      }
+    },
+    "detail_drawer": {
+      "sample": {
+        "title": "採取サンプルのデータ",
+        "article": {
+          "dna": {
+            "title": "DNA解析による種の同定",
+            "photo_of_the_sample": "採取サンプルの写真",
+            "dna_sequence_to_identify": "同定に用いたDNA配列",
+            "result_of_identification": "DNA解析による同定の結果",
+            "dna_region": "DNA領域：",
+            "method": {
+              "title": "解析方法について",
+              "body": "DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。"
+            }
+          },
+          "microscope": {
+            "title": "スマホ顕微鏡による観察記録"
+          },
+          "specimen": {
+            "title": "標本写真"
+          },
+          "memo": {
+            "title": "採取メモ",
+            "sketch": "手書きメモ"
+          }
+        }
+      },
+      "tips": {
+        "title": "森の知識"
+      }
+    },
+    "dna_tab": {
+      "text": "テキスト",
+      "barcode": "バーコード"
+    }
+  },
+  "en": {
+    "top": {
+      "logo": "Field Guide “DNA of Forests” YCAM Bio Research",
+      "lead": "At the workshop conducted by YCAM Bio Research, participants are collecting living samples in the forest of Yamaguchi city to make new kind of field guide. These field guides contain the species that participants identified by using observation carried out in the field and DNA analysis.",
+      "index": "Field guides"
+    },
+    "panorama": {
+      "backtoindex": "See the other guides",
+      "ycam": "http://www.ycam.jp/en/",
+      "cc": "https://creativecommons.org/licenses/by-sa/4.0/deed.en"
+    },
+    "list": {
+      "samples": {
+        "title": "Collected samples",
+        "index": "No.",
+        "result": "Identification result",
+        "dna": "DNA sequence used for identification",
+        "collection_date": "Collection date"
+      },
+      "tips": {
+        "title": "Tips about the Forest"
+      }
+    },
+    "detail_drawer": {
+      "sample": {
+        "title": "Data of collected sample",
+        "article": {
+          "dna": {
+            "title": "Identification of species with DNA-based technology",
+            "photo_of_the_sample": "Photo of the sample in the field",
+            "dna_sequence_to_identify": "DNA sequence to identify",
+            "result_of_identification": "Result of identification",
+            "dna_region": "DNA region: ",
+            "method": {
+              "title": "Method",
+              "body": "We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."
+            }
+          },
+          "microscope": {
+            "title": "Observation with smartphone microscope"
+          },
+          "specimen": {
+            "title": "Specimen photograph"
+          },
+          "memo": {
+            "title": "Memo",
+            "sketch": "Sketch"
+          }
+        }
+      },
+      "tips": {
+        "title": "Tips about the Forest"
+      }
+    },
+    "dna_tab": {
+      "text": "text",
+      "barcode": "barcode"
+    }
+  }
+}
