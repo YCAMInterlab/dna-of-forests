@@ -188,7 +188,7 @@
       display: inline-block
       content: ''
       width: 13px
-      height: 14px
+      height: 16px // ~14px~ Fix: trimmed on iOS Safari
       @include bg2x('/dna-of-forests/img/panorama/marker-arrow', 'png', 13px, 14px)
       vertical-align: middle
     .dna_barcode

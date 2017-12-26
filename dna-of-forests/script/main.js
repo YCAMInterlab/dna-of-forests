@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 164);
+/******/ 	return __webpack_require__(__webpack_require__.s = 166);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1911,7 +1911,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(293)("./" + name);
+            __webpack_require__(294)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4611,8 +4611,8 @@ return hooks;
 
 /* WEBPACK VAR INJECTION */(function(global) {/*global window, global*/
 var util = __webpack_require__(14)
-var assert = __webpack_require__(167)
-var now = __webpack_require__(168)
+var assert = __webpack_require__(169)
+var now = __webpack_require__(170)
 
 var slice = Array.prototype.slice
 var console
@@ -15610,7 +15610,7 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(1), __webpack_require__(169).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(1), __webpack_require__(171).setImmediate))
 
 /***/ }),
 /* 4 */
@@ -15714,7 +15714,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(176)
+var listToStyles = __webpack_require__(178)
 
 /*
 type StyleObject = {
@@ -15933,7 +15933,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(299)
+      __webpack_require__(300)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( matchesSelector ) {
       return factory( window, matchesSelector );
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -16199,11 +16199,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity main
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(13),
-      __webpack_require__(156),
+      __webpack_require__(158),
       __webpack_require__(6),
-      __webpack_require__(300),
       __webpack_require__(301),
-      __webpack_require__(302)
+      __webpack_require__(302),
+      __webpack_require__(303)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( EvEmitter, getSize, utils, Cell, Slide, animatePrototype ) {
       return factory( window, EvEmitter, getSize, utils, Cell, Slide, animatePrototype );
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -34337,14 +34337,14 @@ process.umask = function() { return 0; };
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_panorama_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_52cbab82_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_panorama_vue__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_52cbab82_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_panorama_vue__ = __webpack_require__(290);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(210)
+  __webpack_require__(211)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -34395,10 +34395,10 @@ if (false) {(function () {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_238d82b8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_238d82b8_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_vue__ = __webpack_require__(280);
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -35094,7 +35094,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(165);
+exports.isBuffer = __webpack_require__(167);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -35138,7 +35138,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(166);
+exports.inherits = __webpack_require__(168);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -35236,7 +35236,7 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueResizeDirective = __webpack_require__(181);
+var _vueResizeDirective = __webpack_require__(183);
 
 var _vueResizeDirective2 = _interopRequireDefault(_vueResizeDirective);
 
@@ -35453,7 +35453,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 
 
-_vue2.default.component('lang-button-top', __webpack_require__(184).default);
+_vue2.default.component('lang-button-top', __webpack_require__(186).default);
 
 exports.default = _vue2.default.extend({
   directives: {
@@ -35647,11 +35647,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01a5bd6a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_vue__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01a5bd6a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_vue__ = __webpack_require__(191);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(187)
+  __webpack_require__(189)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -35849,10 +35849,14 @@ var _lodash = __webpack_require__(9);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _util = __webpack_require__(22);
+
+var _util2 = _interopRequireDefault(_util);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 登録
-//
+_vue2.default.component('global-nav', __webpack_require__(23).default); //
 //
 //
 //
@@ -35894,32 +35898,70 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-
-_vue2.default.component('global-nav', __webpack_require__(22).default);
 
 exports.default = _vue2.default.extend({
   data: function data() {
+
+    // Create the initial data object which has whole keys that markers have
+    var merged = {}; // All keys are merged into this object
+    _lodash2.default.each(['niho', 'kumano'], function (forest) {
+      var marker_data = __webpack_require__(29)("./" + forest + '/markers.json');
+      var markers = marker_data.knowledges.concat(marker_data.samples);
+      _lodash2.default.each(markers, function (o) {
+        _lodash2.default.merge(merged, JSON.parse(JSON.stringify(o)));
+      });
+    });
+    merged['type'] = null; // Add 'type'
+
     return {
-      markers: __webpack_require__(202)("./" + this.$route.params.forest + '/markers.json'),
-      config: _lodash2.default.merge(__webpack_require__(205), __webpack_require__(206)("./" + this.$route.params.forest + '/config.json'))
+      initial_data: _util2.default.initWithNullValue(merged),
+      markers: __webpack_require__(29)("./" + this.$route.params.forest + '/markers.json'),
+      config: _lodash2.default.merge(__webpack_require__(206), __webpack_require__(207)("./" + this.$route.params.forest + '/config.json'))
     };
   }
 });
 
 /***/ }),
 /* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  // 全valueをnullにする
+  initWithNullValue: function initWithNullValue(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        // 再帰条件
+        if (key === 'genus') {
+          obj[key] = this.initWithNullValue(obj[key]);
+        } else {
+          obj[key] = null;
+        }
+      }
+    }
+    return obj;
+  }
+};
+
+/***/ }),
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_global_nav_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_46167e8f_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_global_nav_vue__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_46167e8f_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_global_nav_vue__ = __webpack_require__(203);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(195)
+  __webpack_require__(197)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -35965,7 +36007,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35982,7 +36024,7 @@ var _vue2 = _interopRequireDefault(_vue);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 登録
-_vue2.default.component('sound-button', __webpack_require__(197).default); //
+_vue2.default.component('sound-button', __webpack_require__(199).default); //
 //
 //
 //
@@ -36120,7 +36162,7 @@ exports.default = _vue2.default.extend({
 });
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36134,11 +36176,11 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _mobileDetect = __webpack_require__(25);
+var _mobileDetect = __webpack_require__(26);
 
 var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
-var _jsCookie = __webpack_require__(27);
+var _jsCookie = __webpack_require__(28);
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
 
@@ -36236,7 +36278,7 @@ exports.default = _vue2.default.extend({
 //
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // THIS FILE IS GENERATED - DO NOT EDIT!
@@ -37230,7 +37272,7 @@ define(function () {
     if (typeof module !== 'undefined' && module.exports) {
         return function (factory) { module.exports = factory(); };
     } else if (true) {
-        return __webpack_require__(26);
+        return __webpack_require__(27);
     } else if (typeof window !== 'undefined') {
         return function (factory) { window.MobileDetect = factory(); };
     } else {
@@ -37240,7 +37282,7 @@ define(function () {
 })());
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -37249,7 +37291,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37424,7 +37466,31 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 28 */
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./kumano/markers.json": 204,
+	"./niho/markers.json": 205
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 29;
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37438,11 +37504,11 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _threeJs = __webpack_require__(212);
+var _threeJs = __webpack_require__(213);
 
 var _threeJs2 = _interopRequireDefault(_threeJs);
 
-var _jsCookie = __webpack_require__(27);
+var _jsCookie = __webpack_require__(28);
 
 var _jsCookie2 = _interopRequireDefault(_jsCookie);
 
@@ -37450,7 +37516,7 @@ var _lodash = __webpack_require__(9);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _mobileDetect = __webpack_require__(25);
+var _mobileDetect = __webpack_require__(26);
 
 var _mobileDetect2 = _interopRequireDefault(_mobileDetect);
 
@@ -37723,9 +37789,9 @@ var visibleGrid = false;
 
 exports.default = _vue2.default.extend({
   components: {
-    'dna-barcode-bg': __webpack_require__(276).default,
-    'entrance-modal': __webpack_require__(281).default,
-    'instruction-modal': __webpack_require__(285).default
+    'dna-barcode-bg': __webpack_require__(277).default,
+    'entrance-modal': __webpack_require__(282).default,
+    'instruction-modal': __webpack_require__(286).default
   },
   watch: {
     '$route': 'resetAutoScroll'
@@ -38163,7 +38229,7 @@ exports.default = _vue2.default.extend({
 });
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38233,7 +38299,7 @@ exports.default = _vue2.default.extend({
 });
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38247,7 +38313,7 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _dna_colors = __webpack_require__(31);
+var _dna_colors = __webpack_require__(33);
 
 var _dna_colors2 = _interopRequireDefault(_dna_colors);
 
@@ -38333,7 +38399,7 @@ exports.default = _vue2.default.extend({
 });
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38371,19 +38437,19 @@ exports.default = {
 };
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_list_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c51188aa_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_list_vue__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c51188aa_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_list_vue__ = __webpack_require__(295);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(290)
+  __webpack_require__(291)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -38429,7 +38495,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38443,7 +38509,7 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _striptags2 = __webpack_require__(292);
+var _striptags2 = __webpack_require__(293);
 
 var _striptags3 = _interopRequireDefault(_striptags2);
 
@@ -38662,7 +38728,7 @@ exports.default = _vue2.default.extend({
 //
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38741,7 +38807,7 @@ return af;
 
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38889,7 +38955,7 @@ return ar;
 
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38954,7 +39020,7 @@ return arDz;
 
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39019,7 +39085,7 @@ return arKw;
 
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39151,7 +39217,7 @@ return arLy;
 
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39217,7 +39283,7 @@ return arMa;
 
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39328,7 +39394,7 @@ return arSa;
 
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39393,7 +39459,7 @@ return arTn;
 
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39504,7 +39570,7 @@ return az;
 
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39644,7 +39710,7 @@ return be;
 
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39740,7 +39806,7 @@ return bg;
 
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39805,7 +39871,7 @@ return bm;
 
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39930,7 +39996,7 @@ return bn;
 
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40055,7 +40121,7 @@ return bo;
 
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40169,7 +40235,7 @@ return br;
 
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40327,7 +40393,7 @@ return bs;
 
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40421,7 +40487,7 @@ return ca;
 
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40606,7 +40672,7 @@ return cs;
 
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40675,7 +40741,7 @@ return cv;
 
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40762,7 +40828,7 @@ return cy;
 
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40828,7 +40894,7 @@ return da;
 
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40912,7 +40978,7 @@ return de;
 
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40997,7 +41063,7 @@ return deAt;
 
 
 /***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41081,7 +41147,7 @@ return deCh;
 
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41187,7 +41253,7 @@ return dv;
 
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41293,7 +41359,7 @@ return el;
 
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41366,7 +41432,7 @@ return enAu;
 
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41435,7 +41501,7 @@ return enCa;
 
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41508,7 +41574,7 @@ return enGb;
 
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41581,7 +41647,7 @@ return enIe;
 
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41654,7 +41720,7 @@ return enNz;
 
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41733,7 +41799,7 @@ return eo;
 
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41831,7 +41897,7 @@ return es;
 
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41928,7 +41994,7 @@ return esDo;
 
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42017,7 +42083,7 @@ return esUs;
 
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42104,7 +42170,7 @@ return et;
 
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42176,7 +42242,7 @@ return eu;
 
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42289,7 +42355,7 @@ return fa;
 
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42404,7 +42470,7 @@ return fi;
 
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42470,7 +42536,7 @@ return fo;
 
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42559,7 +42625,7 @@ return fr;
 
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42639,7 +42705,7 @@ return frCa;
 
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42723,7 +42789,7 @@ return frCh;
 
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42804,7 +42870,7 @@ return fy;
 
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42886,7 +42952,7 @@ return gd;
 
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42969,7 +43035,7 @@ return gl;
 
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43098,7 +43164,7 @@ return gomLatn;
 
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43228,7 +43294,7 @@ return gu;
 
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43333,7 +43399,7 @@ return he;
 
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43463,7 +43529,7 @@ return hi;
 
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43623,7 +43689,7 @@ return hr;
 
 
 /***/ }),
-/* 85 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43739,7 +43805,7 @@ return hu;
 
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43840,7 +43906,7 @@ return hyAm;
 
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43929,7 +43995,7 @@ return id;
 
 
 /***/ }),
-/* 88 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44067,7 +44133,7 @@ return is;
 
 
 /***/ }),
-/* 89 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44143,7 +44209,7 @@ return it;
 
 
 /***/ }),
-/* 90 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44229,7 +44295,7 @@ return ja;
 
 
 /***/ }),
-/* 91 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44318,7 +44384,7 @@ return jv;
 
 
 /***/ }),
-/* 92 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44413,7 +44479,7 @@ return ka;
 
 
 /***/ }),
-/* 93 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44506,7 +44572,7 @@ return kk;
 
 
 /***/ }),
-/* 94 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44570,7 +44636,7 @@ return km;
 
 
 /***/ }),
-/* 95 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44702,7 +44768,7 @@ return kn;
 
 
 /***/ }),
-/* 96 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44790,7 +44856,7 @@ return ko;
 
 
 /***/ }),
-/* 97 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44884,7 +44950,7 @@ return ky;
 
 
 /***/ }),
-/* 98 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45027,7 +45093,7 @@ return lb;
 
 
 /***/ }),
-/* 99 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45103,7 +45169,7 @@ return lo;
 
 
 /***/ }),
-/* 100 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45227,7 +45293,7 @@ return lt;
 
 
 /***/ }),
-/* 101 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45331,7 +45397,7 @@ return lv;
 
 
 /***/ }),
-/* 102 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45449,7 +45515,7 @@ return me;
 
 
 /***/ }),
-/* 103 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45519,7 +45585,7 @@ return mi;
 
 
 /***/ }),
-/* 104 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45615,7 +45681,7 @@ return mk;
 
 
 /***/ }),
-/* 105 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45702,7 +45768,7 @@ return ml;
 
 
 /***/ }),
-/* 106 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45869,7 +45935,7 @@ return mr;
 
 
 /***/ }),
-/* 107 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45957,7 +46023,7 @@ return ms;
 
 
 /***/ }),
-/* 108 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46046,7 +46112,7 @@ return msMy;
 
 
 /***/ }),
-/* 109 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46112,7 +46178,7 @@ return mt;
 
 
 /***/ }),
-/* 110 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46214,7 +46280,7 @@ return my;
 
 
 /***/ }),
-/* 111 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46283,7 +46349,7 @@ return nb;
 
 
 /***/ }),
-/* 112 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46412,7 +46478,7 @@ return ne;
 
 
 /***/ }),
-/* 113 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46506,7 +46572,7 @@ return nl;
 
 
 /***/ }),
-/* 114 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46600,7 +46666,7 @@ return nlBe;
 
 
 /***/ }),
-/* 115 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46666,7 +46732,7 @@ return nn;
 
 
 /***/ }),
-/* 116 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46796,7 +46862,7 @@ return paIn;
 
 
 /***/ }),
-/* 117 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46928,7 +46994,7 @@ return pl;
 
 
 /***/ }),
-/* 118 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46999,7 +47065,7 @@ return pt;
 
 
 /***/ }),
-/* 119 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47066,7 +47132,7 @@ return ptBr;
 
 
 /***/ }),
-/* 120 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47148,7 +47214,7 @@ return ro;
 
 
 /***/ }),
-/* 121 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47338,7 +47404,7 @@ return ru;
 
 
 /***/ }),
-/* 122 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47442,7 +47508,7 @@ return sd;
 
 
 /***/ }),
-/* 123 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47509,7 +47575,7 @@ return se;
 
 
 /***/ }),
-/* 124 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47586,7 +47652,7 @@ return si;
 
 
 /***/ }),
-/* 125 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47749,7 +47815,7 @@ return sk;
 
 
 /***/ }),
-/* 126 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -47928,7 +47994,7 @@ return sl;
 
 
 /***/ }),
-/* 127 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48004,7 +48070,7 @@ return sq;
 
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48121,7 +48187,7 @@ return sr;
 
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48238,7 +48304,7 @@ return srCyrl;
 
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48333,7 +48399,7 @@ return ss;
 
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48408,7 +48474,7 @@ return sv;
 
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48473,7 +48539,7 @@ return sw;
 
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48609,7 +48675,7 @@ return ta;
 
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48704,7 +48770,7 @@ return te;
 
 
 /***/ }),
-/* 135 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48778,7 +48844,7 @@ return tet;
 
 
 /***/ }),
-/* 136 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48851,7 +48917,7 @@ return th;
 
 
 /***/ }),
-/* 137 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -48919,7 +48985,7 @@ return tlPh;
 
 
 /***/ }),
-/* 138 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49047,7 +49113,7 @@ return tlh;
 
 
 /***/ }),
-/* 139 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49143,7 +49209,7 @@ return tr;
 
 
 /***/ }),
-/* 140 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49241,7 +49307,7 @@ return tzl;
 
 
 /***/ }),
-/* 141 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49305,7 +49371,7 @@ return tzm;
 
 
 /***/ }),
-/* 142 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49369,7 +49435,7 @@ return tzmLatn;
 
 
 /***/ }),
-/* 143 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49527,7 +49593,7 @@ return uk;
 
 
 /***/ }),
-/* 144 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49632,7 +49698,7 @@ return ur;
 
 
 /***/ }),
-/* 145 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49696,7 +49762,7 @@ return uz;
 
 
 /***/ }),
-/* 146 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49760,7 +49826,7 @@ return uzLatn;
 
 
 /***/ }),
-/* 147 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49845,7 +49911,7 @@ return vi;
 
 
 /***/ }),
-/* 148 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49919,7 +49985,7 @@ return xPseudo;
 
 
 /***/ }),
-/* 149 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -49985,7 +50051,7 @@ return yo;
 
 
 /***/ }),
-/* 150 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -50102,7 +50168,7 @@ return zhCn;
 
 
 /***/ }),
-/* 151 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -50213,7 +50279,7 @@ return zhHk;
 
 
 /***/ }),
-/* 152 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -50323,7 +50389,7 @@ return zhTw;
 
 
 /***/ }),
-/* 153 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50349,8 +50415,8 @@ exports.default = _vue2.default.extend({
   },
   // TODO 自動的に増えるようにしたい
   components: {
-    niho: __webpack_require__(296).default,
-    kumano: __webpack_require__(311).default
+    niho: __webpack_require__(297).default,
+    kumano: __webpack_require__(312).default
   }
 }); //
 //
@@ -50360,7 +50426,7 @@ exports.default = _vue2.default.extend({
 //
 
 /***/ }),
-/* 154 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50374,7 +50440,7 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _flickity = __webpack_require__(155);
+var _flickity = __webpack_require__(157);
 
 var _flickity2 = _interopRequireDefault(_flickity);
 
@@ -50641,7 +50707,7 @@ exports.default = _vue2.default.extend({
 });
 
 /***/ }),
-/* 155 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -50662,12 +50728,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(303),
-      __webpack_require__(305),
+      __webpack_require__(304),
       __webpack_require__(306),
       __webpack_require__(307),
       __webpack_require__(308),
-      __webpack_require__(309)
+      __webpack_require__(309),
+      __webpack_require__(310)
     ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -50692,7 +50758,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 156 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -50909,7 +50975,7 @@ return getSize;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 157 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -51211,7 +51277,7 @@ return Unipointer;
 
 
 /***/ }),
-/* 158 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -51229,7 +51295,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(157)
+      __webpack_require__(159)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Unipointer ) {
       return factory( window, Unipointer );
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -51331,7 +51397,7 @@ return TapListener;
 
 
 /***/ }),
-/* 159 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51345,7 +51411,7 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _flickity = __webpack_require__(155);
+var _flickity = __webpack_require__(157);
 
 var _flickity2 = _interopRequireDefault(_flickity);
 
@@ -51622,7 +51688,7 @@ exports.default = _vue2.default.extend({
 });
 
 /***/ }),
-/* 160 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51640,10 +51706,14 @@ var _lodash = __webpack_require__(9);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _util = __webpack_require__(22);
+
+var _util2 = _interopRequireDefault(_util);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 登録
-//
+_vue2.default.component('dna-tab', __webpack_require__(320).default); //
 //
 //
 //
@@ -51934,8 +52004,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-
-_vue2.default.component('dna-tab', __webpack_require__(319).default);
 
 exports.default = _vue2.default.extend({
   created: function created() {
@@ -51949,33 +52017,12 @@ exports.default = _vue2.default.extend({
   },
 
   data: function data() {
-    return this.initWithNullValue(_lodash2.default.merge(_lodash2.default.cloneDeep(this.markers.knowledges[0]), _lodash2.default.cloneDeep(this.markers.samples[0]), {
-      type: null,
-      // error could happen withhout these
-      // TODO: markers内を全部捜査して必要なkeyを確かめるようにすれば、ここでいちいち追加しなくて良い
-      specimen: null,
-      microscope: null
-    }));
+    return _lodash2.default.cloneDeep(this.initial_data);
   },
 
-  props: ['markers'],
+  props: ['markers', 'initial_data'],
 
   methods: {
-    // 全valueをnullにする
-    initWithNullValue: function initWithNullValue(obj) {
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          // 再帰条件
-          if (key === 'genus') {
-            obj[key] = this.initWithNullValue(obj[key]);
-          } else {
-            obj[key] = null;
-          }
-        }
-      }
-      return obj;
-    },
-
     // new_dataのもつプロパティを、old_dataのプロパティに代入する
     initWithData: function initWithData(old_data, new_data) {
       for (var key in new_data) {
@@ -52006,7 +52053,7 @@ exports.default = _vue2.default.extend({
       }
 
       // 現在のdataをnullで初期化しinitialized_dataに格納
-      var initialized_data = this.initWithNullValue(_lodash2.default.cloneDeep(this.$data));
+      var initialized_data = _util2.default.initWithNullValue(_lodash2.default.cloneDeep(this.$data));
       // initialized_dataに_dataを上書きしてdataに格納
       _data = _lodash2.default.defaultsDeep(_data, initialized_data);
       this.initWithData(this, _data);
@@ -52024,7 +52071,7 @@ exports.default = _vue2.default.extend({
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 161 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52038,7 +52085,7 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _dna_colors = __webpack_require__(31);
+var _dna_colors = __webpack_require__(33);
 
 var _dna_colors2 = _interopRequireDefault(_dna_colors);
 
@@ -52145,7 +52192,7 @@ exports.default = _vue2.default.extend({
 });
 
 /***/ }),
-/* 162 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52191,7 +52238,7 @@ exports.default = _vue2.default.extend({
 //
 
 /***/ }),
-/* 163 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52260,7 +52307,7 @@ exports.default = _vue2.default.extend({
 // PC,SP で画像を切替えたい場合にimgrの代わりに使用
 
 /***/ }),
-/* 164 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52270,11 +52317,11 @@ var _vue = __webpack_require__(3);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueI18n = __webpack_require__(171);
+var _vueI18n = __webpack_require__(173);
 
 var _vueI18n2 = _interopRequireDefault(_vueI18n);
 
-var _vueRouter = __webpack_require__(172);
+var _vueRouter = __webpack_require__(174);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
@@ -52282,7 +52329,7 @@ var _lodash = __webpack_require__(9);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _app = __webpack_require__(173);
+var _app = __webpack_require__(175);
 
 var _app2 = _interopRequireDefault(_app);
 
@@ -52351,31 +52398,31 @@ if (ua.indexOf('fban/fbios;fbav') != -1) {
 var router = new _vueRouter2.default({
   routes: [{
     path: '/',
-    component: __webpack_require__(178).default
+    component: __webpack_require__(180).default
   }, {
     path: '/:forest/',
-    component: __webpack_require__(192).default,
-    children: [{ path: '', component: __webpack_require__(11).default }, { path: 'panorama', component: __webpack_require__(11).default }, { path: 'panorama/:index', component: __webpack_require__(11).default }, { path: 'list', component: __webpack_require__(32).default }, { path: 'list/:index', component: __webpack_require__(32).default }, { path: 'about', component: __webpack_require__(295).default }]
+    component: __webpack_require__(194).default,
+    children: [{ path: '', component: __webpack_require__(11).default }, { path: 'panorama', component: __webpack_require__(11).default }, { path: 'panorama/:index', component: __webpack_require__(11).default }, { path: 'list', component: __webpack_require__(34).default }, { path: 'list/:index', component: __webpack_require__(34).default }, { path: 'about', component: __webpack_require__(296).default }]
   }]
 });
 
 // Registration
-_vue2.default.component('detail-drawer', __webpack_require__(316).default);
-_vue2.default.component('global-nav', __webpack_require__(22).default);
-_vue2.default.component('imgr', __webpack_require__(324).default);
-_vue2.default.component('imgr-sp', __webpack_require__(326).default);
+_vue2.default.component('detail-drawer', __webpack_require__(317).default);
+_vue2.default.component('global-nav', __webpack_require__(23).default);
+_vue2.default.component('imgr', __webpack_require__(325).default);
+_vue2.default.component('imgr-sp', __webpack_require__(327).default);
 
 new _app2.default({
   router: router,
   // TODO should load indivisual messages in each guides(guide.vue)
   i18n: new _vueI18n2.default({
     locale: document.querySelector('html').getAttribute('lang'),
-    messages: _lodash2.default.merge(__webpack_require__(330), __webpack_require__(331), __webpack_require__(332))
+    messages: _lodash2.default.merge(__webpack_require__(331), __webpack_require__(332), __webpack_require__(333))
   })
 }).$mount('#app');
 
 /***/ }),
-/* 165 */
+/* 167 */
 /***/ (function(module, exports) {
 
 module.exports = function isBuffer(arg) {
@@ -52386,7 +52433,7 @@ module.exports = function isBuffer(arg) {
 }
 
 /***/ }),
-/* 166 */
+/* 168 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -52415,7 +52462,7 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52913,7 +52960,7 @@ var objectKeys = Object.keys || function (obj) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, exports) {
 
 module.exports = now
@@ -52924,7 +52971,7 @@ function now() {
 
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -52977,13 +53024,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(170);
+__webpack_require__(172);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -53176,7 +53223,7 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(10)))
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54723,7 +54770,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1), __webpack_require__(10)))
 
 /***/ }),
-/* 172 */
+/* 174 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57355,7 +57402,7 @@ if (inBrowser && window.Vue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(10), __webpack_require__(1)))
 
 /***/ }),
-/* 173 */
+/* 175 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57363,11 +57410,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_app_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1aebcd7b_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_app_vue__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1aebcd7b_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_app_vue__ = __webpack_require__(179);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(174)
+  __webpack_require__(176)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -57413,13 +57460,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 174 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(175);
+var content = __webpack_require__(177);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -57439,7 +57486,7 @@ if(false) {
 }
 
 /***/ }),
-/* 175 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -57453,7 +57500,7 @@ exports.push([module.i, "\n.root[data-v-1aebcd7b] {\n  position: relative;\n  he
 
 
 /***/ }),
-/* 176 */
+/* 178 */
 /***/ (function(module, exports) {
 
 /**
@@ -57486,7 +57533,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 177 */
+/* 179 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57508,7 +57555,7 @@ if (false) {
 }
 
 /***/ }),
-/* 178 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57516,11 +57563,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_top_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_972d7c2a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_top_vue__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_972d7c2a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_top_vue__ = __webpack_require__(193);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(179)
+  __webpack_require__(181)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -57566,13 +57613,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(180);
+var content = __webpack_require__(182);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -57592,7 +57639,7 @@ if(false) {
 }
 
 /***/ }),
-/* 180 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -57606,14 +57653,14 @@ exports.push([module.i, "\n.lang[data-v-972d7c2a] {\n  position: absolute;\n  to
 
 
 /***/ }),
-/* 181 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
-!function(t,n){ true?module.exports=n(__webpack_require__(182),__webpack_require__(183)):"function"==typeof define&&define.amd?define(["css-element-queries/src/ResizeSensor.js","lodash.debounce"],n):"object"==typeof exports?exports.Vueresize=n(require("css-element-queries/src/ResizeSensor.js"),require("lodash.debounce")):t.Vueresize=n(t.ResizeSensor,t._)}(this,function(t,n){return function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="/",n(0)}([function(t,n,e){var r,o,u;!function(i,c){o=[t,n,e(9),e(36),e(37)],r=c,u="function"==typeof r?r.apply(n,o):r,!(void 0!==u&&(t.exports=u))}(this,function(t,n,e,r,o){"use strict";function u(t){return t&&t.__esModule?t:{default:t}}function i(t){if(!t)return l;var n=(0,c.default)(t);return n.length?Number(n[0]):l}Object.defineProperty(n,"__esModule",{value:!0});var c=u(e),f=u(r),s=u(o),a=s.default.debounce,p=void 0===a?s.default:a,l=150;n.default={inserted:function(t,n){var e=n.value,r=n.arg,o=n.modifiers,u=function(){return e(t)};switch(r){case"debounce":u=p(function(){return e(t)},i(o));break;case"throttle":var c=i(o);u=p(function(){return e(t)},c,{leading:!0,trailing:!0,maxWait:c})}(0,f.default)(t,u)}},t.exports=n.default})},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n,e){t.exports=!e(3)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(22),o=e(6);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports={default:e(10),__esModule:!0}},function(t,n,e){e(35),t.exports=e(1).Object.keys},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n,e){var r=e(5);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n,e){var r=e(8),o=e(31),u=e(30);t.exports=function(t){return function(n,e,i){var c,f=r(n),s=o(f.length),a=u(i,s);if(t&&e!=e){for(;s>a;)if(c=f[a++],c!=c)return!0}else for(;s>a;a++)if((t||a in f)&&f[a]===e)return t||a||0;return!t&&-1}}},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(5),o=e(4).document,u=r(o)&&r(o.createElement);t.exports=function(t){return u?o.createElement(t):{}}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n,e){var r=e(4),o=e(1),u=e(15),i=e(20),c="prototype",f=function(t,n,e){var s,a,p,l=t&f.F,v=t&f.G,d=t&f.S,x=t&f.P,y=t&f.B,h=t&f.W,b=v?o:o[n]||(o[n]={}),m=b[c],j=v?r:d?r[n]:(r[n]||{})[c];v&&(e=n);for(s in e)a=!l&&j&&void 0!==j[s],a&&s in b||(p=a?j[s]:e[s],b[s]=v&&"function"!=typeof j[s]?e[s]:y&&a?u(p,r):h&&j[s]==p?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[c]=t[c],n}(p):x&&"function"==typeof p?u(Function.call,p):p,x&&((b.virtual||(b.virtual={}))[s]=p,t&f.R&&m&&!m[s]&&i(m,s,p)))};f.F=1,f.G=2,f.S=4,f.P=8,f.B=16,f.W=32,f.U=64,f.R=128,t.exports=f},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(23),o=e(27);t.exports=e(2)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){t.exports=!e(2)&&!e(3)(function(){return 7!=Object.defineProperty(e(16)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(14);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(12),o=e(21),u=e(33),i=Object.defineProperty;n.f=e(2)?Object.defineProperty:function(t,n,e){if(r(t),n=u(n,!0),r(e),o)try{return i(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(19),o=e(8),u=e(13)(!1),i=e(28)("IE_PROTO");t.exports=function(t,n){var e,c=o(t),f=0,s=[];for(e in c)e!=i&&r(c,e)&&s.push(e);for(;n.length>f;)r(c,e=n[f++])&&(~u(s,e)||s.push(e));return s}},function(t,n,e){var r=e(24),o=e(17);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(18),o=e(1),u=e(3);t.exports=function(t,n){var e=(o.Object||{})[t]||Object[t],i={};i[t]=n(e),r(r.S+r.F*u(function(){e(1)}),"Object",i)}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n,e){var r=e(29)("keys"),o=e(34);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(4),o="__core-js_shared__",u=r[o]||(r[o]={});t.exports=function(t){return u[t]||(u[t]={})}},function(t,n,e){var r=e(7),o=Math.max,u=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):u(t,n)}},function(t,n,e){var r=e(7),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){var r=e(6);t.exports=function(t){return Object(r(t))}},function(t,n,e){var r=e(5);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n,e){var r=e(32),o=e(25);e(26)("keys",function(){return function(t){return o(r(t))}})},function(n,e){n.exports=t},function(t,e){t.exports=n}])});
+!function(t,n){ true?module.exports=n(__webpack_require__(184),__webpack_require__(185)):"function"==typeof define&&define.amd?define(["css-element-queries/src/ResizeSensor.js","lodash.debounce"],n):"object"==typeof exports?exports.Vueresize=n(require("css-element-queries/src/ResizeSensor.js"),require("lodash.debounce")):t.Vueresize=n(t.ResizeSensor,t._)}(this,function(t,n){return function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="/",n(0)}([function(t,n,e){var r,o,u;!function(i,c){o=[t,n,e(9),e(36),e(37)],r=c,u="function"==typeof r?r.apply(n,o):r,!(void 0!==u&&(t.exports=u))}(this,function(t,n,e,r,o){"use strict";function u(t){return t&&t.__esModule?t:{default:t}}function i(t){if(!t)return l;var n=(0,c.default)(t);return n.length?Number(n[0]):l}Object.defineProperty(n,"__esModule",{value:!0});var c=u(e),f=u(r),s=u(o),a=s.default.debounce,p=void 0===a?s.default:a,l=150;n.default={inserted:function(t,n){var e=n.value,r=n.arg,o=n.modifiers,u=function(){return e(t)};switch(r){case"debounce":u=p(function(){return e(t)},i(o));break;case"throttle":var c=i(o);u=p(function(){return e(t)},c,{leading:!0,trailing:!0,maxWait:c})}(0,f.default)(t,u)}},t.exports=n.default})},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n,e){t.exports=!e(3)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(22),o=e(6);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports={default:e(10),__esModule:!0}},function(t,n,e){e(35),t.exports=e(1).Object.keys},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n,e){var r=e(5);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n,e){var r=e(8),o=e(31),u=e(30);t.exports=function(t){return function(n,e,i){var c,f=r(n),s=o(f.length),a=u(i,s);if(t&&e!=e){for(;s>a;)if(c=f[a++],c!=c)return!0}else for(;s>a;a++)if((t||a in f)&&f[a]===e)return t||a||0;return!t&&-1}}},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(5),o=e(4).document,u=r(o)&&r(o.createElement);t.exports=function(t){return u?o.createElement(t):{}}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n,e){var r=e(4),o=e(1),u=e(15),i=e(20),c="prototype",f=function(t,n,e){var s,a,p,l=t&f.F,v=t&f.G,d=t&f.S,x=t&f.P,y=t&f.B,h=t&f.W,b=v?o:o[n]||(o[n]={}),m=b[c],j=v?r:d?r[n]:(r[n]||{})[c];v&&(e=n);for(s in e)a=!l&&j&&void 0!==j[s],a&&s in b||(p=a?j[s]:e[s],b[s]=v&&"function"!=typeof j[s]?e[s]:y&&a?u(p,r):h&&j[s]==p?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[c]=t[c],n}(p):x&&"function"==typeof p?u(Function.call,p):p,x&&((b.virtual||(b.virtual={}))[s]=p,t&f.R&&m&&!m[s]&&i(m,s,p)))};f.F=1,f.G=2,f.S=4,f.P=8,f.B=16,f.W=32,f.U=64,f.R=128,t.exports=f},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(23),o=e(27);t.exports=e(2)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){t.exports=!e(2)&&!e(3)(function(){return 7!=Object.defineProperty(e(16)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(14);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(12),o=e(21),u=e(33),i=Object.defineProperty;n.f=e(2)?Object.defineProperty:function(t,n,e){if(r(t),n=u(n,!0),r(e),o)try{return i(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(19),o=e(8),u=e(13)(!1),i=e(28)("IE_PROTO");t.exports=function(t,n){var e,c=o(t),f=0,s=[];for(e in c)e!=i&&r(c,e)&&s.push(e);for(;n.length>f;)r(c,e=n[f++])&&(~u(s,e)||s.push(e));return s}},function(t,n,e){var r=e(24),o=e(17);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(18),o=e(1),u=e(3);t.exports=function(t,n){var e=(o.Object||{})[t]||Object[t],i={};i[t]=n(e),r(r.S+r.F*u(function(){e(1)}),"Object",i)}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n,e){var r=e(29)("keys"),o=e(34);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(4),o="__core-js_shared__",u=r[o]||(r[o]={});t.exports=function(t){return u[t]||(u[t]={})}},function(t,n,e){var r=e(7),o=Math.max,u=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):u(t,n)}},function(t,n,e){var r=e(7),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){var r=e(6);t.exports=function(t){return Object(r(t))}},function(t,n,e){var r=e(5);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n,e){var r=e(32),o=e(25);e(26)("keys",function(){return function(t){return o(r(t))}})},function(n,e){n.exports=t},function(t,e){t.exports=n}])});
 //# sourceMappingURL=Vueresize.js.map
 
 /***/ }),
-/* 182 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -57850,7 +57897,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -58234,7 +58281,7 @@ module.exports = debounce;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58242,11 +58289,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_lang_button_top_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cac6fc5a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_top_vue__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_cac6fc5a_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_lang_button_top_vue__ = __webpack_require__(192);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(185)
+  __webpack_require__(187)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -58292,13 +58339,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 185 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(186);
+var content = __webpack_require__(188);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58318,7 +58365,7 @@ if(false) {
 }
 
 /***/ }),
-/* 186 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -58332,13 +58379,13 @@ exports.push([module.i, "\n.buttons a[data-v-cac6fc5a] {\n  display: block;\n  f
 
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(188);
+var content = __webpack_require__(190);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58358,7 +58405,7 @@ if(false) {
 }
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -58372,7 +58419,7 @@ exports.push([module.i, "\n.buttons a[data-v-01a5bd6a] {\n  display: block;\n  f
 
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58404,7 +58451,7 @@ if (false) {
 }
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58436,7 +58483,7 @@ if (false) {
 }
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58661,7 +58708,7 @@ if (false) {
 }
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58669,11 +58716,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_guide_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0fb86892_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_guide_vue__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0fb86892_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_guide_vue__ = __webpack_require__(210);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(193)
+  __webpack_require__(195)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -58719,13 +58766,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(194);
+var content = __webpack_require__(196);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58745,7 +58792,7 @@ if(false) {
 }
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -58759,13 +58806,13 @@ exports.push([module.i, "\n.root[data-v-0fb86892] {\n  position: relative;\n  he
 
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(196);
+var content = __webpack_require__(198);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58785,7 +58832,7 @@ if(false) {
 }
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -58799,19 +58846,19 @@ exports.push([module.i, "\nnav[data-v-46167e8f] {\n  position: relative;\n  back
 
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_sound_button_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_02555546_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_sound_button_vue__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_02555546_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_sound_button_vue__ = __webpack_require__(202);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(198)
+  __webpack_require__(200)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -58857,13 +58904,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(199);
+var content = __webpack_require__(201);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58883,7 +58930,7 @@ if(false) {
 }
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -58897,7 +58944,7 @@ exports.push([module.i, "\na > div[data-v-02555546] {\n  height: 100%;\n  backgr
 
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58931,7 +58978,7 @@ if (false) {
 }
 
 /***/ }),
-/* 201 */
+/* 203 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58981,54 +59028,30 @@ if (false) {
 }
 
 /***/ }),
-/* 202 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./kumano/markers.json": 203,
-	"./niho/markers.json": 204
-};
-function webpackContext(req) {
-	return __webpack_require__(webpackContextResolve(req));
-};
-function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) // check for number or string
-		throw new Error("Cannot find module '" + req + "'.");
-	return id;
-};
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 202;
-
-/***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports) {
 
 module.exports = {"samples":[{"id":"A","genus":{"ja":"オオイタチシダ","en":"Dryopteris pacifica"},"dna_sequences":[{"region":"rbcL","text":"NTNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNAGNAANNNTNACNCCCCCGAATACAAGACCAAAGATACCGATATCTTAGCAGCCTTTAGAATGACCCCACAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCGGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCTTTGGATCTATTCGAAGAAGGTTCTGTCACCAACTCGTTCACCTCTATTGTAGGTAATGTCTTTGGATTTAAGGCTCTACGCGCTTTACGCTTGGAAGACCTTCGAATTCCCCCCGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGTCTGTCTGCTAAGAATTATGGTAGAGCCGTCTACGAATGCCTCCGNGNNTTTTTTTTTNNNNNAAAAAAAAANNNNNNNNNNNNNNNNNNNNNTTTTNNNTNNNNTTTNNNCCNTTTTNNNNNTNNNTNNNNNNNNNGNCNNTNCNNTNNNNNTTTTNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTCTNNNNNNCNNNNNNNNNNNNNNNNNCNNTTNNNNCCNNNNNNCTTTTCNNNNCNNNNNNNNTTAANNNAATTTTNNTANNNNACCNTTNCTTCNANTANATCCNANNNAATAANCNTACATACCNNNNTATACTNNTTTTCCTCCCCNNNNANCNNNTTNCNNTTTCNNANNCANCNNCCCNTNNNAANNNTNCAAAACNNNTCAACCCNATCTTTNCNNTACNNTNNNCCNANNNACCCNTNNAAGAATTCCNNACCTNCCNNANCCTCCNGGCTTCCTCNNCNNNNTACTCCNNNTTTTNGGGNTCATTNTAANGGCTGCTAAA"}],"marker_position":{"latitude":-5,"longtitude":252,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"シダ系、背が低い、硬い、小さい葉がたくさんある、うらに胞子、他の葉に比べて","なんの植物だと思いますか？":"ワラビ","採集者ID":"Whatab"},"specimen":true,"memofig_width":"200px"},{"id":"B","genus":{"ja":"ヤツデ","en":"Fatsia japonica"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNNNNTNNNNNNNNNTACTTTATTCGATACAAACTCTTTTTTTGTGAGGATCCACTATGATAATGAGAAAGATTTCTGCATATACGCCCAAATCGGTCAATAATATCAGAATCTGATAAATCGGTCCAAACCGCCTTACTAATAGGATGCCCCAATACGTTACAAAATTTCGCTTTAGCCAATGATCCAATCAGAGGAATAATTGGAACAATAGTATCGAACTTATTAATAGCATTATCAATTAGAAATGAATTTTCTAGCATTTGACCGCGTACCATTGAAGGGTTTAGCCGCGCACTTGATAGATAGCCCAGAAGGTCGAGGGAATGATTGTATAATTGGTTTATACAGATCCTTCCCGGTTGAGACCACAGGTAAAAATGACATTGCCATAAATTAACAAAGTAATATGTCCATTTTTTCATCAAAAAGGGCGTCCCTTTTGAAGCGAGAATTGATTTTCCTTGATACCTAACATAATGCATGAAAGGATCCTTCAACAACAATAGATTGACTTGAAAAGCCTTAACAAAGACTTTTACAAGATATTTTATTTTTCCATAGAAATATATTCGTTCAAGAAGGGTTCCAGAAGATGTTGAGCGTAAATGAGAAGATTGGTTACGGAGAAAGATGAAGATGGATTCGTATTCACATAGATGAGAATTATATAGGAAGAAGAATAGTCTTTGATTTCTTTTTGAAAAAGAAGAACCGGCTTTATTTGGAGTATTCCAATTACAATACTCGTGGAGAAAGAATCGTAATAAATGCAAAGAAGAAGCATCTTTTACCCAGTAGCGAAGAGTTGAACA"},{"region":"rbcL","text":"NNNNNNNNNNNNNNANNNATACTCCTGACTATGAAACCAAAGATACTGACATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACGGAATCGAGCCCGTTGCTGGAGACGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATCTGCGAATCCCTGTTGCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTCCGTGGTGNATNNNATTTTTACANNA"}],"marker_position":{"latitude":-11.5,"longtitude":225,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"主脈が８本（8.3本？）","なんの植物だと思いますか？":"ヤツデ科","採集者ID":"8.3hand"},"specimen":true,"memofig_width":"316px"},{"id":"C","genus":{"ja":"テイカカズラ","en":"Trachelospermum asiaticum"},"label_shadow":true,"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNANTNNTGNCTNATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGCGGTGNATNNGATTTTACANNAN"}],"marker_position":{"latitude":-8,"longtitude":243,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"木の幹に巻きついている<br>地面から生えている<br>葉は濃い緑、葉は厚め<br>木の幹に多く巻きついていているが地面からも生えている<br>幹もしっかりしている<br>同じ木で３mくらいの高さまで生えているものもある<br>高いところまで生えているものは葉が大きい同じものか？","なんの植物だと思いますか？":"ツタ","採集者ID":"kytsuta"},"specimen":true,"memofig_width":"200px"},{"id":"D","genus":{"ja":"クロバイ","en":"Symplocos prunifolia"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNAANNNNNTTTTTTTTGAGGATCCACTATGATAATGAGAAAGATTTCTATATATACGCCCGAATCGGTCAATAATATCAGAATCTGATAAATCGGCCCAGACTGGCTTACTAATGGGATATCCTAACACGTTACAAAATTTCGCTTTAGACAATGATCCGATCAGAGGAATAATTGGAACTAGGGTATCGAACTTTTTAATAGCATTTCCTATTAGAAATGCGTTTTCTAGCAGTTGACTCCGTACCATTGAAGGGTTTAGTCGCACACTTGAAAGATAGCCCAGAAAGTCGAGGGAATGATTGGATAATTGGTTTATATGGATCCTTCCTGGTTGAGACCACATGTAAAAATAACATTGCCATAAATTGACAAAGTAATATTTCCATTTCTTCATCAAAATAAACGTCCCTTTTGAAACCAAAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATCCTTGAACAACCATAGAATGGCCCGAAAATCCTTAGTAAATACTTCTACAAAATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAAAATTCCAGAAGATATTAATCGTAAATGAGAAGATTGGTTGCGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAGGAACAAGAATAATCTTTGATTTTTTTTTGAAAAAGAAAAAGTAGATTTCTTTGGAGTAATAAGACTATTCCNATTACGATACTCGTGGAGAAAGAATCGTANNANNTGCAAAGAAAGGGCANNNTTTACCAGCAGCGAANNTNNNNNNNNNNNNNNANGGGGGANTGTGTGANNNAGNNNNNNNNNGNNNNNNNNNNNNNNNNNTGTGTGAAAAAAAAAAANNNNNNNNACACAG"},{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNANNANNNNNATTNAANACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAAGTCCTCAACCCGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCCACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACGACATCGAGCCCGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAATATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTAGAAGATCTGCGAATCCCTCCGGCGTATACTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGGGATAAATTGAACAAGTATGGCCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTAGGGTTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTCCGCGNNNNNNNNNNNTTTNNNAAAAAAAAANNNNN"}],"marker_position":{"latitude":-12,"longtitude":238.5,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"葉の縦横比は55:2くらい、表側はテラテラ。ふちのギザギザは若い葉ほどゆるい。葉の長さ約55mm（目測）","採集者ID":"talikng-saw"},"specimen":true},{"id":"E","genus":{"ja":"ウメノキゴケ","en":"Parmotrema tinctorum"},"label_shadow":true,"dna_sequences":[{"region":"ITS1","text":"GGAGGTANTTACTGANNGAGGGNCNNCGCNNNCCCGGGGGTCTCGGCCCCCAACTCTNNACCCTGTGTGTACCTACCTTTGTTGCTTTGGCGGGCCTCGGGGGTCTCCCTCCGCGTCNNCTTTCGGGTCGATGAGCGTCCGTCAGAGGCCCATTTACATTNNGTTTATCAGTGTNNNCCGAGTACAAAATGAATAAATAAAAACTTTCAACAANNNATCTCTTGGTTCNNNNNNNATGNNAAACGNNNNNNATNNNNNNNGGAANNANNNCTGCCATATGANGGTNANNNNGNNNGTGNTNNNNNGNGNATCNNGGGNCGTTCTNNNTNNNNNTNNTNNNNCGAGNNTGACTGNNNNTGCGACCGNNNNNNTNGTANNCGANNTNNNNNNCTGANNTTTNNNNNNNNCCNTTTCTTTCTTTCTTNNANCTTTTNANTTTTTGGTGNNCNTCTGTGNNGNNNNANNNAGNNNCGNNNNATTNTCANANTGGNNNNNNACCANNCGNNNNNNNACATGATTNNNACNNNNTNCGTNNGNGNAGNNNNCATCACTTGCTGGTGANNNATGTGGNNCAGNNNGAATNNNNNNNNNNNCTCGCCTGNNNNNTNTNNNTNGGGGANNNNGCATAGTTTGCTCATCTCANNNANGNNNNATGNCTNNGGAAAAATATNTTNNNNNNNNNCCAGTNNNTTNANNCTNNCAATCGATATTNNTNNNNCNCNATCCANCCCNTGNTNGCACGCANNNCTNNNNNNNNNNNAAACGGAATCCGGGGCCTTTGAGAANNTNCCCNNNNNNNTNCCCNNNNNNNNNCNNNGNNNTCNNNNNNNNNNNNNTCCTCNANTCACTGCATATNGCANNNNNNTNNNCNAANNACTGTTGCCNCAATGT"}],"marker_position":{"latitude":-6,"longtitude":41.3,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"群生している、平べったい","なんの植物だと思いますか？":"カビゴケ","採集者ID":"exigua.seaslug"},"specimen":true,"memofig_width":"179px"},{"id":"F","genus":{"ja":"モミ","en":"Abies firma"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNANNNNNNNGTTANNATTACAGNATTAACTTATTATACTCCTGNANTATCAGACCAAAGATACGGATATCTTGGCGGCATTCCGAGTAACTCCTCAACCTGGGGTGCCGCCCGAGGAAGCGGGAGCAGCAGTAGCTGCTGAATCTTCCACCGGTACATGGACCACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTACAAAGGGCGATGCTATGACATCGAGCCCGTTGCTGGAGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCCTTAGACCTTTTCGAAGAAGGTTCTGTTACTAACTTGTTCACTTCCATTGTAGGTAATGTATTTGGATTCAAGGCCCTACGGGCTTTACGTTTGGAAGATTTGCGGATTCCCCCTGCTTATTCCAAAACTTTTCAAGGTCCACCTCATGGTATCCAAGTTGAAAGAGATAAATTGAACAAATATGGCCGTCCTTTGTTGGGATGTACTATCAAACCAAAATTGGGTCTATCGGCTAAGAACTATGGTAGAGCAGTTTACGAATGTCTTCGTGGTGNNNNNNATTTTTTACNNANN"}],"marker_position":{"latitude":-2,"longtitude":32,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"大木、こい緑、におい-緑茶風、葉はかたくトゲ状、針葉樹、葉は小さなササ状のあつまり","なんの植物だと思いますか？":"カヤ？","採集者ID":"ANAKUMAMORI"},"specimen":true},{"id":"G","genus":{"ja":"シュロ","en":"Trachycarpus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNTTGACTTATTATACTCCTGACTACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCACCTGAGGAAGCAGGGGCAGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAAACCGTTGTCGGGGAGGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGTCTGGAGGATCTGCGAATTCCCACTTCTTATTCCAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAAAGAGATAAGTTGAACAAGTATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCGGTTTATGAATGTCTACGCGGTGGATAAAA"}],"marker_position":{"latitude":-9.5,"longtitude":70,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"葉がかたくて下の茎が竹","なんの植物だと思いますか？":"シロ","採集者ID":"TOiAPROTZWNLB"},"specimen":true,"memofig_width":"301px"},{"id":"I","genus":{"ja":"タラヨウ","en":"Ilex Iatifolia"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNCTCNATACAAACTCTTTTTTTTTGAGGATCCGCTATGATAATGAAAAAGATTTCTGTATATACGCCCAAATCGATCAATAATATCAGAATCTGATAAATCGGCCCGAACCGGCTTACTAATAGGATGCCCTAATCCGTTACAAAATTTCGCTTTCGCCAACGATCCAATCAGAGGAATAATTGGAACACTGATATCGAACTTCTTAATAGCATTATCGATTAGAAATGCATTTTCTAGCATTTGATTCCGTACCATTAAAGGATTTAGTCGCACACTTGAAAAATAGCCCATAAAGTCAAGATAATAATTGGAAAATTGGTTTATATGGATTCTTCCTGGTTGAGACCACAGGTAAAAATAACATTGCCAGAAATTGACAAGGTAATGTTTCCATTTATTCATCAAAAGAGACGTCCCTTTTGAAGCCAGAATTGATTTTTCTTGATACCTAACATAATGTATGAAAGGATCCTTGAACAACCATAGGTTGACCTGAAAAGCCTTAGCAAAGACTTCTACAAGATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAGAACTCCAGAAGATGTTGATCGTAAATGAGAAGATTGATTACGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAAGAAGAAAAAGAATCTTTGATTTCTTTTTGAAAAAGAAGAACCGGGTTTCTGTGAAGTAATAAGACTATTCCAATTACGATCCTCGTAGAGAAAGAATCGTAATAATGCAAAGAAGAAGTATCTTTTACNNGTAACGAAGNNTGAACNNNAAAANNNNNGGGGGNNTGTGNNNAAAAAAAAAAAAAAAAAAAANTAANNNCTNGTGTGGATTAAAAAANNNTTNTTNCTCAG"},{"region":"rbcL","text":"NNNNNNNNNNNNNNNNNCTGGTGTTNNNATTACAAATTGAATTATTATACTCCTGACTATGTCACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGGTGGACTTNGATTTNNN"}],"marker_position":{"latitude":-28,"longtitude":142,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"少しギザギザ<br>表面ツルツル<br>根っこ、くさっている","採集者ID":"From GOEMON"},"specimen":true,"memofig_width":"311px"},{"id":"J","genus":{"ja":"チャノキ","en":"Camellia sinensis"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNATATATTTTATTCTATACAANCTCGTTTTTTTTGAGGATCCGCTATGATAATGAGAAAGATTTCTATATATACGCCCGAATCGGTCAATAATATCAGAATCTGATAAATCGGCCCAGACTGGTTTACTAATGGGATGTCCTAACACGTTACAAAATTTCGCTTTAGACAATGATCCAATCATAGGAATAATAGGAACTATGGTATCGAACCTCTTAATAGCATTACCTATTAGAAATGAATTTTCTAGCATTTGACTCCGTACCATTGAAGGGTTTAGTCGCACACTTGAAAGATAGCCCAGAAAGTCTGGGGAATGCTTAGATAATTGGTTTATATGGATCCTTCCTGGTTGAGACCACATGTAAAAATAACATTGCCAGAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGAGACGTACCTTTTGAAGCCAAAATGTATTTTCCTTGATACCTAACATAATGAATAAAAGGATCCTTGAACAACCACAGAATGACCTGAAAATCCTTAGTAAAGACTTCTAACAAATGNNCTANNTTTCCATAGANNNNNCTTCGTTCGAGAAANNNNNNNNANNNNATTGATCGGATNNGAGAAGATTGCTTNNNNNNNNNNNCGAAGATAGATTCGTATTNNNATNNNNGNNCATNNNATAGAAACAAGACTNNNNNNAGNTTTNCATTTNTNNTNNATTNNGAGNNNTNGGCGGAGTTNNAAGAAAATTNNTTTNNNATTACAATGCGNCNNTAACNANNNNNNNNNNNNNNAAAAANNCATTATCCTNACCTTNNGCTAGAAAAAAAAAAAAAANNNACGCNNTNNNNAAAAAAAAAAAAAANCCCNNNNNNTGNAATTNANNCGATTCTTCCCCNNNNNNNNGGAATTGGAATAGTCTTANNNNCNANGGAATCNNNTTTNNTTTNCAAANNAATCANNNNTNTNNTGTNNNNNNAATTNCAATATGNAACCAATCNTTNCG"},{"region":"rbcL","text":"NNNNNANNNNATANNNGATANNTTGGCAGCATTCCGAGTAACTCCGCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCGTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTACTGCGTATGTTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGAAGAGCAGTTTATGAATGTNNNNNCGNNNNNNNNNNTTTTTNNNNNNNAAA"}],"marker_position":{"latitude":-25,"longtitude":200,"radius":50},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"大きさ、約10cm×4cm<br>大きなお茶の葉のような形<br>表面がぼこぼこ<br>表面には光沢<br>小さなギザギザあり<br>林がきれた陽の当たるところ<br>白いつぼみあり","なんの植物だと思いますか？":"ヤブチャ","採集者ID":"YABUCHAYA"},"specimen":true,"memofig_width":"330px"},{"id":"K","genus":{"ja":"モチノキ属","en":"Ilex"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNTTTTTTTTNGAGGANCCGCTATGATAATGAAAAAGATTTCTGTATATACGCCCAAATCGATCAATAATATCAGAATCTGATAAATCGGCCCGAACCGGCTTACTAATGGGATGCCCTAATCCGTTACAAAATTTCGCTTTCGCCAACGATCCAATCAGAGGAATAATTGGAACACTGATATCGAACTTCTTAATAGCATTATCGATTAGAAATGCATTTTCTAGCATTTGATTCCGTACCATTAAAGGATTTAGTCGCACACTTGAAAAATAGCCCATAAAGTCAAGATAATAATTGGAAAATTGGTTTATATGGATTCTTCCTGGTTGAGACCACAGGTAAAAATAACATTGCCAGAAATTGACAAGGTAATGTTTCCATTTATTCATCAAAAGAGACGTCCCTTTTGAAGCCAGAATTGATTTTTCTTGATACCTAACATAATGTATGAAAGGATCCTTGAACAACCATAGGTTGACCTGAAAAGCCTTAGCAAAGACTTCTACAAGATATTCTATTTTTCCATAGAAATATATTCGTTCAAGAAGAACTCCAGAAGATGTTGATCGTAAATGAGAAGATTGATTACGGAGAAAAACGAAGATAGATTCGTATTCACATACATGAGAATTATATAAGAATAAAAAGAATCTTTGATTTCTTTTTGAAAAAGAAAAACCGGGTTTCTGTGAAGTAATAAGACTATTCCAATTACGATCCTCGTAGAGAAAGAATCGTAATAANTGCAAAGAAGAAGTATCTTTTACCNNTAACGAAAATNGACATGCGGGGGGGGGGGGG"},{"region":"rbcL","text":"NNNNNNNNATNGNNACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTGACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGNNNNNNNNANNNTNTNNNNNNANAAAAAN"}],"marker_position":{"latitude":-19,"longtitude":193,"radius":150},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"みどり色（くさ色）<br>普通の草のにおい<br>さらっとしている（さわり心地）","なんの植物だと思いますか？":"くさ","採集者ID":"SYOKONISETIQTS"},"specimen":true,"memofig_width":"300px"},{"id":"L","genus":{"ja":"コモチイトゴケ","en":"Pylaisiadelpha tenuitostris"},"dna_sequences":[{"region":"rbcL","text":"TNNNNNNNNNNNNNCNNNCAACCATGGANTACCCGCTGNAAGAGGCAGGAGCTGCAGTAGCTGCTGAATCCTCCACCGGTACATGGACCACTGTTTGGACCGATGGGCTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCCTGAAGCAGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACCTCTATTGTTGGTAATGTTTTTGGATTCAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGTCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTGGGTTTATCCGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTG"}],"marker_position":{"latitude":-12,"longtitude":212,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"ぬれている<br>よくみるとギザギザのある小さな葉。それのかたまりとして全体になっている！<br>さわると、うぶ毛みたいにせんさいなタッチだった","採集者ID":"MOSYAMAGUCHI"},"specimen":true},{"id":"M","genus":{"ja":"スゲ属","en":"Carex"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNNNNNNNNAATACTTGNGTAGATACAANTGTCTCTTTTGAGAAGATCCNNTATAAAAATGAAAAAGATTTTTATATATTCGACCAAATCGACTAATANTATNATAATCTGATAAATCTGTCCAGATTGGCTTACTAGTAGGTTGTCCTACTACAGTACAAAGTGAAGCTTTAGACAATGATTTAATGAGAGGAAGGACTGGAACTAAAGTATCAAATCTCTTAATAAGAGTATCTATTAATATAGAATCCTCTAGTATTTGACTCCTTACCACCAAGTAATTTATTTTGACACTTATAAAATAACCGATAAAGTAGAACGAATAATAAGAGAATTGGTTTCTATGAAACCTATTAGGCTCAGACCAAAAATGAAAATAATATTGCCAAAAATAGACAAGGTAAGATTTCAATTTCTTAATAAAAAGATCAGCCCCTTTTGATGCTAGAATAGCTTTACCTTGATATCGAAGATAGTGCATGAGAGGATCTGTGAAGATCCATAAAGTTTTCTTCAAAAAAACATGATGCACTATTCTAAAATGTTCTATTTTTCCATAGAAGTAAATTCTTTCAAGAAAGCTTCTAAAAGATCTTAATCGTAAACAAGAAGATTTTTTACGAAAAAACAGGAATAAAAACTCATATTCTGATACATAAGAATTGTATAAGAAACGAGAGAGTCTTATATTTTCTTTTGAGAATATAGAAACCGATTTCTTTAAAGTAATGATACTATTCGAATTAGAATTATCGAAGAGAAAAAATCGCAATAAATGCAAAGAAGAAATATCTTGGATCCAGCATTGAAGGATTTGAACCAAGAT"},{"region":"rbcL","text":"NNNNNNNNATNGNNACCAAAGATACTGATATCTTGGCAGCATTCCGAGTATCTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTGTGGACTGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCAAATCGAGCCCGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCATTAGATCTTTTTGAAGAAGGTTCTGTTACTAATATGTTGACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGTGCTCTACGTCTGGAAGATTTGCGAATCCCTCCTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCGAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTACGCGNNNNNNNNANNNTNTNNNNNNANAAAAAN"}],"marker_position":{"latitude":-28,"longtitude":131,"radius":200},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"根元ではが別れている。葉が他の植物と比べて極めて細い。にニオイは特に他と変わらない。裏はツルツルしているが、表は裏と比べてザラつきがある。<br>生息地：しゃ面","採集者ID":"higenosou satou"},"specimen":true},{"id":"N","genus":{"ja":"ヒサカキ","en":"Eurya japonica"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNTNNNNNNNANNNNNNNNNNNACAAATTGACTATATTATACTCCTGACTATGAAACCAAAGCGACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGTCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTGACTTCTATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTCCTGCGTATACTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTCCGCGGTGNATNNNNATTTTACANNNAN"}],"marker_position":{"latitude":-27,"longtitude":126,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"葉がギザギザしていて硬い。<br>裏側の色が濃く、裏側は薄い。<br>斜面に生えている。<br>葉はツバキっぽい","採集者ID":"0826nCm2"},"specimen":true},{"id":"O","genus":{"ja":"サカキ","en":"Cleyera japonica"},"label_shadow":true,"dna_sequences":[{"region":"rbcL","text":"ANNNNNNNNNNNNNNNNNNNNNNNNNNANNTACTAATTGACTTANTATCCTCCTGACTATGAAACCGATGCGAGAGATATTGGGAANACTGNAAGTNTCTCCCNNCCNGNANAATATCATNATAAGCTNGNNNNGNNNACACAGCGGACTCCTGGGAGGCTATCCNACCACTCGAGATTTCNNTGGNTCNTACAANNNNCGNNNNGAGGAATGGTGGACTTCNTCNAANTTCCTTTTTACGGTAACTAATAATAATGCATTTTCTTTCTATTGATTCCCTACCAATAATTGGANNAGNCAGNNCTTGATTNTGTCNNATAANGTCGAGANNATGGATGGANNNNTGNNTTGTATGAATTCTTCCCGGTNGAGACCACACGTNAAAACATCNTGGCCTTACATTGACTTGGCAAGGTTTCCCCTTTTTCTCTTCANAGACGTCCCTTTTGTGCCGAAATTGATTTGTCTTGTTCTNGAAAGCAATGTAAGAGCGGATCNGGGTNCTTGATCTGTTGACCTGGGAGCCNTATTCATGACTGCNTCCNGATAGTCNATTTTTTCNTANAAATAAANTCTTTCNNCNNNAACTCCNANNANGTNGATANNTATGCGTANATTNGATTGCNGANANGCNCGAANNANNTTCATATTCNNCTACNTGANAANTATNAAAANTAAAAANNAACNTNNATATTCTTTTTGTATNTNTATNTGCCGGNTTNCTGTGAAGTTANNNTANTNTTCCNANTACTATTCC"}],"marker_position":{"latitude":-15,"longtitude":101,"radius":100},"collection_date":"2017.10.8","memo":{"形、色、におい、におい、さわりごごち、など":"木の幹がなめらか、赤っぽい大きな木の下、葉がツルツル、においはない","採集者ID":"kumano20171008"},"note":{"ja":"※ 本サンプルに関しては、バイオインフォマティクスを用いた方法（採取したサンプルのDNA配列を用いたデータベース上での検索）では相同性の高い種を見つけられなかったため、植物の特徴や形状の観察による推定結果を掲載しています。","en":"Note: For this sample (No.14), the result of identification shows the candidate species that participants identified by using observation of the shape, not using bioinformatics, because we could not find the high homology sequence with that of this sample on database."},"specimen":true}],"knowledges":[{"title":{"ja":"トンボ","en":"Dragonflies"},"description":{"ja":"細長い翅と腹をもつトンボ目の昆虫。トンボの多くは秋に産卵し、冬を幼虫（ヤゴ）で越し、春に羽化します。幼虫（ヤゴ）は水中で生活するため、山を飛んでいるトンボも産卵は近くの田んぼで行います。山口市熊野町の辺りでは、山裾や川の近くでモノサシトンボ、山の中でマユタテアカネなどをよく見かけることができます。","en":"Dragonflies are Odonata insects that have long slender wings and abdomen. Most of them lay egges in autumn, and emerge as an adult after spending a winter as a larva. Dragonflies inhabiting in mountains travel to rice fields nearby when laying eggs, since larvae live underwater. In Kumano of Yamaguchi city, you can find Copera annulata at the foot of the mountains and near rivers, as well as Sympetrum eroticum in the mountains."},"marker_position":{"latitude":-18,"longtitude":158,"radius":100}},{"title":{"ja":"境内の穴","en":"Holes on the shrine grounds"},"description":{"ja":"神社に至る石段のすきまや、境内の至るところで見つかる穴の多くは、土壌中で生活している動物の地下トンネルへの入り口です。直径5cmくらいの大きな穴からはモグラやアカネズミなど、小さな穴からは昆虫、特にアリやハチが出入りしているようです。羽化するために地中から出たセミの幼虫が残した穴もあります。その他、熊野の森の竹やぶ近くではタケノコが掘られた後の穴も多く見つかります。","en":"Gaps between the shrine’s stone steps and many holes found within the precinct are the entrance to the underground tunnels for animals that inhabit beneath the ground. Animals such as moles and large Japanese field mice are using bigger holes that are approximately 5 cm in diameter, and insects such as ants and bees are going through smaller holes. There are also holes left by cicada nymphs that have emerged from the ground. In addition, around the bamboo grove in the Kumano forest, you can also find lots of holes which people dug out to get bamboo shoots."},"marker_position":{"latitude":-14,"longtitude":23,"radius":100}},{"title":{"ja":"キツネ","en":"Foxes"},"description":{"ja":"日本に自然分布していて最も身近なのは、ネコ目イヌ科キツネ属のアカギツネです。国道9号線以北の山が続くところで生活しており、時折、人家の近くにも姿をあらわします。食性は雑食で、ノネズミやノウサギなどを捕食したり、アケビや柿などの果物を食べたりして生活しています。","en":"Red fox, or Vulpes vulpes (Carnivora, Canidae, Vulpes), is the most familiarized animal that have distributed naturally in Japan. They inhabit the mountains that continue in the north of National Road Route 9, and occassionally show up near people’s houses. They are omnivores, preying on animals such as wild mice and wild rabbits, as well as feeding on fruits such as akebi and persimmons."},"marker_position":{"latitude":-2,"longtitude":268,"radius":100}},{"title":{"ja":"ハチ","en":"Bees"},"description":{"ja":"昆虫綱ハチ目の昆虫。スズメバチ、アシナガバチ、ミツバチなどがよく知られています。熊野神社では、オオスズメバチが（腐った根っこの間から入って）土の中、アシナガバチが植え込みのツツジやサザンカの枝の下、キイロスズメバチが本殿に巣をつくっていることが目撃されています。基本的には雨があたりにくいところに巣をつくります。","en":"Bees are the members of order Hymenoptera from class Insecta. Species such as hornets, paper wasp, and honeybees are widely known. In the Kumano shrine, honeycombs of Asian giant hornet can be found beneath the ground (entered from the gaps of rotten roots). Also, honeycombs of paper wasps have been found underneath the branches of planted azalea and sasanqua, and of Japanese yellow hornets at the main shrine. They generally make honeycombs at places which don’t get hit by the rain."},"marker_position":{"latitude":40,"longtitude":60,"radius":100}},{"title":{"ja":"鳥の混群","en":"Mixed-species flock"},"description":{"ja":"森にすむシジュウカラ、ヤマガラ、エナガ、コゲラなどの異なった種類の小鳥が、秋から冬にかけて一つの群れをつくって行動することを、混群（こんぐん）といいます。繁殖は春で、それ以外の時期は縄張りをはらずに一緒に生活することが知られています。","en":"During the months from autumn to winter, various kinds of small birds such as Parus major, Parus varius, Aegithalos caudatus, and Dendrocopos kizuki that inhabit in the forest form a group and migrate. This type of mixed-species flock is called “kongun” in Japanese. It is known that spring is their breeding season, and in other seasons, they live together without owing territories."},"marker_position":{"latitude":45,"longtitude":210,"radius":200}},{"title":{"ja":"クモ","en":"Spiders"},"description":{"ja":"クモ綱クモ目に属する陸上節足動物。糸を使って垂直や水平に網を張る種と、網を張らずに獲物を捕まえる種がいます。夏から秋にかけて熊野の森の中を歩くと、ジョロウグモが張った大きな網を見つけることができます。","en":"Spiders are arthropods that dwell on land, belonging to the order Araneae within the class Arachnida. There are species that spin web vertically and horizontally, and others that capture their prey without forming a web. If you take a walk in the forest of Kumano in summer and autumn, you can find big spider webs constructed by Nephila clavata."},"marker_position":{"latitude":-3,"longtitude":58,"radius":100}},{"title":{"ja":"白狐の言い伝え","en":"Byakko (white fox) folklore"},"description":{"ja":"その昔、傷ついた白狐が（現在、熊野神社のある）権現山の麓のお寺の池に浸かって傷を治していたそうです。和尚さんがこれを目撃し、不思議に思い、池の水をすくうとなんと温かく、それが湯田温泉の発見につながったと言い伝えられています。そのため湯田温泉は「白狐の湯」と呼ばれています。熊野の森の小道沿いには「いなりのほこら」と呼ばれる祠が今でも祀られています。","en":"Once upon a time, an injured byakko (white fox) was bathing in the pond of the temple, located at the foot of Mt. Gongen (where the Kumano Shrine is now enshrined), and curing the wound. The chief priest who witnessed the scene got curious and scooped the water from the pond, and surprisingly, found out that the water is warm. It has been told that this has led to the discovery of Yuda Onsen (Hot Springs), and for this reason, people call the Onsen as “byakko’s hot water”. Along the small path in Kumano forest, a small shrine called “Inari* no hokora (Inari’s small shine)” still stands for worshipping.<br><br>*Inari is the god of the harvest, often represented in a form of fox."},"marker_position":{"latitude":-2,"longtitude":278,"radius":100}},{"title":{"ja":"ドングリ","en":"Acorns"},"description":{"ja":"秋に熊野の森を散策すると、色々な形をしたドングリを見つけることができます。ドングリはブナ科の樹木の果実です。この辺りにはイチイガシ、ウラジロガシ、アラカシといったカシの仲間や、コジイなどシイの仲間の樹木が植わっています。シイのドングリ（小さくて黒い実）は渋みとなるタンニンの量が比較的少ないため、ネズミやイノシシなどの動物が好んで食べるようです。","en":"When you walk around the autumn forest of Kumano, you can find many acorns in various shapes. Acorns are the fruit of beech tree. Oak trees such as Quercus Gilva, Quercus Salicina, and Quercus Glauca, and chinquapins such as Castanopsis cuspidata are planted in this area. Animals such as mice and boars prefer to feed on the small black acorns from chinquapin trees, since the nuts have relatively less amount of tannin that creates a bitter taste."},"marker_position":{"latitude":-50,"longtitude":130,"radius":100}},{"title":{"ja":"土壌微生物","en":"Soil microbes"},"description":{"ja":"あるクスノキの大木の下の土壌を採取し、微生物群集のゲノムを網羅的に解析することができる「メタゲノム解析」を実施したところ、480種を超える菌種数を確認することができました。その中には培養（人工的に生育・増殖させること）が比較的難しい菌も含まれていました。","en":"After collecting the soil samples from beneath a big camphor tree and conducting ”metagenome analysis” that can analyze the genomes of a microbial community comprehensively, more than 480 types of bacteria have been detected. Among them, bacteria that are relatively difficult to cultivate were found."},"marker_position":{"latitude":-5,"longtitude":285,"radius":100}}]}
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports) {
 
 module.exports = {"samples":[{"id":"9-1-A","genus":{"ja":"クシノハゴケ","en":"Ctenidium capillifolium"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNCTGGTGTAAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACAGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAGGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAGAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATCTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGNNNNNNNTTTTTNANAANAAAN"}],"marker_position":{"latitude":-10.7,"longtitude":39,"radius":3},"collection_date":"2016.10.09","microscope":{"youtube_id":"4EuIq5uTs4Y"},"memo":{"どんな場所で採ったか":"石の上。","なぜその植物を採取したか":"色がきれいで美しいから。","なんの植物だと思うか":"ミドリゴケ","植物の特徴を絵や文字で書いて下さい":"石にはうように、はりついて伸びている<br>わかめのよう<br>先端が細い、先の先まで生命を感じる"},"memofig_width":"230px"},{"id":"9-1-B","genus":{"ja":"スゲ属","en":"Carex"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNAGGGNTTANNGATTACAAACTTACTTATTATACTCCTGAGTACGAAACCAAAGATACTGATATTTTAGCAGCGTTCCGAGTAACTCCTCAACCCGGAGTCCCCCCTGAAGAAGCAGGAGCTGCAGTAGCGGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCATATCGAGCCTGTTGTTGGAGAAGAAAATCAATTTATTGCCTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCTATTGTAGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGCTTGGAAGACTTACGAATTCCCCCTGCTTATTCAAAAACTTTCCAAGGCCCACCTCATGGTATCCAATCCGAAAGAGATAAGTTGAACAAATATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCATGTTATGAATGTCTACGTGGTGGACTTGATTTTACAAATAAAAANCCCNNNNNCCCCNGGC"}],"marker_position":{"latitude":-18,"longtitude":-24,"radius":2.2},"collection_date":"2016.10.09","microscope":{"youtube_id":"Em72Ho5wHJI"},"memo":{"どんな場所で採ったか":"がけの下<br>しめった場所、腐った葉っぱたくさんあるところ<br>日陰<br>他の植物と合わさって、乱雑に植えている","なぜその植物を採取したか":"よく見るけど、名前が何も思いうかばない雑草だから。","なんの植物だと思うか":"ユリ科？","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"9-1-C","genus":{"ja":"ホウライタケ属","en":"Marasmius"},"dna_sequences":[{"region":"ITS1","text":"NNNNGNNTTATTGAACNTTGTNNGGAGAGTTGAGCTGGTCCTTCAAGGGCAAGTGCTCGCTTTTCTTTCAATATTCATCCACCTGTGCACTTTTTGTAGAGAGTTTCTGAGAAAACGGGCCTCAATTGGCCTCGAGTATTGGAACTTTCTATGTCTTTTTACAAACCCTTGATGTATGTCCTTGAATGCCTTTTACAAAGGGGACTTAGTTGGCCCTTTTATAAAAACAATACAACTTTCAGCAACGGATCTCTTGGCTCTCGCATCGANNNAAGAACGANANTNGNTNCGCGTAC"}],"marker_position":{"latitude":-9,"longtitude":-62,"radius":5.7},"collection_date":"2016.10.09","microscope":{"youtube_id":"dkGGG5nsN6w"},"memo":{"どんな場所で採ったか":"山道<br>コンクリートの横<br>コケが生えている岩の下<br>多くの落ち葉<br>しめっている","なぜその植物を採取したか":"足元にあったけれども、だれも気づかなかったから","なんの植物だと思うか":"何かのキノコ<br>ヒダヒダが多い<br>色が白色なので、食べられる？","植物の特徴を絵や文字で書いて下さい":"特有の臭いあり"}},{"id":"9-1-D","genus":{"ja":"キイチゴ属","en":"Rubus"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNGNGAGTCGAAGTATATATTTTATTCGATACAAACTTTTTTTTTTTGAGGATCCGCTATAATAATGAGAAAGATTTCCGCCTATACGCACAAATCGGTCGATAATATCAGAATCCGACGAATCCGCCCAAGTGGACTTACTAATAGGATGCCCTAATGTGTTACAAAATTTAACTTTAGCCAACGATCCTATCATTGGAATAATTGGAACTAATGTATCAAGCTTCTTCATAGCATTATCCATTAGAAACGAATTTTCTAGCAATTGACTCCGTACCACTGAAATATTCGGTCGTATGCTTGAAAGATAACCCAAAAAATCAAGGGAATGCTTGGATAATTGGTTTATATGGATTCTTCCTGGTTGAGACCATACATAAAAATGACATTGCCAAAAATTGACAAGATAATATTTCCACTTATTCATCAGAAGAGGAGTCTCTTTTGATGCCAGAATAGATTTTCCTCGATATCTAACATACTGCATAAAAGGATCCTTGAAGAACCATAAGGTGGCCGGAAAATCGTTAGCAAAGACTTCTTCAACAGGATATTTTATTTTTTCATAAAAAAATATTCGCTCAAAAAAGATCCCAGAAGAGGTTAATAGTAAATGATTAGATTGGTTACGGAGAAAAAGTAAAATGGATTCGTATTCNCATACATNAGAATTATATANGNAGNAGGANGNANCTTGGANTACTTTTTGTAAAATANNNTNNTTTTGGNGGNANGAGGANNNTNCCN"},{"region":"rbcL","text":"NNNNNNNNANNNNNCTGGTGTNNNNATTATAAATTGACTTATTATACTCCGGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAGGAAGCAGGGGCCGCGGTAGCTGCGGAATCTTCTACCGGTACATGGACAACTGTATGGACTGACGGGCTTACTAGTCTTGATCGTTACAAAGGGCGATGCTACCACATTGAACCTGTTGCTGGAGAAGAAACTCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCGGTTACTAACATGTTTACTTCCATTGTGGGTAATGTGTTTG"}],"marker_position":{"latitude":-20,"longtitude":-22,"radius":2},"collection_date":"2016.10.09","microscope":{"youtube_id":"bMUCJyIJCms"},"memo":{"どんな場所で採ったか":"滝付近の傾斜地の下のあたり","なぜその植物を採取したか":"実のようなものがフサフサ毛がはえていたので可愛らしかったから","なんの植物だと思うか":"フキ<br>柏餅の葉<br>など・・・","植物の特徴を絵や文字で書いて下さい":"臭い・・・青臭い<br>すったら粘り気がでた<br>THE 葉っぱ"},"memofig_width":"230px"},{"id":"9-2-A","genus":{"ja":"ミヤマサナダゴケ","en":"Plagiothecium nemorale"},"dna_sequences":[{"region":"rbcL","text":"GNNNNNNNNNNNNCTGGNGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAGGCGGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTGCTGGAGAAGAGAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACTAATTTATTTACTTCTATTGTTGGTAATGTCTTCGGATTCAAGCTTNAGAGCTTTNGTCTAGAAGATTACNATTCCTCCGCTTATTNNANNCTTTCCNNNCCCCCNNNGGGATNNNGANAAANANTAAATTAAGNNCTNTGNNGGNGGGNGTATATNNNCTNNTNGGGNNATCTGCNAANTTNGGTNNNCGGTTTGNNGCTCTCNNATTTTTTTTNNNAAAAAAANNAAANCN"}],"marker_position":{"latitude":-6.8,"longtitude":95,"radius":10},"collection_date":"2016.10.09","microscope":{"youtube_id":"PCl89RPUmFI"},"memo":{"どんな場所で採ったか":"道沿いの岩","なぜその植物を採取したか":"みずみずしい感じがしたため","なんの植物だと思うか":"こけ","植物の特徴を絵や文字で書いて下さい":"濃いみどり色<br>湿っている<br>長い<br>シダっぽい<br>細かい葉っぱがある"}},{"id":"9-2-B","genus":{"ja":"ツボゴケ","en":"Plagiomnium cuspidatum"},"dna_sequences":[{"region":"rbcL","text":"NNNNTGGNNNNNCTGGTGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTACAGAAACTGATATTTTAGCAGCATTTCGGATGACTCCTCAACCGGGAGTACCAGCTGAAGAGGCAGGAGCGGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACTGTTTGGACTGATGGACTTACTAGTCTTGATCGTTACAAAGGAAGATGCTATGGTATTGAAGCAGTTCCTGGAGAAGATAATCAATATATTGCTTATGTTGCTTACCCATTAGATTTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAACAAATATGGTCGTCCATTATTAGGGNGCACTATNAAACCNAAATTGGGTTTATCTGCTNNAAACTATGGTANAGCTGTATATGAATGNNTTCCNGGNGN"}],"marker_position":{"latitude":-12.5,"longtitude":116.3,"radius":7.8},"collection_date":"2016.10.09","microscope":{"youtube_id":"ldPNSvMfrt8"},"memo":{"どんな場所で採ったか":"川のすぐ近く<br>岩場","なぜその植物を採取したか":"こけをとりたいと思った為<br>小さな芽のようなものがかわいかった。","なんの植物だと思うか":"こけ","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"9-2-C","genus":{"ja":"ササクサ","en":"Lophatherum gracile"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNTGNNNGTCGNAGTATATATTTTAGTCGATACAAAGTCTGTTTTTTCGAAGATCCACTATGATAATGAAAAAGATTTCTACATATCCGACCAAAGCGATCAAGAATATCCCAATCTGATAAATCGGTCCAAACGGGTTTACTAATAGGATGCCCCGATCCAGTACAAAATTGAGCTTTTGATAAGGATCCAACGAGAGGAGTAGCGGGGACTGTGGTATCGAATTTTTTTATTCGAGTATTTATTAGAAAAGAATTCTCCAGCATTTGATTCCTTACTAACAAAGTATTTATTGGTACACTTGAAAGGTACCCCAGAAAATCGAAGCAAGAGTTTGTTAATTGGTTTAGACGGATCCTTTGTGGTTGAGTCCAAAAAGAGAAAAAATATTGCGAGAAATTGACAAGGTAAGATTTCCATTTCTTCTTCAAAAGAAGAGTTCCTTTTGATGCAAGAATCGCCTTTCCTTGATATCGAACATAATGCGTAAGAGGATCTATAAAGAACCATATGGTTTTCCGAAAAAACCCTGGGCACATTACCCCAAAATGTTCCATCTTCCTAGAACAGTGGATTCGTTCCAGAAAGGTTCCAGAAGATGTTAATCGTAAGCAAGAAGATTGTTTACGAAGAAACAACAAGAAAAATTCATATTCTGATACATAAGAGTTATATAGGAATCGAAATAGTCTTTTATTTGCTTTTTTCAAAAGCAAAATAGATTTCATTGAAGTAATAAGACTATTCCAATTCGAATAATAGTTGAGAAAGAATCGCAATAAATGCAAAGATGGAACATCTTGAATCCGGTATTCAAGGATTGNNNNAANTCNNANGG"},{"region":"rbcL","text":"NNNNNNNNNNNNNCTGGTGTTANGGATTATAAATTGACTTACTACACCCCGGAGTACGAAACCAAGGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAGCCCGGGGTTCCGCCTGAAGAAGCAGGGGCTGCAGTAGCTGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAGCCCGTTCCTGGGGAAGGAGATCAATATATCTGTTATGTAGCTTATCCATTAGACCTATTTGAAGAGGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAACGTATTTGGTTTCAAAGCCCTACGCGCTCTACGTTTGGAGGATCTACGAATTCCCCCTACTTATTCAAAAACTTTCCAAGGTCCGCCTCACGGTATCCAAGTTGAAAGGGATAAGTTGAACAAGTATGGCCGTCCTTTCTTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAAAATTACGGTAGAGCGTGTTATGAGTGTCTACGCGNNNTTTTTTTTTTTNNAAAAANNAAAAN"}],"marker_position":{"latitude":5.8,"longtitude":-42,"radius":18},"collection_date":"2016.10.09","microscope":{"youtube_id":"GwxhdABzRLQ"},"memo":{"どんな場所で採ったか":"道のそばの岩の間","なぜその植物を採取したか":"形が面白かった","なんの植物だと思うか":"ヌスットハギ？<br>猫じゃらし系","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"230px"},{"id":"9-2-D","genus":{"ja":"ヤマハッカ","en":"Isodon inflexus"},"dna_sequences":[{"region":"rbcL","text":"NNNGGANNNNCGGGTGTTNAGAGTATAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTACTGCTTATATTAAAACTTTCCAAGGTCCGCCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGCGGTGGATTGATTTTTTNNNAAAAAAAAAN"}],"marker_position":{"latitude":-25,"longtitude":-106,"radius":3.3},"collection_date":"2016.10.09","microscope":{"youtube_id":"2RX18v24nD8"},"memo":{"どんな場所で採ったか":"川のほとりに群生<br>鉱脈試掘跡そばに咲く夢の花","なぜその植物を採取したか":"お花としてきれい<br>他の班がとってないエリア<br>川辺でさがしたかった","なんの植物だと思うか":"むらさきりんどう的な？","植物の特徴を絵や文字で書いて下さい":"ホタル袋の小さいもののような花弁<br>うすむらさき<br>苦い無臭<br>エディブルではなさげ<br>葉っぱは普遍的な姿<br>ちょっとトンガリ系<br>虫が食べる、ちょっと野菜系で美味しそう"},"memofig_width":"230px"},{"id":"9-3-A","genus":{"ja":"カナワラビ属","en":"Arachniodes"},"dna_sequences":[{"region":"rbcL","text":"NNNNNTNGNNNNNCTGGTGTCAAAGATTATCGATTGACCTATTACACCCCCGAATACAAAACCAAAGATACCGATATCTTAGCAGCCTTCAGAATGACCCCGCAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCAGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCCTTGGATCTATTCGAAGAAGGTTCTGTCACCAATCTGTTCACCTCCATTGTAGGTAATGTCTTTGGATTCAAAGCTCTACGCGCTTTGCGCTTGGAAGACCTTCGAATTCCCCCTGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGCCTGTCTGCTAAAAATTATGGCAGAGCCGTCTACGAATGCCTTCNNGGTGGANNNNNNTTTTACANNNNANNNTTAANGGNCGNCCATNTTTGNTTAAGTAAACCNTANNNNNNTGAANANCANGNGGCGGTCAATGANNGTTTTAGAANNN"}],"marker_position":{"latitude":-4.5,"longtitude":142,"radius":21},"collection_date":"2016.10.09","microscope":{"youtube_id":"dYGkY5YyaYs"},"memo":{"どんな場所で採ったか":"川の対岸の岩壁の割れ目。","なぜその植物を採取したか":"人が足を踏み得れにくい場所なので、珍しいものがありそうな気がしたから。","なんの植物だと思うか":"わかりません。","植物の特徴を絵や文字で書いて下さい":"双子葉系。<br>岩の隙間から生えていた。<br>根本には苔がびっしり。"}},{"id":"9-3-B","genus":{"ja":"トウゲシバ","en":"Huperzia serrata"},"dna_sequences":[{"region":"rbcL","text":"NNNNNGGNNNNNNCTGGNGTTANGNNTTACNNATTAACTTATTACACTCCTGATTATAAAACCAAAGACACCGATATTTTGGCAGCATTTCGAATGACCCCCCAACCTGGAGTACCNCCCGAGGAGGCGGGGAGCCGCAGTAGCTGCTGAATCTTCCACTGGTACATGGACTACCGTTTGGACCGATGGACTTACCAGCCTTGATCGTTATAAAGGGCGATGCTATGAAATTGAACCTGTGACCGGAGAGAAAAATCAATTTATTGCTTATGTAGCTTATCCTTTGGATCTCTTTGAGGAAGGTTCCGTTACTAACTTATTCACCTCCATCGNGGGTAACGNATTCGGATTCAAAGCTTTACGAGCTTTACGTTTAGAAGATTCGCGAATTCCCCCCGCTTATTCCAAAACTTTCATAGGTCCACCCCATGGTATCCAAGTTGAAAGAGACAAATCAAACAAATATGGCCGTCCTTTATTAGGATGTACTATTAAACCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTTTATGAATGTCTCCGCGGNNNNNNNNTTTTTTTANNNAAANNNNAAGGACCCCAAAGGATGTTGGNCGTAAANNANANATTGGTCTTNGAANAANNNNNAAAATANNTTCNTANTCNCN"}],"marker_position":{"latitude":-1,"longtitude":53,"radius":9},"collection_date":"2016.10.09","microscope":{"youtube_id":"Zfq6MyccyJo"},"memo":{"どんな場所で採ったか":"岩肌<br>少し水気がある<br>斜面","なぜその植物を採取したか":"小さな木のようでキレイだったから。","なんの植物だと思うか":"？","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"280px"},{"id":"9-3-C","genus":{"ja":"ナンテン","en":"Nandina domestica"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNCGGNNGTNNNNATTACAAATTGANTTATTATACTCCTGACTATNNAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCTGTAGCTGCCGAATCTTCTACAGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTACCACATTGAGCCCGTTGCTGGAGAAGACAATCAATATATTTGTTATGTAGCCTATCCTTTAGACCTTTTNGAAGAAGGGTCTGTTACNAACATGTTTANTTCTATTNNAGGTAATGTTTTTGGNTTTCAAAGCNNCTAGCCGNGNCTTCTNANGCTCTGGGAAGGANNCTTGCCGAAATTTCCCCTACCNNTCTTTANTTGNTTAAAAAACCNTTTTCNNATAGGGGACCCCCGGCCCCTTCCAATTGGGGTCAATTTCCCCAAGGGGTTCTGGANNGANGGNANGNANNTNNAAAAANNTTNNGGANAANNNNNAAAAAGTTTANNTTGGGGNATCCNNNNGTTTCCCCCNNCCTCNTTTNNNANTTN"}],"marker_position":{"latitude":-1,"longtitude":-27,"radius":5.5},"collection_date":"2016.10.09","microscope":{"youtube_id":"roS_a3DVBoU"},"memo":{"どんな場所で採ったか":"開始地点の滝の対面<br>小さなガケになっている斜面<br>斜面に同じような植物<br>斜面に対して直角","なぜその植物を採取したか":"実が気になった<br>見たことがあるが名前がわからない","なんの植物だと思うか":"ナンテン","植物の特徴を絵や文字で書いて下さい":"葉が竹っぽい<br>葉にツヤがある<br>実は緑色<br>葉の先がトガっている<br>実のエダはブドウっぽい"}},{"id":"9-3-D","genus":{"ja":"ハネヒツジゴケ","en":"Brachythecium plumosum"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNCTGGTGTCAAGATTACANATTNNNTTATTACACTCCCGATTATCAAACCAAAGATACTGATATCTTAGCAGCCTTCCGAATGACTCCTCAACCCGGAGTACCCGCTGAAGAAGCAGGAGCTGCAGTAGCTGCCGAATCTTCCACTGGTACATGGACCACTGTTTGGACCGACGGACTTACCAGCCTCGATCGTTATAAAGGACGATGCTACGACCTTGAACCCGTTCCTGGAGAAGAAAATCAATATATTGCTCATGTAGCTTACCCCTTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTGTTTACTTCTATTGTTGGTAATGTTTTCGGATTTAAAGCTTTACGAGCTTTACGTCTGGAAGATTTACGAATTCCTCCTGCTTATTCCAAAACTTTCCAAGGACCACCTCATGGTATTCAAGTTGAGAGAGATAAATTAAACAAATATGGACGTCCTTTATTGGGATGTACTATTAAGCCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTCTATGAATGTCTTCGCGGNNNNNNNNTTTTNNNCNNANAAAATNAAGGNCGTCCCATTTTTGGTTTAGTTTATCCCTTTTCGANNCTGAANACNATGNNGCGGTCCANTGNANAGNTTTATAATATTCNNNNNNNNNATTCCNTANGATTTTATATANCNNNANNANNANNCTTN"}],"marker_position":{"latitude":-11.3,"longtitude":113.2,"radius":8},"collection_date":"2016.10.09","microscope":{"youtube_id":"J7iOMr5nnsU"},"memo":{"どんな場所で採ったか":"渓流沿いの岩場についていた","なぜその植物を採取したか":"苔は苔でも、綿毛の様な小さな芽が出ているのが珍しいから","なんの植物だと思うか":"つたに似た苔","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"280px"},{"id":"10-1-A","genus":{"ja":"カラムシ","en":"Boehmeria nivea"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNTCGAANTATATATTTTACTCGATACAAACTCTTTTTTTTTGAGGATCCGCTGTAATAATGAAAAAGATTTCTGCATATACGTACAAATCGATCAATAATATCAAAATCCGATAAATCGACCCAGGTCGACTTACTAACGGGATGTCCTAATACGTTACAAAATTTCATTTTAGCCAACGATCCAATCAGAGGACTAATTGGAATTAATGTATCAATCTTCTTCATAGCCTTATCCGTTATAAATGAATTTTCTAGCATTTGAGTCCGTACCACTGAAAGATTTATTCGCATACTTGAAAGATAGCCCAAAAAGACAAGGGAACGCTTGCATAATTGGTTTATATACATCCTTCCTGATTGAGACCACACATAAAAATTATATTGCCATAAATGGACAAAAAAAGATTTCCATTTATTTATCAAAAGGGGCGGATCCGTATCCTTTAAAGCCAGAATAGATTTTCCTTGATATCTAACATAATGCATGAAGAGATCCTGGAGAAACCATAGGCTAATCGGAAAATCATTAGCAAAGACGTCTTCTACGGGAGTCTTTATTTTTCCATAGAAAAATATTCGCTCAAAAAAGACACCGGAAGCTGTTAATCGTAAATGAGAAGATTTGTTGCGGAGAAAAAGTAAGATGGATTCGTATTCACAAAGATGAGAATTATACAGGAACAAGAAAAATCTTGGATTACTTTTTGAAAAATAGTAATAGATTTATTTATAAATTTNNNTGGGAATAATAAGACTATTCCAATTAGAATACTCGTAAAGAAAAAGTCTTAATAAATACAAAGAGGAGGCGTCTTTTACCNAGTAGCGAAGGGTTNGAANNNAGATTCNNGAATGGACNGGNTNNNNNTN"},{"region":"rbcL","text":"NNNNNNNNNNNANGCTGGTGTAAGATNATAAATTGACTTATTACACTCCCGAATATGAAACCAAGGATACTGATATTTTAGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCCCCTGAAGAAGCAGGGGCTGCGGTAGCAGCTGAATCTTCTACTGGTACATGGACAACTGTATGGACTGACGGGCTTACCAGTCTTGATCGCTACAAAGGTCGATGCTACCACATCGAGCCTGTTGCTGGAGAAGAAAATCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAGGCCCTGCGCGCGCTACGTCTGGAGGATTTGCGAATCCCTCCTGCTTACACTAAAACTTTCCAAGGCCCACCGCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGCCGGCCCCTATTGGGATGTACTATTAAACCTAAATTGGGATTATCCGCTAAGAATTATGGTAGAGCAGTTTATGAATGTCTTCGCGGTGGNTTNGATTTTACAAAAAN"}],"marker_position":{"latitude":22,"longtitude":53,"radius":16},"collection_date":"2016.10.10","microscope":{"youtube_id":"m_dwnaYljfw"},"memo":{"どんな場所で採ったか":"崖ってほどでもない崖←少し登る<br>ジメジメしていた<br>日陰<br>コケがたくさん生えていた<br>コケの中から枝が出てきている感じ","なぜその植物を採取したか":"穴があいていたから<br>誰も知らなかったから","なんの植物だと思うか":"クサギか何か","植物の特徴を絵や文字で書いて下さい":"汁が臭い<br>ギザギザ<br>こんなに臭いのに虫に食われていて、なぜ虫が好むのか？<br>葉がやわらかい"},"memofig_width":"390px"},{"id":"10-1-B","genus":{"ja":"再解析中","en":"Under re-analysis"},"dna_sequences":null,"marker_position":{"latitude":5.4,"longtitude":-46,"radius":22},"collection_date":"2016.10.10","microscope":{"youtube_id":"hff7rKFclZ8"},"memo":{"どんな場所で採ったか":"滝付近の岩場（高いところ）","なぜその植物を採取したか":"周りの植物と比べて、背が高くて目立っていたから！","なんの植物だと思うか":"つるむらさき（？）","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"10-1-C","genus":{"ja":"マメヅタ","en":"Lemmaphyllum microphyllum"},"dna_sequences":[{"region":"rbcL","text":"GNNNNNNNNNNAGCTGGTGTCAAAGATTATCGATTGACTTATTACACCCCCGAATACAAAACCAAAGATACCGATATCTTAGCAGCATTTCGAATGACCCCACAACCTGGAGTACCGGCTGAGGAAGCTGGAGCTGCGGTAGCTGCAGAATCCTCCACAGGTACGTGGACCACTGTATGGACAGATGGGTTGACTAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAAGAGAATCAGTATATCGCGTATGTAGCTTATCCTTTGGATCTATTTGAAGAAGGTTCCGTTACTAATTTATTCACCTCCATAGTCGGTAATGTCTTCGGATTTAAGGCTCTGCGCGCTATACGCCTGGAAGACCTTCGAATTCCTCCTGCTTATTCTAAAACTTTCCAAGGACCGCCTCATGGTATTCAGGTTGAAAGGGATAAATTGAACAAATATGGACGTCCTCTATTGGGATGTACAATCAAGCCAAAATTGGGTCTGTCTGCCAAAAATTATGGTAGAGCCGTCTACGAATGCCTTCGCGGTGGATTNGNTTTNNACAAAAAATCCCNNTNGNNGN"}],"marker_position":{"latitude":4.5,"longtitude":76.6,"radius":15},"collection_date":"2016.10.10","microscope":{"youtube_id":"gyEHDuG3zTM","memo":"スキマが多い→細胞壁？<br>茶色のは死んでる？"},"memo":{"どんな場所で採ったか":"日のあたる木にまきついているツタ","なぜその植物を採取したか":"かわいいから<br>葉っぱがまるくて・・・<br>木にまきついているのを取りたかった","なんの植物だと思うか":"ツタ植物<br>ラシ植物（？）<br>葉がうすいから・・・","植物の特徴を絵や文字で書いて下さい":"多肉植物・・・食べられそう<br>意外と肉厚<br>葉のうらに白・茶のハンテンがあるものもある<br>すりつぶすと水がたくさん出た"},"memofig_width":"280px"},{"id":"10-1-D","genus":{"ja":"カタヒバ","en":"Selaginella involvens"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNGNCGGCGTGANGGATCACAGATTAACTCATTACACTCCCGATTACCAGACCAAAGACACCGATNTTCCGGCAGCATCCCGAATGACTCCGCAACCCGGAGTGCCCGCCGAAGAAGCGGGAGCCGCAGTAGCCGCGGAATCCTCCACAGGAACGTGGACTACCGTTTGGACCGATGGACTGACTAATCTTGATCGTTATAAAGGTCGGTGCTATGATATCGAACCCGTTCCGGGGGAAAAAGATCAATACATTGCTTATGCAGCTCATCCTTCGGACCTGTCTGAGGAAGGTTCCGTTACCAACATGTCCACCTCCATAGTGGGTAATGTTTTTGGATCCAAGGCCTTACGAGCCCCGCGTTCGGAAGATCTGCGAATCCCCCCCGCTTATTCCAAGACCTCCAAGGGTCCACCTCATGGTATCCAAGTCGAAAGGGATAAATCNAACAAATATGGCCGTCCCTCNNTGGGATGTACTATAAAACCCAAGTTGGGTCTATCCNNTAAAAACTACNGCAGANCANTCCATGAACGGCTTCGTGGTGGATNNNNANTTTTACANNAAAN"}],"marker_position":{"latitude":-7,"longtitude":-67,"radius":5.7},"collection_date":"2016.10.10","microscope":{"youtube_id":"quyJ7395yFw"},"memo":{"どんな場所で採ったか":"半日陰の岩肌<br>湿度があるところ","なぜその植物を採取したか":"葉の形状<br>コケが成長したようにみえる（コケより大きい）<br>この場所にしかなかったから<br>根っこがとても長い。水分をひろく取る為","なんの植物だと思うか":"こけ","植物の特徴を絵や文字で書いて下さい":"持って帰って切る時、乾燥したせいか葉がクルクルまるまって、かさかさになっていた。すりつぶしやすかった。"},"memofig_width":"200px"},{"id":"10-2-A","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNNNNNTCGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTGAGAGGANAATTAATAAGAAACGNATATANCTGCCCCTGACTCCTTATTGAAGAAGGGTCTAGTCCTAAANCNTNNCCTCCCCCGTNGAGTTTNGGGAANGANTGTGNNTCGCNTNNATANGNCCNGCNCGAGTGAAANNACNGGCACCTTCCATATTGACCAAACTTGANCCGGCTGGATTTCTATTTATTCATCAAGNGGGCCGGCCACCTTGAANGCAGAATGGATTTGCCCTGCTACCTCANATACTGNNTGNNAGGACATTTGAACAAGCTTNCGNTGGTGGGTGAANNNTGTACGAAGACTTCGGCAAATAGTGANANNNTTCCATAGAAATAGNTTCGN"},{"region":"rbcL","text":"NNNNNNNNNNNNNNNCCGGTGTNNNGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGTGGTGNATNNNNNNTTTTTACNNAA"}],"marker_position":{"latitude":-23,"longtitude":-164,"radius":3.5},"collection_date":"2016.10.10","microscope":{"youtube_id":"fzyCADXctj4"},"memo":{"どんな場所で採ったか":"Riverside, grow on the rock and with mosses","なぜその植物を採取したか":"川の側の他と違うツル状の植物だったから","なんの植物だと思うか":"ツタの仲間？","植物の特徴を絵や文字で書いて下さい":"The stem is thin.<br>Leaves are grow in pairs.<br>Root on the rock,and moss.<br>The plant grows really long."}},{"id":"10-2-B","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNCCGGTGTTNAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGN"}],"marker_position":{"latitude":5,"longtitude":-50,"radius":20},"collection_date":"2016.10.10","microscope":{"youtube_id":"9auE9oVaAUw"},"memo":{"どんな場所で採ったか":"ポールにからみついていた。","なぜその植物を採取したか":"ポールにからみついていたから。","なんの植物だと思うか":"豆科","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"200px"},{"id":"10-2-C","genus":{"ja":"ヤマハッカ","en":"Isodon inflexus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNTNNNNCGGGTGTTNNNAGTATAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTACTGCTTATATTAAAACTTTCCAAGGTCCGCCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGCGNNNNNNNNTTTTTTTTTNNANNNAN"}],"marker_position":{"latitude":-32,"longtitude":-120,"radius":3},"collection_date":"2016.10.10","microscope":{"youtube_id":"p9m-CR0jCWM"},"memo":{"どんな場所で採ったか":"水場に近い場所<br>日あたりが良くて水気のある場所","なぜその植物を採取したか":"花がその場でしかなかったから<br>紫色の花がきれいだったため","なんの植物だと思うか":"シソ科<br>虫にはを食べられていたため、食べることのできる植物","植物の特徴を絵や文字で書いて下さい":"花は紫色"},"memofig_width":"200px"},{"id":"10-2-D","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNAATNNTACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCATTATTAATTAGAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAATAGATTCGTTCAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGAGAAGATTGGTTANGGNAGAAAGACGAAAATAGATTCGTATTCACATACATAAAAATTATATAACAAGAAGAGTAATCTTTGATTTCTTTTTGTTAAAAAATGAAAACAGGTTTTCTTTGTAGAAAGAATCTTATTGCAATTACAATACTCGCGTAGAAAGAATCGTAATAAGTGCAAAGAAGGGGCATCTTTTACCCATAGCGAAGGGTTGNANANNTCGAANNNNNNNCCGGGAA"},{"region":"rbcL","text":"NNNNNNNNNNNNCCGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGTGGTGGNNNNNTTTTTTTANAANAAAN"}],"marker_position":{"latitude":23.4,"longtitude":5,"radius":20},"collection_date":"2016.10.10","microscope":{"youtube_id":"34JCTSSd6Xo","memo":"プツプツ丸いのがたくさん<br>黒い点々が各所にあった<br>つぶすと鮮やかな緑色<br>他のチームの葉と同じような緑ですが、つぶすと色の違いがでた。Dチームはきれな緑。Cチームは茶色い緑に・・・"},"memo":{"どんな場所で採ったか":"杉の木の横の少し高くなった土手の上<br>日陰<br>落ち葉（杉）が積もって腐葉土っぽくなっている","なぜその植物を採取したか":"園芸植物リシマキアの葉と少し似ているけど、微妙にちがうから。たくさん生えていると可愛いかもしれないので。<br>グランドカバー系？","なんの植物だと思うか":"ツル系か？","植物の特徴を絵や文字で書いて下さい":"他の植物の枯れ葉の間の地面からしっかり生えている<br>あまり背は高くない"},"memofig_width":"390px"},{"id":"10-3-A","genus":{"ja":"ツリミギボウシゴケ","en":"Grimmia apiculata"},"dna_sequences":[{"region":"rbcL","text":"NNTNNNNNTGGTGTTAAGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAAACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCACCTGAAGAAGCAGGAGCTGCAGTAGCTGCGGAATCTTCTACTGGTACATGGACCACTGTTTGGACTGATGGACTTACTAGTCTTGATCGTTATAAAGGTCGATGTTATGATATTGAAGCAGTTCCTGGAGAAGAGAATCAATATATCGCTTATGTTGCTTACCCATTAGATTTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTGCGTATTCCTCCAGCTTATTCCAAAACTTTTCAAGGCCCACCTCATGGTATTCAAGTTGAAAGAGATAAATTAAACAAATATGGACGTCCATTGTTAGGATGTACTATTAAACCAAAATTGGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGNNTTGNNTTTTTTTNAAAAAAAAAAAN"}],"marker_position":{"latitude":23.4,"longtitude":-4,"radius":21},"collection_date":"2016.10.10","microscope":{"youtube_id":"lT4GW1cuex8"},"memo":{"どんな場所で採ったか":"切り立った岩の側面","なぜその植物を採取したか":"かわいかったから","なんの植物だと思うか":"コケ","植物の特徴を絵や文字で書いて下さい":"ふさふさした手触り<br>森の香り？（土の香り）"},"memofig_width":"390px"},{"id":"10-3-B","genus":{"ja":"再解析中","en":"Under re-analysis"},"dna_sequences":null,"marker_position":{"latitude":-0.5,"longtitude":-62.5,"radius":18},"collection_date":"2016.10.10","microscope":{"youtube_id":"tcJ2q_q9ye0"},"memo":{"どんな場所で採ったか":"水分をふくんだ岩","なぜその植物を採取したか":"岩から生えていたから<br>シダの形が他の植物と大きく違うので、遺伝子に特徴があるのではないかと思いました。","なんの植物だと思うか":"シダ","採取の手順にて":"①葉をカッターで細くする→においが発する（草っぽい）<br>②乳鉢と乳棒ですりつぶす<br>③（チューブのイラスト有り）にすりつぶしたサンプルを入れる"},"memofig_width":"250px"},{"id":"10-3-C","genus":{"ja":"再解析中","en":"Under re-analysis"},"dna_sequences":null,"marker_position":{"latitude":-13,"longtitude":93,"radius":4.6},"collection_date":"2016.10.10","microscope":{"youtube_id":"jkDc7iL5u-g"},"memo":{"どんな場所で採ったか":"岩肌","なぜその植物を採取したか":"かわいかったから","なんの植物だと思うか":"コケの進化したやつ","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"300px"},{"id":"10-3-D","genus":{"ja":"テイカカズラ属","en":"Trachelospermum"},"dna_sequences":[{"region":"matK","text":"NNNNNNNNNNNANNTCGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCACTATGATAATGAGAAAGGTTTCTGCATATACGCCCAAATCTATCCATAATATCAGAATCTGATAAATCAGTCCGAACCGGCTTACTAACGGGATGTCCTAATAGATTACAAAATTTCGCTTTAGCGAATGATCCAATTAGAGGAATAATTGGAACAAGGGTATCTAATTTCTTAATAGCATTATTAATTAGAAATGCATTTTCGAGCATTTGACTCCGTACCGTTGAAGGGTTTAGTCGCACAATTGAAAGATAACCCATAAAGTCAAGGGAATGATTGTACAATTGCTTTATATAGGCCCTGCGCGAGTGAAACCACAGGTCCAAATTACATTGCCAAAAATTGACAAGGTAAGATTTCCATTTATTCATCAAAAGGGCCGGCCCCCTTGAAAGCAGAATGGATTTTCCTTGATACCTAACATAATGCATGAAAGGATATTTGAACAAGCATAGGTTGGTCGGAAAATCCTTAACGAAGACTTCGGCAAAACGTTCTATTTTTCCATAGAAATAGATTCGTTCAAGAAGGACCCCAAAGGATGTTGGTCGTAAATGAGAAGATTGGTTATGGAGAAAGACGAAAATAGATTCGTATTCACATACATAAAAATTATATAACAAGAAGAGTAATCTTTGATTTCTTTTTGTTAAAAANTGAAAACAGGTTTTCTTTGTAGAAAGAATCTTATTGCAATTACAATACTCGCGTAGAAAGAATCGTAATAAGTGCAAAGAAGGGGCATCTTTTACCCATAGCGAAGGGTTGACANNNNAAN"},{"region":"rbcL","text":"NNNNNNNANNNNNCCGGTGTTAAAGAGTACAAATTGACTTATTATACTCCTGAATACGAAACTAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCCCCCGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTCCTGGAGAAGAAGATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTGTTTGGGTTCAAAGCCCTACGCGCTCTACGTCTGGAAGATTTGCGAATCCCTACGGCTTATATTAAAACCTTCCAAGGCCCGCCTCATGGCATCCAGGTTGAGAGAGATAAATTGAACAAATATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAAAACTATGGTAGGGCGGTTTATGAATGTCTTCGTGGTGGACTTGNNNTTTACANNNNNNNNTTTCCATAANAAATNNTTTCNNTCANNANNGACCCCNTAGGATGTTGGTCGTAAATGAGAAGATTGGTTATGGGAGAAAGACNAANATAGATTCGTATTCNCATACNTAAAANTNNTNTNNCANGAAGAGTAATCTTTGATTTTCTTTTTGTTAAAAAATGAANACAGGNTTTTCTTTTGTAGAAAGAATCTTTATTTGCNATTACNNTACTCNCCGTAGNAANGAANCCNTAATAGNGGCANNNNANGGGNNATCTTTTTACCCNATNNNNNANNNNTGNAN"}],"marker_position":{"latitude":-0.4,"longtitude":-35,"radius":4.5},"collection_date":"2016.10.10","microscope":{"youtube_id":"ctqmt0sPtIA"},"memo":{"どんな場所で採ったか":"沢に接する小路の石にある<br>水もあり、日もよく当たる<br>コケといっしょにはえている","なぜその植物を採取したか":"形がきれいである<br>ひいらぎのようで、見かけない形だった","なんの植物だと思うか":"ツタの仲間","植物の特徴を絵や文字で書いて下さい":""},"memofig_width":"390px"},{"id":"cristina","genus":{"ja":"シワカラカサタケ属","en":"Cystoderma sp."},"dna_sequences":[{"region":"ITS1","text":"NNNNNNNNNNNNNNNNTTGATAAAATGGATCAGGCTGTTGCTGGCTTTATATTTTTTTATAGAGCATGTGCACGCTTCGGTCTATATTCTTTCATTTATCCACTGTGCACCTATTGTAGACTTGAAGTAGTTCTGATAATTGCGTTGTTGCAGCTATCTATTCTATTTCATATCTATGTTAATTATATTAAAAACTTGGATTGACGTTTTAATATTGGATTAACAACCAATTACAACTTTCAACAACGGATCTCTTGGTTCTCGCATCNATGAAGAACCNNNTNANNNANN"}],"marker_position":{"latitude":2.3,"longtitude":-55,"radius":17},"collection_date":"2016.10.09","microscope":{"youtube_id":"L0tZZe86ipQ"}},{"id":"ersin","genus":{"ja":"属種が未同定の菌","en":"Uncultured fungus"},"dna_sequences":[{"region":"ITS1","text":"NNNNNNNNNNNTNTCGATGNNNNTTGGGATGTTGCTGGCTCACTGGGCAATGTGCACTTCCTTGATATTCAAATCCACCTGTGCACAATCAAGTAGGCATAGATTGAGTTCTGTGCCTATGTTTTTTTTTTCNCNCCCACCTCTCCTGTAAAAGAAGAGATGTTAAAAAAAAAAACATTACATTTTTNATCAATGGATCGGTTGTCTCGCGTCTCGATGANGAAAGAAACGAAANCCCTGNCTCAGCCGNATCTCTTCNTNTATNGCACATCCANNANGCNNTANANAGGACTTGAATAACGNTCTGNANNNTTNCGTTGCTTTCT"}],"marker_position":{"latitude":1.8,"longtitude":-57,"radius":18},"collection_date":"2016.10.09","microscope":{"youtube_id":"ha8d8GsV0eI"}},{"id":"B-3","genus":{"ja":"ツバキ属","en":"Camellia"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNATTNNNCTGGTGTTAAAGATTACAAATTGACTTATTATACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCGCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACTAGCCTTGATCGTTACAAAGGGCGATGCTACCACATCGAGCCCGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCGTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTACTGCGTATGTTAAAACTTTCCAAGGACCGCCTCATGGCATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGAAGAGCAGTTTATGAATGTCTCCGCGGTGNANNNNNNTTTTTACN"}],"marker_position":{"latitude":0,"longtitude":-170,"radius":3.8},"collection_date":"2016.10.01","microscope":{"youtube_id":"3fQJA9LoZWQ"}},{"id":"B-4","genus":{"ja":"トウバナ","en":"Clinopodium gracile"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNGNGTGTTNNNAGTACAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCCGTTCCTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTGTTGCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGGATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTTCGCGGNNNNNNNNNNNTTTN"}],"marker_position":{"latitude":-20,"longtitude":-210,"radius":3.5},"collection_date":"2016.10.01","microscope":{"youtube_id":"gwNpgBQUZek"}},{"id":"B-5","genus":{"ja":"オオシノブゴケ","en":"Thuidium tamariscinum"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNGNNNNNNNNCTGGTGNTNNNATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGATACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAAGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACCGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAGAGAGATAAATTAAATAAATATGGTCGTCCATTATTAGGATGTACCATCAAGCCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGGACTTTGATTTTACAANAAN"}],"marker_position":{"latitude":-15.5,"longtitude":-238,"radius":4.5},"collection_date":"2016.10.01","microscope":{"youtube_id":"QqhyFgaGzIc"}},{"id":"B-6","genus":{"ja":"アオキ","en":"Aucuba japonica"},"dna_sequences":[{"region":"rbcL","text":"NNNNNGNNNNNNNNCTGGTGTNNNGATTACAAATTGACTTATTATACTCCTGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCTGCAGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCCGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATCTGCGAATCCCTGTTGCTTATACTAAAACTTTCCAAGGCCCGCCTCATGGTATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTGGGATTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTTCGCGGTGGACTTGGATTTTACANAN"}],"marker_position":{"latitude":6,"longtitude":107,"radius":36},"collection_date":"2016.10.01","microscope":{"youtube_id":"V9HPNK6c8jw"}},{"id":"B-8","genus":{"ja":"サツマイナモリ属","en":"Ophiorrhiza"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNGNANNNNNCGGGTGNTNNNAGTACAAATTAACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCACCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGGCTTACCAGTCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCAGTTCTTGGAGAAGAAGATCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGTAATGTATTTGGGTTCAAAGCCCTGCGCGCTCTACGTCTGGAAGATTTGCGAATCCCCCCTGCTTATACTAAAACCTTCCAAGGCCCGCCTCATGGCATTCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTGTTGGGATGTACTATTAAACCTAAATTAGGTTTATCTGCTAAAAACTACGGTAGAGCAGTTTATGAATGTCTTCGTGGNNNNNNNNANNTTTTTTNNNNAAA"}],"marker_position":{"latitude":-45,"longtitude":110,"radius":1.5},"collection_date":"2016.10.01","microscope":{"youtube_id":"tuSvN5_JQwA"}},{"id":"B-9","genus":{"ja":"キイチゴ属","en":"Rubus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNCTGGTGTTNNGATTATAAATTGACTTATTATACTCCGGACTATGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAGGAAGCAGGGGCCGCGGTAGCTGCGGAATCTTCTACCGGTACATGGACAACTGTATGGACTGACGGGCTTACTAGTCTTGATCGTTACAAAGGGCGATGCTACCACATTAAACCTGTTGCTGGAGAAGAAAGTCAATTTATTGCTTATGTAGCTTACCCCTTAGACCTTTTTGAAGAAGGTTCGGTTACTAACATGTTTACTTCCATTGTGGGTAATGTGTTTGGGTTCAAGGNCTTGNGCGCTCTACGTCTGGAGGATTTACGAATCCCTCCCGCTTATGTTAAAACTTTCCAAGGCCCGCCTCACGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTATGGCCGCCCCCTATTGGGATGTACTATTAAACCTAAATTGGGGTTATCCGCTAAGAATTACGGTAGAGCAGTTTATGAATGTCTCCGCGGTGGACTTGATTTTTANAAAAAAANNNNNNGGN"}],"marker_position":{"latitude":-22,"longtitude":-100,"radius":3.4},"collection_date":"2016.10.01","microscope":{"youtube_id":"TUwughfpsgI"}},{"id":"B-11","genus":{"ja":"オオイタチシダ","en":"Dryopteris pacifica"},"dna_sequences":[{"region":"rbcL","text":"GNNNNNNNNNNNNCTGGTGTCAAAGATTATCGATTGACCTATTACACCCCCGAATACAAGACCAAAGATACCGATATCTTAGCAGCCTTTAGAATGACCCCACAACCCGGAGTACCGGCTGAGGAAGCCGGAGCTGCGGTAGCTGCGGAATCCTCCACGGGTACGTGGACCACTGTATGGACAGATGGGTTGACCAGTCTTGACCGTTACAAGGGCCGATGCTACGACATCGAACCCGTCGCTGGGGAGGAAAACCAGTATATCGCGTATGTAGCTTATCCTTTGGATCTATTCGAAGAAGGTTCTGTCACCAACTTGTTCACCTCTATTGTAGGTAATGTCTTTGGATTTAAGGCTCTACGCGCTTTACGCTTGGAAGACCTTCGAATTCCCCCCGCTTATTCTAAAACTTTCATTGGACCGCCTCATGGTATTCAGGTCGAAAGGGATAAACTAAACAAATATGGACGTCCTTTATTGGGATGTACAATCAAGCCAAAATTAGGTCTGTCTGCTAAGAATTATGGTAGAGCCGTCTACGAATGCCTCCGCGNNNNNNNNNNTTTTTTANAANNNCNTNANGNNNCN"}],"marker_position":{"latitude":-5,"longtitude":-90,"radius":8},"collection_date":"2016.10.01","microscope":{"youtube_id":"GHOB5xv54WM"}},{"id":"B-12","genus":{"ja":"トウゲシバ","en":"Huperzia serrata"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNNNTGGCGTTAGGGANTACAGATTAACTTATTACACTCCTAATTATAAGACCAAAGACACCGATATTTTGGCAGCATTTCGGATGACCCCCCAACCTGGAGTACCACCCGAGGAGGCGGGAGCCGCAGTAGCTGCTGAATCTTCCACTGGTACATGGACTACCGTTTGGACCGATGGACTTACCAGCCTTGATCGTTATAAAGGTCGATGCTATGAAATTGAAGCTGTGACCGGGGAGAAAAATCAATTTATTGCTTATGTAGCTTATCCTTTGGATCTCTTTGAGGAAGGTTCCGTCACTAACTTATTCACCTCCATCGTGGGTAACGTATTCGGATTCAAAGCTTTACGAGCTTTACGTTTAGAAGATTCGCGAATTCCCCCCGCTTATTCCAAAACTTTCATAGGTCCACCCCATGGTATCCAAGTTGAAAGAGACAAATCAAACAAATATGGCCGTCCTTTATTAGGATGTACTATTAAACCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTTTATGAATGTCTCCGNGNNNNNNTTTTTTTTTNNANANAAAAAA"}],"marker_position":{"latitude":0,"longtitude":65,"radius":15},"collection_date":"2016.10.01","microscope":{"youtube_id":"YM1nOx5-0hw"}},{"id":"B-13","genus":{"ja":"スゲ属","en":"Carex"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNNANCAGGGGTTNAGATTACAAACTTACTTATTATACTCCTGAGTACGAAACCAAAGATACTGATATCTTGGCAGCGTTCCGAGTAACTCCTCAACCCGGAGTCCCTCCTGAAGAAGCAGGAGCTGCAGTAGCGGCAGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCATATCGAGCCTGTTGTTGGAGAAGAAAATCAATTTATTGCCTATGTAGCTTATCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCTATTGTAGGTAATGTATTTGGTTTCAAAGCCCTACGAGCTCTACGCTTGGAAGACTTACGAATTCCCCCTGCTTATTCAAAAACTTTCCAAGGCCCACCTCATGGTATCCAATCCGAAAGAGATAAGTTGAACAAATATGGTCGTCCTCTATTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAGAACTACGGTAGAGCATGTTATGAATGTCTACGTGGTGGCTTNNNNTTTTNANAAAAAN"}],"marker_position":{"latitude":-11,"longtitude":-225,"radius":5.7},"collection_date":"2016.10.01","microscope":{"youtube_id":"k_Jb-hZ4bZk"}},{"id":"B-14","genus":{"ja":"トウバナ","en":"Clinopodium gracile"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNCGGGTGTTNNNAGTACAAATTGACTTATTATACTCCTGAATACGAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCCGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGGCGATGCTACCACATTGAGCCCGTTCCTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATTCCTGTTGCTTATGTTAAAACTTTCCAAGGCCCGCCTCATGGGATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCTCTGCTGGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAAAACTACGGTAGAGCGGTTTATGAATGTCTTCGCGGTGNTTTGANTTTTTTTAAAAAAN"}],"marker_position":{"latitude":-20,"longtitude":-220,"radius":4},"collection_date":"2016.10.01","microscope":{"youtube_id":"vh7shDaZ6R0"}},{"id":"B-15","genus":{"ja":"ニレ科","en":"Ulmaceae"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNGANNNNNCGGGTGTTNNNATTATAAATTGACTTATTACACTCCTGAATATGAAACCAAAGATACTGATATCTTGGCAGCATTTCGAGTAACTCCTCAACCTGGAGTTCCACCTGAGGAAGCAGGAGCTGCGGTAGCTGCTGAATCTTCTACTGGTACATGGACAACTGTATGGACTGACGGGCTTACTAGTCTTGATCGCTACAAAGGTCGATGCTACGGCATTGAGCCTGTTGCTGGAGAAGAAAATCAATATATTGCTTATGTAGCTTACCCCTTAGACCTTTTCGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAATGTATTTGGGTTCAAGGCCCTGCGCGCTCTACGTCTAGAGGATTTACGAATCCCTCCTGCTTATTCTAAAACTTTCCAAGGTCCGCCTCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGCCGCCCCCTATTAGGATGTACTATTAAACCTAAATTGGGGTTATCTGCTAAGAATTATGGTAGAGCAGTTTATGAATGTCTTCGCGGTNNTTGGNNTTTTTTAAAAAAN"}],"marker_position":{"latitude":-3,"longtitude":98,"radius":23},"collection_date":"2016.10.01","microscope":{"youtube_id":"7EclZm3AePo"}},{"id":"B-16","genus":{"ja":"クサギ","en":"Clerodendrum trichotomum"},"dna_sequences":[{"region":"matK","text":"CCGGCCCGAAAGTTGAAGTATATACTTTATTCGATACAAACTCTTTTTTTTGGAAGATCCGCTATAATAATGAGAAAGATTTCTGCATATACGACCAAATCGGTCAATAATATTAGAATCGGATAAATCAGCCCAAATCGGCTTACTAACAGGATGCCCAAATACGTTACAAAATTTCGCTTTAGCCAATGACGCAATCATTGGAATAATTGGAATAAGGGTATCAAACTTCTTAATAGCATTATTGATTAGAAATGCATTTTCTAGAATTTGACTCCGTACCACGGAGGGGTTCATTCGCACGCTTGAAAGATAGTCCAAAAATTCAAGGGAATAATTGGATAATTGGTTTATATAAATCCTTCTTGGATGAAACCACAGCGAAAAATGCCATTGCCAAAAAGTGACAAGATAAAATTGCCATTTTTTCATGAAAAAAGATGTTCCCTTTGAAGCCAGAATGGATCTTCTTTGATACCTAATATAATGCATGAAAGGTTCCTTGACCAACCACGAGTTCGCCCGAAAATTGTTAATCTTAACAAAGACGTTCACAAGACGTTCTACTTTTACATAGAAATGGATTCGTTCAAGAAGAACTCCAAAAGCTGTTGATCGTAAATGAAAAGATTGGTTACGTAGAAAGACGAAAACGGATTCATATTCACATACATGAGAATTATATAAGAATAAGAATAGTCTTGGATTTCGTTTTGAAAAAGAGGAGCCAGCTTTCGTTGGAATAATAAGACTATTCCAATTACAATATTCAGCGAGAAAGACTCGTAGTAAATGTAAAGAAGAAGCATCTTTTACCCAACCGCGAAGAGTTTGAACCAAGATTTCCAGATGGGACTGGGGT"},{"region":"rbcL","text":"TCTGGGATTACAAGCGGGTGTTAAGAGTACAAATTGACTTATTATACTCCTGAATACAAAACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTTCCGCCTGAAGAAGCAGGGGCCGCGGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGCCTTACCAGCCTTGATCGTTACAAAGGTCGATGCTACGACATCGAGCCCGTTCTTGGAGAAAAAGATCAATATATCTGTTATGTAGCTTATCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACATGTTTACTTCCATTGTAGGAAATGTATTTGGATTCAAAGCCCTACGTGCTCTACGTCTGGAAGATCTGCGAATCCCCACTGCTTATATTAAAACTTTCCAAGGCCCACCTCATGGGATCCAAGTTGAAAGAGATAAATTGAACAAGTACGGTCGTCCTCTGTTGGGATGTACTATTAAACCGAAATTGGGGTTATCCGCTAAAAACTATGGTAGAGCGGTTTATGAATGTCTTCGTGGTGGACTTGATTTTACAAAA"}],"marker_position":{"latitude":1,"longtitude":115,"radius":35},"collection_date":"2016.10.01","microscope":{"youtube_id":"6zXd9mEi1PQ"}},{"id":"B-17","genus":{"ja":"スギ","en":"Cryptomeria japonica"},"dna_sequences":[{"region":"rbcL","text":"GAAGGCGGTATTAAGGCTGGTGTTAAAGATTACAGATTAACTTATTATACTCCGGAATATCAGACCAAAGATACTGATATCTTAGCAGCATTCCGAGTCACTCCTCAACCTGGAGTACCCCCCGAAGAAGCGGGAGCAGCAGTAGCCGCCGAATCTTCCACTGGTACGTGGACGACTGTTTGGACCGATGGACTTACCAGTCTTGATCGTTACAAGGGGCGATGCTATGATATTGAACCCGTTCCTGGAGAGGAAAGTCAATTTATTGCCTATGTGGCTTACCCTTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACCTGTTCACTTCTATTGTAGGTAATGTATTTGGATTCAAAGCCTTACGGGCTCTACGTCTGGAAGATTTACGGATTCCTCCTGCTTATTCAAAAACTTTCCAAGGCCCACCACATGGTATTCAAGTAGAAAGAGATAAATTAAACAAATATGGTCGTCCTTTGTTGGGATGTACTATAAAACCAAAATTGGGTCTATCTGCCAAGAATTATGGTAGAGCGGTTTATGAATGTCTCCGTGGTGGACTTGATTTTACAAAA"}],"marker_position":{"latitude":1,"longtitude":104,"radius":30},"collection_date":"2016.10.01","microscope":{"youtube_id":"DFZ4EnxMF6g"}},{"id":"B-18","genus":{"ja":"イヌガヤ属","en":"Cephalotaxus"},"dna_sequences":[{"region":"rbcL","text":"NNCNNCAANGCTGGTGTTAAAGATTACAGATTAACTTATTATACTCCGGAATATAAGACCAAAGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAACCTGGAGTGCCCCCTGAGGAAGCAGGAGCAGCAGTAGCTGCCGAATCTTCCACTGGTACATGGACTACTGTTTGGACCGATGGACTTACGAGTCTTGATCGTTACAAGGGACGATGCTATGATATTGAACCCGTTCCTGGAGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCCTTAGATCTTTTTGAAGAAGGTTCTGTTACTAACCTGTTCACTTCCATTGTAGGTAATGTATTTGGATTCAAAGCCCTACGAGCTCTACGTCTGGAAGATCTGCGAATTCCTCCTGCTTATTCAAAAACTTTCCAAGGCCCACCACATGGTATCCAAGTGGAAAGAGATAAACTAAATAAATATGGTCGTCCTTTGTTGGGATGTACAATCAAACCAAAATTGGGTCTATCTGCCAAGAATTATGGTAGAGCGGTTTACGAATGTCTCCGCGGTGGCTNNNTTTTTTNNNAAAAAAATN"}],"marker_position":{"latitude":23,"longtitude":-28.5,"radius":23},"collection_date":"2016.10.01","microscope":{"youtube_id":"G3-OOTj_Ktk"}},{"id":"B-20","genus":{"ja":"シノブゴケ属","en":"Thuidium"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNGNNNNNNANCTGGTGTTANGATTACAGATTAACTTATTACACTCCAGATTATCAGACTAAAGAGACTGATATTTTAGCAGCATTTCGAATGACTCCTCAACCAGGAGTACCCGCTGAAGAAGCAGGAGCTGCAGTAGCTGCGGAATCTTCCACTGGTACATGGACCACCGTTTGGACTGATGGACTTACCAGTCTTGATCGTTATAAAGGACGATGCTATGATCTTGAAGCAGTTCCTGGAGAAGAAAATCAATATATTGCTTATGTTGCTTACCCATTAGATCTATTTGAAGAAGGTTCTGTTACCAATTTATTTACTTCTATTGTTGGTAATGTTTTTGGATTTAAAGCTTTACGAGCTTTACGTCTAGAAGATTTACGTATTCCTCCAGCTTATTCCAAAACTTTCCAAGGCCCACCTCATGGTATTCAAGTTGAGAGAGATAAATTAAACAAATATGGTCGTCCATTATTAGGATGTACTATTAAGCCAAAATTAGGTTTATCTGCTAAAAACTATGGTAGAGCTGTATATGAATGTCTTCGTGGTGGATNNGANTTTTACAAAAAN"}],"marker_position":{"latitude":-32,"longtitude":-52,"radius":1.7},"collection_date":"2016.10.01","microscope":{"youtube_id":"wJiPaxhgXm0"}},{"id":"B-23","genus":{"ja":"チヂミザサ","en":"Oplismenus undulatifolius"},"dna_sequences":[{"region":"rbcL","text":"NNNNNNNNNNNNCTGGTGTTAGGATTATAAATTGAATTACTACACCCCGGAGTACGAAACCAAGGATACTGATATCTTGGCAGCATTCCGAGTAACTCCTCAGCCCGGGGTTCCGCCTGAAGAAGCAGGGGCTGCAGTAGCTGCGGAATCTTCTACTGGTACATGGACAACTGTTTGGACTGATGGACTTACCAGTCTTGATCGTTACAAAGGACGATGCTATCACATCGAGCCCGTTCCTGGGGATGCAGATCAATATATCTGTTATGTAGCTTATCCATTAGACCTATTTGAAGAGGGTTCTGTTACTAACATGTTTACTTCCATTGTGGGTAACGTATTTGGTTTCAAAGCCCTACGCGCTCTACGTTTGGAGGATCTACGAATTCCCACTACTTATTCAAAAACTTTCCAAGGCCCGCCTCACGGTATCCAAGTTGAAAGGGATAAGTTGAACAAGTATGGTCGTCCTTTTTTGGGATGTACTATTAAACCAAAATTGGGATTATCCGCAAAAAATTACGGTAGAGCGTGTTATGAGTGTCTACGCNNNNNNNTTTNNTNTN"}],"marker_position":{"latitude":-27,"longtitude":-114,"radius":3.2},"collection_date":"2016.10.01","microscope":{"youtube_id":"XdfnMKZwImU"}},{"id":"B-24","genus":{"ja":"タブノキ","en":"Machilus"},"dna_sequences":[{"region":"rbcL","text":"NNNNNGNNNNNNNNCTGGTGTTAAGATTACAAATTGACTTATTATACTCCTGACTATGAAACCAAAAGTACTGATATTTTGGCAGCATTTCGAGTAACTCCTCAACCCGGAGTTCCACCTGAGGAAGCAGGGGCTGCCGTAGCTGCCGAATCTTCTACTGGTACATGGACAACTGTGTGGACCGATGGACTTACCAGCCTTGATCGTTACAAAGGACGATGCTACCACATCGAGCCCGTTGCTGGGGAGGAAAGTCAATTTATTGCCTATGTAGCTTACCCTTTAGACCTTTTTGAAGAAGGTTCTGTTACGAACATGTTTACTTCTATTGTGGGTAATGTATTTGGGTTCAAAGCTCTACGAGCTCTACGTCTGGAGGATCTGCGAATTCCTCCTGCTTATTCCAAAACTTTCCAAGGCCCGCCCCATGGCATCCAAGTTGAGAGAGATAAATTGAACAAGTATGGTCGTCCCCTATTGGGATGTACTATTAAACCAAAATTGGGGTTATCCGCCAAGAACTACGGTAGAGCGGTTTATGAATGTCTCCGTGGTGNNTTNGAATTTTACAAAANAN"}],"marker_position":{"latitude":-1,"longtitude":-125,"radius":4.7},"collection_date":"2016.10.01","microscope":{"youtube_id":"au5oqDo4uoA"}}],"knowledges":[{"title":{"ja":"ユスリカ","en":"Chironomids"},"description":{"ja":"ハエ目の昆虫。蚊柱の多くはユスリカのオスの群飛で、メスはその群飛に飛び込み交尾をし、水辺に移動し産卵します。成虫の口器は退化し、食物をとらず、1日から数日の命です。幼虫は水底で成長し、魚類などの餌です。仁保の森には、山間渓流に生息する<a href=\"https://www.google.com/search?q='Tanypodinae'\" target=\"_blank\" class=\"border\">コヒメユスリカ（モンユスリカ亜科）</a>、<a href=\"https://www.google.com/search?q='Orthocladius'\" target=\"_blank\" class=\"border\">カニエリユスリカ（エリユスリカ亜科）</a>、水田など発生する<a href=\"https://www.google.com/search?q='Chironominae'\" target=\"_blank\" class=\"border\">ウスイロユスリカ（ユスリカ亜科）</a>をはじめ多種が生息。","en":"Chironomids are insects of the order Diptera. Most of the time, mosquito pillars are the swarming of flying male chironomids, and females fly into the swarm for copulation, then move to the waterside to lay eggs. The adults have atrophied mouthparts, and for this reason, they spend their lives without consuming any food and survive for one or a few days. Larval chironomids develop at the bottom of water, and animals such as fish prey on them. There are many species of chironomids inhabiting the forest of Niho, including <a href=\"https://www.google.com/search?q='Tanypodinae'\" target=\"_blank\" class=\"border\">Nilotanypus(Tanypodinae)</a> and <a href=\"https://www.google.com/search?q='Orthocladius'\" target=\"_blank\" class=\"border\">Orthocladius kanii(Orthocladius)</a> that live in mountain streams, and <a href=\"https://www.google.com/search?q='Chironominae'\" target=\"_blank\" class=\"border\">Chironomus kiiensis(Chironominae)</a> dwelling in paddy fields."},"marker_position":{"latitude":-10,"longtitude":-130,"radius":6}},{"title":{"ja":"トンボ","en":"Dragonflies"},"description":{"ja":"食虫性の昆虫。飛びながら小さな昆虫を捕えて食べます。体は細長く、早く、まっすぐに飛び、旋回やホバリングもこなします。大きな複眼は飛翔しながら昆虫を探すセンサーです。幼虫はヤゴとよばれ水棲で肉食です。仁保の森には、<a href=\"https://www.google.com/search?q='Coenagrionidae'\" target=\"_blank\" class=\"border\">イトトンボ</a>、<a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">カワトンボ</a>、<a href=\"https://www.google.com/search?q='Cordulegasteridae'\" target=\"_blank\" class=\"border\">オニヤンマ</a>、<a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">ヤンマ</a>、<a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">サナエ</a>、<a href=\"https://www.google.com/search?q='Libellulidae'\" target=\"_blank\" class=\"border\">トンボ</a>の仲間など多種類が生息。特に渓流では、春に<a href=\"https://www.google.com/search?q='Epiophlebiidae'\" target=\"_blank\" class=\"border\">ムカシトンボ</a>や<a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">カワトンボ</a>、5月頃から<a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">サナエ</a>の仲間、夏には<a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">ヤンマ</a>の仲間などがみられます。","en":"Dragonflies are insectivores. They capture small insects while flying and feed on them. With their thin and long body, they fly fast and straight, and can also circle and hover. Their big compound eyes are the sensor for hunting insects while flying in the air. The nymphs, called “yago” in Japanese, spend their juvenile stages underwater and are carnivorous. There are many species from the families <a href=\"https://www.google.com/search?q='Coenagrionidae'\" target=\"_blank\" class=\"border\">Coenagrionidae</a>, <a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">Calopterygidae</a>, <a href=\"https://www.google.com/search?q='Cordulegasteridae'\" target=\"_blank\" class=\"border\">Cordulegasteridae</a>, <a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">Aeshnidae</a>, <a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">Gomphidae</a>, and <a href=\"https://www.google.com/search?q='Libellulidae'\" target=\"_blank\" class=\"border\">Libellulidae</a> inhabiting in the forest of Niho. Especially near the mountain streams, you can find species from <a href=\"https://www.google.com/search?q='Epiophlebiidae'\" target=\"_blank\" class=\"border\">Epiophlebiidae</a> and <a href=\"https://www.google.com/search?q='Calopterygidae'\" target=\"_blank\" class=\"border\">Calopterygidae</a> families in spring, <a href=\"https://www.google.com/search?q='Gomphidae'\" target=\"_blank\" class=\"border\">Gomphidae</a> from around May, and <a href=\"https://www.google.com/search?q='Aeshnidae'\" target=\"_blank\" class=\"border\">Aeshnidae</a> during summer."},"marker_position":{"latitude":10,"longtitude":-150,"radius":4}},{"title":{"ja":"カエル","en":"Frogs"},"description":{"ja":"水中と陸上の両方で活動する半水生、繁殖期以外は陸上で生活する陸生に分かれます。後足は長く、跳躍運動に適応し、水かきがあります。樹上性カエルの指には吸盤があります。オタマジャクシは水中で成長します。意外と視野は狭いが、動いているものは捉えることができます。渓流域の森林部には<a href=\"https://www.google.com/search?q='Buergeria+buergeri'\" target=\"_blank\" class=\"border\">カジカガエル</a>、<a href=\"https://www.google.com/search?q='Rhacophorus+arboreus'\" target=\"_blank\" class=\"border\">モリアオガエル</a>、<a href=\"https://www.google.com/search?q='Rana+ornativentris'\" target=\"_blank\" class=\"border\">ヤマアカガエル</a>、<a href=\"https://www.google.com/search?q='Rana+tagoi'\" target=\"_blank\" class=\"border\">タゴガエル</a>、<a href=\"https://www.google.com/search?q='Bufo+japonicus'\" target=\"_blank\" class=\"border\">二ホンヒキガエル</a>が生息。田畑周辺には<a href=\"https://www.google.com/search?q='Hyla+japonica'\" target=\"_blank\" class=\"border\">ニホンアマガエル</a>などが生息。","en":"Frogs are divided into two groups; one group is semiaquatic, active both in water and on land, and another is terrestrial that spend their lives on land other than the breeding season. Their long rear legs are webbed and adapted for jumping movement, and arboreal frogs have fingers with suckers. Tadpoles develop in water. Frogs actually have a narrow range of vision, but they are capable of recognizing moving animals or objects. There are species such as <a href=\"https://www.google.com/search?q='Buergeria+buergeri'\" target=\"_blank\" class=\"border\">Buergeria buergeri</a>, <a href=\"https://www.google.com/search?q='Rhacophorus+arboreus'\" target=\"_blank\" class=\"border\">Rhacophorus arboreus</a>, <a href=\"https://www.google.com/search?q='Rana+ornativentris'\" target=\"_blank\" class=\"border\">Rana ornativentris</a>, <a href=\"https://www.google.com/search?q='Rana+tagoi'\" target=\"_blank\" class=\"border\">Rana tagoi</a>, and <a href=\"https://www.google.com/search?q='Bufo+japonicus'\" target=\"_blank\" class=\"border\">Bufo japonicus</a> inhabiting the areas with mountain streams in the forest. Around the fields, frogs such as <a href=\"https://www.google.com/search?q='Hyla+japonica'\" target=\"_blank\" class=\"border\">Hyla japonica</a> can be found."},"marker_position":{"latitude":-20,"longtitude":-150,"radius":4}},{"title":{"ja":"フクロウ","en":"Owls"},"description":{"ja":"多くは肉食性の鳥類で、夜行性の種が多く、大型種はネズミ、小鳥、ヘビなどを捕食します。小型種は昆虫食です。風切羽に消音構造があり、羽音をたてずに飛びます。頭は大きく、鋭いくちばし、大きな目、発達した耳を持ちます。仁保の森に生息している種類は、留鳥では<a href=\"https://www.google.com/search?q='Ural+owls'\" target=\"_blank\" class=\"border\">フクロウ</a>、<a href=\"https://www.google.com/search?q='Otus+lempiji'\" target=\"_blank\" class=\"border\">オオコノハズク</a>、夏鳥では<a href=\"https://www.google.com/search?q='Ninox+scutulata'\" target=\"_blank\" class=\"border\">アオバズク</a>、<a href=\"https://www.google.com/search?q='Otus+sunia'\" target=\"_blank\" class=\"border\">コノハズク</a>、冬鳥では<a href=\"https://www.google.com/search?q='Asio+flammeus'\" target=\"_blank\" class=\"border\">コミミズク</a>、<a href=\"https://www.google.com/search?q='Asio+otus'\" target=\"_blank\" class=\"border\">トラフグス</a>。","en":"Mostly carnivorous and nocturnal, owls with large body feed on mice, small birds, and snakes, while smaller species prey on insects. Their flight feathers are designed to silence the sounds, hence, they can fly without emitting any sounds of flapping wings. Their heads are big, with features including a sharp beak, big eyes, and developed ears. There are several owl species in the forest of Niho: the resident <a href=\"https://www.google.com/search?q='Ural+owls'\" target=\"_blank\" class=\"border\">Ural owls</a> and <a href=\"https://www.google.com/search?q='Otus+lempiji'\" target=\"_blank\" class=\"border\">Otus lempiji</a>; <a href=\"https://www.google.com/search?q='Ninox+scutulata'\" target=\"_blank\" class=\"border\">Ninox scutulata</a> and <a href=\"https://www.google.com/search?q='Otus+sunia'\" target=\"_blank\" class=\"border\">Otus sunia</a> that migrate to the forests during summer; and <a href=\"https://www.google.com/search?q='Asio+flammeus'\" target=\"_blank\" class=\"border\">Asio flammeus</a> and <a href=\"https://www.google.com/search?q='Asio+otus'\" target=\"_blank\" class=\"border\">Asio otus</a> that are winter migrants."},"marker_position":{"latitude":45,"longtitude":280,"radius":20}},{"title":{"ja":"ウロ","en":"Tree hollow"},"description":{"ja":"ケヤキなどの大きく成長する樹にはウロと呼ばれる穴ができやすいので、そこにフクロウなどが巣をつくります。ウロは入口の直径が10cm程度のさほど大きくはないものでも、奥が広くなっていることが多く、体長約50cmのフクロウも暮らすことができます。複数の動物が利用するため、ムササビや、夏に渡ってくるアオバズクなども使います。","en":"Trees such as zelkova that grow large tend to form hollows inside, and animals such as owls use those space to build dens. In many cases, even the holes with a 10 cm wide entrance, the interior tends to be spacious, which would be large enough for a 50 cm owl to dwell inside. Hollows are used by several animals including flying squirrels and brown hawk owls that migrate to the forests in summer."},"marker_position":{"latitude":42,"longtitude":21,"radius":14}},{"title":{"ja":"犬鳴の滝","en":"Inunaki Waterfall"},"description":{"ja":"この森の奥には落差20メートルの「犬鳴の滝」があり、川となって森と里をつなぎ、仁保川に流れ込んでいます。そのため、山や里によくいる生き物に加えて、渓流系の生き物も住んでいます。また、この辺りは植林による針葉樹も少なく、自然に育った多様な広葉樹が残っている豊かな森です。","en":"Deep in the forest, there is a twenty-meter Inunaki Waterfall, which forms a river that links the forest and villages and flows into a main stream of Niho River. In addition to the wildlife often seen in mountains and village-vicinity woodlands, the types of creatures that dwell near mountain streams also inhabit the forest. Only a small number of coniferous trees are planted in this forest, where richness still remains with a wide diversity of naturally-grown broadleaved trees."},"marker_position":{"latitude":15,"longtitude":-60,"radius":25}},{"title":{"ja":"ハムシ","en":"Leaf beetles"},"description":{"ja":"ハムシ（葉虫）は幼虫も成虫も生きた植物にくっついて、葉っぱを食べて暮らしています。甲虫目で硬い虫であり、危険を察知するとすぐ葉っぱから落ちて身を守ります。食べる植物の好き嫌いがハッキリしていて、シソ科の多年草などを好みます。","en":"Adult and larval leaf beetles spend their lives attached to living plants and feed on leaves. They are coleopteran with hard body. When they sense impending danger, they protect themselves by immediately falling onto the ground. They have definite food likes and dislikes, and prefer eating perennial plants such as labiates."},"marker_position":{"latitude":-40,"longtitude":50,"radius":1.5}},{"title":{"ja":"山道と広場と崖の穴","en":"Mountain paths"},"description":{"ja":"人が通る山道は動物の通り道にもなっており、夜間にカメラを置いておくと動物たちが多く映ります。フクロウは広くひらけたところを狩場として利用します。夜、木の高いところから観察し、野ネズミなどが出てくると捉えて食べます。また、崖の穴は、ヒミズ（モグラの仲間）、モグラ、ヘビ、ノネズミなどの生息場所としてシェアされています。","en":"Mountain paths for humans also function as pathways for wildlife. A camera left on standby at nighttime would capture the records of many animals passing by. Wide and open areas are used as hunting field by owls, that would observe from high places on trees at night to wait for emerging field mice to prey on. Holes on the cliff sides are shared as habitats among animals such as shrew-moles, moles, snakes, and field mice."},"marker_position":{"latitude":-40,"longtitude":-90,"radius":1.7}},{"title":{"ja":"危険な生きもの","en":"Dangerous Creatures"},"description":{"ja":"秋の採集の時期はカエルがいたのでマムシも出てきていました。ヘビは草むらにいることも多く、草むらに入ることがある場合は気をつけて入る必要があります。ブト・ブヨや蚊にも注意が必要です。","en":"Frogs appeared during the fieldwork season in the autumn, but so as vipers, a type of venomous snake. It is important to be careful when entering into the grass, where snakes are often found, and keep wary eyes on black flies and mosquitos as well."},"marker_position":{"latitude":-5,"longtitude":-95,"radius":8}},{"title":{"ja":"ノネズミ","en":"Field mice"},"description":{"ja":"森にはたくさんのノネズミが生息しています。林の中では直径1-2cmの穴を多く見つけることができますが、これらはノネズミの巣穴であることも多いです。ノネズミは夜行性の動物で、夜に活動してドングリ類などを食べています。フクロウの主な食料でもあります。","en":"In the forest, there are many field mice. On the cliff sides, you can find lots of holes with diameter of 1-2 cm, which happens to be the burrows of field mice in many cases. The mice are nocturnal and eat acorns and such. They are the staple food for owls."},"marker_position":{"latitude":-5,"longtitude":0,"radius":6.5}},{"title":{"ja":"ザトウムシ","en":"Harvestmen"},"description":{"ja":"クモを連想するような長い足を持った外見のためザトウグモとも呼ばれますが、網状の巣をつくるクモとは別グループに属します。ザトウムシは川を超えられないので、川をはさんで、種が異なっている可能性もあります。","en":"Due to their appearance having long legs that remind us of spiders, harvestmen are also called as “Zatougumo” in Japanese, which the word “kumo (or gumo)” refers to “spider.” However, they actually belong to a group different from the spiders that construct spiderwebs. Since they are incapable to travel across water, their species may be distinct from the ones on the other side of the river."},"marker_position":{"latitude":20,"longtitude":22.5,"radius":10}}]}
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports) {
 
 module.exports = {"camera_default_position":{"longtitude":1882,"latitude":46.2}}
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./kumano/config.json": 207,
-	"./niho/config.json": 208
+	"./kumano/config.json": 208,
+	"./niho/config.json": 209
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -59044,22 +59067,22 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 206;
-
-/***/ }),
-/* 207 */
-/***/ (function(module, exports) {
-
-module.exports = {"camera_default_position":{"longtitude":265,"latitude":0}}
+webpackContext.id = 207;
 
 /***/ }),
 /* 208 */
 /***/ (function(module, exports) {
 
-module.exports = {}
+module.exports = {"camera_default_position":{"longtitude":265,"latitude":0}}
 
 /***/ }),
 /* 209 */
+/***/ (function(module, exports) {
+
+module.exports = {}
+
+/***/ }),
+/* 210 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59081,7 +59104,9 @@ var render = function() {
         { attrs: { name: "fade" } },
         [
           _vm.$route.params.index
-            ? _c("detail-drawer", { attrs: { markers: _vm.markers } })
+            ? _c("detail-drawer", {
+                attrs: { markers: _vm.markers, initial_data: _vm.initial_data }
+              })
             : _vm._e()
         ],
         1
@@ -59102,13 +59127,13 @@ if (false) {
 }
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(211);
+var content = __webpack_require__(212);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -59128,7 +59153,7 @@ if(false) {
 }
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -59136,18 +59161,18 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n@keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-webkit-keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-moz-keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-webkit-keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-moz-keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n.fade-enter-active[data-v-52cbab82],\n.fade-leave-active[data-v-52cbab82] {\n  transition: opacity 1.5s;\n}\n.fade-enter[data-v-52cbab82],\n.fade-leave-active[data-v-52cbab82] {\n  opacity: 0;\n}\n.instruction_anim-enter-active[data-v-52cbab82],\n.instruction_anim-leave-active[data-v-52cbab82] {\n  transition: opacity 0.3s;\n}\n.instruction_anim-enter[data-v-52cbab82],\n.instruction_anim-leave-active[data-v-52cbab82] {\n  opacity: 0;\n}\n#container[data-v-52cbab82] {\n  height: 100%;\n  overflow: hidden;\n}\n.ycam[data-v-52cbab82] {\n  position: absolute;\n  top: 18px;\n  right: 22px;\n  z-index: 11;\n  user-select: none;\n}\n.ycam[data-v-52cbab82]:hover {\n    opacity: 0.7;\n}\n.copyright[data-v-52cbab82] {\n  position: absolute;\n  bottom: 19px;\n  right: 22px;\n  z-index: 11;\n  font-family: 'Roboto';\n  font-size: 9px;\n  line-height: 15px;\n  text-align: right;\n  opacity: 0.55;\n}\n.copyright a[data-v-52cbab82] {\n    color: #fff;\n    text-decoration: none;\n}\n.copyright a[data-v-52cbab82]:hover {\n      border-bottom: 1px dotted #ccc;\n}\n.marker[data-v-52cbab82] {\n  position: absolute;\n  cursor: pointer;\n  z-index: 10;\n  user-select: none;\n  height: 14px;\n  line-height: 14px;\n  white-space: nowrap;\n  transform-origin: 0% 50%;\n  -webkit-transform-origin: 0% 50%;\n  transform: rotate(-90deg);\n  -webkit-transform: rotate(-90deg);\n}\n.marker img[data-v-52cbab82] {\n    display: inline-block;\n    vertical-align: middle;\n    cursor: pointer;\n    user-select: none;\n    pointer-events: none;\n}\n.marker img.label[data-v-52cbab82] {\n    margin-left: 5px;\n}\n.marker[data-v-52cbab82]:hover {\n    animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n    -webkit-animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n    -moz-animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n}\n.marker.selected[data-v-52cbab82] {\n    animation: flash-data-v-52cbab82 1s infinite linear;\n    -webkit-animation: flash-data-v-52cbab82 1s infinite linear;\n    -moz-animation: flash-data-v-52cbab82 1s infinite linear;\n}\n.marker.sample[data-v-52cbab82] {\n    margin-left: 7px;\n}\n.marker.sample[data-v-52cbab82]:before {\n      display: inline-block;\n      content: '';\n      width: 13px;\n      height: 14px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow.png\");\n      background-size: 13px 14px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample[data-v-52cbab82]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow@2x.png\");\n}\n}\n.marker.sample .dna_barcode[data-v-52cbab82] {\n      margin-left: 5px;\n      cursor: pointer;\n}\n.marker.sample.shadow[data-v-52cbab82]:before {\n      display: inline-block;\n      width: 17px;\n      height: 18px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow.png\");\n      background-size: 17px 18px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample.shadow[data-v-52cbab82]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow@2x.png\");\n}\n}\n.marker.sample.shadow img.label[data-v-52cbab82] {\n      margin-left: 3px;\n}\n.marker.sample:hover .dna_barcode[data-v-52cbab82] {\n      animation-duration: 500s !important;\n      -webkit-animation-duration: 500s !important;\n      -moz-animation-duration: 500s !important;\n}\n.marker.knowledge[data-v-52cbab82] {\n    margin-top: 3.5px;\n    margin-left: 3.5px;\n}\n.marker.knowledge[data-v-52cbab82]:before {\n      display: inline-block;\n      content: '';\n      width: 14px;\n      height: 14px;\n      vertical-align: middle;\n      border-radius: 7px;\n      background-color: #fcff00;\n}\n@media (max-width: 660px) {\n.ycam[data-v-52cbab82] {\n    right: inherit;\n    left: 22px;\n    opacity: 0.5;\n}\n.copyright[data-v-52cbab82] {\n    bottom: inherit;\n    top: 19px;\n    right: 22px;\n    opacity: 0.5;\n}\n}\n[data-lang='en'] .marker span.label[data-v-52cbab82] {\n  font-family: 'Roboto';\n  color: #fcff00;\n  font-size: 11px;\n  letter-spacing: 0.1em;\n  margin-left: 5px;\n}\n[data-lang='en'] .marker.shadow span.label[data-v-52cbab82] {\n  text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px, rgba(0, 0, 0, 0.2) -1px -1px 1px, rgba(0, 0, 0, 0.2) -1px 1px 1px, rgba(0, 0, 0, 0.2) 1px -1px 1px, rgba(0, 0, 0, 0.2) 0px 1px 1px, rgba(0, 0, 0, 0.2) 0 -1px 1px, rgba(0, 0, 0, 0.2) -1px 0 1px, rgba(0, 0, 0, 0.2) 1px 0 1px;\n}\n", ""]);
+exports.push([module.i, "\n@keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-webkit-keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@-moz-keyframes flash-data-v-52cbab82 {\n0% {\n    opacity: 0.4;\n}\n50% {\n    opacity: 1;\n}\n100% {\n    opacity: 0.4;\n}\n}\n@keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-webkit-keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n@-moz-keyframes hover_flash-data-v-52cbab82 {\n0% {\n    opacity: 1;\n}\n50% {\n    opacity: 0.4;\n}\n100% {\n    opacity: 1;\n}\n}\n.fade-enter-active[data-v-52cbab82],\n.fade-leave-active[data-v-52cbab82] {\n  transition: opacity 1.5s;\n}\n.fade-enter[data-v-52cbab82],\n.fade-leave-active[data-v-52cbab82] {\n  opacity: 0;\n}\n.instruction_anim-enter-active[data-v-52cbab82],\n.instruction_anim-leave-active[data-v-52cbab82] {\n  transition: opacity 0.3s;\n}\n.instruction_anim-enter[data-v-52cbab82],\n.instruction_anim-leave-active[data-v-52cbab82] {\n  opacity: 0;\n}\n#container[data-v-52cbab82] {\n  height: 100%;\n  overflow: hidden;\n}\n.ycam[data-v-52cbab82] {\n  position: absolute;\n  top: 18px;\n  right: 22px;\n  z-index: 11;\n  user-select: none;\n}\n.ycam[data-v-52cbab82]:hover {\n    opacity: 0.7;\n}\n.copyright[data-v-52cbab82] {\n  position: absolute;\n  bottom: 19px;\n  right: 22px;\n  z-index: 11;\n  font-family: 'Roboto';\n  font-size: 9px;\n  line-height: 15px;\n  text-align: right;\n  opacity: 0.55;\n}\n.copyright a[data-v-52cbab82] {\n    color: #fff;\n    text-decoration: none;\n}\n.copyright a[data-v-52cbab82]:hover {\n      border-bottom: 1px dotted #ccc;\n}\n.marker[data-v-52cbab82] {\n  position: absolute;\n  cursor: pointer;\n  z-index: 10;\n  user-select: none;\n  height: 14px;\n  line-height: 14px;\n  white-space: nowrap;\n  transform-origin: 0% 50%;\n  -webkit-transform-origin: 0% 50%;\n  transform: rotate(-90deg);\n  -webkit-transform: rotate(-90deg);\n}\n.marker img[data-v-52cbab82] {\n    display: inline-block;\n    vertical-align: middle;\n    cursor: pointer;\n    user-select: none;\n    pointer-events: none;\n}\n.marker img.label[data-v-52cbab82] {\n    margin-left: 5px;\n}\n.marker[data-v-52cbab82]:hover {\n    animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n    -webkit-animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n    -moz-animation: hover_flash-data-v-52cbab82 0.2s 1 linear;\n}\n.marker.selected[data-v-52cbab82] {\n    animation: flash-data-v-52cbab82 1s infinite linear;\n    -webkit-animation: flash-data-v-52cbab82 1s infinite linear;\n    -moz-animation: flash-data-v-52cbab82 1s infinite linear;\n}\n.marker.sample[data-v-52cbab82] {\n    margin-left: 7px;\n}\n.marker.sample[data-v-52cbab82]:before {\n      display: inline-block;\n      content: '';\n      width: 13px;\n      height: 16px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow.png\");\n      background-size: 13px 14px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample[data-v-52cbab82]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow@2x.png\");\n}\n}\n.marker.sample .dna_barcode[data-v-52cbab82] {\n      margin-left: 5px;\n      cursor: pointer;\n}\n.marker.sample.shadow[data-v-52cbab82]:before {\n      display: inline-block;\n      width: 17px;\n      height: 18px;\n      background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow.png\");\n      background-size: 17px 18px;\n      background-position: center;\n      background-repeat: no-repeat;\n      vertical-align: middle;\n}\n@media all and (-webkit-min-device-pixel-ratio: 1.5), all and (-o-min-device-pixel-ratio: 3 / 2), all and (min--moz-device-pixel-ratio: 1.5), all and (min-device-pixel-ratio: 1.5) {\n.marker.sample.shadow[data-v-52cbab82]:before {\n          background-image: url(\"/dna-of-forests/img/panorama/marker-arrow-shadow@2x.png\");\n}\n}\n.marker.sample.shadow img.label[data-v-52cbab82] {\n      margin-left: 3px;\n}\n.marker.sample:hover .dna_barcode[data-v-52cbab82] {\n      animation-duration: 500s !important;\n      -webkit-animation-duration: 500s !important;\n      -moz-animation-duration: 500s !important;\n}\n.marker.knowledge[data-v-52cbab82] {\n    margin-top: 3.5px;\n    margin-left: 3.5px;\n}\n.marker.knowledge[data-v-52cbab82]:before {\n      display: inline-block;\n      content: '';\n      width: 14px;\n      height: 14px;\n      vertical-align: middle;\n      border-radius: 7px;\n      background-color: #fcff00;\n}\n@media (max-width: 660px) {\n.ycam[data-v-52cbab82] {\n    right: inherit;\n    left: 22px;\n    opacity: 0.5;\n}\n.copyright[data-v-52cbab82] {\n    bottom: inherit;\n    top: 19px;\n    right: 22px;\n    opacity: 0.5;\n}\n}\n[data-lang='en'] .marker span.label[data-v-52cbab82] {\n  font-family: 'Roboto';\n  color: #fcff00;\n  font-size: 11px;\n  letter-spacing: 0.1em;\n  margin-left: 5px;\n}\n[data-lang='en'] .marker.shadow span.label[data-v-52cbab82] {\n  text-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px, rgba(0, 0, 0, 0.2) -1px -1px 1px, rgba(0, 0, 0, 0.2) -1px 1px 1px, rgba(0, 0, 0, 0.2) 1px -1px 1px, rgba(0, 0, 0, 0.2) 0px 1px 1px, rgba(0, 0, 0, 0.2) 0 -1px 1px, rgba(0, 0, 0, 0.2) -1px 0 1px, rgba(0, 0, 0, 0.2) 1px 0 1px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function( self ){
 
-	var THREE = __webpack_require__(213);
+	var THREE = __webpack_require__(214);
 
 	module.exports = function( addons ){
 
@@ -59164,7 +59189,7 @@ exports.push([module.i, "\n@keyframes flash-data-v-52cbab82 {\n0% {\n    opacity
 				}
 				else if( typeof addon === "string" ){
 
-					__webpack_require__(215)("./" + addon + ".js")(THREE);
+					__webpack_require__(216)("./" + addon + ".js")(THREE);
 
 				}
 				else {
@@ -59185,7 +59210,7 @@ exports.push([module.i, "\n@keyframes flash-data-v-52cbab82 {\n0% {\n    opacity
 
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {var __WEBPACK_AMD_DEFINE_RESULT__;(function( self ){
@@ -100937,7 +100962,7 @@ exports.push([module.i, "\n@keyframes flash-data-v-52cbab82 {\n0% {\n    opacity
 
 	};
 
-	if( "function" !== "undefined" && __webpack_require__(26) instanceof Function && __webpack_require__(214) != undefined ){
+	if( "function" !== "undefined" && __webpack_require__(27) instanceof Function && __webpack_require__(215) != undefined ){
 
 		!(__WEBPACK_AMD_DEFINE_RESULT__ = (function(){
 
@@ -100962,7 +100987,7 @@ exports.push([module.i, "\n@keyframes flash-data-v-52cbab82 {\n0% {\n    opacity
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -100971,70 +100996,70 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./AdaptiveToneMappingPass.js": 216,
-	"./BasicShader.js": 217,
-	"./BleachBypassShader.js": 218,
-	"./BlendShader.js": 219,
-	"./BloomPass.js": 220,
-	"./BokehPass.js": 221,
-	"./BokehShader.js": 222,
-	"./BokehShader2.js": 223,
-	"./BrightnessContrastShader.js": 224,
-	"./CanvasRenderer.js": 225,
-	"./ColorCorrectionShader.js": 226,
-	"./ColorifyShader.js": 227,
-	"./ConvolutionShader.js": 228,
-	"./CopyShader.js": 229,
-	"./DDSLoader.js": 230,
-	"./DOFMipMapShader.js": 231,
-	"./DigitalGlitch.js": 232,
-	"./DotScreenPass.js": 233,
-	"./DotScreenShader.js": 234,
-	"./EdgeShader.js": 235,
-	"./EdgeShader2.js": 236,
-	"./EffectComposer.js": 237,
-	"./FXAAShader.js": 238,
-	"./FilmPass.js": 239,
-	"./FilmShader.js": 240,
-	"./FocusShader.js": 241,
-	"./FresnelShader.js": 242,
-	"./GammaCorrectionShader.js": 243,
-	"./GlitchPass.js": 244,
-	"./HorizontalBlurShader.js": 245,
-	"./HorizontalTiltShiftShader.js": 246,
-	"./HueSaturationShader.js": 247,
-	"./JSONLoader.js": 248,
-	"./KaleidoShader.js": 249,
-	"./LuminosityShader.js": 250,
-	"./MTLLoader.js": 251,
-	"./MarchingCubes.js": 252,
-	"./MaskPass.js": 253,
-	"./MirrorShader.js": 254,
-	"./NormalMapShader.js": 255,
-	"./OBJLoader.js": 256,
-	"./OceanShaders.js": 257,
-	"./OrbitControls.js": 258,
-	"./ParallaxShader.js": 259,
-	"./Projector.js": 260,
-	"./RGBShiftShader.js": 261,
-	"./RenderPass.js": 262,
-	"./SSAOShader.js": 263,
-	"./SVGLoader.js": 264,
-	"./SavePass.js": 265,
-	"./SepiaShader.js": 266,
-	"./ShaderPass.js": 267,
-	"./TechnicolorShader.js": 268,
-	"./TexturePass.js": 269,
-	"./ToneMapShader.js": 270,
-	"./TriangleBlurShader.js": 271,
-	"./UnpackDepthRGBAShader.js": 272,
-	"./VerticalBlurShader.js": 273,
-	"./VerticalTiltShiftShader.js": 274,
-	"./VignetteShader.js": 275
+	"./AdaptiveToneMappingPass.js": 217,
+	"./BasicShader.js": 218,
+	"./BleachBypassShader.js": 219,
+	"./BlendShader.js": 220,
+	"./BloomPass.js": 221,
+	"./BokehPass.js": 222,
+	"./BokehShader.js": 223,
+	"./BokehShader2.js": 224,
+	"./BrightnessContrastShader.js": 225,
+	"./CanvasRenderer.js": 226,
+	"./ColorCorrectionShader.js": 227,
+	"./ColorifyShader.js": 228,
+	"./ConvolutionShader.js": 229,
+	"./CopyShader.js": 230,
+	"./DDSLoader.js": 231,
+	"./DOFMipMapShader.js": 232,
+	"./DigitalGlitch.js": 233,
+	"./DotScreenPass.js": 234,
+	"./DotScreenShader.js": 235,
+	"./EdgeShader.js": 236,
+	"./EdgeShader2.js": 237,
+	"./EffectComposer.js": 238,
+	"./FXAAShader.js": 239,
+	"./FilmPass.js": 240,
+	"./FilmShader.js": 241,
+	"./FocusShader.js": 242,
+	"./FresnelShader.js": 243,
+	"./GammaCorrectionShader.js": 244,
+	"./GlitchPass.js": 245,
+	"./HorizontalBlurShader.js": 246,
+	"./HorizontalTiltShiftShader.js": 247,
+	"./HueSaturationShader.js": 248,
+	"./JSONLoader.js": 249,
+	"./KaleidoShader.js": 250,
+	"./LuminosityShader.js": 251,
+	"./MTLLoader.js": 252,
+	"./MarchingCubes.js": 253,
+	"./MaskPass.js": 254,
+	"./MirrorShader.js": 255,
+	"./NormalMapShader.js": 256,
+	"./OBJLoader.js": 257,
+	"./OceanShaders.js": 258,
+	"./OrbitControls.js": 259,
+	"./ParallaxShader.js": 260,
+	"./Projector.js": 261,
+	"./RGBShiftShader.js": 262,
+	"./RenderPass.js": 263,
+	"./SSAOShader.js": 264,
+	"./SVGLoader.js": 265,
+	"./SavePass.js": 266,
+	"./SepiaShader.js": 267,
+	"./ShaderPass.js": 268,
+	"./TechnicolorShader.js": 269,
+	"./TexturePass.js": 270,
+	"./ToneMapShader.js": 271,
+	"./TriangleBlurShader.js": 272,
+	"./UnpackDepthRGBAShader.js": 273,
+	"./VerticalBlurShader.js": 274,
+	"./VerticalTiltShiftShader.js": 275,
+	"./VignetteShader.js": 276
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -101050,10 +101075,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 215;
+webpackContext.id = 216;
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -101379,7 +101404,7 @@ webpackContext.id = 215;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101419,7 +101444,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101492,7 +101517,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101551,7 +101576,7 @@ module.exports = function( THREE ){
 }
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -101677,7 +101702,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -101790,7 +101815,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -101915,7 +101940,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102294,7 +102319,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -102361,7 +102386,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -103485,7 +103510,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103544,7 +103569,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103602,7 +103627,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103712,7 +103737,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 229 */
+/* 230 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -103767,7 +103792,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 230 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -104046,7 +104071,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 231 */
+/* 232 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104113,7 +104138,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 232 */
+/* 233 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104225,7 +104250,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -104296,7 +104321,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 234 */
+/* 235 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104373,7 +104398,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 235 */
+/* 236 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104475,7 +104500,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 236 */
+/* 237 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104557,7 +104582,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 237 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -104705,7 +104730,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104733,7 +104758,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -104805,7 +104830,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -104918,7 +104943,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 241 */
+/* 242 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105018,7 +105043,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 242 */
+/* 243 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105101,7 +105126,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 243 */
+/* 244 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105160,7 +105185,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 244 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -105283,7 +105308,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105354,7 +105379,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 246 */
+/* 247 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105428,7 +105453,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 247 */
+/* 248 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -105506,7 +105531,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 248 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -106071,7 +106096,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -106140,7 +106165,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -106199,7 +106224,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -106625,7 +106650,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -107691,7 +107716,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -107787,7 +107812,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -107854,7 +107879,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -107916,7 +107941,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -108329,7 +108354,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports) {
 
 ﻿module.exports = function( THREE ){
@@ -108726,7 +108751,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -109773,7 +109798,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -109966,7 +109991,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -110897,7 +110922,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -110962,7 +110987,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111022,7 +111047,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111256,7 +111281,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111298,7 +111323,7 @@ module.exports = function( THREE ){
 };
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -111371,7 +111396,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111434,7 +111459,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111503,7 +111528,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111559,7 +111584,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(console) {module.exports = function( THREE ){
@@ -111616,7 +111641,7 @@ module.exports = function( THREE ){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111700,7 +111725,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111787,7 +111812,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111853,7 +111878,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111924,7 +111949,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -111998,7 +112023,7 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports) {
 
 module.exports = function( THREE ){
@@ -112070,19 +112095,19 @@ module.exports = function( THREE ){
 
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_barcode_bg_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_00863184_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_00863184_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_barcode_bg_vue__ = __webpack_require__(281);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(277)
+  __webpack_require__(278)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -112128,13 +112153,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(278);
+var content = __webpack_require__(279);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -112154,7 +112179,7 @@ if(false) {
 }
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -112168,7 +112193,7 @@ exports.push([module.i, "\n@-webkit-keyframes bgscroll {\n0% {\n    background-p
 
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112190,7 +112215,7 @@ if (false) {
 }
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112222,16 +112247,16 @@ if (false) {
 }
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e7f20be4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_entrance_modal_vue__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e7f20be4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_entrance_modal_vue__ = __webpack_require__(285);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(282)
+  __webpack_require__(283)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -112276,13 +112301,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(283);
+var content = __webpack_require__(284);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -112302,7 +112327,7 @@ if(false) {
 }
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -112316,7 +112341,7 @@ exports.push([module.i, "\n.wrapper[data-v-e7f20be4] {\n  display: table;\n  pos
 
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112395,16 +112420,16 @@ if (false) {
 }
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_371f92b4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_instruction_modal_vue__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_template_compiler_index_id_data_v_371f92b4_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_instruction_modal_vue__ = __webpack_require__(289);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(286)
+  __webpack_require__(287)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -112449,13 +112474,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(287);
+var content = __webpack_require__(288);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -112475,7 +112500,7 @@ if(false) {
 }
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -112489,7 +112514,7 @@ exports.push([module.i, "\n.wrapper[data-v-371f92b4] {\n  display: table;\n  pos
 
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112530,7 +112555,7 @@ if (false) {
 }
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112682,13 +112707,13 @@ if (false) {
 }
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(291);
+var content = __webpack_require__(292);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -112708,7 +112733,7 @@ if(false) {
 }
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -112722,7 +112747,7 @@ exports.push([module.i, "\nsection.list[data-v-c51188aa] {\n  height: 100%;\n  o
 
 
 /***/ }),
-/* 292 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -112965,248 +112990,248 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 
 
 /***/ }),
-/* 293 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 34,
-	"./af.js": 34,
-	"./ar": 35,
-	"./ar-dz": 36,
-	"./ar-dz.js": 36,
-	"./ar-kw": 37,
-	"./ar-kw.js": 37,
-	"./ar-ly": 38,
-	"./ar-ly.js": 38,
-	"./ar-ma": 39,
-	"./ar-ma.js": 39,
-	"./ar-sa": 40,
-	"./ar-sa.js": 40,
-	"./ar-tn": 41,
-	"./ar-tn.js": 41,
-	"./ar.js": 35,
-	"./az": 42,
-	"./az.js": 42,
-	"./be": 43,
-	"./be.js": 43,
-	"./bg": 44,
-	"./bg.js": 44,
-	"./bm": 45,
-	"./bm.js": 45,
-	"./bn": 46,
-	"./bn.js": 46,
-	"./bo": 47,
-	"./bo.js": 47,
-	"./br": 48,
-	"./br.js": 48,
-	"./bs": 49,
-	"./bs.js": 49,
-	"./ca": 50,
-	"./ca.js": 50,
-	"./cs": 51,
-	"./cs.js": 51,
-	"./cv": 52,
-	"./cv.js": 52,
-	"./cy": 53,
-	"./cy.js": 53,
-	"./da": 54,
-	"./da.js": 54,
-	"./de": 55,
-	"./de-at": 56,
-	"./de-at.js": 56,
-	"./de-ch": 57,
-	"./de-ch.js": 57,
-	"./de.js": 55,
-	"./dv": 58,
-	"./dv.js": 58,
-	"./el": 59,
-	"./el.js": 59,
-	"./en-au": 60,
-	"./en-au.js": 60,
-	"./en-ca": 61,
-	"./en-ca.js": 61,
-	"./en-gb": 62,
-	"./en-gb.js": 62,
-	"./en-ie": 63,
-	"./en-ie.js": 63,
-	"./en-nz": 64,
-	"./en-nz.js": 64,
-	"./eo": 65,
-	"./eo.js": 65,
-	"./es": 66,
-	"./es-do": 67,
-	"./es-do.js": 67,
-	"./es-us": 68,
-	"./es-us.js": 68,
-	"./es.js": 66,
-	"./et": 69,
-	"./et.js": 69,
-	"./eu": 70,
-	"./eu.js": 70,
-	"./fa": 71,
-	"./fa.js": 71,
-	"./fi": 72,
-	"./fi.js": 72,
-	"./fo": 73,
-	"./fo.js": 73,
-	"./fr": 74,
-	"./fr-ca": 75,
-	"./fr-ca.js": 75,
-	"./fr-ch": 76,
-	"./fr-ch.js": 76,
-	"./fr.js": 74,
-	"./fy": 77,
-	"./fy.js": 77,
-	"./gd": 78,
-	"./gd.js": 78,
-	"./gl": 79,
-	"./gl.js": 79,
-	"./gom-latn": 80,
-	"./gom-latn.js": 80,
-	"./gu": 81,
-	"./gu.js": 81,
-	"./he": 82,
-	"./he.js": 82,
-	"./hi": 83,
-	"./hi.js": 83,
-	"./hr": 84,
-	"./hr.js": 84,
-	"./hu": 85,
-	"./hu.js": 85,
-	"./hy-am": 86,
-	"./hy-am.js": 86,
-	"./id": 87,
-	"./id.js": 87,
-	"./is": 88,
-	"./is.js": 88,
-	"./it": 89,
-	"./it.js": 89,
-	"./ja": 90,
-	"./ja.js": 90,
-	"./jv": 91,
-	"./jv.js": 91,
-	"./ka": 92,
-	"./ka.js": 92,
-	"./kk": 93,
-	"./kk.js": 93,
-	"./km": 94,
-	"./km.js": 94,
-	"./kn": 95,
-	"./kn.js": 95,
-	"./ko": 96,
-	"./ko.js": 96,
-	"./ky": 97,
-	"./ky.js": 97,
-	"./lb": 98,
-	"./lb.js": 98,
-	"./lo": 99,
-	"./lo.js": 99,
-	"./lt": 100,
-	"./lt.js": 100,
-	"./lv": 101,
-	"./lv.js": 101,
-	"./me": 102,
-	"./me.js": 102,
-	"./mi": 103,
-	"./mi.js": 103,
-	"./mk": 104,
-	"./mk.js": 104,
-	"./ml": 105,
-	"./ml.js": 105,
-	"./mr": 106,
-	"./mr.js": 106,
-	"./ms": 107,
-	"./ms-my": 108,
-	"./ms-my.js": 108,
-	"./ms.js": 107,
-	"./mt": 109,
-	"./mt.js": 109,
-	"./my": 110,
-	"./my.js": 110,
-	"./nb": 111,
-	"./nb.js": 111,
-	"./ne": 112,
-	"./ne.js": 112,
-	"./nl": 113,
-	"./nl-be": 114,
-	"./nl-be.js": 114,
-	"./nl.js": 113,
-	"./nn": 115,
-	"./nn.js": 115,
-	"./pa-in": 116,
-	"./pa-in.js": 116,
-	"./pl": 117,
-	"./pl.js": 117,
-	"./pt": 118,
-	"./pt-br": 119,
-	"./pt-br.js": 119,
-	"./pt.js": 118,
-	"./ro": 120,
-	"./ro.js": 120,
-	"./ru": 121,
-	"./ru.js": 121,
-	"./sd": 122,
-	"./sd.js": 122,
-	"./se": 123,
-	"./se.js": 123,
-	"./si": 124,
-	"./si.js": 124,
-	"./sk": 125,
-	"./sk.js": 125,
-	"./sl": 126,
-	"./sl.js": 126,
-	"./sq": 127,
-	"./sq.js": 127,
-	"./sr": 128,
-	"./sr-cyrl": 129,
-	"./sr-cyrl.js": 129,
-	"./sr.js": 128,
-	"./ss": 130,
-	"./ss.js": 130,
-	"./sv": 131,
-	"./sv.js": 131,
-	"./sw": 132,
-	"./sw.js": 132,
-	"./ta": 133,
-	"./ta.js": 133,
-	"./te": 134,
-	"./te.js": 134,
-	"./tet": 135,
-	"./tet.js": 135,
-	"./th": 136,
-	"./th.js": 136,
-	"./tl-ph": 137,
-	"./tl-ph.js": 137,
-	"./tlh": 138,
-	"./tlh.js": 138,
-	"./tr": 139,
-	"./tr.js": 139,
-	"./tzl": 140,
-	"./tzl.js": 140,
-	"./tzm": 141,
-	"./tzm-latn": 142,
-	"./tzm-latn.js": 142,
-	"./tzm.js": 141,
-	"./uk": 143,
-	"./uk.js": 143,
-	"./ur": 144,
-	"./ur.js": 144,
-	"./uz": 145,
-	"./uz-latn": 146,
-	"./uz-latn.js": 146,
-	"./uz.js": 145,
-	"./vi": 147,
-	"./vi.js": 147,
-	"./x-pseudo": 148,
-	"./x-pseudo.js": 148,
-	"./yo": 149,
-	"./yo.js": 149,
-	"./zh-cn": 150,
-	"./zh-cn.js": 150,
-	"./zh-hk": 151,
-	"./zh-hk.js": 151,
-	"./zh-tw": 152,
-	"./zh-tw.js": 152
+	"./af": 36,
+	"./af.js": 36,
+	"./ar": 37,
+	"./ar-dz": 38,
+	"./ar-dz.js": 38,
+	"./ar-kw": 39,
+	"./ar-kw.js": 39,
+	"./ar-ly": 40,
+	"./ar-ly.js": 40,
+	"./ar-ma": 41,
+	"./ar-ma.js": 41,
+	"./ar-sa": 42,
+	"./ar-sa.js": 42,
+	"./ar-tn": 43,
+	"./ar-tn.js": 43,
+	"./ar.js": 37,
+	"./az": 44,
+	"./az.js": 44,
+	"./be": 45,
+	"./be.js": 45,
+	"./bg": 46,
+	"./bg.js": 46,
+	"./bm": 47,
+	"./bm.js": 47,
+	"./bn": 48,
+	"./bn.js": 48,
+	"./bo": 49,
+	"./bo.js": 49,
+	"./br": 50,
+	"./br.js": 50,
+	"./bs": 51,
+	"./bs.js": 51,
+	"./ca": 52,
+	"./ca.js": 52,
+	"./cs": 53,
+	"./cs.js": 53,
+	"./cv": 54,
+	"./cv.js": 54,
+	"./cy": 55,
+	"./cy.js": 55,
+	"./da": 56,
+	"./da.js": 56,
+	"./de": 57,
+	"./de-at": 58,
+	"./de-at.js": 58,
+	"./de-ch": 59,
+	"./de-ch.js": 59,
+	"./de.js": 57,
+	"./dv": 60,
+	"./dv.js": 60,
+	"./el": 61,
+	"./el.js": 61,
+	"./en-au": 62,
+	"./en-au.js": 62,
+	"./en-ca": 63,
+	"./en-ca.js": 63,
+	"./en-gb": 64,
+	"./en-gb.js": 64,
+	"./en-ie": 65,
+	"./en-ie.js": 65,
+	"./en-nz": 66,
+	"./en-nz.js": 66,
+	"./eo": 67,
+	"./eo.js": 67,
+	"./es": 68,
+	"./es-do": 69,
+	"./es-do.js": 69,
+	"./es-us": 70,
+	"./es-us.js": 70,
+	"./es.js": 68,
+	"./et": 71,
+	"./et.js": 71,
+	"./eu": 72,
+	"./eu.js": 72,
+	"./fa": 73,
+	"./fa.js": 73,
+	"./fi": 74,
+	"./fi.js": 74,
+	"./fo": 75,
+	"./fo.js": 75,
+	"./fr": 76,
+	"./fr-ca": 77,
+	"./fr-ca.js": 77,
+	"./fr-ch": 78,
+	"./fr-ch.js": 78,
+	"./fr.js": 76,
+	"./fy": 79,
+	"./fy.js": 79,
+	"./gd": 80,
+	"./gd.js": 80,
+	"./gl": 81,
+	"./gl.js": 81,
+	"./gom-latn": 82,
+	"./gom-latn.js": 82,
+	"./gu": 83,
+	"./gu.js": 83,
+	"./he": 84,
+	"./he.js": 84,
+	"./hi": 85,
+	"./hi.js": 85,
+	"./hr": 86,
+	"./hr.js": 86,
+	"./hu": 87,
+	"./hu.js": 87,
+	"./hy-am": 88,
+	"./hy-am.js": 88,
+	"./id": 89,
+	"./id.js": 89,
+	"./is": 90,
+	"./is.js": 90,
+	"./it": 91,
+	"./it.js": 91,
+	"./ja": 92,
+	"./ja.js": 92,
+	"./jv": 93,
+	"./jv.js": 93,
+	"./ka": 94,
+	"./ka.js": 94,
+	"./kk": 95,
+	"./kk.js": 95,
+	"./km": 96,
+	"./km.js": 96,
+	"./kn": 97,
+	"./kn.js": 97,
+	"./ko": 98,
+	"./ko.js": 98,
+	"./ky": 99,
+	"./ky.js": 99,
+	"./lb": 100,
+	"./lb.js": 100,
+	"./lo": 101,
+	"./lo.js": 101,
+	"./lt": 102,
+	"./lt.js": 102,
+	"./lv": 103,
+	"./lv.js": 103,
+	"./me": 104,
+	"./me.js": 104,
+	"./mi": 105,
+	"./mi.js": 105,
+	"./mk": 106,
+	"./mk.js": 106,
+	"./ml": 107,
+	"./ml.js": 107,
+	"./mr": 108,
+	"./mr.js": 108,
+	"./ms": 109,
+	"./ms-my": 110,
+	"./ms-my.js": 110,
+	"./ms.js": 109,
+	"./mt": 111,
+	"./mt.js": 111,
+	"./my": 112,
+	"./my.js": 112,
+	"./nb": 113,
+	"./nb.js": 113,
+	"./ne": 114,
+	"./ne.js": 114,
+	"./nl": 115,
+	"./nl-be": 116,
+	"./nl-be.js": 116,
+	"./nl.js": 115,
+	"./nn": 117,
+	"./nn.js": 117,
+	"./pa-in": 118,
+	"./pa-in.js": 118,
+	"./pl": 119,
+	"./pl.js": 119,
+	"./pt": 120,
+	"./pt-br": 121,
+	"./pt-br.js": 121,
+	"./pt.js": 120,
+	"./ro": 122,
+	"./ro.js": 122,
+	"./ru": 123,
+	"./ru.js": 123,
+	"./sd": 124,
+	"./sd.js": 124,
+	"./se": 125,
+	"./se.js": 125,
+	"./si": 126,
+	"./si.js": 126,
+	"./sk": 127,
+	"./sk.js": 127,
+	"./sl": 128,
+	"./sl.js": 128,
+	"./sq": 129,
+	"./sq.js": 129,
+	"./sr": 130,
+	"./sr-cyrl": 131,
+	"./sr-cyrl.js": 131,
+	"./sr.js": 130,
+	"./ss": 132,
+	"./ss.js": 132,
+	"./sv": 133,
+	"./sv.js": 133,
+	"./sw": 134,
+	"./sw.js": 134,
+	"./ta": 135,
+	"./ta.js": 135,
+	"./te": 136,
+	"./te.js": 136,
+	"./tet": 137,
+	"./tet.js": 137,
+	"./th": 138,
+	"./th.js": 138,
+	"./tl-ph": 139,
+	"./tl-ph.js": 139,
+	"./tlh": 140,
+	"./tlh.js": 140,
+	"./tr": 141,
+	"./tr.js": 141,
+	"./tzl": 142,
+	"./tzl.js": 142,
+	"./tzm": 143,
+	"./tzm-latn": 144,
+	"./tzm-latn.js": 144,
+	"./tzm.js": 143,
+	"./uk": 145,
+	"./uk.js": 145,
+	"./ur": 146,
+	"./ur.js": 146,
+	"./uz": 147,
+	"./uz-latn": 148,
+	"./uz-latn.js": 148,
+	"./uz.js": 147,
+	"./vi": 149,
+	"./vi.js": 149,
+	"./x-pseudo": 150,
+	"./x-pseudo.js": 150,
+	"./yo": 151,
+	"./yo.js": 151,
+	"./zh-cn": 152,
+	"./zh-cn.js": 152,
+	"./zh-hk": 153,
+	"./zh-hk.js": 153,
+	"./zh-tw": 154,
+	"./zh-tw.js": 154
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -113222,10 +113247,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 293;
+webpackContext.id = 294;
 
 /***/ }),
-/* 294 */
+/* 295 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113437,15 +113462,15 @@ if (false) {
 }
 
 /***/ }),
-/* 295 */
+/* 296 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3ba2a0a3_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3ba2a0a3_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(316);
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -113491,19 +113516,19 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 296 */
+/* 297 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_76ca443e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_76ca443e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(311);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(297)
+  __webpack_require__(298)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -113549,13 +113574,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 297 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(298);
+var content = __webpack_require__(299);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -113575,7 +113600,7 @@ if(false) {
 }
 
 /***/ }),
-/* 298 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -113589,7 +113614,7 @@ exports.push([module.i, "\narticle.about {\n  height: 100%;\n  overflow-y: auto;
 
 
 /***/ }),
-/* 299 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -113652,7 +113677,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 
 /***/ }),
-/* 300 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity.Cell
@@ -113662,7 +113687,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Flickity.Cell
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(156)
+      __webpack_require__(158)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( getSize ) {
       return factory( window, getSize );
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -113749,7 +113774,7 @@ return Cell;
 
 
 /***/ }),
-/* 301 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// slide
@@ -113835,7 +113860,7 @@ return Slide;
 
 
 /***/ }),
-/* 302 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// animate
@@ -114061,7 +114086,7 @@ return proto;
 
 
 /***/ }),
-/* 303 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// drag
@@ -114072,7 +114097,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// drag
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(304),
+      __webpack_require__(305),
       __webpack_require__(6)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, Unidragger, utils ) {
       return factory( window, Flickity, Unidragger, utils );
@@ -114454,7 +114479,7 @@ return Flickity;
 
 
 /***/ }),
-/* 304 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -114472,7 +114497,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(157)
+      __webpack_require__(159)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Unipointer ) {
       return factory( window, Unipointer );
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -114732,7 +114757,7 @@ return Unidragger;
 
 
 /***/ }),
-/* 305 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// prev/next buttons
@@ -114743,7 +114768,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// prev/next but
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(158),
+      __webpack_require__(160),
       __webpack_require__(6)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, TapListener, utils ) {
       return factory( window, Flickity, TapListener, utils );
@@ -114959,7 +114984,7 @@ return Flickity;
 
 
 /***/ }),
-/* 306 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// page dots
@@ -114970,7 +114995,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// page dots
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
       __webpack_require__(8),
-      __webpack_require__(158),
+      __webpack_require__(160),
       __webpack_require__(6)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = (function( Flickity, TapListener, utils ) {
       return factory( window, Flickity, TapListener, utils );
@@ -115144,7 +115169,7 @@ return Flickity;
 
 
 /***/ }),
-/* 307 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// player & autoPlay
@@ -115364,7 +115389,7 @@ return Flickity;
 
 
 /***/ }),
-/* 308 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// add, remove cell
@@ -115553,7 +115578,7 @@ return Flickity;
 
 
 /***/ }),
-/* 309 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// lazyload
@@ -115679,7 +115704,7 @@ return Flickity;
 
 
 /***/ }),
-/* 310 */
+/* 311 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -115949,19 +115974,19 @@ if (false) {
 }
 
 /***/ }),
-/* 311 */
+/* 312 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_about_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_37439061_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(314);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_37439061_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_about_vue__ = __webpack_require__(315);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(312)
+  __webpack_require__(313)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -116007,13 +116032,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 312 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(313);
+var content = __webpack_require__(314);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -116033,7 +116058,7 @@ if(false) {
 }
 
 /***/ }),
-/* 313 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -116047,7 +116072,7 @@ exports.push([module.i, "\narticle.about {\n  height: 100%;\n  overflow-y: auto;
 
 
 /***/ }),
-/* 314 */
+/* 315 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116345,7 +116370,7 @@ if (false) {
 }
 
 /***/ }),
-/* 315 */
+/* 316 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116367,19 +116392,19 @@ if (false) {
 }
 
 /***/ }),
-/* 316 */
+/* 317 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_detail_drawer_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ad1e0c7_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ad1e0c7_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_detail_drawer_vue__ = __webpack_require__(324);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(317)
+  __webpack_require__(318)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -116425,13 +116450,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 317 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(318);
+var content = __webpack_require__(319);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -116451,7 +116476,7 @@ if(false) {
 }
 
 /***/ }),
-/* 318 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -116465,19 +116490,19 @@ exports.push([module.i, "\n.drawer[data-v-2ad1e0c7] {\n  position: fixed;\n  wid
 
 
 /***/ }),
-/* 319 */
+/* 320 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_dna_tab_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2f392939_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_tab_vue__ = __webpack_require__(322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2f392939_hasScoped_true_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_dna_tab_vue__ = __webpack_require__(323);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(320)
+  __webpack_require__(321)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -116523,13 +116548,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 320 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(321);
+var content = __webpack_require__(322);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -116549,7 +116574,7 @@ if(false) {
 }
 
 /***/ }),
-/* 321 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -116563,7 +116588,7 @@ exports.push([module.i, "\n.tab > div.contents[data-v-2f392939] {\n  padding: 18
 
 
 /***/ }),
-/* 322 */
+/* 323 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -116669,7 +116694,7 @@ if (false) {
 }
 
 /***/ }),
-/* 323 */
+/* 324 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117018,15 +117043,15 @@ if (false) {
 }
 
 /***/ }),
-/* 324 */
+/* 325 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_51b2f9b6_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_vue__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_51b2f9b6_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_vue__ = __webpack_require__(326);
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -117072,7 +117097,7 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 325 */
+/* 326 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117094,19 +117119,19 @@ if (false) {
 }
 
 /***/ }),
-/* 326 */
+/* 327 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_imgr_sp_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1054fd35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1054fd35_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_template_compiler_preprocessor_engine_pug_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_imgr_sp_vue__ = __webpack_require__(330);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(327)
+  __webpack_require__(328)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
@@ -117152,13 +117177,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 327 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(328);
+var content = __webpack_require__(329);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -117178,7 +117203,7 @@ if(false) {
 }
 
 /***/ }),
-/* 328 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -117192,7 +117217,7 @@ exports.push([module.i, "\nimg.sp {\n  display: none;\n}\n@media (max-width: 660
 
 
 /***/ }),
-/* 329 */
+/* 330 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117224,19 +117249,19 @@ if (false) {
 }
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports) {
 
-module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 YCAM Bio Research","lead":"YCAMバイオ・リサーチが開催しているワークショップ「森のDNA図鑑」では、一般の参加者とともに山口市内の森で生き物のサンプルを採集し、あたらしい図鑑の作成に取り組んでいます。参加者が観察とDNA解析の情報から生物種を推定した結果を収録しています。","index":"図鑑一覧"},"panorama":{"backtoindex":"他の図鑑をみる","ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"specimen":{"title":"標本写真"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” YCAM Bio Research","lead":"At the workshop conducted by YCAM Bio Research, participants are collecting living samples in the forest of Yamaguchi city to make new kind of field guide. These field guides contain the species that participants identified by using observation carried out in the field and DNA analysis.","index":"Field guides"},"panorama":{"backtoindex":"See the other guides","ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"specimen":{"title":"Specimen photograph"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
+module.exports = {"ja":{"top":{"logo":"森のDNA図鑑 YCAM Bio Research","lead":"YCAMバイオ・リサーチが開催しているワークショップ「森のDNA図鑑」では、一般の参加者とともに山口市内の森で生き物のサンプルを採集し、あたらしい図鑑の作成に取り組んでいます。参加者が観察とDNA解析の情報から生物種を推定した結果を収録しています。","index":"図鑑一覧"},"panorama":{"backtoindex":"他の図鑑をみる","ycam":"http://www.ycam.jp/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.ja"},"list":{"samples":{"title":"採取したサンプル","index":"No.","result":"同定結果","dna":"同定に用いたDNA配列","collection_date":"採取日"},"tips":{"title":"森の知識"}},"detail_drawer":{"sample":{"title":"採取サンプルのデータ","article":{"dna":{"title":"DNA解析による種の同定","photo_of_the_sample":"採取サンプルの写真","dna_sequence_to_identify":"同定に用いたDNA配列","result_of_identification":"DNA解析による同定の結果","dna_region":"DNA領域：","method":{"title":"解析方法について","body":"DNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、未知のサンプルから、ある程度まで種名を調べる事ができる技術を使って解析しました。詳しくは、アバウトページの「DNAバーコーディング」を御覧ください。"}},"microscope":{"title":"スマホ顕微鏡による観察記録"},"specimen":{"title":"標本写真"},"memo":{"title":"採取メモ","sketch":"手書きメモ"}}},"tips":{"title":"森の知識"}},"dna_tab":{"text":"テキスト","barcode":"バーコード"}},"en":{"top":{"logo":"Field Guide “DNA of Forests” YCAM Bio Research","lead":"At the workshop conducted by YCAM Bio Research, participants are collecting living samples in the forest of Yamaguchi city to make new kind of field guide. These field guides contain the species that participants identified by using observation carried out in the field and DNA analysis.","index":"Field guides"},"panorama":{"backtoindex":"See the other guides","ycam":"http://www.ycam.jp/en/","cc":"https://creativecommons.org/licenses/by-sa/4.0/deed.en"},"list":{"samples":{"title":"Collected samples","index":"No.","result":"Identification result","dna":"DNA sequence used for identification","collection_date":"Collection date"},"tips":{"title":"Tips about the Forest"}},"detail_drawer":{"sample":{"title":"Data of collected sample","article":{"dna":{"title":"Identification of species with DNA-based technology","photo_of_the_sample":"Photo of the sample in the field","dna_sequence_to_identify":"DNA sequence to identify","result_of_identification":"Result of identification","dna_region":"DNA region: ","method":{"title":"Method","body":"We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."}},"microscope":{"title":"Observation with smartphone microscope"},"specimen":{"title":"Specimen photograph"},"memo":{"title":"Memo","sketch":"Sketch"}}},"tips":{"title":"Tips about the Forest"}},"dna_tab":{"text":"text","barcode":"barcode"}}}
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports) {
 
 module.exports = {"ja":{"niho":{"top":{"logo":"森のDNA図鑑 仁保の森 2016 YCAM Bio Research","lead":"YCAMバイオ・リサーチのワークショップ「森のDNA」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。"},"about":{"logo":"森のDNA図鑑 仁保の森 2016","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチのワークショップ「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">森のDNA</a>」の参加者と山口市の仁保の森で生き物を採集し、顕微鏡での観察記録やDNA解析の結果を収録しています。<a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">仁保の森のある地点</a>から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集した情報を引き出すことができます。<br>私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。<br>この「森のDNA」は、ロンドンを拠点に活躍するクリエティブ・スタジオ「マシュマロ・レーザー・フィースト（MLF）」によるバーチャル・リアリティ作品「<a class=\"border\" href=\"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">もしも、森のいきものになったら</a>」の仁保の森ツアープログラムとして開催されました。","credit":"写真提供：山口情報芸術センター［YCAM］"},"dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・昆虫・菌類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の特定を試みました。具体的には、植物では葉緑体のrbcLやmatK、昆虫ではミトコンドリアのCOI、菌類ではITSと呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"niho_forest":{"title":"仁保の森について","body":"YCAMから車で約30分、山口市仁保上郷（にほ かみごう）にある森。森の奥には落差20メートルの「犬鳴（いぬなき）の滝」があり、そこから流れる川は森と里をつなぎ、仁保川に流れ込んでいます。山や里によくいる生き物に加えて渓流系の生き物も住んでいる豊かな森であり、典型的な山口の里山の風景が広がっています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"iteota":{"title":"「もしも、森のいきものになったら」チーム","body":"Ersinhan Ersin　Christina Tarquini　Ben Larthe　Antoine Bertin<br>（マシュマロ・レーザー・フィースト）<br>竹下 暁子　Clarence Ng　三浦 陽平　北堀 あすみ<br>（山口情報芸術センター［YCAM］）","link":"http://www.ycam.jp/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"山口情報芸術センター［YCAM］","body":"Yamaguchi Center for Arts and Media","link":"http://www.ycam.jp/"},"production":"制作","tanaka":{"text":"講師：田中 浩（山口県立博物館動物担当理学博士）","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/"},"karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"録音・音源編集：Antoine Bertin（antoinebertin.org）","link":"http://www.antoinebertin.org/"},"cooperation":"協力","cooperations":"スマホ顕微鏡開発者：永山國昭(生理学研究所名誉教授、総合研究大学院大学理事）<br>伊藤俊幸（元生理学研究所技術員、LisCo社員）<br> <a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">スマホ顕微鏡普及団体：Life is small Project</a><br> <a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">スマホ顕微鏡技術協力：寺田 勉（防府市青少年科学館ソラール館長）</a><br>現地協力：仁保自治会<br>レーザースキャニング技術協力：東北大学災害科学国際研究所、山口大学<br> <br>主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会、ブリティッシュ・カウンシル<br>助成：平成28年度文化庁劇場・音楽堂等活性化事業"}}},"en":{"niho":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016 YCAM Bio Research","lead":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop “DNA of the Forest” conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Niho 2016","about":{"title":"About the Field Guide “DNA of Forests”","body":"In the forest of Niho, Yamaguchi city, we collected living samples with the participants who joined the workshop <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/ycam-bio-research-open-day-vol3/\" target=\"_blank\">“DNA of the Forest”</a> conducted by YCAM Bio Research. This website contains the results of microscopic observations and DNA analysis of the samples. From <a class=\"border\" href=\"https://goo.gl/maps/Fm9EAftjMMA2\" target=\"_blank\">a standpoint</a>, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants.<br>In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.<br>This “DNA of the Forest” project was carried out to offer a tour of the forest in Niho as part of a virtual reality work <a class=\"border\" href=\"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/\" target=\"_blank\">“In the Eyes of the Animal”</a> by London-based creative studio Marshmallow Laser Feast.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; COI from mitochondria for insects; and ITS for fungi.<br>To search, we used a program called <a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">“BLAST”</a> that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"niho_forest":{"title":"About the Forest in Niho","body":"The forest is located within a 30 minute driving distance from YCAM, in the area of Niho Kamigo in Yamaguchi city. Deep in the forests, there is a 20 meter Inunaki Waterfall, which forms a river that links the forests and villages and flows into a main stream of Niho River. The presence of the creatures that dwell in the mountains and villages, as well as rivers connect them, is a feature of typical landscape of Satoyama in Yamaguchi city, and that can be found in the forests of Niho."},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"iteota":{"title":"In the Eyes of the Animal","body":"Ersinhan Ersin, Christina Tarquini, Ben Larthe, Antoine Bertin<br>(Marshmallow Laser Feast)<br>Akiko Takeshita, Clarence Ng, Yohei Miura, Asumi Kitahori<br>(Yamaguchi Center for Arts and Media [YCAM])","link":"http://www.ycam.jp/en/events/2016/in-the-eyes-of-the-animal/"},"ycam":{"title":"Yamaguchi Center for Arts and Media [YCAM]","body":"","link":"http://www.ycam.jp/en/"},"production":"Production","tanaka":{"text":"Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)","link":"http://www.yamahaku.pref.yamaguchi.lg.jp/english.html"},"karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"antoine":{"text":"Field recording and mixing: Antoine Bertin (antoinebertin.org)","link":"http://www.antoinebertin.org/"},"cooperation":"Cooperation","cooperations":"With regard to Smartphone microscope,<br>Proposed by: Kuniaki Nagayama<br>(National Institute for Physiological Sciences, The Graduate University for Advanced Studies),<br>Toshiyuki Ito (Life is small Company)<br><a href=\"https://www.facebook.com/groups/life.is.small/\" target=\"_blank\">Promoted by: Life is small Project</a><br><a href=\"http://www.solar-hofu.sakura.ne.jp/\" target=\"_blank\">Technical adviser: Tsutomu Terada (Hofu Science Museum Solar)</a><br>In Corporation with: Niho Community Association<br>Technical assistance for laser scanning: Tohoku University International Research Institute of Disaster<br>Science, Yamaguchi University<br><br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education, British Council<br>Supported by: The Agency for Cultural Affairs, Government of Japan in the fiscal 2016"}}}}
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports) {
 
 module.exports = {"ja":{"kumano":{"top":{"logo":"森のDNA図鑑 熊野の森 2017 YCAM Bio Research","lead":"YCAMバイオ・リサーチが開催しているワークショップ「森のDNA図鑑」では、一般の参加者とともに山口市内の森で生き物のサンプルを採集し、あたらしい図鑑の作成に取り組んでいます。参加者が観察とDNA解析の情報から生物種を推定した結果を収録しています。"},"about":{"logo":"森のDNA図鑑 熊野の森 2017","about":{"title":"「森のDNA図鑑」について","body":"YCAMバイオ・リサーチが「未来の山口の授業β」として開催したワークショップ「<a class=\"border\" target=\"_blank\" href=\"http://www.ycam.jp/events/2017/how-to-make-the-field-guide-dna-of-forests/\">森のDNA図鑑</a>」の参加者と山口市の熊野神社の森で生き物を採集し、生息地での観察とDNA解析の情報から、参加者が推測した結果を収録しています。熊野神社周辺の森のある地点から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集し、推測した生き物の種名などの情報を引き出すことができます。私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA図鑑」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。","credit":"写真提供：山口情報芸術センター［YCAM］"},"day1":"ワークショップ 1日目","day2":"ワークショップ 2日目","dna_barcoding":{"title":"解析方法（DNAバーコーディング）について","body":"すべての生き物が、それぞれのDNAを持っています。DNAは生き物の設計情報を記録している物質です。生き物のDNAに書かれている情報の一部を読み取り、既に知られているDNAの情報と照らし合わせることで、ある程度、種名を調べる事ができるようになってきています。この技術は「DNAバーコーディング」と呼ばれており、専門家以外でも種の特定を可能とする技術として取り組みが広がってきています。<br>今回のプロジェクトでは、実際に森で採集した生き物からDNAを取り出し、植物・地衣類それぞれに標準化されたDNA情報を用いて、データベース上で検索を行い、生物種の推定を試みました。具体的には、植物では葉緑体のrbcLやmatK、地衣類ではITS1と呼ばれる領域のDNAを利用しました。<br>また、検索にはバイオインフォマティクスでDNAの類似した部分を並べて照らし合わせることができる「<a class=\"border\" href=\"https://blast.ncbi.nlm.nih.gov/Blast.cgi\" target=\"_blank\">BLAST</a>」と呼ばれるプログラムを利用しました。"},"about_forest":{"title":"熊野の森について","body":"熊野神社は古来から当地鎮守の神として祀られてきました。およそ700年前、当地を治める大内氏が国を領した時に、紀州熊野神社を熊野の山頂に勧請したのがはじまりです。その後、毛利氏が引き継ぎ、大守大江宗広朝臣が、御神殿、拝殿を再興しました。熊野権現を祭る熊野神社が存在することから名前が由来された権現山には、その昔、権現山の白虎伝説で知られる白狐が住んでいたと言われています。周辺植生は照葉樹林を中心とした典型的な社寺林、かつて赤松も見られましたが、近年松食い虫の被害により松枯れし、現在の姿となりました。詩人の中原中也の縁の場所としても知られており、中也が学校をさぼってはここから街並みを眺めていたり、息子を肩車して登ったりしたといわれています。高木層にはコジイ、イチイガシ、ウラジロガシ、アラカシ、クスノキ、タブノキなどが、低木層にはシャシャンボ、サカキなどが生息しています。"},"planning_production":"企画・制作","ycam-bioresearch":{"title":"YCAM バイオ・リサーチ","body":"高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです","link":"http://www.ycam.jp/projects/ycam-bio-research/"},"production":"制作","karappo":{"text":"図鑑ウェブ制作：KARAPPO Inc.","link":"http://karappo.net"},"cooperation":"協力","cooperations":"現地協力：熊野神社<br>森の知識監修：田中 浩（山口県立博物館動物担当理学博士）<br>調査同行：セバスチャン・コシオバ（モレキュラー・フローリスト）<br>主催：山口市、公益財団法人山口市文化振興財団 <br>後援：山口市教育委員会<br>助成：平成29年度 文化庁 文化芸術創造活用プラットフォーム形成事業、<br>日本医療研究開発機構・研究倫理に関する情報共有と国民理解の推進事業<br>（ゲノム医療実用化に係るELSI分野）<br>「ポジティブな関与を促すELSIへの未来志向型アプローチ」<br>"}}},"en":{"kumano":{"top":{"logo":"Field Guide “DNA of Forests” in the forest of Kumano 2017 YCAM Bio Research","lead":"At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website contains the species that participants identified by using observation carried out in the field and DNA analysis."},"about":{"logo":"Field Guide “DNA of Forests” in the forest of Kumano 2017","about":{"title":"About the Field Guide “DNA of Forests”","body":"At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class β”, participants collected living samples in the forest around the Kumano Shrine in Yamaguchi city. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis. From a standpoint, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants. In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.","credit":"Courtesy of Yamaguchi Center for Arts and Media [YCAM]"},"day1":"Workshop Day 1","day2":"Workshop Day 2","dna_barcoding":{"title":"DNA Barcoding Method","body":"All living organisms have their own DNA. DNA is the substance that keeps the records of genetic instruction of life. By reading a short genetic marker in their DNA and checking against the DNA information already known, it is now becoming possible, to some extent, to identify the species. The practice of this technique, called “DNA barcoding,” has been spreading widely as a method that enables identification of species by non-specialists.<br>In this project, we attempted to identify the species through the processes of extracting DNA from the living samples collected from the forest, and searching through a database using DNA loci information that are standardized each for plants, insects, and fungi. Although some loci have been suggested, We examined a common set of loci regions the following DNA regions: rbcL and matK of chloroplast for plants; and ITS1 for Lichenes.<br>To search, we used a program called “BLAST” that allows comparison between the resembling regions of DNA with the application of bioinformatics."},"about_forest":{"title":"About the Forest in Kumano","body":"The god enshrined at the Kumano Shrine has been worshipped as the region’s guardian from old times. When the Ouchi clan who governed the region came to reign the province about 700 years ago, the Kishu Kumano Shrine was placed at the top of the mountain in Kumano through a propagation process called kanjo (transfer of a tutelary deity to a new location). The Mori clan subsequently took power and “Oe Munehiro no Ason” rebuilt the shrine and the hall of worship. In Mt. Kumano, which the name derives from the Kumano Shrine that enshrines Kumano Gongen*, it has been told that byakko, known from the ”Byakko (white fox) folklore” of Mt. Gongen, used to inhabit. The surrounding vegetation forms a typical Shajirin (temple forest) which mainly consists broadleaves. Red pines used to be present, but they have withered in recent years due to damage from pine sawyers and resulted in the current state. This place is also remembered in connection with the poet Chuya Nakahara, who ditched school and visited here to view the townscape, and climbed the mountain while carrying his son on his shoulders. The area consists trees from tree layer, such as Castanopsis cuspidata, Quercus Gilva, Quercus Salicina, Quercus Glauca, Cinnamomum camphora, and Machilus thunbergli, and shrub layer, including Vaccinium bracteatum and Cleyera japonica.<br><br>*Gongen refers to the manifestation of a Buddha in the form of god"},"planning_production":"Planning and Production","ycam-bioresearch":{"title":"YCAM Bio Research","body":"Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.","link":"http://www.ycam.jp/en/projects/ycam-bio-research/"},"production":"Production","karappo":{"text":"Web design and development: KARAPPO Inc.","link":"http://karappo.net"},"cooperation":"Cooperation","cooperations":"<br>In corporation with: Kumano Shrine<br>Adviser: Hiroshi Tanaka (Laboratory of Zoology, Yamaguchi Museum)<br>In field research with: Sebastian S. Cocioba (Molecular Florist)<br>Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education<br>Supported by: <br>The agency for Cultural Affairs, Government of Japan in the fiscal 2017, and<br>\"Future-oriented approach to ELSI for positive engagement\", <br>Public Understanding and Information Sharing on Research Ethics<br>(Ethical, legal and social issues on the practical application of genome medicine), <br>Japan Agency for Medical Research and Development (AMED)"}}}}
