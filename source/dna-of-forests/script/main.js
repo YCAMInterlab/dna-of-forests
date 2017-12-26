@@ -3,6 +3,7 @@ import VueI18n from 'vue-i18n';
 import VueRouter from 'vue-router';
 import _ from 'lodash';
 import AppGuide from '../components/app.vue';
+import VueGtm from 'vue-gtm'
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
@@ -77,22 +78,29 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: require('../components/page/top.vue').default
+      component: require('../components/page/top.vue').default,
+      meta: {gtm: 'Global Top'}
     },
     {
       path: '/:forest/',
       component: require('../components/page/guide.vue').default,
+      meta: {gtm: 'Field Guide Top'},
       children: [
-        { path: '',                component: require('../components/page/guide/panorama.vue').default },
-        { path: 'panorama',        component: require('../components/page/guide/panorama.vue').default },
-        { path: 'panorama/:index', component: require('../components/page/guide/panorama.vue').default },
-        { path: 'list',            component: require('../components/page/guide/list.vue').default },
-        { path: 'list/:index',     component: require('../components/page/guide/list.vue').default },
-        { path: 'about',           component: require('../components/page/about.vue').default }
+        { path: '',                component: require('../components/page/guide/panorama.vue').default, meta: {gtm: 'Field Guide Top'} },
+        { path: 'panorama',        component: require('../components/page/guide/panorama.vue').default, meta: {gtm: 'Panorama'} },
+        { path: 'panorama/:index', component: require('../components/page/guide/panorama.vue').default, meta: {gtm: 'Detail (Panorama)'} },
+        { path: 'list',            component: require('../components/page/guide/list.vue').default,     meta: {gtm: 'List'} },
+        { path: 'list/:index',     component: require('../components/page/guide/list.vue').default,     meta: {gtm: 'Detail (List)'} },
+        { path: 'about',           component: require('../components/page/about.vue').default,          meta: {gtm: 'About'} }
       ]
     }
   ]
 });
+
+Vue.use(VueGtm, {
+  debug: false, // Whether or not display console logs debugs (optional)
+  vueRouter: router // Pass the router instance to automatically sync with router (optional)
+})
 
 // Registration
 Vue.component('detail-drawer', require('../components/detail-drawer.vue').default);

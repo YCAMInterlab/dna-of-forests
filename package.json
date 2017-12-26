@@ -39,6 +39,7 @@
     "striptags": "^3.1.1",
     "three-js": "^79.0.0",
     "vue": "^2.5.13",
+    "vue-gtm": "^1.0.2",
     "vue-resize-directive": "^1.0.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.13"
