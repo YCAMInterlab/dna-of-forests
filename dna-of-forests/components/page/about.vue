@@ -9,6 +9,9 @@ component(:is="currentView")
 import Vue from 'vue';
 
 export default Vue.extend({
+  // mounted: function(){
+  //   this.$ua.trackView('MyScreenName', 'currentpath');
+  // },
   // TODO URLを書き換えた時に再読み込みされないのをなんとかしたい
   // 例：/#/niho/about → /#/kumano/about
   data: function(){

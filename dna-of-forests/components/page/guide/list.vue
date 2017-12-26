@@ -183,6 +183,7 @@ export default Vue.extend({
   },
   props: ['markers'],
   mounted: function() {
+    // this.$ua.trackView('List', 'currentpath');
 
     // 選択された行がある場合は、そこまでスクロール
     if(this.$route.params.index){
