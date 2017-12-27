@@ -253,10 +253,10 @@ h4
 
   font-size: 13px
   line-height: 36px
-  text-align: left
 
   dl
     clear: both
+    text-align: left
     &:not(:first-child)
       margin-top: 36px
     dt
@@ -273,6 +273,8 @@ h4
 section.note
   margin-top: 36px
   color: #808080
+  .bg_line
+    text-align: left
 
 @media (max-width: 660px)
   .drawer
