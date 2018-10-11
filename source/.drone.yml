@@ -11,10 +11,10 @@ pipeline:
     commands:
       - echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
       - curl https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/deploy.sh | bash
-    secrets: [ ssh_key, slack_channel, slack_webhook_url ]
+    secrets: [ ssh_key ]
   notify:
     image: plugins/slack
-    channel: $SLACK_CHANNEL
-    webhook: $SLACK_WEBHOOK_URL
+    channel: builds-karappo
+    secrets: [ slack_webhook ]
     when:
       status: [ success, failure ]
