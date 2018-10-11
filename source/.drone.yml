@@ -1,16 +1,20 @@
-clone:
-  depth: 1
-build:
-  image: karappo/dronedeploy
-  environment:
-    - DEP_MASTER_COMMAND=rsync
-    - DEP_MASTER_HOST=karappojp.sakura.ne.jp
-    - DEP_MASTER_USER=karappojp
-    - DEP_MASTER_HOST_DIR=/home/karappojp/www/preview/ycam.karappo.jp
-    - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/master/include-files/php/.depinc.sh
-  commands:
-    - curl https://raw.githubusercontent.com/karappo/drone-deploy/master/deploy.sh | bash
-notify:
-  slack:
-    webhook_url: https://hooks.slack.com/services/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
-    channel: builds-karappo
+pipeline:
+  build:
+    image: karappo/dronedeploy:drone-0.8
+    # pull: true
+    environment:
+      - DEP_MASTER_COMMAND=rsync
+      - DEP_MASTER_HOST=karappojp.sakura.ne.jp
+      - DEP_MASTER_USER=karappojp
+      - DEP_MASTER_HOST_DIR=/home/karappojp/www/preview/ycam.karappo.jp
+      - DEP_MASTER_INCLUDE_FILE=https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/include-files/php/.depinc.sh
+    commands:
+      - echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      - curl https://raw.githubusercontent.com/karappo/drone-deploy/drone-compatible/v0.8/deploy.sh | bash
+    secrets: [ ssh_key, slack_channel, slack_webhook_url ]
+  notify:
+    image: plugins/slack
+    channel: "$SLACK_CHANNEL"
+    webhook: "$SLACK_WEBHOOK_URL"
+    when:
+      status: [ success, failure ]
