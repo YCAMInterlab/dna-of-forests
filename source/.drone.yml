@@ -14,7 +14,7 @@ pipeline:
     secrets: [ ssh_key, slack_channel, slack_webhook_url ]
   notify:
     image: plugins/slack
-    channel: "$SLACK_CHANNEL"
-    webhook: "$SLACK_WEBHOOK_URL"
+    channel: $SLACK_CHANNEL
+    webhook: $SLACK_WEBHOOK_URL
     when:
       status: [ success, failure ]
