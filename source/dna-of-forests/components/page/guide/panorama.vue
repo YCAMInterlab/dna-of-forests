@@ -423,7 +423,7 @@ export default Vue.extend({
   methods: {
 
     isTop(){
-      if(this.$route.path.match(/^\/[A-Za-z0-9]+\/*$/)) {
+      if(this.$route.path.match(/^\/[A-Za-z0-9_-]+\/*$/)) {
         return true;
       }
       else {
