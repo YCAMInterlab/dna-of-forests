@@ -41,7 +41,7 @@ article.about
     p(v-html="$t('chuo-park.about.dna_barcoding.body')")
   section#about_forest
     h2
-      imgr(:alt="$t('chuo-park.about.about_forest.title')" src='about/title-chuo-park.png' locale)
+      imgr(:alt="$t('chuo-park.about.about_forest.title')" src='about/title-chuo_park.png' locale)
     p(v-html="$t('chuo-park.about.about_forest.body')")
   section#credit
     h3#planning_production
