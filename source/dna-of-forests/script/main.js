@@ -120,7 +120,8 @@ loadGoogleMapsAPI({ key: 'AIzaSyDQoGu03t5Lxa7aVYgCMo7fwrgZmKIfIWQ' }).then(funct
       messages: _.merge(
         require('../messages.json'),
         require('../niho/messages.json'),
-        require('../kumano/messages.json')
+        require('../kumano/messages.json'),
+        require('../chuo-park/messages.json')
       )
     })
   }).$mount('#app');

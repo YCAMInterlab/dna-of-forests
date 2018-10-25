@@ -18,8 +18,9 @@ export default Vue.extend({
   },
   // TODO 自動的に増えるようにしたい
   components: {
-    niho:   require('../../niho/components/about.vue').default,
-    kumano: require('../../kumano/components/about.vue').default
+    'niho':   require('../../niho/components/about.vue').default,
+    'kumano': require('../../kumano/components/about.vue').default,
+    'chuo-park': require('../../chuo-park/components/about.vue').default
   }
 });
 

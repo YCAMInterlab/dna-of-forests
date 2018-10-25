@@ -23,9 +23,11 @@
       h2
         imgr(:alt="$t('top.index')" src='top/title-guides.png' locale global)
       .links
-        router-link(:to="linkUrl('kumano')")
+        router-link(:to="linkUrl('chuo-park')" style="background-color: #29e55f")
+          imgr(alt='chuo-park' src='top/guides/chuo-park/list.png' locale global)
+        router-link(:to="linkUrl('kumano')" style="background-color: #ff33a5")
           imgr(alt='kumano' src='top/guides/kumano/list.png' locale global)
-        router-link(:to="linkUrl('niho')")
+        router-link(:to="linkUrl('niho')" style="background-color: #337eff")
           imgr(alt='niho' src='top/guides/niho/list.png' locale global)
     footer
       a.ycam(:href="$t('panorama.ycam')" target="_blank")
@@ -181,14 +183,6 @@ nav
       background-image: url(/dna-of-forests/img/top/list-icon.png)
       background-repeat: no-repeat
       background-position: right 38px center
-      &:nth-child(4n+1)
-        background-color: #ff33a5
-      &:nth-child(4n+2)
-        background-color: #337eff
-      &:nth-child(4n+3)
-        background-color: #33ff6d
-      &:nth-child(4n+4)
-        background-color: #f5ff8a
   footer
     position: relative
     height: auto
@@ -242,19 +236,26 @@ export default Vue.extend({
         const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         const guides = {
-          niho: {
+          'niho': {
             title: {
               ja: '仁保の森 2016',
               en: 'Forest of Niho 2016'
             },
             position: new google.maps.LatLng(34.2505833, 131.5789502)
           },
-          kumano: {
+          'kumano': {
             title: {
               ja: '熊野の森 2017',
               en: 'Forest of Kumano 2017',
             },
             position: new google.maps.LatLng(34.170286, 131.461427)
+          },
+          'chuo-park': {
+            title: {
+              ja: '中央公園 2018',
+              en: 'Chuo Park 2018',
+            },
+            position: new google.maps.LatLng(34.169894, 131.466662)
           }
         };
 
