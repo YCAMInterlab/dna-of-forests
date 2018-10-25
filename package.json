@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@karappo.biz:karappo/dna-of-forests.git"
+    "url": "git@github.com:YCAMInterlab/dna-of-forests.git"
   },
   "author": "Naokazu Terada",
   "license": "MIT",
