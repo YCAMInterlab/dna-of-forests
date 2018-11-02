@@ -366,7 +366,7 @@ export default Vue.extend({
         CustomMarker.prototype.animateBounce = function() {
           dynamics.stop(this.pinWrap);
           dynamics.css(this.pinWrap, {
-            'transform': 'none',
+            transform: 'none',
           });
           dynamics.animate(this.pinWrap, {
             translateY: -30
@@ -379,7 +379,7 @@ export default Vue.extend({
 
           dynamics.stop(this.pin);
           dynamics.css(this.pin, {
-              'transform': 'none',
+            transform: 'none',
           });
           dynamics.animate(this.pin, {
             scaleY: 0.8
@@ -398,7 +398,7 @@ export default Vue.extend({
           });
           dynamics.stop(this.pinShadow);
           dynamics.css(this.pinShadow, {
-            'transform': 'none',
+            transform: 'none',
           });
           dynamics.animate(this.pinShadow, {
             scale: 0.6,
