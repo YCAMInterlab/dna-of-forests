@@ -198,10 +198,114 @@ nav
       &.chrome
         line-height: 22px
 
+//
+
+@function sqrt($r)
+  $x0: 1
+  $x1: $x0
+  @for $i from 1 through 10
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0)
+    $x0: $x1
+  @return $x1
+$pinWidth: 100px
+$pinHeightFactor: ((1 + sqrt(2))/2)
+$pinHeight: $pinHeightFactor * $pinWidth
+$pinColor: #f93c11
+$shadowOpacity: .5
+$shadow-size: 50px
+$pulseSize: 100px
+.pin-wrap
+  position: absolute
+  width: $pinWidth
+  height: $pinWidth
+  margin-top: -$pinHeight
+  margin-left: -$pinWidth/2
+  transform-origin: 50% ($pinHeightFactor * 100%) 0
+
+.pin
+  position: absolute
+  top: 50%
+  left: 50%
+  width: $pinWidth
+  height: $pinWidth
+  margin-top: -$pinWidth/2
+  margin-left: -$pinWidth/2
+  transform-origin: 50% ($pinHeightFactor * 100%) 0
+
+.pin::after
+  position: absolute
+  display: block
+  box-sizing: border-box
+  width: $pinWidth
+  height: $pinWidth
+  content: ''
+  transform: rotateZ(-45deg)
+  border: 20px solid $pinColor
+  border-radius: 50% 50% 50% 50%
+
+.pin::before
+  position: absolute
+  display: block
+  box-sizing: border-box
+  width: $pinWidth
+  height: $pinWidth
+  content: ''
+  transform: rotateZ(-45deg)
+  border: 18px solid darken($pinColor, 10%)
+  border-radius: 50% 50% 50% 0
+
+
+.shadow
+  position: absolute
+
+.shadow::after
+  position: absolute
+  left: -100px - $shadow-size/2
+  display: block
+  width: $shadow-size
+  height: $shadow-size
+  margin-top: -$shadow-size/2
+  content: ''
+  transform: rotateX(55deg)
+  border-radius: 50%
+  box-shadow: rgba(0, 0, 0, $shadowOpacity) 100px 0 20px
+
+.pulse
+  position: absolute
+  margin-top: -$pulseSize/2
+  margin-left: -$pulseSize/2
+  transform: rotateX(55deg)
+
+.pulse::after
+  display: block
+  width: $pulseSize
+  height: $pulseSize
+  content: ''
+  animation: pulsate 1s ease-out
+  animation-delay: 1.1s
+  animation-iteration-count: infinite
+  opacity: 0
+  border-radius: 50%
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, $shadowOpacity)
+  box-shadow: 0 0 6px 3px rgba($pinColor, 1.0)
+
+@keyframes pulsate
+  0%
+    transform: scale(.1, .1)
+    opacity: 0
+
+  50%
+    opacity: 1
+
+  100%
+    transform: scale(1.2, 1.2)
+    opacity: 0
+
 </style>
 
 <script>
 
+import dynamics from 'dynamics.js'
 import Vue from 'vue';
 import resize from 'vue-resize-directive';
 
@@ -241,31 +345,129 @@ export default Vue.extend({
               ja: '仁保の森 2016',
               en: 'Forest of Niho 2016'
             },
-            position: new google.maps.LatLng(34.2505833, 131.5789502)
+            position: new google.maps.LatLng(34.2505833, 131.5789502),
+            zIndex: 1
           },
           'kumano': {
             title: {
               ja: '熊野の森 2017',
               en: 'Forest of Kumano 2017',
             },
-            position: new google.maps.LatLng(34.170286, 131.461427)
+            position: new google.maps.LatLng(34.170286, 131.461427),
+            zIndex: 1
           },
           'chuo-park': {
             title: {
               ja: '中央公園 2018',
               en: 'Chuo Park 2018',
             },
-            position: new google.maps.LatLng(34.169894, 131.466662)
+            position: new google.maps.LatLng(34.169894, 131.466662),
+            zIndex: 1
           }
         };
 
         const locale = location.pathname == '/dna-of-forests/' ? 'ja' : 'en';
 
+        CustomMarker.prototype = new google.maps.OverlayView();
+
+        function CustomMarker(opts) {
+          this.setValues(opts);
+        }
+
+        const scopeId = this.$options._scopeId;
+        CustomMarker.prototype.draw = function() {
+          var self = this;
+          var div = this.div;
+          if (!div) {
+            function htmlToElement(html) {
+              var template = document.createElement('template');
+              html = html.trim(); // Never return a text node of whitespace as the result
+              template.innerHTML = html;
+              return template.content.firstChild;
+            }
+            div = this.div = htmlToElement(`
+              <div ${scopeId}>
+                <div ${scopeId} class="shadow"></div>
+                <div ${scopeId} class="pulse"></div>
+                <div ${scopeId} class="pin-wrap">
+                  <div ${scopeId} class="pin"></div>
+                </div>
+              </div>
+              `);
+            this.pinWrap = this.div.getElementsByClassName('pin-wrap');
+            this.pin = this.div.getElementsByClassName('pin');
+            this.pinShadow = this.div.getElementsByClassName('shadow');
+            div.style.position = 'absolute';
+            div.style.cursor = 'pointer';
+            var panes = this.getPanes();
+            panes.overlayImage.appendChild(div);
+            google.maps.event.addDomListener(div, 'click', function(event) {
+              google.maps.event.trigger(self, 'click', event);
+            });
+            google.maps.event.addDomListener(div, 'mouseover', function(event) {
+              google.maps.event.trigger(self, 'mouseover', event);
+            });
+          }
+          var point = this.getProjection().fromLatLngToDivPixel(this.position);
+          if (point) {
+            div.style.left = point.x + 'px';
+            div.style.top = point.y + 'px';
+          }
+        };
+
+        CustomMarker.prototype.animateBounce = function() {
+          dynamics.stop(this.pinWrap);
+          dynamics.css(this.pinWrap, {
+            'transform': 'none',
+          });
+          dynamics.animate(this.pinWrap, {
+            translateY: -30
+          }, {
+            type: dynamics.forceWithGravity,
+            bounciness: 0,
+            duration: 500,
+            delay: 150,
+          });
+
+          dynamics.stop(this.pin);
+          dynamics.css(this.pin, {
+              'transform': 'none',
+          });
+          dynamics.animate(this.pin, {
+            scaleY: 0.8
+          }, {
+            type: dynamics.bounce,
+            duration: 800,
+            bounciness: 0,
+          });
+          dynamics.animate(this.pin, {
+              scaleY: 0.8
+          }, {
+            type: dynamics.bounce,
+            duration: 800,
+            bounciness: 600,
+            delay: 650,
+          });
+
+          dynamics.stop(this.pinShadow);
+          dynamics.css(this.pinShadow, {
+            'transform': 'none',
+          });
+          dynamics.animate(this.pinShadow, {
+            scale: 0.6,
+          }, {
+            type: dynamics.forceWithGravity,
+            bounciness: 0,
+            duration: 500,
+            delay: 150,
+          });
+        }
+
         for(var _prop in guides) {
           var b = guides[_prop];
           // SPの時
           const icon_img = isSP ? `marker-sp.png` : `marker-${locale}-pc.png`;
-          var marker = new google.maps.Marker({
+          var marker = new CustomMarker({
             name: _prop,
             position: b.position,
             map: map,
@@ -274,6 +476,15 @@ export default Vue.extend({
           });
           marker.addListener('click', function(e) {
             location.href = `#/${this.name}`;
+          });
+          marker.addListener('mouseover', function(e) {
+            this.animateBounce();
+            this.setOptions({zIndex: 10});
+            // this.setAnimation(google.maps.Animation.BOUNCE);
+          });
+          marker.addListener('mouseout', function(e) {
+            this.setOptions({zIndex: 1});
+            // this.setAnimation(null);
           });
         }
         // 表示領域の調整
