@@ -198,7 +198,7 @@ nav
       &.chrome
         line-height: 22px
 
-//
+// Marker Style ================
 
 @function sqrt($r)
   $x0: 1
@@ -208,16 +208,14 @@ nav
     $x0: $x1
   @return $x1
 $pinWidth: 100px
+$pinHeight: 113px
 $pinHeightFactor: ((1 + sqrt(2))/2)
-$pinHeight: $pinHeightFactor * $pinWidth
 $pinColor: #f93c11
-$shadowOpacity: .5
 $shadow-size: 50px
-$pulseSize: 100px
 .pin-wrap
   position: absolute
   width: $pinWidth
-  height: $pinWidth
+  height: $pinHeight
   margin-top: -$pinHeight
   margin-left: -$pinWidth/2
   transform-origin: 50% ($pinHeightFactor * 100%) 0
@@ -227,32 +225,11 @@ $pulseSize: 100px
   top: 50%
   left: 50%
   width: $pinWidth
-  height: $pinWidth
-  margin-top: -$pinWidth/2
+  height: $pinHeight
+  margin-top: -$pinHeight/2
   margin-left: -$pinWidth/2
   transform-origin: 50% ($pinHeightFactor * 100%) 0
-
-.pin::after
-  position: absolute
-  display: block
-  box-sizing: border-box
-  width: $pinWidth
-  height: $pinWidth
-  content: ''
-  transform: rotateZ(-45deg)
-  border: 20px solid $pinColor
-  border-radius: 50% 50% 50% 50%
-
-.pin::before
-  position: absolute
-  display: block
-  box-sizing: border-box
-  width: $pinWidth
-  height: $pinWidth
-  content: ''
-  transform: rotateZ(-45deg)
-  border: 18px solid darken($pinColor, 10%)
-  border-radius: 50% 50% 50% 0
+  background-size: $pinWidth $pinHeight
 
 
 .shadow
@@ -268,38 +245,7 @@ $pulseSize: 100px
   content: ''
   transform: rotateX(55deg)
   border-radius: 50%
-  box-shadow: rgba(0, 0, 0, $shadowOpacity) 100px 0 20px
-
-.pulse
-  position: absolute
-  margin-top: -$pulseSize/2
-  margin-left: -$pulseSize/2
-  transform: rotateX(55deg)
-
-.pulse::after
-  display: block
-  width: $pulseSize
-  height: $pulseSize
-  content: ''
-  animation: pulsate 1s ease-out
-  animation-delay: 1.1s
-  animation-iteration-count: infinite
-  opacity: 0
-  border-radius: 50%
-  box-shadow: 0 0 1px 2px rgba(0, 0, 0, $shadowOpacity)
-  box-shadow: 0 0 6px 3px rgba($pinColor, 1.0)
-
-@keyframes pulsate
-  0%
-    transform: scale(.1, .1)
-    opacity: 0
-
-  50%
-    opacity: 1
-
-  100%
-    transform: scale(1.2, 1.2)
-    opacity: 0
+  box-shadow: rgba(0, 0, 0, .4) 100px 0 20px
 
 </style>
 
@@ -367,14 +313,13 @@ export default Vue.extend({
         };
 
         const locale = location.pathname == '/dna-of-forests/' ? 'ja' : 'en';
+        const scopeId = this.$options._scopeId;
 
+        // CustomMaker ------>
         CustomMarker.prototype = new google.maps.OverlayView();
-
         function CustomMarker(opts) {
           this.setValues(opts);
         }
-
-        const scopeId = this.$options._scopeId;
         CustomMarker.prototype.draw = function() {
           var self = this;
           var div = this.div;
@@ -390,7 +335,7 @@ export default Vue.extend({
                 <div ${scopeId} class="shadow"></div>
                 <div ${scopeId} class="pulse"></div>
                 <div ${scopeId} class="pin-wrap">
-                  <div ${scopeId} class="pin"></div>
+                  <div ${scopeId} class="pin" style="background-image: url(${this.icon})"></div>
                 </div>
               </div>
               `);
@@ -401,11 +346,15 @@ export default Vue.extend({
             div.style.cursor = 'pointer';
             var panes = this.getPanes();
             panes.overlayImage.appendChild(div);
-            google.maps.event.addDomListener(div, 'click', function(event) {
-              google.maps.event.trigger(self, 'click', event);
+            google.maps.event.addDomListener(div, 'click', (e)=> {
+              location.href = this.link;
             });
-            google.maps.event.addDomListener(div, 'mouseover', function(event) {
-              google.maps.event.trigger(self, 'mouseover', event);
+            google.maps.event.addDomListener(div, 'mouseover', function(e) {
+              this.style.zIndex = 10;
+              self.animateBounce();
+            });
+            google.maps.event.addDomListener(div, 'mouseout', function(e) {
+              this.style.zIndex = 1;
             });
           }
           var point = this.getProjection().fromLatLngToDivPixel(this.position);
@@ -413,8 +362,7 @@ export default Vue.extend({
             div.style.left = point.x + 'px';
             div.style.top = point.y + 'px';
           }
-        };
-
+        }
         CustomMarker.prototype.animateBounce = function() {
           dynamics.stop(this.pinWrap);
           dynamics.css(this.pinWrap, {
@@ -448,7 +396,6 @@ export default Vue.extend({
             bounciness: 600,
             delay: 650,
           });
-
           dynamics.stop(this.pinShadow);
           dynamics.css(this.pinShadow, {
             'transform': 'none',
@@ -462,29 +409,19 @@ export default Vue.extend({
             delay: 150,
           });
         }
+        // ------> CustomMaker
 
         for(var _prop in guides) {
           var b = guides[_prop];
           // SPの時
-          const icon_img = isSP ? `marker-sp.png` : `marker-${locale}-pc.png`;
+          const icon_img = isSP ? `marker-sp@2x.png` : `marker-${locale}-pc@2x.png`;
           var marker = new CustomMarker({
             name: _prop,
             position: b.position,
             map: map,
             title: `${b.title[locale]}をみる`,
-            icon: `/dna-of-forests/img/top/guides/${_prop}/${icon_img}`
-          });
-          marker.addListener('click', function(e) {
-            location.href = `#/${this.name}`;
-          });
-          marker.addListener('mouseover', function(e) {
-            this.animateBounce();
-            this.setOptions({zIndex: 10});
-            // this.setAnimation(google.maps.Animation.BOUNCE);
-          });
-          marker.addListener('mouseout', function(e) {
-            this.setOptions({zIndex: 1});
-            // this.setAnimation(null);
+            icon: `/dna-of-forests/img/top/guides/${_prop}/${icon_img}`,
+            link: `#/${_prop}`
           });
         }
         // 表示領域の調整
