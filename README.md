@@ -115,6 +115,12 @@ npm update
 
 ## Tips and tools for development
 
+### MP3 encode with Lame
+
+```sh
+lame -V2 forest.wav forest.mp3
+```
+
 ### Remove sound from movie file
 
 [AudioRemover](http://www.audioremover.com/)
