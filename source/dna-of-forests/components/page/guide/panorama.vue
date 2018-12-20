@@ -28,7 +28,7 @@
 
   .marker.knowledge(v-for="(item, index) in markers.knowledges" :id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/k-'+(index+1) }" v-on:click="goMarker('k-'+(index+1))")
     //- Ref: [2]
-    imgr.label(:src="'panorama/marker-text/knowledge/'+(index+1)+'.png'" v-if="$root.$i18n.locale === 'ja'")
+    imgr.label(:alt="item.title.ja" :src="'panorama/marker-text/knowledge/'+(index+1)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.title.en }}
 
 </template>
