@@ -34,6 +34,7 @@ article.about
         .carousel-cell(:style="bgImage('day2',7)")
         .carousel-cell(:style="bgImage('day2',8)")
         .carousel-cell(:style="bgImage('day2',9)")
+        .carousel-cell(:style="bgImage('day2',10)")
       center.credit(v-html="$t('chuo-park.about.about.credit')")
   section#dna_barcoding
     h2
@@ -270,7 +271,7 @@ export default Vue.extend({
   },
   methods: {
     bgImage(day, num) {
-      return `background-image: url(/dna-of-forests/chuo-park/img/about/slides/${day}/${num}-${this.$root.$i18n.locale}.jpg);`;
+      return `background-image: url(/dna-of-forests/chuo-park/img/about/slides/${day}/${num}.jpg);`;
     }
   }
 });
