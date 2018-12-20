@@ -50,6 +50,10 @@ article.about
       h4
         imgr(:alt="$t('chuo-park.about.ycam-bioresearch.title')" src='about/ycam-bioresearch.png' locale global)
       p(v-html="$t('chuo-park.about.ycam-bioresearch.body')")
+    h4(v-html="$t('chuo-park.about.ycam-education-team.title')")
+    p(v-html="$t('chuo-park.about.ycam-education-team.body')")
+    h4(v-html="$t('chuo-park.about.ycam-support-staff.title')")
+    p(v-html="$t('chuo-park.about.ycam-support-staff.body')")
     h3#production
       imgr(:alt="$t('chuo-park.about.production')" src='about/title-production.png' locale global)
     p

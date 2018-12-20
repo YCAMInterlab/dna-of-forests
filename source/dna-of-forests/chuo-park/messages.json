@@ -3,13 +3,13 @@
     "chuo-park": {
       "top": {
         "logo": "森のDNA図鑑 中央公園 2018 YCAM Bio Research",
-        "lead": "YCAMバイオ・リサーチが開催しているワークショップ「森のDNA図鑑」では、一般の参加者とともに山口市内の森で生き物のサンプルを採集し、あたらしい図鑑の作成に取り組んでいます。参加者が観察とDNA解析の情報から生物種を推定した結果を収録しています。"
+        "lead": "「未来の山口の授業 at YCAM」として開催されたワークショップ「森のDNA図鑑」のウェブサイトです。参加者が山口市中央公園で生き物を採集し、生息地での観察とDNA解析の情報から生物種を推定した結果を収録しています。"
       },
       "about": {
         "logo": "森のDNA図鑑 中央公園 2018",
         "about": {
           "title": "「森のDNA図鑑」について",
-          "body": "YCAMバイオ・リサーチが「未来の山口の授業β」として開催したワークショップ「<a class=\"border\" target=\"_blank\" href=\"http://www.ycam.jp/events/2017/how-to-make-the-field-guide-dna-of-forests/\">森のDNA図鑑</a>」の参加者と山口市の中央公園で生き物を採集し、生息地での観察とDNA解析の情報から、参加者が推測した結果を収録しています。中央公園のある地点から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集し、推測した生き物の種名などの情報を引き出すことができます。私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA図鑑」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。",
+          "body": "YCAMバイオ・リサーチが開催しているワークショップです。参加者が山口市中央公園で生き物を採集し、生息地での観察とDNA解析の情報から推測した結果を収録しています。中央公園のある地点から、ぐるっと360°パノラマの風景を見渡し、ワークショップ参加者が採集し推測した生き物の生物種などの情報を引き出すことができます。私達が何気なく見ている自然の風景にも、たくさんの情報が眠っています。「森のDNA図鑑」は、その眠っている情報を自分たちで採集しながら、ひとつの図鑑をつくることを通じて、複眼的な見方を養っていくプロジェクトです。",
           "credit": "写真提供：山口情報芸術センター［YCAM］"
         },
         "day1": "ワークショップ 1日目",
@@ -20,13 +20,21 @@
         },
         "about_forest": {
           "title": "中央公園について",
-          "body": "[TODO]"
+          "body": "山口市中園町にある公園です。この場所には、1956年から1995年まで山口県立中央高等学校の校舎やグラウンドなどがありましたが、1989年の「第4次山口市総合計画」策定の際に、情報・業務・文化の用途に利用する区画として位置付けられ、公園や文化施設をつくる構想がはじまりました。そして、2003年には現在の形になりました。<br>この中央公園の特徴としては、ベンチや遊具などをほとんど置かないフラットな設計になっており、さまざまな目的に利用できることが挙げられます。マルシェなどのマーケットや映画の野外上映「真夏の夜の星空上映会」が開かれたり、仮設の公園「コロガルパビリオン」や霧を使った作品「CLOUD FOREST」などが現れることもあります。<br>都市型の公園ですが、植生によって四季を感じることができます。春には桜が咲き、秋には紅葉が見られ、季節によって芝生の草花も変化していきます。この図鑑の撮影の時期は11月ですが、今後も中央公園でのワークショップを開催し、図鑑の情報を充実させていくにつれ、図鑑からも四季の変化が見えてくるかもしれません。"
         },
         "planning_production": "企画・制作",
         "ycam-bioresearch": {
           "title": "YCAM バイオ・リサーチ",
-          "body": "高原 文江　津田 和俊　朴 鈴子　伊藤 隆之　菅沼 聖<br>（山口情報芸術センター［YCAM］）<br>「YCAM バイオ・リサーチ」は、バイオテクノロジーの応用可能性を<br>多様な切り口で模索するYCAMのプロジェクトです",
+          "body": "高原 文江　津田 和俊　伊藤 隆之　菅沼 聖",
           "link": "http://www.ycam.jp/projects/ycam-bio-research/"
+        },
+        "ycam-education-team": {
+          "title": "YCAM 教育普及",
+          "body": "金子 春香　菅沼 聖　山岡 大地"
+        },
+        "ycam-support-staff": {
+          "title": "YCAM サポートスタッフ",
+          "body": "谷 紗矢乃　坂本 環<br>藤原 緑　出口 晃多　小林 功弥　野口 颯希<br><br>（山口情報芸術センター［YCAM］）"
         },
         "production": "制作",
         "karappo": {
@@ -34,7 +42,7 @@
           "link": "http://karappo.net"
         },
         "cooperation": "協力",
-        "cooperations": "[TODO]"
+        "cooperations": "主催：山口市、公益財団法人山口市文化振興財団<br>後援：山口市教育委員会"
       }
     }
   },
@@ -48,7 +56,7 @@
         "logo": "Field Guide “DNA of Forests” in the Chuo Park 2018",
         "about": {
           "title": "About the Field Guide “DNA of Forests”",
-          "body": "At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class β”, participants collected living samples in the Chuo Park in Yamaguchi city. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis. From a standpoint, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants. In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.",
+          "body": "At the workshop “How to Make the Field Guide “DNA of the Forests”” conducted by YCAM Bio Research as part of the “Yamaguchi’s Future Class at YCAM”, participants collected living samples in Yamaguchi City Central Park. This website presents the results the participants gathered from their observations carried out in the field and DNA analysis. From a standpoint, you can have a 360-degree panoramic view of the surrounding forest and draw out information collected by the workshop participants. In the natural landscapes that we see without giving much attention, there lays plenty of information that remain hidden. “DNA of the Forest” is a project that aims to provide and cultivate multi-perspectives by collecting such latent information by ourselves and compiling them into one field guide.",
           "credit": "Courtesy of Yamaguchi Center for Arts and Media [YCAM]"
         },
         "day1": "Workshop Day 1",
@@ -64,8 +72,16 @@
         "planning_production": "Planning and Production",
         "ycam-bioresearch": {
           "title": "YCAM Bio Research",
-          "body": "Fumie Takahara, Kazutoshi Tsuda, Young-Ja Park, Takayuki Ito, Kiyoshi Suganuma<br>(Yamaguchi Center for Arts and Media [YCAM])<br>* YCAM Bio Research is a team exploring the possibilities of biotechnology.",
+          "body": "Fumie Takahara, Kazutoshi Tsuda, Takayuki Ito, Kiyoshi Suganuma",
           "link": "http://www.ycam.jp/en/projects/ycam-bio-research/"
+        },
+        "ycam-education-team": {
+          "title": "YCAM education team",
+          "body": "Haruka Kaneko, Kiyoshi Suganuma, Daichi Yamaoka"
+        },
+        "ycam-support-staff": {
+          "title": "YCAM support staff",
+          "body": "Sayano Tani, Tamaki Sakamoto<br>Midori Fujiwara, Kota Deguchi, Koya Kobayashi, Satsuki Noguchi"
         },
         "production": "Production",
         "karappo": {
@@ -73,7 +89,7 @@
           "link": "http://karappo.net"
         },
         "cooperation": "Cooperation",
-        "cooperations": "[TODO]"
+        "cooperations": "Organized by: Yamaguchi City, Yamaguchi City Foundation for Cultural Promotion<br>In association with: Yamaguchi City Board of Education<br>Supported by: Agency for Cultural Affairs, Government of Japan in the fiscal 2018"
       }
     }
   }
