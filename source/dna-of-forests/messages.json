@@ -93,7 +93,7 @@
             "dna_region": "DNA region: ",
             "method": {
               "title": "Method",
-              "body": "We used a method called DNA barcoding to identify the species of the samples.See <a href=\"#/about/\" class=\"border dark\">ABOUT page</a> for more details."
+              "body": "We used a method called DNA barcoding to identify the species of the samples.See ABOUT page for more details."
             }
           },
           "microscope": {
