@@ -26,7 +26,7 @@
 
     <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text" />
 
-  .marker.knowledge(v-for="(item, index) in markers.knowledges" :id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/k-'+(index+1) }" v-on:click="goMarker('k-'+(index+1))")
+  .marker.knowledge(v-for="(item, index) in markers.knowledges" :id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/k-'+(index+1), shadow: item.label_shadow }" v-on:click="goMarker('k-'+(index+1))")
     //- Ref: [2]
     imgr.label(:alt="item.title.ja" :src="'panorama/marker-text/knowledge/'+(index+1)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.title.en }}
@@ -225,6 +225,9 @@
       vertical-align: middle
       border-radius: 7px
       background-color: #fcff00
+    &.shadow
+      &:before
+        box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75)
 
 
 @media (max-width: 660px)
