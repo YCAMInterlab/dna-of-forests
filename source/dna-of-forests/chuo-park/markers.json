@@ -67,11 +67,11 @@
          "dna_sequences":[
             {
                "region":"matK",
-               "text":""
+               "text":"NNNNN"
             },
             {
                "region":"rbcL",
-               "text":""
+               "text":"NNNNN"
             }
          ],
          "marker_position":{
