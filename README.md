@@ -9,9 +9,10 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
 
 ## Table of contents
 
+
+
 <!-- MarkdownTOC depth="0" bracket="round" autolink="true" indent="    " -->
 
-- [Branches](#branches)
 - [Getting started](#getting-started)
     - [Set up environments and install dependencies](#set-up-environments-and-install-dependencies)
     - [Start middleman server](#start-middleman-server)
@@ -22,18 +23,6 @@ The middleman project for the website **Field Guide “DNA of Forests”**.
     - [Exception list](#exception-list)
 
 <!-- /MarkdownTOC -->
-
-
-## Branches
-
-This repository includes these branches below.
-
-| Branch        | Description                 |
-|:--------------|:----------------------------|
-| master        | Static files                |
-| source        | Source of `master`          |
-| teaser        | Static files of teaser site |
-| source-teaser | Source of `teaser`          |
 
 ## Getting started
 
