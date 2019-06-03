@@ -35,8 +35,8 @@ First of all, please install [rbenv](https://github.com/rbenv/rbenv) and [ndenv]
 Then follow this instruction.
 
 ```sh
-# clone this repository and checkout 'source' branch
-git clone --recursive -b source https://github.com/YCAMInterlab/dna-of-forests.git
+# clone this repository
+git clone --recursive https://github.com/YCAMInterlab/dna-of-forests.git
 
 # move into project dirctory
 cd dna-of-forests
