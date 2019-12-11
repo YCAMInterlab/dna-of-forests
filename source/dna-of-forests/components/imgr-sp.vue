@@ -26,7 +26,24 @@ img.sp
 import Vue from 'vue';
 
 export default Vue.extend({
-  props: ['alt','src','locale','global'],
+  props: {
+    alt: {
+      type: String,
+      require: true
+    },
+    src: {
+      type: String,
+      require: true
+    },
+    locale: {
+      type: Boolean,
+      default: false
+    },
+    global: {
+      type: Boolean,
+      default: false
+    }
+  },
   watch: {
     src: 'setAttrs'
   },
