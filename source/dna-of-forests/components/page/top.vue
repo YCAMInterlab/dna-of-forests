@@ -304,8 +304,8 @@ export default Vue.extend({
           },
           'chuo-park': {
             title: {
-              ja: '中央公園 2018',
-              en: 'Chuo Park 2018',
+              ja: '中央公園 2018-2019',
+              en: 'Chuo Park 2018-2019',
             },
             position: new google.maps.LatLng(34.169894, 131.466662),
             zIndex: 1
