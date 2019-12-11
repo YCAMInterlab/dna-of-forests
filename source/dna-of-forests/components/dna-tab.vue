@@ -85,7 +85,12 @@ import dna_colors from '../script/dna_colors.js';
 Vue.component('dna-barcode', require('./dna-barcode.vue').default);
 
 export default Vue.extend({
-  props: ['text'],
+  props: {
+    text: {
+      type: String,
+      require: true
+    }
+  },
   data: function(){
     return {
       current: 'barcode'

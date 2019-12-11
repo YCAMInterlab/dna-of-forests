@@ -36,7 +36,12 @@ import Vue from 'vue';
 import _ from 'lodash';
 
 export default Vue.extend({
-  props: ['dna'],
+  props: {
+    dna: {
+      type: String,
+      require: true
+    }
+  },
   components: {
     'dna-barcode': require('./dna-barcode.vue').default
   },

@@ -314,7 +314,16 @@ export default Vue.extend({
     return _.cloneDeep(this.initial_data);
   },
 
-  props: ['markers','initial_data'],
+  props: {
+    markers: {
+      type: Object,
+      require: true
+    },
+    initial_data: {
+      type: Object,
+      require: true
+    }
+  },
 
   methods: {
     // new_dataのもつプロパティを、old_dataのプロパティに代入する

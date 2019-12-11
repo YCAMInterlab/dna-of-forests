@@ -11,7 +11,18 @@ import dna_colors from '../script/dna_colors.js';
 
 export default Vue.extend({
 
-  props: ['dna','max_width','height'],
+  props: {
+    dna: {
+      type: String,
+      require: true
+    },
+    max_width: {
+      type: Number
+    },
+    height: {
+      type: Number
+    }
+  },
 
   mounted: function() {
     this.renderBarcode();
