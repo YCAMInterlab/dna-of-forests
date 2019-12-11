@@ -22,6 +22,7 @@ export default Vue.extend({
 
       // locale属性があれば、言語毎に画像パスを切り替え
       const _locale = this.locale ? '-'+this.$root.$i18n.locale : '';
+      console.log(_locale)
 
       this.$el.src    = _src.replace(/(\.\w+)$/, _locale+'$1');
       this.$el.srcset = _src.replace(/(\.\w+)$/, _locale+'@2x$1')+' 2x';

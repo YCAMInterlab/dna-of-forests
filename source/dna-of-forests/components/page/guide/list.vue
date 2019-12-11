@@ -48,7 +48,7 @@ section.list(:data-lang="$root.$i18n.locale")
 
 </template>
 
-<style lang="sass?indentedSyntax" scoped>
+<style lang="sass" scoped>
 
 section.list
   height: 100%

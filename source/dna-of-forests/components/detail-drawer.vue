@@ -64,7 +64,7 @@
 
 </template>
 
-<style lang="sass?indentedSyntax" scoped>
+<style lang="sass" scoped>
 
 .drawer
   position: fixed

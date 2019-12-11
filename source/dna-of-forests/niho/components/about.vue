@@ -58,7 +58,7 @@ article.about
 
 </template>
 
-<style lang="sass?indentedSyntax">
+<style lang="sass">
 
 article.about
   height: 100%

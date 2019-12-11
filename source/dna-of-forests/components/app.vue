@@ -4,7 +4,7 @@ router-view.root
 
 </template>
 
-<style lang="sass?indentedSyntax" scoped>
+<style lang="sass" scoped>
 
 .root
   position: relative

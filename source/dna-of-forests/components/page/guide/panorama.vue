@@ -33,7 +33,7 @@
 
 </template>
 
-<style lang="sass?indentedSyntax" scoped>
+<style lang="sass" scoped>
 
 =bg2x($path, $ext: "png", $w: auto, $h: auto, $pos: center, $repeat: no-repeat)
 

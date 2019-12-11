@@ -5,7 +5,7 @@
 
 </template>
 
-<style lang="sass?indentedSyntax">
+<style lang="sass">
 
 @-webkit-keyframes bgscroll
   0%

@@ -1,4 +1,5 @@
 var { CleanWebpackPlugin } = require('clean-webpack-plugin');
+var VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: {
@@ -18,25 +19,41 @@ module.exports = {
   },
 
   module: {
-    loaders: [
-      {
-        test: /\.js[x]?$/,
-        exclude: /node_modules|\.tmp|vendor/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015'],
-        }
+    rules: [{
+        test: /\.js$/,
+        exclude: /node_modules|vendor/,
+        use: 'babel-loader'
       },
       {
         test: /\.json$/,
-        exclude: /node_modules/,
-        loader: 'json-loader'
+        exclude: /node_modules|vendor/,
+        use: 'json-loader',
+        type: 'javascript/auto'
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        use: 'vue-loader'
+      },
+      {
+        test: /\.pug$/,
+        use: 'pug-plain-loader'
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                indentedSyntax: true
+              }
+            }
+          }
+        ]
       }
-    ],
+    ]
   },
 
   node: {
@@ -45,6 +62,7 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: '.tmp/*'}),
+    new VueLoaderPlugin()
     // Declare Global variables
     // new webpack.ProvidePlugin({
     //   $: 'jquery',

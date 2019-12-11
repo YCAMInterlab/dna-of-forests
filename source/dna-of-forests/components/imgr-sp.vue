@@ -6,7 +6,7 @@ div
 
 </template>
 
-<style lang="sass?indentedSyntax">
+<style lang="sass">
 
 img.sp
   display: none

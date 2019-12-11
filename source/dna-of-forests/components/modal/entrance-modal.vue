@@ -12,7 +12,7 @@
 
 </template>
 
-<style lang="sass?indentedSyntax" scoped>
+<style lang="sass" scoped>
 
 .wrapper
   display: table
