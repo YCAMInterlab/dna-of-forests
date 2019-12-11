@@ -24,7 +24,7 @@
     imgr.label(:alt="item.genus.ja" :src="'panorama/marker-text/sample-ja/'+filename(item.genus.en)+'.png'" v-if="$root.$i18n.locale === 'ja'")
     span.label(v-else) {{ item.genus.en }}
 
-    <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text" />
+    <dna-barcode-bg v-if="item.dna_sequences" :dna="item.dna_sequences[0].text" v-bind:animate="$route.params.forest!='chuo-park'" />
 
   .marker.knowledge(v-for="(item, index) in markers.knowledges" :id="'k-'+(index+1)" v-bind:class="{ selected: $route.path=='/'+$route.params.forest+'/panorama/k-'+(index+1), shadow: item.label_shadow }" v-on:click="goMarker('k-'+(index+1))")
     //- Ref: [2]
