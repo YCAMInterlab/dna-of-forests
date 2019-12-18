@@ -1561,7 +1561,7 @@
       ],
       "marker_position":{
         "latitude":-7,
-        "longtitude":255,
+        "longtitude":256.5,
         "radius":100
       },
       "collection_date":"2019.10.27",
@@ -2261,7 +2261,7 @@
       },
       "marker_position":{
         "latitude":-1,
-        "longtitude":358,
+        "longtitude":359,
         "radius":100
       }
     },
@@ -2277,7 +2277,7 @@
       },
       "marker_position":{
         "latitude":-3,
-        "longtitude":275,
+        "longtitude":274.5,
         "radius":100
       }
     }
