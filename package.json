@@ -46,7 +46,7 @@
     "load-google-maps-api": "^2.0.1",
     "lodash": "^4.17.15",
     "mobile-detect": "^1.4.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "striptags": "^3.1.1",
     "three-js": "^79.0.0",
     "vue": "^2.6.10",
