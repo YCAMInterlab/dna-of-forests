@@ -109,7 +109,7 @@ Vue.component('global-nav',    require('../components/global-nav.vue').default);
 Vue.component('imgr',          require('../components/imgr.vue').default);
 Vue.component('imgr-sp',       require('../components/imgr-sp.vue').default);
 
-loadGoogleMapsAPI({ key: 'AIzaSyA8xpJNkPhuKOibZnaJOEHs_e-wTcyIDS0' }).then(function(googleMaps) {
+loadGoogleMapsAPI({ key: 'AIzaSyDQoGu03t5Lxa7aVYgCMo7fwrgZmKIfIWQ' }).then(function(googleMaps) {
 
   // initialize App after loading google object
   new AppGuide({
