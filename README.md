@@ -72,6 +72,8 @@ rbenv versions
 
 # install bundler
 rbenv exec gem install bundler
+# or check the version of bundler in Gemfile.lock and install it
+rbenv exec gem install bundler -v x.x.x
 
 # install dependencies
 rbenv exec bundle install --path=vendor/bundle --binstubs=vendor/bin
