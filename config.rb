@@ -10,8 +10,8 @@ set :images_dir, 'dna-of-forests/img'
 ignore '*.git*'
 ignore '**/README*'
 
-# htmlのattributesの囲みを「"」にする
-set :haml, { :attr_wrapper => "\"" }
+# htmlのattributesの囲みを「"」にしたい時はattr_wrapperを設定
+set :haml, { :attr_quote => '"' }
 
 # 他言語化
 # activate :i18n
