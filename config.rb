@@ -6,7 +6,7 @@ set :css_dir, 'dna-of-forests/style'
 set :js_dir, 'dna-of-forests/script'
 set :images_dir, 'dna-of-forests/img'
 # set :build_dir, '../html'
-
+ignore /^\.github\/.*/
 ignore '*.git*'
 ignore '**/README*'
 
