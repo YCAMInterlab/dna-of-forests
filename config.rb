@@ -77,6 +77,10 @@ end
 ###
 
 helpers do
+    # 値がnilのものはkeyごと削除して返す
+  def cleanAttr(attr)
+    return attr.reject { |k, v| v.nil? }
+  end
 
   def nl2br(txt)
     txt.gsub(/(\r\n|\r|\n)/, "<br>")

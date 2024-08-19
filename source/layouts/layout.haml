@@ -1,4 +1,5 @@
 - data = current_resource.data
+- body_attr = cleanAttr({id: @body_id || data.body_id, class: @body_class || data.body_class})
 -#
 -# host = 'http://ycam.karappo.jp'
 - host = 'http://special.ycam.jp'
@@ -47,7 +48,7 @@
 
     = partial 'google_analytics'
 
-  %body{class: data['body_class']}
+  %body{**body_attr}
     / Google Tag Manager (noscript)
     %noscript
       %iframe{src: "https://www.googletagmanager.com/ns.html?id=GTM-W3BHRH8", height:"0", width:"0", style:"display:none;visibility:hidden"}
